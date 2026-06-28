@@ -289,24 +289,44 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 @media(max-width:640px){.offers-home-btn{position:static;margin-bottom:18px;display:inline-flex;}}
 /* OFFERS PAGE */
 .op-msg{background:var(--adim);border:1px solid var(--aborder);border-radius:var(--rs);padding:9px 12px;font-size:.75rem;line-height:1.6;margin-bottom:16px;}
-.offer-card{background:var(--bg3);border:1px solid var(--b);border-radius:var(--r);padding:13px;position:relative;overflow:visible;flex:0 0 220px;min-width:0;}
-.offers-scroll-row{display:flex;flex-direction:row;gap:9px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin;scrollbar-color:var(--b) transparent;}
+.offers-scroll-row{display:flex;flex-direction:row;gap:10px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin;scrollbar-color:var(--b) transparent;}
 .offers-scroll-row::-webkit-scrollbar{height:4px;}
 .offers-scroll-row::-webkit-scrollbar-track{background:transparent;}
 .offers-scroll-row::-webkit-scrollbar-thumb{background:var(--b);border-radius:2px;}
-.offer-logo-wrap{background:#fff;border-radius:6px;padding:4px 8px;display:inline-flex;align-items:center;margin-bottom:8px;max-width:100%;}
-.offer-logo-wrap img{max-height:28px;width:auto;display:block;}
-.oc-icon-wrap{width:32px;height:32px;border-radius:var(--rs);border:1px solid var(--aborder);background:var(--adim);display:flex;align-items:center;justify-content:center;margin-bottom:9px;overflow:hidden;flex-shrink:0;}
+/* OFFER CARD — Option C */
+.offer-card{background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:14px;position:relative;overflow:hidden;flex:0 0 230px;min-width:0;display:flex;flex-direction:column;}
+.offer-card.featured{border:2px solid var(--accent);}
+.oc-top-badge{position:absolute;top:0;right:0;font-family:var(--mono);font-size:.5rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:3px 9px;border-radius:0 var(--r) 0 var(--rs);background:var(--accent);color:var(--bg);line-height:1.6;z-index:2;}
+/* icon area — kept exactly as before */
+.oc-icon-wrap{width:34px;height:34px;border-radius:var(--rs);border:1px solid var(--aborder);background:var(--adim);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;}
 .oc-icon-wrap img{width:22px;height:22px;object-fit:contain;}
-.oc-top-badge{position:absolute;top:-1px;right:-1px;font-family:var(--mono);font-size:.52rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:3px 8px;border-radius:0 var(--r) 0 var(--rs);background:var(--accent);color:var(--bg);line-height:1.5;z-index:2;}
-.oc-title{font-size:.82rem;font-weight:700;margin-bottom:3px;padding-right:4px;}
-.oc-badge{font-size:.6rem;background:rgba(217,119,6,.12);color:var(--amber);border:1px solid rgba(217,119,6,.25);border-radius:4px;padding:1px 6px;font-family:var(--mono);margin-left:5px;}
-.oc-desc{font-size:.72rem;color:var(--t2);line-height:1.55;margin-bottom:8px;}
-.oc-coupon-btn{display:inline-flex;align-items:center;gap:6px;padding:5px 12px 5px 10px;border-radius:20px;border:1.5px dashed var(--accent);background:var(--adim);color:var(--accent);font-family:var(--mono);font-size:.7rem;font-weight:600;letter-spacing:.06em;cursor:pointer;transition:all var(--tr);user-select:none;-webkit-user-select:none;margin-bottom:8px;}
+.offer-logo-wrap{background:#fff;border-radius:6px;padding:4px 8px;display:inline-flex;align-items:center;max-width:100%;}
+.offer-logo-wrap img{max-height:24px;width:auto;display:block;}
+/* card header row: icon + title */
+.oc-header{display:flex;align-items:flex-start;gap:9px;margin-bottom:8px;}
+.oc-header-text{flex:1;min-width:0;}
+.oc-platform{font-size:.58rem;font-family:var(--mono);color:var(--t2);text-transform:uppercase;letter-spacing:.07em;margin-bottom:1px;}
+.oc-title{font-size:.8rem;font-weight:700;line-height:1.35;padding-right:28px;}
+/* rating row */
+.oc-rating{display:flex;align-items:center;gap:5px;margin-bottom:8px;}
+.oc-stars{color:#f59e0b;font-size:.72rem;letter-spacing:1px;line-height:1;}
+.oc-rating-count{font-size:.62rem;color:var(--t2);}
+/* feature checklist */
+.oc-features{list-style:none;margin-bottom:10px;display:flex;flex-direction:column;gap:3px;flex:1;}
+.oc-features li{font-size:.7rem;color:var(--t2);display:flex;align-items:flex-start;gap:5px;line-height:1.45;}
+.oc-features li::before{content:'✓';color:var(--green);font-size:.65rem;margin-top:1px;flex-shrink:0;font-weight:700;}
+/* price block */
+.oc-price-block{border-top:1px solid var(--b);padding-top:10px;margin-top:auto;}
+.oc-price-row{display:flex;align-items:baseline;gap:6px;margin-bottom:3px;}
+.oc-price-now{font-size:1.15rem;font-weight:700;color:var(--accent);font-family:var(--mono);}
+.oc-price-was{font-size:.72rem;color:var(--t2);text-decoration:line-through;font-family:var(--mono);}
+.oc-price-save{font-size:.58rem;font-weight:700;background:rgba(76,175,80,.12);color:var(--green);border:1px solid rgba(76,175,80,.25);border-radius:4px;padding:1px 6px;font-family:var(--mono);}
+.oc-price-note{font-size:.62rem;color:var(--t2);margin-bottom:9px;}
+/* coupon + link */
+.oc-coupon-btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:5px 12px;border-radius:20px;border:1.5px dashed var(--accent);background:var(--adim);color:var(--accent);font-family:var(--mono);font-size:.68rem;font-weight:600;letter-spacing:.06em;cursor:pointer;transition:all var(--tr);user-select:none;-webkit-user-select:none;margin-bottom:7px;width:100%;box-sizing:border-box;}
 .oc-coupon-btn:hover{background:var(--accent);color:var(--bg);border-style:solid;}
 .oc-coupon-btn svg{flex-shrink:0;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-.oc-coupon{font-family:var(--mono);font-size:.72rem;background:var(--adim);border:1px solid var(--aborder);color:var(--accent);border-radius:5px;padding:3px 8px;margin-bottom:8px;display:inline-block;}
-.oc-link{display:inline-flex;align-items:center;gap:4px;font-size:.72rem;font-weight:600;color:var(--bg);background:var(--accent);border-radius:var(--rs);padding:5px 11px;text-decoration:none;transition:opacity .15s;}
+.oc-link{display:flex;align-items:center;justify-content:center;gap:5px;font-size:.72rem;font-weight:600;color:var(--bg);background:var(--accent);border-radius:var(--rs);padding:6px 12px;text-decoration:none;transition:opacity .15s;width:100%;box-sizing:border-box;}
 .oc-link:hover{opacity:.85;}
 
 </style>
@@ -765,18 +785,50 @@ function renderHome(){
   const offerCardHtml=(o,idx)=>{
     const uid=`oc_${idx}`;
     const couponCopyFn=o.coupon?`ocCopy('${o.coupon}','${uid}')`:null;
+    // Price section
+    const hasPrice=o.price||o.originalPrice;
+    const discount=(o.price&&o.originalPrice&&o.originalPrice>o.price)?Math.round((1-o.price/o.originalPrice)*100):o.discount||null;
+    const priceHtml=hasPrice?`
+      <div class="oc-price-block">
+        <div class="oc-price-row">
+          ${o.price?`<span class="oc-price-now">₹${o.price}</span>`:''}
+          ${o.originalPrice?`<span class="oc-price-was">₹${o.originalPrice}</span>`:''}
+          ${discount?`<span class="oc-price-save">${discount}% off</span>`:''}
+        </div>
+        ${o.price&&o.originalPrice?`<div class="oc-price-note">You save ₹${o.originalPrice-o.price}</div>`:''}
+      </div>`:'';
+    // Rating stars
+    const rating=parseFloat(o.rating)||0;
+    const ratingHtml=rating?`
+      <div class="oc-rating">
+        <span class="oc-stars">${'★'.repeat(Math.round(rating))}${'☆'.repeat(5-Math.round(rating))}</span>
+        <span class="oc-rating-count">${rating}${o.ratingCount?` (${Number(o.ratingCount).toLocaleString('en-IN')} students)`:''}</span>
+      </div>`:'';
+    // Features from desc — split by · or newline into checklist items
+    const featLines=o.desc?(o.desc.split(/[·\n]/).map(s=>s.trim()).filter(Boolean)):[]; 
+    const featHtml=featLines.length?`<ul class="oc-features">${featLines.map(f=>`<li>${f}</li>`).join('')}</ul>`:
+      (o.desc?`<ul class="oc-features"><li>${o.desc}</li></ul>`:'');
     return `
-      <div class="offer-card">
-        ${o.badge?`<div class="oc-top-badge">${o.badge}</div>`:""}
-        ${o.iconUrl?`<div class="oc-icon-wrap"><img src="${o.iconUrl}" alt="" onerror="this.parentElement.style.display='none'"/></div>`:""}
-        ${o.logoUrl?`<div class="offer-logo-wrap"><img src="${o.logoUrl}" alt="${o.title} logo" onerror="this.parentElement.style.display='none'"/></div>`:""}
-        <div class="oc-title">${o.title||""}</div>
-        ${o.desc?`<div class="oc-desc">${o.desc}</div>`:""}
-        ${o.coupon?`<button class="oc-coupon-btn" id="${uid}-btn" onclick="${couponCopyFn}" title="Click to copy">
-          <svg width="12" height="12" viewBox="0 0 24 24" id="${uid}-ico"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-          <span id="${uid}-lbl">CODE: ${o.coupon}</span>
-        </button>`:""}
-        ${o.link?`<a class="oc-link" href="${o.link}" target="_blank" style="display:inline-flex">View Offer <svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>`:""}
+      <div class="offer-card${o.featured?' featured':''}">
+        ${o.badge?`<div class="oc-top-badge">${o.badge}</div>`:''}
+        <div class="oc-header">
+          ${o.iconUrl?`<div class="oc-icon-wrap"><img src="${o.iconUrl}" alt="" onerror="this.parentElement.style.display='none'"/></div>`:
+            o.logoUrl?`<div class="oc-icon-wrap" style="background:#fff;border-color:var(--b)"><img src="${o.logoUrl}" alt="" onerror="this.parentElement.style.display='none'" style="width:28px;height:28px"/></div>`:''}
+          <div class="oc-header-text">
+            ${o.platform?`<div class="oc-platform">${o.platform}</div>`:''}
+            <div class="oc-title">${o.title||''}</div>
+          </div>
+        </div>
+        ${ratingHtml}
+        ${featHtml}
+        ${hasPrice?priceHtml:`<div style="flex:1"></div>`}
+        <div style="${hasPrice?'margin-top:10px':'margin-top:auto;padding-top:10px;border-top:1px solid var(--b)'}">
+          ${o.coupon?`<button class="oc-coupon-btn" id="${uid}-btn" onclick="${couponCopyFn}" title="Click to copy">
+            <svg width="12" height="12" viewBox="0 0 24 24" id="${uid}-ico"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            <span id="${uid}-lbl">CODE: ${o.coupon}</span>
+          </button>`:''}
+          ${o.link?`<a class="oc-link" href="${o.link}" target="_blank">View Offer <svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>`:''}
+        </div>
       </div>`;
   };
   if(offers.length>0){
