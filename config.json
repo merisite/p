@@ -1679,6 +1679,21 @@
       "rating": 4.8,
       "ratingCount": 88080,
       "featured": true
+    },
+    {
+      "title": "Mock Test Offer",
+      "badge": "Discount",
+      "desc": "Banking & Insurance, SSC, Railway • 6 Month Validity",
+      "coupon": "PAW12",
+      "link": "https://guidely.in/mock-test-subscription",
+      "iconUrl": "https://i.postimg.cc/rFXJMDRq/1000146027-removebg-preview.png",
+      "logoUrl": "",
+      "price": 219,
+      "originalPrice": 499,
+      "platform": "Guidely",
+      "rating": 4.8,
+      "ratingCount": 97050,
+      "featured": true
     }
   ]
 }
