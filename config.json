@@ -1663,16 +1663,7 @@
       "status": "upcoming"
     }
   ],
-  "liveTrackerEntries": [
-    {
-      "platform": "Guidely",
-      "platformLogo": "https://i.postimg.cc/Bv3JVR25/176162780593.png",
-      "mockName": "SBI PO Prelims Live Mock Test",
-      "status": "upcoming",
-      "date": "Ends 11 July 19:50",
-      "link": "https://postimg.cc/cvDqK996/5e5554bc"
-    }
-  ],
+  "liveTrackerEntries": [],
   "offers": [
     {
       "title": "dgd",
