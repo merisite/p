@@ -627,6 +627,16 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
         <div class="ff"><label>Icon URL <span style="font-size:.65rem;color:var(--t2)">(small square icon, shown top-left of card)</span></label><input type="text" id="om-icon" placeholder="https://example.com/icon.png"/><div class="hint">Use a 48×48 or 64×64 PNG/SVG icon. Shown in a small rounded box on the card.</div></div>
         <div class="ff"><label>Logo Image URL <span style="font-size:.65rem;color:var(--t2)">(wide banner logo, optional)</span></label><input type="text" id="om-logo" placeholder="https://example.com/logo.png"/><div class="hint">Wide logo shown on white background below icon. Leave blank if using icon only.</div></div>
       </div>
+      <div class="fr c3">
+        <div class="ff"><label>Discounted Price (₹)</label><input type="number" id="om-price" placeholder="e.g. 194" min="0"/><div class="hint">Shown as the main price on the card.</div></div>
+        <div class="ff"><label>Original / MRP (₹)</label><input type="number" id="om-original-price" placeholder="e.g. 999" min="0"/><div class="hint">Shown struck-through. % off is auto-calculated.</div></div>
+        <div class="ff"><label>Platform / Provider</label><input type="text" id="om-platform" placeholder="e.g. StudyIQ, Guidely"/><div class="hint">Small label above the title.</div></div>
+      </div>
+      <div class="fr c2">
+        <div class="ff"><label>Rating (out of 5)</label><input type="number" id="om-rating" placeholder="e.g. 4.8" min="0" max="5" step="0.1"/></div>
+        <div class="ff"><label>Number of Students / Reviews</label><input type="number" id="om-rating-count" placeholder="e.g. 12400" min="0"/></div>
+      </div>
+      <div class="ff" style="margin-top:4px"><label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-size:.78rem;color:var(--t2)"><input type="checkbox" id="om-featured" style="width:auto"> Mark as <strong style="color:var(--accent)">Featured</strong> (adds highlighted border — use for "Best Value" card)</label></div>
       <input type="hidden" id="om-id"/>
     </div>
     <div class="mf"><button class="btn bo" onclick="cm('offer-modal')">Cancel</button><button class="btn bp" onclick="saveOffer()">Save Card</button></div>
@@ -1241,7 +1251,7 @@ function rOffers(){
 function openOfferModal(idx){
   const d=D();
   const vdChk=document.getElementById('om-badge-vd');if(vdChk)vdChk.checked=false;
-  if(idx!==undefined){const o=(d.offers||[])[idx];if(!o)return;document.getElementById('offer-modal-title').textContent='Edit Offer';document.getElementById('om-title').value=o.title||'';document.getElementById('om-badge').value=o.badge||'';if(vdChk)vdChk.checked=(o.badge==='Verified Discount');document.getElementById('om-desc').value=o.desc||'';document.getElementById('om-coupon').value=o.coupon||'';document.getElementById('om-link').value=o.link||'';const iconEl=document.getElementById('om-icon');if(iconEl)iconEl.value=o.iconUrl||'';document.getElementById('om-logo').value=o.logoUrl||'';document.getElementById('om-id').value=idx;}
+  if(idx!==undefined){const o=(d.offers||[])[idx];if(!o)return;document.getElementById('offer-modal-title').textContent='Edit Offer';document.getElementById('om-title').value=o.title||'';document.getElementById('om-badge').value=o.badge||'';if(vdChk)vdChk.checked=(o.badge==='Verified Discount');document.getElementById('om-desc').value=o.desc||'';document.getElementById('om-coupon').value=o.coupon||'';document.getElementById('om-link').value=o.link||'';const iconEl=document.getElementById('om-icon');if(iconEl)iconEl.value=o.iconUrl||'';document.getElementById('om-logo').value=o.logoUrl||'';const priceEl=document.getElementById('om-price');if(priceEl)priceEl.value=o.price||'';const origEl=document.getElementById('om-original-price');if(origEl)origEl.value=o.originalPrice||'';const platformEl=document.getElementById('om-platform');if(platformEl)platformEl.value=o.platform||'';const ratingEl=document.getElementById('om-rating');if(ratingEl)ratingEl.value=o.rating||'';const ratingCntEl=document.getElementById('om-rating-count');if(ratingCntEl)ratingCntEl.value=o.ratingCount||'';const featEl=document.getElementById('om-featured');if(featEl)featEl.checked=o.featured||false;document.getElementById('om-id').value=idx;}
   else{document.getElementById('offer-modal-title').textContent='Add Offer Card';['om-title','om-badge','om-desc','om-coupon','om-link','om-icon','om-logo'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});document.getElementById('om-id').value='';}
   om('offer-modal');
 }
@@ -1251,6 +1261,18 @@ function saveOffer(){
   const offer={title:document.getElementById('om-title').value.trim(),badge:document.getElementById('om-badge').value.trim(),desc:document.getElementById('om-desc').value.trim(),coupon:document.getElementById('om-coupon').value.trim(),link:document.getElementById('om-link').value.trim(),iconUrl:iconEl?iconEl.value.trim():'',logoUrl:document.getElementById('om-logo').value.trim()};
   if(!offer.title){t('Title required','er');return;}
   const idxStr=document.getElementById('om-id').value;
+  const priceVal=document.getElementById('om-price')?.value;
+  const origVal=document.getElementById('om-original-price')?.value;
+  const platformVal=document.getElementById('om-platform')?.value||'';
+  const ratingVal=document.getElementById('om-rating')?.value;
+  const ratingCountVal=document.getElementById('om-rating-count')?.value;
+  const featuredVal=document.getElementById('om-featured')?.checked||false;
+  if(priceVal)offer.price=parseInt(priceVal);
+  if(origVal)offer.originalPrice=parseInt(origVal);
+  if(platformVal)offer.platform=platformVal;
+  if(ratingVal)offer.rating=parseFloat(ratingVal);
+  if(ratingCountVal)offer.ratingCount=parseInt(ratingCountVal);
+  if(featuredVal)offer.featured=true;
   if(idxStr!=='')d.offers[parseInt(idxStr)]=offer;else d.offers.push(offer);
   SD(d);cm('offer-modal');rOffers();t('Offer saved','ok');
 }
