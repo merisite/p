@@ -1694,6 +1694,21 @@
       "rating": 4.8,
       "ratingCount": 97050,
       "featured": true
+    },
+    {
+      "title": "CA Mock Drill™ Pro (6Months)",
+      "badge": "Discount",
+      "desc": "All CA PDFs + Tests + AI Based Learning\nValidity : 6 Month(s)",
+      "coupon": "PREP2DAY",
+      "link": "https://testzone.smartkeeda.com/pricing?tabId=ca-mock-drill",
+      "iconUrl": "https://i.postimg.cc/J0jxXkdg/1000146054-removebg-preview.png",
+      "logoUrl": "",
+      "price": 369,
+      "originalPrice": 699,
+      "platform": "SmartKeeda",
+      "rating": 4.7,
+      "ratingCount": 77059,
+      "featured": true
     }
   ]
 }
