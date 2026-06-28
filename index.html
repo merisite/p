@@ -1295,9 +1295,34 @@ async function runAIMock(){
       const tot=document.getElementById("r-total-score");
       if(tot&&totMax>0)tot.textContent=`${totScore}/${totMax}`;
     } else {
-      if(scoreEl)scoreEl.textContent="AI unavailable";
-      if(aiEl)aiEl.innerHTML='<div class="ai-notice">AI evaluation not available. Check Worker URL in Admin → Settings.</div>';
+      const d2=D(),cfg2=d2.siteSettings||{};let ep2="";
+      try{const ls=localStorage.getItem("dpt_data");if(ls){ep2=JSON.parse(ls)?.siteSettings?.apiProxy||"";}}catch(e){}
+      ep2=ep2||cfg2.apiProxy||"";
+      if(!ep2){
+        if(scoreEl)scoreEl.textContent="AI unavailable";
+        if(aiEl)aiEl.innerHTML='<div class="ai-notice">AI evaluation not available. Check Worker URL in Admin → Settings.</div>';
+      } else {
+        if(scoreEl)scoreEl.textContent="AI failed";
+        const idx2=i;
+        if(aiEl)aiEl.innerHTML='<div class="ai-notice"><strong>AI evaluation failed.</strong> <button onclick="retryMockAI('+idx2+')" style="margin-left:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--accent);cursor:pointer;font-size:.75rem;font-family:var(--font);">Retry</button></div>';
+      }
     }
+  }
+}
+async function retryMockAI(idx){
+  const s=MS.s[idx];const ans=MS.a[idx]||"";
+  if(!s||!s.question||!ans.trim())return;
+  const aiEl=document.getElementById("mai-"+idx);
+  const scoreEl=document.getElementById("mscore-"+idx);
+  if(aiEl)aiEl.innerHTML='<div class="ai-notice">Retrying AI evaluation…</div>';
+  const wc=cw(ans),elapsed=(Date.now()-MS.st)/60000,wpm=elapsed>0?Math.round(wc/elapsed):0;
+  const result=await evalWithAI(s.question,ans,wc,wpm);
+  if(result){
+    if(scoreEl)scoreEl.innerHTML='<span style="color:var(--accent)">'+result.totalScore+'/'+s.question.marks+'</span>';
+    if(aiEl)aiEl.innerHTML=renderAIBlock(result,s.question.marks);
+  } else {
+    if(scoreEl)scoreEl.textContent="AI failed";
+    if(aiEl)aiEl.innerHTML='<div class="ai-notice"><strong>AI evaluation failed.</strong> <button onclick="retryMockAI('+idx+')" style="margin-left:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--accent);cursor:pointer;font-size:.75rem;font-family:var(--font);">Retry</button></div>';
   }
 }
 async function evalWithAI(q,ans,wc,wpm){
@@ -1387,8 +1412,10 @@ function renderAIBlock(result,max){
     <div class="verdict" style="margin-top:9px"><div class="blbl-s">Verdict</div>${result.overallVerdict||""}</div>
   </div>`;
 }
+let _lastAIArgs=null;
 async function runAI(ans,wc,wpm){
   const q=CQ;if(!q)return;
+  _lastAIArgs={ans,wc,wpm,q};
   const result=await evalWithAI(q,ans,wc,wpm);
   if(result){
     document.getElementById("r-score").textContent=result.totalScore+"/"+q.marks;
@@ -1399,7 +1426,32 @@ async function runAI(ans,wc,wpm){
     }).join("");
     document.getElementById("r-ai").innerHTML=renderAIBlock(result,q.marks);
   } else {
-    document.getElementById("r-ai").innerHTML='<div class="ai-notice"><strong>AI evaluation not configured.</strong> Add your Cloudflare Worker URL in Admin → Settings → AI Evaluation Proxy.</div>';
+    const d=D(),cfg=d.siteSettings||{};let ep="";
+    try{const ls=localStorage.getItem("dpt_data");if(ls){ep=JSON.parse(ls)?.siteSettings?.apiProxy||"";}}catch(e){}
+    ep=ep||cfg.apiProxy||"";
+    if(!ep){
+      document.getElementById("r-ai").innerHTML='<div class="ai-notice"><strong>AI evaluation not configured.</strong> Add your Cloudflare Worker URL in Admin → Settings → AI Evaluation Proxy.</div>';
+    } else {
+      document.getElementById("r-ai").innerHTML='<div class="ai-notice"><strong>AI evaluation failed.</strong> Please check your connection and try again. <button onclick="retryRunAI()" style="margin-left:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--accent);cursor:pointer;font-size:.75rem;font-family:var(--font);">Retry</button></div>';
+    }
+  }
+}
+async function retryRunAI(){
+  if(!_lastAIArgs)return;
+  const{ans,wc,wpm,q}=_lastAIArgs;
+  const aiEl=document.getElementById("r-ai");
+  aiEl.innerHTML='<div class="ai-notice">Retrying AI evaluation…</div>';
+  const result=await evalWithAI(q,ans,wc,wpm);
+  if(result){
+    document.getElementById("r-score").textContent=result.totalScore+"/"+q.marks;
+    document.getElementById("sbars").innerHTML=(result.parameters||[]).map(p=>{
+      const p100=Math.round((p.score/p.max)*100);
+      const col=p100>=70?"var(--green,#22c55e)":p100>=45?"var(--amber,#f59e0b)":"var(--red,#ef4444)";
+      return`<div class="sbar"><div class="sbar-top"><span>${p.name}</span><span>${p.score}/${p.max}</span></div><div class="sbar-track"><div class="sbar-fill" style="width:${p100}%;background:${col}"></div></div><div class="sbar-note">${p.comment}</div></div>`;
+    }).join("");
+    aiEl.innerHTML=renderAIBlock(result,q.marks);
+  } else {
+    aiEl.innerHTML='<div class="ai-notice"><strong>AI evaluation failed.</strong> Please check your connection and try again. <button onclick="retryRunAI()" style="margin-left:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--accent);cursor:pointer;font-size:.75rem;font-family:var(--font);">Retry</button></div>';
   }
 }
 let tlSec=120;
