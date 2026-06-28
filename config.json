@@ -1666,13 +1666,19 @@
   "liveTrackerEntries": [],
   "offers": [
     {
-      "title": "₹194 SBI PO 2026 (Pre+Mains) Cracker Package",
+      "title": "SBI PO 2026 (Pre+Mains) Cracker Package",
       "badge": "Verified Discount",
-      "desc": "✔20 SBI PO Prelims Mock Tests\n\n✔10 SBI PO Mains Mock Tests\n\n✔35 Sectional Tests (15 Prelims + 20 Mains)\n\n✔50+50 Days PDF Course for Pre+Mains\n\n✔Available in Bilingual (Hindi & English)\n\n✔Video Solution for PDF Course",
+      "desc": "✔20 SBI PO Prelims Mock Tests\n✔10 SBI PO Mains Mock Tests\n✔35 Sectional Tests (15 Prelims + 20 Mains)\n✔50+50 Days PDF Course for Pre+Mains\n✔Available in Bilingual (Hindi & English)\n✔Video Solution for PDF Course",
       "coupon": "PAW12",
       "link": "https://guidely.in/combo/sbi-po-2026-cracker-package",
       "iconUrl": "",
-      "logoUrl": "https://i.postimg.cc/rFXJMDRq/1000146027-removebg-preview.png"
+      "logoUrl": "https://i.postimg.cc/rFXJMDRq/1000146027-removebg-preview.png",
+      "price": 194,
+      "originalPrice": 799,
+      "platform": "Guidely",
+      "rating": 4.8,
+      "ratingCount": 88080,
+      "featured": true
     }
   ]
 }
