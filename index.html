@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>[data-theme="dark-default"]{--bg:#0e1117;--bg2:#161c27;--bg3:#1c2333;--bg4:#232d40;--t:#d1d9e6;--t2:#7a8499;--t3:#3a4150;--b:#252d3d;--accent:#e2b714;--ah:#c9a312;--adim:rgba(226,183,20,.08);--aborder:rgba(226,183,20,.22);--green:#4caf50;--gdim:rgba(76,175,80,.08);--gborder:rgba(76,175,80,.22);--red:#ca4754;--rdim:rgba(202,71,84,.08);--rborder:rgba(202,71,84,.22);--amber:#e2a014;--ch:rgba(255,255,255,.02);--shadow:0 1px 3px rgba(0,0,0,.5);}
 [data-theme="dark-simple"]{--bg:#18181b;--bg2:#1f1f23;--bg3:#27272a;--bg4:#2e2e32;--t:#f0f0f0;--t2:#a0a0a8;--t3:#404048;--b:#303038;--accent:#6366f1;--ah:#4f52e0;--adim:rgba(99,102,241,.08);--aborder:rgba(99,102,241,.22);--green:#4ade80;--gdim:rgba(74,222,128,.08);--gborder:rgba(74,222,128,.22);--red:#f87171;--rdim:rgba(248,113,113,.08);--rborder:rgba(248,113,113,.22);--amber:#fbbf24;--ch:rgba(255,255,255,.025);--shadow:0 1px 3px rgba(0,0,0,.6);}
-[data-theme="light-default"]{--bg:#f4f6fb;--bg2:#ffffff;--bg3:#ebedf5;--bg4:#e0e4ef;--t:#141828;--t2:#4a5470;--t3:#b8bece;--b:#d5d9ea;--accent:#1e40af;--ah:#1730a0;--adim:rgba(30,64,175,.07);--aborder:rgba(30,64,175,.18);--green:#166534;--gdim:rgba(22,101,52,.07);--gborder:rgba(22,101,52,.18);--red:#b91c1c;--rdim:rgba(185,28,28,.07);--rborder:rgba(185,28,28,.18);--amber:#92400e;--ch:rgba(0,0,0,.018);--shadow:0 1px 3px rgba(0,0,0,.08);}
+[data-theme="light-default"]{--bg:#f8f9fc;--bg2:#ffffff;--bg3:#f0f2f7;--bg4:#e8ebf2;--t:#1a1d2e;--t2:#5a6278;--t3:#c2c8d8;--b:#dde1ee;--accent:#2563eb;--ah:#1d4ed8;--adim:rgba(37,99,235,.07);--aborder:rgba(37,99,235,.2);--green:#15803d;--gdim:rgba(21,128,61,.07);--gborder:rgba(21,128,61,.2);--red:#dc2626;--rdim:rgba(220,38,38,.07);--rborder:rgba(220,38,38,.2);--amber:#b45309;--ch:rgba(0,0,0,.015);--shadow:0 1px 3px rgba(0,0,0,.07);}
 [data-theme="light-warm"]{--bg:#faf8f5;--bg2:#ffffff;--bg3:#f5f1eb;--bg4:#ede8df;--t:#2c2416;--t2:#7a6e60;--t3:#c8bfb0;--b:#ddd6ca;--accent:#c2460a;--ah:#a83a08;--adim:rgba(194,70,10,.07);--aborder:rgba(194,70,10,.2);--green:#3a7d44;--gdim:rgba(58,125,68,.07);--gborder:rgba(58,125,68,.2);--red:#c0392b;--rdim:rgba(192,57,43,.07);--rborder:rgba(192,57,43,.2);--amber:#b45309;--ch:rgba(0,0,0,.01);--shadow:0 1px 3px rgba(0,0,0,.06);}
 :root{--r:10px;--rs:6px;--rl:14px;--fs:16px;--font:"Inter",sans-serif;--mono:"JetBrains Mono",monospace;--tr:.18s ease;}
 /* LIVE TRACKER */
@@ -100,10 +100,10 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .back-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--adim)}
 .back-btn svg{stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 /* HOME */
-#home{max-width:860px;margin:0 auto;padding:52px 24px 40px}
+#home{max-width:1100px;margin:0 auto;padding:52px 32px 40px}
 .eyebrow{font-family:var(--mono);font-size:.63rem;color:var(--accent);letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
 .h-title{font-size:2rem;font-weight:700;letter-spacing:-.4px;line-height:1.18;margin-bottom:10px}
-.h-sub{color:var(--t2);font-size:.88rem;line-height:1.7;margin-bottom:36px;max-width:520px}
+.h-sub{color:var(--t2);font-size:.88rem;line-height:1.7;margin-bottom:36px;max-width:640px}
 .tg-strip{display:none;align-items:center;gap:12px;background:var(--adim);border:1px solid var(--aborder);border-radius:var(--r);padding:12px 16px;margin-bottom:28px}
 .tg-strip.show{display:flex}
 .tg-strip svg{flex-shrink:0}
@@ -112,7 +112,7 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .tgs-sub{font-size:.72rem;color:var(--t2)}
 .tgs-cta{flex-shrink:0;background:var(--accent);color:var(--bg);border:none;padding:6px 14px;border-radius:var(--rs);font-size:.72rem;font-weight:700;cursor:pointer;font-family:var(--font)}
 .sec-lbl{font-size:.63rem;font-family:var(--mono);color:var(--t2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:9px}
-.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:9px;margin-bottom:30px}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:11px;margin-bottom:30px}
 .hcard{background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:17px;cursor:pointer;transition:border-color var(--tr),background var(--tr),transform var(--tr);position:relative;overflow:hidden}
 .hcard::after{content:"";position:absolute;inset:0 auto 0 0;width:2px;background:var(--accent);opacity:0;transition:opacity var(--tr)}
 .hcard:hover{border-color:var(--accent);background:var(--ch);transform:translateY(-1px)}
@@ -367,7 +367,7 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
     <div class="t-choice" data-t="dark-simple" onclick="setTheme('dark-simple')"><div class="t-swatch" style="background:linear-gradient(135deg,#18181b 50%,#6366f1 50%)"></div>Dark &amp; minimal</div>
   </div>
   <div class="tp-grp"><div class="tp-grp-lbl">Light</div>
-    <div class="t-choice" data-t="light-default" onclick="setTheme('light-default')"><div class="t-swatch" style="background:linear-gradient(135deg,#f4f6fb 50%,#1e40af 50%)"></div>Clean &amp; blue</div>
+    <div class="t-choice" data-t="light-default" onclick="setTheme('light-default')"><div class="t-swatch" style="background:linear-gradient(135deg,#f8f9fc 50%,#2563eb 50%)"></div>Clean &amp; blue</div>
     <div class="t-choice" data-t="light-warm" onclick="setTheme('light-warm')"><div class="t-swatch" style="background:linear-gradient(135deg,#faf8f5 50%,#c2460a 50%)"></div>Warm &amp; terracotta</div>
   </div>
 </div>
@@ -520,7 +520,7 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 </div>
 <div id="typing" class="screen">
   <div style="max-width:740px;margin:0 auto;padding:40px 24px">
-    <button class="back-btn" onclick="showS('home')"><svg width="13" height="13" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Home</button>
+    <button class="back-btn" onclick="typingBackBtn()"><svg width="13" height="13" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Home</button>
     <div style="font-size:1rem;font-weight:700;margin-bottom:3px" id="typ-head">Typing Speed Test</div>
     <div style="color:var(--t2);font-size:.78rem;margin-bottom:20px" id="typ-sub">Test your WPM and accuracy before the exam</div>
     <div id="typ-setup">
@@ -752,7 +752,8 @@ window.addEventListener("popstate",function(e){
 });
 function closeBackExitCov(){document.getElementById("back-exit-cov").classList.remove("open");history.pushState({exam:true},"",location.pathname+location.search+"#exam-guard");}
 function doBackExit(){document.getElementById("back-exit-cov").classList.remove("open");clearInterval(TI);clearInterval(WI);showS("home");}
-function doTypingExit(){document.getElementById("typing-exit-cov").classList.remove("open");resetTyping();showS("home");}
+function doTypingExit(){document.getElementById("typing-exit-cov").classList.remove("open");showS("home");}
+function typingBackBtn(){if(isInActiveTyping()){document.getElementById("typing-exit-cov").classList.add("open");}else{showS("home");}}
 function handleBrand(e){e.preventDefault();if(isInActiveExam())askExit("home");else if(isInActiveTyping()){document.getElementById("typing-exit-cov").classList.add("open");}else if(document.getElementById("home").classList.contains("active"))location.reload();else showS("home");}
 function askExit(dest){exitDest=dest;document.getElementById("exit-cov").classList.add("open");}
 function closeCov(){document.getElementById("exit-cov").classList.remove("open");exitDest=null;}
@@ -1853,11 +1854,12 @@ doFinishTyping = function(val, elapsedSec){
   saveProgress({ kind:'typing', date:new Date().toISOString(), wpm:wpm, acc:acc, timeSec:Math.round(elapsed), grade:grade });
 };
 
-/* ---- Override showS to render progress screen on open ---- */
+/* ---- Override showS to render progress screen on open, and reset typing on exit ---- */
 const _showSOrig = showS;
 showS = function(id, opts){
-  // If navigating away from typing screen while a test is running, reset it cleanly
-  if(id !== 'typing' && document.getElementById('typing') && document.getElementById('typing').classList.contains('active') && (tyTStarted||tyDone)){
+  // Reset typing test whenever leaving the typing screen (regardless of state)
+  const typingEl = document.getElementById('typing');
+  if(id !== 'typing' && typingEl && typingEl.classList.contains('active')){
     resetTyping();
   }
   _showSOrig(id, opts);
