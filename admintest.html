@@ -757,10 +757,9 @@ function login(){
   const c=gc();
   const err=document.getElementById('lerr');
   err.style.display='none';
-  // Check stored creds OR fallback to default
+  // Check stored creds only (default is only used as initial value when nothing is stored)
   const matchStored=(u===c.user&&p===c.pass);
-  const matchDefault=(u===DCRED.user&&p===DCRED.pass);
-  if(matchStored||matchDefault){
+  if(matchStored){
     sessionStorage.setItem('dpt_li','1');
     document.getElementById('ls').style.display='none';
     document.getElementById('sh').style.display='block';
@@ -781,7 +780,9 @@ function changePass(){
   const p=document.getElementById('new-p').value;
   if(!u||p.length<6){t('Username needed, password min 6 chars','er');return;}
   localStorage.setItem('dpt_creds',JSON.stringify({user:u,pass:p}));
-  t('Password updated. Use new credentials next time.','ok');
+  document.getElementById('new-u').value='';
+  document.getElementById('new-p').value='';
+  t('Credentials updated — use new username & password next time you log in.','ok');
 }
 
 // ── DATA ──
