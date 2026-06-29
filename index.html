@@ -655,6 +655,12 @@ async function init(){
   renderHome();
   document.getElementById("home").style.visibility="visible";
   if(typeof updateProgCard === "function") updateProgCard();
+  // If the browser was refreshed while on the live-tracker screen, routeFromHash()
+  // fires on DOMContentLoaded *before* this async fetch completes, so the tracker
+  // renders with empty/stale data. Re-render it now that config is fully loaded.
+  if(document.getElementById("live-tracker").classList.contains("active")){
+    renderLiveTracker();
+  }
 }
 function applyTheme(t,save=true){
   document.documentElement.setAttribute("data-theme",t);

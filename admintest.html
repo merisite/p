@@ -231,6 +231,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
       <div class="ni" data-p="secs" onclick="nav('secs')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="21"/></svg></span>Sections</div>
       <div class="ni" data-p="typing" onclick="nav('typing')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M8 12h.01M12 12h.01M16 12h.01M7 16h10"/></svg></span>Typing Paras</div>
       <div class="ng">Settings</div>
+      <div class="ni" data-p="platforms" onclick="nav('platforms')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></span>Platform Presets</div>
       <div class="ni" data-p="offers" onclick="nav('offers')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></span>Offers & Discounts</div>
       <div class="ni" data-p="timing" onclick="nav('timing')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>Timing</div>
       <div class="ni" data-p="appear" onclick="nav('appear')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></span>Appearance</div>
@@ -396,6 +397,19 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
           <div class="cb" id="text-tg"></div>
         </div>
         <button class="btn bp" onclick="saveContent()">Save All Text</button>
+      </div>
+
+      <!-- PLATFORM PRESETS -->
+      <div id="pg-platforms" class="pg">
+        <div class="ph"><div class="ph-ey">Settings</div><div class="ph-ti">Platform Presets</div><div class="ph-su">Save platform names and logos once. Pick from the dropdown when adding Live Mock entries or Offer cards — no copy-pasting URLs every time.</div></div>
+        <div style="display:flex;justify-content:flex-end;margin-bottom:12px">
+          <button class="btn bp" onclick="openPlatformModal()"><span class="ic" style="width:12px;height:12px"><svg width="12" height="12" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>Add Platform</button>
+        </div>
+        <div id="platform-list"></div>
+        <!-- Seeded defaults notice -->
+        <div id="platform-seed-hint" style="display:none;margin-top:12px;background:var(--adim);border:1px solid var(--aborder);border-radius:var(--rs);padding:10px 14px;font-size:.75rem;color:var(--t2)">
+          💡 <strong style="color:var(--t)">Common platforms pre-loaded.</strong> Edit or delete any preset, and add your own. Changes are saved instantly.
+        </div>
       </div>
 
       <!-- OFFERS -->
@@ -612,6 +626,17 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
   <div class="mo" style="max-width:520px">
     <div class="mh"><div class="mt" id="offer-modal-title">Add Offer Card</div><button class="mc" onclick="cm('offer-modal')">×</button></div>
     <div class="mb">
+      <!-- Platform Picker -->
+      <div class="ff" style="margin-bottom:12px">
+        <label>Quick-fill Platform <span style="font-weight:400;color:var(--t2)">(auto-fills icon, logo &amp; platform name)</span></label>
+        <div style="display:flex;gap:7px;align-items:center">
+          <select id="om-platform-preset" onchange="applyOMPlatformPreset()" style="flex:1;background:var(--bg3);border:1px solid var(--b);border-radius:var(--rs);padding:7px 11px;color:var(--t);font-size:.8rem;outline:none;font-family:'Inter',sans-serif">
+            <option value="">— Select a saved platform —</option>
+          </select>
+          <button class="btn bo sm" onclick="nav('platforms');cm('offer-modal')" title="Manage saved platforms" style="flex-shrink:0;white-space:nowrap">⚙ Manage</button>
+        </div>
+      </div>
+      <div style="height:1px;background:var(--b);margin-bottom:12px"></div>
       <div class="fr c2">
         <div class="ff"><label>Title</label><input type="text" id="om-title" placeholder="e.g. Guidely SBI PO Course"/></div>
         <div class="ff"><label>Badge text (shown top-right corner)</label><input type="text" id="om-badge" placeholder="e.g. Verified Discount, Best Seller"/>
@@ -704,6 +729,17 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
   <div class="mo" style="max-width:580px">
     <div class="mh"><div class="mt" id="lt-modal-title">Add Entry</div><button class="mc" onclick="cm('lt-modal')">×</button></div>
     <div class="mb">
+      <!-- Platform Picker -->
+      <div class="ff" style="margin-bottom:12px">
+        <label>Quick-fill Platform <span style="font-weight:400;color:var(--t2)">(select to auto-fill name &amp; logo)</span></label>
+        <div style="display:flex;gap:7px;align-items:center">
+          <select id="lt-platform-preset" onchange="applyLTPlatformPreset()" style="flex:1;background:var(--bg3);border:1px solid var(--b);border-radius:var(--rs);padding:7px 11px;color:var(--t);font-size:.8rem;outline:none;font-family:'Inter',sans-serif">
+            <option value="">— Select a saved platform —</option>
+          </select>
+          <button class="btn bo sm" onclick="nav('platforms');cm('lt-modal')" title="Manage saved platforms" style="flex-shrink:0;white-space:nowrap">⚙ Manage</button>
+        </div>
+      </div>
+      <div style="height:1px;background:var(--b);margin-bottom:12px"></div>
       <div class="fr c2">
         <div class="ff"><label>Platform Name</label><input type="text" id="lt-platform" placeholder="e.g. Guidely, Testbook, Oliveboard"/></div>
         <div class="ff"><label>Platform Logo URL</label><input type="url" id="lt-logo" placeholder="https://…/logo.png" oninput="ltPrevLogo()"/></div>
@@ -734,6 +770,37 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
       <input type="hidden" id="lt-idx" value=""/>
     </div>
     <div class="mf"><button class="btn bo" onclick="cm('lt-modal')">Cancel</button><button class="btn bp" onclick="saveLTEntry()">Save Entry</button></div>
+  </div>
+</div>
+
+<!-- PLATFORM PRESET MODAL -->
+<div class="ov" id="platform-modal">
+  <div class="mo" style="max-width:480px">
+    <div class="mh"><div class="mt" id="platform-modal-title">Add Platform</div><button class="mc" onclick="cm('platform-modal')">×</button></div>
+    <div class="mb">
+      <div class="fr c1">
+        <div class="ff"><label>Platform Name</label><input type="text" id="pm-name" placeholder="e.g. Guidely, Testbook, Oliveboard, StudyIQ" oninput="pmPrevLogo()"/></div>
+      </div>
+      <div class="fr c1">
+        <div class="ff">
+          <label>Logo URL</label>
+          <input type="url" id="pm-logo" placeholder="https://example.com/logo.png" oninput="pmPrevLogo()"/>
+          <div class="hint">Paste a direct image URL. Tip: right-click any logo on the platform's website → "Copy image address".</div>
+        </div>
+      </div>
+      <!-- Live preview -->
+      <div id="pm-logo-prev" style="margin-top:10px;display:none">
+        <div style="font-size:.65rem;color:var(--t2);margin-bottom:6px">Preview</div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="width:42px;height:42px;border-radius:8px;border:1px solid var(--b);background:#fff;display:flex;align-items:center;justify-content:center;padding:4px;overflow:hidden;flex-shrink:0">
+            <img id="pm-logo-img" src="" style="width:100%;height:100%;object-fit:contain" onerror="document.getElementById('pm-logo-prev').style.display='none'"/>
+          </div>
+          <span id="pm-name-prev" style="font-size:.82rem;font-weight:600;color:var(--t)"></span>
+        </div>
+      </div>
+      <input type="hidden" id="pm-idx" value=""/>
+    </div>
+    <div class="mf"><button class="btn bo" onclick="cm('platform-modal')">Cancel</button><button class="btn bp" onclick="savePlatformPreset()">Save Platform</button></div>
   </div>
 </div>
 
@@ -802,7 +869,7 @@ function toggleTheme(){
 
 // ── NAV ──
 function nav(p){document.querySelectorAll('.pg').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.ni').forEach(x=>x.classList.remove('on'));document.getElementById('pg-'+p).classList.add('on');document.querySelector(`[data-p="${p}"]`).classList.add('on');rp(p);}
-function rp(p){if(p==='dash')rDash();if(p==='qs')rQP();if(p==='exams')rExams();if(p==='mocks')renderMocks();if(p==='secs')rSecs();if(p==='typing')rTypingParas();if(p==='timing')rTiming();if(p==='appear')rAppear();if(p==='content')rContent();if(p==='cfg')rCfg();if(p==='livetracker')rLiveTracker();if(p==='offers')rOffers();}
+function rp(p){if(p==='dash')rDash();if(p==='qs')rQP();if(p==='exams')rExams();if(p==='mocks')renderMocks();if(p==='secs')rSecs();if(p==='typing')rTypingParas();if(p==='timing')rTiming();if(p==='appear')rAppear();if(p==='content')rContent();if(p==='cfg')rCfg();if(p==='livetracker')rLiveTracker();if(p==='offers')rOffers();if(p==='platforms')rPlatforms();}
 
 // ── LIVE TRACKER ──
 function rLiveTracker(){
@@ -839,6 +906,7 @@ function ltPrevLogo(){
   else prev.style.display='none';
 }
 function openLTModal(idx){
+  populatePlatformDropdowns();
   const d=D();
   const entries=d.liveTrackerEntries||[];
   document.getElementById('lt-modal-title').textContent=idx!=null?'Edit Entry':'Add Entry';
@@ -1250,6 +1318,7 @@ function rOffers(){
   list.innerHTML=offers.map((o,i)=>`<div class="card" style="margin-bottom:10px"><div class="ch"><div style="display:flex;align-items:center;gap:8px">${o.iconUrl?`<img src="${o.iconUrl}" style="width:22px;height:22px;object-fit:contain;border-radius:4px;border:1px solid var(--b)" onerror="this.style.display='none'"/>`:''}${o.badge?`<span class="bge bg-a">${o.badge}</span>`:''}<span style="font-size:.85rem;font-weight:600">${o.title||'Untitled'}</span></div><div style="display:flex;gap:6px"><button class="btn bo sm" onclick="openOfferModal(${i})">Edit</button><button class="btn bd sm" onclick="delOffer(${i})">Delete</button></div></div><div class="cb" style="font-size:.78rem;color:var(--t2)">${o.desc||''}${o.coupon?`<div style="margin-top:5px"><span class="bge bg-b">Coupon: ${o.coupon}</span></div>`:''}${o.link?`<div style="margin-top:4px"><a href="${o.link}" target="_blank" style="font-size:.7rem;color:var(--accent)">${o.link.length>50?o.link.slice(0,50)+'…':o.link}</a></div>`:''}</div></div>`).join('');
 }
 function openOfferModal(idx){
+  populatePlatformDropdowns();
   const d=D();
   const vdChk=document.getElementById('om-badge-vd');if(vdChk)vdChk.checked=false;
   if(idx!==undefined){const o=(d.offers||[])[idx];if(!o)return;document.getElementById('offer-modal-title').textContent='Edit Offer';document.getElementById('om-title').value=o.title||'';document.getElementById('om-badge').value=o.badge||'';if(vdChk)vdChk.checked=(o.badge==='Verified Discount');document.getElementById('om-desc').value=o.desc||'';document.getElementById('om-coupon').value=o.coupon||'';document.getElementById('om-link').value=o.link||'';const iconEl=document.getElementById('om-icon');if(iconEl)iconEl.value=o.iconUrl||'';document.getElementById('om-logo').value=o.logoUrl||'';const priceEl=document.getElementById('om-price');if(priceEl)priceEl.value=o.price||'';const origEl=document.getElementById('om-original-price');if(origEl)origEl.value=o.originalPrice||'';const platformEl=document.getElementById('om-platform');if(platformEl)platformEl.value=o.platform||'';const ratingEl=document.getElementById('om-rating');if(ratingEl)ratingEl.value=o.rating||'';const ratingCntEl=document.getElementById('om-rating-count');if(ratingCntEl)ratingCntEl.value=o.ratingCount||'';const featEl=document.getElementById('om-featured');if(featEl)featEl.checked=o.featured||false;document.getElementById('om-id').value=idx;}
@@ -1415,6 +1484,127 @@ async function quickPublish(){
   await publishToGitHub();
 }
 
+
+// ── PLATFORM PRESETS ──
+const DEFAULT_PLATFORMS=[
+  {name:'Guidely',logoUrl:'https://i.postimg.cc/Bv3JVR25/176162780593.png'},
+  {name:'Testbook',logoUrl:'https://i.postimg.cc/gkL3BnM1/testbook-logo.png'},
+  {name:'Oliveboard',logoUrl:'https://i.postimg.cc/3JqkVhBY/oliveboard-logo.png'},
+  {name:'StudyIQ',logoUrl:'https://i.postimg.cc/nzLGg6Lz/studyiq-logo.png'},
+  {name:'Adda247',logoUrl:'https://i.postimg.cc/2yRfjvf7/adda247-logo.png'},
+  {name:'PracticeMock',logoUrl:''},
+  {name:'IBPSGuide',logoUrl:''},
+  {name:'AffairsCloud',logoUrl:''},
+];
+function getPlatformPresets(){
+  try{
+    const raw=localStorage.getItem('dpt_platforms');
+    if(raw){const p=JSON.parse(raw);if(Array.isArray(p)&&p.length)return p;}
+  }catch(e){}
+  // First time: seed defaults and mark as seeded
+  localStorage.setItem('dpt_platforms',JSON.stringify(DEFAULT_PLATFORMS));
+  return DEFAULT_PLATFORMS;
+}
+function savePlatformPresets(arr){localStorage.setItem('dpt_platforms',JSON.stringify(arr));}
+function populatePlatformDropdowns(){
+  const presets=getPlatformPresets();
+  const opts='<option value="">— Select a saved platform —</option>'+presets.map((p,i)=>`<option value="${i}">${p.name}</option>`).join('');
+  const ltSel=document.getElementById('lt-platform-preset');
+  const omSel=document.getElementById('om-platform-preset');
+  if(ltSel)ltSel.innerHTML=opts;
+  if(omSel)omSel.innerHTML=opts;
+}
+function applyLTPlatformPreset(){
+  const idx=document.getElementById('lt-platform-preset').value;
+  if(idx==='')return;
+  const p=getPlatformPresets()[parseInt(idx)];if(!p)return;
+  document.getElementById('lt-platform').value=p.name||'';
+  document.getElementById('lt-logo').value=p.logoUrl||'';
+  ltPrevLogo();
+  // Reset selector back to placeholder so it's clear it was a one-time fill
+  document.getElementById('lt-platform-preset').value='';
+}
+function applyOMPlatformPreset(){
+  const idx=document.getElementById('om-platform-preset').value;
+  if(idx==='')return;
+  const p=getPlatformPresets()[parseInt(idx)];if(!p)return;
+  // Fill platform name field
+  const platformEl=document.getElementById('om-platform');if(platformEl)platformEl.value=p.name||'';
+  // Fill icon URL (used in offer cards as the small icon)
+  const iconEl=document.getElementById('om-icon');if(iconEl)iconEl.value=p.logoUrl||'';
+  // Fill logo URL too
+  const logoEl=document.getElementById('om-logo');if(logoEl)logoEl.value=p.logoUrl||'';
+  document.getElementById('om-platform-preset').value='';
+}
+function rPlatforms(){
+  const presets=getPlatformPresets();
+  const list=document.getElementById('platform-list');
+  const hint=document.getElementById('platform-seed-hint');
+  if(!presets.length){
+    list.innerHTML='<div class="empty">No platforms saved yet. Click <strong>Add Platform</strong> to get started.</div>';
+    if(hint)hint.style.display='none';
+    return;
+  }
+  if(hint)hint.style.display='block';
+  list.innerHTML=`<div class="card"><div class="cb" style="padding:0"><table class="dt">
+    <thead><tr><th style="width:50px">Logo</th><th>Platform Name</th><th>Logo URL</th><th>Actions</th></tr></thead>
+    <tbody>
+    ${presets.map((p,i)=>`<tr>
+      <td>${p.logoUrl?`<div style="width:32px;height:32px;border-radius:6px;border:1px solid var(--b);background:#fff;display:flex;align-items:center;justify-content:center;padding:3px;overflow:hidden"><img src="${p.logoUrl}" style="width:100%;height:100%;object-fit:contain" onerror="this.parentElement.innerHTML='<span style=\\'font-size:.6rem;color:var(--t2)\\'>ERR</span>'"/></div>`:'<span style="color:var(--t3);font-size:.72rem">None</span>'}</td>
+      <td style="font-weight:600;font-size:.82rem">${p.name||'—'}</td>
+      <td class="td-p" style="font-size:.7rem;color:var(--t2);max-width:220px">${p.logoUrl||'—'}</td>
+      <td><div class="tda"><button class="btn bo sm" onclick="openPlatformModal(${i})">Edit</button><button class="btn bd sm" onclick="deletePlatformPreset(${i})">Delete</button></div></td>
+    </tr>`).join('')}
+    </tbody></table></div></div>`;
+}
+function openPlatformModal(idx){
+  const presets=getPlatformPresets();
+  const isEdit=idx!=null;
+  document.getElementById('platform-modal-title').textContent=isEdit?'Edit Platform':'Add Platform';
+  document.getElementById('pm-idx').value=isEdit?idx:'';
+  if(isEdit&&presets[idx]){
+    document.getElementById('pm-name').value=presets[idx].name||'';
+    document.getElementById('pm-logo').value=presets[idx].logoUrl||'';
+  }else{
+    document.getElementById('pm-name').value='';
+    document.getElementById('pm-logo').value='';
+  }
+  pmPrevLogo();
+  om('platform-modal');
+}
+function pmPrevLogo(){
+  const url=document.getElementById('pm-logo').value.trim();
+  const name=document.getElementById('pm-name').value.trim();
+  const prev=document.getElementById('pm-logo-prev');
+  const img=document.getElementById('pm-logo-img');
+  const namePrev=document.getElementById('pm-name-prev');
+  if(url||name){
+    prev.style.display='block';
+    if(namePrev)namePrev.textContent=name||'';
+    if(url){img.src=url;}else img.src='';
+  }else prev.style.display='none';
+}
+function savePlatformPreset(){
+  const name=document.getElementById('pm-name').value.trim();
+  if(!name){t('Platform name is required','er');return;}
+  const logoUrl=document.getElementById('pm-logo').value.trim();
+  const presets=getPlatformPresets();
+  const idxStr=document.getElementById('pm-idx').value;
+  if(idxStr!==''){presets[parseInt(idxStr)]={name,logoUrl};}
+  else{presets.push({name,logoUrl});}
+  savePlatformPresets(presets);
+  populatePlatformDropdowns();
+  cm('platform-modal');rPlatforms();t('Platform saved','ok');
+}
+function deletePlatformPreset(idx){
+  if(!confirm('Remove this platform preset?'))return;
+  const presets=getPlatformPresets();
+  presets.splice(idx,1);
+  savePlatformPresets(presets);
+  populatePlatformDropdowns();
+  rPlatforms();t('Deleted','ok');
+}
+
 // ── MODAL / TOAST ──
 function om(id){document.getElementById(id).classList.add('op');}
 function cm(id){document.getElementById(id).classList.remove('op');}
@@ -1465,6 +1655,8 @@ function initAdmin(){
   // Sync theme picker state
   const currentT=getT();
   document.querySelectorAll('.t-row').forEach(r=>r.classList.toggle('on',r.dataset.t===currentT));
+  // Seed platform presets and populate dropdowns
+  populatePlatformDropdowns();
   nav('dash');renderGHSection();
 }
 if(li()){document.getElementById('ls').style.display='none';document.getElementById('sh').style.display='block';initAdmin();}
