@@ -180,6 +180,10 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .ta-footer{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
 .wc-lbl{font-family:var(--mono);font-size:.68rem;color:var(--t2)}
 .wc-lbl strong{color:var(--accent)}
+/* ── Submit guard styles ── */
+.submit-guard-hint{font-size:.62rem;font-family:var(--mono);color:var(--t2);margin-top:3px;transition:color .3s;}
+.submit-guard-hint.ready{color:var(--green);font-weight:600;}
+.btn.bp[disabled]{opacity:.38;cursor:not-allowed;pointer-events:none;filter:grayscale(.4);}
 .mock-tabs{display:flex;gap:4px;overflow-x:auto;background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:4px;margin-bottom:10px}
 .mtab{font-size:.72rem;padding:5px 12px;border-radius:var(--rs);cursor:pointer;white-space:nowrap;transition:all var(--tr);color:var(--t2);background:transparent;border:1px solid transparent;font-family:var(--font)}
 .mtab:hover{color:var(--t)}
@@ -441,7 +445,8 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
     </div>
     <div style="display:flex;gap:6px;flex-shrink:0">
       <button class="btn bg bsm" onclick="askExit('qselect')"><svg width="11" height="11" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Exit</button>
-      <button class="btn bp bsm" onclick="submitSingle()">Submit</button>
+      <button class="btn bp bsm" id="exam-submit-btn" disabled onclick="submitSingle()">Submit</button>
+      <div class="submit-guard-hint" id="exam-submit-hint">Write at least half the required words to unlock</div>
     </div>
   </div>
   <div class="exam-grid">
@@ -467,7 +472,8 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
     </div>
     <div style="display:flex;gap:6px;flex-shrink:0">
       <button class="btn bg bsm" onclick="askExit('home')"><svg width="11" height="11" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Exit</button>
-      <button class="btn bp bsm" onclick="submitMock()">Submit All</button>
+      <button class="btn bp bsm" id="mock-submit-btn" disabled onclick="submitMock()">Submit All</button>
+      <div class="submit-guard-hint" id="mock-submit-hint">Write at least 15 words to unlock</div>
     </div>
   </div>
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;flex-wrap:wrap;gap:6px">
@@ -953,6 +959,11 @@ function launchExam(qid){
   document.getElementById("exam-qtext").textContent=CQ.text;
   document.getElementById("exam-qmeta").innerHTML=`<span class="chip">${CQ.wordLimit}</span><span class="chip">${CQ.marks} marks</span>`;
   const ta=document.getElementById("exam-ta");ta.value="";tyStarted=false;tStart=null;
+  // Reset submit guard for new question
+  const _sb=document.getElementById("exam-submit-btn");
+  const _sh=document.getElementById("exam-submit-hint");
+  if(_sb){_sb.disabled=true;}
+  if(_sh){_sh.textContent="Write at least half the required words to unlock";_sh.className="submit-guard-hint";}
   restrictTA(ta);
   updWC("exam-ta","exam-wc","exam-wc-top","exam-pwc");
   clearInterval(TI);clearInterval(WI);
@@ -1050,7 +1061,31 @@ function flashLock(ta){
   clearTimeout(_lockT);
   _lockT=setTimeout(()=>ta.classList.remove("ta-locked"),220);
 }
-function updWC(ta,wc,top,panel){const v=cw(document.getElementById(ta).value);[wc,top].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=v;});const pe=document.getElementById(panel);if(pe)pe.textContent=v+" words";}
+function updWC(ta,wc,top,panel){
+  const v=cw(document.getElementById(ta).value);
+  [wc,top].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=v;});
+  const pe=document.getElementById(panel);if(pe)pe.textContent=v+' words';
+  // ── Submit guard: unlock when student has written >= half the required words ──
+  if(ta==='exam-ta'){
+    const wlStr=CQ&&CQ.wordLimit?CQ.wordLimit:'';
+    const nums=wlStr.match(/\d+/g);
+    // Parse the lower bound of the word limit (e.g. "150-200" → 150, "~100" → 100)
+    const lowerBound=nums&&nums.length>0?parseInt(nums[0]):0;
+    const threshold=lowerBound>0?Math.ceil(lowerBound/2):15;
+    const btn=document.getElementById('exam-submit-btn');
+    const hint=document.getElementById('exam-submit-hint');
+    if(btn){
+      if(v>=threshold){
+        btn.disabled=false;
+        if(hint){hint.textContent='✓ Ready to submit';hint.className='submit-guard-hint ready';}
+      } else {
+        btn.disabled=true;
+        const need=threshold-v;
+        if(hint){hint.textContent='Write '+need+' more word'+(need===1?'':'s')+' to unlock (need '+threshold+'+)';hint.className='submit-guard-hint';}
+      }
+    }
+  }
+}
 function calcWPM(ta,wid){if(!tStart||!tyStarted)return;const e=(Date.now()-tStart)/60000,v=cw(document.getElementById(ta).value);const el=document.getElementById(wid);if(el)el.textContent=e>0?Math.round(v/e):0;}
 /* submitSingle moved to progress system below */
 let _pendingMockExamId=null;
@@ -1140,6 +1175,11 @@ function startMockAfterInstr(){
   // Start timer immediately and go into fullmock — question picker fires on first section load
   const ex2=MS.currentExam;
   clearInterval(TI);startTimer((ex2.duration||30)*60,"mock-timer","mock-prog",()=>submitMock());
+  // Reset mock submit guard
+  const _msb=document.getElementById("mock-submit-btn");
+  const _msh=document.getElementById("mock-submit-hint");
+  if(_msb){_msb.disabled=true;}
+  if(_msh){_msh.textContent="Write at least 15 words to unlock";_msh.className="submit-guard-hint";}
   document.getElementById("mock-total").textContent=MS.s.length;
   document.getElementById("mock-done").innerHTML="0/<span id='mock-total'>"+MS.s.length+"</span>";
   renderMTabs();
@@ -1258,7 +1298,25 @@ function loadMSContent(idx){
   setTimeout(()=>ta.focus(),100);
 }
 
-function updMWC(){const v=cw(document.getElementById("mock-ta").value);document.getElementById("mock-wc").textContent=v;document.getElementById("mock-pwc").textContent=v+" words";}
+function updMWC(){
+  const v=cw(document.getElementById("mock-ta").value);
+  document.getElementById("mock-wc").textContent=v;
+  document.getElementById("mock-pwc").textContent=v+" words";
+  // ── Mock submit guard: total words across ALL sections must be >= 15 ──
+  const totalWC=Object.values(MS.a||{}).reduce(function(s,a){return s+cw(a||"");},0);
+  const btn=document.getElementById("mock-submit-btn");
+  const hint=document.getElementById("mock-submit-hint");
+  if(btn){
+    if(totalWC>=15){
+      btn.disabled=false;
+      if(hint){hint.textContent="✓ Ready to submit";hint.className="submit-guard-hint ready";}
+    } else {
+      btn.disabled=true;
+      const need=15-totalWC;
+      if(hint){hint.textContent="Write "+need+" more word"+(need===1?"":"s")+" total to unlock";hint.className="submit-guard-hint";}
+    }
+  }
+}
 /* submitMock moved to progress system below */
 function showResult(ans,wc,wpm,taken){
   // Single section practice
@@ -1696,6 +1754,27 @@ function updateProgCard(){
 
 /* ---- Hook: Practice submit ---- */
 async function submitSingle(){
+  // ── Guard: minimum word check before ANY API call fires ──
+  const _ans_raw = document.getElementById('exam-ta').value.trim();
+  const _wc_check = cw(_ans_raw);
+  const _wlStr = CQ&&CQ.wordLimit?CQ.wordLimit:'';
+  const _nums = _wlStr.match(/\d+/g);
+  const _lowerBound = _nums&&_nums.length>0?parseInt(_nums[0]):0;
+  const _threshold = _lowerBound>0?Math.ceil(_lowerBound/2):15;
+  if(_wc_check < _threshold){
+    // Timer-triggered auto-submit with empty/near-empty answer — cancel silently
+    const btn=document.getElementById('exam-submit-btn');
+    if(!btn||btn.disabled){
+      // Auto-submit path: show banner, block API
+      const banner=document.createElement('div');
+      banner.style.cssText='position:fixed;top:0;left:0;right:0;z-index:9999;background:#c0392b;color:#fff;font-size:.82rem;font-family:var(--font,Inter),sans-serif;padding:12px 16px;text-align:center;font-weight:600;';
+      banner.textContent='⏱ Time is up — but no answer was recorded. The submission has been cancelled.';
+      document.body.appendChild(banner);
+      setTimeout(()=>banner.remove(),6000);
+      return; // ← HARD BLOCK: API call never fires
+    }
+    return; // Manual attempt blocked by disabled button — shouldn't reach here
+  }
   clearInterval(TI);clearInterval(WI);
   const ans = document.getElementById('exam-ta').value.trim();
   const taken = tTotal>0 ? tTotal-tLeft : Math.round((Date.now()-(tStart||Date.now()))/1000);
@@ -1720,6 +1799,20 @@ async function submitSingle(){
 
 /* ---- Hook: Mock submit ---- */
 async function submitMock(){
+  // ── Guard: block API if total written < 15 words across all sections ──
+  const _mockTotalWC=Object.values(MS.a||{}).reduce(function(s,a){return s+cw(a||"");},0);
+  if(_mockTotalWC<15){
+    const _btn=document.getElementById("mock-submit-btn");
+    if(!_btn||_btn.disabled){
+      // Timer-triggered auto-submit with nothing written
+      const banner=document.createElement("div");
+      banner.style.cssText="position:fixed;top:0;left:0;right:0;z-index:9999;background:#c0392b;color:#fff;font-size:.82rem;font-family:var(--font,Inter),sans-serif;padding:12px 16px;text-align:center;font-weight:600;";
+      banner.textContent="⏱ Time is up — but no answer was recorded. The submission has been cancelled.";
+      document.body.appendChild(banner);
+      setTimeout(function(){banner.remove();},6000);
+    }
+    return; // ← HARD BLOCK: API never fires
+  }
   clearInterval(TI);
   const taken = (EX()&&EX().duration||30)*60 - tLeft;
   showMockResult(taken); showS('result');
