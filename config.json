@@ -1734,6 +1734,16 @@
       "rating": 4.7,
       "ratingCount": 77059,
       "featured": true
+    },
+    {
+      "title": "test",
+      "badge": "",
+      "desc": "",
+      "coupon": "",
+      "link": "",
+      "iconUrl": "https://i.postimg.cc/rFXJMDRq/1000146027-removebg-preview.png",
+      "logoUrl": "https://i.postimg.cc/rFXJMDRq/1000146027-removebg-preview.png",
+      "platform": "Guidely"
     }
   ]
 }
