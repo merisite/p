@@ -93,17 +93,17 @@
     {
       "id": "sbi_po",
       "name": "SBI PO Mains 2026",
-      "key": "sbi_po",
+      "shortName": "SBI PO",
       "duration": 30,
       "status": "active",
       "desc": "New pattern — No essay. 10 full mocks available.",
+      "icon": "https://i.postimg.cc/pr9WtfcQ/state-bank-india-kiosk-banking-registration-apply-sbi-3.png",
       "sections": [
         "email",
         "situation",
         "report",
         "precis"
-      ],
-      "shortName": "SBI PO"
+      ]
     },
     {
       "id": "ibps_po",
