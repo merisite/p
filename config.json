@@ -1671,6 +1671,14 @@
       "status": "live",
       "date": "Ends on 02 July 12:00 PM",
       "link": "https://testzone.smartkeeda.com/test/dashboard/live-mock/405"
+    },
+    {
+      "platform": "Oliveboard",
+      "platformLogo": "https://i.postimg.cc/6QVvGX0C/download-removebg-preview.png",
+      "mockName": "RRB PO Prelims Live Mock",
+      "status": "live",
+      "date": "Ends on 30 June",
+      "link": "https://u1.oliveboard.in/exams/?c=ibpsrrbscp&i=banking"
     }
   ],
   "offers": [
