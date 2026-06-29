@@ -96,7 +96,7 @@
       "shortName": "SBI PO",
       "duration": 30,
       "status": "active",
-      "desc": "New pattern — No essay. 10 full mocks available.",
+      "desc": "New pattern — Will Be Updated Soon",
       "icon": "https://i.postimg.cc/pr9WtfcQ/state-bank-india-kiosk-banking-registration-apply-sbi-3.png",
       "sections": [
         "email",
@@ -111,7 +111,7 @@
       "shortName": "IBPS PO",
       "duration": 30,
       "status": "active",
-      "desc": "Full pattern with Essay & Comprehension. 10 mocks available.",
+      "desc": "New pattern — Will Be Updated Soon",
       "icon": "https://i.postimg.cc/x1j0fVZK/ibps-logo.png",
       "sections": [
         "essay",
@@ -1734,16 +1734,6 @@
       "rating": 4.7,
       "ratingCount": 77059,
       "featured": true
-    },
-    {
-      "title": "test",
-      "badge": "",
-      "desc": "",
-      "coupon": "",
-      "link": "",
-      "iconUrl": "https://i.postimg.cc/rFXJMDRq/1000146027-removebg-preview.png",
-      "logoUrl": "https://i.postimg.cc/rFXJMDRq/1000146027-removebg-preview.png",
-      "platform": "Guidely"
     }
   ]
 }
