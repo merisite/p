@@ -1679,6 +1679,14 @@
       "status": "live",
       "date": "Ends on 30 June",
       "link": "https://u1.oliveboard.in/exams/?c=ibpsrrbscp&i=banking"
+    },
+    {
+      "platform": "Testbook",
+      "platformLogo": "https://i.postimg.cc/sfP3d22P/tesbook-icon-1024px.webp",
+      "mockName": "SBI PO & IBPS PO Prelims Mock",
+      "status": "live",
+      "date": "SBI PO Ends on 2 Jul, 23:59 & IBPS PO Ends on 29 Jun, 21:00",
+      "link": "https://testbook.com/free-live-tests-and-quizzes"
     }
   ],
   "offers": [
