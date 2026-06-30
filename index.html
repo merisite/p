@@ -187,6 +187,33 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .mtab:hover{color:var(--t)}
 .mtab.on{background:var(--accent);color:var(--bg);font-weight:600}
 .mtab.done{border-color:var(--gborder);color:var(--green)}
+
+/* ── Exam status sidebar (mock exam layout) ── */
+.exam-layout{display:grid;grid-template-columns:1fr 230px;gap:11px;align-items:start}
+.exam-main{min-width:0}
+.exam-side{background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:12px;display:flex;flex-direction:column;gap:10px;max-height:calc(100vh - 160px);overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--b) transparent}
+.exam-side::-webkit-scrollbar{width:6px}
+.exam-side::-webkit-scrollbar-thumb{background:var(--b);border-radius:3px}
+.es-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.es-stat{display:flex;align-items:center;gap:7px;font-size:.66rem;color:var(--t2);line-height:1.3}
+.es-badge{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.68rem;font-weight:700;color:#fff;flex-shrink:0}
+.es-badge.green{background:#16a34a}
+.es-badge.orange{background:#ea580c}
+.es-badge.grey{background:var(--t3);color:var(--t2)}
+.es-badge.purple{background:#7c3aed}
+.es-sec-title{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--t2);background:var(--bg3);border-radius:var(--rs);padding:7px 9px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:6px}
+.es-sec-title.on{color:var(--accent);background:var(--adim)}
+.es-qgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:8px 2px 2px}
+.es-qbtn{aspect-ratio:1;border-radius:6px;border:1px solid var(--b);background:var(--bg3);color:var(--t2);font-family:var(--mono);font-size:.72rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all var(--tr);position:relative}
+.es-qbtn:hover{border-color:var(--accent)}
+.es-qbtn.es-current{border-color:var(--accent);background:var(--accent);color:#fff}
+.es-qbtn.es-done{background:#16a34a;border-color:#16a34a;color:#fff}
+.es-qbtn.es-notdone{background:#ea580c;border-color:#ea580c;color:#fff}
+.es-qbtn.es-notvisited{background:var(--bg3);border-color:var(--b);color:var(--t2)}
+.es-qbtn.es-marked{background:#7c3aed;border-color:#7c3aed;color:#fff}
+.es-qbtn.es-marked-done::after{content:"";position:absolute;bottom:-2px;right:-2px;width:9px;height:9px;border-radius:50%;background:#16a34a;border:1.5px solid var(--bg2)}
+@media(max-width:900px){.exam-layout{grid-template-columns:1fr}.exam-side{max-height:none;flex-direction:row;flex-wrap:wrap;overflow-x:auto}.es-stat-grid{display:flex;gap:10px;flex:1 1 100%}.es-qgrid{grid-template-columns:repeat(8,1fr);flex:1 1 100%}}
+#mock-mr-btn.mr-active{border-color:#7c3aed;color:#7c3aed;background:rgba(124,58,237,.1)}
 /* BUTTONS */
 .btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:var(--rs);font-size:.78rem;font-weight:600;cursor:pointer;border:none;font-family:var(--font);transition:all var(--tr);white-space:nowrap}
 .btn svg{stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
@@ -477,18 +504,26 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
     <div style="font-family:var(--mono);font-size:.6rem;color:var(--t2)">30 min combined timer</div>
   </div>
   <div class="mock-tabs" id="mock-tabs"></div>
-  <div class="exam-grid">
-    <div class="panel">
-      <div class="ph"><span id="mock-type-lbl">Question</span><span id="mock-wl" style="color:var(--t2)"></span></div>
-      <div class="pb"><div class="q-text" id="mock-qtext"></div><div class="q-meta" id="mock-qmeta"></div></div>
-    </div>
-    <div class="panel">
-      <div class="ph"><span>Your Answer</span><span id="mock-pwc" style="color:var(--t2)">0 words</span></div>
-      <div class="pb" style="padding:10px;display:flex;flex-direction:column;gap:6px;min-height:0;overflow-y:hidden">
-        <textarea class="answer-ta" id="mock-ta" placeholder="Start writing here…"></textarea>
-        <div class="ta-footer"><div class="wc-lbl">Words: <strong id="mock-wc">0</strong></div></div>
+  <div class="exam-layout">
+    <div class="exam-main">
+      <div class="exam-grid">
+        <div class="panel">
+          <div class="ph"><span id="mock-type-lbl">Question</span><span id="mock-wl" style="color:var(--t2)"></span></div>
+          <div class="pb"><div class="q-text" id="mock-qtext"></div><div class="q-meta" id="mock-qmeta"></div></div>
+        </div>
+        <div class="panel">
+          <div class="ph"><span>Your Answer</span><span id="mock-pwc" style="color:var(--t2)">0 words</span></div>
+          <div class="pb" style="padding:10px;display:flex;flex-direction:column;gap:6px;min-height:0;overflow-y:hidden">
+            <textarea class="answer-ta" id="mock-ta" placeholder="Start writing here…"></textarea>
+            <div class="ta-footer">
+              <div class="wc-lbl">Words: <strong id="mock-wc">0</strong></div>
+              <button class="btn bg bsm" id="mock-mr-btn" onclick="toggleMR()"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg><span id="mock-mr-lbl">Mark for Review</span></button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+    <div class="exam-side" id="exam-side"></div>
   </div>
 </div>
 <div id="result" class="screen">
@@ -604,7 +639,7 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 function D(){try{return JSON.parse(localStorage.getItem("dpt_data"))||DD();}catch(e){return DD();}}
 function DD(){return{siteSettings:{name:"Descriptive Prep Today",tagline:"",tgLink:"",tgText:"Join Telegram",logoUrl:"",logoUrlDark:"",logoUrlLight:"",accentColor:"",fontFamily:"Inter",fontSize:15,apiProxy:"",homeEyebrow:"Free Practice Platform",homeTitle:"SBI PO Descriptive\nPractice 2026",homeSub:"Exam-pattern interface · AI evaluation · Model answers · Typing speed tracker",practiceSectionLabel:"Practice Section",toolsLabel:"Tools",typingCardTitle:"Typing Speed Test",typingCardDesc:"Check your WPM and accuracy with a countdown timer",typingHeading:"Typing Speed Test",typingSubhead:"Test your WPM and accuracy before the exam",tgStripTitle:"Get daily questions on Telegram",tgStripSub:"Free PDFs, updates and practice material",offersMsg:"Support this channel — purchase any course using my coupon code. It helps me keep this platform free for everyone!"},sectionTypes:[{id:"email",name:"Email Writing",wordLimit:"150-200 words",marks:20,timer:10,noTimer:true},{id:"situation",name:"Situation Analysis",wordLimit:"100-150 words",marks:15,timer:10,noTimer:true},{id:"report",name:"Report Writing",wordLimit:"100-150 words",marks:15,timer:10,noTimer:true},{id:"precis",name:"Precis Writing",wordLimit:"~1/3rd of passage",marks:15,timer:10,noTimer:true}],exams:[{id:"sbi_po",name:"SBI PO Mains 2026",duration:30,status:"active",desc:"Email, Situation Analysis, Report, Precis",sections:["email","situation","report","precis"]}],typingParas:["Financial inclusion remains one of the most pressing developmental challenges facing India today. Despite significant progress over the past decade, a large section of the population continues to lack access to formal banking services. The Pradhan Mantri Jan Dhan Yojana has been a landmark initiative bringing millions of unbanked households into the formal financial fold.","The Reserve Bank of India plays a pivotal role in maintaining monetary stability and regulating the banking sector. Its primary objectives include controlling inflation, managing foreign exchange reserves, and ensuring the smooth functioning of the payment and settlement system. The RBI also acts as the banker to the government."],offers:[],questions:[{id:"q1",examId:"sbi_po",type:"email",text:"You are a PO at SBI, Connaught Place Branch. A customer Mr. Ramesh Gupta has complained that his net banking access has been blocked for 3 days. Write a formal email explaining the reason (scheduled server maintenance) and the resolution timeline.",wordLimit:"150-200 words",marks:20,difficulty:"medium",modelAnswer:"To: ramesh.gupta@email.com\nSubject: Resolution of Net Banking Access Issue\n\nDear Mr. Gupta,\n\nI sincerely apologise for the disruption to your net banking services. The temporary suspension was due to scheduled server maintenance from 14th to 16th June 2026. Your access has been fully restored.\n\nPlease reset your password via Forgot Password if you face any difficulty. For assistance call 1800-11-2211.\n\nYours sincerely,\n[Your Name]\nProbationary Officer, SBI",active:true},{id:"q2",examId:"sbi_po",type:"situation",text:"You are a PO at a semi-urban SBI branch. Mrs. Kamla Devi (72) reports she shared her OTP with a fraudster and Rs 45,000 was debited. She is in tears. Describe your immediate steps.",wordLimit:"100-150 words",marks:15,difficulty:"medium",modelAnswer:"I would calm Mrs. Kamla Devi and offer her a seat. I would immediately block her debit card and help her call 1800-11-2211 to report the fraud. I would assist in filing a branch complaint and guide her to cybercrime.gov.in. I would explain the RBI Zero Liability policy and educate her about never sharing OTPs with anyone.",active:true},{id:"q3",examId:"sbi_po",type:"report",text:"You participated in a Financial Literacy Camp in village Rampur on 5th June 2026. Write a formal report to your Branch Manager covering objectives, activities, attendance, outcomes and recommendations.",wordLimit:"100-150 words",marks:15,difficulty:"easy",modelAnswer:"REPORT ON FINANCIAL LITERACY CAMP - RAMPUR\n\nDate: 6th June 2026\nTo: Branch Manager, SBI\n\nA camp was held at Gram Panchayat Hall on 5th June 2026. Topics: PMJDY, RuPay card, UPI, fraud awareness. 180 villagers attended; 42 new accounts opened.\n\nRecommendation: Continue monthly camps and deploy a Business Correspondent.\n\n[Your Name] | PO",active:true},{id:"q4",examId:"sbi_po",type:"precis",text:"Read the following passage and write a precis in approximately 100 words.\n\nFinancial inclusion remains one of the most pressing challenges facing India. Despite PMJDY bringing millions into formal banking, merely opening accounts does not guarantee meaningful inclusion. The real challenge lies in ensuring accounts are actively used for credit, savings, insurance and remittances. Financial literacy, digital infrastructure and trust in banking institutions must be strengthened simultaneously.",wordLimit:"~100 words",marks:15,difficulty:"easy",modelAnswer:"Financial inclusion remains a major challenge in India. While PMJDY has brought millions into the banking system, account ownership alone is insufficient. True inclusion requires active usage for savings, credit, insurance and transfers. Achieving this depends on strengthening financial literacy, expanding digital infrastructure and building public trust in banking institutions.",active:true}]}};
 let CQ=null,TI=null,WI=null,tLeft=0,tTotal=0,tStart=null,tyStarted=false,tMode="default";
-let MS={s:[],a:{},idx:0,st:null},exitDest=null;
+let MS={s:[],a:{},idx:0,st:null,mr:{}},exitDest=null;
 let tyMode="given",tyPara="",tyLim=120,tyStart=null,tyInterval=null,tyDone=false,tyTStarted=false,tLeft2=0;
 const EX=()=>{try{const d=D();return d.exams.find(e=>e.status==="active")||d.exams[0];}catch(e){return null;}};
 async function init(){
@@ -655,12 +690,6 @@ async function init(){
   renderHome();
   document.getElementById("home").style.visibility="visible";
   if(typeof updateProgCard === "function") updateProgCard();
-  // If the browser was refreshed while on the live-tracker screen, routeFromHash()
-  // fires on DOMContentLoaded *before* this async fetch completes, so the tracker
-  // renders with empty/stale data. Re-render it now that config is fully loaded.
-  if(document.getElementById("live-tracker").classList.contains("active")){
-    renderLiveTracker();
-  }
 }
 function applyTheme(t,save=true){
   document.documentElement.setAttribute("data-theme",t);
@@ -1181,7 +1210,7 @@ function startMockAfterInstr(){
     if(combined.length) secs.push({typeId:"report_precis",meta:{name:"Report / Precis"},questions:combined,question:null,isReportPrecis:true});
   }
   if(!secs.length){alert("No questions available for this mock. Please add questions in the Admin panel.");return;}
-  MS.s=secs;MS.a={};MS.idx=0;MS.st=Date.now();
+  MS.s=secs;MS.a={};MS.idx=0;MS.st=Date.now();MS.mr={};
   // Start timer immediately and go into fullmock — question picker fires on first section load
   const ex2=MS.currentExam;
   clearInterval(TI);startTimer((ex2.duration||30)*60,"mock-timer","mock-prog",()=>submitMock());
@@ -1270,6 +1299,64 @@ function renderMTabs(){
     const pending=!s.question?`<span style="font-size:.55rem;opacity:.65;margin-left:3px">· pick</span>`:"";
     return `<button class="mtab ${active} ${done}" onclick="loadMS(${i})">${name}${pending}</button>`;
   }).join("");
+  renderExamSide();
+}
+
+// Status sidebar: Answered / Not Answered / Not Visited / Marked for Review counts
+// plus a number grid (one button per section, like a real exam's question palette).
+function renderExamSide(){
+  const el=document.getElementById("exam-side");if(!el)return;
+  const total=MS.s.length;
+  let answered=0,notVisited=0,marked=0;
+  MS.s.forEach((s,i)=>{
+    const hasAnswer=!!(MS.a[i]&&MS.a[i].trim());
+    const visited=!!s.question;
+    const isMarked=!!MS.mr[i];
+    if(isMarked)marked++;
+    if(hasAnswer)answered++;
+    else if(!visited)notVisited++;
+  });
+  const notAnswered=total-answered;
+  el.innerHTML=`
+    <div class="es-stat-grid">
+      <div class="es-stat"><div class="es-badge green">${answered}</div>Answered</div>
+      <div class="es-stat"><div class="es-badge orange">${notAnswered}</div>Not<br>Answered</div>
+      <div class="es-stat"><div class="es-badge grey">${notVisited}</div>Not<br>Visited</div>
+      <div class="es-stat"><div class="es-badge purple">${marked}</div>Marked For<br>Review</div>
+    </div>
+    <div class="es-sec-title on">Choose a Question</div>
+    <div class="es-qgrid">
+      ${MS.s.map((s,i)=>{
+        const hasAnswer=!!(MS.a[i]&&MS.a[i].trim());
+        const visited=!!s.question;
+        const isCurrent=i===MS.idx;
+        const isMarked=!!MS.mr[i];
+        let cls="es-notvisited";
+        if(isMarked&&hasAnswer)cls="es-marked es-marked-done";
+        else if(isMarked)cls="es-marked";
+        else if(hasAnswer)cls="es-done";
+        else if(visited)cls="es-notdone";
+        if(isCurrent)cls+=" es-current";
+        return `<button class="es-qbtn ${cls}" onclick="loadMS(${i})" title="${s.meta.name||s.typeId}${isMarked?' (marked for review)':''}">${i+1}</button>`;
+      }).join("")}
+    </div>`;
+}
+
+// Toggle "Marked for Review" on the currently open section.
+function toggleMR(){
+  const idx=MS.idx;
+  if(MS.mr[idx])delete MS.mr[idx];
+  else MS.mr[idx]=true;
+  updateMRButton();
+  renderExamSide();
+}
+function updateMRButton(){
+  const btn=document.getElementById("mock-mr-btn");
+  const lbl=document.getElementById("mock-mr-lbl");
+  if(!btn||!lbl)return;
+  const isMarked=!!MS.mr[MS.idx];
+  btn.classList.toggle("mr-active",isMarked);
+  lbl.textContent=isMarked?"Marked for Review":"Mark for Review";
 }
 
 function loadMS(idx){
@@ -1299,6 +1386,7 @@ function loadMSContent(idx){
   document.getElementById("mock-qmeta").innerHTML=`<span class="chip">${s.question.wordLimit}</span><span class="chip">${s.question.marks} marks</span>${changeBtn}`;
   const ta=document.getElementById("mock-ta");ta.value=MS.a[idx]||"";updMWC();
   restrictTA(ta);
+  updateMRButton();
   ta.oninput=()=>{
     MS.a[idx]=ta.value;updMWC();
     const done=Object.values(MS.a).filter(a=>a.trim()).length;
