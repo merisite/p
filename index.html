@@ -7,10 +7,90 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>[data-theme="dark-default"]{--bg:#0e1117;--bg2:#161c27;--bg3:#1c2333;--bg4:#232d40;--t:#d1d9e6;--t2:#7a8499;--t3:#3a4150;--b:#252d3d;--accent:#e2b714;--ah:#c9a312;--adim:rgba(226,183,20,.08);--aborder:rgba(226,183,20,.22);--green:#4caf50;--gdim:rgba(76,175,80,.08);--gborder:rgba(76,175,80,.22);--red:#ca4754;--rdim:rgba(202,71,84,.08);--rborder:rgba(202,71,84,.22);--amber:#e2a014;--ch:rgba(255,255,255,.02);--shadow:0 1px 3px rgba(0,0,0,.5);}
 [data-theme="dark-simple"]{--bg:#18181b;--bg2:#1f1f23;--bg3:#27272a;--bg4:#2e2e32;--t:#f0f0f0;--t2:#a0a0a8;--t3:#404048;--b:#303038;--accent:#6366f1;--ah:#4f52e0;--adim:rgba(99,102,241,.08);--aborder:rgba(99,102,241,.22);--green:#4ade80;--gdim:rgba(74,222,128,.08);--gborder:rgba(74,222,128,.22);--red:#f87171;--rdim:rgba(248,113,113,.08);--rborder:rgba(248,113,113,.22);--amber:#fbbf24;--ch:rgba(255,255,255,.025);--shadow:0 1px 3px rgba(0,0,0,.6);}
-[data-theme="light-default"]{--bg:#f8f9fc;--bg2:#ffffff;--bg3:#f0f2f7;--bg4:#e8ebf2;--t:#1a1d2e;--t2:#5a6278;--t3:#c2c8d8;--b:#dde1ee;--accent:#2563eb;--ah:#1d4ed8;--adim:rgba(37,99,235,.07);--aborder:rgba(37,99,235,.2);--green:#15803d;--gdim:rgba(21,128,61,.07);--gborder:rgba(21,128,61,.2);--red:#dc2626;--rdim:rgba(220,38,38,.07);--rborder:rgba(220,38,38,.2);--amber:#b45309;--ch:rgba(0,0,0,.015);--shadow:0 1px 3px rgba(0,0,0,.07);}
+[data-theme="light-default"]{--bg:#eef3fb;--bg2:#ffffff;--bg3:#e6edf8;--bg4:#d8e3f4;--t:#18243a;--t2:#526080;--t3:#b4c2d8;--b:#cfd9ee;--accent:#2563eb;--ah:#1d4ed8;--adim:rgba(37,99,235,.08);--aborder:rgba(37,99,235,.22);--teal:#0d9488;--tealdim:rgba(13,148,136,.08);--tealborder:rgba(13,148,136,.22);--green:#16a34a;--gdim:rgba(22,163,74,.08);--gborder:rgba(22,163,74,.22);--red:#dc2626;--rdim:rgba(220,38,38,.07);--rborder:rgba(220,38,38,.2);--amber:#b45309;--coral:#e05a3a;--coraldim:rgba(224,90,58,.07);--coralborder:rgba(224,90,58,.2);--ch:rgba(37,99,235,.03);--shadow:0 2px 8px rgba(30,58,120,.08);--ex-hbg:#1e3a5f;--ex-hborder:#2a4f7c;--ex-ht:#e8f0fe;--ex-ht2:#93b4da;}
 [data-theme="light-warm"]{--bg:#faf8f5;--bg2:#ffffff;--bg3:#f5f1eb;--bg4:#ede8df;--t:#2c2416;--t2:#7a6e60;--t3:#c8bfb0;--b:#ddd6ca;--accent:#c2460a;--ah:#a83a08;--adim:rgba(194,70,10,.07);--aborder:rgba(194,70,10,.2);--green:#3a7d44;--gdim:rgba(58,125,68,.07);--gborder:rgba(58,125,68,.2);--red:#c0392b;--rdim:rgba(192,57,43,.07);--rborder:rgba(192,57,43,.2);--amber:#b45309;--ch:rgba(0,0,0,.01);--shadow:0 1px 3px rgba(0,0,0,.06);}
 :root{--r:10px;--rs:6px;--rl:14px;--fs:16px;--font:"Inter",sans-serif;--mono:"JetBrains Mono",monospace;--tr:.18s ease;}
-/* LIVE TRACKER */
+/* ── EXAM MODE: light-default theme ONLY ── */
+[data-theme="light-default"] body.exam-mode header{background:#1e3a5f;border-bottom:1px solid #2a4f7c;box-shadow:0 2px 8px rgba(0,0,0,.25);}
+/* Logo: white background pill so blue logo stays visible on dark header */
+[data-theme="light-default"] body.exam-mode header #site-logo{background:#fff;border-radius:5px;padding:3px 5px;}
+[data-theme="light-default"] body.exam-mode header .site-name-top{color:#93c5fd;}
+[data-theme="light-default"] body.exam-mode header .site-name-bot{color:#e0eaff;}
+[data-theme="light-default"] body.exam-mode header .h-brand:hover{background:rgba(255,255,255,.08);}
+[data-theme="light-default"] body.exam-mode .h-exam-info .hei-exam{color:#e8f0fe;}
+[data-theme="light-default"] body.exam-mode .h-exam-info .hei-mock{color:#93c5fd;}
+/* Header icon buttons */
+[data-theme="light-default"] body.exam-mode header .ib{border-color:rgba(255,255,255,.18);color:#93c5fd;background:transparent;}
+[data-theme="light-default"] body.exam-mode header .ib:hover{border-color:#93c5fd;color:#e8f0fe;background:rgba(255,255,255,.1);}
+/* Exit button in header — ghost style on dark bg */
+[data-theme="light-default"] body.exam-mode header .btn.bg{border-color:rgba(255,255,255,.25);color:#cbd5e1;background:transparent;}
+[data-theme="light-default"] body.exam-mode header .btn.bg:hover{border-color:#93c5fd;color:#fff;background:rgba(255,255,255,.1);}
+/* Submit button in header */
+[data-theme="light-default"] body.exam-mode header .btn.bp{background:#3b82f6;color:#fff;}
+[data-theme="light-default"] body.exam-mode header .tg-hbtn{border-color:rgba(255,255,255,.18);color:#93c5fd;}
+[data-theme="light-default"] body.exam-mode header .tg-hbtn:hover{border-color:#93c5fd;color:#e8f0fe;}
+/* Submit guard hint text under header submit btn */
+[data-theme="light-default"] body.exam-mode header .submit-guard-hint{color:#93b4da;}
+/* Exam content area — white panels on soft blue bg */
+[data-theme="light-default"] body.exam-mode{background:#eef3fb;}
+[data-theme="light-default"] body.exam-mode .panel{background:#fff;border-color:#cfd9ee;}
+[data-theme="light-default"] body.exam-mode .exam-side{background:#fff;border-color:#cfd9ee;}
+[data-theme="light-default"] body.exam-mode .answer-ta{background:#fafcff;border-color:#cfd9ee;}
+/* Panel headers (Question / Your Answer bar) — blue stripe */
+[data-theme="light-default"] body.exam-mode .ph{background:#2563eb;color:#fff;border-bottom-color:#1d4ed8;}
+[data-theme="light-default"] body.exam-mode .ph span:last-child{color:rgba(255,255,255,.75);}
+/* Mock section tabs */
+[data-theme="light-default"] body.exam-mode .mock-tabs{background:#f0f5ff;border-color:#cfd9ee;}
+[data-theme="light-default"] body.exam-mode .mtab{color:#526080;}
+[data-theme="light-default"] body.exam-mode .mtab.on{background:#2563eb;color:#fff;}
+[data-theme="light-default"] body.exam-mode .mock-tabs .btn.bg{border-color:#cfd9ee;color:#526080;background:#fff;}
+[data-theme="light-default"] body.exam-mode .mock-tabs .btn.bg:hover{border-color:#dc2626;color:#dc2626;background:#fff5f5;}
+/* Exam top bar (WPM/Words + buttons strip) */
+[data-theme="light-default"] body.exam-mode .exam-bar{background:#fff;border:1px solid #cfd9ee;border-radius:8px;padding:8px 12px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;}
+[data-theme="light-default"] body.exam-mode .exam-bar .bval{color:#2563eb;}
+[data-theme="light-default"] body.exam-mode .exam-bar .blbl{color:#526080;}
+/* Exit + Submit buttons INSIDE the exam-bar (not header) */
+[data-theme="light-default"] body.exam-mode .exam-bar .btn.bg{border-color:#cfd9ee;color:#526080;background:#fff;}
+[data-theme="light-default"] body.exam-mode .exam-bar .btn.bg:hover{border-color:#2563eb;color:#2563eb;background:#f0f5ff;}
+[data-theme="light-default"] body.exam-mode .exam-bar .btn.bp{background:#2563eb;color:#fff;}
+[data-theme="light-default"] body.exam-mode .exam-bar .submit-guard-hint{color:#526080;}
+/* Sidebar */
+[data-theme="light-default"] body.exam-mode .es-sec-title{background:#2563eb;color:#fff;}
+[data-theme="light-default"] body.exam-mode .es-sec-title.on{background:#1d4ed8;color:#fff;}
+[data-theme="light-default"] body.exam-mode .es-timer{background:#f0f5ff;border-color:#cfd9ee;}
+[data-theme="light-default"] body.exam-mode .es-timer-val{color:#2563eb;}
+[data-theme="light-default"] body.exam-mode .chip{background:#f0f5ff;border-color:#cfd9ee;color:#526080;}
+/* ── SITE-WIDE VISUAL ENHANCEMENTS (all themes) ── */
+/* Richer home cards */
+.hcard{box-shadow:0 1px 4px rgba(30,58,120,.06);}
+.hcard:hover{box-shadow:0 4px 16px rgba(37,99,235,.13);}
+/* Section label pill */
+.sec-lbl{background:var(--adim);border:1px solid var(--aborder);border-radius:20px;padding:2px 10px;display:inline-block;}
+/* Hero eyebrow dot */
+.eyebrow::before{content:"●";margin-right:6px;font-size:.5rem;vertical-align:middle;opacity:.7;}
+/* Teal accent for teal-able elements */
+.hi-badge.mock{background:var(--tealdim);border-color:var(--tealborder);color:var(--teal);}
+/* Progress tiles */
+.ph-tile{box-shadow:0 1px 4px rgba(30,58,120,.06);}
+/* Scrollbar — thicker and more visible */
+::-webkit-scrollbar{width:7px;height:7px;}
+::-webkit-scrollbar-track{background:var(--bg3);border-radius:4px;}
+::-webkit-scrollbar-thumb{background:var(--t3);border-radius:4px;}
+::-webkit-scrollbar-thumb:hover{background:var(--t2);}
+/* Extra visible scrollbar in exam panels */
+body.exam-mode .exam-main::-webkit-scrollbar,
+body.exam-mode .panel .pb::-webkit-scrollbar,
+body.exam-mode .exam-side::-webkit-scrollbar{width:8px;}
+body.exam-mode .exam-main::-webkit-scrollbar-track,
+body.exam-mode .panel .pb::-webkit-scrollbar-track,
+body.exam-mode .exam-side::-webkit-scrollbar-track{background:#e6edf8;border-radius:4px;}
+body.exam-mode .exam-main::-webkit-scrollbar-thumb,
+body.exam-mode .panel .pb::-webkit-scrollbar-thumb,
+body.exam-mode .exam-side::-webkit-scrollbar-thumb{background:#93b4da;border-radius:4px;}
+body.exam-mode .exam-main::-webkit-scrollbar-thumb:hover,
+body.exam-mode .panel .pb::-webkit-scrollbar-thumb:hover,
+body.exam-mode .exam-side::-webkit-scrollbar-thumb:hover{background:#2563eb;}
+/* Live TRACKER */
 .lt-empty{text-align:center;padding:48px 20px;color:var(--t2);font-size:.82rem}
 .lt-empty svg{stroke:var(--t3);display:block;margin:0 auto 12px}
 .lt-row{display:flex;align-items:center;gap:12px;padding:11px 14px;border-bottom:1px solid var(--b);transition:background var(--tr)}
@@ -66,7 +146,21 @@
 html{font-size:var(--fs)}
 body{font-family:var(--font);background:var(--bg);color:var(--t);min-height:100vh;transition:background var(--tr),color var(--tr);line-height:1.6;-webkit-font-smoothing:antialiased}
 /* HEADER */
-header{background:var(--bg2);border-bottom:1px solid var(--b);height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;position:sticky;top:0;z-index:100}
+header{background:var(--bg2);border-bottom:1px solid var(--b);height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;position:sticky;top:0;z-index:100;gap:12px;box-shadow:0 1px 6px rgba(30,58,120,.06);transition:background .22s,border-color .22s;}
+.h-exam-ctl{display:flex;align-items:center;gap:10px;flex:1;min-width:0;justify-content:flex-end;padding-right:6px}
+.h-exam-ctl .prog-track{display:none}
+@media(min-width:760px){.h-exam-ctl .prog-track{display:block;width:80px}}
+header{position:relative}
+.h-exam-info{display:none;flex-direction:column;line-height:1.2;min-width:0;overflow:hidden;max-width:170px}
+.h-exam-info.show{display:flex}
+.h-exam-info .hei-exam{font-family:var(--mono);font-size:.72rem;font-weight:700;color:var(--t);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.h-exam-info .hei-mock{font-family:var(--mono);font-size:.62rem;color:var(--accent);white-space:nowrap;font-weight:600}
+.h-brand.center-mode{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);padding:2px 6px;margin:0}
+.h-brand.center-mode .site-logo{height:18px}
+.h-brand.center-mode .site-name-top,.h-brand.center-mode .site-name-bot{font-size:.6rem}
+.es-timer{background:var(--adim);border:1px solid var(--aborder);border-radius:var(--rs);padding:9px 10px;text-align:center}
+.es-timer-val{font-family:var(--mono);font-size:1.3rem;font-weight:700;color:var(--accent);line-height:1}
+.es-timer-lbl{font-size:.58rem;color:var(--t2);text-transform:uppercase;letter-spacing:.07em;margin-top:3px}
 .h-brand{display:flex;align-items:center;gap:9px;cursor:pointer;text-decoration:none;color:inherit;border-radius:var(--rs);padding:4px 8px;margin:-4px -8px;transition:background var(--tr);flex-shrink:1;min-width:0;overflow:hidden}
 .h-brand:hover{background:var(--bg3)}
 .site-logo{height:26px;width:auto;display:none;border-radius:4px;flex-shrink:0;background:transparent;padding:2px 4px;}
@@ -113,9 +207,9 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .tgs-cta{flex-shrink:0;background:var(--accent);color:var(--bg);border:none;padding:6px 14px;border-radius:var(--rs);font-size:.72rem;font-weight:700;cursor:pointer;font-family:var(--font)}
 .sec-lbl{font-size:.63rem;font-family:var(--mono);color:var(--t2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:9px}
 .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:11px;margin-bottom:30px}
-.hcard{background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:17px;cursor:pointer;transition:border-color var(--tr),background var(--tr),transform var(--tr);position:relative;overflow:hidden}
-.hcard::after{content:"";position:absolute;inset:0 auto 0 0;width:2px;background:var(--accent);opacity:0;transition:opacity var(--tr)}
-.hcard:hover{border-color:var(--accent);background:var(--ch);transform:translateY(-1px)}
+.hcard{background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:17px;cursor:pointer;transition:border-color var(--tr),background var(--tr),transform var(--tr),box-shadow var(--tr);position:relative;overflow:hidden;box-shadow:0 1px 4px rgba(30,58,120,.06);}
+.hcard::after{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:linear-gradient(180deg,#3b82f6,#06b6d4);opacity:0;transition:opacity var(--tr);border-radius:3px 0 0 3px;}
+.hcard:hover{border-color:var(--accent);background:linear-gradient(135deg,rgba(37,99,235,.03) 0%,rgba(6,182,212,.02) 100%);transform:translateY(-2px);box-shadow:0 6px 20px rgba(37,99,235,.12);}
 .hcard:hover::after{opacity:1}
 .hc-icon{width:32px;height:32px;background:var(--adim);border:1px solid var(--aborder);border-radius:var(--rs);display:flex;align-items:center;justify-content:center;color:var(--accent);margin-bottom:10px}
 .hc-icon svg{stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
@@ -156,21 +250,13 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .blbl{font-size:.56rem;color:var(--t2);margin-top:2px;text-transform:uppercase;letter-spacing:.07em;white-space:nowrap}
 .prog-track{width:100px;height:3px;background:var(--b);border-radius:2px;overflow:hidden;flex-shrink:0}
 .prog-fill{height:100%;background:var(--accent);border-radius:2px;transition:width 1s linear,background .5s}
-.exam-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;height:calc(100vh - 160px);max-height:640px;min-height:340px}
-.panel{background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;min-height:0}
+.exam-grid{display:flex;flex-direction:column;gap:11px}
+.panel{background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);overflow:visible;display:flex;flex-direction:column}
 .ph{background:var(--bg3);padding:7px 12px;font-family:var(--mono);font-size:.6rem;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid var(--b);display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
-.pb{padding:13px;flex:1;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--b) transparent}
-.pb::-webkit-scrollbar{width:6px}
-.pb::-webkit-scrollbar-track{background:transparent}
-.pb::-webkit-scrollbar-thumb{background:var(--b);border-radius:3px}
-.pb::-webkit-scrollbar-thumb:hover{background:var(--t2)}
+.pb{padding:13px}
 .q-text{font-size:.83rem;line-height:1.8;white-space:pre-wrap}
 .q-meta{display:flex;gap:6px;margin-top:11px;flex-wrap:wrap}
-.answer-ta{width:100%;min-height:160px;flex:1;background:var(--bg);border:1px solid var(--b);border-radius:var(--rs);color:var(--t);font-family:var(--font);font-size:.83rem;line-height:1.8;padding:11px;resize:none;outline:none;transition:border-color var(--tr);display:block;scrollbar-width:thin;scrollbar-color:var(--b) transparent}
-.answer-ta::-webkit-scrollbar{width:6px}
-.answer-ta::-webkit-scrollbar-track{background:transparent}
-.answer-ta::-webkit-scrollbar-thumb{background:var(--b);border-radius:3px}
-.answer-ta::-webkit-scrollbar-thumb:hover{background:var(--t2)}
+.answer-ta{width:100%;min-height:340px;background:var(--bg);border:1px solid var(--b);border-radius:var(--rs);color:var(--t);font-family:var(--font);font-size:.83rem;line-height:1.8;padding:11px;resize:none;outline:none;transition:border-color var(--tr);display:block;overflow:hidden}
 .answer-ta:focus{border-color:var(--accent)}
 .answer-ta::placeholder{color:var(--t3)}
 .answer-ta.ta-locked{border-color:#ef4444!important;animation:taShake .2s}
@@ -182,7 +268,8 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .submit-guard-hint{font-size:.62rem;font-family:var(--mono);color:var(--t2);margin-top:3px;transition:color .3s;}
 .submit-guard-hint.ready{color:var(--green);font-weight:600;}
 .btn.bp[disabled]{opacity:.38;cursor:not-allowed;pointer-events:none;filter:grayscale(.4);}
-.mock-tabs{display:flex;gap:4px;overflow-x:auto;background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:4px;margin-bottom:10px}
+.mock-tabs{display:flex;align-items:center;gap:4px;background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:4px;margin-bottom:10px;overflow-x:auto;}
+.mock-tabs-inner{display:flex;gap:4px;flex:1;overflow-x:auto;}
 .mtab{font-size:.72rem;padding:5px 12px;border-radius:var(--rs);cursor:pointer;white-space:nowrap;transition:all var(--tr);color:var(--t2);background:transparent;border:1px solid transparent;font-family:var(--font)}
 .mtab:hover{color:var(--t)}
 .mtab.on{background:var(--accent);color:var(--bg);font-weight:600}
@@ -191,9 +278,7 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 /* ── Exam status sidebar (mock exam layout) ── */
 .exam-layout{display:grid;grid-template-columns:1fr 230px;gap:11px;align-items:start}
 .exam-main{min-width:0}
-.exam-side{background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:12px;display:flex;flex-direction:column;gap:10px;max-height:calc(100vh - 160px);overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--b) transparent}
-.exam-side::-webkit-scrollbar{width:6px}
-.exam-side::-webkit-scrollbar-thumb{background:var(--b);border-radius:3px}
+.exam-side{background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:12px;display:flex;flex-direction:column;gap:10px;position:sticky;top:64px}
 .es-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
 .es-stat{display:flex;align-items:center;gap:7px;font-size:.66rem;color:var(--t2);line-height:1.3}
 .es-badge{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.68rem;font-weight:700;color:#fff;flex-shrink:0}
@@ -207,6 +292,7 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .es-qbtn{aspect-ratio:1;border-radius:6px;border:1px solid var(--b);background:var(--bg3);color:var(--t2);font-family:var(--mono);font-size:.72rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all var(--tr);position:relative}
 .es-qbtn:hover{border-color:var(--accent)}
 .es-qbtn.es-current{border-color:var(--accent);background:var(--accent);color:#fff}
+.es-qbtn.es-answered{background:#16a34a;border-color:#16a34a;color:#fff}
 .es-qbtn.es-done{background:#16a34a;border-color:#16a34a;color:#fff}
 .es-qbtn.es-notdone{background:#ea580c;border-color:#ea580c;color:#fff}
 .es-qbtn.es-notvisited{background:var(--bg3);border-color:var(--b);color:var(--t2)}
@@ -306,7 +392,7 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .cbox-t{font-size:.95rem;font-weight:700;margin-bottom:7px}
 .cbox-s{font-size:.78rem;color:var(--t2);margin-bottom:20px;line-height:1.6}
 .cbox-btns{display:flex;gap:8px;justify-content:center}
-@media(max-width:640px){.exam-grid{grid-template-columns:1fr;height:auto;max-height:none}.exam-grid .panel{height:42vh;max-height:42vh}.score-row{grid-template-columns:repeat(2,1fr)}.trc-grid{grid-template-columns:repeat(2,1fr)}.h-title{font-size:1.55rem}.tm-grid{grid-template-columns:1fr}.bar-l{gap:10px}.prog-track{display:none}}
+@media(max-width:640px){.exam-grid{height:auto;max-height:none}.score-row{grid-template-columns:repeat(2,1fr)}.trc-grid{grid-template-columns:repeat(2,1fr)}.h-title{font-size:1.55rem}.tm-grid{grid-template-columns:1fr}.bar-l{gap:10px}.prog-track{display:none}}
 /* OFFERS HOME BUTTON */
 #home{position:relative;}
 .offers-home-btn{position:absolute;top:0;right:24px;display:flex;align-items:center;gap:7px;background:var(--adim);border:1px solid var(--aborder);border-radius:var(--r);padding:9px 14px;cursor:pointer;font-family:var(--font);transition:all var(--tr);z-index:5;}
@@ -369,7 +455,14 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
       <span class="site-name-bot">PrepToday</span>
     </span>
   </a>
-  <div class="h-right">
+  <div class="h-exam-info" id="h-exam-info">
+    <div class="hei-exam" id="hei-exam-name"></div>
+    <div class="hei-mock" id="hei-mock-no"></div>
+  </div>
+  <div class="h-exam-ctl" id="h-exam-ctl" style="display:none">
+    <div id="mock-done" style="display:none">0/<span id="mock-total">0</span></div>
+  </div>
+  <div class="h-right" id="h-right">
     <a class="tg-hbtn" id="tg-hbtn" href="#" target="_blank">
       <svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 4.5L2.5 11.5l6 2m13-9L14.5 20l-4-5.5m11-10L8.5 13.5m0 0v5.5l3-3"/></svg>
       <span id="tg-ht">Telegram</span>
@@ -461,48 +554,49 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 <div id="exam" class="screen">
   <div class="exam-bar">
     <div class="bar-l">
-      <div class="bstat"><div class="bval" id="exam-timer">--:--</div><div class="blbl">Time</div></div>
-      <div class="prog-track"><div class="prog-fill" id="exam-prog" style="width:100%"></div></div>
       <div class="bstat"><div class="bval" id="exam-wpm">0</div><div class="blbl">WPM</div></div>
       <div class="bstat"><div class="bval" id="exam-wc-top">0</div><div class="blbl">Words</div></div>
     </div>
     <div style="display:flex;gap:6px;flex-shrink:0">
       <button class="btn bg bsm" onclick="askExit('qselect')"><svg width="11" height="11" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Exit</button>
-      <button class="btn bp bsm" id="exam-submit-btn" disabled onclick="submitSingle()">Submit</button>
-      <div class="submit-guard-hint" id="exam-submit-hint">Write at least half the required words to unlock</div>
     </div>
   </div>
-  <div class="exam-grid">
-    <div class="panel">
-      <div class="ph"><span id="exam-type-lbl">Question</span><span id="exam-wl" style="color:var(--t2)"></span></div>
-      <div class="pb"><div class="q-text" id="exam-qtext"></div><div class="q-meta" id="exam-qmeta"></div></div>
-    </div>
-    <div class="panel">
-      <div class="ph"><span>Your Answer</span><span id="exam-pwc" style="color:var(--t2)">0 words</span></div>
-      <div class="pb" style="padding:10px;display:flex;flex-direction:column;gap:6px;min-height:0;overflow-y:hidden">
-        <textarea class="answer-ta" id="exam-ta" placeholder="Start writing here…"></textarea>
-        <div class="ta-footer"><div class="wc-lbl">Words: <strong id="exam-wc">0</strong></div></div>
+  <div class="exam-layout">
+    <div class="exam-main">
+      <div class="exam-grid">
+        <div class="panel">
+          <div class="ph"><span id="exam-type-lbl">Question</span><span id="exam-wl" style="color:var(--t2)"></span></div>
+          <div class="pb"><div class="q-text" id="exam-qtext"></div><div class="q-meta" id="exam-qmeta"></div></div>
+        </div>
+        <div class="panel">
+          <div class="ph"><span>Your Answer</span><span id="exam-pwc" style="color:var(--t2)">0 words</span></div>
+          <div class="pb" style="padding:10px;display:flex;flex-direction:column;gap:6px">
+            <textarea class="answer-ta" id="exam-ta" placeholder="Start writing here…"></textarea>
+            <div class="ta-footer"><div class="wc-lbl">Words: <strong id="exam-wc">0</strong></div></div>
+          </div>
+        </div>
       </div>
+    </div>
+    <div class="exam-side" id="practice-side">
+      <div class="es-timer">
+        <div class="es-timer-val" id="exam-timer">--:--</div>
+        <div class="es-timer-lbl">Time Remaining</div>
+      </div>
+      <div class="es-stat-grid">
+        <div class="es-stat"><div class="es-badge orange" id="ps-status-badge">1</div><span id="ps-status-lbl">Not<br>Answered</span></div>
+        <div class="es-stat"><div class="es-badge grey">1</div>Total<br>Question</div>
+      </div>
+      <div class="es-sec-title" style="margin-top:2px">Practice Question</div>
+      <div class="es-qgrid">
+        <button class="es-qbtn es-current es-notdone" id="ps-qbtn">1</button>
+      </div>
+      <div style="font-size:.62rem;color:var(--t2);line-height:1.5;padding:4px 2px 0">Practice mode — this single-question layout mirrors the real exam interface.</div>
+      <button class="btn bp" style="width:100%;margin-top:8px" id="exam-submit-btn" disabled onclick="submitSingle()">Submit Answer</button>
+      <div class="submit-guard-hint" id="exam-submit-hint" style="margin-top:6px">Write at least half the required words to unlock</div>
     </div>
   </div>
 </div>
 <div id="fullmock" class="screen">
-  <div class="exam-bar">
-    <div class="bar-l">
-      <div class="bstat"><div class="bval" id="mock-timer">--:--</div><div class="blbl">Mock Time</div></div>
-      <div class="prog-track"><div class="prog-fill" id="mock-prog" style="width:100%"></div></div>
-      <div class="bstat"><div class="bval" id="mock-done">0/<span id="mock-total">0</span></div><div class="blbl">Done</div></div>
-    </div>
-    <div style="display:flex;gap:6px;flex-shrink:0">
-      <button class="btn bg bsm" onclick="askExit('home')"><svg width="11" height="11" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Exit</button>
-      <button class="btn bp bsm" id="mock-submit-btn" disabled onclick="submitMock()">Submit All</button>
-      <div class="submit-guard-hint" id="mock-submit-hint">Write at least 15 words to unlock</div>
-    </div>
-  </div>
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;flex-wrap:wrap;gap:6px">
-    <div style="font-family:var(--mono);font-size:.6rem;color:var(--t2);letter-spacing:.08em;text-transform:uppercase">SBI PO Mains · Real Pattern · Email → Situation → Report/Precis</div>
-    <div style="font-family:var(--mono);font-size:.6rem;color:var(--t2)">30 min combined timer</div>
-  </div>
   <div class="mock-tabs" id="mock-tabs"></div>
   <div class="exam-layout">
     <div class="exam-main">
@@ -513,7 +607,7 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
         </div>
         <div class="panel">
           <div class="ph"><span>Your Answer</span><span id="mock-pwc" style="color:var(--t2)">0 words</span></div>
-          <div class="pb" style="padding:10px;display:flex;flex-direction:column;gap:6px;min-height:0;overflow-y:hidden">
+          <div class="pb" style="padding:10px;display:flex;flex-direction:column;gap:6px">
             <textarea class="answer-ta" id="mock-ta" placeholder="Start writing here…"></textarea>
             <div class="ta-footer">
               <div class="wc-lbl">Words: <strong id="mock-wc">0</strong></div>
@@ -728,9 +822,21 @@ function ocCopy(code,uid){
    set below (a stale link shouldn't drop someone into a live/expired test). */
 const NON_LINKABLE_SCREENS=new Set(["exam","fullmock","result","typing"]);
 function showS(id,opts){
+  // Clear result snapshot when user deliberately navigates away
+  if(id!=='result') sessionStorage.removeItem('dpt_result_html');
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   document.getElementById(id).classList.add("active");
   window.scrollTo(0,0);
+  const isExamScreen=(id==="fullmock"||id==="exam");
+  document.body.classList.toggle("exam-mode",isExamScreen);
+  const hec=document.getElementById("h-exam-ctl");
+  if(hec) hec.style.display=(id==="fullmock")?"flex":"none";
+  const brand=document.getElementById("h-brand");
+  if(brand) brand.classList.toggle("center-mode",id==="fullmock");
+  const heinfo=document.getElementById("h-exam-info");
+  if(heinfo) heinfo.classList.toggle("show",id==="fullmock");
+  const tg=document.getElementById("tg-hbtn");
+  if(tg) tg.style.display=(id==="fullmock")?"none":"";
   ["fp","tp"].forEach(id=>document.getElementById(id).classList.remove("open"));
   if(!opts||!opts.skipHash){
     const hash=(opts&&opts.hash)?opts.hash:id;
@@ -768,7 +874,22 @@ function routeFromHash(){
   if(el&&el.classList.contains("screen"))showS(screenId,{skipHash:true});
 }
 window.addEventListener("hashchange",routeFromHash);
-window.addEventListener("DOMContentLoaded",routeFromHash);
+window.addEventListener("DOMContentLoaded",function(){
+  // Restore result page if user refreshed while on it
+  const savedHtml=sessionStorage.getItem('dpt_result_html');
+  const savedKind=sessionStorage.getItem('dpt_result_kind');
+  if(savedHtml){
+    const resultEl=document.getElementById('result');
+    if(resultEl){
+      resultEl.innerHTML=savedHtml;
+      // Restore exam-mode class if needed
+      document.body.classList.remove('exam-mode');
+      showS('result',{skipHash:true});
+      return; // skip normal hash routing
+    }
+  }
+  routeFromHash();
+});
 function isInActiveExam(){return document.getElementById("exam").classList.contains("active")||document.getElementById("fullmock").classList.contains("active");}
 function isInActiveTyping(){return document.getElementById("typing").classList.contains("active")&&tyTStarted&&!tyDone;}
 // Refresh guard — browser shows its own dialog ("Refresh page? Changes you made may not be saved")
@@ -997,7 +1118,10 @@ function launchExam(qid){
   document.getElementById("exam-wl").textContent=CQ.wordLimit;
   document.getElementById("exam-qtext").textContent=CQ.text;
   document.getElementById("exam-qmeta").innerHTML=`<span class="chip">${CQ.wordLimit}</span><span class="chip">${CQ.marks} marks</span>`;
-  const ta=document.getElementById("exam-ta");ta.value="";tyStarted=false;tStart=null;
+  const ta=document.getElementById("exam-ta");ta.value="";tyStarted=false;tStart=null;autoGrow(ta);
+  // Reset practice sidebar status
+  const badge=document.getElementById("ps-status-badge");const lbl=document.getElementById("ps-status-lbl");const qbtn=document.getElementById("ps-qbtn");
+  if(badge){badge.className="es-badge orange";}if(lbl){lbl.innerHTML="Not<br>Answered";}if(qbtn){qbtn.className="es-qbtn es-current es-notdone";}
   // Reset submit guard for new question
   const _sb=document.getElementById("exam-submit-btn");
   const _sh=document.getElementById("exam-submit-hint");
@@ -1006,9 +1130,27 @@ function launchExam(qid){
   restrictTA(ta);
   updWC("exam-ta","exam-wc","exam-wc-top","exam-pwc");
   clearInterval(TI);clearInterval(WI);
-  startTimer(mins*60,"exam-timer","exam-prog",()=>submitSingle());
+  startTimer(mins*60,"exam-timer",null,()=>submitSingle());
   WI=setInterval(()=>calcWPM("exam-ta","exam-wpm"),2000);
-  ta.oninput=()=>{if(!tyStarted){tyStarted=true;tStart=Date.now();}updWC("exam-ta","exam-wc","exam-wc-top","exam-pwc");calcWPM("exam-ta","exam-wpm");};
+  ta.oninput=()=>{
+    if(!tyStarted){tyStarted=true;tStart=Date.now();}
+    updWC("exam-ta","exam-wc","exam-wc-top","exam-pwc");
+    calcWPM("exam-ta","exam-wpm");
+    // Update practice side badge
+    const wc=ta.value.trim().split(/\s+/).filter(Boolean).length;
+    const badge=document.getElementById("ps-status-badge");
+    const lbl=document.getElementById("ps-status-lbl");
+    const qbtn=document.getElementById("ps-qbtn");
+    if(badge&&lbl&&qbtn){
+      if(wc===0){
+        badge.className="es-badge orange";lbl.innerHTML="Not<br>Answered";
+        qbtn.className="es-qbtn es-current es-notdone";
+      } else {
+        badge.className="es-badge green";lbl.innerHTML="Answered";
+        qbtn.className="es-qbtn es-current es-answered";
+      }
+    }
+  };
   // Replace the #qselect entry so back button skips it, then push exam sentinel
   history.replaceState(null,"",location.pathname+location.search);
   history.pushState({exam:true},"",location.pathname+location.search+"#exam-guard");
@@ -1040,20 +1182,31 @@ function resumeTimer(){
 }
 function startTimer(sec,tid,bid,onEnd){
   clearInterval(TI);tLeft=sec;tTotal=sec;_timerPaused=false;
-  if(sec===0){document.getElementById(tid).textContent="inf";return;}
+  if(sec===0){const tEl=document.getElementById(tid);if(tEl)tEl.textContent="inf";return;}
   tickT(tid,bid);
   TI=setInterval(()=>{if(_timerPaused)return;tLeft--;tickT(tid,bid);if(tLeft<=0){clearInterval(TI);if(onEnd)onEnd();}},1000);
 }
 function tickT(tid,bid){
   const m=Math.floor(tLeft/60),s=tLeft%60;
-  document.getElementById(tid).textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
-  if(bid){const p=tTotal>0?(tLeft/tTotal)*100:100;const b=document.getElementById(bid);b.style.width=p+"%";b.style.background=p>40?"var(--accent)":p>15?"var(--amber)":"var(--red)";}
+  const tEl=document.getElementById(tid);
+  if(tEl) tEl.textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+  if(bid){const p=tTotal>0?(tLeft/tTotal)*100:100;const b=document.getElementById(bid);if(b){b.style.width=p+"%";b.style.background=p>40?"var(--accent)":p>15?"var(--amber)":"var(--red)";}}
+  // Re-evaluate mock submit guard on every tick (time condition)
+  if(tid==="mock-timer"&&typeof updMWC==="function")updMWC();
 }
 function cw(t){return t.trim()===""?0:t.trim().split(/\s+/).length;}
+// Grows a textarea to fit its content so the page (not the textarea) scrolls.
+function autoGrow(ta){
+  if(!ta)return;
+  ta.style.height="auto";
+  ta.style.height=Math.max(ta.scrollHeight,340)+"px";
+}
 // Locks a textarea: no paste/drop, no double-space, no blank-line skipping, no space↔enter mixing
 // Also blocks mouse-click cursor repositioning — navigation only via arrow keys
 function restrictTA(ta){
   if(!ta||ta._restricted)return;ta._restricted=true;
+  autoGrow(ta);
+  ta.addEventListener("input",()=>autoGrow(ta));
   const block=e=>{e.preventDefault();flashLock(ta);};
   ta.addEventListener("paste",block);
   ta.addEventListener("drop",block);
@@ -1204,23 +1357,28 @@ function startMockAfterInstr(){
     return{typeId:tid,meta:tm[tid]||{},questions:qs.slice(0,2),question:null};
   }).filter(Boolean);
   if(hasBoth){
-    const reportQs=d.questions.filter(q=>q.examId===ex.id&&q.type==="report"&&q.active&&(mockNo==null||q.mockNo===mockNo)).slice(0,2).map(q=>({...q,_sectionLabel:"Report Writing"}));
-    const precisQs=d.questions.filter(q=>q.examId===ex.id&&q.type==="precis"&&q.active&&(mockNo==null||q.mockNo===mockNo)).slice(0,2).map(q=>({...q,_sectionLabel:"Precis Writing"}));
-    const combined=[...reportQs,...precisQs];
-    if(combined.length) secs.push({typeId:"report_precis",meta:{name:"Report / Precis"},questions:combined,question:null,isReportPrecis:true});
+    const reportQs=d.questions.filter(q=>q.examId===ex.id&&q.type==="report"&&q.active&&(mockNo==null||q.mockNo===mockNo)).slice(0,2);
+    const precisQs=d.questions.filter(q=>q.examId===ex.id&&q.type==="precis"&&q.active&&(mockNo==null||q.mockNo===mockNo)).slice(0,2);
+    if(reportQs.length||precisQs.length){
+      secs.push({
+        typeId:"report_precis",meta:{name:"Report / Precis"},
+        isReportPrecis:true,
+        choices:{report:{name:"Report Writing",questions:reportQs},precis:{name:"Precis Writing",questions:precisQs}},
+        chosenType:null,questions:[],question:null
+      });
+    }
   }
   if(!secs.length){alert("No questions available for this mock. Please add questions in the Admin panel.");return;}
   MS.s=secs;MS.a={};MS.idx=0;MS.st=Date.now();MS.mr={};
   // Start timer immediately and go into fullmock — question picker fires on first section load
   const ex2=MS.currentExam;
-  clearInterval(TI);startTimer((ex2.duration||30)*60,"mock-timer","mock-prog",()=>submitMock());
-  // Reset mock submit guard
-  const _msb=document.getElementById("mock-submit-btn");
-  const _msh=document.getElementById("mock-submit-hint");
-  if(_msb){_msb.disabled=true;}
-  if(_msh){_msh.textContent="Write at least 15 words to unlock";_msh.className="submit-guard-hint";}
+  clearInterval(TI);startTimer((ex2.duration||30)*60,"mock-timer",null,()=>submitMock());
   document.getElementById("mock-total").textContent=MS.s.length;
-  document.getElementById("mock-done").innerHTML="0/<span id='mock-total'>"+MS.s.length+"</span>";
+  document.getElementById("mock-done").style.display="none";
+  const nameLbl=document.getElementById("hei-exam-name");
+  const mockLbl=document.getElementById("hei-mock-no");
+  if(nameLbl) nameLbl.textContent=ex2.name;
+  if(mockLbl) mockLbl.textContent=mockNo!=null?"Mock "+mockNo:"Full Mock";
   renderMTabs();
   history.replaceState(null,"",location.pathname+location.search);
   history.pushState({exam:true},"",location.pathname+location.search+"#exam-guard");
@@ -1228,77 +1386,74 @@ function startMockAfterInstr(){
   loadMS(0);
 }
 
-// Show the question picker overlay for a section (on first visit or when changing question)
-function showQPicker(secIdx, isChange){
-  const sec=MS.s[secIdx];if(!sec)return;
-  const qs=sec.questions||[];
-  if(!qs.length){loadMSContent(secIdx);return;}
+// Type picker overlay — used ONLY for the SBI PO "choose Report OR Precis" case.
+let _pickSecIdx=null;
+function showTypePicker(secIdx){
+  _pickSecIdx=secIdx;
+  const sec=MS.s[secIdx];if(!sec||!sec.isReportPrecis)return;
   const overlay=document.getElementById("qpick-cov");
-  document.getElementById("qpick-title").textContent=(sec.meta.name||sec.typeId)+" — Choose a question";
+  document.getElementById("qpick-title").textContent="Choose your question type";
   const subtitle=overlay.querySelector(".cbox-s");
-  if(subtitle) subtitle.textContent=sec.isReportPrecis
-    ?"Pick one question from either Report Writing or Precis Writing."
-    :"Pick one of the two options below to attempt.";
-  // Build question list HTML
-  let html="";
-  if(sec.isReportPrecis){
-    const groups={};
-    qs.forEach((q,i)=>{const lbl=q._sectionLabel||"Other";if(!groups[lbl])groups[lbl]=[];groups[lbl].push({q,i});});
-    Object.entries(groups).forEach(([lbl,items])=>{
-      html+=`<div style="font-size:.6rem;font-family:var(--mono);color:var(--t2);text-transform:uppercase;letter-spacing:.09em;padding:6px 2px 6px;border-bottom:1px solid var(--b);margin-bottom:8px">${lbl}</div>`;
-      items.forEach(({q,i})=>{
-        const isCurrent=sec.question&&sec.question.id===q.id;
-        html+=`<button class="qpick-btn" style="margin-bottom:8px;${isCurrent?"border-color:var(--accent);background:var(--adim)":""}" onclick="pickQ(${secIdx},${i})">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">
-            <span style="font-size:.62rem;font-family:var(--mono);color:var(--accent);text-transform:uppercase;letter-spacing:.08em">Option ${i+1}</span>
-            ${isCurrent?`<span style="font-size:.58rem;font-family:var(--mono);color:var(--green);background:var(--gdim);border:1px solid var(--gborder);border-radius:4px;padding:1px 6px">Current</span>`:""}
-          </div>
-          <div style="font-size:.83rem;line-height:1.75;color:var(--t);text-align:left;white-space:pre-wrap;margin-bottom:8px">${q.text}</div>
-          <div style="display:flex;gap:5px;flex-wrap:wrap"><span class="chip">${q.wordLimit}</span><span class="chip">${q.marks} marks</span></div>
-          <div style="margin-top:8px;font-size:.72rem;color:var(--accent);font-weight:600;text-align:left">→ Tap to attempt</div>
-        </button>`;
-      });
-    });
-  } else {
-    html=qs.slice(0,2).map((q,i)=>{
-      const isCurrent=sec.question&&sec.question.id===q.id;
-      const sep=i===0?`<div style="text-align:center;font-size:.65rem;font-family:var(--mono);color:var(--t2);margin:6px 0">— OR —</div>`:"";
-      return`<button class="qpick-btn" style="${isCurrent?"border-color:var(--accent);background:var(--adim)":""}" onclick="pickQ(${secIdx},${i})">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">
-          <span style="font-size:.62rem;font-family:var(--mono);color:var(--accent);text-transform:uppercase;letter-spacing:.08em">Option ${i+1}</span>
-          ${isCurrent?`<span style="font-size:.58rem;font-family:var(--mono);color:var(--green);background:var(--gdim);border:1px solid var(--gborder);border-radius:4px;padding:1px 6px">Current</span>`:""}
-        </div>
-        <div style="font-size:.83rem;line-height:1.75;color:var(--t);text-align:left;white-space:pre-wrap;margin-bottom:8px">${q.text}</div>
-        <div style="display:flex;gap:5px;flex-wrap:wrap"><span class="chip">${q.wordLimit}</span><span class="chip">${q.marks} marks</span></div>
-        <div style="margin-top:8px;font-size:.72rem;color:var(--accent);font-weight:600;text-align:left">→ Tap to attempt</div>
-      </button>${sep}`;
-    }).join("");
-  }
-  document.getElementById("qpick-list").innerHTML=html;
+  if(subtitle) subtitle.textContent="As per the exam pattern, attempt ONE of the following. This cannot be changed once selected.";
+  const order=["report","precis"];
+  document.getElementById("qpick-list").innerHTML=order.map(tid=>{
+    const c=sec.choices[tid];if(!c||!c.questions.length)return"";
+    return `<button class="qpick-btn" onclick="pickType(${secIdx},'${tid}')">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <span style="font-size:.85rem;font-weight:700;color:var(--t)">${c.name}</span>
+        <span style="font-size:.68rem;color:var(--accent);font-weight:600">→ Select</span>
+      </div>
+      <div style="font-size:.7rem;color:var(--t2);margin-top:4px">${c.questions.length} question option${c.questions.length!==1?"s":""} available</div>
+    </button>`;
+  }).join("");
   pauseTimer();
-  overlay.classList.add("open");
+  document.getElementById("choice-cov").classList.add("open");
 }
 
-function pickQ(secIdx,qIdx){
+function pickType(secIdx,typeId){
   document.getElementById("qpick-cov").classList.remove("open");
   resumeTimer();
   const sec=MS.s[secIdx];
+  sec.chosenType=typeId;
+  sec.typeId=typeId;
+  sec.meta=tmMeta(typeId)||{name:sec.choices[typeId].name};
+  sec.questions=sec.choices[typeId].questions;
+  sec.question=sec.questions[0]||null;
+  renderMTabs();
+  if(sec.question) loadMSContent(secIdx);
+}
+function chooseSection(typeId){
+  document.getElementById("choice-cov").classList.remove("open");
+  if(_pickSecIdx!=null) pickType(_pickSecIdx,typeId);
+  _pickSecIdx=null;
+}
+function tmMeta(typeId){
+  try{const d=D();return (d.sectionTypes||[]).find(s=>s.id===typeId);}catch(e){return null;}
+}
+
+// Direct, popup-free question switch — clicking a numbered tile in the
+// sidebar for the currently open section.
+function selectQuestion(secIdx,qIdx){
+  const sec=MS.s[secIdx];if(!sec)return;
+  const q=sec.questions[qIdx];if(!q)return;
   const prevId=sec.question?.id;
-  sec.question=sec.questions[qIdx];
-  if(sec.isReportPrecis) sec.typeId=sec.question.type;
-  // If question changed, clear saved answer for this section
-  if(prevId && prevId!==sec.question.id) delete MS.a[secIdx];
+  sec.question=q;
+  if(prevId&&prevId!==q.id) delete MS.a[secIdx];
   loadMSContent(secIdx);
+  renderExamSide();
 }
 
 function renderMTabs(){
-  document.getElementById("mock-tabs").innerHTML=MS.s.map((s,i)=>{
+  const tabs=MS.s.map((s,i)=>{
     const done=MS.a[i]?.trim()?"done":"";
     const active=i===MS.idx?"on":"";
-    const name=s.question&&s.isReportPrecis?(s.question.type==="report"?"Report Writing":"Precis Writing"):(s.meta.name||s.typeId);
-    const pending=!s.question?`<span style="font-size:.55rem;opacity:.65;margin-left:3px">· pick</span>`:"";
+    const name=s.isReportPrecis?(s.chosenType?s.choices[s.chosenType].name:"Report / Precis"):(s.meta.name||s.typeId);
+    const pending=(s.isReportPrecis&&!s.chosenType)?`<span style="font-size:.55rem;opacity:.65;margin-left:3px">· pick type</span>`:"";
     return `<button class="mtab ${active} ${done}" onclick="loadMS(${i})">${name}${pending}</button>`;
   }).join("");
+  document.getElementById("mock-tabs").innerHTML=
+    `<div class="mock-tabs-inner">${tabs}</div>`+
+    `<button class="btn bg bsm" style="flex-shrink:0;margin-left:4px" onclick="askExit('home')"><svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Exit</button>`;
   renderExamSide();
 }
 
@@ -1310,25 +1465,62 @@ function renderExamSide(){
   let answered=0,notVisited=0,marked=0;
   MS.s.forEach((s,i)=>{
     const hasAnswer=!!(MS.a[i]&&MS.a[i].trim());
-    const visited=!!s.question;
+    const visited=s.isReportPrecis?!!s.chosenType:!!s.question;
     const isMarked=!!MS.mr[i];
     if(isMarked)marked++;
     if(hasAnswer)answered++;
     else if(!visited)notVisited++;
   });
   const notAnswered=total-answered;
+
+  const cur=MS.s[MS.idx];
+  let paletteHtml="";
+  if(cur){
+    if(cur.isReportPrecis&&!cur.chosenType){
+      paletteHtml=`<div class="es-sec-title on">${cur.meta.name||"Report / Precis"}</div>
+        <div style="font-size:.72rem;color:var(--t2);padding:8px 2px;line-height:1.5">
+          You must choose ONE question type for this section.
+          <span style="color:var(--accent);font-weight:600;cursor:pointer;text-decoration:underline" onclick="showTypePicker(${MS.idx})">Choose now →</span>
+        </div>`;
+    } else {
+      const secLabel=cur.isReportPrecis?cur.choices[cur.chosenType].name:(cur.meta.name||cur.typeId);
+      const qs=cur.questions||[];
+      paletteHtml=`<div class="es-sec-title on">${secLabel}</div>
+        <div style="font-size:.65rem;color:var(--t2);padding:4px 2px 2px">${qs.length>1?"Choose a Question":"Question"}</div>
+        <div class="es-qgrid">
+          ${qs.map((q,qi)=>{
+            const isCurrentQ=cur.question&&cur.question.id===q.id;
+            const hasAns=isCurrentQ&&!!(MS.a[MS.idx]&&MS.a[MS.idx].trim());
+            const isMarkedQ=isCurrentQ&&!!MS.mr[MS.idx];
+            let cls="es-notvisited";
+            if(isMarkedQ&&hasAns)cls="es-marked es-marked-done";
+            else if(isMarkedQ)cls="es-marked";
+            else if(hasAns)cls="es-done";
+            else if(isCurrentQ)cls="es-notdone";
+            if(isCurrentQ)cls+=" es-current";
+            return `<button class="es-qbtn ${cls}" onclick="selectQuestion(${MS.idx},${qi})">${qi+1}</button>`;
+          }).join("")}
+        </div>`;
+    }
+  }
+
   el.innerHTML=`
+    <div class="es-timer">
+      <div class="es-timer-val" id="mock-timer">--:--</div>
+      <div class="es-timer-lbl">Time Remaining</div>
+    </div>
     <div class="es-stat-grid">
       <div class="es-stat"><div class="es-badge green">${answered}</div>Answered</div>
       <div class="es-stat"><div class="es-badge orange">${notAnswered}</div>Not<br>Answered</div>
       <div class="es-stat"><div class="es-badge grey">${notVisited}</div>Not<br>Visited</div>
       <div class="es-stat"><div class="es-badge purple">${marked}</div>Marked For<br>Review</div>
     </div>
-    <div class="es-sec-title on">Choose a Question</div>
+    ${paletteHtml}
+    <div class="es-sec-title" style="margin-top:6px">All Sections</div>
     <div class="es-qgrid">
       ${MS.s.map((s,i)=>{
         const hasAnswer=!!(MS.a[i]&&MS.a[i].trim());
-        const visited=!!s.question;
+        const visited=s.isReportPrecis?!!s.chosenType:!!s.question;
         const isCurrent=i===MS.idx;
         const isMarked=!!MS.mr[i];
         let cls="es-notvisited";
@@ -1339,7 +1531,10 @@ function renderExamSide(){
         if(isCurrent)cls+=" es-current";
         return `<button class="es-qbtn ${cls}" onclick="loadMS(${i})" title="${s.meta.name||s.typeId}${isMarked?' (marked for review)':''}">${i+1}</button>`;
       }).join("")}
-    </div>`;
+    </div>
+    <button class="btn bp" style="width:100%;margin-top:8px" id="exam-side-submit" onclick="submitMock()" disabled>Submit Test</button>
+    <div class="submit-guard-hint" id="mock-submit-hint" style="margin-top:6px">Write 150+ words & wait for 2/3 time to unlock</div>`;
+  updateMockSubmitGuard();
 }
 
 // Toggle "Marked for Review" on the currently open section.
@@ -1362,11 +1557,12 @@ function updateMRButton(){
 function loadMS(idx){
   const s=MS.s[idx];if(!s)return;MS.idx=idx;
   renderMTabs();
-  if(!s.question){
-    // First visit — show question picker immediately
-    showQPicker(idx,false);
+  if(s.isReportPrecis&&!s.chosenType){
+    showTypePicker(idx);
     return;
   }
+  if(!s.question&&s.questions&&s.questions.length) s.question=s.questions[0];
+  if(!s.question)return;
   loadMSContent(idx);
 }
 
@@ -1380,17 +1576,14 @@ function loadMSContent(idx){
   document.getElementById("mock-type-lbl").textContent=(typeMeta.name||s.meta.name||"").toUpperCase();
   document.getElementById("mock-wl").textContent=s.question.wordLimit;
   document.getElementById("mock-qtext").textContent=s.question.text;
-  // "Change question" button shown only if there are 2+ options
-  const canChange=s.questions&&s.questions.length>1;
-  const changeBtn=canChange?`<button class="btn bg bsm" style="margin-top:8px" onclick="showQPicker(${idx},true)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4v6h6"/><path d="M23 20v-6h-6"/><path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/></svg>Change question</button>`:"";
-  document.getElementById("mock-qmeta").innerHTML=`<span class="chip">${s.question.wordLimit}</span><span class="chip">${s.question.marks} marks</span>${changeBtn}`;
-  const ta=document.getElementById("mock-ta");ta.value=MS.a[idx]||"";updMWC();
+  document.getElementById("mock-qmeta").innerHTML=`<span class="chip">${s.question.wordLimit}</span><span class="chip">${s.question.marks} marks</span>`;
+  const ta=document.getElementById("mock-ta");ta.value=MS.a[idx]||"";updMWC();autoGrow(ta);
   restrictTA(ta);
   updateMRButton();
   ta.oninput=()=>{
     MS.a[idx]=ta.value;updMWC();
     const done=Object.values(MS.a).filter(a=>a.trim()).length;
-    document.getElementById("mock-done").innerHTML=done+"/<span id='mock-total'>"+MS.s.length+"</span>";
+    document.getElementById("mock-done").style.display="none";
     renderMTabs();
   };
   setTimeout(()=>ta.focus(),100);
@@ -1400,18 +1593,36 @@ function updMWC(){
   const v=cw(document.getElementById("mock-ta").value);
   document.getElementById("mock-wc").textContent=v;
   document.getElementById("mock-pwc").textContent=v+" words";
-  // ── Mock submit guard: total words across ALL sections must be >= 15 ──
+  updateMockSubmitGuard();
+}
+
+// ── Mock submit guard: need 150+ words AND 2/3 of time elapsed ──
+// Recomputes and applies the enabled/disabled state + hint text for the
+// Submit Test button (located below the question palette in the side panel).
+function updateMockSubmitGuard(){
   const totalWC=Object.values(MS.a||{}).reduce(function(s,a){return s+cw(a||"");},0);
-  const btn=document.getElementById("mock-submit-btn");
+  const timeElapsed=tTotal>0?(tTotal-tLeft)/tTotal:0;
+  const timeReady=tTotal===0||timeElapsed>=(2/3);
+  const btn=document.getElementById("exam-side-submit");
   const hint=document.getElementById("mock-submit-hint");
   if(btn){
-    if(totalWC>=15){
+    if(totalWC>=150&&timeReady){
       btn.disabled=false;
       if(hint){hint.textContent="✓ Ready to submit";hint.className="submit-guard-hint ready";}
     } else {
       btn.disabled=true;
-      const need=15-totalWC;
-      if(hint){hint.textContent="Write "+need+" more word"+(need===1?"":"s")+" total to unlock";hint.className="submit-guard-hint";}
+      if(!timeReady){
+        const pct=Math.round(timeElapsed*100);
+        const need=150-totalWC;
+        if(totalWC<150){
+          if(hint){hint.textContent="Need "+need+" more words + 2/3 time elapsed to unlock";hint.className="submit-guard-hint";}
+        } else {
+          if(hint){hint.textContent="Submit unlocks after 2/3 of time ("+pct+"% elapsed)";hint.className="submit-guard-hint";}
+        }
+      } else {
+        const need=150-totalWC;
+        if(hint){hint.textContent="Write "+need+" more word"+(need===1?"":"s")+" total (need 150+) to unlock";hint.className="submit-guard-hint";}
+      }
     }
   }
 }
@@ -1879,6 +2090,9 @@ async function submitSingle(){
   const taken = tTotal>0 ? tTotal-tLeft : Math.round((Date.now()-(tStart||Date.now()))/1000);
   const wc = cw(ans), el2 = tyStarted&&tStart ? (Date.now()-tStart)/60000 : 1, wpm2 = el2>0 ? Math.round(wc/el2) : 0;
   showResult(ans,wc,wpm2,taken); showS('result');
+  // Snapshot for refresh persistence
+  sessionStorage.setItem('dpt_result_html', document.getElementById('result').innerHTML);
+  sessionStorage.setItem('dpt_result_kind', 'practice');
   await runAI(ans,wc,wpm2);
   const scoreEl = document.getElementById('r-score');
   saveProgress({
@@ -1894,28 +2108,33 @@ async function submitSingle(){
     marks: CQ ? CQ.marks||0 : 0,
     questionId: CQ ? CQ.id||'' : ''
   });
+  // Update snapshot with final AI score
+  sessionStorage.setItem('dpt_result_html', document.getElementById('result').innerHTML);
 }
 
 /* ---- Hook: Mock submit ---- */
 async function submitMock(){
   // ── Guard: block API if total written < 15 words across all sections ──
   const _mockTotalWC=Object.values(MS.a||{}).reduce(function(s,a){return s+cw(a||"");},0);
-  if(_mockTotalWC<15){
-    const _btn=document.getElementById("mock-submit-btn");
+  if(_mockTotalWC<150){
+    const _btn=document.getElementById("exam-side-submit");
     if(!_btn||_btn.disabled){
-      // Timer-triggered auto-submit with nothing written
       const banner=document.createElement("div");
       banner.style.cssText="position:fixed;top:0;left:0;right:0;z-index:9999;background:#c0392b;color:#fff;font-size:.82rem;font-family:var(--font,Inter),sans-serif;padding:12px 16px;text-align:center;font-weight:600;";
       banner.textContent="⏱ Time is up — but no answer was recorded. The submission has been cancelled.";
       document.body.appendChild(banner);
       setTimeout(function(){banner.remove();},6000);
     }
-    return; // ← HARD BLOCK: API never fires
+    return;
   }
   clearInterval(TI);
   const taken = (EX()&&EX().duration||30)*60 - tLeft;
   showMockResult(taken); showS('result');
+  // Save result snapshot to sessionStorage so refresh works
+  sessionStorage.setItem('dpt_result_html', document.getElementById('result').innerHTML);
+  sessionStorage.setItem('dpt_result_kind', 'mock');
   await runAIMock();
+  // Now AI is done — save progress with real total score
   const ex = MS.currentExam || EX() || {};
   const attempted = Object.values(MS.a).filter(function(a){return a&&a.trim();}).length;
   const totalWC = Object.values(MS.a).reduce(function(s,a){return s+cw(a||'');},0);
@@ -1935,6 +2154,8 @@ async function submitMock(){
     attempted: attempted, totalWC: totalWC, timeSec: taken,
     totalScore: totScoreEl ? totScoreEl.textContent : '--'
   });
+  // Update snapshot with final AI-evaluated scores
+  sessionStorage.setItem('dpt_result_html', document.getElementById('result').innerHTML);
 }
 
 /* ---- Hook: Typing finish ---- */
