@@ -154,8 +154,8 @@ header{position:relative}
 .h-exam-info .hei-exam{font-family:var(--mono);font-size:.72rem;font-weight:700;color:var(--t);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .h-exam-info .hei-mock{font-family:var(--mono);font-size:.62rem;color:var(--accent);white-space:nowrap;font-weight:600}
 .h-brand.center-mode{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);padding:2px 6px;margin:0}
-.h-brand.center-mode .site-logo{height:18px}
-.h-brand.center-mode .site-name-top,.h-brand.center-mode .site-name-bot{font-size:.6rem}
+.h-brand.center-mode .site-logo{height:32px}
+.h-brand.center-mode .site-name-top,.h-brand.center-mode .site-name-bot{font-size:.72rem}
 .es-timer{background:var(--adim);border:1px solid var(--aborder);border-radius:var(--rs);padding:9px 10px;text-align:center}
 .es-timer-val{font-family:var(--mono);font-size:1.3rem;font-weight:700;color:var(--accent);line-height:1}
 .es-timer-lbl{font-size:.58rem;color:var(--t2);text-transform:uppercase;letter-spacing:.07em;margin-top:3px}
@@ -251,6 +251,7 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .exam-grid{display:flex;flex-direction:column;gap:11px}
 .panel{background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);overflow:visible;display:flex;flex-direction:column}
 .ph{background:var(--bg3);padding:7px 12px;font-family:var(--mono);font-size:.6rem;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid var(--b);display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+.ph span:last-child{color:var(--t2)}
 .pb{padding:13px}
 .q-text{font-size:.83rem;line-height:1.8;white-space:pre-wrap}
 .q-meta{display:flex;gap:6px;margin-top:11px;flex-wrap:wrap}
@@ -563,11 +564,11 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
     <div class="exam-main">
       <div class="exam-grid">
         <div class="panel">
-          <div class="ph"><span id="exam-type-lbl">Question</span><span id="exam-wl" style="color:var(--t2)"></span></div>
+          <div class="ph"><span id="exam-type-lbl">Question</span><span id="exam-wl"></span></div>
           <div class="pb"><div class="q-text" id="exam-qtext"></div><div class="q-meta" id="exam-qmeta"></div></div>
         </div>
         <div class="panel">
-          <div class="ph"><span>Your Answer</span><span id="exam-pwc" style="color:var(--t2)">0 words</span></div>
+          <div class="ph"><span>Your Answer</span><span id="exam-pwc">0 words</span></div>
           <div class="pb" style="padding:10px;display:flex;flex-direction:column;gap:6px">
             <textarea class="answer-ta" id="exam-ta" placeholder="Start writing here…"></textarea>
             <div class="ta-footer"><div class="wc-lbl">Words: <strong id="exam-wc">0</strong></div></div>
@@ -600,11 +601,11 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
     <div class="exam-main">
       <div class="exam-grid">
         <div class="panel">
-          <div class="ph"><span id="mock-type-lbl">Question</span><span id="mock-wl" style="color:var(--t2)"></span></div>
+          <div class="ph"><span id="mock-type-lbl">Question</span><span id="mock-wl"></span></div>
           <div class="pb"><div class="q-text" id="mock-qtext"></div><div class="q-meta" id="mock-qmeta"></div></div>
         </div>
         <div class="panel">
-          <div class="ph"><span>Your Answer</span><span id="mock-pwc" style="color:var(--t2)">0 words</span></div>
+          <div class="ph"><span>Your Answer</span><span id="mock-pwc">0 words</span></div>
           <div class="pb" style="padding:10px;display:flex;flex-direction:column;gap:6px">
             <textarea class="answer-ta" id="mock-ta" placeholder="Start writing here…"></textarea>
             <div class="ta-footer">
@@ -1464,6 +1465,11 @@ function renderMTabs(){
 // plus a number grid (one button per section, like a real exam's question palette).
 function renderExamSide(){
   const el=document.getElementById("exam-side");if(!el)return;
+  // Preserve the live timer text across re-renders (this function runs on every
+  // keystroke via renderMTabs) so it doesn't flash back to the --:-- placeholder.
+  const _existingTimerEl=document.getElementById("mock-timer");
+  const _curTimerText=_existingTimerEl?_existingTimerEl.textContent:"--:--";
+  const _curTimerPaused=_existingTimerEl?_existingTimerEl.style.opacity:"";
   const total=MS.s.length;
   let answered=0,notVisited=0,marked=0;
   MS.s.forEach((s,i)=>{
@@ -1509,7 +1515,7 @@ function renderExamSide(){
 
   el.innerHTML=`
     <div class="es-timer">
-      <div class="es-timer-val" id="mock-timer">--:--</div>
+      <div class="es-timer-val" id="mock-timer" style="opacity:${_curTimerPaused||''}">${_curTimerText}</div>
       <div class="es-timer-lbl">Time Remaining</div>
     </div>
     <div class="es-stat-grid">
@@ -1538,6 +1544,7 @@ function renderExamSide(){
     <button class="btn bp" style="width:100%;margin-top:8px" id="exam-side-submit" onclick="submitMock()" disabled>Submit Test</button>
     <div class="submit-guard-hint" id="mock-submit-hint" style="margin-top:6px">Write 150+ words & wait for 2/3 time to unlock</div>`;
   updateMockSubmitGuard();
+  if(typeof _timerPaused!=="undefined"&&_timerPaused)pauseTimer();
 }
 
 // Toggle "Marked for Review" on the currently open section.
