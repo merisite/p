@@ -12,8 +12,6 @@
 :root{--r:10px;--rs:6px;--rl:14px;--fs:16px;--font:"Inter",sans-serif;--mono:"JetBrains Mono",monospace;--tr:.18s ease;}
 /* ── EXAM MODE: light-default theme ONLY ── */
 [data-theme="light-default"] body.exam-mode header{background:#1e3a5f;border-bottom:1px solid #2a4f7c;box-shadow:0 2px 8px rgba(0,0,0,.25);}
-/* Logo: white background pill so blue logo stays visible on dark header */
-[data-theme="light-default"] body.exam-mode header #site-logo{background:#fff;border-radius:5px;padding:3px 5px;}
 [data-theme="light-default"] body.exam-mode header .site-name-top{color:#93c5fd;}
 [data-theme="light-default"] body.exam-mode header .site-name-bot{color:#e0eaff;}
 [data-theme="light-default"] body.exam-mode header .h-brand:hover{background:rgba(255,255,255,.08);}
@@ -797,7 +795,11 @@ function applyTheme(t,save=true){
 }
 function setTheme(t){applyTheme(t);document.getElementById("tp").classList.remove("open");}
 function updateLogo(t){
-  const d=D(),cfg=d.siteSettings||{},dark=t.startsWith("dark");
+  const d=D(),cfg=d.siteSettings||{};
+  // Clean & Blue's exam/mock header keeps a dark navy background even in the light theme,
+  // so use the dark-theme logo there instead of faking a white tile behind the light logo.
+  const examDarkHeader=t==="light-default"&&document.body.classList.contains("exam-mode");
+  const dark=t.startsWith("dark")||examDarkHeader;
   const url=dark?(cfg.logoUrlDark||cfg.logoUrl||""):(cfg.logoUrlLight||cfg.logoUrl||"");
   const l=document.getElementById("site-logo");
   if(url){l.src=url;l.style.display="block";}else l.style.display="none";
@@ -829,6 +831,7 @@ function showS(id,opts){
   window.scrollTo(0,0);
   const isExamScreen=(id==="fullmock"||id==="exam");
   document.body.classList.toggle("exam-mode",isExamScreen);
+  updateLogo(localStorage.getItem("dpt_theme")||"light-default");
   const hec=document.getElementById("h-exam-ctl");
   if(hec) hec.style.display=(id==="fullmock")?"flex":"none";
   const brand=document.getElementById("h-brand");
@@ -1722,8 +1725,8 @@ async function runAIMock(){
         if(aiEl)aiEl.innerHTML='<div class="ai-notice">AI evaluation not available. Check Worker URL in Admin → Settings.</div>';
       } else {
         if(scoreEl)scoreEl.textContent="AI failed";
-        const idx2=i;
-        if(aiEl)aiEl.innerHTML='<div class="ai-notice"><strong>AI evaluation failed.</strong> <button onclick="retryMockAI('+idx2+')" style="margin-left:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--accent);cursor:pointer;font-size:.75rem;font-family:var(--font);">Retry</button></div>';
+        MS.aiFails=MS.aiFails||{};MS.aiFails[i]=1;
+        if(aiEl)aiEl.innerHTML=aiFailHTML("retryMockAI("+i+")","manualEvalMock("+i+")",1);
       }
     }
   }
@@ -1741,7 +1744,8 @@ async function retryMockAI(idx){
     if(aiEl)aiEl.innerHTML=renderAIBlock(result,s.question.marks);
   } else {
     if(scoreEl)scoreEl.textContent="AI failed";
-    if(aiEl)aiEl.innerHTML='<div class="ai-notice"><strong>AI evaluation failed.</strong> <button onclick="retryMockAI('+idx+')" style="margin-left:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--accent);cursor:pointer;font-size:.75rem;font-family:var(--font);">Retry</button></div>';
+    MS.aiFails=MS.aiFails||{};MS.aiFails[idx]=(MS.aiFails[idx]||1)+1;
+    if(aiEl)aiEl.innerHTML=aiFailHTML("retryMockAI("+idx+")","manualEvalMock("+idx+")",MS.aiFails[idx]);
   }
 }
 async function evalWithAI(q,ans,wc,wpm){
@@ -1814,6 +1818,75 @@ Return ONLY this JSON:
     return JSON.parse(data.content.map(i=>i.text||"").join("").replace(/```json|```/g,"").trim());
   }catch(e){return null;}
 }
+function buildManualEvalText(q,ans,wc){
+  const d=D(),tm={};d.sectionTypes.forEach(s=>tm[s.id]=s);
+  const typeName=tm[q.type]?.name||q.type,max=q.marks,per=Math.round(max/4);
+  return `You are a strict, senior examiner for the SBI PO / IBPS PO Mains Descriptive Paper (2026 pattern). Evaluate my answer below the way a real bank exam evaluator would — be honest and rigorous, don't inflate the score.
+
+SECTION TYPE: ${typeName}
+WORD LIMIT: ${q.wordLimit}
+MAX MARKS: ${max}
+
+QUESTION:
+${q.text}
+
+MY ANSWER (${wc} words):
+${ans||"(blank)"}
+
+Please score me on these 4 parameters, each out of ${per} marks:
+1. Content & Relevance
+2. Structure & Format
+3. Language & Grammar
+4. Word Limit Adherence
+
+For each parameter give a score and a one-line reason. Then give a total out of ${max}, 2-3 strengths, 2-3 specific improvements, and a short overall verdict (below average / average / good / excellent).`;
+}
+function fallbackCopy(text,onDone){
+  try{
+    const ta=document.createElement("textarea");
+    ta.value=text;ta.style.position="fixed";ta.style.opacity="0";
+    document.body.appendChild(ta);ta.focus();ta.select();
+    document.execCommand("copy");
+    document.body.removeChild(ta);
+    onDone();
+  }catch(e){alert("Could not copy automatically. Please select and copy the prompt manually.");}
+}
+function manualEvalInstructionsHTML(copyAgainOnclick){
+  return `<div class="ai-notice" style="border-color:var(--accent)">
+    <strong>✓ Copied to clipboard!</strong>
+    <div style="margin-top:8px;font-size:.78rem;line-height:1.8;color:var(--t2)">
+      <b>How to get your evaluation:</b><br>
+      1. Open any AI chatbot — ChatGPT, Gemini, or Claude (app or website).<br>
+      2. Paste it into the chat box (long-press → Paste, or Ctrl/Cmd+V).<br>
+      3. Send the message — it will score your answer and give feedback in seconds.
+    </div>
+    <button onclick="${copyAgainOnclick}" style="margin-top:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--accent);cursor:pointer;font-size:.75rem;font-family:var(--font)">Copy Again</button>
+  </div>`;
+}
+function doManualEvalCopy(q,ans,wc,targetElId,copyAgainOnclick){
+  const text=buildManualEvalText(q,ans,wc);
+  const el=document.getElementById(targetElId);
+  const onDone=()=>{if(el)el.innerHTML=manualEvalInstructionsHTML(copyAgainOnclick);};
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(onDone).catch(()=>fallbackCopy(text,onDone));
+  } else fallbackCopy(text,onDone);
+}
+function aiFailHTML(retryOnclick,manualOnclick,fails){
+  const manualBtn=fails>=3?` <button onclick="${manualOnclick}" style="margin-left:6px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--accent);cursor:pointer;font-size:.75rem;font-family:var(--font)">Evaluate Manually</button>`:"";
+  const hint=fails>=3?`<div style="margin-top:8px;font-size:.72rem;color:var(--t2);line-height:1.7">AI evaluation keeps failing — this usually happens when too many users submit at once. Click <strong>Evaluate Manually</strong> to copy a ready-made prompt with your question and answer, then paste it into ChatGPT, Gemini, or any AI chatbot for instant feedback.</div>`:"";
+  return `<div class="ai-notice"><strong>AI evaluation failed.</strong> <button onclick="${retryOnclick}" style="margin-left:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--accent);cursor:pointer;font-size:.75rem;font-family:var(--font)">Retry</button>${manualBtn}${hint}</div>`;
+}
+function manualEvalPractice(){
+  if(!_lastAIArgs)return;
+  const{ans,wc,q}=_lastAIArgs;
+  doManualEvalCopy(q,ans,wc,"r-ai","manualEvalPractice()");
+}
+function manualEvalMock(idx){
+  const s=MS.s[idx];const ans=MS.a[idx]||"";
+  if(!s||!s.question)return;
+  const wc=cw(ans);
+  doManualEvalCopy(s.question,ans,wc,"mai-"+idx,"manualEvalMock("+idx+")");
+}
 function renderAIBlock(result,max){
   const pct=Math.round((result.totalScore/max)*100);
   const bars=(result.parameters||[]).map(p=>{
@@ -1851,7 +1924,8 @@ async function runAI(ans,wc,wpm){
     if(!ep){
       document.getElementById("r-ai").innerHTML='<div class="ai-notice"><strong>AI evaluation not configured.</strong> Add your Cloudflare Worker URL in Admin → Settings → AI Evaluation Proxy.</div>';
     } else {
-      document.getElementById("r-ai").innerHTML='<div class="ai-notice"><strong>AI evaluation failed.</strong> Please check your connection and try again. <button onclick="retryRunAI()" style="margin-left:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--accent);cursor:pointer;font-size:.75rem;font-family:var(--font);">Retry</button></div>';
+      _lastAIArgs.fails=1;
+      document.getElementById("r-ai").innerHTML=aiFailHTML("retryRunAI()","manualEvalPractice()",1);
     }
   }
 }
@@ -1870,7 +1944,8 @@ async function retryRunAI(){
     }).join("");
     aiEl.innerHTML=renderAIBlock(result,q.marks);
   } else {
-    aiEl.innerHTML='<div class="ai-notice"><strong>AI evaluation failed.</strong> Please check your connection and try again. <button onclick="retryRunAI()" style="margin-left:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--accent);cursor:pointer;font-size:.75rem;font-family:var(--font);">Retry</button></div>';
+    _lastAIArgs.fails=(_lastAIArgs.fails||1)+1;
+    aiEl.innerHTML=aiFailHTML("retryRunAI()","manualEvalPractice()",_lastAIArgs.fails);
   }
 }
 let tlSec=120;
