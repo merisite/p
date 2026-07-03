@@ -353,10 +353,10 @@
       "examId": "sbi_po",
       "type": "situation",
       "text": "A long-standing customer visits your branch upset about poor service and says she wants to close her account and move to another bank. As the PO, describe how you would handle this situation.",
-      "wordLimit": "200-250 words",
+      "modelAnswer": "If a long-standing customer is upset and wants to close her account, I will handle the situation calmly and professionally to save our relationship.\n\nFirst, I will take her to a quiet seating area so she feels comfortable and respected. I will listen to her complaints patiently without interrupting. I will show genuine empathy for the poor service experience she faced at our branch.\n\nNext, I will look into the matter immediately to find out exactly what went wrong. I will offer a sincere apology for our mistake and provide a quick solution to fix her problem right away. I will also promise her that I will personally supervise her account in the future to avoid any errors.\n\nIf she still insists on leaving, I will help her close the account quickly and politely without any arguments. This ensures her last memory of our bank remains pleasant, leaving the door open for her return.",
+      "wordLimit": "150-200 words",
       "marks": 15,
       "difficulty": "medium",
-      "modelAnswer": "I would listen patiently to her concerns without interrupting, to understand the exact reasons behind her dissatisfaction. I would sincerely apologise for the inconvenience caused and assure her that her feedback will be taken seriously.\n\nI would offer to personally resolve any pending issues, such as service charges or transaction disputes, and inform her of recent improvements like extended service hours or digital banking options. If she still wishes to close her account, I would process the closure respectfully without pressuring her, while leaving the door open for her to return in future.",
       "active": true,
       "mockNo": 4
     },
