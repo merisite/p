@@ -891,7 +891,7 @@ window.addEventListener("DOMContentLoaded",function(){
         const d=JSON.parse(savedData);
         if(d.kind==='practice'){
           CQ=d.CQ;
-          _lastAIArgs={ans:d.ans,wc:d.wc,wpm:d.wpm,q:d.CQ,fails:d.fails||1};
+          _lastAIArgs={ans:d.ans,wc:d.wc,wpm:d.wpm,q:d.CQ,fails:d.fails||1,progressId:d.progressId};
         } else if(d.kind==='mock'){
           MS=d.MS;
         }
@@ -935,37 +935,38 @@ function askExit(dest){exitDest=dest;document.getElementById("exit-cov").classLi
 function closeCov(){document.getElementById("exit-cov").classList.remove("open");exitDest=null;}
 function doExit(){clearInterval(TI);clearInterval(WI);document.getElementById("exit-cov").classList.remove("open");if(exitDest)showS(exitDest);exitDest=null;}
 function setT(id,v){const e=document.getElementById(id);if(e&&v)e.textContent=v;}
-function openTG(){const l=D().siteSettings?.tgLink||"";if(l)window.open(l,"_blank");}
-function updateSiteName(name){
-  // name format: "Descriptive Prep Today" or any string — split at first space boundary for two lines
-  // Always show "Descriptive" on top and "PrepToday" on bottom regardless of stored name
-  const el=document.getElementById("site-name");
-  if(!el)return;
-  const parts=name?name.split(" "):[""]; 
-  // Use first word as top, rest joined as bottom
-  const top=parts[0]||"Descriptive";
-  const bot=parts.slice(1).join("")||"PrepToday";
-  const topEl=el.querySelector(".site-name-top");
-  const botEl=el.querySelector(".site-name-bot");
-  if(topEl)topEl.textContent=top;
-  if(botEl)botEl.textContent=bot;
+// Deterministic PRNG (mulberry32) so the same seed always produces the same shuffle order —
+// this is what lets all visitors within the same hour see the same order, and lets it change
+// automatically once the hour rolls over, with no server/storage needed.
+function seededRandom(seed){
+  return function(){
+    seed|=0;seed=seed+0x6D2B79F5|0;
+    let t=Math.imul(seed^seed>>>15,1|seed);
+    t=t+Math.imul(t^t>>>7,61|t)^t;
+    return((t^t>>>14)>>>0)/4294967296;
+  };
 }
-function renderHome(){
-  const d=D(),cfg=d.siteSettings||{};
-  if(cfg.name)updateSiteName(cfg.name);
-  updateLogo(localStorage.getItem("dpt_theme")||"light-default");
-  setT("h-eyebrow",cfg.homeEyebrow);
-  const ht=document.getElementById("h-title");if(ht&&cfg.homeTitle)ht.innerHTML=cfg.homeTitle.replace("\n","<br>");
-  setT("h-sub",cfg.homeSub);setT("h-plbl",cfg.practiceSectionLabel);setT("h-tlbl",cfg.toolsLabel);
-  setT("typ-card-t",cfg.typingCardTitle);setT("typ-card-d",cfg.typingCardDesc);
-  setT("typ-head",cfg.typingHeading);setT("typ-sub",cfg.typingSubhead);
-  if(cfg.tgLink){
-    setT("tgs-title",cfg.tgStripTitle);setT("tgs-sub",cfg.tgStripSub);
-    const hb=document.getElementById("tg-hbtn");if(hb){hb.href=cfg.tgLink;hb.classList.add("show");}setT("tg-ht",cfg.tgText||"Telegram");
+function seededShuffle(arr,seed){
+  const a=arr.slice();
+  const rnd=seededRandom(seed);
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(rnd()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
   }
-  // Course card icon/link logic removed — cards now managed via Offers & Discounts in admin
-  // Offers & Discounts page
-  const offers=d.offers||[];
+  return a;
+}
+let _lastOfferHourSeed=null;
+function renderOfferCards(){
+  const d=D(),cfg=d.siteSettings||{};
+  const offersPageMsgEl=document.getElementById("offers-page-msg");
+  if(cfg.offersMsg&&offersPageMsgEl)offersPageMsgEl.textContent=cfg.offersMsg;
+  const hourSeed=Math.floor(Date.now()/3600000); // changes once per hour, same for everyone within that hour
+  _lastOfferHourSeed=hourSeed;
+  // Keep featured cards first (they're pinned promotions), shuffle the rest
+  const rawOffers=d.offers||[];
+  const featured=rawOffers.filter(o=>o.featured);
+  const rest=seededShuffle(rawOffers.filter(o=>!o.featured),hourSeed);
+  const offers=[...featured,...rest];
   const offerCardHtml=(o,idx)=>{
     const uid=`oc_${idx}`;
     const couponCopyFn=o.coupon?`ocCopy('${o.coupon}','${uid}')`:null;
@@ -1015,20 +1016,54 @@ function renderHome(){
         </div>
       </div>`;
   };
+  const offersPageCardsEl=document.getElementById("offers-page-cards");
+  const homeCardsEl=document.getElementById("offers-home-cards");
   if(offers.length>0){
-    if(cfg.offersMsg)document.getElementById("offers-page-msg").textContent=cfg.offersMsg;
-    document.getElementById("offers-page-cards").innerHTML=offers.map((o,i)=>offerCardHtml(o,i)).join("");
-    // Render on home page: fill a row (auto with card-grid), then show "See More" at end
-    const homeCardsEl=document.getElementById("offers-home-cards");
+    if(offersPageCardsEl)offersPageCardsEl.innerHTML=offers.map((o,i)=>offerCardHtml(o,i)).join("");
     if(homeCardsEl){
-      // Use card-grid layout; add a "See More" link card at the end of the row
       homeCardsEl.innerHTML=`<div class="offers-scroll-row">${offers.map((o,i)=>offerCardHtml(o,i)).join("")}<div class="offer-card" style="display:flex;align-items:center;justify-content:center;cursor:pointer;border-style:dashed;min-width:140px;" onclick="showS('offers')"><span style="font-size:.8rem;font-weight:700;color:var(--accent);text-align:center;">See More Offers &amp; Discounts →</span></div></div>`;
     }
   } else {
-    const homeCardsEl=document.getElementById("offers-home-cards");
-    if(homeCardsEl) homeCardsEl.innerHTML="<div style='color:var(--t2);font-size:.78rem;padding:8px 0'>No offers available right now.</div>";
-    document.getElementById("offers-page-cards").innerHTML="<div style='color:var(--t2);font-size:.78rem;padding:8px 0'>No offers available right now.</div>";
+    if(homeCardsEl)homeCardsEl.innerHTML="<div style='color:var(--t2);font-size:.78rem;padding:8px 0'>No offers available right now.</div>";
+    if(offersPageCardsEl)offersPageCardsEl.innerHTML="<div style='color:var(--t2);font-size:.78rem;padding:8px 0'>No offers available right now.</div>";
   }
+}
+// Watch for the hour rolling over while the site stays open, and reshuffle automatically —
+// checked every 2 minutes, but only actually re-renders when the hour bucket has changed.
+setInterval(()=>{
+  const h=Math.floor(Date.now()/3600000);
+  if(h!==_lastOfferHourSeed)renderOfferCards();
+},120000);
+function openTG(){const l=D().siteSettings?.tgLink||"";if(l)window.open(l,"_blank");}
+function updateSiteName(name){
+  // name format: "Descriptive Prep Today" or any string — split at first space boundary for two lines
+  // Always show "Descriptive" on top and "PrepToday" on bottom regardless of stored name
+  const el=document.getElementById("site-name");
+  if(!el)return;
+  const parts=name?name.split(" "):[""]; 
+  // Use first word as top, rest joined as bottom
+  const top=parts[0]||"Descriptive";
+  const bot=parts.slice(1).join("")||"PrepToday";
+  const topEl=el.querySelector(".site-name-top");
+  const botEl=el.querySelector(".site-name-bot");
+  if(topEl)topEl.textContent=top;
+  if(botEl)botEl.textContent=bot;
+}
+function renderHome(){
+  const d=D(),cfg=d.siteSettings||{};
+  if(cfg.name)updateSiteName(cfg.name);
+  updateLogo(localStorage.getItem("dpt_theme")||"light-default");
+  setT("h-eyebrow",cfg.homeEyebrow);
+  const ht=document.getElementById("h-title");if(ht&&cfg.homeTitle)ht.innerHTML=cfg.homeTitle.replace("\n","<br>");
+  setT("h-sub",cfg.homeSub);setT("h-plbl",cfg.practiceSectionLabel);setT("h-tlbl",cfg.toolsLabel);
+  setT("typ-card-t",cfg.typingCardTitle);setT("typ-card-d",cfg.typingCardDesc);
+  setT("typ-head",cfg.typingHeading);setT("typ-sub",cfg.typingSubhead);
+  if(cfg.tgLink){
+    setT("tgs-title",cfg.tgStripTitle);setT("tgs-sub",cfg.tgStripSub);
+    const hb=document.getElementById("tg-hbtn");if(hb){hb.href=cfg.tgLink;hb.classList.add("show");}setT("tg-ht",cfg.tgText||"Telegram");
+  }
+  // Course card icon/link logic removed — cards now managed via Offers & Discounts in admin
+  renderOfferCards();
   const tm={};d.sectionTypes.forEach(s=>tm[s.id]=s);
   const activeExams=d.exams.filter(e=>e.status==="active");
   const icons={email:'<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>',situation:'<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>',report:'<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>',precis:'<line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="13" y1="18" x2="3" y2="18"/>',essay:'<path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/>',comprehension:'<path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>'};
@@ -1714,8 +1749,31 @@ function showMockResult(taken){
     </div>`;
   }).join("");
 }
-async function runAIMock(){
+function aggregateMockParameters(){
+  MS.aiResults=MS.aiResults||{};
+  const agg={};
+  Object.values(MS.aiResults).forEach(function(r){
+    (r.parameters||[]).forEach(function(p){
+      if(!agg[p.name])agg[p.name]={name:p.name,score:0,max:0};
+      agg[p.name].score+=p.score;agg[p.name].max+=p.max;
+    });
+  });
+  const list=Object.values(agg);
+  return list.length?list:null;
+}
+function recomputeMockTotal(){
   let totScore=0,totMax=0;
+  MS.aiResults=MS.aiResults||{};
+  for(let i=0;i<MS.s.length;i++){
+    const r=MS.aiResults[i];
+    if(r){totScore+=r.totalScore||0;totMax+=MS.s[i].question&&MS.s[i].question.marks||0;}
+  }
+  const tot=document.getElementById("r-total-score");
+  if(tot&&totMax>0)tot.textContent=`${totScore}/${totMax}`;
+  return {totScore,totMax};
+}
+async function runAIMock(){
+  MS.aiResults=MS.aiResults||{};
   for(let i=0;i<MS.s.length;i++){
     const s=MS.s[i];
     const ans=MS.a[i]||"";
@@ -1730,12 +1788,10 @@ async function runAIMock(){
     const scoreEl=document.getElementById(`mscore-${i}`);
     const aiEl=document.getElementById(`mai-${i}`);
     if(result){
-      totScore+=result.totalScore||0;
-      totMax+=s.question.marks||0;
+      MS.aiResults[i]=result;
       if(scoreEl)scoreEl.innerHTML=`<span style="color:var(--accent)">${result.totalScore}/${s.question.marks}</span>`;
       if(aiEl)aiEl.innerHTML=renderAIBlock(result,s.question.marks);
-      const tot=document.getElementById("r-total-score");
-      if(tot&&totMax>0)tot.textContent=`${totScore}/${totMax}`;
+      recomputeMockTotal();
     } else {
       const d2=D(),cfg2=d2.siteSettings||{};let ep2="";
       try{const ls=localStorage.getItem("dpt_data");if(ls){ep2=JSON.parse(ls)?.siteSettings?.apiProxy||"";}}catch(e){}
@@ -1760,8 +1816,12 @@ async function retryMockAI(idx){
   const wc=cw(ans),elapsed=(Date.now()-MS.st)/60000,wpm=elapsed>0?Math.round(wc/elapsed):0;
   const result=await evalWithAI(s.question,ans,wc,wpm);
   if(result){
+    MS.aiResults=MS.aiResults||{};
+    MS.aiResults[idx]=result;
     if(scoreEl)scoreEl.innerHTML='<span style="color:var(--accent)">'+result.totalScore+'/'+s.question.marks+'</span>';
     if(aiEl)aiEl.innerHTML=renderAIBlock(result,s.question.marks);
+    const {totScore,totMax}=recomputeMockTotal();
+    if(totMax>0)updateProgressEntry(MS.progressId,{totalScore:totScore+"/"+totMax,parameters:aggregateMockParameters()});
   } else {
     if(scoreEl)scoreEl.textContent="AI failed";
     MS.aiFails=MS.aiFails||{};MS.aiFails[idx]=(MS.aiFails[idx]||1)+1;
@@ -1949,6 +2009,7 @@ async function runAI(ans,wc,wpm){
   if(result){
     document.getElementById("r-score").textContent=result.totalScore+"/"+q.marks;
     document.getElementById("r-ai").innerHTML=renderAIBlock(result,q.marks);
+    _lastAIArgs.result=result;
   } else {
     const d=D(),cfg=d.siteSettings||{};let ep="";
     try{const ls=localStorage.getItem("dpt_data");if(ls){ep=JSON.parse(ls)?.siteSettings?.apiProxy||"";}}catch(e){}
@@ -1970,6 +2031,8 @@ async function retryRunAI(){
   if(result){
     document.getElementById("r-score").textContent=result.totalScore+"/"+q.marks;
     aiEl.innerHTML=renderAIBlock(result,q.marks);
+    _lastAIArgs.result=result;
+    updateProgressEntry(_lastAIArgs.progressId,{score:result.totalScore+"/"+q.marks,parameters:result.parameters});
   } else {
     _lastAIArgs.fails=(_lastAIArgs.fails||1)+1;
     aiEl.innerHTML=aiFailHTML("retryRunAI()","manualEvalPractice()",_lastAIArgs.fails);
@@ -2148,10 +2211,25 @@ function getProgress(){
 }
 function saveProgress(entry){
   const list = getProgress();
+  entry.id = entry.id || (Date.now()+'_'+Math.random().toString(36).slice(2,9));
   list.unshift(entry);
   if(list.length > 200) list.length = 200;
   localStorage.setItem(PROG_KEY, JSON.stringify(list));
   updateProgCard();
+  return entry.id;
+}
+function updateProgressEntry(id,patch){
+  if(!id)return;
+  const list = getProgress();
+  const idx = list.findIndex(function(x){return x.id===id;});
+  if(idx===-1)return;
+  Object.assign(list[idx],patch);
+  localStorage.setItem(PROG_KEY, JSON.stringify(list));
+  updateProgCard();
+  // If the Progress screen is currently open, refresh it so the fix is visible immediately
+  if(document.getElementById('progress')&&document.getElementById('progress').classList.contains('active')){
+    renderHistList();
+  }
 }
 function updateProgCard(){
   const list = getProgress();
@@ -2202,7 +2280,7 @@ async function submitSingle(){
   sessionStorage.setItem('dpt_result_data', JSON.stringify({kind:'practice',CQ:CQ,ans:ans,wc:wc,wpm:wpm2,taken:taken}));
   await runAI(ans,wc,wpm2);
   const scoreEl = document.getElementById('r-score');
-  saveProgress({
+  const _practiceProgressId=saveProgress({
     kind: 'practice',
     date: new Date().toISOString(),
     examId: CQ ? CQ.examId||'' : '',
@@ -2213,11 +2291,13 @@ async function submitSingle(){
     wc: wc, wpm: wpm2, timeSec: taken,
     score: scoreEl ? scoreEl.textContent : '',
     marks: CQ ? CQ.marks||0 : 0,
-    questionId: CQ ? CQ.id||'' : ''
+    questionId: CQ ? CQ.id||'' : '',
+    parameters: (_lastAIArgs&&_lastAIArgs.result&&_lastAIArgs.result.parameters)||null
   });
+  if(_lastAIArgs)_lastAIArgs.progressId=_practiceProgressId;
   // Update snapshot with final AI score
   sessionStorage.setItem('dpt_result_html', document.getElementById('result').innerHTML);
-  sessionStorage.setItem('dpt_result_data', JSON.stringify({kind:'practice',CQ:CQ,ans:ans,wc:wc,wpm:wpm2,taken:taken,fails:(_lastAIArgs&&_lastAIArgs.fails)||0}));
+  sessionStorage.setItem('dpt_result_data', JSON.stringify({kind:'practice',CQ:CQ,ans:ans,wc:wc,wpm:wpm2,taken:taken,fails:(_lastAIArgs&&_lastAIArgs.fails)||0,progressId:_practiceProgressId}));
 }
 
 /* ---- Hook: Mock submit ---- */
@@ -2248,7 +2328,7 @@ async function submitMock(){
   const attempted = Object.values(MS.a).filter(function(a){return a&&a.trim();}).length;
   const totalWC = Object.values(MS.a).reduce(function(s,a){return s+cw(a||'');},0);
   const totScoreEl = document.getElementById('r-total-score');
-  saveProgress({
+  MS.progressId=saveProgress({
     kind: 'mock',
     date: new Date().toISOString(),
     examName: ex.name||'Mock',
@@ -2261,7 +2341,8 @@ async function submitMock(){
       };
     }),
     attempted: attempted, totalWC: totalWC, timeSec: taken,
-    totalScore: totScoreEl ? totScoreEl.textContent : '--'
+    totalScore: totScoreEl ? totScoreEl.textContent : '--',
+    parameters: aggregateMockParameters()
   });
   // Update snapshot with final AI-evaluated scores
   sessionStorage.setItem('dpt_result_html', document.getElementById('result').innerHTML);
@@ -2301,6 +2382,46 @@ function filterProg(kind, btn){
   renderHistList();
 }
 
+function computeWeakAreas(){
+  const list=getProgress();
+  const agg={};
+  list.forEach(function(entry){
+    if(entry.kind!=='practice'&&entry.kind!=='mock')return;
+    (entry.parameters||[]).forEach(function(p){
+      if(!p||!p.max)return;
+      if(!agg[p.name])agg[p.name]={name:p.name,score:0,max:0,count:0};
+      agg[p.name].score+=p.score;agg[p.name].max+=p.max;agg[p.name].count++;
+    });
+  });
+  const result=Object.values(agg).map(function(a){
+    return{name:a.name,pct:Math.round((a.score/a.max)*100),count:a.count};
+  });
+  result.sort(function(a,b){return a.pct-b.pct;});
+  return result;
+}
+function renderWeakAreas(){
+  const el=document.getElementById('weak-areas-card');
+  if(!el)return;
+  const areas=computeWeakAreas();
+  if(!areas.length){
+    el.style.display='none';
+    return;
+  }
+  el.style.display='';
+  const colFor=function(p){return p>=70?'var(--green,#22c55e)':p>=45?'var(--amber,#f59e0b)':'var(--red,#ef4444)';};
+  el.innerHTML=`
+    <div class="ch"><div class="cht">Your Weak Areas</div></div>
+    <div class="cb">
+      <div style="font-size:.72rem;color:var(--t2);margin-bottom:14px;line-height:1.6">Based on AI feedback across all your practice and mock attempts — this is where you're losing the most marks.</div>
+      ${areas.map(function(a,i){
+        return `<div class="sbar">
+          <div class="sbar-top"><span>${i===0?'⚠ ':''}${a.name}</span><span>${a.pct}%</span></div>
+          <div class="sbar-track"><div class="sbar-fill" style="width:${a.pct}%;background:${colFor(a.pct)}"></div></div>
+          <div class="sbar-note">${a.count} attempt${a.count!==1?'s':''} evaluated${i===0?' · Focus here first':''}</div>
+        </div>`;
+      }).join('')}
+    </div>`;
+}
 function renderProgressScreen(){
   const list = getProgress();
   const prac = list.filter(function(x){return x.kind==='practice';});
@@ -2311,6 +2432,7 @@ function renderProgressScreen(){
     '<div class="ph-tile"><div class="ph-v">'+(prac.length+mocks.length)+'</div><div class="ph-l">Sessions</div></div>'+
     '<div class="ph-tile"><div class="ph-v">'+typs.length+'</div><div class="ph-l">Typing Tests</div></div>'+
     '<div class="ph-tile"><div class="ph-v">'+(bestWPM||'--')+'</div><div class="ph-l">Best WPM</div></div>';
+  renderWeakAreas();
   renderHistList();
 }
 
@@ -2492,6 +2614,7 @@ init();
       <button class="clr-btn" onclick="clearAllProgress()">Clear All</button>
     </div>
     <div class="ph-row" id="prog-overview"></div>
+    <div class="card" id="weak-areas-card" style="margin-bottom:16px;display:none"></div>
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
       <div class="prog-tabs">
         <button class="ptab on" onclick="filterProg('all',this)">All</button>
