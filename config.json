@@ -1710,6 +1710,21 @@
       "rating": 4.9,
       "ratingCount": 1876900,
       "featured": true
+    },
+    {
+      "title": "TTBR Editorials",
+      "badge": "Offer",
+      "desc": "TTBR (Topics To Be Read)\nSelected Articles From Different Sources\nDaily Upload (Mon-Sat)",
+      "coupon": "PAW12",
+      "link": "https://cosmofeed.com/vig/68c7f4b36b1b0400138d3f40",
+      "iconUrl": "https://i.postimg.cc/8PqdwNdV/1000147170-removebg-preview.png",
+      "logoUrl": "",
+      "price": 29,
+      "originalPrice": 99,
+      "platform": "TTBR",
+      "rating": 4.5,
+      "ratingCount": 2569,
+      "featured": true
     }
   ]
 }
