@@ -1573,6 +1573,18 @@
       "difficulty": "medium",
       "active": true,
       "mockNo": null
+    },
+    {
+      "id": "q_1783514476919",
+      "examId": "sbi_po",
+      "type": "email",
+      "text": "Write an email to the bank manager requesting to update your mobile number linked with your savings account, as your old number is no longer active.",
+      "modelAnswer": "To: managerabcbank@gmail.com\nSubject: Request to Update Registered Mobile Number\n\nDear Sir/Madam,\nI hope you are doing well. I am writing to request an update to the mobile number linked to my savings account (Account No. 123456789012) held at your branch. My previously registered mobile number (9876543210) has been deactivated, and I would like to replace it with my new mobile number (9123456789) so that I can continue receiving transaction alerts, OTPs, and other important banking notifications.\nKindly let me know the procedure for updating my registered mobile number. I am willing to visit the branch and submit the required documents, including my Aadhaar Card, PAN Card, and a written application, as per the bank's guidelines.\nI request you to process my request at the earliest to avoid any disruption in my banking services. I would appreciate your prompt assistance in this matter.\nThank you for your time and cooperation. I look forward to your confirmation.\n\nYours sincerely,\nKaran Pawar",
+      "wordLimit": "150-200 words",
+      "marks": 20,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null
     }
   ],
   "typingParas": [
