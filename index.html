@@ -155,7 +155,7 @@ header{position:relative}
 .es-timer-lbl{font-size:.58rem;color:var(--t2);text-transform:uppercase;letter-spacing:.07em;margin-top:3px}
 .h-brand{display:flex;align-items:center;gap:9px;cursor:pointer;text-decoration:none;color:inherit;border-radius:var(--rs);padding:4px 8px;margin:-4px -8px;transition:background var(--tr);flex-shrink:1;min-width:0;overflow:hidden}
 .h-brand:hover{background:var(--bg3)}
-.site-logo{height:26px;width:auto;display:none;border-radius:4px;flex-shrink:0;background:transparent;padding:2px 4px;}
+.site-logo{height:29px;width:auto;display:none;border-radius:4px;flex-shrink:0;background:transparent;padding:2px 4px;}
 .site-name{display:flex;flex-direction:column;line-height:1.15;overflow:hidden;min-width:0;}
 .site-name-top{font-family:var(--mono);font-size:.72rem;font-weight:600;letter-spacing:.04em;color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .site-name-bot{font-family:var(--mono);font-size:.72rem;font-weight:600;letter-spacing:.04em;color:var(--t);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -562,10 +562,10 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
   border:2px solid var(--b);font-weight:600;border-radius:999px;
 }
 :is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .oc-top-badge{
-  top:-11px;right:16px;left:auto;
+  top:10px;right:12px;left:auto;
   background:var(--brut-fill);color:var(--brut-fill-t);
   border:2.5px solid var(--b);border-radius:999px;
-  padding:5px 13px;font-family:'Space Grotesk',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.05em;
+  padding:5px 12px;font-family:'Space Grotesk',sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.05em;
   box-shadow:3px 3px 0 var(--b);transform:rotate(-4deg);line-height:1.4;
 }
 
@@ -1018,6 +1018,8 @@ function applyMode(m,save=true){
   document.documentElement.setAttribute("data-mode",m);
   if(save)localStorage.setItem("dpt_mode",m);
   document.querySelectorAll(".t-choice").forEach(e=>e.classList.toggle("on",e.dataset.m===m));
+  // Keep the exam/mock module's own theme in sync with the site-wide light/dark mode
+  applyTheme(m==="dark"?"dark-default":"light-default",save);
   // Only update logo if data is already loaded (save=true means user-triggered, data is ready)
   if(save)updateLogo(m);
 }
