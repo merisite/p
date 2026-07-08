@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light-default">
+<html lang="en" data-theme="light-default" data-mode="light">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Descriptive Prep Today</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet"/>
 <style>[data-theme="dark-default"]{--bg:#0e1117;--bg2:#161c27;--bg3:#1c2333;--bg4:#232d40;--t:#d1d9e6;--t2:#7a8499;--t3:#3a4150;--b:#252d3d;--accent:#e2b714;--ah:#c9a312;--adim:rgba(226,183,20,.08);--aborder:rgba(226,183,20,.22);--green:#4caf50;--gdim:rgba(76,175,80,.08);--gborder:rgba(76,175,80,.22);--red:#ca4754;--rdim:rgba(202,71,84,.08);--rborder:rgba(202,71,84,.22);--amber:#e2a014;--ch:rgba(255,255,255,.02);--shadow:0 1px 3px rgba(0,0,0,.5);}
 [data-theme="dark-simple"]{--bg:#18181b;--bg2:#1f1f23;--bg3:#27272a;--bg4:#2e2e32;--t:#f0f0f0;--t2:#a0a0a8;--t3:#404048;--b:#303038;--accent:#6366f1;--ah:#4f52e0;--adim:rgba(99,102,241,.08);--aborder:rgba(99,102,241,.22);--green:#4ade80;--gdim:rgba(74,222,128,.08);--gborder:rgba(74,222,128,.22);--red:#f87171;--rdim:rgba(248,113,113,.08);--rborder:rgba(248,113,113,.22);--amber:#fbbf24;--ch:rgba(255,255,255,.025);--shadow:0 1px 3px rgba(0,0,0,.6);}
 [data-theme="light-default"]{--bg:#eef3fb;--bg2:#ffffff;--bg3:#e6edf8;--bg4:#d8e3f4;--t:#18243a;--t2:#526080;--t3:#b4c2d8;--b:#cfd9ee;--accent:#2563eb;--ah:#1d4ed8;--adim:rgba(37,99,235,.08);--aborder:rgba(37,99,235,.22);--teal:#0d9488;--tealdim:rgba(13,148,136,.08);--tealborder:rgba(13,148,136,.22);--green:#16a34a;--gdim:rgba(22,163,74,.08);--gborder:rgba(22,163,74,.22);--red:#dc2626;--rdim:rgba(220,38,38,.07);--rborder:rgba(220,38,38,.2);--amber:#b45309;--coral:#e05a3a;--coraldim:rgba(224,90,58,.07);--coralborder:rgba(224,90,58,.2);--ch:rgba(37,99,235,.03);--shadow:0 2px 8px rgba(30,58,120,.08);--ex-hbg:#1e3a5f;--ex-hborder:#2a4f7c;--ex-ht:#e8f0fe;--ex-ht2:#93b4da;}
@@ -181,12 +181,12 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .t-swatch{width:24px;height:16px;border-radius:3px;flex-shrink:0;border:1px solid rgba(0,0,0,.1)}
 /* SCREENS */
 .screen{display:none}.screen.active{display:block}
-.page-wrap{max-width:960px;margin:0 auto;padding:40px 32px}
+.page-wrap{max-width:none;padding:40px 32px}
 .back-btn{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;color:var(--t2);background:var(--bg2);border:1px solid var(--b);border-radius:var(--rs);padding:6px 14px;cursor:pointer;font-family:var(--font);transition:all var(--tr);margin-bottom:22px}
 .back-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--adim)}
 .back-btn svg{stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 /* HOME */
-#home{max-width:1100px;margin:0 auto;padding:52px 32px 40px}
+#home{padding:52px 32px 40px}
 .eyebrow{font-family:var(--mono);font-size:.63rem;color:var(--accent);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
 .h-title{font-size:2.1rem;font-weight:800;letter-spacing:-.6px;line-height:1.15;margin-bottom:12px}
@@ -306,7 +306,7 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .bg{background:transparent;border:1px solid var(--b);color:var(--t2)}.bg:hover{border-color:var(--accent);color:var(--accent)}
 .bsm{padding:4px 10px;font-size:.7rem}
 /* RESULT */
-#result{max-width:920px;margin:0 auto;padding:34px 28px}
+#result{padding:34px 28px}
 .r-top{text-align:center;margin-bottom:24px}
 .r-top h2{font-size:1.35rem;font-weight:700;margin-bottom:3px;letter-spacing:-.3px}
 .r-top p{color:var(--t2);font-size:.78rem}
@@ -443,6 +443,220 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .oc-link{display:flex;align-items:center;justify-content:center;gap:5px;font-size:.72rem;font-weight:600;color:var(--bg);background:var(--accent);border-radius:var(--rs);padding:6px 12px;text-decoration:none;transition:opacity .15s;width:100%;box-sizing:border-box;}
 .oc-link:hover{opacity:.85;}
 
+/* =========================================================================
+   NEO-BRUTALIST REDESIGN — RetroUI-inspired
+   Scope: everything EXCEPT the live test-taking module (#exam, #fullmock)
+   and the exam-mode header, which keep their original design untouched.
+   ========================================================================= */
+
+/* Mode-independent tokens (radius etc.) + the light/dark blocks below.
+   Because #exam/#fullmock are separate sibling containers, none of this
+   touches them — they keep resolving the original [data-theme] variables
+   exactly as before, so the exam module's own look is untouched. */
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,.cov,.panel-pop){
+  --r:20px;--rs:12px;--rl:26px;
+  color:var(--t);
+}
+
+/* Light / Dark mode — matches the two reference screenshots (cream+ink vs near-black+cream),
+   both anchored to the same yellow brand accent. Doesn't touch #exam/#fullmock (see note above). */
+[data-mode="light"] :is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,.cov,.panel-pop){
+  --bg:#FBF2DA;--bg2:#FFFFFF;--bg3:#F4E6BE;--bg4:#EBD68F;
+  --t:#18130F;--t2:#6B5D45;--t3:#C7B78C;--b:#18130F;
+  --accent:#A8710A;--ah:#8A5D08;--adim:#FFF3C2;--aborder:#18130F;
+  --green:#1C8C4E;--gdim:#E1F5E7;--gborder:#18130F;
+  --red:#D6382C;--rdim:#FBE3E0;--rborder:#18130F;
+  --amber:#9A6300;
+  --teal:#0E8C82;--tealdim:#DEF4F1;--tealborder:#18130F;
+  --coral:#D3501F;--coraldim:#FBE6DC;--coralborder:#18130F;
+  --ch:rgba(255,214,64,.2);
+  --shadow:4px 4px 0 #18130F;
+  --dotbg:radial-gradient(rgba(24,19,15,.09) 1px,transparent 1px);
+}
+[data-mode="dark"] :is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,.cov,.panel-pop){
+  --bg:#131210;--bg2:#1C1A16;--bg3:#26221B;--bg4:#332C21;
+  --t:#F5EEDD;--t2:#B7AC93;--t3:#5B5347;--b:#F5EEDD;
+  --accent:#FFDE4D;--ah:#FFE87A;--adim:#3A3220;--aborder:#F5EEDD;
+  --green:#4ADE80;--gdim:#1E3324;--gborder:#F5EEDD;
+  --red:#FF6F6F;--rdim:#3A1F1F;--rborder:#F5EEDD;
+  --amber:#FFC94D;
+  --teal:#4DD9C0;--tealdim:#17332E;--tealborder:#F5EEDD;
+  --coral:#FF9166;--coraldim:#3A2416;--coralborder:#F5EEDD;
+  --ch:rgba(255,222,77,.1);
+  --shadow:4px 4px 0 #F5EEDD;
+  --dotbg:radial-gradient(rgba(245,238,221,.10) 1px,transparent 1px);
+}
+:root{--brut-fill:#FFDE4D;--brut-fill-t:#18130F;}
+[data-mode="light"]{--brut-tint:#FFF3C2;}
+[data-mode="dark"]{--brut-tint:#3A3220;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker){
+  background-color:var(--bg);
+  color:var(--t);
+  background-image:var(--dotbg);
+  background-size:16px 16px;
+}
+
+/* headline / label voice */
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) h1,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) h2,
+.h-title,.r-top h2,.hc-title,.hi-title,.oc-title,.tmode-t,#offers-head,#ml-exam-name,.trc-grade{
+  font-family:'Space Grotesk',sans-serif;
+}
+.h-title{font-weight:800;text-transform:uppercase;font-size:2.35rem;letter-spacing:-.01em;text-shadow:4px 4px 0 var(--brut-fill);}
+.r-top h2{font-weight:800;text-transform:uppercase;letter-spacing:-.01em;}
+.eyebrow{background:var(--brut-fill);color:var(--brut-fill-t);border:2.5px solid var(--b);border-radius:999px;padding:5px 14px 5px 10px;display:inline-flex;font-weight:700;}
+.eyebrow::before{background:#18130F;}
+.sec-lbl{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.66rem;}
+.sec-lbl::before{border-radius:2px;}
+
+/* scrolling ribbon on the homepage */
+.nb-marquee{overflow:hidden;border-top:3px solid var(--b);border-bottom:3px solid var(--b);background:var(--brut-fill);margin:0 -32px 30px;}
+.nb-marquee-track{display:flex;width:max-content;animation:nbMarquee 26s linear infinite;}
+.nb-marquee-track span{display:flex;align-items:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.76rem;letter-spacing:.05em;text-transform:uppercase;color:var(--brut-fill-t);white-space:nowrap;padding:9px 22px 9px 0;}
+@keyframes nbMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.nb-marquee-track{animation:none}}
+@media(max-width:640px){.nb-marquee{margin:0 -24px 24px}}
+
+/* buttons */
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,.cov,.panel-pop) .btn,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,.cov,.panel-pop) .tgs-cta,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .oc-link,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .oc-coupon-btn,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .clr-btn,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .lt-btn,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .back-btn{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.02em;
+  border:2.5px solid var(--b)!important;border-radius:999px;
+  box-shadow:3px 3px 0 var(--b);transition:transform .12s ease,box-shadow .12s ease,background .12s ease,color .12s ease!important;
+}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,.cov,.panel-pop) .btn:hover,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .oc-link:hover,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .lt-btn:hover,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .back-btn:hover{
+  transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--b);
+}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,.cov,.panel-pop) .btn:active{
+  transform:translate(0,0);box-shadow:1px 1px 0 var(--b);
+}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,.cov,.panel-pop) .bp,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .oc-link,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .tgs-cta{
+  background:var(--brut-fill)!important;color:var(--brut-fill-t)!important;box-shadow:3px 3px 0 var(--b);
+}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,.cov,.panel-pop) .bg,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .back-btn,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .clr-btn{
+  background:var(--bg2)!important;
+}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .clr-btn{color:var(--red)!important;border-color:var(--b)!important;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .clr-btn:hover{background:var(--red)!important;color:var(--bg)!important;}
+
+/* pills — pattern for chips/tabs, thick-ish border, no heavy shadow (keeps dense rows calm) */
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) :is(.stab,.tob,.ptab,.tl-btn,.mtab){
+  border:2px solid var(--b);font-weight:600;
+}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) :is(.stab.on,.tob.on,.ptab.on,.tl-btn.on){
+  background:var(--brut-fill);color:var(--brut-fill-t);
+}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) :is(.chip,.hi-badge,.hi-score-chip,.ftag,.lt-badge,.oc-price-save){
+  border:2px solid var(--b);font-weight:600;border-radius:999px;
+}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .oc-top-badge{
+  top:-11px;right:16px;left:auto;
+  background:var(--brut-fill);color:var(--brut-fill-t);
+  border:2.5px solid var(--b);border-radius:999px;
+  padding:5px 13px;font-family:'Space Grotesk',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.05em;
+  box-shadow:3px 3px 0 var(--b);transform:rotate(-4deg);line-height:1.4;
+}
+
+/* card / surface family: thick border + hard offset shadow */
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,.cov) :is(.hcard,.offer-card,.stile,.rcard,.ph-tile,.hist-item,.timer-box,.q-item,.tmode,.trc,.trc-tile,.cbox,.card,.qpick-btn,.paste-area,.typing-input,.para-disp,.tbar,.lt-card,.weak-areas-card){
+  border:3px solid var(--b);
+  box-shadow:5px 5px 0 var(--b);
+  border-radius:var(--r);
+}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .hcard{transition:transform .12s ease,box-shadow .12s ease;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .hcard::after{display:none;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .hcard:hover{
+  transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--b);background:var(--bg2);border-color:var(--b);
+}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .hcard.exam-card:hover{
+  box-shadow:8px 8px 0 var(--teal);
+}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .hc-icon{
+  border:2.5px solid var(--b);border-radius:8px;
+}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .oc-icon-wrap{border:2px solid var(--b);}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .offer-card.featured{border:3px solid var(--b);box-shadow:6px 6px 0 var(--brut-fill);}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .q-item:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--b);}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .model-box{
+  border-top:3px solid var(--b);border-right:3px solid var(--b);border-bottom:3px solid var(--b);border-left:5px solid var(--green);
+  box-shadow:5px 5px 0 var(--b);border-radius:var(--rs);
+}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .ans-box,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .verdict,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .ai-notice{
+  border:2.5px solid var(--b);border-radius:var(--rs);
+}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .lt-row{border-bottom:2px solid var(--b);}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .lt-logo,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .lt-logo-fb{border:2px solid var(--b);border-radius:8px;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .cring .ring-bg{stroke:var(--b);opacity:.25;}
+
+/* homepage-closing CTA banner, inspired by the reference site's footer */
+.nb-footer{position:relative;overflow:hidden;background:#18130F;margin:44px -32px 0;padding:52px 32px 0;color:#FBF2DA;border-top:4px solid #18130F;}
+.nb-footer-inner{position:relative;z-index:2;max-width:620px;}
+.nb-footer-eyebrow{display:inline-flex;align-items:center;background:var(--brut-fill);color:var(--brut-fill-t);border:2.5px solid #FBF2DA;border-radius:999px;padding:5px 14px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.64rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:16px;}
+.nb-footer-h{font-family:'Space Grotesk',sans-serif;font-weight:800;text-transform:uppercase;font-size:2.15rem;line-height:1.06;letter-spacing:-.01em;margin:0 0 12px;}
+.nb-footer-sub{font-size:.92rem;color:#C7B78C;max-width:420px;margin:0 0 24px;}
+.nb-footer-cta{background:var(--brut-fill)!important;color:var(--brut-fill-t)!important;border:3px solid #FBF2DA!important;box-shadow:5px 5px 0 rgba(251,242,218,.3)!important;font-size:.85rem;padding:13px 26px;}
+.nb-footer-cta:hover{box-shadow:7px 7px 0 rgba(251,242,218,.3)!important;}
+.nb-footer-word{position:relative;z-index:1;font-family:'Space Grotesk',sans-serif;font-weight:800;text-transform:uppercase;font-size:8.5rem;line-height:.85;color:#FBF2DA;opacity:.08;white-space:nowrap;margin:34px -8px -16px;letter-spacing:-.01em;pointer-events:none;}
+@media(max-width:640px){.nb-footer{margin:32px -24px 0;padding:38px 24px 0;}.nb-footer-h{font-size:1.5rem}.nb-footer-word{font-size:3.6rem;margin:22px -6px -10px}}
+
+
+.cbox-t{font-family:'Space Grotesk',sans-serif;font-weight:800;text-transform:uppercase;}
+.panel-pop{border:3px solid var(--b)!important;box-shadow:5px 5px 0 var(--b)!important;}
+
+/* value chips / dividers */
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .sec-divider{
+  background:repeating-linear-gradient(90deg,var(--b) 0 8px,transparent 8px 16px);height:2.5px;
+}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .prog-tabs{gap:8px;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .stile-v,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .ph-v,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .trc-v,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .tst-v,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .t-v{font-family:'Space Grotesk',sans-serif;font-weight:800;}
+
+/* HEADER — default (non-exam) look only.
+   Kept at plain, low-specificity selectors so the existing
+   [data-theme="light-default"] body.exam-mode header … rules
+   (much higher specificity) continue to win untouched during a test. */
+header{
+  --rs:9px;
+  color:var(--t);
+  box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;
+}
+[data-mode="light"] header{
+  --bg:#FBF2DA;--bg2:#FFFFFF;--bg3:#F4E6BE;--t:#18130F;--t2:#6B5D45;--t3:#C7B78C;--b:#18130F;
+  --accent:#A8710A;--ah:#8A5D08;--adim:#FFF3C2;--aborder:#18130F;
+  background:#FBF2DA;border-bottom:3px solid #18130F;
+}
+[data-mode="dark"] header{
+  --bg:#131210;--bg2:#1C1A16;--bg3:#26221B;--t:#F5EEDD;--t2:#B7AC93;--t3:#5B5347;--b:#F5EEDD;
+  --accent:#FFDE4D;--ah:#FFE87A;--adim:#3A3220;--aborder:#F5EEDD;
+  background:#131210;border-bottom:3px solid #F5EEDD;
+}
+header .site-name-top,header .site-name-bot{font-family:'Space Grotesk',sans-serif;font-weight:800;letter-spacing:0;}
+header .ib{border:2px solid var(--b);border-radius:8px;}
+header .ib:hover{background:var(--brut-fill);border-color:var(--b);color:var(--brut-fill-t);}
+header .tg-hbtn{border:2px solid var(--b);border-radius:8px;font-weight:700;}
+header .tg-hbtn:hover{background:var(--brut-fill);color:var(--brut-fill-t);border-color:var(--b);}
+header .btn{font-family:'Space Grotesk',sans-serif;font-weight:700;text-transform:uppercase;border:2px solid var(--b);border-radius:8px;}
+header .h-brand:hover{background:var(--brut-tint);}
+.panel-pop .t-choice.on{border-color:var(--b);background:var(--brut-tint);}
+
 </style>
 </head>
 <body>
@@ -470,7 +684,7 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
       <svg width="14" height="14" viewBox="0 0 24 24"><path d="M4 20V7H2m4 0h8m0 0h2m-2 0V20m-8-7h7"/><path d="M15 20v-5a2.5 2.5 0 015 0V20m-5-2.5h5"/></svg>
     </button>
     <button class="ib" onclick="toggleP('tp',event)" title="Theme">
-      <svg id="theme-ico" width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg id="theme-ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 109 9c0-.46-.04-.92-.1-1.36a5.5 5.5 0 01-7.54-7.54A8.94 8.94 0 0012 3z"/></svg>
     </button>
   </div>
 </header>
@@ -481,13 +695,9 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 </div>
 <div class="panel-pop" id="tp">
   <div class="pop-title">Theme</div>
-  <div class="tp-grp"><div class="tp-grp-lbl">Dark</div>
-    <div class="t-choice" data-t="dark-default" onclick="setTheme('dark-default')"><div class="t-swatch" style="background:linear-gradient(135deg,#0e1117 50%,#e2b714 50%)"></div>Navy &amp; gold</div>
-    <div class="t-choice" data-t="dark-simple" onclick="setTheme('dark-simple')"><div class="t-swatch" style="background:linear-gradient(135deg,#18181b 50%,#6366f1 50%)"></div>Dark &amp; minimal</div>
-  </div>
-  <div class="tp-grp"><div class="tp-grp-lbl">Light</div>
-    <div class="t-choice" data-t="light-default" onclick="setTheme('light-default')"><div class="t-swatch" style="background:linear-gradient(135deg,#f8f9fc 50%,#2563eb 50%)"></div>Clean &amp; blue</div>
-    <div class="t-choice" data-t="light-warm" onclick="setTheme('light-warm')"><div class="t-swatch" style="background:linear-gradient(135deg,#faf8f5 50%,#c2460a 50%)"></div>Warm &amp; terracotta</div>
+  <div class="tp-grp">
+    <div class="t-choice" data-m="light" onclick="setMode('light')"><div class="t-swatch" style="background:linear-gradient(135deg,#FBF2DA 50%,#FFDE4D 50%)"></div>Light</div>
+    <div class="t-choice" data-m="dark" onclick="setMode('dark')"><div class="t-swatch" style="background:linear-gradient(135deg,#131210 50%,#FFDE4D 50%)"></div>Dark</div>
   </div>
 </div>
 <div class="cov" id="exit-cov">
@@ -504,6 +714,12 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
   <div class="eyebrow" id="h-eyebrow">Free Practice Platform</div>
   <h1 class="h-title" id="h-title">SBI PO Descriptive<br>Practice 2026</h1>
   <p class="h-sub" id="h-sub">Exam-pattern interface · AI evaluation · Model answers · Typing speed tracker</p>
+  <div class="nb-marquee" aria-hidden="true">
+    <div class="nb-marquee-track">
+      <span>★ Descriptive Practice ★ AI Evaluation ★ Model Answers ★ Typing Speed Test ★ Exam-Pattern Interface ★</span>
+      <span>★ Descriptive Practice ★ AI Evaluation ★ Model Answers ★ Typing Speed Test ★ Exam-Pattern Interface ★</span>
+    </div>
+  </div>
   <div class="sec-lbl" id="h-plbl">Practice Section</div>
   <div class="card-grid" id="sec-practice-cards" style="margin-bottom:26px"></div>
   <div class="sec-divider"></div>
@@ -526,10 +742,19 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
       <div class="hc-desc" id="prog-card-desc">View your practice history, scores &amp; typing results</div>
     </div>
     <div class="hcard" onclick="showLiveTracker()">
-      <div class="hc-icon" style="background:rgba(99,102,241,.1);border-color:rgba(99,102,241,.3);color:#6366f1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+      <div class="hc-icon" style="background:var(--tealdim);border-color:var(--tealborder);color:var(--teal)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
       <div class="hc-title">Live Mock Tracker</div>
       <div class="hc-desc">Live &amp; upcoming mocks across top platforms</div>
     </div>
+  </div>
+  <div class="nb-footer">
+    <div class="nb-footer-inner">
+      <div class="nb-footer-eyebrow">Free. Forever. No catch.</div>
+      <h2 class="nb-footer-h">Ready to start<br>practicing?</h2>
+      <p class="nb-footer-sub">Pick a section, write your first answer, and get instant AI feedback — no signup needed.</p>
+      <button class="btn bp nb-footer-cta" onclick="document.getElementById('sec-practice-cards').scrollIntoView({behavior:'smooth',block:'center'})">Start Practicing →</button>
+    </div>
+    <div class="nb-footer-word" id="footer-wordmark" aria-hidden="true">Descriptive PrepToday</div>
   </div>
 </div>
 <div id="qselect" class="screen">
@@ -737,6 +962,8 @@ const EX=()=>{try{const d=D();return d.exams.find(e=>e.status==="active")||d.exa
 async function init(){
   const th=localStorage.getItem("dpt_theme")||"light-default";
   applyTheme(th,false);
+  const mo=localStorage.getItem("dpt_mode")||"light";
+  applyMode(mo,false);
   const rawFs=parseInt(localStorage.getItem("dpt_font")||"16");
   const fs=String(Math.min(Math.max(rawFs,14),22));
   setFS(fs,false);document.getElementById("fs-slider").value=fs;
@@ -786,20 +1013,21 @@ async function init(){
 function applyTheme(t,save=true){
   document.documentElement.setAttribute("data-theme",t);
   if(save)localStorage.setItem("dpt_theme",t);
-  const dark=t.startsWith("dark");
-  const ico=document.getElementById("theme-ico");
-  ico.innerHTML=dark?'<path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/>':'<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>';
-  document.querySelectorAll(".t-choice").forEach(e=>e.classList.toggle("on",e.dataset.t===t));
-  // Only update logo if data is already loaded (save=true means user-triggered, data is ready)
-  if(save)updateLogo(t);
 }
-function setTheme(t){applyTheme(t);document.getElementById("tp").classList.remove("open");}
-function updateLogo(t){
+function applyMode(m,save=true){
+  document.documentElement.setAttribute("data-mode",m);
+  if(save)localStorage.setItem("dpt_mode",m);
+  document.querySelectorAll(".t-choice").forEach(e=>e.classList.toggle("on",e.dataset.m===m));
+  // Only update logo if data is already loaded (save=true means user-triggered, data is ready)
+  if(save)updateLogo(m);
+}
+function setMode(m){applyMode(m);document.getElementById("tp").classList.remove("open");}
+function updateLogo(m){
   const d=D(),cfg=d.siteSettings||{};
-  // Clean & Blue's exam/mock header keeps a dark navy background even in the light theme,
-  // so use the dark-theme logo there instead of faking a white tile behind the light logo.
-  const examDarkHeader=t==="light-default"&&document.body.classList.contains("exam-mode");
-  const dark=t.startsWith("dark")||examDarkHeader;
+  // The exam-taking header keeps its own dark navy background regardless of site mode,
+  // so use the dark-variant logo there instead of faking a white tile behind the light logo.
+  const examDarkHeader=document.body.classList.contains("exam-mode");
+  const dark=m==="dark"||examDarkHeader;
   const url=dark?(cfg.logoUrlDark||cfg.logoUrl||""):(cfg.logoUrlLight||cfg.logoUrl||"");
   const l=document.getElementById("site-logo");
   if(url){l.src=url;l.style.display="block";}else l.style.display="none";
@@ -831,7 +1059,7 @@ function showS(id,opts){
   window.scrollTo(0,0);
   const isExamScreen=(id==="fullmock"||id==="exam");
   document.body.classList.toggle("exam-mode",isExamScreen);
-  updateLogo(localStorage.getItem("dpt_theme")||"light-default");
+  updateLogo(localStorage.getItem("dpt_mode")||"light");
   const hec=document.getElementById("h-exam-ctl");
   if(hec) hec.style.display=(id==="fullmock")?"flex":"none";
   const brand=document.getElementById("h-brand");
@@ -1048,11 +1276,13 @@ function updateSiteName(name){
   const botEl=el.querySelector(".site-name-bot");
   if(topEl)topEl.textContent=top;
   if(botEl)botEl.textContent=bot;
+  const fw=document.getElementById("footer-wordmark");
+  if(fw)fw.textContent=name||"Descriptive PrepToday";
 }
 function renderHome(){
   const d=D(),cfg=d.siteSettings||{};
   if(cfg.name)updateSiteName(cfg.name);
-  updateLogo(localStorage.getItem("dpt_theme")||"light-default");
+  updateLogo(localStorage.getItem("dpt_mode")||"light");
   setT("h-eyebrow",cfg.homeEyebrow);
   const ht=document.getElementById("h-title");if(ht&&cfg.homeTitle)ht.innerHTML=cfg.homeTitle.replace("\n","<br>");
   setT("h-sub",cfg.homeSub);setT("h-plbl",cfg.practiceSectionLabel);setT("h-tlbl",cfg.toolsLabel);
