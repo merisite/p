@@ -9,7 +9,7 @@
     "logoUrl": "https://i.postimg.cc/W4NFFL3J/Untitled-June-14-2026-at-10-51-00.png",
     "accentColor": "#2563eb",
     "fontFamily": "Poppins",
-    "fontSize": 70,
+    "fontSize": 100,
     "darkBg": "#323437",
     "darkText": "#d1d0c5",
     "lightBg": "#ffffff",
@@ -25,7 +25,9 @@
     "typingSubhead": "Practice regular paragraphs or exam-specific prompts to build the muscle memory required for maximum scoring.",
     "tgStripTitle": "",
     "tgStripSub": "",
-    "apiProxy": "https://weathered-math-4ca8.descriptivepreptoday.workers.dev/"
+    "apiProxy": "https://weathered-math-4ca8.descriptivepreptoday.workers.dev/",
+    "marqueeText": "★ Descriptive Practice ★ AI Evaluation ★ Model Answers ★ Typing Speed Test ★ Exam-Pattern Interface ★",
+    "marqueeSpeed": 26
   },
   "sectionTypes": [
     {
