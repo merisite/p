@@ -132,7 +132,7 @@
       "marks": 20,
       "difficulty": "medium",
       "active": true,
-      "mockNo": 1
+      "mockNo": null
     },
     {
       "id": "q2",
