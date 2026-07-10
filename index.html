@@ -562,14 +562,14 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
   border:2px solid var(--b);font-weight:600;border-radius:999px;
 }
 :is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .oc-top-badge{
-  top:8px;right:10px;left:auto;
+  position:static;float:right;margin:0 0 4px 8px;
   background:var(--brut-fill);color:var(--brut-fill-t);
   border:1.5px solid var(--b);border-radius:999px;
   padding:2px 7px;font-family:'Space Grotesk',sans-serif;font-size:.48rem;font-weight:700;letter-spacing:.03em;
-  box-shadow:1.5px 1.5px 0 color-mix(in srgb,var(--b) 45%,transparent);line-height:1.35;white-space:nowrap;max-width:90px;
+  box-shadow:1.5px 1.5px 0 color-mix(in srgb,var(--b) 45%,transparent);line-height:1.35;white-space:nowrap;
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .oc-title.has-badge{
-  padding-right:64px;
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .oc-title{
+  padding-right:0;
 }
 
 /* card / surface family: thick border + hard offset shadow */
@@ -1254,13 +1254,12 @@ function renderOfferCards(){
       (o.desc?`<ul class="oc-features"><li>${o.desc}</li></ul>`:'');
     return `
       <div class="offer-card${o.featured?' featured':''}">
-        ${o.badge?`<div class="oc-top-badge">${o.badge}</div>`:''}
         <div class="oc-header">
           ${o.iconUrl?`<div class="oc-icon-wrap"><img src="${o.iconUrl}" alt="" onerror="this.parentElement.style.display='none'"/></div>`:
             o.logoUrl?`<div class="oc-icon-wrap" style="background:#fff;border-color:var(--b)"><img src="${o.logoUrl}" alt="" onerror="this.parentElement.style.display='none'" style="width:28px;height:28px"/></div>`:''}
           <div class="oc-header-text">
             ${o.platform?`<div class="oc-platform">${o.platform}</div>`:''}
-            <div class="oc-title${o.badge?' has-badge':''}">${o.title||''}</div>
+            <div class="oc-title">${o.badge?`<span class="oc-top-badge">${o.badge}</span>`:''}${o.title||''}</div>
           </div>
         </div>
         ${ratingHtml}
