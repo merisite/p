@@ -1135,11 +1135,52 @@ function routeFromHash(){
     showMockList(sectionArg,{skipHash:true});
     return;
   }
+  if(screenId==="question"&&sectionArg){
+    openQuestionLink(sectionArg);
+    return;
+  }
+  if(screenId==="mock"&&sectionArg){
+    openMockLink(sectionArg);
+    return;
+  }
   if(NON_LINKABLE_SCREENS.has(screenId))return;
   const el=document.getElementById(screenId);
   if(el&&el.classList.contains("screen"))showS(screenId,{skipHash:true});
 }
 window.addEventListener("hashchange",routeFromHash);
+function openQuestionLink(qid){
+  const d=D();
+  const q=d.questions.find(x=>x.id===qid);
+  if(!q||!q.active){alert("This question link is invalid or no longer available.");showS("home",{skipHash:true});return;}
+  launchExam(qid);
+}
+function openMockLink(arg){
+  const parts=arg.split("-");
+  let mockNo=null,examId=arg;
+  if(parts.length>1&&/^\d+$/.test(parts[parts.length-1])){
+    mockNo=parseInt(parts[parts.length-1]);
+    examId=parts.slice(0,-1).join("-");
+  }
+  const d=D();
+  const ex=d.exams.find(e=>e.id===examId);
+  if(!ex){alert("This mock test link is invalid or no longer available.");showS("home",{skipHash:true});return;}
+  if(mockNo!=null)startMockByNo(examId,mockNo);
+  else startFullMockFor(examId);
+}
+function copyShareLink(hash,btn){
+  const url=location.origin+location.pathname+"#"+hash;
+  const done=()=>{
+    if(!btn)return;
+    const orig=btn.innerHTML;
+    btn.innerHTML="✓ Copied";
+    setTimeout(()=>{btn.innerHTML=orig;},1400);
+  };
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(url).then(done).catch(()=>prompt("Copy this link:",url));
+  }else{
+    prompt("Copy this link:",url);
+  }
+}
 window.addEventListener("DOMContentLoaded",function(){
   // Restore result page if user refreshed while on it
   const savedHtml=sessionStorage.getItem('dpt_result_html');
@@ -1446,7 +1487,7 @@ function renderQS(type){
   document.getElementById("cust-row").classList.remove("show");tMode="default";
   // Show up to 20 questions for practice
   const qs=d.questions.filter(q=>q.type===type&&q.active).slice(0,20);
-  document.getElementById("q-list").innerHTML=qs.length===0?"<div class='empty-q'>No questions yet for this section. Add questions in the Admin panel.</div>":qs.map((q,i)=>`<div class="q-item" onclick="launchExam('${q.id}')"><div class="q-n">Q${i+1}</div><div style="flex:1"><div style="font-size:.65rem;font-family:var(--mono);color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px">Question ${i+1}</div><div style="font-size:.83rem;line-height:1.75;white-space:pre-wrap;color:var(--t)">${q.text}</div><div class="chips" style="margin-top:8px"><span class="chip">${q.wordLimit}</span><span class="chip">${q.marks} marks</span><span class="chip">${q.difficulty||"medium"}</span></div><div style="margin-top:8px;font-size:.72rem;color:var(--accent);font-weight:600">→ Click to attempt</div></div></div>`).join("");
+  document.getElementById("q-list").innerHTML=qs.length===0?"<div class='empty-q'>No questions yet for this section. Add questions in the Admin panel.</div>":qs.map((q,i)=>`<div class="q-item" onclick="launchExam('${q.id}')"><div class="q-n">Q${i+1}</div><div style="flex:1"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:5px"><div style="font-size:.65rem;font-family:var(--mono);color:var(--accent);text-transform:uppercase;letter-spacing:.08em">Question ${i+1}</div><button onclick="event.stopPropagation();copyShareLink('question-${q.id}',this)" title="Copy direct link to this question" style="flex-shrink:0;display:flex;align-items:center;gap:4px;font-size:.62rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>Copy Link</button></div><div style="font-size:.83rem;line-height:1.75;white-space:pre-wrap;color:var(--t)">${q.text}</div><div class="chips" style="margin-top:8px"><span class="chip">${q.wordLimit}</span><span class="chip">${q.marks} marks</span><span class="chip">${q.difficulty||"medium"}</span></div><div style="margin-top:8px;font-size:.72rem;color:var(--accent);font-weight:600">→ Click to attempt</div></div></div>`).join("");
 }
 function setTO(btn,v){document.querySelectorAll(".tob").forEach(b=>b.classList.remove("on"));btn.classList.add("on");tMode=v;document.getElementById("cust-row").classList.toggle("show",v==="custom");}
 let _instrReturnTo="home",_instrOnStart=null;
@@ -1681,7 +1722,8 @@ function showMockList(examId,opts){
           <div style="margin-top:8px;font-size:.62rem;font-family:var(--mono);color:var(--amber,#d97706);text-align:center;letter-spacing:.05em">Coming Soon</div>
         </div>`;
       }
-      return `<div class="hcard exam-card" onclick="startMockByNo('${examId}',${m.mockNo})" style="border-color:var(--aborder);background:var(--adim)">
+      return `<div class="hcard exam-card" onclick="startMockByNo('${examId}',${m.mockNo})" style="border-color:var(--aborder);background:var(--adim);position:relative">
+        <button onclick="event.stopPropagation();copyShareLink('mock-${examId}-${m.mockNo}',this)" title="Copy direct link to this mock" style="position:absolute;top:10px;right:10px;display:flex;align-items:center;gap:4px;font-size:.6rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer;z-index:2"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>Copy Link</button>
         <div class="hc-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
         <div class="hc-title">${m.title}</div>
         <div class="hc-sub" style="font-size:.7rem;color:var(--t2)">${qc} question${qc!==1?'s':''} · ${ex.duration||30} min</div>
