@@ -9,7 +9,7 @@
 [data-theme="dark-simple"]{--bg:#18181b;--bg2:#1f1f23;--bg3:#27272a;--bg4:#2e2e32;--t:#f0f0f0;--t2:#a0a0a8;--t3:#404048;--b:#303038;--accent:#6366f1;--ah:#4f52e0;--adim:rgba(99,102,241,.08);--aborder:rgba(99,102,241,.22);--green:#4ade80;--gdim:rgba(74,222,128,.08);--gborder:rgba(74,222,128,.22);--red:#f87171;--rdim:rgba(248,113,113,.08);--rborder:rgba(248,113,113,.22);--amber:#fbbf24;--ch:rgba(255,255,255,.025);--shadow:0 1px 3px rgba(0,0,0,.6);}
 [data-theme="light-default"]{--bg:#eef3fb;--bg2:#ffffff;--bg3:#e6edf8;--bg4:#d8e3f4;--t:#18243a;--t2:#526080;--t3:#b4c2d8;--b:#cfd9ee;--accent:#2563eb;--ah:#1d4ed8;--adim:rgba(37,99,235,.08);--aborder:rgba(37,99,235,.22);--teal:#0d9488;--tealdim:rgba(13,148,136,.08);--tealborder:rgba(13,148,136,.22);--green:#16a34a;--gdim:rgba(22,163,74,.08);--gborder:rgba(22,163,74,.22);--red:#dc2626;--rdim:rgba(220,38,38,.07);--rborder:rgba(220,38,38,.2);--amber:#b45309;--coral:#e05a3a;--coraldim:rgba(224,90,58,.07);--coralborder:rgba(224,90,58,.2);--ch:rgba(37,99,235,.03);--shadow:0 2px 8px rgba(30,58,120,.08);--ex-hbg:#1e3a5f;--ex-hborder:#2a4f7c;--ex-ht:#e8f0fe;--ex-ht2:#93b4da;}
 [data-theme="light-warm"]{--bg:#faf8f5;--bg2:#ffffff;--bg3:#f5f1eb;--bg4:#ede8df;--t:#2c2416;--t2:#7a6e60;--t3:#c8bfb0;--b:#ddd6ca;--accent:#c2460a;--ah:#a83a08;--adim:rgba(194,70,10,.07);--aborder:rgba(194,70,10,.2);--green:#3a7d44;--gdim:rgba(58,125,68,.07);--gborder:rgba(58,125,68,.2);--red:#c0392b;--rdim:rgba(192,57,43,.07);--rborder:rgba(192,57,43,.2);--amber:#b45309;--ch:rgba(0,0,0,.01);--shadow:0 1px 3px rgba(0,0,0,.06);}
-:root{--r:10px;--rs:6px;--rl:14px;--fs:16px;--font:"Inter",sans-serif;--mono:"JetBrains Mono",monospace;--tr:.2s cubic-bezier(.16,1,.3,1);}
+:root{--r:10px;--rs:6px;--rl:14px;--fs:17px;--font:"Inter",sans-serif;--mono:"JetBrains Mono",monospace;--tr:.2s cubic-bezier(.16,1,.3,1);}
 /* ── EXAM MODE: light-default theme ONLY ── */
 [data-theme="light-default"] body.exam-mode header{background:#1e3a5f;border-bottom:1px solid #2a4f7c;box-shadow:0 2px 8px rgba(0,0,0,.25);}
 [data-theme="light-default"] body.exam-mode header .site-name-top{color:#93c5fd;}
@@ -696,7 +696,7 @@ header .h-brand:hover{background:var(--brut-tint);}
 </header>
 <div class="panel-pop" id="fp" style="width:195px">
   <div class="pop-title">Text Size</div>
-  <input type="range" id="fs-slider" min="14" max="22" value="16" oninput="setFS(this.value)"/>
+  <input type="range" id="fs-slider" min="14" max="22" value="17" oninput="setFS(this.value)"/>
   <div class="fp-row"><span style="font-size:.72rem">A</span><span>A</span><span style="font-size:1.1rem">A</span></div>
 </div>
 <div class="panel-pop" id="tp">
@@ -812,6 +812,7 @@ header .h-brand:hover{background:var(--brut-tint);}
       <div class="bstat"><div class="bval" id="exam-wc-top">0</div><div class="blbl">Words</div></div>
     </div>
     <div style="display:flex;gap:6px;flex-shrink:0">
+      <button class="btn bg bsm fs-toggle-btn" onclick="toggleFullscreen()" title="Toggle full screen"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 00-2 2v3M16 3h3a2 2 0 012 2v3M21 16v3a2 2 0 01-2 2h-3M3 16v3a2 2 0 002 2h3"/></svg></button>
       <button class="btn bg bsm" onclick="askExit('qselect')"><svg width="11" height="11" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Exit</button>
     </div>
   </div>
@@ -994,7 +995,7 @@ async function init(){
   applyTheme(th,false);
   const mo=localStorage.getItem("dpt_mode")||"light";
   applyMode(mo,false);
-  const rawFs=parseInt(localStorage.getItem("dpt_font")||"16");
+  const rawFs=parseInt(localStorage.getItem("dpt_font")||"17");
   const fs=String(Math.min(Math.max(rawFs,14),22));
   setFS(fs,false);document.getElementById("fs-slider").value=fs;
   // Bundled config data
@@ -1194,6 +1195,22 @@ function keepGoingTyping(){document.getElementById("typing-exit-cov").classList.
 function typingBackBtn(){if(isInActiveTyping()){document.getElementById("typing-exit-cov").classList.add("open");}else{showS("home");}}
 function handleBrand(e){e.preventDefault();if(isInActiveExam())askExit("home");else if(isInActiveTyping()){document.getElementById("typing-exit-cov").classList.add("open");}else if(document.getElementById("home").classList.contains("active"))location.reload();else showS("home");}
 function askExit(dest){exitDest=dest;document.getElementById("exit-cov").classList.add("open");}
+const FS_EXPAND_ICON='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 00-2 2v3M16 3h3a2 2 0 012 2v3M21 16v3a2 2 0 01-2 2h-3M3 16v3a2 2 0 002 2h3"/></svg>';
+const FS_COMPRESS_ICON='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3a2 2 0 01-2 2H3M16 3v3a2 2 0 002 2h3M21 16h-3a2 2 0 00-2 2v3M3 16h3a2 2 0 012 2v3"/></svg>';
+function toggleFullscreen(){
+  if(!document.fullscreenElement){
+    (document.documentElement.requestFullscreen?.()||Promise.resolve()).catch(()=>{});
+  }else{
+    (document.exitFullscreen?.()||Promise.resolve()).catch(()=>{});
+  }
+}
+document.addEventListener("fullscreenchange",()=>{
+  const on=!!document.fullscreenElement;
+  document.querySelectorAll(".fs-toggle-btn").forEach(b=>{
+    b.innerHTML=on?FS_COMPRESS_ICON:FS_EXPAND_ICON;
+    b.title=on?"Exit full screen":"Toggle full screen";
+  });
+});
 function closeCov(){document.getElementById("exit-cov").classList.remove("open");exitDest=null;}
 function doExit(){clearInterval(TI);clearInterval(WI);document.getElementById("exit-cov").classList.remove("open");if(exitDest)showS(exitDest);exitDest=null;}
 function setT(id,v){const e=document.getElementById(id);if(e&&v)e.textContent=v;}
@@ -1821,6 +1838,7 @@ function renderMTabs(){
   }).join("");
   document.getElementById("mock-tabs").innerHTML=
     `<div class="mock-tabs-inner">${tabs}</div>`+
+    `<button class="btn bg bsm fs-toggle-btn" style="flex-shrink:0;margin-left:4px" onclick="toggleFullscreen()" title="${document.fullscreenElement?'Exit full screen':'Toggle full screen'}">${document.fullscreenElement?FS_COMPRESS_ICON:FS_EXPAND_ICON}</button>`+
     `<button class="btn bg bsm" style="flex-shrink:0;margin-left:4px" onclick="askExit('home')"><svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Exit</button>`;
   renderExamSide();
 }
