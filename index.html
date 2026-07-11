@@ -1128,11 +1128,11 @@ function routeFromHash(){
   const[screenId,...rest]=raw.split("-");
   const sectionArg=rest.join("-");
   if(screenId==="qselect"&&sectionArg&&typeof goSec==="function"){
-    goSec(sectionArg,{skipHash:true});
+    initPromise.then(()=>goSec(sectionArg,{skipHash:true}));
     return;
   }
   if(screenId==="mocks"&&sectionArg&&typeof showMockList==="function"){
-    showMockList(sectionArg,{skipHash:true});
+    initPromise.then(()=>showMockList(sectionArg,{skipHash:true}));
     return;
   }
   if(screenId==="question"&&sectionArg){
@@ -1145,7 +1145,7 @@ function routeFromHash(){
   }
   if(NON_LINKABLE_SCREENS.has(screenId))return;
   const el=document.getElementById(screenId);
-  if(el&&el.classList.contains("screen"))showS(screenId,{skipHash:true});
+  if(el&&el.classList.contains("screen"))initPromise.then(()=>showS(screenId,{skipHash:true}));
 }
 window.addEventListener("hashchange",routeFromHash);
 function openQuestionLink(qid){
