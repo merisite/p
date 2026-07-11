@@ -1136,11 +1136,11 @@ function routeFromHash(){
     return;
   }
   if(screenId==="question"&&sectionArg){
-    openQuestionLink(sectionArg);
+    initPromise.then(()=>openQuestionLink(sectionArg));
     return;
   }
   if(screenId==="mock"&&sectionArg){
-    openMockLink(sectionArg);
+    initPromise.then(()=>openMockLink(sectionArg));
     return;
   }
   if(NON_LINKABLE_SCREENS.has(screenId))return;
@@ -2881,7 +2881,7 @@ function clearAllProgress(){
   updateProgCard();
 }
 
-init();
+const initPromise=init();
 </script>
 <!-- REPORT/PRECIS CHOICE OVERLAY -->
 <div class="cov" id="choice-cov">
