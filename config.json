@@ -1587,11 +1587,11 @@
       "mockNo": null
     },
     {
-      "id": "q_1783754905791",
+      "id": "q_1783755072587",
       "examId": "sbi_po",
       "type": "situation",
       "text": "You are the owner of a restaurant where several customers have suffered from food poisoning after eating. What immediate steps would you take to ensure customer safety and regain their trust?",
-      "modelAnswer": "As the owner of the restaurant, I would first remain calm and respond to the situation immediately. I would sincerely apologies to the affected customers, express concern for their health, and assure them that I would take every possible step to resolve the issue. First, I would stop serving food temporarily to prevent any further risk. Next, I would identify the possible cause by checking the food ingredients, storage conditions, kitchen hygiene, and staff practices. I would immediately discard any suspected food items and thoroughly clean and sanitise the kitchen. If required, I would inform the food safety authorities and fully cooperate with their investigation. I would also arrange medical assistance for the affected customers and stay in touch with them until the matter is resolved. Finally, I would organise staff training on food safety and hygiene and introduce stricter quality checks. This approach would help restore customer confidence, ensure food safety, and rebuild the restaurant's reputation.",
+      "modelAnswer": "As the owner of the restaurant, I would first remain calm and respond to the situation immediately. I would sincerely apologise to the affected customers, express concern for their health, and assure them that I would take every possible step to resolve the issue. First, I would stop serving food temporarily to prevent any further risk. Next, I would identify the possible cause by checking the food ingredients, storage conditions, kitchen hygiene, and staff practices. I would immediately discard any suspected food items and thoroughly clean and sanitise the kitchen. If required, I would inform the food safety authorities and fully cooperate with their investigation. I would also arrange medical assistance for the affected customers and stay in touch with them until the matter is resolved. Finally, I would organise staff training on food safety and hygiene and introduce stricter quality checks. This approach would help restore customer confidence, ensure food safety, and rebuild the restaurant's reputation.",
       "wordLimit": "120-150",
       "marks": 20,
       "difficulty": "medium",
