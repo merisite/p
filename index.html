@@ -2207,6 +2207,34 @@ async function retryMockAI(idx){
     sessionStorage.setItem('dpt_result_data', JSON.stringify({kind:'mock',MS:MS}));
   }catch(e){}
 }
+function parseWordLimitRange(wlStr){
+  const nums=(String(wlStr||"").match(/\d+/g)||[]).map(Number);
+  if(nums.length>=2)return{min:Math.min(nums[0],nums[1]),max:Math.max(nums[0],nums[1])};
+  if(nums.length===1)return{min:nums[0],max:nums[0]};
+  return null;
+}
+function computeWordLimitScore(wc,wlStr,maxMarks){
+  const range=parseWordLimitRange(wlStr);
+  if(!range||maxMarks<=0)return{name:"Word Limit",score:maxMarks,max:maxMarks,comment:"Word limit not specified numerically."};
+  if(wc<20)return{name:"Word Limit",score:0,max:maxMarks,comment:`Only ${wc} words written — too short to be a meaningful attempt.`};
+  const{min,max}=range;
+  let pct,withinBand=(wc>=min&&wc<=max);
+  if(withinBand){
+    pct=1;
+  }else{
+    const target=wc<min?min:max;
+    const deviation=Math.abs(wc-target)/target;
+    if(deviation<=0.10)pct=1;
+    else if(deviation<=0.30)pct=0.5;
+    else pct=Math.max(0,0.25-(deviation-0.30)*0.8);
+  }
+  const score=Math.round(pct*maxMarks*2)/2;
+  const rangeLabel=min===max?String(min):`${min}–${max}`;
+  const comment=withinBand?`${wc} words — within the ${rangeLabel} word limit. Full marks.`:
+    wc<min?`${wc} words — ${min-wc} word${min-wc===1?'':'s'} short of the ${rangeLabel} word limit.`:
+    `${wc} words — ${wc-max} word${wc-max===1?'':'s'} over the ${rangeLabel} word limit.`;
+  return{name:"Word Limit",score,max:maxMarks,comment};
+}
 async function evalWithAI(q,ans,wc,wpm){
   const d=D(),cfg=d.siteSettings||{};
   let ep="";
@@ -2215,15 +2243,19 @@ async function evalWithAI(q,ans,wc,wpm){
   if(!ep)return null;
   const tm={};d.sectionTypes.forEach(s=>tm[s.id]=s);
   const typeName=tm[q.type]?.name||q.type,max=q.marks;
-  // Distribute max marks across the 4 parameters so they sum EXACTLY to max
-  // (Math.round(max/4) reused 4x can overshoot/undershoot the real total — e.g. 15/4→4×4=16≠15)
-  const base=Math.floor(max/4),rem=max-base*4;
-  const pMax=[base+(rem>0?1:0),base+(rem>1?1:0),base+(rem>2?1:0),base];
+  // Word Limit Adherence is pure arithmetic (we already know the exact word count and limit),
+  // so it's computed deterministically below instead of asking the AI to judge it — this removes
+  // an entire class of scoring errors on something that should never be wrong.
+  // The remaining 3 parameters (genuinely subjective) split the rest of the marks between them.
+  const wlMax=Math.round(max/4);
+  const restMax=max-wlMax;
+  const base=Math.floor(restMax/3),rem=restMax-base*3;
+  const pMax=[base+(rem>0?1:0),base+(rem>1?1:0),base];
   const sys=`You are a strict, senior examiner for SBI PO / IBPS PO Mains Descriptive Paper (2026 pattern), equivalent to the marking standard used by Oliveboard and Guidely. Your scoring must be realistic, unbiased, and rigorous — the same way an actual UPSC/banking exam evaluator would mark.
 
 HARD RULES YOU MUST FOLLOW WITHOUT EXCEPTION:
 1. GIBBERISH / IRRELEVANT / BLANK answers: If the answer is blank, random characters, keyboard mashing, copy-paste of the question, or completely off-topic, award 0 across ALL parameters. Do not give any charity marks.
-2. INCOMPLETE answers (under 40% of word limit): Cap total score at 30% of max marks. Penalise heavily on Word Limit and Content.
+2. INCOMPLETE answers (under 40% of word limit): Cap total score at 30% of max marks. Penalise heavily on Content.
 3. PARTIAL answers (40–70% of word limit): Cap total score at 55% of max marks unless quality is exceptional.
 4. WRONG FORMAT (e.g. writing an essay instead of an email, missing Subject/To/Salutation in email, missing heading/date/to in report): Deduct at least 50% from Structure & Format score.
 5. LANGUAGE ERRORS: Each significant grammar/spelling error costs marks. An answer with 5+ errors cannot score more than 50% on Language & Grammar.
@@ -2242,7 +2274,7 @@ STEP 1 — VALIDITY CHECK:
 - Does the answer attempt to address the question at all? If NO → treat as gibberish.
 
 STEP 2 — SCORING (only if answer is valid):
-Score each of the 4 parameters using the exact max shown for each (they are pre-distributed to add up to ${max} total — do not change them):
+Score each of the 3 parameters below using the exact max shown for each (they are pre-distributed — do not change them). You may award scores in half-mark (0.5) increments where the answer falls between two whole-mark bands (e.g. 3.5/5) — do not round every score to a whole number if a half-mark is a more honest reflection of quality. Note: word limit adherence is scored separately by the system, not by you — ignore word count except where it genuinely reflects incomplete/rushed content:
 
 [Content & Relevance /${pMax[0]}]
 - Full marks: All key points covered with accurate, question-specific detail and banking/professional knowledge
@@ -2263,27 +2295,27 @@ Score each of the 4 parameters using the exact max shown for each (they are pre-
 - 5+ errors = max 50% of this parameter
 - Gibberish/random text = 0
 
-[Word Limit Adherence /${pMax[3]}]
-- Within ±10% of prescribed limit: full marks
-- 10–30% below limit: 50% of this parameter
-- >30% below or heavily over: 0–25% of this parameter
-- Under 20 meaningful words regardless of limit: 0
-
-STEP 3 — totalScore must equal the sum of the 4 parameter scores exactly.
+STEP 3 — totalScore must equal the sum of the 3 parameter scores exactly (may be a half-mark value, e.g. 9.5).
 
 Return ONLY this JSON:
-{"totalScore":<n>,"parameters":[{"name":"Content & Relevance","score":<n>,"max":${pMax[0]},"comment":"<specific 1-sentence critique>"},{"name":"Structure & Format","score":<n>,"max":${pMax[1]},"comment":"<specific 1-sentence critique>"},{"name":"Language & Grammar","score":<n>,"max":${pMax[2]},"comment":"<specific 1-sentence critique>"},{"name":"Word Limit","score":<n>,"max":${pMax[3]},"comment":"<state actual word count vs required and impact>"}],"strengths":["<specific strength or 'None identified' if gibberish>"],"improvements":["<specific actionable point>","<specific actionable point>","<specific actionable point>"],"overallVerdict":"<2-3 honest sentences — state clearly if answer is unacceptable, below average, average, good, or excellent and why>"}`;
+{"totalScore":<n>,"parameters":[{"name":"Content & Relevance","score":<n>,"max":${pMax[0]},"comment":"<specific 1-sentence critique>"},{"name":"Structure & Format","score":<n>,"max":${pMax[1]},"comment":"<specific 1-sentence critique>"},{"name":"Language & Grammar","score":<n>,"max":${pMax[2]},"comment":"<specific 1-sentence critique>"}],"strengths":["<specific strength or 'None identified' if gibberish>"],"improvements":["<specific actionable point>","<specific actionable point>","<specific actionable point>"],"overallVerdict":"<2-3 honest sentences — state clearly if answer is unacceptable, below average, average, good, or excellent and why>"}`;
   try{
     const res=await fetch(ep,{method:"POST",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({model:"gemini-2.5-flash-lite",max_tokens:1000,system:sys,messages:[{role:"user",content:p}]})});
     const data=await res.json();
     if(data.error)throw new Error(data.error.message);
     const result=JSON.parse(data.content.map(i=>i.text||"").join("").replace(/```json|```/g,"").trim());
-    // Never trust the model's self-reported totalScore — recompute it deterministically
-    // from the parameter scores so the displayed total always matches the breakdown.
     if(result&&Array.isArray(result.parameters)){
-      result.parameters=result.parameters.map(pr=>({...pr,score:Math.max(0,Math.min(pr.score,pr.max))}));
-      result.totalScore=result.parameters.reduce((a,pr)=>a+pr.score,0);
+      result.parameters=result.parameters.map(pr=>({...pr,score:Math.round(Math.max(0,Math.min(pr.score,pr.max))*2)/2}));
+      // If the AI's 3 judged parameters are all zero, this was flagged as gibberish/blank/off-topic —
+      // in that case word-limit compliance is meaningless, so zero it out too instead of trusting the word count.
+      const isGibberish=result.parameters.every(pr=>pr.score===0);
+      const wl=computeWordLimitScore(wc,q.wordLimit,wlMax);
+      if(isGibberish)wl.score=0;
+      result.parameters.push(wl);
+      // Never trust the model's self-reported totalScore — recompute it deterministically
+      // from the parameter scores (3 AI-judged + 1 computed) so the displayed total always matches the breakdown.
+      result.totalScore=Math.round(result.parameters.reduce((a,pr)=>a+pr.score,0)*2)/2;
     }
     return result;
   }catch(e){return null;}
