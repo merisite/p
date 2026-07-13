@@ -2286,16 +2286,23 @@ Score each of the 3 parameters below using the exact max shown for each (they ar
 [Structure & Format /${pMax[1]}]
 - For EMAIL: Must have To, Subject, Salutation, Body paragraphs, Closing, Signature. Missing any = heavy deduction.
 - For REPORT: Must have heading, date, To, Subject, body with sections, recommendation, signature. Missing = heavy deduction.
-- For SITUATION/PRECIS/ESSAY: Logical flow, paragraphing, introduction and conclusion.
+- For SITUATION/PRECIS/ESSAY: Requires visible paragraphing (introduction, body, conclusion as separate paragraphs) and logical flow.
+- CONCRETE PENALTY: If the answer is written as a single unbroken block of text with no paragraph breaks at all (for a type that requires paragraphing), this is a real structural failure, not a minor issue — cap this parameter at 50% regardless of how logical the content order is. Do not give 80%+ on this parameter to a wall-of-text answer.
 - 0 if format is completely wrong for the type.
 
 [Language & Grammar /${pMax[2]}]
-- Full marks: Formal tone, zero/near-zero errors, varied sentence structure, precise vocabulary
-- Deduct per error: spelling mistakes, wrong tense, subject-verb disagreement, informal language
-- 5+ errors = max 50% of this parameter
+- Before scoring, actively scan the answer sentence-by-sentence for: wrong articles (a/an/the), wrong prepositions, subject-verb disagreement, wrong tense, run-on/fragment sentences, informal phrasing, and repetitive short "I will X. I will Y." sentence patterns. Count every instance you find — do not skim past them.
+- Full marks (95-100%): Zero or near-zero errors, formal tone, varied sentence structure, precise vocabulary.
+- 80-90%: 1-2 minor errors only, otherwise clean and formal.
+- 60-75%: 3-4 errors, or correct but repetitive/simplistic sentence construction throughout.
+- 40-50%: 5+ errors (this is a hard ceiling — do not exceed 50% once you've counted 5 or more, even if content is otherwise fine).
+- Under 25%: 8+ errors, or informal/broken English throughout.
 - Gibberish/random text = 0
 
 STEP 3 — totalScore must equal the sum of the 3 parameter scores exactly (may be a half-mark value, e.g. 9.5).
+
+STEP 4 — CONSISTENCY CHECK (mandatory, do this before responding):
+Calculate the percentage: (totalScore ÷ ${pMax[0]+pMax[1]+pMax[2]}) × 100. Your overallVerdict's descriptive word MUST match that percentage using rule 7's bands (below average <40%, average 40-55%, good 60-75%, excellent 80-90%, near-perfect 90%+). If your verdict says "average" but your percentage is actually 80%+, that is a contradiction — it means your parameter scores are too generous for what you actually described. Go back and lower the parameter scores (especially Structure and Language, which are the easiest to over-score) until the verdict and the percentage genuinely agree. Do not fix this by simply rewording the verdict to match an inflated score.
 
 Return ONLY this JSON:
 {"totalScore":<n>,"parameters":[{"name":"Content & Relevance","score":<n>,"max":${pMax[0]},"comment":"<specific 1-sentence critique>"},{"name":"Structure & Format","score":<n>,"max":${pMax[1]},"comment":"<specific 1-sentence critique>"},{"name":"Language & Grammar","score":<n>,"max":${pMax[2]},"comment":"<specific 1-sentence critique>"}],"strengths":["<specific strength or 'None identified' if gibberish>"],"improvements":["<specific actionable point>","<specific actionable point>","<specific actionable point>"],"overallVerdict":"<2-3 honest sentences — state clearly if answer is unacceptable, below average, average, good, or excellent and why>"}`;
