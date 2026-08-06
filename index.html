@@ -1253,7 +1253,14 @@ document.addEventListener("fullscreenchange",()=>{
   });
 });
 function closeCov(){document.getElementById("exit-cov").classList.remove("open");exitDest=null;}
-function doExit(){clearInterval(TI);clearInterval(WI);document.getElementById("exit-cov").classList.remove("open");if(exitDest)showS(exitDest);exitDest=null;}
+function doExit(){
+  clearInterval(TI);clearInterval(WI);
+  document.getElementById("exit-cov").classList.remove("open");
+  if(document.fullscreenElement){
+    (document.exitFullscreen?.()||Promise.resolve()).catch(()=>{});
+  }
+  if(exitDest)showS(exitDest);exitDest=null;
+}
 function setT(id,v){const e=document.getElementById(id);if(e&&v)e.textContent=v;}
 // Deterministic PRNG (mulberry32) so the same seed always produces the same shuffle order —
 // this is what lets all visitors within the same hour see the same order, and lets it change
@@ -1502,7 +1509,13 @@ function showInstr(cfg){
   showS("instr",{skipHash:true});
 }
 function cancelInstr(){showS(_instrReturnTo,{skipHash:true});}
-function confirmInstr(){const fn=_instrOnStart;_instrOnStart=null;if(fn)fn();}
+function confirmInstr(){
+  const fn=_instrOnStart;_instrOnStart=null;
+  if(!document.fullscreenElement){
+    (document.documentElement.requestFullscreen?.()||Promise.resolve()).catch(()=>{});
+  }
+  if(fn)fn();
+}
 function launchExam(qid){
   const d=D();const q=d.questions.find(x=>x.id===qid);if(!q)return;
   const tm={};d.sectionTypes.forEach(s=>tm[s.id]=s);const sec=tm[q.type]||{};
@@ -2062,6 +2075,9 @@ function updateMockSubmitGuard(){
 }
 /* submitMock moved to progress system below */
 function showResult(ans,wc,wpm,taken){
+  if(document.fullscreenElement){
+    (document.exitFullscreen?.()||Promise.resolve()).catch(()=>{});
+  }
   // Single section practice
   document.getElementById("r-single").style.display="";
   document.getElementById("r-mock").style.display="none";
