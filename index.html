@@ -472,7 +472,7 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
   --coral:#B3562E;--coraldim:#F6E9E1;--coralborder:#1C2A47;
   --ch:rgba(226,183,20,.12);
   --shadow:2px 2px 0 color-mix(in srgb,var(--b) 45%,transparent);
-  --dotbg:radial-gradient(rgba(22,33,58,.09) 1px,transparent 1px);
+  --dotbg:radial-gradient(rgba(22,33,58,.16) 1px,transparent 1px);
 }
 [data-mode="dark"] :is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,.cov,.panel-pop){
   --bg:#0F1420;--bg2:#161C27;--bg3:#1C2333;--bg4:#232D40;
@@ -485,7 +485,7 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
   --coral:#E08A6B;--coraldim:#2E2018;--coralborder:#C7D0E0;
   --ch:rgba(226,183,20,.08);
   --shadow:2px 2px 0 color-mix(in srgb,var(--b) 35%,transparent);
-  --dotbg:radial-gradient(rgba(199,208,224,.09) 1px,transparent 1px);
+  --dotbg:radial-gradient(rgba(199,208,224,.16) 1px,transparent 1px);
 }
 [data-mode="light"]{--brut-fill:#E2B714;--brut-fill-t:#16213A;--brut-tint:#F5E9C7;}
 [data-mode="dark"]{--brut-fill:#E2B714;--brut-fill-t:#12151C;--brut-tint:#2E2712;}
@@ -889,6 +889,7 @@ header .h-brand:hover{background:var(--brut-tint);}
       <div class="rcard"><div class="rcard-h">Your Answer</div><div class="rcard-b"><div class="ans-box" id="r-ans"></div></div></div>
       <div class="rcard"><div class="rcard-h">AI Feedback</div><div class="rcard-b"><div id="r-ai"><div class="loading-row"><div class="spin"></div>Evaluating...</div></div></div></div>
       <div class="rcard"><div class="rcard-h">✓ Model Answer</div><div class="rcard-b"><div class="model-box" id="r-model"></div></div></div>
+      <div class="rcard" id="r-history-card" style="display:none"><div class="rcard-h">Your Previous Attempts</div><div class="rcard-b"><div id="r-history"></div></div></div>
     </div>
     <!-- Full mock result -->
     <div id="r-mock" style="display:none">
@@ -986,7 +987,7 @@ header .h-brand:hover{background:var(--brut-tint);}
 <script>
 function D(){try{return JSON.parse(localStorage.getItem("dpt_data"))||DD();}catch(e){return DD();}}
 function DD(){return{siteSettings:{name:"Descriptive Prep Today",tagline:"",tgLink:"",tgText:"Join Telegram",logoUrl:"",logoUrlDark:"",logoUrlLight:"",accentColor:"",fontFamily:"Inter",fontSize:15,apiProxy:"",homeEyebrow:"Free Practice Platform",homeTitle:"SBI PO Descriptive\nPractice 2026",homeSub:"Exam-pattern interface · AI evaluation · Model answers · Typing speed tracker",practiceSectionLabel:"Practice Section",toolsLabel:"Tools",typingCardTitle:"Typing Speed Test",typingCardDesc:"Check your WPM and accuracy with a countdown timer",typingHeading:"Typing Speed Test",typingSubhead:"Test your WPM and accuracy before the exam",tgStripTitle:"Get daily questions on Telegram",tgStripSub:"Free PDFs, updates and practice material",marqueeText:"★ Descriptive Practice ★ AI Evaluation ★ Model Answers ★ Typing Speed Test ★ Exam-Pattern Interface ★",marqueeSpeed:26,offersMsg:"Support this channel — purchase any course using my coupon code. It helps me keep this platform free for everyone!"},sectionTypes:[{id:"email",name:"Email Writing",wordLimit:"150-200 words",marks:20,timer:10,noTimer:true},{id:"situation",name:"Situation Analysis",wordLimit:"100-150 words",marks:15,timer:10,noTimer:true},{id:"report",name:"Report Writing",wordLimit:"100-150 words",marks:15,timer:10,noTimer:true},{id:"precis",name:"Precis Writing",wordLimit:"~1/3rd of passage",marks:15,timer:10,noTimer:true}],exams:[{id:"sbi_po",name:"SBI PO Mains 2026",duration:30,status:"active",desc:"Email, Situation Analysis, Report, Precis",sections:["email","situation","report","precis"]}],typingParas:["Financial inclusion remains one of the most pressing developmental challenges facing India today. Despite significant progress over the past decade, a large section of the population continues to lack access to formal banking services. The Pradhan Mantri Jan Dhan Yojana has been a landmark initiative bringing millions of unbanked households into the formal financial fold.","The Reserve Bank of India plays a pivotal role in maintaining monetary stability and regulating the banking sector. Its primary objectives include controlling inflation, managing foreign exchange reserves, and ensuring the smooth functioning of the payment and settlement system. The RBI also acts as the banker to the government."],offers:[],questions:[{id:"q1",examId:"sbi_po",type:"email",text:"You are a PO at SBI, Connaught Place Branch. A customer Mr. Ramesh Gupta has complained that his net banking access has been blocked for 3 days. Write a formal email explaining the reason (scheduled server maintenance) and the resolution timeline.",wordLimit:"150-200 words",marks:20,difficulty:"medium",modelAnswer:"To: ramesh.gupta@email.com\nSubject: Resolution of Net Banking Access Issue\n\nDear Mr. Gupta,\n\nI sincerely apologise for the disruption to your net banking services. The temporary suspension was due to scheduled server maintenance from 14th to 16th June 2026. Your access has been fully restored.\n\nPlease reset your password via Forgot Password if you face any difficulty. For assistance call 1800-11-2211.\n\nYours sincerely,\n[Your Name]\nProbationary Officer, SBI",active:true},{id:"q2",examId:"sbi_po",type:"situation",text:"You are a PO at a semi-urban SBI branch. Mrs. Kamla Devi (72) reports she shared her OTP with a fraudster and Rs 45,000 was debited. She is in tears. Describe your immediate steps.",wordLimit:"100-150 words",marks:15,difficulty:"medium",modelAnswer:"I would calm Mrs. Kamla Devi and offer her a seat. I would immediately block her debit card and help her call 1800-11-2211 to report the fraud. I would assist in filing a branch complaint and guide her to cybercrime.gov.in. I would explain the RBI Zero Liability policy and educate her about never sharing OTPs with anyone.",active:true},{id:"q3",examId:"sbi_po",type:"report",text:"You participated in a Financial Literacy Camp in village Rampur on 5th June 2026. Write a formal report to your Branch Manager covering objectives, activities, attendance, outcomes and recommendations.",wordLimit:"100-150 words",marks:15,difficulty:"easy",modelAnswer:"REPORT ON FINANCIAL LITERACY CAMP - RAMPUR\n\nDate: 6th June 2026\nTo: Branch Manager, SBI\n\nA camp was held at Gram Panchayat Hall on 5th June 2026. Topics: PMJDY, RuPay card, UPI, fraud awareness. 180 villagers attended; 42 new accounts opened.\n\nRecommendation: Continue monthly camps and deploy a Business Correspondent.\n\n[Your Name] | PO",active:true},{id:"q4",examId:"sbi_po",type:"precis",text:"Read the following passage and write a precis in approximately 100 words.\n\nFinancial inclusion remains one of the most pressing challenges facing India. Despite PMJDY bringing millions into formal banking, merely opening accounts does not guarantee meaningful inclusion. The real challenge lies in ensuring accounts are actively used for credit, savings, insurance and remittances. Financial literacy, digital infrastructure and trust in banking institutions must be strengthened simultaneously.",wordLimit:"~100 words",marks:15,difficulty:"easy",modelAnswer:"Financial inclusion remains a major challenge in India. While PMJDY has brought millions into the banking system, account ownership alone is insufficient. True inclusion requires active usage for savings, credit, insurance and transfers. Achieving this depends on strengthening financial literacy, expanding digital infrastructure and building public trust in banking institutions.",active:true}]}};
-let CQ=null,TI=null,WI=null,tLeft=0,tTotal=0,tStart=null,tyStarted=false,tMode="default";
+let CQ=null,TI=null,WI=null,tLeft=0,tTotal=0,tStart=null,tyStarted=false,tMode="default",_draftSaveTimer=null;
 let MS={s:[],a:{},idx:0,st:null,mr:{}},exitDest=null;
 let tyMode="given",tyPara="",tyLim=120,tyStart=null,tyInterval=null,tyDone=false,tyTStarted=false,tLeft2=0;
 const EX=()=>{try{const d=D();return d.exams.find(e=>e.status==="active")||d.exams[0];}catch(e){return null;}};
@@ -1535,6 +1536,31 @@ function launchExam(qid){
     onStart:()=>launchExamReal(qid)
   });
 }
+function saveDraft(qid,text){
+  if(!qid)return;
+  try{localStorage.setItem('dpt_draft_'+qid,JSON.stringify({text:text,savedAt:Date.now()}));}catch(e){}
+}
+function getDraft(qid){
+  if(!qid)return null;
+  try{return JSON.parse(localStorage.getItem('dpt_draft_'+qid));}catch(e){return null;}
+}
+function clearDraft(qid){
+  if(!qid)return;
+  try{localStorage.removeItem('dpt_draft_'+qid);}catch(e){}
+}
+function showToast(msg){
+  let el=document.getElementById('dpt-toast');
+  if(!el){
+    el=document.createElement('div');
+    el.id='dpt-toast';
+    el.style.cssText='position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--t,#1D1D1F);color:var(--bg,#fff);font-size:.8rem;font-family:var(--font,Inter),sans-serif;padding:10px 18px;border-radius:999px;z-index:9999;opacity:0;transition:opacity .25s ease,transform .25s ease;pointer-events:none;box-shadow:0 4px 16px rgba(0,0,0,.25);';
+    document.body.appendChild(el);
+  }
+  el.textContent=msg;
+  clearTimeout(el._hideTimer);
+  requestAnimationFrame(function(){el.style.opacity='1';el.style.transform='translateX(-50%) translateY(0)';});
+  el._hideTimer=setTimeout(function(){el.style.opacity='0';el.style.transform='translateX(-50%) translateY(20px)';},3000);
+}
 function launchExamReal(qid){
   const d=D();CQ=d.questions.find(q=>q.id===qid);if(!CQ)return;
   const tm={};d.sectionTypes.forEach(s=>tm[s.id]=s);const sec=tm[CQ.type]||{timer:10};
@@ -1544,9 +1570,19 @@ function launchExamReal(qid){
   document.getElementById("exam-qtext").textContent=CQ.text;
   document.getElementById("exam-qmeta").innerHTML=`<span class="chip">${CQ.wordLimit}</span><span class="chip">${CQ.marks} marks</span>`;
   const ta=document.getElementById("exam-ta");ta.value="";tyStarted=false;tStart=null;autoGrow(ta);
-  // Reset practice sidebar status
+  // Restore autosaved draft, if one exists for this question
+  const _draft=getDraft(qid);
+  if(_draft&&_draft.text&&_draft.text.trim()){
+    ta.value=_draft.text;
+    autoGrow(ta);
+    showToast("Draft restored from your last visit");
+  }
+  // Reset practice sidebar status (reflects restored draft content, if any)
   const badge=document.getElementById("ps-status-badge");const lbl=document.getElementById("ps-status-lbl");const qbtn=document.getElementById("ps-qbtn");
-  if(badge){badge.className="es-badge orange";}if(lbl){lbl.innerHTML="Not<br>Answered";}if(qbtn){qbtn.className="es-qbtn es-current es-notdone";}
+  const _hasDraftContent=ta.value.trim().length>0;
+  if(badge){badge.className=_hasDraftContent?"es-badge green":"es-badge orange";}
+  if(lbl){lbl.innerHTML=_hasDraftContent?"Answered":"Not<br>Answered";}
+  if(qbtn){qbtn.className=_hasDraftContent?"es-qbtn es-current es-answered":"es-qbtn es-current es-notdone";}
   // Reset submit guard for new question
   const _sb=document.getElementById("exam-submit-btn");
   const _sh=document.getElementById("exam-submit-hint");
@@ -1561,6 +1597,8 @@ function launchExamReal(qid){
     if(!tyStarted){tyStarted=true;tStart=Date.now();}
     updWC("exam-ta","exam-wc","exam-wc-top","exam-pwc");
     calcWPM("exam-ta","exam-wpm");
+    clearTimeout(_draftSaveTimer);
+    _draftSaveTimer=setTimeout(()=>saveDraft(qid,ta.value),1200);
     // Update practice side badge
     const wc=ta.value.trim().split(/\s+/).filter(Boolean).length;
     const badge=document.getElementById("ps-status-badge");
@@ -2090,6 +2128,7 @@ function showResult(ans,wc,wpm,taken){
   document.getElementById("r-score").textContent="...";
   document.getElementById("r-ans").textContent=ans||"(No answer submitted)";
   document.getElementById("r-model").textContent=CQ?.modelAnswer||"";
+  renderQuestionHistory(CQ?.id);
   document.getElementById("r-ai").innerHTML='<div class="loading-row"><div class="spin"></div>Evaluating...</div>';
 }
 function showMockResult(taken){
@@ -2690,6 +2729,25 @@ function updateProgCard(){
 }
 
 /* ---- Hook: Practice submit ---- */
+function renderQuestionHistory(qid){
+  const card=document.getElementById('r-history-card');
+  const wrap=document.getElementById('r-history');
+  if(!card||!wrap)return;
+  if(!qid){card.style.display='none';return;}
+  const list=getProgress().filter(function(x){return x.kind==='practice'&&x.questionId===qid;});
+  if(!list.length){card.style.display='none';return;}
+  const recent=list.slice(0,3);
+  card.style.display='';
+  wrap.innerHTML=recent.map(function(e,i){
+    const d=new Date(e.date);
+    const dateStr=d.toLocaleDateString(undefined,{day:'numeric',month:'short'})+' · '+d.toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit'});
+    const border=i<recent.length-1?'border-bottom:1px solid var(--b);':'';
+    return '<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;'+border+'">'+
+      '<div><div style="font-size:.78rem;color:var(--t2)">'+dateStr+'</div><div style="font-size:.72rem;color:var(--t3);margin-top:2px">'+(e.wc||0)+' words · '+(e.wpm||0)+' WPM</div></div>'+
+      '<div style="font-family:var(--mono);font-weight:700;font-size:.95rem;color:var(--accent)">'+(e.score||'-')+'</div>'+
+    '</div>';
+  }).join('');
+}
 async function submitSingle(){
   // ── Guard: minimum word check before ANY API call fires ──
   const _ans_raw = document.getElementById('exam-ta').value.trim();
@@ -2714,6 +2772,7 @@ async function submitSingle(){
   }
   clearInterval(TI);clearInterval(WI);
   const ans = document.getElementById('exam-ta').value.trim();
+  clearDraft(CQ?.id);
   const taken = tTotal>0 ? tTotal-tLeft : Math.round((Date.now()-(tStart||Date.now()))/1000);
   const wc = cw(ans), el2 = tyStarted&&tStart ? (Date.now()-tStart)/60000 : 1, wpm2 = el2>0 ? Math.round(wc/el2) : 0;
   showResult(ans,wc,wpm2,taken); showS('result');
