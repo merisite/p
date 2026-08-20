@@ -319,6 +319,7 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .rcard-b{padding:14px}
 .ans-box{background:var(--bg3);border:1px solid var(--b);border-radius:var(--rs);padding:11px;font-size:.8rem;line-height:1.75;white-space:pre-wrap;color:var(--t2)}
 .model-box{background:var(--bg3);border:1px solid var(--gborder);border-left:3px solid var(--green);border-radius:var(--rs);padding:11px;font-size:.8rem;line-height:1.8;white-space:pre-wrap}
+.wl-mark{background:var(--adim);color:var(--accent);padding:0 3px;border-radius:3px;font-weight:600;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
 .loading-row{display:flex;align-items:center;gap:8px;color:var(--t2);font-size:.8rem;padding:12px 0}
 .spin{width:15px;height:15px;border:2px solid var(--b);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -662,12 +663,31 @@ header .tg-hbtn:hover{background:var(--brut-fill);color:var(--brut-fill-t);borde
 header .btn{font-family:'Space Grotesk',sans-serif;font-weight:700;text-transform:uppercase;border:2px solid var(--b);border-radius:8px;}
 header .h-brand:hover{background:var(--brut-tint);}
 .panel-pop .t-choice.on{border-color:var(--b);background:var(--brut-tint);}
-
+/* ── Festive themes (admin-toggleable, homepage hero only, subtle by design) ── */
+.festive-layer{position:absolute;top:0;left:0;right:0;height:260px;overflow:hidden;pointer-events:none;z-index:1;}
+.festive-layer .fp{position:absolute;top:-24px;border-radius:50%;opacity:.55;animation:festiveFall linear infinite;}
+.festive-layer .fp.spark{border-radius:50%;animation:festiveTwinkle ease-in-out infinite;opacity:0;}
+@keyframes festiveFall{
+  0%{transform:translateY(0) translateX(0) rotate(0deg);opacity:0;}
+  8%{opacity:.55;}
+  100%{transform:translateY(280px) translateX(var(--drift,12px)) rotate(180deg);opacity:0;}
+}
+@keyframes festiveTwinkle{
+  0%,100%{opacity:0;transform:scale(.6);}
+  50%{opacity:.7;transform:scale(1.15);}
+}
+.festive-tricolor-bar{position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#FF9933 0 33.33%,#FFFFFF 33.33% 66.66%,#138808 66.66% 100%);opacity:.85;z-index:2;}
+#festive-hat{display:none;align-items:center;margin-right:3px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.18));flex-shrink:0;}
+#festive-hat svg{display:block;}
+@media(prefers-reduced-motion:reduce){
+  .festive-layer .fp{animation:none!important;opacity:0!important;}
+}
 </style>
 </head>
 <body>
 <header>
   <a class="h-brand" id="h-brand" onclick="handleBrand(event)" href="#">
+    <span id="festive-hat" style="display:none"></span>
     <img id="site-logo" class="site-logo" src="" alt="logo"/>
     <span class="site-name" id="site-name">
       <span class="site-name-top">Descriptive</span>
@@ -717,6 +737,7 @@ header .h-brand:hover{background:var(--brut-tint);}
   </div>
 </div>
 <div id="home" class="screen active" style="visibility:hidden">
+  <div id="festive-layer" class="festive-layer" aria-hidden="true"></div>
   <div class="eyebrow" id="h-eyebrow">Free Practice Platform</div>
   <h1 class="h-title" id="h-title">SBI PO Descriptive<br>Practice 2026</h1>
   <p class="h-sub" id="h-sub">Exam-pattern interface · AI evaluation · Model answers · Typing speed tracker</p>
@@ -888,8 +909,10 @@ header .h-brand:hover{background:var(--brut-tint);}
         <div class="stile"><div class="stile-v" id="r-wpm">-</div><div class="stile-l">WPM</div></div>
         <div class="stile"><div class="stile-v" id="r-time">-</div><div class="stile-l">Time</div></div>
       </div>
+      <div class="rcard"><div class="rcard-h">Question</div><div class="rcard-b"><div class="model-box" id="r-question" style="border-left-color:var(--accent)"></div></div></div>
       <div class="rcard"><div class="rcard-h">Your Answer</div><div class="rcard-b"><div class="ans-box" id="r-ans"></div></div></div>
       <div class="rcard"><div class="rcard-h">AI Feedback</div><div class="rcard-b"><div id="r-ai"><div class="loading-row"><div class="spin"></div>Evaluating...</div></div></div></div>
+      <div class="rcard" id="r-corrected-card" style="display:none"><div class="rcard-h">Your Answer, Corrected</div><div class="rcard-b"><div id="r-corrected"></div></div></div>
       <div class="rcard"><div class="rcard-h">✓ Model Answer</div><div class="rcard-b"><div class="model-box" id="r-model"></div></div></div>
       <div class="rcard" id="r-history-card" style="display:none"><div class="rcard-h">Your Previous Attempts</div><div class="rcard-b"><div id="r-history"></div></div></div>
     </div>
@@ -988,7 +1011,7 @@ header .h-brand:hover{background:var(--brut-tint);}
 </div>
 <script>
 function D(){try{return JSON.parse(localStorage.getItem("dpt_data"))||DD();}catch(e){return DD();}}
-function DD(){return{siteSettings:{name:"Descriptive Prep Today",tagline:"",tgLink:"",tgText:"Join Telegram",logoUrl:"",logoUrlDark:"",logoUrlLight:"",accentColor:"",fontFamily:"Inter",fontSize:15,apiProxy:"",homeEyebrow:"Free Practice Platform",homeTitle:"SBI PO Descriptive\nPractice 2026",homeSub:"Exam-pattern interface · AI evaluation · Model answers · Typing speed tracker",practiceSectionLabel:"Practice Section",toolsLabel:"Tools",typingCardTitle:"Typing Speed Test",typingCardDesc:"Check your WPM and accuracy with a countdown timer",typingHeading:"Typing Speed Test",typingSubhead:"Test your WPM and accuracy before the exam",tgStripTitle:"Get daily questions on Telegram",tgStripSub:"Free PDFs, updates and practice material",marqueeText:"★ Descriptive Practice ★ AI Evaluation ★ Model Answers ★ Typing Speed Test ★ Exam-Pattern Interface ★",marqueeSpeed:26,offersMsg:"Support this channel — purchase any course using my coupon code. It helps me keep this platform free for everyone!"},sectionTypes:[{id:"email",name:"Email Writing",wordLimit:"150-200 words",marks:20,timer:10,noTimer:true},{id:"situation",name:"Situation Analysis",wordLimit:"100-150 words",marks:15,timer:10,noTimer:true},{id:"report",name:"Report Writing",wordLimit:"100-150 words",marks:15,timer:10,noTimer:true},{id:"precis",name:"Precis Writing",wordLimit:"~1/3rd of passage",marks:15,timer:10,noTimer:true}],exams:[{id:"sbi_po",name:"SBI PO Mains 2026",duration:30,status:"active",desc:"Email, Situation Analysis, Report, Precis",sections:["email","situation","report","precis"]}],typingParas:["Financial inclusion remains one of the most pressing developmental challenges facing India today. Despite significant progress over the past decade, a large section of the population continues to lack access to formal banking services. The Pradhan Mantri Jan Dhan Yojana has been a landmark initiative bringing millions of unbanked households into the formal financial fold.","The Reserve Bank of India plays a pivotal role in maintaining monetary stability and regulating the banking sector. Its primary objectives include controlling inflation, managing foreign exchange reserves, and ensuring the smooth functioning of the payment and settlement system. The RBI also acts as the banker to the government."],offers:[],questions:[{id:"q1",examId:"sbi_po",type:"email",text:"You are a PO at SBI, Connaught Place Branch. A customer Mr. Ramesh Gupta has complained that his net banking access has been blocked for 3 days. Write a formal email explaining the reason (scheduled server maintenance) and the resolution timeline.",wordLimit:"150-200 words",marks:20,difficulty:"medium",modelAnswer:"To: ramesh.gupta@email.com\nSubject: Resolution of Net Banking Access Issue\n\nDear Mr. Gupta,\n\nI sincerely apologise for the disruption to your net banking services. The temporary suspension was due to scheduled server maintenance from 14th to 16th June 2026. Your access has been fully restored.\n\nPlease reset your password via Forgot Password if you face any difficulty. For assistance call 1800-11-2211.\n\nYours sincerely,\n[Your Name]\nProbationary Officer, SBI",active:true},{id:"q2",examId:"sbi_po",type:"situation",text:"You are a PO at a semi-urban SBI branch. Mrs. Kamla Devi (72) reports she shared her OTP with a fraudster and Rs 45,000 was debited. She is in tears. Describe your immediate steps.",wordLimit:"100-150 words",marks:15,difficulty:"medium",modelAnswer:"I would calm Mrs. Kamla Devi and offer her a seat. I would immediately block her debit card and help her call 1800-11-2211 to report the fraud. I would assist in filing a branch complaint and guide her to cybercrime.gov.in. I would explain the RBI Zero Liability policy and educate her about never sharing OTPs with anyone.",active:true},{id:"q3",examId:"sbi_po",type:"report",text:"You participated in a Financial Literacy Camp in village Rampur on 5th June 2026. Write a formal report to your Branch Manager covering objectives, activities, attendance, outcomes and recommendations.",wordLimit:"100-150 words",marks:15,difficulty:"easy",modelAnswer:"REPORT ON FINANCIAL LITERACY CAMP - RAMPUR\n\nDate: 6th June 2026\nTo: Branch Manager, SBI\n\nA camp was held at Gram Panchayat Hall on 5th June 2026. Topics: PMJDY, RuPay card, UPI, fraud awareness. 180 villagers attended; 42 new accounts opened.\n\nRecommendation: Continue monthly camps and deploy a Business Correspondent.\n\n[Your Name] | PO",active:true},{id:"q4",examId:"sbi_po",type:"precis",text:"Read the following passage and write a precis in approximately 100 words.\n\nFinancial inclusion remains one of the most pressing challenges facing India. Despite PMJDY bringing millions into formal banking, merely opening accounts does not guarantee meaningful inclusion. The real challenge lies in ensuring accounts are actively used for credit, savings, insurance and remittances. Financial literacy, digital infrastructure and trust in banking institutions must be strengthened simultaneously.",wordLimit:"~100 words",marks:15,difficulty:"easy",modelAnswer:"Financial inclusion remains a major challenge in India. While PMJDY has brought millions into the banking system, account ownership alone is insufficient. True inclusion requires active usage for savings, credit, insurance and transfers. Achieving this depends on strengthening financial literacy, expanding digital infrastructure and building public trust in banking institutions.",active:true}]}};
+function DD(){return{siteSettings:{name:"Descriptive Prep Today",tagline:"",tgLink:"",tgText:"Join Telegram",logoUrl:"",logoUrlDark:"",logoUrlLight:"",accentColor:"",fontFamily:"Inter",fontSize:15,apiProxy:"",homeEyebrow:"Free Practice Platform",homeTitle:"SBI PO Descriptive\nPractice 2026",homeSub:"Exam-pattern interface · AI evaluation · Model answers · Typing speed tracker",practiceSectionLabel:"Practice Section",toolsLabel:"Tools",typingCardTitle:"Typing Speed Test",typingCardDesc:"Check your WPM and accuracy with a countdown timer",typingHeading:"Typing Speed Test",typingSubhead:"Test your WPM and accuracy before the exam",tgStripTitle:"Get daily questions on Telegram",tgStripSub:"Free PDFs, updates and practice material",marqueeText:"★ Descriptive Practice ★ AI Evaluation ★ Model Answers ★ Typing Speed Test ★ Exam-Pattern Interface ★",marqueeSpeed:26,festiveTheme:"none",offersMsg:"Support this channel — purchase any course using my coupon code. It helps me keep this platform free for everyone!"},sectionTypes:[{id:"email",name:"Email Writing",wordLimit:"150-200 words",marks:20,timer:10,noTimer:true},{id:"situation",name:"Situation Analysis",wordLimit:"100-150 words",marks:15,timer:10,noTimer:true},{id:"report",name:"Report Writing",wordLimit:"100-150 words",marks:15,timer:10,noTimer:true},{id:"precis",name:"Precis Writing",wordLimit:"~1/3rd of passage",marks:15,timer:10,noTimer:true}],exams:[{id:"sbi_po",name:"SBI PO Mains 2026",duration:30,status:"active",desc:"Email, Situation Analysis, Report, Precis",sections:["email","situation","report","precis"]}],typingParas:["Financial inclusion remains one of the most pressing developmental challenges facing India today. Despite significant progress over the past decade, a large section of the population continues to lack access to formal banking services. The Pradhan Mantri Jan Dhan Yojana has been a landmark initiative bringing millions of unbanked households into the formal financial fold.","The Reserve Bank of India plays a pivotal role in maintaining monetary stability and regulating the banking sector. Its primary objectives include controlling inflation, managing foreign exchange reserves, and ensuring the smooth functioning of the payment and settlement system. The RBI also acts as the banker to the government."],offers:[],questions:[{id:"q1",examId:"sbi_po",type:"email",text:"You are a PO at SBI, Connaught Place Branch. A customer Mr. Ramesh Gupta has complained that his net banking access has been blocked for 3 days. Write a formal email explaining the reason (scheduled server maintenance) and the resolution timeline.",wordLimit:"150-200 words",marks:20,difficulty:"medium",modelAnswer:"To: ramesh.gupta@email.com\nSubject: Resolution of Net Banking Access Issue\n\nDear Mr. Gupta,\n\nI sincerely apologise for the disruption to your net banking services. The temporary suspension was due to scheduled server maintenance from 14th to 16th June 2026. Your access has been fully restored.\n\nPlease reset your password via Forgot Password if you face any difficulty. For assistance call 1800-11-2211.\n\nYours sincerely,\n[Your Name]\nProbationary Officer, SBI",active:true},{id:"q2",examId:"sbi_po",type:"situation",text:"You are a PO at a semi-urban SBI branch. Mrs. Kamla Devi (72) reports she shared her OTP with a fraudster and Rs 45,000 was debited. She is in tears. Describe your immediate steps.",wordLimit:"100-150 words",marks:15,difficulty:"medium",modelAnswer:"I would calm Mrs. Kamla Devi and offer her a seat. I would immediately block her debit card and help her call 1800-11-2211 to report the fraud. I would assist in filing a branch complaint and guide her to cybercrime.gov.in. I would explain the RBI Zero Liability policy and educate her about never sharing OTPs with anyone.",active:true},{id:"q3",examId:"sbi_po",type:"report",text:"You participated in a Financial Literacy Camp in village Rampur on 5th June 2026. Write a formal report to your Branch Manager covering objectives, activities, attendance, outcomes and recommendations.",wordLimit:"100-150 words",marks:15,difficulty:"easy",modelAnswer:"REPORT ON FINANCIAL LITERACY CAMP - RAMPUR\n\nDate: 6th June 2026\nTo: Branch Manager, SBI\n\nA camp was held at Gram Panchayat Hall on 5th June 2026. Topics: PMJDY, RuPay card, UPI, fraud awareness. 180 villagers attended; 42 new accounts opened.\n\nRecommendation: Continue monthly camps and deploy a Business Correspondent.\n\n[Your Name] | PO",active:true},{id:"q4",examId:"sbi_po",type:"precis",text:"Read the following passage and write a precis in approximately 100 words.\n\nFinancial inclusion remains one of the most pressing challenges facing India. Despite PMJDY bringing millions into formal banking, merely opening accounts does not guarantee meaningful inclusion. The real challenge lies in ensuring accounts are actively used for credit, savings, insurance and remittances. Financial literacy, digital infrastructure and trust in banking institutions must be strengthened simultaneously.",wordLimit:"~100 words",marks:15,difficulty:"easy",modelAnswer:"Financial inclusion remains a major challenge in India. While PMJDY has brought millions into the banking system, account ownership alone is insufficient. True inclusion requires active usage for savings, credit, insurance and transfers. Achieving this depends on strengthening financial literacy, expanding digital infrastructure and building public trust in banking institutions.",active:true}]}};
 let CQ=null,TI=null,WI=null,tLeft=0,tTotal=0,tStart=null,tyStarted=false,tMode="default",_draftSaveTimer=null;
 let MS={s:[],a:{},idx:0,st:null,mr:{}},exitDest=null;
 let tyMode="given",tyPara="",tyLim=120,tyStart=null,tyInterval=null,tyDone=false,tyTStarted=false,tLeft2=0;
@@ -1035,6 +1058,7 @@ async function init(){
         tgStripSub:   es.tgStripSub   || bs.tgStripSub   || "Free PDFs, updates and practice material",
         marqueeText:  es.marqueeText  || bs.marqueeText  || "★ Descriptive Practice ★ AI Evaluation ★ Model Answers ★ Typing Speed Test ★ Exam-Pattern Interface ★",
         marqueeSpeed: parseInt(es.marqueeSpeed || bs.marqueeSpeed || 26),
+        festiveTheme: es.festiveTheme || bs.festiveTheme || "none",
         offersMsg:    es.offersMsg    || bs.offersMsg    || "",
       }
     };
@@ -1381,10 +1405,63 @@ function updateSiteName(name){
   const fw=document.getElementById("footer-wordmark");
   if(fw)fw.textContent=name||"Descriptive PrepToday";
 }
+const FESTIVE_ICONS={
+  diya:'<svg width="17" height="17" viewBox="0 0 24 24"><path d="M3.5 15.5c0 3.3 3.8 5.5 8.5 5.5s8.5-2.2 8.5-5.5c0-1.6-1.6-2.5-1.6-2.5H5.1s-1.6.9-1.6 2.5z" fill="#C9750A"/><ellipse cx="12" cy="15.5" rx="6.5" ry="2.2" fill="#FFB74D"/><path d="M12 4.5c-1.7 2.3-2.3 4-2.3 5.5a2.3 2.3 0 004.6 0c0-1.5-.6-3.2-2.3-5.5z" fill="#FF6B35"/><path d="M12 8.2c-.8 1.1-1.1 2-1.1 2.8a1.1 1.1 0 002.2 0c0-.8-.3-1.7-1.1-2.8z" fill="#FFD54F"/></svg>',
+  santahat:'<svg width="17" height="17" viewBox="0 0 24 24"><path d="M4.5 19.5C7 10.5 12.5 5 19 6.5c-2 2.3-2.7 5.3-1.5 9-6-1.8-10.8 1-13 4z" fill="#D6382C"/><circle cx="19.2" cy="6.3" r="2.3" fill="#F5F5F5"/><path d="M3.5 19.3a2 2 0 002 2.2h13a2 2 0 002-1.8" fill="none" stroke="#F5F5F5" stroke-width="3" stroke-linecap="round"/></svg>',
+  crescent:'<svg width="17" height="17" viewBox="0 0 24 24"><path d="M15.8 3.5a8.5 8.5 0 100 17 7.3 7.3 0 010-17z" fill="#00A86B"/><path d="M18.3 8.3l.8 1.9 1.9.8-1.9.8-.8 1.9-.8-1.9-1.9-.8 1.9-.8z" fill="#FFD700"/></svg>',
+  rakhi:'<svg width="17" height="17" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="#D6382C" stroke-width="2.4"/><circle cx="12" cy="12" r="4.2" fill="#FFD700"/><circle cx="12" cy="12" r="1.7" fill="#D6382C"/><path d="M12 4v-2M12 22v-2M4 12H2M22 12h-2" stroke="#FF9933" stroke-width="1.6" stroke-linecap="round"/></svg>',
+  kite:'<svg width="17" height="17" viewBox="0 0 24 24"><path d="M12 2.5l7.5 9L12 21 4.5 11.5z" fill="#FFC107"/><path d="M12 2.5l7.5 9H12z" fill="#FF9933"/><path d="M12 2.5v18.5" stroke="#4CAF50" stroke-width="1"/><path d="M12 21l3.5 3M12 21l-3.5 3" stroke="#4CAF50" stroke-width="1.6" stroke-linecap="round"/></svg>',
+};
+const FESTIVE_THEMES={
+  tricolor:{type:'bar'},
+  holi:{type:'dots',colors:['#FF4D6D','#FFC107','#4CAF50','#2196F3','#E040FB','#FF7043'],size:[5,9],count:12},
+  diwali:{type:'spark',colors:['#FFD700','#FFA500','#FFEB99'],size:[4,7],count:8,icon:'diya'},
+  christmas:{type:'dots',colors:['#FFFFFF','#E8F4FF'],size:[4,7],count:14,icon:'santahat'},
+  newyear:{type:'dots',colors:['#FFD700','#FFFFFF','#C0C0C0','#E2B714'],size:[4,8],count:12},
+  eid:{type:'spark',colors:['#00A86B','#FFD700','#E8F5E9'],size:[4,7],count:8,icon:'crescent'},
+  rakhi:{type:'dots',colors:['#D6382C','#FFD700','#FF9933'],size:[4,7],count:10,icon:'rakhi'},
+  ganesh:{type:'dots',colors:['#FF9933','#D6382C','#FFD700'],size:[4,8],count:10},
+  navratri:{type:'dots',colors:['#E040FB','#FF4D6D','#FFC107','#4CAF50','#2196F3','#FF7043'],size:[5,9],count:12},
+  pongal:{type:'dots',colors:['#FF9933','#FFC107','#4CAF50'],size:[4,7],count:10,icon:'kite'},
+  gurpurab:{type:'spark',colors:['#FF9933','#2196F3','#FFFFFF'],size:[4,7],count:8},
+};
+function renderFestiveTheme(theme){
+  const layer=document.getElementById('festive-layer');
+  const hat=document.getElementById('festive-hat');
+  if(!layer)return;
+  layer.innerHTML='';
+  if(hat){hat.style.display='none';hat.innerHTML='';}
+  if(!theme||theme==='none')return;
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const mkParticle=function(colors,sizeRange,count,spark){
+    let html='';
+    for(let i=0;i<count;i++){
+      const c=colors[Math.floor(Math.random()*colors.length)];
+      const size=(sizeRange[0]+Math.random()*(sizeRange[1]-sizeRange[0])).toFixed(1);
+      const left=(Math.random()*100).toFixed(1);
+      const dur=(spark?(2+Math.random()*2):(6+Math.random()*5)).toFixed(1);
+      const delay=(Math.random()*6).toFixed(1);
+      const drift=Math.round((Math.random()*40)-20);
+      html+='<span class="fp'+(spark?' spark':'')+'" style="left:'+left+'%;width:'+size+'px;height:'+size+'px;background:'+c+';animation-duration:'+dur+'s;animation-delay:'+delay+'s;--drift:'+drift+'px"></span>';
+    }
+    return html;
+  };
+  const cfgT=FESTIVE_THEMES[theme];
+  if(!cfgT)return;
+  if(cfgT.icon&&hat&&FESTIVE_ICONS[cfgT.icon]){hat.style.display='inline-flex';hat.innerHTML=FESTIVE_ICONS[cfgT.icon];}
+  if(cfgT.type==='bar'){
+    layer.innerHTML='<div class="festive-tricolor-bar"></div>';
+  }else if(cfgT.type==='dots'&&!reduced){
+    layer.innerHTML=mkParticle(cfgT.colors,cfgT.size,cfgT.count,false);
+  }else if(cfgT.type==='spark'&&!reduced){
+    layer.innerHTML=mkParticle(cfgT.colors,cfgT.size,cfgT.count,true);
+  }
+}
 function renderHome(){
   const d=D(),cfg=d.siteSettings||{};
   if(cfg.name)updateSiteName(cfg.name);
   updateLogo(localStorage.getItem("dpt_mode")||"light");
+  renderFestiveTheme(cfg.festiveTheme||"none");
   setT("h-eyebrow",cfg.homeEyebrow);
   const mqTxt=cfg.marqueeText||"★ Descriptive Practice ★ AI Evaluation ★ Model Answers ★ Typing Speed Test ★ Exam-Pattern Interface ★";
   const mq1=document.getElementById("nb-marquee-span1"),mq2=document.getElementById("nb-marquee-span2");
@@ -2170,6 +2247,7 @@ function showResult(ans,wc,wpm,taken){
   document.getElementById("r-words").textContent=wc;document.getElementById("r-wpm").textContent=wpm;
   const mm=Math.floor(taken/60),ss=taken%60;document.getElementById("r-time").textContent=mm+"m "+ss+"s";
   document.getElementById("r-score").textContent="...";
+  document.getElementById("r-question").textContent=CQ?.text||"";
   document.getElementById("r-ans").textContent=ans||"(No answer submitted)";
   document.getElementById("r-model").textContent=CQ?.modelAnswer||"";
   renderQuestionHistory(CQ?.id);
@@ -2411,11 +2489,20 @@ STEP 3 — totalScore must equal the sum of the 3 parameter scores exactly (may 
 STEP 4 — CONSISTENCY CHECK (mandatory, do this before responding):
 Calculate the percentage: (totalScore ÷ ${pMax[0]+pMax[1]+pMax[2]}) × 100. Your overallVerdict's descriptive word MUST match that percentage using rule 7's bands (below average <40%, average 40-55%, good 60-75%, excellent 80-90%, near-perfect 90%+). If your verdict says "average" but your percentage is actually 80%+, that is a contradiction — it means your parameter scores are too generous for what you actually described. Go back and lower the parameter scores (especially Structure and Language, which are the easiest to over-score) until the verdict and the percentage genuinely agree. Do not fix this by simply rewording the verdict to match an inflated score.
 
+STEP 5 — CORRECTED VERSION OF THE STUDENT'S OWN ANSWER (skip this step entirely if the answer was gibberish/blank — return correctedAnswer as an empty string and mistakes as an empty array in that case):
+Produce "correctedAnswer": the student's own answer with ONLY spelling, grammar, punctuation, and clearly awkward phrasing fixed. This is a light edit, not a rewrite:
+- Do NOT add new content, points, or sentences that weren't in the original.
+- Do NOT remove or restructure sentences/paragraphs, reorder ideas, or change the answer's structure.
+- Do NOT upgrade vocabulary to sound more advanced or "impressive" — keep it in plain, simple, everyday English. If the student wrote "give" don't change it to "provide" unless "give" is actually grammatically wrong there. The corrected version must still sound like the student's own natural voice, just with mistakes cleaned up.
+- Wrap every word or phrase you actually changed in double curly braces, e.g. "I will {{listen to}} the customer" (original had "listen the customer"). Only wrap what changed — do not wrap unchanged text. If you changed nothing, return the original answer unwrapped.
+
+Then produce "mistakes": an array of the individual corrections you made (skip minor duplicates of the exact same recurring error after the 6th instance — cap the list at the 8 most illustrative mistakes). Each item: {"type":"Spelling"|"Grammar"|"Word Choice"|"Punctuation","original":"<the exact original word/phrase>","corrected":"<the fixed word/phrase>","reason":"<very short plain-English reason, under 10 words>"}. If there were no mistakes at all, return an empty array.
+
 Return ONLY this JSON:
-{"totalScore":<n>,"parameters":[{"name":"Content & Relevance","score":<n>,"max":${pMax[0]},"comment":"<specific 1-sentence critique>"},{"name":"Structure & Format","score":<n>,"max":${pMax[1]},"comment":"<specific 1-sentence critique>"},{"name":"Language & Grammar","score":<n>,"max":${pMax[2]},"comment":"<specific 1-sentence critique>"}],"strengths":["<specific strength or 'None identified' if gibberish>"],"improvements":["<specific actionable point>","<specific actionable point>","<specific actionable point>"],"overallVerdict":"<2-3 honest sentences — state clearly if answer is unacceptable, below average, average, good, or excellent and why>"}`;
+{"totalScore":<n>,"parameters":[{"name":"Content & Relevance","score":<n>,"max":${pMax[0]},"comment":"<specific 1-sentence critique>"},{"name":"Structure & Format","score":<n>,"max":${pMax[1]},"comment":"<specific 1-sentence critique>"},{"name":"Language & Grammar","score":<n>,"max":${pMax[2]},"comment":"<specific 1-sentence critique>"}],"strengths":["<specific strength or 'None identified' if gibberish>"],"improvements":["<specific actionable point>","<specific actionable point>","<specific actionable point>"],"overallVerdict":"<2-3 honest sentences — state clearly if answer is unacceptable, below average, average, good, or excellent and why>","correctedAnswer":"<the student's answer with only mistakes fixed, changed parts wrapped in {{double curly braces}}, or empty string if gibberish>","mistakes":[{"type":"<Spelling|Grammar|Word Choice|Punctuation>","original":"<text>","corrected":"<text>","reason":"<short reason>"}]}`;
   try{
     const res=await fetch(ep,{method:"POST",headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({model:"gemini-2.5-flash-lite",max_tokens:1000,system:sys,messages:[{role:"user",content:p}]})});
+      body:JSON.stringify({model:"gemini-2.5-flash-lite",max_tokens:1800,system:sys,messages:[{role:"user",content:p}]})});
     const data=await res.json();
     if(data.error)throw new Error(data.error.message);
     const result=JSON.parse(data.content.map(i=>i.text||"").join("").replace(/```json|```/g,"").trim());
@@ -2430,6 +2517,9 @@ Return ONLY this JSON:
       // Never trust the model's self-reported totalScore — recompute it deterministically
       // from the parameter scores (3 AI-judged + 1 computed) so the displayed total always matches the breakdown.
       result.totalScore=Math.round(result.parameters.reduce((a,pr)=>a+pr.score,0)*2)/2;
+      if(isGibberish){result.correctedAnswer="";result.mistakes=[];}
+      if(typeof result.correctedAnswer!=="string")result.correctedAnswer="";
+      if(!Array.isArray(result.mistakes))result.mistakes=[];
     }
     return result;
   }catch(e){return null;}
@@ -2505,6 +2595,42 @@ function manualEvalMock(idx){
   const wc=cw(ans);
   doManualEvalCopy(s.question,ans,wc,"mai-"+idx,"manualEvalMock("+idx+")");
 }
+function escapeHTML(s){
+  return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+function renderCorrectedText(text){
+  const esc=escapeHTML(text);
+  return esc.replace(/\{\{(.+?)\}\}/g,'<mark class="wl-mark">$1</mark>');
+}
+function renderCorrectedAnswer(result){
+  const card=document.getElementById('r-corrected-card');
+  const wrap=document.getElementById('r-corrected');
+  if(!card||!wrap)return;
+  const hasCorrected=result.correctedAnswer&&result.correctedAnswer.trim();
+  const hasMistakes=Array.isArray(result.mistakes)&&result.mistakes.length>0;
+  if(!hasCorrected&&!hasMistakes){card.style.display='none';return;}
+  card.style.display='';
+  let html='';
+  if(hasCorrected){
+    html+='<div class="model-box" style="white-space:pre-wrap;line-height:1.8">'+renderCorrectedText(result.correctedAnswer)+'</div>';
+  }
+  if(hasMistakes){
+    const typeColor={Spelling:'var(--red)',Grammar:'var(--accent)',"Word Choice":'var(--teal)',Punctuation:'var(--amber)'};
+    html+='<div style="margin-top:14px"><div class="blbl-s">Mistakes Fixed</div><div style="display:flex;flex-direction:column;gap:8px;margin-top:6px">'+
+      result.mistakes.map(function(m){
+        const col=typeColor[m.type]||'var(--t2)';
+        return '<div style="border:1px solid var(--b);border-radius:var(--rs);padding:8px 10px">'+
+          '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">'+
+            '<span style="font-size:.62rem;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;color:'+col+';border:1px solid '+col+';border-radius:999px;padding:1px 8px;flex-shrink:0">'+escapeHTML(m.type)+'</span>'+
+            '<span style="font-size:.8rem"><s style="color:var(--red);opacity:.8">'+escapeHTML(m.original)+'</s> → <strong style="color:var(--green)">'+escapeHTML(m.corrected)+'</strong></span>'+
+          '</div>'+
+          (m.reason?'<div style="font-size:.72rem;color:var(--t2);margin-top:4px">'+escapeHTML(m.reason)+'</div>':'')+
+        '</div>';
+      }).join('')+
+    '</div></div>';
+  }
+  wrap.innerHTML=html;
+}
 function renderAIBlock(result,max){
   const pct=Math.round((result.totalScore/max)*100);
   const bars=(result.parameters||[]).map(p=>{
@@ -2530,6 +2656,7 @@ async function runAI(ans,wc,wpm){
   if(result){
     document.getElementById("r-score").textContent=result.totalScore+"/"+q.marks;
     document.getElementById("r-ai").innerHTML=renderAIBlock(result,q.marks);
+    renderCorrectedAnswer(result);
     _lastAIArgs.result=result;
   } else {
     const d=D(),cfg=d.siteSettings||{};let ep="";
@@ -2552,6 +2679,7 @@ async function retryRunAI(){
   if(result){
     document.getElementById("r-score").textContent=result.totalScore+"/"+q.marks;
     aiEl.innerHTML=renderAIBlock(result,q.marks);
+    renderCorrectedAnswer(result);
     _lastAIArgs.result=result;
     updateProgressEntry(_lastAIArgs.progressId,{score:result.totalScore+"/"+q.marks,parameters:result.parameters});
   } else {
