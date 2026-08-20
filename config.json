@@ -1564,7 +1564,7 @@
       "marks": 10,
       "difficulty": "medium",
       "active": true,
-      "mockNo": null
+      "mockNo": 1
     },
     {
       "id": "q_1783514476919",
@@ -1609,7 +1609,7 @@
       "mockNo": 1,
       "title": "SBI PO Mock 1",
       "active": true,
-      "status": "upcoming"
+      "status": "active"
     },
     {
       "id": "sbi_po_mock_2",
