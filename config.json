@@ -743,11 +743,11 @@
       "examId": "ibps_po",
       "type": "comprehension",
       "text": "Read the passage and answer the questions that follow in your own words.\n\n\"Microfinance institutions have played a transformative role in extending credit to low-income households that lack access to traditional banking collateral. By offering small, unsecured loans through group-lending models, these institutions have enabled millions of rural entrepreneurs, particularly women, to start small businesses. However, the sector has faced criticism over high interest rates and aggressive recovery practices in some cases. Regulatory reforms in recent years have sought to cap interest rates and enforce responsible lending standards, balancing financial inclusion with borrower protection.\"\n\n(a) How do microfinance institutions extend credit to low-income households lacking collateral? (2 marks)\n(b) Who has particularly benefited from these group-lending models, according to the passage? (2 marks)\n(c) What criticism has the microfinance sector faced? (2 marks)\n(d) What has been the aim of recent regulatory reforms in this sector? (2 marks)\n(e) Find one word from the passage meaning \"changed completely for the better.\" (2 marks)",
+      "modelAnswer": "(a) They extend credit through small, unsecured loans using group-lending models.\n(b) Rural entrepreneurs, particularly women, have benefited the most.\n(c) The sector has been criticised for high interest rates and aggressive recovery practices in some cases.\n(d) Recent reforms aim to cap interest rates and enforce responsible lending standards.\n(e) Transformative.",
       "wordLimit": "30-50 words per answer",
       "marks": 10,
       "difficulty": "medium",
-      "modelAnswer": "(a) They extend credit through small, unsecured loans using group-lending models.\n(b) Rural entrepreneurs, particularly women, have benefited the most.\n(c) The sector has been criticised for high interest rates and aggressive recovery practices in some cases.\n(d) Recent reforms aim to cap interest rates and enforce responsible lending standards.\n(e) Transformative.",
-      "active": true,
+      "active": false,
       "mockNo": 3
     },
     {
@@ -755,11 +755,11 @@
       "examId": "ibps_po",
       "type": "comprehension",
       "text": "Read the passage and answer the questions that follow in your own words.\n\n\"Managing inflation remains one of the Reserve Bank of India's primary mandates, achieved largely through adjustments to the repo rate, the rate at which it lends to commercial banks. Raising the repo rate makes borrowing costlier, typically cooling consumer spending and moderating inflation. However, this approach risks slowing economic growth and increasing EMI burdens on existing borrowers. The Monetary Policy Committee must therefore carefully balance inflation control against growth objectives, basing decisions on indicators including food prices, global crude oil trends, and currency stability.\"\n\n(a) What is the repo rate, as defined in the passage? (2 marks)\n(b) How does raising the repo rate help control inflation? (2 marks)\n(c) What is one risk associated with raising the repo rate? (2 marks)\n(d) Name two indicators the Monetary Policy Committee considers in its decisions. (2 marks)\n(e) Find one word from the passage meaning \"directive\" or \"official task.\" (2 marks)",
+      "modelAnswer": "(a) The repo rate is the rate at which the RBI lends to commercial banks.\n(b) It makes borrowing costlier, which cools consumer spending and moderates inflation.\n(c) It risks slowing economic growth and increasing EMI burdens on existing borrowers.\n(d) Food prices and global crude oil trends (or currency stability).\n(e) Mandate.",
       "wordLimit": "30-50 words per answer",
       "marks": 10,
       "difficulty": "medium",
-      "modelAnswer": "(a) The repo rate is the rate at which the RBI lends to commercial banks.\n(b) It makes borrowing costlier, which cools consumer spending and moderates inflation.\n(c) It risks slowing economic growth and increasing EMI burdens on existing borrowers.\n(d) Food prices and global crude oil trends (or currency stability).\n(e) Mandate.",
-      "active": true,
+      "active": false,
       "mockNo": 4
     },
     {
@@ -767,11 +767,11 @@
       "examId": "ibps_po",
       "type": "comprehension",
       "text": "Read the passage and answer the questions that follow in your own words.\n\n\"India's start-up ecosystem has matured significantly over the past decade, supported by venture capital funding, government initiatives like Start-up India, and an expanding pool of skilled talent. Banks have traditionally been cautious lenders to early-stage start-ups due to the absence of collateral and unproven business models. However, specialised start-up financing schemes, venture debt products, and credit guarantee mechanisms are gradually emerging to bridge this gap. Deeper bank participation could significantly reduce start-ups' dependence on equity dilution for early-stage capital needs.\"\n\n(a) Name two factors that have supported the growth of India's start-up ecosystem. (2 marks)\n(b) Why have banks traditionally been cautious lenders to early-stage start-ups? (2 marks)\n(c) What new financing tools are emerging to address this gap? (2 marks)\n(d) What benefit could deeper bank participation offer to start-ups, according to the passage? (2 marks)\n(e) Find one word from the passage meaning \"reduction in ownership share.\" (2 marks)",
+      "modelAnswer": "(a) Venture capital funding and government initiatives like Start-up India (or skilled talent).\n(b) Due to the absence of collateral and unproven business models.\n(c) Specialised start-up financing schemes, venture debt products, and credit guarantee mechanisms.\n(d) It could reduce start-ups' dependence on equity dilution for early-stage capital.\n(e) Dilution.",
       "wordLimit": "30-50 words per answer",
       "marks": 10,
       "difficulty": "medium",
-      "modelAnswer": "(a) Venture capital funding and government initiatives like Start-up India (or skilled talent).\n(b) Due to the absence of collateral and unproven business models.\n(c) Specialised start-up financing schemes, venture debt products, and credit guarantee mechanisms.\n(d) It could reduce start-ups' dependence on equity dilution for early-stage capital.\n(e) Dilution.",
-      "active": true,
+      "active": false,
       "mockNo": 5
     },
     {
@@ -779,11 +779,11 @@
       "examId": "ibps_po",
       "type": "comprehension",
       "text": "Read the passage and answer the questions that follow in your own words.\n\n\"Cybersecurity has become a critical concern for banks as digital transactions surge. Threats range from phishing attacks to ransomware targeting core banking systems, and a single breach can compromise millions of customer records, eroding decades of public trust. Regulators worldwide are mandating stricter data protection standards, regular audits, and rapid breach disclosure timelines. However, technology alone cannot solve this challenge; employee awareness, customer education, and organisational vigilance are equally essential to building genuine cyber resilience.\"\n\n(a) Why has cybersecurity become a critical concern for banks? (2 marks)\n(b) What can a single successful breach lead to, according to the passage? (2 marks)\n(c) Name two measures regulators are mandating in response. (2 marks)\n(d) Besides technology, what else is essential for building cyber resilience? (2 marks)\n(e) Find one word from the passage meaning \"the ability to recover quickly from difficulties.\" (2 marks)",
+      "modelAnswer": "(a) Because digital transactions are surging, exposing banks to threats like phishing and ransomware.\n(b) It can compromise millions of customer records and erode public trust.\n(c) Stricter data protection standards and regular security audits (or rapid breach disclosure).\n(d) Employee awareness, customer education, and organisational vigilance.\n(e) Resilience.",
       "wordLimit": "30-50 words per answer",
       "marks": 10,
       "difficulty": "medium",
-      "modelAnswer": "(a) Because digital transactions are surging, exposing banks to threats like phishing and ransomware.\n(b) It can compromise millions of customer records and erode public trust.\n(c) Stricter data protection standards and regular security audits (or rapid breach disclosure).\n(d) Employee awareness, customer education, and organisational vigilance.\n(e) Resilience.",
-      "active": true,
+      "active": false,
       "mockNo": 6
     },
     {
