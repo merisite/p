@@ -2436,6 +2436,12 @@ async function evalWithAI(q,ans,wc,wpm){
   const restMax=max-wlMax;
   const base=Math.floor(restMax/3),rem=restMax-base*3;
   const pMax=[base+(rem>0?1:0),base+(rem>1?1:0),base];
+  // The "corrected answer" feature only makes sense once there's a substantive attempt to correct —
+  // gate it deterministically at 2/3 of the word limit's lower bound, same threshold style used
+  // elsewhere in this app, rather than leaving it to the AI's judgment.
+  const _wlRange=parseWordLimitRange(q.wordLimit);
+  const correctionThreshold=_wlRange&&_wlRange.min>0?Math.ceil(_wlRange.min*2/3):15;
+  const eligibleForCorrection=wc>=correctionThreshold;
   const sys=`You are a strict, senior examiner for SBI PO / IBPS PO Mains Descriptive Paper (2026 pattern), equivalent to the marking standard used by Oliveboard and Guidely. Your scoring must be realistic, unbiased, and rigorous — the same way an actual UPSC/banking exam evaluator would mark.
 
 HARD RULES YOU MUST FOLLOW WITHOUT EXCEPTION:
@@ -2486,20 +2492,24 @@ Score each of the 3 parameters below using the exact max shown for each (they ar
 
 STEP 3 — totalScore must equal the sum of the 3 parameter scores exactly (may be a half-mark value, e.g. 9.5).
 
-STEP 4 — CONSISTENCY CHECK (mandatory, do this before responding):
-Calculate the percentage: (totalScore ÷ ${pMax[0]+pMax[1]+pMax[2]}) × 100. Your overallVerdict's descriptive word MUST match that percentage using rule 7's bands (below average <40%, average 40-55%, good 60-75%, excellent 80-90%, near-perfect 90%+). If your verdict says "average" but your percentage is actually 80%+, that is a contradiction — it means your parameter scores are too generous for what you actually described. Go back and lower the parameter scores (especially Structure and Language, which are the easiest to over-score) until the verdict and the percentage genuinely agree. Do not fix this by simply rewording the verdict to match an inflated score.
+STEP 3 — totalScore must equal the sum of the 3 parameter scores exactly (may be a half-mark value, e.g. 9.5).
 
-STEP 5 — CORRECTED VERSION OF THE STUDENT'S OWN ANSWER (skip this step entirely if the answer was gibberish/blank — return correctedAnswer as an empty string and mistakes as an empty array in that case):
-Produce "correctedAnswer": the student's own answer with ONLY spelling, grammar, punctuation, and clearly awkward phrasing fixed. This is a light edit, not a rewrite:
+STEP 4 — CORRECTED VERSION OF THE STUDENT'S OWN ANSWER (REQUIRED for every eligible non-gibberish answer — do not skip this, it is as important as the scoring above, not an optional extra):
+${eligibleForCorrection?`Produce "correctedAnswer": the student's own answer with ONLY spelling, grammar, punctuation, and clearly awkward phrasing fixed. This is a light edit, not a rewrite:
 - Do NOT add new content, points, or sentences that weren't in the original.
 - Do NOT remove or restructure sentences/paragraphs, reorder ideas, or change the answer's structure.
 - Do NOT upgrade vocabulary to sound more advanced or "impressive" — keep it in plain, simple, everyday English. If the student wrote "give" don't change it to "provide" unless "give" is actually grammatically wrong there. The corrected version must still sound like the student's own natural voice, just with mistakes cleaned up.
-- Wrap every word or phrase you actually changed in double curly braces, e.g. "I will {{listen to}} the customer" (original had "listen the customer"). Only wrap what changed — do not wrap unchanged text. If you changed nothing, return the original answer unwrapped.
+- Wrap every word or phrase you actually changed in double curly braces, e.g. "I will {{listen to}} the customer" (original had "listen the customer"). Only wrap what changed — do not wrap unchanged text. If you changed nothing at all, return the original answer unwrapped (do not return an empty string just because there were no mistakes).
+- If the answer was gibberish/blank, return correctedAnswer as an empty string instead.
 
-Then produce "mistakes": an array of the individual corrections you made (skip minor duplicates of the exact same recurring error after the 6th instance — cap the list at the 8 most illustrative mistakes). Each item: {"type":"Spelling"|"Grammar"|"Word Choice"|"Punctuation","original":"<the exact original word/phrase>","corrected":"<the fixed word/phrase>","reason":"<very short plain-English reason, under 10 words>"}. If there were no mistakes at all, return an empty array.
+Then produce "mistakes": an array of the individual corrections you made (skip minor duplicates of the exact same recurring error after the 6th instance — cap the list at the 8 most illustrative mistakes). Each item: {"type":"Spelling"|"Grammar"|"Word Choice"|"Punctuation","original":"<the exact original word/phrase>","corrected":"<the fixed word/phrase>","reason":"<very short plain-English reason, under 10 words>"}. If there were no mistakes at all, return an empty array — but the array key itself must still be present.`:
+`The student wrote only ${wc} words, below the ${correctionThreshold}-word minimum needed for this feature to be useful — there isn't enough of a real attempt yet to meaningfully correct. Skip this step entirely: return correctedAnswer as an empty string and mistakes as an empty array. Do not spend effort generating a correction here.`}
 
-Return ONLY this JSON:
-{"totalScore":<n>,"parameters":[{"name":"Content & Relevance","score":<n>,"max":${pMax[0]},"comment":"<specific 1-sentence critique>"},{"name":"Structure & Format","score":<n>,"max":${pMax[1]},"comment":"<specific 1-sentence critique>"},{"name":"Language & Grammar","score":<n>,"max":${pMax[2]},"comment":"<specific 1-sentence critique>"}],"strengths":["<specific strength or 'None identified' if gibberish>"],"improvements":["<specific actionable point>","<specific actionable point>","<specific actionable point>"],"overallVerdict":"<2-3 honest sentences — state clearly if answer is unacceptable, below average, average, good, or excellent and why>","correctedAnswer":"<the student's answer with only mistakes fixed, changed parts wrapped in {{double curly braces}}, or empty string if gibberish>","mistakes":[{"type":"<Spelling|Grammar|Word Choice|Punctuation>","original":"<text>","corrected":"<text>","reason":"<short reason>"}]}`;
+STEP 5 — CONSISTENCY CHECK (mandatory, do this before responding):
+Calculate the percentage: (totalScore ÷ ${pMax[0]+pMax[1]+pMax[2]}) × 100. Your overallVerdict's descriptive word MUST match that percentage using rule 7's bands (below average <40%, average 40-55%, good 60-75%, excellent 80-90%, near-perfect 90%+). If your verdict says "average" but your percentage is actually 80%+, that is a contradiction — it means your parameter scores are too generous for what you actually described. Go back and lower the parameter scores (especially Structure and Language, which are the easiest to over-score) until the verdict and the percentage genuinely agree. Do not fix this by simply rewording the verdict to match an inflated score.
+
+Return ONLY this JSON — every key listed below must be present, correctedAnswer and mistakes are not optional:
+{"totalScore":<n>,"parameters":[{"name":"Content & Relevance","score":<n>,"max":${pMax[0]},"comment":"<specific 1-sentence critique>"},{"name":"Structure & Format","score":<n>,"max":${pMax[1]},"comment":"<specific 1-sentence critique>"},{"name":"Language & Grammar","score":<n>,"max":${pMax[2]},"comment":"<specific 1-sentence critique>"}],"correctedAnswer":"<the student's answer with only mistakes fixed, changed parts wrapped in {{double curly braces}}, or empty string if gibberish>","mistakes":[{"type":"<Spelling|Grammar|Word Choice|Punctuation>","original":"<text>","corrected":"<text>","reason":"<short reason>"}],"strengths":["<specific strength or 'None identified' if gibberish>"],"improvements":["<specific actionable point>","<specific actionable point>","<specific actionable point>"],"overallVerdict":"<2-3 honest sentences — state clearly if answer is unacceptable, below average, average, good, or excellent and why>"}`;
   try{
     const res=await fetch(ep,{method:"POST",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({model:"gemini-2.5-flash-lite",max_tokens:1800,system:sys,messages:[{role:"user",content:p}]})});
@@ -2517,7 +2527,7 @@ Return ONLY this JSON:
       // Never trust the model's self-reported totalScore — recompute it deterministically
       // from the parameter scores (3 AI-judged + 1 computed) so the displayed total always matches the breakdown.
       result.totalScore=Math.round(result.parameters.reduce((a,pr)=>a+pr.score,0)*2)/2;
-      if(isGibberish){result.correctedAnswer="";result.mistakes=[];}
+      if(isGibberish||!eligibleForCorrection){result.correctedAnswer="";result.mistakes=[];}
       if(typeof result.correctedAnswer!=="string")result.correctedAnswer="";
       if(!Array.isArray(result.mistakes))result.mistakes=[];
     }
