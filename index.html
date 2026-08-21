@@ -2444,15 +2444,19 @@ async function evalWithAI(q,ans,wc,wpm){
   const eligibleForCorrection=wc>=correctionThreshold;
   const sys=`You are a strict, senior examiner for SBI PO / IBPS PO Mains Descriptive Paper (2026 pattern), equivalent to the marking standard used by Oliveboard and Guidely. Your scoring must be realistic, unbiased, and rigorous — the same way an actual UPSC/banking exam evaluator would mark.
 
+CRITICAL: you generate text in order and cannot revise something you already wrote. So you must count and analyze BEFORE you score — never the other way around. The JSON schema below deliberately puts an "analysis" object first, with parameter scores afterward, precisely so your scores are derived from what you just counted, not guessed first and rationalized after.
+
 HARD RULES YOU MUST FOLLOW WITHOUT EXCEPTION:
 1. GIBBERISH / IRRELEVANT / BLANK answers: If the answer is blank, random characters, keyboard mashing, copy-paste of the question, or completely off-topic, award 0 across ALL parameters. Do not give any charity marks.
 2. INCOMPLETE answers (under 40% of word limit): Cap total score at 30% of max marks. Penalise heavily on Content.
 3. PARTIAL answers (40–70% of word limit): Cap total score at 55% of max marks unless quality is exceptional.
-4. WRONG FORMAT (e.g. writing an essay instead of an email, missing Subject/To/Salutation in email, missing heading/date/to in report): Deduct at least 50% from Structure & Format score.
-5. LANGUAGE ERRORS: Each significant grammar/spelling error costs marks. An answer with 5+ errors cannot score more than 50% on Language & Grammar.
-6. CONTENT ACCURACY: Award marks only for points directly relevant to the question scenario. Generic or vague points get partial credit. Irrelevant points get zero content credit.
-7. DO NOT inflate scores to be encouraging. A mediocre answer should score 40–55%. A good answer 60–75%. An excellent answer 80–90%. Near-perfect answers 90%+. Scores above 90% should be extremely rare.
-8. Respond ONLY with valid JSON, no markdown, no explanation outside JSON.`;
+4. MISSING SUB-PARTS: If the question has multiple numbered parts/sub-questions and the student did not attempt one or more of them, Content & Relevance cannot exceed (parts answered ÷ parts required), plus at most 15 percentage points of grace — a fully unanswered part is a major, not minor, gap.
+5. WRONG FORMAT (e.g. writing an essay instead of an email, missing Subject/To/Salutation in email, missing heading/date/to in report): Deduct at least 50% from Structure & Format score.
+6. LANGUAGE ERRORS: your Language & Grammar score must directly match the error count you state in "analysis" — do not write down a count and then ignore it when scoring. 5+ errors = hard ceiling of 50% on this parameter, no exceptions.
+7. CONTENT ACCURACY: Award marks only for points directly relevant to the question scenario. Generic or vague points get partial credit. Irrelevant points get zero content credit.
+8. DO NOT inflate scores to be encouraging. A mediocre answer should score 40–55%. A good answer 60–75%. An excellent answer 80–90%. Near-perfect answers 90%+. Scores above 90% should be extremely rare.
+9. Your overallVerdict's descriptive word must match the final percentage using rule 8's bands. Since verdict is written after scores in this schema, this should already agree — if you notice a mismatch, it means you under-penalized in analysis, not that you should just pick softer verdict words.
+10. Respond ONLY with valid JSON, no markdown, no explanation outside JSON.`;
   const p=`SECTION TYPE: ${typeName}
 WORD LIMIT: ${q.wordLimit}
 MAX MARKS: ${max}
@@ -2464,52 +2468,56 @@ STEP 1 — VALIDITY CHECK:
 - Is this answer blank, gibberish, random characters, or completely unrelated to the question? If YES → set all scores to 0, set overallVerdict to explain why, then return JSON.
 - Does the answer attempt to address the question at all? If NO → treat as gibberish.
 
-STEP 2 — SCORING (only if answer is valid):
-Score each of the 3 parameters below using the exact max shown for each (they are pre-distributed — do not change them). You may award scores in half-mark (0.5) increments where the answer falls between two whole-mark bands (e.g. 3.5/5) — do not round every score to a whole number if a half-mark is a more honest reflection of quality. Note: word limit adherence is scored separately by the system, not by you — ignore word count except where it genuinely reflects incomplete/rushed content:
+STEP 2 — ANALYSIS (fill this in first, before any score — be exact, these numbers directly determine your scores in Step 3):
+- "subPartsRequired": if the question has multiple distinct numbered parts/sub-questions, how many are there? (Use 1 if it's a single unified task like an email/essay/report with no numbered sub-parts.)
+- "subPartsAnswered": of those, how many did the student actually attempt, even partially? Check carefully — count only parts with a real, on-topic attempt, not a placeholder.
+- "missingParts": brief note naming which part(s) were skipped, or "none".
+- "languageErrorCount": scan the answer sentence-by-sentence and count every genuine error — wrong articles (a/an/the), wrong prepositions, subject-verb disagreement, wrong tense, run-on/fragment sentences, misspelled words. Do not count stylistic preferences as errors. Give the exact number.
+- "formatIssues": brief note on structural problems (e.g. "no paragraph breaks", "missing salutation"), or "none".
+
+STEP 3 — SCORING (derive every score below from the analysis you just wrote — do not contradict it):
+Score each of the 3 parameters using the exact max shown for each (they are pre-distributed — do not change them). Half-mark (0.5) increments are allowed and encouraged where they're a more honest reflection than a whole number. Word limit adherence is scored separately by the system, not by you — ignore word count except where it reflects genuinely incomplete/rushed content:
 
 [Content & Relevance /${pMax[0]}]
-- Full marks: All key points covered with accurate, question-specific detail and banking/professional knowledge
-- 75%: Most key points covered, minor gaps
-- 50%: Some relevant points but significant gaps or vague content
-- 25%: Very few relevant points, mostly generic
-- 0%: Off-topic, irrelevant, or gibberish
+- Apply Hard Rule 4 first if subPartsAnswered < subPartsRequired.
+- Full marks: All key points covered with accurate, question-specific detail and banking/professional knowledge.
+- 75%: Most key points covered, minor gaps.
+- 50%: Some relevant points but significant gaps or vague content.
+- 25%: Very few relevant points, mostly generic.
+- 0%: Off-topic, irrelevant, or gibberish.
 
 [Structure & Format /${pMax[1]}]
 - For EMAIL: Must have To, Subject, Salutation, Body paragraphs, Closing, Signature. Missing any = heavy deduction.
 - For REPORT: Must have heading, date, To, Subject, body with sections, recommendation, signature. Missing = heavy deduction.
-- For SITUATION/PRECIS/ESSAY: Requires visible paragraphing (introduction, body, conclusion as separate paragraphs) and logical flow.
-- CONCRETE PENALTY: If the answer is written as a single unbroken block of text with no paragraph breaks at all (for a type that requires paragraphing), this is a real structural failure, not a minor issue — cap this parameter at 50% regardless of how logical the content order is. Do not give 80%+ on this parameter to a wall-of-text answer.
+- For SITUATION/PRECIS/ESSAY/COMPREHENSION: Requires visible paragraphing/clear separation between answers and logical flow.
+- CONCRETE PENALTY: a single unbroken block of text with no breaks at all (for a type that requires them) caps this parameter at 50%, regardless of how logical the content order is.
 - 0 if format is completely wrong for the type.
 
 [Language & Grammar /${pMax[2]}]
-- Before scoring, actively scan the answer sentence-by-sentence for: wrong articles (a/an/the), wrong prepositions, subject-verb disagreement, wrong tense, run-on/fragment sentences, informal phrasing, and repetitive short "I will X. I will Y." sentence patterns. Count every instance you find — do not skim past them.
-- Full marks (95-100%): Zero or near-zero errors, formal tone, varied sentence structure, precise vocabulary.
-- 80-90%: 1-2 minor errors only, otherwise clean and formal.
-- 60-75%: 3-4 errors, or correct but repetitive/simplistic sentence construction throughout.
-- 40-50%: 5+ errors (this is a hard ceiling — do not exceed 50% once you've counted 5 or more, even if content is otherwise fine).
-- Under 25%: 8+ errors, or informal/broken English throughout.
-- Gibberish/random text = 0
+- This score MUST match languageErrorCount from your analysis: 0 errors = 95-100%. 1-2 errors = 80-90%. 3-4 errors = 60-75%. 5-7 errors = 40-50% (hard ceiling). 8+ errors = under 25%. Gibberish = 0.
 
-STEP 3 — totalScore must equal the sum of the 3 parameter scores exactly (may be a half-mark value, e.g. 9.5).
+STEP 4 — totalScore must equal the sum of the 3 parameter scores exactly (may be a half-mark value, e.g. 9.5).
 
-STEP 3 — totalScore must equal the sum of the 3 parameter scores exactly (may be a half-mark value, e.g. 9.5).
-
-STEP 4 — CORRECTED VERSION OF THE STUDENT'S OWN ANSWER (REQUIRED for every eligible non-gibberish answer — do not skip this, it is as important as the scoring above, not an optional extra):
-${eligibleForCorrection?`Produce "correctedAnswer": the student's own answer with ONLY spelling, grammar, punctuation, and clearly awkward phrasing fixed. This is a light edit, not a rewrite:
+STEP 5 — CORRECTED VERSION OF THE STUDENT'S OWN ANSWER (REQUIRED for every eligible non-gibberish answer — do not skip this):
+${eligibleForCorrection?`Produce "correctedAnswer": the student's own answer with ONLY genuine spelling, grammar, and punctuation errors fixed. This is a light edit, not a rewrite:
 - Do NOT add new content, points, or sentences that weren't in the original.
 - Do NOT remove or restructure sentences/paragraphs, reorder ideas, or change the answer's structure.
-- Do NOT upgrade vocabulary to sound more advanced or "impressive" — keep it in plain, simple, everyday English. If the student wrote "give" don't change it to "provide" unless "give" is actually grammatically wrong there. The corrected version must still sound like the student's own natural voice, just with mistakes cleaned up.
-- Wrap every word or phrase you actually changed in double curly braces, e.g. "I will {{listen to}} the customer" (original had "listen the customer"). Only wrap what changed — do not wrap unchanged text. If you changed nothing at all, return the original answer unwrapped (do not return an empty string just because there were no mistakes).
+- Do NOT upgrade vocabulary or reword something that was already grammatically correct just to sound smoother — only touch text that is an actual error. If the student wrote "give" don't change it to "provide" unless "give" is actually grammatically wrong there.
+- Wrap every word or phrase you actually changed in double curly braces, e.g. "I will {{listen to}} the customer" (original had "listen the customer"). Only wrap what changed. If you changed nothing at all, return the original answer unwrapped.
 - If the answer was gibberish/blank, return correctedAnswer as an empty string instead.
 
-Then produce "mistakes": an array of the individual corrections you made (skip minor duplicates of the exact same recurring error after the 6th instance — cap the list at the 8 most illustrative mistakes). Each item: {"type":"Spelling"|"Grammar"|"Word Choice"|"Punctuation","original":"<the exact original word/phrase>","corrected":"<the fixed word/phrase>","reason":"<very short plain-English reason, under 10 words>"}. If there were no mistakes at all, return an empty array — but the array key itself must still be present.`:
-`The student wrote only ${wc} words, below the ${correctionThreshold}-word minimum needed for this feature to be useful — there isn't enough of a real attempt yet to meaningfully correct. Skip this step entirely: return correctedAnswer as an empty string and mistakes as an empty array. Do not spend effort generating a correction here.`}
+Then produce "mistakes": one entry per genuine error, matching what you actually changed above. Each item: {"type":"Spelling"|"Grammar"|"Word Choice"|"Punctuation","original":"<exact original text>","corrected":"<exact fixed text>","reason":"<short plain-English reason, under 10 words, describing only the difference between original and corrected shown in THIS entry>"}.
+STRICT RULES for this list, all mandatory:
+- NEVER include an entry where "original" and "corrected" are the same text — that means nothing actually changed, so it is not a mistake.
+- Category definitions, use them precisely: Spelling = a misspelled word. Grammar = wrong tense, article, preposition, subject-verb agreement, or a run-on/fragment sentence. Word Choice = grammatically fine but a different word is standard/idiomatic usage where the original is genuinely non-standard (not just less polished). Punctuation = missing/wrong comma, period, or capitalization.
+- Do NOT list something as a mistake just because a smoother phrasing exists — only genuine errors count, not style preferences.
+- Do NOT list the same underlying fix twice at different granularities (e.g. don't list two word-level fixes individually AND then also list the whole sentence containing both as one more "mistake") — each distinct error appears exactly once.
+- List individual word/phrase-level entries, not whole-sentence rewrites, unless the entire sentence structure itself was broken (e.g. a run-on).
+- Cap the list at the 8 most illustrative genuine errors. If there were no genuine mistakes at all, return an empty array — the key must still be present.`:
+`The student wrote only ${wc} words, below the ${correctionThreshold}-word minimum needed for this feature to be useful. Skip this step entirely: return correctedAnswer as an empty string and mistakes as an empty array.`}
 
-STEP 5 — CONSISTENCY CHECK (mandatory, do this before responding):
-Calculate the percentage: (totalScore ÷ ${pMax[0]+pMax[1]+pMax[2]}) × 100. Your overallVerdict's descriptive word MUST match that percentage using rule 7's bands (below average <40%, average 40-55%, good 60-75%, excellent 80-90%, near-perfect 90%+). If your verdict says "average" but your percentage is actually 80%+, that is a contradiction — it means your parameter scores are too generous for what you actually described. Go back and lower the parameter scores (especially Structure and Language, which are the easiest to over-score) until the verdict and the percentage genuinely agree. Do not fix this by simply rewording the verdict to match an inflated score.
-
-Return ONLY this JSON — every key listed below must be present, correctedAnswer and mistakes are not optional:
-{"totalScore":<n>,"parameters":[{"name":"Content & Relevance","score":<n>,"max":${pMax[0]},"comment":"<specific 1-sentence critique>"},{"name":"Structure & Format","score":<n>,"max":${pMax[1]},"comment":"<specific 1-sentence critique>"},{"name":"Language & Grammar","score":<n>,"max":${pMax[2]},"comment":"<specific 1-sentence critique>"}],"correctedAnswer":"<the student's answer with only mistakes fixed, changed parts wrapped in {{double curly braces}}, or empty string if gibberish>","mistakes":[{"type":"<Spelling|Grammar|Word Choice|Punctuation>","original":"<text>","corrected":"<text>","reason":"<short reason>"}],"strengths":["<specific strength or 'None identified' if gibberish>"],"improvements":["<specific actionable point>","<specific actionable point>","<specific actionable point>"],"overallVerdict":"<2-3 honest sentences — state clearly if answer is unacceptable, below average, average, good, or excellent and why>"}`;
+Return ONLY this JSON — every key must be present in this order (analysis before parameters before everything else):
+{"analysis":{"subPartsRequired":<n>,"subPartsAnswered":<n>,"missingParts":"<text or 'none'>","languageErrorCount":<n>,"formatIssues":"<text or 'none'>"},"parameters":[{"name":"Content & Relevance","score":<n>,"max":${pMax[0]},"comment":"<specific 1-sentence critique>"},{"name":"Structure & Format","score":<n>,"max":${pMax[1]},"comment":"<specific 1-sentence critique>"},{"name":"Language & Grammar","score":<n>,"max":${pMax[2]},"comment":"<specific 1-sentence critique>"}],"totalScore":<n>,"correctedAnswer":"<answer with only genuine errors fixed, changed parts wrapped in {{double curly braces}}, or empty string if gibberish>","mistakes":[{"type":"<Spelling|Grammar|Word Choice|Punctuation>","original":"<text>","corrected":"<text>","reason":"<short reason>"}],"strengths":["<specific strength or 'None identified' if gibberish>"],"improvements":["<specific actionable point>","<specific actionable point>","<specific actionable point>"],"overallVerdict":"<2-3 honest sentences — state clearly if answer is unacceptable, below average, average, good, or excellent and why, referencing missingParts if any>"}`;
   try{
     const res=await fetch(ep,{method:"POST",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({model:"gemini-2.5-flash-lite",max_tokens:1800,system:sys,messages:[{role:"user",content:p}]})});
