@@ -29,7 +29,7 @@
     "marqueeText": "★ Descriptive Practice ★ AI Evaluation ★ Model Answers ★ Typing Speed Test ★ Exam-Pattern Interface ★",
     "marqueeSpeed": 25,
     "festiveTheme": "rakhi",
-    "maintenanceMode": false,
+    "maintenanceMode": true,
     "maintenanceMessage": "We'll be back soon."
   },
   "sectionTypes": [
