@@ -2529,19 +2529,20 @@ HARD RULES YOU MUST FOLLOW WITHOUT EXCEPTION:
 1. GIBBERISH / IRRELEVANT / BLANK answers: If the answer is blank, random characters, keyboard mashing, copy-paste of the question, or completely off-topic, award 0 across ALL parameters. Do not give any charity marks.
 2. INCOMPLETE answers (under 40% of word limit): Cap total score at 30% of max marks. Penalise heavily on Content.
 3. PARTIAL answers (40–70% of word limit): Cap total score at 55% of max marks unless quality is exceptional.
-4. MISSING SUB-PARTS: If the question has multiple numbered parts/sub-questions and the student did not attempt one or more of them, Content & Relevance cannot exceed (parts answered ÷ parts required), plus at most 15 percentage points of grace — a fully unanswered part is a major, not minor, gap.
+4. MISSING SUB-PARTS: If the question has multiple numbered parts/sub-questions, identify EXACTLY which ones by number (e.g. "Question 5") — never a vague count. Content & Relevance cannot exceed (parts answered ÷ parts required), plus at most 15 percentage points of grace — a fully unanswered part is a major, not minor, gap.
 5. WRONG FORMAT (e.g. writing an essay instead of an email, missing Subject/To/Salutation in email, missing heading/date/to in report): Deduct at least 50% from Structure & Format score.
-6. LANGUAGE ERRORS: your Language & Grammar score must directly match the error count you state in "analysis" — do not write down a count and then ignore it when scoring. 5+ errors = hard ceiling of 50% on this parameter, no exceptions.
+6. LANGUAGE ERRORS: your Language & Grammar score must directly match the error count you state in "analysis", using this exact table — no other value is allowed: 0 errors = 100%. 1-2 errors = 85%. 3-4 errors = 65%. 5-6 errors = 33%. 7+ errors = 0%.
 7. CONTENT ACCURACY: Award marks only for points directly relevant to the question scenario. Generic or vague points get partial credit. Irrelevant points get zero content credit.
 8. DO NOT inflate scores to be encouraging. A mediocre answer should score 40–55%. A good answer 60–75%. An excellent answer 80–90%. Near-perfect answers 90%+. Scores above 90% should be extremely rare.
-9. Your overallVerdict's descriptive word must match the final percentage using rule 8's bands. Since verdict is written after scores in this schema, this should already agree — if you notice a mismatch, it means you under-penalized in analysis, not that you should just pick softer verdict words.
-10. Respond ONLY with valid JSON, no markdown, no explanation outside JSON.
+9. NUMBERS MUST NEVER APPEAR IN overallVerdict, strengths, or improvements — no score, no fraction ("X out of Y"), no percentage, anywhere in that text. This is not a style preference, it is mandatory: the numeric score already exists in the parameters/totalScore fields you wrote earlier, and restating a number in prose risks contradicting it (you cannot go back and check what you already wrote). Describe performance only in words (e.g. "missed one full question", "several grammar errors"), never digits standing for a score.
+10. Every count you mention anywhere in the response (in comments, strengths, improvements) — like how many sub-parts were answered — MUST be the exact same number as subPartsAnswered/subPartsRequired in your analysis. Do not re-count independently in a later field; reuse the number you already committed to in Step 2.
+11. Respond ONLY with valid JSON, no markdown, no explanation outside JSON.
 
 WORKED EXAMPLE (for calibration only — shows the correct standard to apply, not the actual question to grade):
 Question: "Write an email to your bank manager requesting a duplicate passbook as yours was lost." Word limit: 100-150. Max marks: 15.
 Answer: "Respected Sir, I lost my passbook few days back somewhere in my home I think. So I want a new passbook please give me. I am your customer since 2 years. Please do this soon. Thank you."
 Correct analysis a senior examiner would reach: subPartsRequired=1, subPartsAnswered=1 (attempted but very thin), languageErrorCount=6 ("few days back somewhere" — awkward/unclear, "I think" — vague, "So I want a new passbook please give me" — run-on and informal, "I am your customer since 2 years" — wrong tense, should be "for 2 years", no account number or branch given despite this being essential for the request to function, no Subject line, no proper closing/signature), formatIssues="No Subject line, no closing/sign-off, only 35 words — well under the 100-150 word range so the request itself is underdeveloped."
-Correct scoring at that standard: Content & Relevance ~45-50% (states the ask but omits account number/branch — the request as written couldn't actually be processed). Structure & Format ~30-35% (missing Subject line and closing are real structural failures, not stylistic nitpicks). Language & Grammar ~40% (6 genuine errors triggers the hard ceiling in rule 6). Overall this is a BELOW AVERAGE answer (roughly 38-42%), not "average" and certainly not "good" — a common mistake is being charitable here because the tone is polite; politeness is not the same as a complete, well-formed answer. Use this same level of rigor on the real answer below, whatever section type it is.`;
+Correct scoring at that standard: Content & Relevance ~45-50% (states the ask but omits account number/branch — the request as written couldn't actually be processed). Structure & Format ~30-35% (missing Subject line and closing are real structural failures, not stylistic nitpicks). Language & Grammar 33% (6 errors, rule 6 table). Overall this is a BELOW AVERAGE answer, not "average" and certainly not "good" — a common mistake is being charitable here because the tone is polite; politeness is not the same as a complete, well-formed answer. The verdict for this example would read like: "This response attempts the task but falls short of a complete, well-formed answer. Key account details are missing, the email lacks a proper subject line and closing, and there are several grammar issues throughout." — notice: no numbers anywhere in that verdict. Use this same level of rigor on the real answer below, whatever section type it is.`;
   const p=`SECTION TYPE: ${typeName}
 WORD LIMIT: ${q.wordLimit}
 MAX MARKS: ${max}
@@ -2556,8 +2557,8 @@ STEP 1 — VALIDITY CHECK:
 
 STEP 2 — ANALYSIS (fill this in first, before any score — be exact, these numbers directly determine your scores in Step 3):
 - "subPartsRequired": if the question has multiple distinct numbered parts/sub-questions, how many are there? (Use 1 if it's a single unified task like an email/essay/report with no numbered sub-parts.)
-- "subPartsAnswered": of those, how many did the student actually attempt, even partially? Check carefully — count only parts with a real, on-topic attempt, not a placeholder.
-- "missingParts": brief note naming which part(s) were skipped, or "none".
+- "subPartsAnswered": of those, how many did the student actually attempt, even partially? Check EVERY part individually against the student's answer before concluding it's missing — do not assume based on length alone.
+- "missingParts": name the EXACT number(s) of any part(s) skipped, e.g. "Question 5" — never a vague description. Use "none" only if truly all parts were attempted.
 - "languageErrorCount": scan the answer sentence-by-sentence and count every genuine error — wrong articles (a/an/the), wrong prepositions, subject-verb disagreement, wrong tense, run-on/fragment sentences, misspelled words. Do not count stylistic preferences as errors. Give the exact number.
 - "formatIssues": brief note on structural problems (e.g. "no paragraph breaks", "missing salutation"), or "none".
 
@@ -2565,7 +2566,7 @@ STEP 3 — SCORING (derive every score below from the analysis you just wrote �
 Score each of the 3 parameters using the exact max shown for each (they are pre-distributed — do not change them). Half-mark (0.5) increments are allowed and encouraged where they're a more honest reflection than a whole number. Word limit adherence is scored separately by the system, not by you — ignore word count except where it reflects genuinely incomplete/rushed content:
 
 [Content & Relevance /${pMax[0]}]
-- Apply Hard Rule 4 first if subPartsAnswered < subPartsRequired.
+- Apply Hard Rule 4 first if subPartsAnswered < subPartsRequired — use the exact same subPartsAnswered/subPartsRequired numbers, do not recount.
 - Full marks: All key points covered with accurate, question-specific detail and banking/professional knowledge.
 - 75%: Most key points covered, minor gaps.
 - 50%: Some relevant points but significant gaps or vague content.
@@ -2581,7 +2582,7 @@ Score each of the 3 parameters using the exact max shown for each (they are pre-
 - 0 if format is completely wrong for the type.
 
 [Language & Grammar /${pMax[2]}]
-- This score MUST match languageErrorCount from your analysis: 0 errors = 95-100%. 1-2 errors = 80-90%. 3-4 errors = 60-75%. 5-7 errors = 40-50% (hard ceiling). 8+ errors = under 25%. Gibberish = 0.
+- This score MUST use the exact table from Hard Rule 6, applied to languageErrorCount from your analysis: 0 errors=100%, 1-2=85%, 3-4=65%, 5-6=33%, 7+=0%. No other value is permitted.
 
 STEP 4 — totalScore must equal the sum of the 3 parameter scores exactly (may be a half-mark value, e.g. 9.5).
 
@@ -2603,8 +2604,8 @@ STRICT RULES for this list, all mandatory:
 - Cap the list at the 8 most illustrative genuine errors. If there were no genuine mistakes at all, return an empty array — the key must still be present.`:
 `The student wrote only ${wc} words, below the ${correctionThreshold}-word minimum needed for this feature to be useful. Skip this step entirely: return correctedAnswer as an empty string and mistakes as an empty array.`}
 
-Return ONLY this JSON — every key must be present in this order (analysis before parameters before everything else):
-{"analysis":{"subPartsRequired":<n>,"subPartsAnswered":<n>,"missingParts":"<text or 'none'>","languageErrorCount":<n>,"formatIssues":"<text or 'none'>"},"parameters":[{"name":"Content & Relevance","score":<n>,"max":${pMax[0]},"comment":"<specific 1-sentence critique>"},{"name":"Structure & Format","score":<n>,"max":${pMax[1]},"comment":"<specific 1-sentence critique>"},{"name":"Language & Grammar","score":<n>,"max":${pMax[2]},"comment":"<specific 1-sentence critique>"}],"totalScore":<n>,"correctedAnswer":"<answer with only genuine errors fixed, changed parts wrapped in {{double curly braces}}, or empty string if gibberish>","mistakes":[{"type":"<Spelling|Grammar|Word Choice|Punctuation>","original":"<text>","corrected":"<text>","reason":"<short reason>"}],"strengths":["<specific strength or 'None identified' if gibberish>"],"improvements":["<specific actionable point>","<specific actionable point>","<specific actionable point>"],"overallVerdict":"<2-3 honest sentences — state clearly if answer is unacceptable, below average, average, good, or excellent and why, referencing missingParts if any>"}`;
+Return ONLY this JSON — every key must be present in this order (analysis before parameters before everything else). Remember Hard Rule 9: overallVerdict, strengths, and improvements must contain ZERO numbers/fractions/percentages anywhere:
+{"analysis":{"subPartsRequired":<n>,"subPartsAnswered":<n>,"missingParts":"<exact part number(s) or 'none'>","languageErrorCount":<n>,"formatIssues":"<text or 'none'>"},"parameters":[{"name":"Content & Relevance","score":<n>,"max":${pMax[0]},"comment":"<specific 1-sentence critique, no numbers>"},{"name":"Structure & Format","score":<n>,"max":${pMax[1]},"comment":"<specific 1-sentence critique, no numbers>"},{"name":"Language & Grammar","score":<n>,"max":${pMax[2]},"comment":"<specific 1-sentence critique, no numbers>"}],"totalScore":<n>,"correctedAnswer":"<answer with only genuine errors fixed, changed parts wrapped in {{double curly braces}}, or empty string if gibberish>","mistakes":[{"type":"<Spelling|Grammar|Word Choice|Punctuation>","original":"<text>","corrected":"<text>","reason":"<short reason>"}],"strengths":["<specific strength, no numbers, or 'None identified' if gibberish>"],"improvements":["<specific actionable point, no numbers>","<specific actionable point, no numbers>","<specific actionable point, no numbers>"],"overallVerdict":"<2-3 honest sentences, ZERO numbers anywhere — state clearly if answer is unacceptable, below average, average, good, or excellent and why, referencing missingParts by name if any>"}`;
   try{
     const res=await fetch(ep,{method:"POST",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({model:"gemini-2.5-flash-lite",max_tokens:1800,system:sys,messages:[{role:"user",content:p}]})});
@@ -2632,6 +2633,21 @@ Return ONLY this JSON — every key must be present in this order (analysis befo
       // Never trust the model's self-reported totalScore — recompute it deterministically
       // from the parameter scores (3 AI-judged + 1 computed) so the displayed total always matches the breakdown.
       result.totalScore=Math.round(result.parameters.reduce((a,pr)=>a+pr.score,0)*2)/2;
+      // Defensive backstop for Hard Rule 9: even though the AI is instructed never to state a
+      // number in the verdict, if it slips one in anyway (as seen in testing — e.g. stating a
+      // different total than the real score), that number could contradict the real total.
+      // Rather than risk displaying a false/contradictory number, detect and replace it with a
+      // safe verdict generated from the actual, correct percentage.
+      const _fullMax=q.marks;
+      const _pct=_fullMax>0?Math.round((result.totalScore/_fullMax)*100):0;
+      const _numberPattern=/\d+(\.\d+)?\s*(\/|out of|-)\s*\d+|\d+(\.\d+)?\s*%|\bscor(e|ing)\s+\d/i;
+      if(typeof result.overallVerdict==="string"&&_numberPattern.test(result.overallVerdict)){
+        const _band=isGibberish?"unacceptable":_pct<40?"below average":_pct<60?"an average":_pct<75?"a good":_pct<90?"an excellent":"an outstanding";
+        result.overallVerdict=isGibberish?"This response does not meaningfully attempt the question, so no credit can be given.":
+          `This is ${_band} response. See the parameter breakdown above for specific strengths and gaps.`;
+      }
+      if(Array.isArray(result.strengths)){result.strengths=result.strengths.filter(s=>typeof s!=="string"||!_numberPattern.test(s));if(!result.strengths.length)result.strengths=["Attempted the question with a relevant response."];}
+      if(Array.isArray(result.improvements)){result.improvements=result.improvements.filter(s=>typeof s!=="string"||!_numberPattern.test(s));}
       if(isGibberish||!eligibleForCorrection){result.correctedAnswer="";result.mistakes=[];}
       if(typeof result.correctedAnswer!=="string")result.correctedAnswer="";
       if(!Array.isArray(result.mistakes))result.mistakes=[];
