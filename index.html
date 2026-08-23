@@ -2461,6 +2461,32 @@ function computeWordLimitScore(wc,wlStr,maxMarks){
   const score=Math.round(pct*maxMarks*2)/2;
   return{name:"Word Limit",score,max:maxMarks,comment};
 }
+function checkSubParts(qText,ans){
+  // Code-verified ground truth for multi-part questions (comprehension (a)/(b)/(c)... or (1)/(2)/(3)...),
+  // computed BEFORE the AI sees the answer — same pattern as checkStructureElements. The AI's own
+  // counting of "which sub-questions were answered" is exactly what caused a 4-of-5-answered submission
+  // to be scored and described as "3 of 5, missing Q4" — this removes that entire class of error by
+  // never trusting the model's self-report for something a regex can verify.
+  const q=qText||"",a=ans||"";
+  // Detect the label style actually used in the question text: (a)(b)(c)... or (1)(2)(3)...
+  const letterLabels=[...q.matchAll(/\((a|b|c|d|e)\)/gi)].map(m=>m[1].toLowerCase());
+  const numberLabels=[...q.matchAll(/\((\d)\)/g)].map(m=>m[1]);
+  const uniqueLetters=[...new Set(letterLabels)];
+  const uniqueNumbers=[...new Set(numberLabels)];
+  const labels=uniqueLetters.length>=2?uniqueLetters:(uniqueNumbers.length>=2?uniqueNumbers:null);
+  if(!labels)return null; // not a multi-part question — nothing to verify
+  // For each label, check whether the answer has a matching marker followed by a real attempt
+  // (at least 3 words before the next marker or end of text) rather than just the bare label.
+  const found=labels.map(lbl=>{
+    const esc=String(lbl).replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+    const re=new RegExp("\\("+esc+"\\)\\s*([^]*?)(?=\\([a-eA-E1-9]\\)|$)","i");
+    const m=a.match(re);
+    if(!m)return false;
+    return (m[1]||"").trim().split(/\s+/).filter(Boolean).length>=3;
+  });
+  const count=found.filter(Boolean).length;
+  return{labels,found,count,total:labels.length};
+}
 function checkStructureElements(ans,type){
   const a=ans||"";
   if(type==="email"){
@@ -2495,7 +2521,11 @@ async function evalWithAI(q,ans,wc,wpm){
   // so it's computed deterministically below instead of asking the AI to judge it — this removes
   // an entire class of scoring errors on something that should never be wrong.
   // The remaining 3 parameters (genuinely subjective) split the rest of the marks between them.
-  const wlMax=Math.round(max/4);
+  // Previously max/4 (25%) — word-limit compliance was worth as much as Content & Relevance,
+  // which let answers with thin content but the right length score misleadingly high. Word count
+  // is a compliance check, not a proxy for quality, so its share is capped lower and the freed
+  // marks flow into the 3 genuinely-judged pillars below.
+  const wlMax=Math.max(1,Math.round(max*0.15));
   const restMax=max-wlMax;
   const base=Math.floor(restMax/3),rem=restMax-base*3;
   const pMax=[base+(rem>0?1:0),base+(rem>1?1:0),base];
@@ -2505,6 +2535,17 @@ async function evalWithAI(q,ans,wc,wpm){
   // ceiling on Structure & Format afterward regardless of what the AI scores, same pattern as Word Limit.
   const structCheck=checkStructureElements(ans,q.type);
   let structPromptNote="",structCapPct=1;
+  // Code-verified sub-part ground truth (see checkSubParts above) — same treat-as-fact /
+  // hard-cap-afterward pattern as the structural check, closing the gap that let a 4-of-5-answered
+  // submission get miscounted and described as "3 of 5, missing Q4".
+  const subCheck=checkSubParts(q.text,ans);
+  let subPromptNote="";
+  if(subCheck){
+    const missingLabels=subCheck.labels.filter((l,i)=>!subCheck.found[i]);
+    subPromptNote=`\nSUB-PART CHECK (already verified by code — treat as ground truth, do NOT recount or contradict this): this question has ${subCheck.total} labeled sub-parts (${subCheck.labels.map(l=>"("+l+")").join(", ")}). The student made a real, on-topic attempt at exactly ${subCheck.count} of them.`+
+      (missingLabels.length?` Unattempted/missing: ${missingLabels.map(l=>"("+l+")").join(", ")}. Use this exact list for "missingParts" — do not name a different part as missing.`:" All sub-parts were attempted — do not claim otherwise.")+
+      ` Set subPartsRequired=${subCheck.total} and subPartsAnswered=${subCheck.count} exactly as given here.`;
+  }
   if(structCheck.kind==="email"||structCheck.kind==="report"){
     const missing=structCheck.required.filter((r,i)=>!structCheck.found[i]);
     structPromptNote=`STRUCTURAL CHECK (already verified by code — treat as ground truth, do not re-guess these): `+
@@ -2535,7 +2576,8 @@ HARD RULES YOU MUST FOLLOW WITHOUT EXCEPTION:
 7. CONTENT ACCURACY: Award marks only for points directly relevant to the question scenario. Generic or vague points get partial credit. Irrelevant points get zero content credit.
 8. DO NOT inflate scores to be encouraging. A mediocre answer should score 40–55%. A good answer 60–75%. An excellent answer 80–90%. Near-perfect answers 90%+. Scores above 90% should be extremely rare.
 9. Your overallVerdict's descriptive word must match the final percentage using rule 8's bands. Since verdict is written after scores in this schema, this should already agree — if you notice a mismatch, it means you under-penalized in analysis, not that you should just pick softer verdict words.
-10. Respond ONLY with valid JSON, no markdown, no explanation outside JSON.
+10. overallVerdict must NEVER state or imply a numeric score, fraction, or percentage (no "X out of 10", "X/10", "X%", etc. — not even one that matches your own totalScore). The website displays the exact score separately and will prepend it to your verdict automatically; your job is only the qualitative judgement (below average/average/good/excellent) and the reasoning behind it. A verdict containing any number is a formatting error.
+11. Respond ONLY with valid JSON, no markdown, no explanation outside JSON.
 
 WORKED EXAMPLE (for calibration only — shows the correct standard to apply, not the actual question to grade):
 Question: "Write an email to your bank manager requesting a duplicate passbook as yours was lost." Word limit: 100-150. Max marks: 15.
@@ -2548,16 +2590,14 @@ MAX MARKS: ${max}
 QUESTION: ${q.text}
 STUDENT'S ANSWER: ${ans||"(blank)"}
 WORD COUNT: ${wc} words
-${structPromptNote}
+${structPromptNote}${subPromptNote}
 
 STEP 1 — VALIDITY CHECK:
 - Is this answer blank, gibberish, random characters, or completely unrelated to the question? If YES → set all scores to 0, set overallVerdict to explain why, then return JSON.
 - Does the answer attempt to address the question at all? If NO → treat as gibberish.
 
 STEP 2 — ANALYSIS (fill this in first, before any score — be exact, these numbers directly determine your scores in Step 3):
-- "subPartsRequired": if the question has multiple distinct numbered parts/sub-questions, how many are there? (Use 1 if it's a single unified task like an email/essay/report with no numbered sub-parts.)
-- "subPartsAnswered": of those, how many did the student actually attempt, even partially? Check carefully — count only parts with a real, on-topic attempt, not a placeholder.
-- "missingParts": brief note naming which part(s) were skipped, or "none".
+- "subPartsRequired" / "subPartsAnswered" / "missingParts": if the SUB-PART CHECK note above is present, it is code-verified ground truth — copy its subPartsRequired/subPartsAnswered/missing-list values exactly, do not recount or override them. If no SUB-PART CHECK note is present, this is a single unified task (email/essay/report with no numbered sub-parts) — use subPartsRequired=1, subPartsAnswered=1, missingParts="none".
 - "languageErrorCount": scan the answer sentence-by-sentence and count every genuine error — wrong articles (a/an/the), wrong prepositions, subject-verb disagreement, wrong tense, run-on/fragment sentences, misspelled words. Do not count stylistic preferences as errors. Give the exact number.
 - "formatIssues": brief note on structural problems (e.g. "no paragraph breaks", "missing salutation"), or "none".
 
@@ -2604,7 +2644,7 @@ STRICT RULES for this list, all mandatory:
 `The student wrote only ${wc} words, below the ${correctionThreshold}-word minimum needed for this feature to be useful. Skip this step entirely: return correctedAnswer as an empty string and mistakes as an empty array.`}
 
 Return ONLY this JSON — every key must be present in this order (analysis before parameters before everything else):
-{"analysis":{"subPartsRequired":<n>,"subPartsAnswered":<n>,"missingParts":"<text or 'none'>","languageErrorCount":<n>,"formatIssues":"<text or 'none'>"},"parameters":[{"name":"Content & Relevance","score":<n>,"max":${pMax[0]},"comment":"<specific 1-sentence critique>"},{"name":"Structure & Format","score":<n>,"max":${pMax[1]},"comment":"<specific 1-sentence critique>"},{"name":"Language & Grammar","score":<n>,"max":${pMax[2]},"comment":"<specific 1-sentence critique>"}],"totalScore":<n>,"correctedAnswer":"<answer with only genuine errors fixed, changed parts wrapped in {{double curly braces}}, or empty string if gibberish>","mistakes":[{"type":"<Spelling|Grammar|Word Choice|Punctuation>","original":"<text>","corrected":"<text>","reason":"<short reason>"}],"strengths":["<specific strength or 'None identified' if gibberish>"],"improvements":["<specific actionable point>","<specific actionable point>","<specific actionable point>"],"overallVerdict":"<2-3 honest sentences — state clearly if answer is unacceptable, below average, average, good, or excellent and why, referencing missingParts if any>"}`;
+{"analysis":{"subPartsRequired":<n>,"subPartsAnswered":<n>,"missingParts":"<text or 'none'>","languageErrorCount":<n>,"formatIssues":"<text or 'none'>"},"parameters":[{"name":"Content & Relevance","score":<n>,"max":${pMax[0]},"comment":"<specific 1-sentence critique>"},{"name":"Structure & Format","score":<n>,"max":${pMax[1]},"comment":"<specific 1-sentence critique>"},{"name":"Language & Grammar","score":<n>,"max":${pMax[2]},"comment":"<specific 1-sentence critique>"}],"totalScore":<n>,"correctedAnswer":"<answer with only genuine errors fixed, changed parts wrapped in {{double curly braces}}, or empty string if gibberish>","mistakes":[{"type":"<Spelling|Grammar|Word Choice|Punctuation>","original":"<text>","corrected":"<text>","reason":"<short reason>"}],"strengths":["<specific strength or 'None identified' if gibberish>"],"improvements":["<specific actionable point>","<specific actionable point>","<specific actionable point>"],"overallVerdict":"<2-3 honest sentences, NO numeric score/fraction/percentage anywhere in this string — state clearly if answer is unacceptable, below average, average, good, or excellent and why, referencing missingParts if any>"}`;
   try{
     const res=await fetch(ep,{method:"POST",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({model:"gemini-2.5-flash-lite",max_tokens:1800,system:sys,messages:[{role:"user",content:p}]})});
@@ -2624,6 +2664,23 @@ Return ONLY this JSON — every key must be present in this order (analysis befo
           const grace=structCheck.kind==="generic"?0:0.10;
           const structCap=Math.round(Math.min(structParam.max,structCapPct*structParam.max+structParam.max*grace)*2)/2;
           if(structParam.score>structCap)structParam.score=structCap;
+        }
+        // Same hard-cap treatment for Content & Relevance, driven by the code-verified sub-part
+        // count rather than trusting the model's own tally — matches Hard Rule 4's
+        // (answered÷required + 15pp grace) formula, but enforced here instead of only requested in the prompt.
+        if(subCheck){
+          const contentParam=result.parameters.find(pr=>pr.name==="Content & Relevance");
+          if(contentParam){
+            const contentCapPct=Math.min(1,subCheck.count/subCheck.total+0.15);
+            const contentCap=Math.round(Math.min(contentParam.max,contentCapPct*contentParam.max)*2)/2;
+            if(contentParam.score>contentCap)contentParam.score=contentCap;
+          }
+          if(result.analysis){
+            const missingLabels=subCheck.labels.filter((l,i)=>!subCheck.found[i]);
+            result.analysis.subPartsRequired=subCheck.total;
+            result.analysis.subPartsAnswered=subCheck.count;
+            result.analysis.missingParts=missingLabels.length?missingLabels.map(l=>"("+l+")").join(", "):"none";
+          }
         }
       }
       const wl=computeWordLimitScore(wc,q.wordLimit,wlMax);
@@ -2760,8 +2817,19 @@ function renderAIBlock(result,max){
     ${bars}
     ${s?`<div style="margin-top:10px"><div class="blbl-s">Strengths</div><div class="ftags">${s}</div></div>`:""}
     ${imp?`<div style="margin-top:8px"><div class="blbl-s">Improve</div><div class="ftags">${imp}</div></div>`:""}
-    <div class="verdict" style="margin-top:9px"><div class="blbl-s">Verdict</div>${result.overallVerdict||""}</div>
+    <div class="verdict" style="margin-top:9px"><div class="blbl-s">Verdict</div>Scoring ${result.totalScore}/${max} (${pct}%) — ${stripScoreMentions(result.overallVerdict||"")}</div>
   </div>`;
+}
+function stripScoreMentions(txt){
+  // Defense in depth: even though the prompt now forbids the model from stating a numeric
+  // score inside overallVerdict, strip any that slip through anyway (e.g. "5.5 out of 10",
+  // "8.5/10", "55%") so the templated real score above is always the only number shown.
+  return String(txt||"")
+    .replace(/\b\d+(\.\d+)?\s*(?:\/|out of)\s*\d+(\.\d+)?\b/gi,"")
+    .replace(/\b\d+(\.\d+)?\s*%/g,"")
+    .replace(/\s{2,}/g," ")
+    .replace(/\s+([,.])/g,"$1")
+    .trim();
 }
 let _lastAIArgs=null;
 async function runAI(ans,wc,wpm){
