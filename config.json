@@ -28,8 +28,8 @@
     "apiProxy": "https://weathered-math-4ca8.descriptivepreptoday.workers.dev/",
     "marqueeText": "★ Descriptive Practice ★ AI Evaluation ★ Model Answers ★ Typing Speed Test ★ Exam-Pattern Interface ★",
     "marqueeSpeed": 25,
-    "festiveTheme": "none",
-    "maintenanceMode": true,
+    "festiveTheme": "rakhi",
+    "maintenanceMode": false,
     "maintenanceMessage": "We'll be back soon."
   },
   "sectionTypes": [
