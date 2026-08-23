@@ -2458,6 +2458,28 @@ function computeWordLimitScore(wc,wlStr,maxMarks){
   const score=Math.round(pct*maxMarks*2)/2;
   return{name:"Word Limit",score,max:maxMarks,comment};
 }
+function checkStructureElements(ans,type){
+  const a=ans||"";
+  if(type==="email"){
+    const hasSubject=/\bsubject\s*:/i.test(a)||/\bsubject\b/i.test(a.split("\n").slice(0,3).join(" "));
+    const hasGreeting=/\b(dear|respected|sir|madam|to whom it may concern|hi|hello)\b/i.test(a);
+    const hasClosing=/\b(regards|sincerely|yours faithfully|yours truly|yours sincerely|thanking you)\b/i.test(a);
+    const found=[hasSubject,hasGreeting,hasClosing].filter(Boolean).length;
+    return{kind:"email",required:["Subject line","Greeting/Salutation","Closing/Sign-off"],found:[hasSubject,hasGreeting,hasClosing],count:found,total:3};
+  }
+  if(type==="report"){
+    const firstLines=a.split("\n").slice(0,3).join(" ");
+    const hasHeading=/\breport\s+on\b/i.test(a)||/\btitle\s*:/i.test(a)||/^[A-Z0-9\s\-:]{8,}$/.test((a.split("\n")[0]||"").trim());
+    const hasDate=/\bdate\s*:/i.test(a)||/\b\d{1,2}(st|nd|rd|th)?\s+(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/i.test(a)||/\d{1,2}\/\d{1,2}\/\d{2,4}/.test(a);
+    const hasRecommendation=/\b(recommend|suggest|conclusion|it is advised|going forward)\b/i.test(a);
+    const found=[hasHeading,hasDate,hasRecommendation].filter(Boolean).length;
+    return{kind:"report",required:["Heading/Title","Date reference","Recommendation/Conclusion"],found:[hasHeading,hasDate,hasRecommendation],count:found,total:3};
+  }
+  // For situation/precis/essay/comprehension-style answers: paragraphing is the one
+  // objectively checkable structural signal — does the answer have more than one paragraph break?
+  const paraCount=a.split(/\n\s*\n|\n/).map(s=>s.trim()).filter(Boolean).length;
+  return{kind:"generic",hasParagraphs:paraCount>1,paraCount};
+}
 async function evalWithAI(q,ans,wc,wpm){
   const d=D(),cfg=d.siteSettings||{};
   let ep="";
@@ -2474,6 +2496,22 @@ async function evalWithAI(q,ans,wc,wpm){
   const restMax=max-wlMax;
   const base=Math.floor(restMax/3),rem=restMax-base*3;
   const pMax=[base+(rem>0?1:0),base+(rem>1?1:0),base];
+  // Code-verified structural facts, computed BEFORE the AI sees the answer, so it doesn't have to
+  // re-derive (and possibly get wrong) things that are objectively checkable — e.g. "is there a
+  // Subject line" isn't a judgment call, it's a plain text search. This also lets us enforce a hard
+  // ceiling on Structure & Format afterward regardless of what the AI scores, same pattern as Word Limit.
+  const structCheck=checkStructureElements(ans,q.type);
+  let structPromptNote="",structCapPct=1;
+  if(structCheck.kind==="email"||structCheck.kind==="report"){
+    const missing=structCheck.required.filter((r,i)=>!structCheck.found[i]);
+    structPromptNote=`STRUCTURAL CHECK (already verified by code — treat as ground truth, do not re-guess these): `+
+      structCheck.required.map((r,i)=>r+": "+(structCheck.found[i]?"present":"MISSING")).join(", ")+
+      (missing.length?`. Missing required elements: ${missing.join(", ")}.`:". All required elements present.");
+    structCapPct=structCheck.count/structCheck.total;
+  }else{
+    structPromptNote=`STRUCTURAL CHECK (already verified by code): the answer has ${structCheck.paraCount} paragraph break(s) — `+(structCheck.hasParagraphs?"multiple paragraphs, acceptable separation.":"written as a single unbroken block with no paragraph breaks at all.");
+    structCapPct=structCheck.hasParagraphs?1:0.5;
+  }
   // The "corrected answer" feature only makes sense once there's a substantive attempt to correct —
   // gate it deterministically at 2/3 of the word limit's lower bound, same threshold style used
   // elsewhere in this app, rather than leaving it to the AI's judgment.
@@ -2494,13 +2532,20 @@ HARD RULES YOU MUST FOLLOW WITHOUT EXCEPTION:
 7. CONTENT ACCURACY: Award marks only for points directly relevant to the question scenario. Generic or vague points get partial credit. Irrelevant points get zero content credit.
 8. DO NOT inflate scores to be encouraging. A mediocre answer should score 40–55%. A good answer 60–75%. An excellent answer 80–90%. Near-perfect answers 90%+. Scores above 90% should be extremely rare.
 9. Your overallVerdict's descriptive word must match the final percentage using rule 8's bands. Since verdict is written after scores in this schema, this should already agree — if you notice a mismatch, it means you under-penalized in analysis, not that you should just pick softer verdict words.
-10. Respond ONLY with valid JSON, no markdown, no explanation outside JSON.`;
+10. Respond ONLY with valid JSON, no markdown, no explanation outside JSON.
+
+WORKED EXAMPLE (for calibration only — shows the correct standard to apply, not the actual question to grade):
+Question: "Write an email to your bank manager requesting a duplicate passbook as yours was lost." Word limit: 100-150. Max marks: 15.
+Answer: "Respected Sir, I lost my passbook few days back somewhere in my home I think. So I want a new passbook please give me. I am your customer since 2 years. Please do this soon. Thank you."
+Correct analysis a senior examiner would reach: subPartsRequired=1, subPartsAnswered=1 (attempted but very thin), languageErrorCount=6 ("few days back somewhere" — awkward/unclear, "I think" — vague, "So I want a new passbook please give me" — run-on and informal, "I am your customer since 2 years" — wrong tense, should be "for 2 years", no account number or branch given despite this being essential for the request to function, no Subject line, no proper closing/signature), formatIssues="No Subject line, no closing/sign-off, only 35 words — well under the 100-150 word range so the request itself is underdeveloped."
+Correct scoring at that standard: Content & Relevance ~45-50% (states the ask but omits account number/branch — the request as written couldn't actually be processed). Structure & Format ~30-35% (missing Subject line and closing are real structural failures, not stylistic nitpicks). Language & Grammar ~40% (6 genuine errors triggers the hard ceiling in rule 6). Overall this is a BELOW AVERAGE answer (roughly 38-42%), not "average" and certainly not "good" — a common mistake is being charitable here because the tone is polite; politeness is not the same as a complete, well-formed answer. Use this same level of rigor on the real answer below, whatever section type it is.`;
   const p=`SECTION TYPE: ${typeName}
 WORD LIMIT: ${q.wordLimit}
 MAX MARKS: ${max}
 QUESTION: ${q.text}
 STUDENT'S ANSWER: ${ans||"(blank)"}
 WORD COUNT: ${wc} words
+${structPromptNote}
 
 STEP 1 — VALIDITY CHECK:
 - Is this answer blank, gibberish, random characters, or completely unrelated to the question? If YES → set all scores to 0, set overallVerdict to explain why, then return JSON.
@@ -2525,8 +2570,9 @@ Score each of the 3 parameters using the exact max shown for each (they are pre-
 - 0%: Off-topic, irrelevant, or gibberish.
 
 [Structure & Format /${pMax[1]}]
-- For EMAIL: Must have To, Subject, Salutation, Body paragraphs, Closing, Signature. Missing any = heavy deduction.
-- For REPORT: Must have heading, date, To, Subject, body with sections, recommendation, signature. Missing = heavy deduction.
+- Use the STRUCTURAL CHECK note above the question — it's already verified by code, so trust it rather than re-scanning yourself. Any element marked MISSING there is a confirmed absence, not something to give benefit of the doubt on.
+- For EMAIL: Must have Subject, Greeting, and Closing at minimum. Missing any = heavy deduction.
+- For REPORT: Must have Heading, Date, and Recommendation at minimum. Missing = heavy deduction.
 - For SITUATION/PRECIS/ESSAY/COMPREHENSION: Requires visible paragraphing/clear separation between answers and logical flow.
 - CONCRETE PENALTY: a single unbroken block of text with no breaks at all (for a type that requires them) caps this parameter at 50%, regardless of how logical the content order is.
 - 0 if format is completely wrong for the type.
@@ -2567,6 +2613,16 @@ Return ONLY this JSON — every key must be present in this order (analysis befo
       // If the AI's 3 judged parameters are all zero, this was flagged as gibberish/blank/off-topic —
       // in that case word-limit compliance is meaningless, so zero it out too instead of trusting the word count.
       const isGibberish=result.parameters.every(pr=>pr.score===0);
+      // Enforce a hard ceiling on Structure & Format from the code-verified structural check, same
+      // pattern as word limit — don't just trust the AI to have honored what the prompt asked it to.
+      if(!isGibberish){
+        const structParam=result.parameters.find(pr=>pr.name==="Structure & Format");
+        if(structParam){
+          const grace=structCheck.kind==="generic"?0:0.10;
+          const structCap=Math.round(Math.min(structParam.max,structCapPct*structParam.max+structParam.max*grace)*2)/2;
+          if(structParam.score>structCap)structParam.score=structCap;
+        }
+      }
       const wl=computeWordLimitScore(wc,q.wordLimit,wlMax);
       if(isGibberish)wl.score=0;
       result.parameters.push(wl);
