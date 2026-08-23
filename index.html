@@ -665,20 +665,20 @@ header .h-brand:hover{background:var(--brut-tint);}
 .panel-pop .t-choice.on{border-color:var(--b);background:var(--brut-tint);}
 /* ── Festive themes (admin-toggleable, homepage hero only, subtle by design) ── */
 .festive-layer{position:absolute;top:0;left:0;right:0;height:260px;overflow:hidden;pointer-events:none;z-index:1;}
-.festive-layer .fp{position:absolute;top:-24px;border-radius:50%;opacity:.55;animation:festiveFall linear infinite;}
-.festive-layer .fp.spark{border-radius:50%;animation:festiveTwinkle ease-in-out infinite;opacity:0;}
+.festive-layer .fp{position:absolute;top:-24px;border-radius:50%;opacity:.85;animation:festiveFall linear infinite;box-shadow:0 1px 4px rgba(0,0,0,.3),0 0 0 1px rgba(0,0,0,.06);}
+.festive-layer .fp.spark{border-radius:50%;animation:festiveTwinkle ease-in-out infinite;opacity:0;box-shadow:0 0 6px rgba(0,0,0,.15);}
 @keyframes festiveFall{
   0%{transform:translateY(0) translateX(0) rotate(0deg);opacity:0;}
-  8%{opacity:.55;}
+  8%{opacity:.85;}
   100%{transform:translateY(280px) translateX(var(--drift,12px)) rotate(180deg);opacity:0;}
 }
 @keyframes festiveTwinkle{
   0%,100%{opacity:0;transform:scale(.6);}
-  50%{opacity:.7;transform:scale(1.15);}
+  50%{opacity:.95;transform:scale(1.15);}
 }
 .festive-tricolor-bar{position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#FF9933 0 33.33%,#FFFFFF 33.33% 66.66%,#138808 66.66% 100%);opacity:.85;z-index:2;}
-#festive-hat{display:none;align-items:center;margin-right:3px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.18));flex-shrink:0;}
-#festive-hat svg{display:block;}
+.festive-badge{display:none;position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;align-items:center;justify-content:center;background:var(--bg2);box-shadow:0 2px 6px rgba(0,0,0,.12),0 0 0 1px var(--b);z-index:2;pointer-events:none;}
+@media(max-width:640px){.festive-badge{width:32px;height:32px;top:10px;right:10px;}}
 @media(prefers-reduced-motion:reduce){
   .festive-layer .fp{animation:none!important;opacity:0!important;}
 }
@@ -701,7 +701,6 @@ header .h-brand:hover{background:var(--brut-tint);}
 </div>
 <header>
   <a class="h-brand" id="h-brand" onclick="handleBrand(event)" href="#">
-    <span id="festive-hat" style="display:none"></span>
     <img id="site-logo" class="site-logo" src="" alt="logo"/>
     <span class="site-name" id="site-name">
       <span class="site-name-top">Descriptive</span>
@@ -751,7 +750,10 @@ header .h-brand:hover{background:var(--brut-tint);}
   </div>
 </div>
 <div id="home" class="screen active" style="visibility:hidden">
-  <div id="festive-layer" class="festive-layer" aria-hidden="true"></div>
+  <div id="festive-layer" class="festive-layer" aria-hidden="true">
+    <div id="festive-particles"></div>
+    <div id="festive-badge" class="festive-badge"></div>
+  </div>
   <div class="eyebrow" id="h-eyebrow">Free Practice Platform</div>
   <h1 class="h-title" id="h-title">SBI PO Descriptive<br>Practice 2026</h1>
   <p class="h-sub" id="h-sub">Exam-pattern interface · AI evaluation · Model answers · Typing speed tracker</p>
@@ -1454,7 +1456,7 @@ const FESTIVE_THEMES={
   tricolor:{type:'bar'},
   holi:{type:'dots',colors:['#FF4D6D','#FFC107','#4CAF50','#2196F3','#E040FB','#FF7043'],size:[5,9],count:12},
   diwali:{type:'spark',colors:['#FFD700','#FFA500','#FFEB99'],size:[4,7],count:8,icon:'diya'},
-  christmas:{type:'dots',colors:['#FFFFFF','#E8F4FF'],size:[4,7],count:14,icon:'santahat'},
+  christmas:{type:'dots',colors:['#FFFFFF','#BFE0FF'],size:[4,7],count:14,icon:'santahat'},
   newyear:{type:'dots',colors:['#FFD700','#FFFFFF','#C0C0C0','#E2B714'],size:[4,8],count:12},
   eid:{type:'spark',colors:['#00A86B','#FFD700','#E8F5E9'],size:[4,7],count:8,icon:'crescent'},
   rakhi:{type:'dots',colors:['#D6382C','#FFD700','#FF9933'],size:[4,7],count:10,icon:'rakhi'},
@@ -1465,10 +1467,11 @@ const FESTIVE_THEMES={
 };
 function renderFestiveTheme(theme){
   const layer=document.getElementById('festive-layer');
-  const hat=document.getElementById('festive-hat');
-  if(!layer)return;
-  layer.innerHTML='';
-  if(hat){hat.style.display='none';hat.innerHTML='';}
+  const particles=document.getElementById('festive-particles');
+  const badge=document.getElementById('festive-badge');
+  if(!layer||!particles)return;
+  particles.innerHTML='';
+  if(badge){badge.style.display='none';badge.innerHTML='';}
   if(!theme||theme==='none')return;
   const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const mkParticle=function(colors,sizeRange,count,spark){
@@ -1486,13 +1489,13 @@ function renderFestiveTheme(theme){
   };
   const cfgT=FESTIVE_THEMES[theme];
   if(!cfgT)return;
-  if(cfgT.icon&&hat&&FESTIVE_ICONS[cfgT.icon]){hat.style.display='inline-flex';hat.innerHTML=FESTIVE_ICONS[cfgT.icon];}
+  if(cfgT.icon&&badge&&FESTIVE_ICONS[cfgT.icon]){badge.style.display='flex';badge.innerHTML=FESTIVE_ICONS[cfgT.icon];}
   if(cfgT.type==='bar'){
-    layer.innerHTML='<div class="festive-tricolor-bar"></div>';
+    particles.innerHTML='<div class="festive-tricolor-bar"></div>';
   }else if(cfgT.type==='dots'&&!reduced){
-    layer.innerHTML=mkParticle(cfgT.colors,cfgT.size,cfgT.count,false);
+    particles.innerHTML=mkParticle(cfgT.colors,cfgT.size,cfgT.count,false);
   }else if(cfgT.type==='spark'&&!reduced){
-    layer.innerHTML=mkParticle(cfgT.colors,cfgT.size,cfgT.count,true);
+    particles.innerHTML=mkParticle(cfgT.colors,cfgT.size,cfgT.count,true);
   }
 }
 function renderHome(){
