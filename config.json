@@ -186,7 +186,7 @@
       "wordLimit": "150 words (30-40 words per answer)",
       "marks": 10,
       "difficulty": "medium",
-      "active": true,
+      "active": false,
       "mockNo": 1
     },
     {
@@ -210,7 +210,7 @@
       "wordLimit": "150 words (30-40 words per answer)",
       "marks": 10,
       "difficulty": "medium",
-      "active": true,
+      "active": false,
       "mockNo": 2
     },
     {
