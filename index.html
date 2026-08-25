@@ -317,13 +317,20 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .rcard{background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);overflow:hidden;margin-bottom:10px}
 .rcard-h{background:var(--bg3);padding:7px 14px;font-family:var(--mono);font-size:.6rem;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid var(--b)}
 .rcard-b{padding:14px}
+.ch{background:var(--bg3);padding:9px 16px;font-family:var(--mono);font-size:.62rem;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--b)}
+.cb{padding:16px}
+details.rcard summary.rcard-h{cursor:pointer;display:flex;align-items:center;justify-content:space-between;list-style:none;-webkit-tap-highlight-color:transparent;}
+details.rcard summary.rcard-h::-webkit-details-marker{display:none}
+details.rcard summary.rcard-h::after{content:'';width:6px;height:6px;border-right:1.5px solid var(--accent);border-bottom:1.5px solid var(--accent);transform:rotate(45deg);transition:transform .2s ease;margin-left:10px;flex-shrink:0;}
+details.rcard[open] summary.rcard-h::after{transform:rotate(-135deg);}
+details.rcard summary.rcard-h:hover{background:var(--bg4)}
 .ans-box{background:var(--bg3);border:1px solid var(--b);border-radius:var(--rs);padding:11px;font-size:.8rem;line-height:1.75;white-space:pre-wrap;color:var(--t2)}
 .model-box{background:var(--bg3);border:1px solid var(--gborder);border-left:3px solid var(--green);border-radius:var(--rs);padding:11px;font-size:.8rem;line-height:1.8;white-space:pre-wrap}
 .wl-mark{background:var(--adim);color:var(--accent);padding:0 3px;border-radius:3px;font-weight:600;box-decoration-break:clone;-webkit-box-decoration-break:clone;}
 .loading-row{display:flex;align-items:center;gap:8px;color:var(--t2);font-size:.8rem;padding:12px 0}
 .spin{width:15px;height:15px;border:2px solid var(--b);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
 @keyframes spin{to{transform:rotate(360deg)}}
-.sbar{margin-bottom:11px}
+.sbar{margin-bottom:9px}
 .sbar-top{display:flex;justify-content:space-between;font-size:.72rem;margin-bottom:4px;color:var(--t2)}
 .sbar-top span:last-child{font-family:var(--mono);color:var(--t)}
 .sbar-track{height:3px;background:var(--b);border-radius:2px;overflow:hidden}
@@ -925,12 +932,12 @@ header .h-brand:hover{background:var(--brut-tint);}
         <div class="stile"><div class="stile-v" id="r-wpm">-</div><div class="stile-l">WPM</div></div>
         <div class="stile"><div class="stile-v" id="r-time">-</div><div class="stile-l">Time</div></div>
       </div>
-      <div class="rcard"><div class="rcard-h">Question</div><div class="rcard-b"><div class="model-box" id="r-question" style="border-left-color:var(--accent)"></div></div></div>
-      <div class="rcard"><div class="rcard-h">Your Answer</div><div class="rcard-b"><div class="ans-box" id="r-ans"></div></div></div>
+      <details class="rcard"><summary class="rcard-h">Question</summary><div class="rcard-b"><div class="model-box" id="r-question" style="border-left-color:var(--accent)"></div></div></details>
+      <details class="rcard" id="r-ans-details" open><summary class="rcard-h">Your Answer</summary><div class="rcard-b"><div class="ans-box" id="r-ans"></div></div></details>
       <div class="rcard"><div class="rcard-h">AI Feedback</div><div class="rcard-b"><div id="r-ai"><div class="loading-row"><div class="spin"></div>Evaluating...</div></div></div></div>
-      <div class="rcard" id="r-corrected-card" style="display:none"><div class="rcard-h">Your Answer, Corrected</div><div class="rcard-b"><div id="r-corrected"></div></div></div>
-      <div class="rcard"><div class="rcard-h">✓ Model Answer</div><div class="rcard-b"><div class="model-box" id="r-model"></div></div></div>
-      <div class="rcard" id="r-history-card" style="display:none"><div class="rcard-h">Your Previous Attempts</div><div class="rcard-b"><div id="r-history"></div></div></div>
+      <details class="rcard" id="r-corrected-card" style="display:none" open><summary class="rcard-h">Your Answer, Corrected</summary><div class="rcard-b"><div id="r-corrected"></div></div></details>
+      <details class="rcard"><summary class="rcard-h">✓ Model Answer</summary><div class="rcard-b"><div class="model-box" id="r-model"></div></div></details>
+      <details class="rcard" id="r-history-card" style="display:none"><summary class="rcard-h">Your Previous Attempts</summary><div class="rcard-b"><div id="r-history"></div></div></details>
     </div>
     <!-- Full mock result -->
     <div id="r-mock" style="display:none">
@@ -2283,6 +2290,8 @@ function showResult(ans,wc,wpm,taken){
   document.getElementById("r-mock").style.display="none";
   document.getElementById("r-try-btn").style.display="";
   document.getElementById("r-title").textContent="Your Result";
+  const _ansDetails=document.getElementById("r-ans-details");if(_ansDetails)_ansDetails.open=true;
+  const _correctedCard=document.getElementById("r-corrected-card");if(_correctedCard)_correctedCard.style.display="none";
   const d=D(),tm={};d.sectionTypes.forEach(s=>tm[s.id]=s);
   document.getElementById("r-sub").textContent=(tm[CQ?.type]?.name||"")+" · "+(CQ?.wordLimit||"");
   document.getElementById("r-words").textContent=wc;document.getElementById("r-wpm").textContent=wpm;
@@ -2842,11 +2851,13 @@ function renderCorrectedText(text){
 function renderCorrectedAnswer(result){
   const card=document.getElementById('r-corrected-card');
   const wrap=document.getElementById('r-corrected');
+  const ansDetails=document.getElementById('r-ans-details');
   if(!card||!wrap)return;
   const hasCorrected=result.correctedAnswer&&result.correctedAnswer.trim();
   const hasMistakes=Array.isArray(result.mistakes)&&result.mistakes.length>0;
-  if(!hasCorrected&&!hasMistakes){card.style.display='none';return;}
+  if(!hasCorrected&&!hasMistakes){card.style.display='none';if(ansDetails)ansDetails.open=true;return;}
   card.style.display='';
+  if(ansDetails)ansDetails.open=false;
   let html='';
   if(hasCorrected){
     html+='<div class="model-box" style="white-space:pre-wrap;line-height:1.8">'+renderCorrectedText(result.correctedAnswer)+'</div>';
