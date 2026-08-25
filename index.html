@@ -2484,15 +2484,28 @@ function checkStructureElements(ans,type){
   return{kind:"generic",hasParagraphs:paraCount>1,paraCount};
 }
 function checkCopiedFromPassage(ans,qText){
-  // Detects "answers" that are really just the passage/question retyped or copy-pasted —
-  // technically on-topic (it IS the source text) but answers nothing, a distinct failure
-  // mode from gibberish that needs its own deterministic check rather than AI judgment.
-  const norm=s=>(s||"").toLowerCase().replace(/[^a-z0-9\s]/g," ").split(/\s+/).filter(w=>w.length>3);
-  const ansWords=norm(ans),srcWords=new Set(norm(qText));
-  if(ansWords.length<15)return{copied:false,overlapPct:0};
-  const overlapCount=ansWords.filter(w=>srcWords.has(w)).length;
-  const overlapPct=overlapCount/ansWords.length;
-  return{copied:overlapPct>=0.75,overlapPct:Math.round(overlapPct*100)};
+  // Detects genuine copy-pasting: a long UNBROKEN run of words appearing identically, in the
+  // same order, in both the answer and the source passage. This is deliberately NOT a word-overlap
+  // ratio check — comprehension answers are supposed to reuse the passage's vocabulary/key terms,
+  // so scattered overlapping words are normal and must not be penalized. Only a genuinely long
+  // verbatim run (50+ consecutive words) indicates copying rather than answering in one's own words.
+  const norm=s=>(s||"").toLowerCase().replace(/[^a-z0-9\s]/g," ").split(/\s+/).filter(Boolean);
+  const a=norm(ans),b=norm(qText);
+  if(a.length<10||b.length<10)return{copied:false,longestRun:0};
+  // Longest common contiguous run (word-level), O(n*m) DP — sizes here are small (a few hundred
+  // words max), so this is trivially fast.
+  let prevRow=new Array(b.length+1).fill(0),longestRun=0;
+  for(let i=1;i<=a.length;i++){
+    const curRow=new Array(b.length+1).fill(0);
+    for(let j=1;j<=b.length;j++){
+      if(a[i-1]===b[j-1]){
+        curRow[j]=prevRow[j-1]+1;
+        if(curRow[j]>longestRun)longestRun=curRow[j];
+      }
+    }
+    prevRow=curRow;
+  }
+  return{copied:longestRun>=50,longestRun};
 }
 function countCompQuestions(qText){
   const matches=(qText||"").match(/\n\s*\(([a-z]|\d{1,2})\)/gi)||(qText||"").match(/^\s*\(([a-z]|\d{1,2})\)/gim);
@@ -2503,31 +2516,43 @@ async function evalComprehensionAI(q,ans,wc,ep){
   const perQMax=2;
   const totalPossible=numQ*perQMax;
   const copyCheck=checkCopiedFromPassage(ans,q.text);
+  // Deterministic, code-only decision — this never goes through the AI at all, so there's no
+  // judgment call or inconsistency possible here, and it also saves an API call entirely.
+  if(copyCheck.copied){
+    const subQuestions=Array.from({length:numQ},(_,i)=>({name:"Question "+(i+1),score:0,max:perQMax,comment:"This answer largely reproduces the passage text rather than answering the question."}));
+    return{
+      parameters:subQuestions,
+      totalScore:0,
+      correctedAnswer:"",
+      mistakes:[],
+      strengths:[],
+      improvements:["Answer the questions in your own words instead of copying from the passage.","Focus on directly addressing what each question asks, using the passage only as a reference."],
+      overallVerdict:"This response largely repeats the passage itself rather than answering the questions asked, so no credit can be given. Please write the answers in your own words."
+    };
+  }
   const sys=`You are a strict, senior examiner grading a Comprehension section for SBI PO / IBPS PO Mains (2026 pattern). This section has ${numQ} sub-questions, each worth EXACTLY ${perQMax} marks — no other distribution is allowed. Total for this answer: ${totalPossible} marks.
 
 CRITICAL: you generate text in order and cannot revise something already written — analyze BEFORE you score, never the reverse.
 
 HARD RULES:
-1. If the "answer" is substantially the passage or question text copied/retyped rather than actual answers, this is NOT a valid attempt — award 0 to every sub-question regardless of how much text was written. A pre-check already flagged this answer as ${copyCheck.copied?`COPIED (${copyCheck.overlapPct}% word overlap with the source passage — treat this as confirmed, do not re-judge it)`:`not copied (${copyCheck.overlapPct}% overlap, within normal range)`}.
-2. Each sub-question is scored independently, 0 to ${perQMax}, in HALF-mark increments allowed (e.g. 1.5).
-3. A sub-question with NO attempt at all = 0 for that sub-question. Do not give partial credit "for effort."
-4. A sub-question that is attempted but factually wrong, off-topic, or just repeats passage text without answering = 0 or near-0.
-5. A sub-question that is attempted, on-topic, and substantively correct = full ${perQMax} marks, even if brief — comprehension answers are meant to be short (around 30-40 words each).
-6. A sub-question that is on-topic but incomplete/vague/partially correct = 1 mark (half credit).
-7. Genuine grammar/spelling errors within an answer can cost up to 0.5 marks off that sub-question's score, not more — content accuracy matters far more than polish for a 30-40 word answer.
-8. NUMBERS MUST NEVER APPEAR in overallVerdict, strengths, or improvements — describe performance in words only, never restate a score/fraction/percentage there. The real numbers already exist in the parameters array.
-9. Respond ONLY with valid JSON, no markdown, no explanation outside JSON.`;
+1. Each sub-question is scored independently, 0 to ${perQMax}, in HALF-mark increments allowed (e.g. 1.5).
+2. A sub-question with NO attempt at all = 0 for that sub-question. Do not give partial credit "for effort."
+3. A sub-question that is attempted but factually wrong or completely off-topic = 0 or near-0.
+4. A sub-question that is attempted, on-topic, and substantively correct = full ${perQMax} marks, even if brief — comprehension answers are meant to be short (around 30-40 words each). Reusing some of the passage's own vocabulary/key terms is completely normal and not a penalty — only judge whether the question was actually answered correctly.
+5. A sub-question that is on-topic but incomplete/vague/partially correct = 1 mark (half credit).
+6. Genuine grammar/spelling errors within an answer can cost up to 0.5 marks off that sub-question's score, not more — content accuracy matters far more than polish for a 30-40 word answer.
+7. NUMBERS MUST NEVER APPEAR in overallVerdict, strengths, or improvements — describe performance in words only, never restate a score/fraction/percentage there. The real numbers already exist in the parameters array.
+8. Respond ONLY with valid JSON, no markdown, no explanation outside JSON.`;
   const p=`PASSAGE + QUESTIONS: ${q.text}
 STUDENT'S FULL ANSWER: ${ans||"(blank)"}
 WORD COUNT: ${wc} words (guideline: roughly ${numQ*30}-${numQ*40} words total is expected, about 30-40 per sub-question)
-COPY-CHECK: ${copyCheck.copied?`This answer is ${copyCheck.overlapPct}% overlapping with the source passage — very likely copied/retyped rather than actually answered. Apply Hard Rule 1.`:`No significant copying detected (${copyCheck.overlapPct}% overlap).`}
 
 STEP 1 — For each of the ${numQ} sub-questions in order, determine: was it attempted at all (yes/no)? If the student used different numbering/lettering than the passage, match by content/position, not by label text.
 STEP 2 — Score each sub-question 0-${perQMax} using the hard rules above, derived directly from Step 1 — an unattempted one is 0, no exceptions.
 STEP 3 — totalScore = exact sum of all ${numQ} sub-question scores.
 
 Return ONLY this JSON (one object per sub-question in the "subQuestions" array — ${numQ} objects total, numbered 1 to ${numQ}):
-{"subQuestions":[{"num":1,"attempted":true,"score":<0-${perQMax}>,"comment":"<short 1-sentence note, no numbers>"}],"totalScore":<n>,"correctedAnswer":"<student's answer with only genuine spelling/grammar fixed, changed parts wrapped in {{double curly braces}}, or empty string if copied/gibberish>","mistakes":[{"type":"<Spelling|Grammar|Word Choice|Punctuation>","original":"<text>","corrected":"<text>","reason":"<short reason>"}],"strengths":["<specific strength, no numbers>"],"improvements":["<specific actionable point, no numbers>","<specific actionable point, no numbers>"],"overallVerdict":"<2-3 honest sentences, ZERO numbers anywhere>"}`;
+{"subQuestions":[{"num":1,"attempted":true,"score":<0-${perQMax}>,"comment":"<short 1-sentence note, no numbers>"}],"totalScore":<n>,"correctedAnswer":"<student's answer with only genuine spelling/grammar fixed, changed parts wrapped in {{double curly braces}}, or empty string if gibberish>","mistakes":[{"type":"<Spelling|Grammar|Word Choice|Punctuation>","original":"<text>","corrected":"<text>","reason":"<short reason>"}],"strengths":["<specific strength, no numbers>"],"improvements":["<specific actionable point, no numbers>","<specific actionable point, no numbers>"],"overallVerdict":"<2-3 honest sentences, ZERO numbers anywhere>"}`;
   try{
     const res=await fetch(ep,{method:"POST",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({model:"gemini-2.5-flash-lite",max_tokens:1800,system:sys,messages:[{role:"user",content:p}]})});
