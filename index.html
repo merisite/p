@@ -2511,6 +2511,35 @@ function countCompQuestions(qText){
   const matches=(qText||"").match(/\n\s*\(([a-z]|\d{1,2})\)/gi)||(qText||"").match(/^\s*\(([a-z]|\d{1,2})\)/gim);
   return matches&&matches.length>=2?matches.length:5;
 }
+// Per-type marking weights (content/structure/language/wordLimit as fractions of maxMarks).
+// This is the single source of truth for how a question type's marks are distributed — both
+// the automated AI path (evalWithAI) and the manual copy-paste fallback (buildManualEvalText)
+// read from this same table, so they can never silently diverge again. Changing maxMarks for a
+// type in sectionTypes/admin never requires touching these weights or any AI prompt — the
+// fractions just get applied to whatever max is set at grading time.
+const MARK_WEIGHTS={
+  email:     {content:0.40,structure:0.20,language:0.20,wordLimit:0.20},
+  situation: {content:0.45,structure:0.15,language:0.20,wordLimit:0.20},
+  report:    {content:0.40,structure:0.25,language:0.15,wordLimit:0.20},
+  essay:     {content:0.45,structure:0.20,language:0.20,wordLimit:0.15},
+  precis:    {content:0.45,structure:0.20,language:0.20,wordLimit:0.15},
+  default:   {content:0.40,structure:0.20,language:0.20,wordLimit:0.20}
+};
+// Splits `max` marks into 4 integer parts (content/structure/language/wordLimit) that sum to
+// EXACTLY max, using the type's weights and largest-remainder rounding (so no marks are lost
+// or double-counted to floor/ceil drift). Comprehension never calls this — it has its own
+// fixed 2-marks-per-sub-question rule in evalComprehensionAI/buildManualEvalTextComprehension.
+function splitMarksByWeight(max,type){
+  const w=MARK_WEIGHTS[type]||MARK_WEIGHTS.default;
+  const keys=["content","structure","language","wordLimit"];
+  const raw=keys.map(k=>w[k]*max);
+  const floors=raw.map(Math.floor);
+  let used=floors.reduce((a,b)=>a+b,0);
+  let remainder=Math.round(max-used);
+  const order=raw.map((v,i)=>({i,frac:v-floors[i]})).sort((a,b)=>b.frac-a.frac);
+  for(let k=0;k<remainder&&k<order.length;k++){floors[order[k].i]++;}
+  return{content:floors[0],structure:floors[1],language:floors[2],wordLimit:floors[3]};
+}
 async function evalComprehensionAI(q,ans,wc,ep){
   const numQ=countCompQuestions(q.text);
   const perQMax=2;
@@ -2600,11 +2629,12 @@ async function evalWithAI(q,ans,wc,wpm){
   // Word Limit Adherence is pure arithmetic (we already know the exact word count and limit),
   // so it's computed deterministically below instead of asking the AI to judge it — this removes
   // an entire class of scoring errors on something that should never be wrong.
-  // The remaining 3 parameters (genuinely subjective) split the rest of the marks between them.
-  const wlMax=Math.round(max/4);
-  const restMax=max-wlMax;
-  const base=Math.floor(restMax/3),rem=restMax-base*3;
-  const pMax=[base+(rem>0?1:0),base+(rem>1?1:0),base];
+  // The remaining 3 parameters (genuinely subjective) split the rest of the marks between them,
+  // weighted per question type (see MARK_WEIGHTS) rather than split equally — e.g. Content counts
+  // for more of an Email's marks than Structure does, so polished-but-empty answers can't coast.
+  const _marks=splitMarksByWeight(max,q.type);
+  const wlMax=_marks.wordLimit;
+  const pMax=[_marks.content,_marks.structure,_marks.language];
   // Code-verified structural facts, computed BEFORE the AI sees the answer, so it doesn't have to
   // re-derive (and possibly get wrong) things that are objectively checkable — e.g. "is there a
   // Subject line" isn't a judgment call, it's a plain text search. This also lets us enforce a hard
@@ -2761,11 +2791,19 @@ Return ONLY this JSON — every key must be present in this order (analysis befo
     return result;
   }catch(e){return null;}
 }
+// This is the manual copy-paste fallback prompt, shown after the automated worker fails
+// repeatedly (see aiFailHTML / manualEvalPractice / manualEvalMock). It MUST mirror the same
+// marking rules as the automated path (evalWithAI/evalComprehensionAI) — this function used to
+// always emit the generic 4-parameter template below even for comprehension questions, which is
+// exactly what produced results like "Content & Relevance 2/3, Structure & Format 1.5/2,
+// Language & Grammar 2/2, Word Limit 3/3 = 8.5/10" for a 5-question, 10-mark comprehension
+// answer: two different scoring systems disagreeing on the same question. Comprehension now
+// branches to its own per-sub-question rubric here, same as it does in evalWithAI.
 function buildManualEvalText(q,ans,wc){
+  if(q.type==="comprehension")return buildManualEvalTextComprehension(q,ans,wc);
   const d=D(),tm={};d.sectionTypes.forEach(s=>tm[s.id]=s);
   const typeName=tm[q.type]?.name||q.type,max=q.marks;
-  const base=Math.floor(max/4),rem=max-base*4;
-  const pMax=[base+(rem>0?1:0),base+(rem>1?1:0),base+(rem>2?1:0),base];
+  const marks=splitMarksByWeight(max,q.type);
   return `You are a strict, senior examiner for the SBI PO / IBPS PO Mains Descriptive Paper (2026 pattern). Evaluate my answer below the way a real bank exam evaluator would — be honest and rigorous, don't inflate the score.
 
 SECTION TYPE: ${typeName}
@@ -2778,13 +2816,37 @@ ${q.text}
 MY ANSWER (${wc} words):
 ${ans||"(blank)"}
 
-Please score me on these 4 parameters — note the max marks differ slightly per parameter so they add up to exactly ${max}:
-1. Content & Relevance (out of ${pMax[0]})
-2. Structure & Format (out of ${pMax[1]})
-3. Language & Grammar (out of ${pMax[2]})
-4. Word Limit Adherence (out of ${pMax[3]})
+Please score me on these 4 parameters — the max marks per parameter are weighted by what matters most for this question type (not split equally), and add up to exactly ${max}:
+1. Content & Relevance (out of ${marks.content})
+2. Structure & Format (out of ${marks.structure})
+3. Language & Grammar (out of ${marks.language})
+4. Word Limit Adherence (out of ${marks.wordLimit})
 
 For each parameter give a score and a one-line reason. Then give a total out of ${max} — please add up the 4 scores yourself and double-check the total actually equals their sum before giving it to me. Then give 2-3 strengths, 2-3 specific improvements, and a short overall verdict (below average / average / good / excellent).`;
+}
+// Comprehension's manual fallback: mirrors evalComprehensionAI's HARD RULE that each sub-question
+// is worth EXACTLY 2 marks, scored 0/1/2 (half-marks allowed), with no separate global Structure/
+// Word-Limit marks — never the generic 4-parameter template above.
+function buildManualEvalTextComprehension(q,ans,wc){
+  const numQ=countCompQuestions(q.text);
+  const perQMax=2;
+  const totalPossible=numQ*perQMax;
+  return `You are a strict, senior examiner grading a Comprehension section for SBI PO / IBPS PO Mains (2026 pattern). This section has ${numQ} sub-questions, each worth EXACTLY ${perQMax} marks — no other distribution is allowed. Total for this answer: ${totalPossible} marks.
+
+PASSAGE + QUESTIONS:
+${q.text}
+
+MY ANSWER (${wc} words):
+${ans||"(blank)"}
+
+Score EACH of the ${numQ} sub-questions separately and independently, using ONLY this scale per sub-question (half-marks like 0.5/1.5 allowed where genuinely in between):
+- 0 = not attempted at all, factually wrong, or completely off-topic
+- 1 = attempted, on-topic, but incomplete or vague (partial credit)
+- 2 = attempted, on-topic, and substantively correct — even if brief, since these answers are meant to be short (~30-40 words each)
+
+Do NOT create any separate "Structure & Format" or "Word Limit Adherence" marks for this section — those don't apply here, only the ${numQ} sub-question scores above. Genuine grammar/spelling errors can cost at most 0.5 off an individual sub-question's score, never more, and never a whole separate category.
+
+List each sub-question's score with a one-line reason, then give the total (sum of all ${numQ} sub-question scores, out of ${totalPossible} — add them up yourself and double-check the total actually equals their sum). Then give 2-3 strengths, 2-3 specific improvements, and a short overall verdict (below average / average / good / excellent).`;
 }
 function fallbackCopy(text,onDone){
   try{
