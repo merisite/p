@@ -2431,32 +2431,36 @@ function parseWordLimitRange(wlStr){
   if(nums.length===1)return{min:nums[0],max:nums[0]};
   return null;
 }
+// =====================================================================================
+// ROBUST AI MARKING ENGINE
+// Pipeline: QUESTION → QUESTION TYPE → MARKING PROFILE → TASK REQUIREMENT EXTRACTION →
+// OBJECTIVE CHECKS → AI CONTENT/QUALITY EVALUATION → DETERMINISTIC SCORE ENGINE →
+// VALIDATION/SAFETY GUARDS → FINAL RESULT.
+// AI = examiner's eyes (identifies what's present/missing/wrong and how well it's done).
+// Code = examiner's calculator + rulebook (decides what it's worth, caps, totals, validation).
+// The AI is NEVER allowed to state an absolute mark value or a maximum — only a 0.0–1.0
+// "quality" per criterion. All multiplication, capping, rounding, and totalling happens here.
+// =====================================================================================
+
+// ---- Deterministic word-limit score (code counts words; AI is never asked to). ----
+// Policy (configurable in one place): within range = 100%, within 10% outside = 80%,
+// within 20% outside = 50%, more than 20% outside = 0%. Never applied to comprehension.
 function computeWordLimitScore(wc,wlStr,maxMarks){
   const range=parseWordLimitRange(wlStr);
   if(!range||maxMarks<=0)return{name:"Word Limit",score:maxMarks,max:maxMarks,comment:"Word limit not specified numerically."};
-  if(wc<20)return{name:"Word Limit",score:0,max:maxMarks,comment:`Only ${wc} words written — too short to be a meaningful attempt.`};
+  if(wc<=0)return{name:"Word Limit",score:0,max:maxMarks,comment:"No answer written."};
   const{min,max}=range;
   let pct,comment;
-  if(wc<min){
-    // Below the minimum — small grace zone first (words are hard to count exactly while writing),
-    // then tapers down the further short you fall.
-    const deviation=(min-wc)/min;
-    if(deviation<=0.10){pct=1;comment=`${wc} words — within the accepted range for the ${min}${min!==max?'–'+max:''} word limit. Full marks.`;}
-    else if(deviation<=0.30){pct=0.5;comment=`${wc} words — ${min-wc} words short of the minimum ${min} word requirement.`;}
-    else{pct=Math.max(0,0.2-(deviation-0.30)*0.6);comment=`${wc} words — ${min-wc} words short of the minimum ${min} word requirement.`;}
-  }else if(wc<=max){
-    // Anywhere within the stated range (including right at the lower bound) — full marks.
-    // Word-limit adherence is a compliance check, not a "write more to score higher" incentive —
-    // thoroughness is already what Content & Relevance rewards.
+  const label=min===max?String(max):min+"–"+max;
+  if(wc>=min&&wc<=max){
     pct=1;
-    comment=min===max?`${wc} words — meets the ${max} word target. Full marks.`:`${wc} words — within the ${min}–${max} word limit. Full marks.`;
+    comment=`${wc} words — within the ${label} word limit. Full marks.`;
   }else{
-    // Over the upper limit — same small grace zone, then tapers down.
-    const deviation=(wc-max)/max;
-    if(deviation<=0.10)pct=1;
-    else if(deviation<=0.30)pct=0.5;
-    else pct=Math.max(0,0.25-(deviation-0.30)*0.8);
-    comment=`${wc} words — ${wc-max} word${wc-max===1?'':'s'} over the ${min===max?String(max):min+'–'+max} word limit.`;
+    const under=wc<min;
+    const dev=under?(min-wc)/min:(wc-max)/max;
+    if(dev<=0.10){pct=0.8;comment=`${wc} words — slightly ${under?"below the minimum":"above the maximum"} of the ${label} word limit.`;}
+    else if(dev<=0.20){pct=0.5;comment=`${wc} words — noticeably ${under?"short of":"over"} the ${label} word limit.`;}
+    else{pct=0;comment=`${wc} words — far ${under?"short of":"over"} the ${label} word limit.`;}
   }
   const score=Math.round(pct*maxMarks*2)/2;
   return{name:"Word Limit",score,max:maxMarks,comment};
@@ -2471,7 +2475,6 @@ function checkStructureElements(ans,type){
     return{kind:"email",required:["Subject line","Greeting/Salutation","Closing/Sign-off"],found:[hasSubject,hasGreeting,hasClosing],count:found,total:3};
   }
   if(type==="report"){
-    const firstLines=a.split("\n").slice(0,3).join(" ");
     const hasHeading=/\breport\s+on\b/i.test(a)||/\btitle\s*:/i.test(a)||/^[A-Z0-9\s\-:]{8,}$/.test((a.split("\n")[0]||"").trim());
     const hasDate=/\bdate\s*:/i.test(a)||/\b\d{1,2}(st|nd|rd|th)?\s+(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/i.test(a)||/\d{1,2}\/\d{1,2}\/\d{2,4}/.test(a);
     const hasRecommendation=/\b(recommend|suggest|conclusion|it is advised|going forward)\b/i.test(a);
@@ -2485,15 +2488,15 @@ function checkStructureElements(ans,type){
 }
 function checkCopiedFromPassage(ans,qText){
   // Detects genuine copy-pasting: a long UNBROKEN run of words appearing identically, in the
-  // same order, in both the answer and the source passage. This is deliberately NOT a word-overlap
-  // ratio check — comprehension answers are supposed to reuse the passage's vocabulary/key terms,
-  // so scattered overlapping words are normal and must not be penalized. Only a genuinely long
-  // verbatim run (50+ consecutive words) indicates copying rather than answering in one's own words.
+  // same order, in both the answer and the source passage. Deliberately NOT a word-overlap
+  // ratio check — comprehension answers are supposed to reuse the passage's vocabulary/key
+  // terms, so scattered overlapping words are normal and must not be penalized. Only a
+  // genuinely long verbatim run (50+ consecutive words, configurable threshold below)
+  // indicates copying rather than answering in one's own words.
+  const COPY_RUN_THRESHOLD=50;
   const norm=s=>(s||"").toLowerCase().replace(/[^a-z0-9\s]/g," ").split(/\s+/).filter(Boolean);
   const a=norm(ans),b=norm(qText);
   if(a.length<10||b.length<10)return{copied:false,longestRun:0};
-  // Longest common contiguous run (word-level), O(n*m) DP — sizes here are small (a few hundred
-  // words max), so this is trivially fast.
   let prevRow=new Array(b.length+1).fill(0),longestRun=0;
   for(let i=1;i<=a.length;i++){
     const curRow=new Array(b.length+1).fill(0);
@@ -2505,41 +2508,232 @@ function checkCopiedFromPassage(ans,qText){
     }
     prevRow=curRow;
   }
-  return{copied:longestRun>=50,longestRun};
+  return{copied:longestRun>=COPY_RUN_THRESHOLD,longestRun};
 }
 function countCompQuestions(qText){
   const matches=(qText||"").match(/\n\s*\(([a-z]|\d{1,2})\)/gi)||(qText||"").match(/^\s*\(([a-z]|\d{1,2})\)/gim);
   return matches&&matches.length>=2?matches.length:5;
 }
-// Per-type marking weights (content/structure/language/wordLimit as fractions of maxMarks).
-// This is the single source of truth for how a question type's marks are distributed — both
-// the automated AI path (evalWithAI) and the manual copy-paste fallback (buildManualEvalText)
-// read from this same table, so they can never silently diverge again. Changing maxMarks for a
-// type in sectionTypes/admin never requires touching these weights or any AI prompt — the
-// fractions just get applied to whatever max is set at grading time.
-const MARK_WEIGHTS={
-  email:     {content:0.40,structure:0.20,language:0.20,wordLimit:0.20},
-  situation: {content:0.45,structure:0.15,language:0.20,wordLimit:0.20},
-  report:    {content:0.40,structure:0.25,language:0.15,wordLimit:0.20},
-  essay:     {content:0.45,structure:0.20,language:0.20,wordLimit:0.15},
-  precis:    {content:0.45,structure:0.20,language:0.20,wordLimit:0.15},
-  default:   {content:0.40,structure:0.20,language:0.20,wordLimit:0.20}
+
+// ---- MARKING PROFILES ----
+// Percentage weights per question type — NOT absolute marks. The engine converts these into
+// actual marks from q.marks at grading time (see distributeMarks), so changing a question's
+// max marks in admin/sectionTypes never requires touching this table or any AI prompt.
+// contentCriterionId marks which single criterion receives the essential-requirement cap from
+// computeRequirementCap() (spec §11) — the "beautifully written but misses the task" guard.
+const MARKING_PROFILES={
+  email:{
+    contentCriterionId:"content",
+    structCriterionId:"format",
+    criteria:[
+      {id:"content",name:"Content & Task Fulfilment",weight:40},
+      {id:"format",name:"Format & Structure",weight:20},
+      {id:"language",name:"Language & Grammar",weight:20},
+      {id:"tone",name:"Professional Tone",weight:10},
+      {id:"wordLimit",name:"Word Limit",weight:10,deterministic:true}
+    ]
+  },
+  situation:{
+    contentCriterionId:"judgement",
+    structCriterionId:"structure",
+    criteria:[
+      {id:"understanding",name:"Understanding of Situation",weight:20},
+      {id:"task",name:"Task Fulfilment",weight:25},
+      {id:"judgement",name:"Judgement & Practical Action",weight:30},
+      {id:"structure",name:"Structure & Organisation",weight:10},
+      {id:"language",name:"Language & Grammar",weight:10},
+      {id:"wordLimit",name:"Word Limit",weight:5,deterministic:true}
+    ]
+  },
+  report:{
+    contentCriterionId:"content",
+    structCriterionId:"format",
+    criteria:[
+      {id:"content",name:"Content & Required Information",weight:40},
+      {id:"format",name:"Report Format",weight:20},
+      {id:"organisation",name:"Organisation & Coherence",weight:15},
+      {id:"language",name:"Language & Grammar",weight:15},
+      {id:"wordLimit",name:"Word Limit",weight:10,deterministic:true}
+    ]
+  },
+  essay:{
+    contentCriterionId:"content",
+    structCriterionId:"structure",
+    criteria:[
+      {id:"relevance",name:"Relevance & Task Fulfilment",weight:25},
+      {id:"content",name:"Content & Development",weight:30},
+      {id:"analysis",name:"Analysis & Argument Quality",weight:20},
+      {id:"structure",name:"Structure & Coherence",weight:15},
+      {id:"language",name:"Language & Grammar",weight:10}
+    ]
+  },
+  precis:{
+    contentCriterionId:"core",
+    structCriterionId:"organisation",
+    criteria:[
+      {id:"core",name:"Core Ideas & Accuracy",weight:40},
+      {id:"conciseness",name:"Conciseness & Compression",weight:20},
+      {id:"organisation",name:"Organisation & Coherence",weight:15},
+      {id:"language",name:"Language & Grammar",weight:15},
+      {id:"wordLimit",name:"Word Limit",weight:10,deterministic:true}
+    ]
+  },
+  default:{
+    contentCriterionId:"content",
+    structCriterionId:"structure",
+    criteria:[
+      {id:"content",name:"Content & Relevance",weight:40},
+      {id:"structure",name:"Structure & Format",weight:20},
+      {id:"language",name:"Language & Grammar",weight:20},
+      {id:"wordLimit",name:"Word Limit",weight:20,deterministic:true}
+    ]
+  }
 };
-// Splits `max` marks into 4 integer parts (content/structure/language/wordLimit) that sum to
-// EXACTLY max, using the type's weights and largest-remainder rounding (so no marks are lost
-// or double-counted to floor/ceil drift). Comprehension never calls this — it has its own
-// fixed 2-marks-per-sub-question rule in evalComprehensionAI/buildManualEvalTextComprehension.
-function splitMarksByWeight(max,type){
-  const w=MARK_WEIGHTS[type]||MARK_WEIGHTS.default;
-  const keys=["content","structure","language","wordLimit"];
-  const raw=keys.map(k=>w[k]*max);
+function getMarkingProfile(type){return MARKING_PROFILES[type]||MARKING_PROFILES.default;}
+
+// Distributes `max` marks across a profile's criteria by weight%, in 0.5-mark units, using
+// largest-remainder rounding so the parts always sum to EXACTLY max. Never
+// Math.floor(max/n) equal-splitting, and never re-derived by the AI — this is the one and only
+// place weight% becomes an actual mark value, and it recomputes fresh from q.marks every time,
+// so a question's max marks can change (20→15, etc.) with zero changes here or in any prompt.
+function distributeMarks(max,criteria){
+  const totalWeight=criteria.reduce((a,c)=>a+c.weight,0)||100;
+  const units=Math.round(max*2);
+  const raw=criteria.map(c=>(c.weight/totalWeight)*units);
   const floors=raw.map(Math.floor);
   let used=floors.reduce((a,b)=>a+b,0);
-  let remainder=Math.round(max-used);
+  let remainder=units-used;
   const order=raw.map((v,i)=>({i,frac:v-floors[i]})).sort((a,b)=>b.frac-a.frac);
-  for(let k=0;k<remainder&&k<order.length;k++){floors[order[k].i]++;}
-  return{content:floors[0],structure:floors[1],language:floors[2],wordLimit:floors[3]};
+  for(let k=0;k<remainder&&k<order.length;k++)floors[order[k].i]++;
+  const out={};
+  criteria.forEach((c,i)=>{out[c.id]=floors[i]/2;});
+  return out;
 }
+
+// ---- §11 Essential-requirement penalty ----
+// The AI identifies which task requirements exist and whether each is satisfied; this function
+// is the ONLY place that turns that into an actual numeric cap — the AI never decides the cap
+// value itself. Applied only to the profile's single contentCriterionId.
+function computeRequirementCap(taskRequirements,majorlyOffTask,isGibberish){
+  if(isGibberish)return 0;
+  if(majorlyOffTask)return 0.30;
+  if(!Array.isArray(taskRequirements)||!taskRequirements.length)return 1;
+  const essential=taskRequirements.filter(r=>r.importance==="essential");
+  if(!essential.length)return 1;
+  const missing=essential.filter(r=>!r.satisfied).length;
+  if(missing===0)return 1;
+  if(missing===1)return 0.75;
+  return 0.55; // two or more essential requirements missing
+}
+
+// Normalizes/validates the AI-supplied task-requirement list — drops malformed entries rather
+// than trusting the AI's shape blindly. This is where "task requirement extraction" output is
+// sanity-checked before it's allowed to influence a cap.
+function extractTaskRequirements(raw){
+  if(!Array.isArray(raw))return[];
+  const validImportance=new Set(["essential","important","minor"]);
+  return raw.filter(r=>r&&typeof r==="object"&&typeof r.description==="string"&&r.description.trim())
+    .map((r,i)=>({
+      id:typeof r.id==="string"&&r.id?r.id:"requirement_"+(i+1),
+      description:r.description.trim(),
+      importance:validImportance.has(r.importance)?r.importance:"important",
+      satisfied:!!r.satisfied,
+      quality:Math.max(0,Math.min(Number(r.quality)||0,1)),
+      evidence:typeof r.evidence==="string"?r.evidence:""
+    }));
+}
+
+// ---- DETERMINISTIC SCORE ENGINE ----
+// Turns AI-judged 0.0–1.0 "quality" per criterion into actual marks. This is the ONLY place
+// quality × marks multiplication happens. The AI is never allowed to state a mark value or a
+// maximum itself — only a quality fraction — so it can never invent or exceed a ceiling.
+function calculateFinalScore(question,profile,criterionQualityById,wordLimitResult,requirementCapPct,isGibberish){
+  const criteriaMax=distributeMarks(question.marks,profile.criteria);
+  const parameters=profile.criteria.map(c=>{
+    const max=criteriaMax[c.id];
+    if(c.deterministic){
+      const rawScore=isGibberish?0:(wordLimitResult?wordLimitResult.score:0);
+      const score=Math.max(0,Math.min(Math.round(rawScore*2)/2,max));
+      return{id:c.id,name:c.name,score,max,comment:isGibberish?"No credit — answer is blank, gibberish, or irrelevant.":(wordLimitResult?wordLimitResult.comment:"")};
+    }
+    const entry=criterionQualityById[c.id]||{};
+    const quality=isGibberish?0:Math.max(0,Math.min(Number(entry.quality)||0,1));
+    const cap=(c.id===profile.contentCriterionId)?requirementCapPct:1;
+    let score=Math.round(quality*cap*max*2)/2;
+    score=Math.max(0,Math.min(score,max));
+    return{id:c.id,name:c.name,score,max,comment:entry.evidence||""};
+  });
+  let totalScore=Math.round(parameters.reduce((a,p)=>a+p.score,0)*2)/2;
+  totalScore=Math.max(0,Math.min(totalScore,question.marks));
+  return{parameters,totalScore};
+}
+
+// ---- VALIDATION / SAFETY GUARDS (spec §23) ----
+// Returns null (a controlled failure — caller shows "AI evaluation failed", never a fabricated
+// score) only when the data is fundamentally unusable: NaN, missing criteria, or an
+// unrecoverable shape. Anything recoverable (an out-of-range score, a mismatched sum) is
+// clamped/recomputed here rather than trusted from the AI — the recomputed value is what's
+// actually returned, so displayed numbers can never contradict their own breakdown.
+function validateEvaluation(result,maxMarks){
+  if(!result||!Array.isArray(result.parameters)||!result.parameters.length)return null;
+  let sum=0;
+  for(const p of result.parameters){
+    if(typeof p.score!=="number"||typeof p.max!=="number")return null;
+    if(!isFinite(p.score)||!isFinite(p.max))return null;
+    if(p.max<0)return null;
+    p.score=Math.max(0,Math.min(p.score,p.max)); // no negative marks, never exceeds its own max
+    sum+=p.score;
+  }
+  sum=Math.round(sum*2)/2;
+  if(!isFinite(sum)||sum<0)return null;
+  result.totalScore=Math.max(0,Math.min(sum,maxMarks)); // sum(criteria)=finalScore, finalScore<=maxMarks
+  return result;
+}
+
+// ---- Correction validation (spec §18) ----
+// Rejects: original===corrected (nothing changed), an empty correction, internal template
+// markers leaking through, or a missing reason. Keeps a malformed corrections list from ever
+// destroying an otherwise-valid score — mistakes/styleSuggestions are discarded independently
+// of the numeric evaluation.
+function validateCorrections(list){
+  if(!Array.isArray(list))return[];
+  const badMarker=/\{\{|\}\}|<error>|\[\[fix\]\]/i;
+  return list.filter(m=>{
+    if(!m||typeof m!=="object")return false;
+    const orig=String(m.original||"").trim(),corr=String(m.corrected||"").trim();
+    if(!orig||!corr)return false;
+    if(orig===corr)return false;
+    if(badMarker.test(orig)||badMarker.test(corr))return false;
+    if(!m.reason||!String(m.reason).trim())return false;
+    return true;
+  });
+}
+
+// ---- Score bands (spec §25) — code decides the band from percentage, AI only ever explains. ----
+function getScoreBand(pct){
+  if(pct<40)return"Below Average";
+  if(pct<60)return"Average";
+  if(pct<75)return"Good";
+  if(pct<90)return"Excellent";
+  return"Outstanding";
+}
+const _NUMBER_PATTERN=/\d+(\.\d+)?\s*(\/|out of|-)\s*\d+|\d+(\.\d+)?\s*%|\bscor(e|ing)\s+\d/i;
+function bandPhrase(pct,isGibberish){
+  if(isGibberish)return"This response does not meaningfully attempt the question, so no credit can be given.";
+  const band=getScoreBand(pct);
+  const article=/^[AEIOU]/.test(band)?"an":"a";
+  return`This is ${article} ${band.toLowerCase()} response. See the parameter breakdown above for specific strengths and gaps.`;
+}
+
+// Type-specific grading guidance injected into the AI prompt (spec §29-33).
+const TYPE_GUIDANCE={
+  essay:`ESSAY-SPECIFIC RULES: Do not require exact factual points unless the question itself demands them. Judge relevance, depth, development, balance, argument quality, use of examples, logical progression, and conclusion. Generic filler or buzzwords mentioned without explanation must NOT earn high content marks.`,
+  situation:`SITUATION-ANALYSIS RULES: Reward understanding of the immediate problem, priority of actions, customer safety, correct banking procedure, practicality, professional judgement, escalation where appropriate, and prevention/follow-up. Penalise generic promises ("I will take necessary action" with no specifics), unrealistic actions, ignoring the central problem, unsafe recommendations, or actions that violate the scenario. Do not compare only against the model answer's exact wording — many different sound approaches can be equally correct.`,
+  email:`EMAIL-SPECIFIC RULES: Check recipient/context, subject when appropriate, salutation, purpose, whether ALL requested information/actions were addressed, professional tone, a clear action/request, and closing. Do NOT invent missing details (e.g. a name or exact amount the question never gave) and do not penalise the student for not inventing them either.`,
+  report:`REPORT-SPECIFIC RULES: Determine from the actual question who the report is for, what event/topic it covers, date/time, purpose, findings/activities/outcomes, and recommendations. Do not automatically demand every possible field for every report — only what this specific question calls for.`,
+  precis:`PRECIS-SPECIFIC RULES: Judge whether the student retains the central argument and major supporting ideas, removes unnecessary detail, avoids personal opinion, avoids copying large portions verbatim, maintains logical flow, and preserves the original meaning. A shorter answer is not automatically better — a precis that strips out essential meaning must lose Core Ideas marks even if it is short and grammatically clean.`
+};
+
 async function evalComprehensionAI(q,ans,wc,ep){
   const numQ=countCompQuestions(q.text);
   const perQMax=2;
@@ -2559,64 +2753,79 @@ async function evalComprehensionAI(q,ans,wc,ep){
       overallVerdict:"This response largely repeats the passage itself rather than answering the questions asked, so no credit can be given. Please write the answers in your own words."
     };
   }
-  const sys=`You are a strict, senior examiner grading a Comprehension section for SBI PO / IBPS PO Mains (2026 pattern). This section has ${numQ} sub-questions, each worth EXACTLY ${perQMax} marks — no other distribution is allowed. Total for this answer: ${totalPossible} marks.
+  const _wlRange0=parseWordLimitRange(q.wordLimit);
+  const correctionThreshold=_wlRange0&&_wlRange0.min>0?Math.ceil(_wlRange0.min*2/3):15;
+  const eligibleForCorrection=wc>=correctionThreshold;
+  const sys=`You are a strict, senior examiner grading a Comprehension section for SBI PO / IBPS PO Mains (2026 pattern). This section has ${numQ} sub-questions, each worth EXACTLY ${perQMax} marks — no other distribution is allowed, and comprehension NEVER uses generic Content/Structure/Language/Word-Limit criteria. Total for this answer: ${totalPossible} marks.
 
-CRITICAL: you generate text in order and cannot revise something already written — analyze BEFORE you score, never the reverse.
+CRITICAL: you generate text in order and cannot revise something already written — analyze BEFORE you score, never the reverse. You are the examiner's eyes only: report requiredPoints and a scoreRecommendation per sub-question; the code independently clamps and rounds every score before it counts.
 
 HARD RULES:
-1. Each sub-question is scored independently, 0 to ${perQMax}, in HALF-mark increments allowed (e.g. 1.5).
-2. A sub-question with NO attempt at all = 0 for that sub-question. Do not give partial credit "for effort."
-3. A sub-question that is attempted but factually wrong or completely off-topic = 0 or near-0.
-4. A sub-question that is attempted, on-topic, and substantively correct = full ${perQMax} marks, even if brief — comprehension answers are meant to be short (around 30-40 words each). Reusing some of the passage's own vocabulary/key terms is completely normal and not a penalty — only judge whether the question was actually answered correctly.
-5. A sub-question that is on-topic but incomplete/vague/partially correct = 1 mark (half credit).
-6. Genuine grammar/spelling errors within an answer can cost up to 0.5 marks off that sub-question's score, not more — content accuracy matters far more than polish for a 30-40 word answer.
-7. NUMBERS MUST NEVER APPEAR in overallVerdict, strengths, or improvements — describe performance in words only, never restate a score/fraction/percentage there. The real numbers already exist in the parameters array.
-8. Respond ONLY with valid JSON, no markdown, no explanation outside JSON.`;
+1. For each sub-question, first identify the "requiredPoints" — the distinct acceptable ideas a correct answer needs — from the passage and question, then judge which ones the student actually conveyed (do not invent points the passage doesn't support).
+2. Score each sub-question 0 to ${perQMax}. Prefer whole numbers (0, 1, 2); use a half mark (0.5 or 1.5) only when genuinely in between. No other increment is allowed.
+3. attempted=false (no attempt at all) → scoreRecommendation MUST be 0. Do not give partial credit "for effort."
+4. Attempted but factually wrong, contradictory, or completely off-topic → 0.
+5. Attempted, on-topic, substantively correct → full ${perQMax}, even if brief — comprehension answers are meant to be short (around 30-40 words each). Reusing the passage's own vocabulary/key terms is completely normal and never a penalty by itself — judge only whether the question was actually answered correctly.
+6. Attempted, on-topic, but incomplete/vague/only one of several required points present → 1 (or 1.5 if nearly complete, or 0.5 if only a very weak fragment is present).
+7. VOCABULARY sub-questions ("Find one word from the passage that means…"): identify the one specific word the passage supports. Correct word = ${perQMax}. A close-but-inadequate word (right idea, wrong/imprecise word, or a related-but-not-matching word from the passage) = 1. Wrong word = 0. Do not accept merely related words as fully correct.
+8. Genuine grammar/spelling errors within an answer can cost at most 0.5 off that sub-question's score, never more — content accuracy matters far more than polish for a 30-40 word answer. Grammar alone must never zero out an otherwise substantively correct answer.
+9. NUMBERS MUST NEVER APPEAR in overallVerdict, strengths, or improvements — describe performance in words only, never restate a score/fraction/percentage there.
+10. Respond ONLY with valid JSON, no markdown, no explanation outside JSON.`;
   const p=`PASSAGE + QUESTIONS: ${q.text}
 STUDENT'S FULL ANSWER: ${ans||"(blank)"}
 WORD COUNT: ${wc} words (guideline: roughly ${numQ*30}-${numQ*40} words total is expected, about 30-40 per sub-question)
 
-STEP 1 — For each of the ${numQ} sub-questions in order, determine: was it attempted at all (yes/no)? If the student used different numbering/lettering than the passage, match by content/position, not by label text.
-STEP 2 — Score each sub-question 0-${perQMax} using the hard rules above, derived directly from Step 1 — an unattempted one is 0, no exceptions.
-STEP 3 — totalScore = exact sum of all ${numQ} sub-question scores.
+STEP 1 — For each of the ${numQ} sub-questions in order, list requiredPoints and determine: was it attempted at all? If the student used different numbering/lettering than the passage, match by content/position, not by label text.
+STEP 2 — Score each sub-question 0-${perQMax} using the hard rules above, derived directly from Step 1.
+STEP 3 — ${eligibleForCorrection?`Produce a light-edit "correctedAnswer" (only genuine spelling/grammar fixed, changed parts wrapped in {{double curly braces}}) and split language feedback into "mistakes" (genuine objective errors only) and "styleSuggestions" (optional, non-scoring improvements). Never "correct" something merely because another phrasing is more natural — only objective errors belong in "mistakes".`:`The student wrote only ${wc} words, below the ${correctionThreshold}-word minimum for this feature to be useful — return correctedAnswer as an empty string, mistakes as [], styleSuggestions as [].`}
 
-Return ONLY this JSON (one object per sub-question in the "subQuestions" array — ${numQ} objects total, numbered 1 to ${numQ}):
-{"subQuestions":[{"num":1,"attempted":true,"score":<0-${perQMax}>,"comment":"<short 1-sentence note, no numbers>"}],"totalScore":<n>,"correctedAnswer":"<student's answer with only genuine spelling/grammar fixed, changed parts wrapped in {{double curly braces}}, or empty string if gibberish>","mistakes":[{"type":"<Spelling|Grammar|Word Choice|Punctuation>","original":"<text>","corrected":"<text>","reason":"<short reason>"}],"strengths":["<specific strength, no numbers>"],"improvements":["<specific actionable point, no numbers>","<specific actionable point, no numbers>"],"overallVerdict":"<2-3 honest sentences, ZERO numbers anywhere>"}`;
+Return ONLY this JSON (one object per sub-question in "subQuestions" — ${numQ} objects, numbered 1 to ${numQ}):
+{"subQuestions":[{"num":1,"attempted":true,"requiredPoints":[{"point":"","satisfied":true}],"scoreRecommendation":<0-${perQMax}>,"evidence":"<short 1-sentence note, no numbers>"}],"mistakes":[{"type":"<Spelling|Grammar|Word Choice|Punctuation>","original":"","corrected":"","reason":""}],"styleSuggestions":[],"correctedAnswer":"","strengths":["<no numbers>"],"improvements":["<no numbers>","<no numbers>"],"overallVerdict":"<2-3 honest sentences, ZERO numbers anywhere>"}`;
   try{
     const res=await fetch(ep,{method:"POST",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({model:"gemini-2.5-flash-lite",max_tokens:1800,system:sys,messages:[{role:"user",content:p}]})});
     const data=await res.json();
     if(data.error)throw new Error(data.error.message);
-    const result=JSON.parse(data.content.map(i=>i.text||"").join("").replace(/```json|```/g,"").trim());
-    if(result&&Array.isArray(result.subQuestions)){
-      // Deterministic enforcement, regardless of what the AI returned: an unattempted sub-question
-      // is forced to 0, and copied-passage answers are forced to 0 across the board — same
-      // "don't just trust the AI" pattern used for word limit and structural checks elsewhere.
-      result.subQuestions=result.subQuestions.map(sq=>{
-        let score=Math.max(0,Math.min(Number(sq.score)||0,perQMax));
-        score=Math.round(score*2)/2;
-        if(!sq.attempted||copyCheck.copied)score=0;
-        return{name:"Question "+(sq.num||"?"),score,max:perQMax,comment:sq.comment||""};
-      });
-      result.parameters=result.subQuestions;
-      result.totalScore=Math.round(result.parameters.reduce((a,pr)=>a+pr.score,0)*2)/2;
-      const _numberPattern=/\d+(\.\d+)?\s*(\/|out of|-)\s*\d+|\d+(\.\d+)?\s*%|\bscor(e|ing)\s+\d/i;
-      if(typeof result.overallVerdict==="string"&&_numberPattern.test(result.overallVerdict)){
-        const _pct=totalPossible>0?Math.round((result.totalScore/totalPossible)*100):0;
-        result.overallVerdict=copyCheck.copied?"This response largely repeats the passage itself rather than answering the questions asked, so no meaningful credit can be given.":
-          `This is ${_pct<40?"a below average":_pct<60?"an average":_pct<75?"a good":_pct<90?"an excellent":"an outstanding"} response. See the per-question breakdown above for specifics.`;
-      }
-      if(Array.isArray(result.strengths)){result.strengths=result.strengths.filter(s=>typeof s!=="string"||!_numberPattern.test(s));if(!result.strengths.length&&!copyCheck.copied)result.strengths=["Attempted the comprehension questions with relevant responses."];}
-      if(Array.isArray(result.improvements))result.improvements=result.improvements.filter(s=>typeof s!=="string"||!_numberPattern.test(s));
-      const _wlRange=parseWordLimitRange(q.wordLimit);
-      const _correctionThreshold=_wlRange&&_wlRange.min>0?Math.ceil(_wlRange.min*2/3):15;
-      if(copyCheck.copied||wc<_correctionThreshold){result.correctedAnswer="";result.mistakes=[];}
-      if(typeof result.correctedAnswer!=="string")result.correctedAnswer="";
-      if(!Array.isArray(result.mistakes))result.mistakes=[];
+    const raw=JSON.parse(data.content.map(i=>i.text||"").join("").replace(/```json|```/g,"").trim());
+    if(!raw||!Array.isArray(raw.subQuestions))return null; // malformed core scoring data → fail safely, never fabricate
+
+    // Deterministic enforcement, regardless of what the AI returned: an unattempted sub-question
+    // is forced to 0, scores are clamped to [0,2] and rounded to the nearest half-mark, and a
+    // copied-passage answer is forced to 0 across the board.
+    const subQuestions=[];
+    for(let i=0;i<numQ;i++){
+      const sq=raw.subQuestions.find(x=>Number(x.num)===i+1)||raw.subQuestions[i]||{};
+      let score=Number(sq.scoreRecommendation);
+      if(!isFinite(score))score=0;
+      score=Math.max(0,Math.min(score,perQMax));
+      score=Math.round(score*2)/2;
+      if(!sq.attempted||copyCheck.copied)score=0;
+      subQuestions.push({name:"Question "+(i+1),score,max:perQMax,comment:typeof sq.evidence==="string"?sq.evidence:""});
     }
+    let result={parameters:subQuestions,totalScore:0};
+    result=validateEvaluation(result,totalPossible);
+    if(!result)return null;
+
+    result.mistakes=validateCorrections(raw.mistakes);
+    const styleSuggestions=validateCorrections(raw.styleSuggestions).map(s=>Object.assign({},s,{type:"Style"}));
+    result.mistakes=result.mistakes.concat(styleSuggestions).slice(0,8);
+
+    if(copyCheck.copied||!eligibleForCorrection){result.correctedAnswer="";result.mistakes=[];}
+    else result.correctedAnswer=typeof raw.correctedAnswer==="string"?raw.correctedAnswer:"";
+
+    const pct=totalPossible>0?Math.round((result.totalScore/totalPossible)*100):0;
+    result.overallVerdict=(typeof raw.overallVerdict==="string"&&raw.overallVerdict.trim()&&!_NUMBER_PATTERN.test(raw.overallVerdict))
+      ?raw.overallVerdict
+      :(copyCheck.copied?"This response largely repeats the passage itself rather than answering the questions asked, so no meaningful credit can be given.":bandPhrase(pct,false));
+
+    result.strengths=Array.isArray(raw.strengths)?raw.strengths.filter(s=>typeof s==="string"&&!_NUMBER_PATTERN.test(s)):[];
+    if(!result.strengths.length&&!copyCheck.copied)result.strengths=["Attempted the comprehension questions with relevant responses."];
+    result.improvements=Array.isArray(raw.improvements)?raw.improvements.filter(s=>typeof s==="string"&&!_NUMBER_PATTERN.test(s)):[];
+
     return result;
   }catch(e){return null;}
 }
+
 async function evalWithAI(q,ans,wc,wpm){
   const d=D(),cfg=d.siteSettings||{};
   let ep="";
@@ -2624,21 +2833,17 @@ async function evalWithAI(q,ans,wc,wpm){
   ep=ep||cfg.apiProxy||"";
   if(!ep)return null;
   if(q.type==="comprehension")return evalComprehensionAI(q,ans,wc,ep);
+
+  const profile=getMarkingProfile(q.type);
+  const max=q.marks;
   const tm={};d.sectionTypes.forEach(s=>tm[s.id]=s);
-  const typeName=tm[q.type]?.name||q.type,max=q.marks;
-  // Word Limit Adherence is pure arithmetic (we already know the exact word count and limit),
-  // so it's computed deterministically below instead of asking the AI to judge it — this removes
-  // an entire class of scoring errors on something that should never be wrong.
-  // The remaining 3 parameters (genuinely subjective) split the rest of the marks between them,
-  // weighted per question type (see MARK_WEIGHTS) rather than split equally — e.g. Content counts
-  // for more of an Email's marks than Structure does, so polished-but-empty answers can't coast.
-  const _marks=splitMarksByWeight(max,q.type);
-  const wlMax=_marks.wordLimit;
-  const pMax=[_marks.content,_marks.structure,_marks.language];
-  // Code-verified structural facts, computed BEFORE the AI sees the answer, so it doesn't have to
-  // re-derive (and possibly get wrong) things that are objectively checkable — e.g. "is there a
-  // Subject line" isn't a judgment call, it's a plain text search. This also lets us enforce a hard
-  // ceiling on Structure & Format afterward regardless of what the AI scores, same pattern as Word Limit.
+  const typeName=tm[q.type]?.name||q.type;
+
+  // Code-verified structural facts, computed BEFORE the AI sees the answer, so it doesn't have
+  // to re-derive (and possibly get wrong) things that are objectively checkable — e.g. "is there
+  // a Subject line" isn't a judgment call, it's a plain text search. This also lets us enforce a
+  // hard ceiling on the profile's structure-family criterion afterward regardless of what the AI
+  // scores, same pattern as Word Limit.
   const structCheck=checkStructureElements(ans,q.type);
   let structPromptNote="",structCapPct=1;
   if(structCheck.kind==="email"||structCheck.kind==="report"){
@@ -2651,160 +2856,138 @@ async function evalWithAI(q,ans,wc,wpm){
     structPromptNote=`STRUCTURAL CHECK (already verified by code): the answer has ${structCheck.paraCount} paragraph break(s) — `+(structCheck.hasParagraphs?"multiple paragraphs, acceptable separation.":"written as a single unbroken block with no paragraph breaks at all.");
     structCapPct=structCheck.hasParagraphs?1:0.5;
   }
-  // The "corrected answer" feature only makes sense once there's a substantive attempt to correct —
-  // gate it deterministically at 2/3 of the word limit's lower bound, same threshold style used
-  // elsewhere in this app, rather than leaving it to the AI's judgment.
+
+  // The "corrected answer" feature only makes sense once there's a substantive attempt to
+  // correct — gated deterministically at 2/3 of the word limit's lower bound.
   const _wlRange=parseWordLimitRange(q.wordLimit);
   const correctionThreshold=_wlRange&&_wlRange.min>0?Math.ceil(_wlRange.min*2/3):15;
   const eligibleForCorrection=wc>=correctionThreshold;
-  const sys=`You are a strict, senior examiner for SBI PO / IBPS PO Mains Descriptive Paper (2026 pattern), equivalent to the marking standard used by Oliveboard and Guidely. Your scoring must be realistic, unbiased, and rigorous — the same way an actual UPSC/banking exam evaluator would mark.
 
-CRITICAL: you generate text in order and cannot revise something you already wrote. So you must count and analyze BEFORE you score — never the other way around. The JSON schema below deliberately puts an "analysis" object first, with parameter scores afterward, precisely so your scores are derived from what you just counted, not guessed first and rationalized after.
+  const criteriaList=profile.criteria.filter(c=>!c.deterministic);
+  const criteriaIdsLine=criteriaList.map(c=>c.id).join(", ");
+  const criteriaDescLine=criteriaList.map(c=>`- "${c.id}" = ${c.name}`).join("\n");
+  const typeGuidance=TYPE_GUIDANCE[q.type]||"";
 
-HARD RULES YOU MUST FOLLOW WITHOUT EXCEPTION:
-1. GIBBERISH / IRRELEVANT / BLANK answers: If the answer is blank, random characters, keyboard mashing, copy-paste of the question, or completely off-topic, award 0 across ALL parameters. Do not give any charity marks.
-2. INCOMPLETE answers (under 40% of word limit): Cap total score at 30% of max marks. Penalise heavily on Content.
-3. PARTIAL answers (40–70% of word limit): Cap total score at 55% of max marks unless quality is exceptional.
-4. MISSING SUB-PARTS: If the question has multiple numbered parts/sub-questions, identify EXACTLY which ones by number (e.g. "Question 5") — never a vague count. Content & Relevance cannot exceed (parts answered ÷ parts required), plus at most 15 percentage points of grace — a fully unanswered part is a major, not minor, gap.
-5. WRONG FORMAT (e.g. writing an essay instead of an email, missing Subject/To/Salutation in email, missing heading/date/to in report): Deduct at least 50% from Structure & Format score.
-6. LANGUAGE ERRORS: your Language & Grammar score must directly match the error count you state in "analysis", using this exact table — no other value is allowed: 0 errors = 100%. 1-2 errors = 85%. 3-4 errors = 65%. 5-6 errors = 33%. 7+ errors = 0%.
-7. CONTENT ACCURACY: Award marks only for points directly relevant to the question scenario. Generic or vague points get partial credit. Irrelevant points get zero content credit.
-8. DO NOT inflate scores to be encouraging. A mediocre answer should score 40–55%. A good answer 60–75%. An excellent answer 80–90%. Near-perfect answers 90%+. Scores above 90% should be extremely rare.
-9. NUMBERS MUST NEVER APPEAR IN overallVerdict, strengths, or improvements — no score, no fraction ("X out of Y"), no percentage, anywhere in that text. This is not a style preference, it is mandatory: the numeric score already exists in the parameters/totalScore fields you wrote earlier, and restating a number in prose risks contradicting it (you cannot go back and check what you already wrote). Describe performance only in words (e.g. "missed one full question", "several grammar errors"), never digits standing for a score.
-10. Every count you mention anywhere in the response (in comments, strengths, improvements) — like how many sub-parts were answered — MUST be the exact same number as subPartsAnswered/subPartsRequired in your analysis. Do not re-count independently in a later field; reuse the number you already committed to in Step 2.
-11. Respond ONLY with valid JSON, no markdown, no explanation outside JSON.
+  const sys=`You are a strict, senior examiner for SBI PO / IBPS PO Mains Descriptive Paper (2026 pattern). Score realistically and rigorously, the way an actual banking-exam evaluator would — never inflate a score to be encouraging, and never over-penalise for harmless wording differences, legitimate synonyms, natural alternative phrasing, or information the question never asked for.
 
-WORKED EXAMPLE (for calibration only — shows the correct standard to apply, not the actual question to grade):
-Question: "Write an email to your bank manager requesting a duplicate passbook as yours was lost." Word limit: 100-150. Max marks: 15.
-Answer: "Respected Sir, I lost my passbook few days back somewhere in my home I think. So I want a new passbook please give me. I am your customer since 2 years. Please do this soon. Thank you."
-Correct analysis a senior examiner would reach: subPartsRequired=1, subPartsAnswered=1 (attempted but very thin), languageErrorCount=6 ("few days back somewhere" — awkward/unclear, "I think" — vague, "So I want a new passbook please give me" — run-on and informal, "I am your customer since 2 years" — wrong tense, should be "for 2 years", no account number or branch given despite this being essential for the request to function, no Subject line, no proper closing/signature), formatIssues="No Subject line, no closing/sign-off, only 35 words — well under the 100-150 word range so the request itself is underdeveloped."
-Correct scoring at that standard: Content & Relevance ~45-50% (states the ask but omits account number/branch — the request as written couldn't actually be processed). Structure & Format ~30-35% (missing Subject line and closing are real structural failures, not stylistic nitpicks). Language & Grammar 33% (6 errors, rule 6 table). Overall this is a BELOW AVERAGE answer, not "average" and certainly not "good" — a common mistake is being charitable here because the tone is polite; politeness is not the same as a complete, well-formed answer. The verdict for this example would read like: "This response attempts the task but falls short of a complete, well-formed answer. Key account details are missing, the email lacks a proper subject line and closing, and there are several grammar issues throughout." — notice: no numbers anywhere in that verdict. Use this same level of rigor on the real answer below, whatever section type it is.`;
+CRITICAL: you generate text in order and cannot revise something already written, so analyze BEFORE you score, never the reverse. The JSON schema below puts "analysis" first for exactly this reason.
+
+YOUR ROLE IN THIS PIPELINE: you are the examiner's EYES ONLY. You identify what is present, what is missing, what is wrong, and how well each requirement is fulfilled. You do NOT decide final marks, criterion maximums, or the total — code does that afterward from the "quality" (0.0 to 1.0) you report per criterion. NEVER write an absolute mark value or a maximum anywhere in your response.
+
+STEP 1 — TASK REQUIREMENT EXTRACTION (from the question text only, before looking at the answer's quality): list the concrete requirements this specific question is actually asking for. Do NOT invent information the question didn't provide — e.g. if no exact charge/amount/name is given, "state the exact charge" is not a requirement. For each: id, a short description, importance ("essential"|"important"|"minor"), whether the student's answer satisfies it (true/false), a quality estimate 0.0-1.0 for how well it's satisfied if attempted, and a one-line evidence note.
+
+STEP 2 — VALIDITY CHECK:
+- "attempted": did the student make any real attempt at all?
+- "isGibberish": is the answer blank, random characters, keyboard mashing, a copy of the question only, or completely unrelated to the question? If true, every criterion's quality must be 0 — code also forces this independently.
+- "majorlyOffTask": true only if the response is largely off the actual task even though something substantive was written (not the same as merely weak).
+
+${structPromptNote}
+
+STEP 3 — LANGUAGE: do NOT use a rigid errors-to-percentage table. Judge quality by frequency, severity, clarity impact, and recurrence. Minor = small errors that don't affect meaning. Moderate = repeated issues reducing professionalism. Severe = frequent errors materially affecting clarity or correctness. Report "languageSeverity" as "minor"|"moderate"|"severe" and let that inform (not mechanically dictate) the language criterion's quality.
+
+STEP 4 — CRITERION QUALITY (0.0 to 1.0 each, for EXACTLY these criteria — do not add, remove, or rename any):
+${criteriaDescLine}
+If an essential task requirement is missing, the criteria most related to content/task fulfilment must reflect that — a beautifully written response must NOT score near-full on those criteria just because it is polished; task completion is what they measure. Do not penalise a criterion for a detail the question never asked for.
+
+${typeGuidance}
+
+STEP 5 — CORRECTED ANSWER + LANGUAGE FEEDBACK:
+${eligibleForCorrection?`Produce "correctedAnswer": the student's own answer with ONLY genuine spelling/grammar/punctuation errors fixed — a light edit, never a rewrite. Do not add content, remove/reorder sentences, or upgrade correct-but-plain vocabulary just to sound smoother. Wrap only the words/phrases you actually changed in double curly braces, e.g. "I will {{listen to}} the customer". If nothing changed, return the original unwrapped. If gibberish/blank, return an empty string.
+
+Then split language feedback into TWO separate lists:
+- "mistakes": GENUINE, OBJECTIVE errors only (wrong tense/article/preposition/agreement, misspelling, run-on/fragment sentence, wrong punctuation). Each: {"type":"Spelling"|"Grammar"|"Word Choice"|"Punctuation","original":"<exact text>","corrected":"<exact fixed text>","reason":"<short reason, under 10 words>"}. NEVER include an entry where original and corrected are the same. Never "correct" something merely because another phrasing is more elegant, formal, concise, or native-like — e.g. "We request you to visit the branch", "at the earliest possible", or "it will be debited" are NOT grammar errors merely because another construction is preferred.
+- "styleSuggestions": OPTIONAL improvements only — a phrase that is already correct but where a more natural/idiomatic alternative exists in formal banking communication. Same object shape as mistakes. Nothing in this list may affect any quality score — it is feedback only.
+Cap each list at 8 entries. If there are no genuine errors, "mistakes" must be an empty array — never invent one to populate the section.`:
+`The student wrote only ${wc} words, below the ${correctionThreshold}-word minimum needed for this feature to be useful. Skip this step: return correctedAnswer as an empty string, mistakes as [], styleSuggestions as [].`}
+
+HARD RULES:
+- NUMBERS MUST NEVER APPEAR in overallVerdict, strengths, or improvements — no score, fraction, or percentage anywhere in that text. Describe performance only in words.
+- Do not inflate: a response must not score high merely for being polite, grammatical, well formatted, long, or professional-sounding if it does not actually complete the task.
+- Do not over-penalise: harmless wording differences, legitimate synonyms, natural alternative phrasing, and correct-but-different-from-model-answer grammar are NOT errors.
+- Respond ONLY with valid JSON, no markdown, no explanation outside JSON.
+
+Return ONLY this JSON, every key present, in this order:
+{"analysis":{"attempted":true,"isGibberish":false,"majorlyOffTask":false,"taskRequirements":[{"id":"requirement_1","description":"","importance":"essential","satisfied":true,"quality":1,"evidence":""}],"languageSeverity":"minor","formatIssues":[]},"criterionEvaluation":[${criteriaList.map(c=>`{"id":"${c.id}","quality":0.0,"evidence":""}`).join(",")}],"mistakes":[{"type":"Grammar","original":"","corrected":"","reason":""}],"styleSuggestions":[],"strengths":["<no numbers>"],"improvements":["<no numbers>"],"correctedAnswer":"","overallVerdict":"<no numbers>"}`;
+
   const p=`SECTION TYPE: ${typeName}
 WORD LIMIT: ${q.wordLimit}
-MAX MARKS: ${max}
+MAX MARKS: ${max} (for your reference only — you never state marks, only 0.0-1.0 quality per criterion)
 QUESTION: ${q.text}
 STUDENT'S ANSWER: ${ans||"(blank)"}
 WORD COUNT: ${wc} words
-${structPromptNote}
 
-STEP 1 — VALIDITY CHECK:
-- Is this answer blank, gibberish, random characters, or completely unrelated to the question? If YES → set all scores to 0, set overallVerdict to explain why, then return JSON.
-- Does the answer attempt to address the question at all? If NO → treat as gibberish.
+Follow the steps in the system instructions in order: extract task requirements from the question, run the validity check, judge language severity, then give criterion quality (0.0-1.0) for exactly: ${criteriaIdsLine}. Then produce the corrected answer / mistakes / style suggestions, strengths, improvements, and overallVerdict as instructed.`;
 
-STEP 2 — ANALYSIS (fill this in first, before any score — be exact, these numbers directly determine your scores in Step 3):
-- "subPartsRequired": if the question has multiple distinct numbered parts/sub-questions, how many are there? (Use 1 if it's a single unified task like an email/essay/report with no numbered sub-parts.)
-- "subPartsAnswered": of those, how many did the student actually attempt, even partially? Check EVERY part individually against the student's answer before concluding it's missing — do not assume based on length alone.
-- "missingParts": name the EXACT number(s) of any part(s) skipped, e.g. "Question 5" — never a vague description. Use "none" only if truly all parts were attempted.
-- "languageErrorCount": scan the answer sentence-by-sentence and count every genuine error — wrong articles (a/an/the), wrong prepositions, subject-verb disagreement, wrong tense, run-on/fragment sentences, misspelled words. Do not count stylistic preferences as errors. Give the exact number.
-- "formatIssues": brief note on structural problems (e.g. "no paragraph breaks", "missing salutation"), or "none".
-
-STEP 3 — SCORING (derive every score below from the analysis you just wrote — do not contradict it):
-Score each of the 3 parameters using the exact max shown for each (they are pre-distributed — do not change them). Half-mark (0.5) increments are allowed and encouraged where they're a more honest reflection than a whole number. Word limit adherence is scored separately by the system, not by you — ignore word count except where it reflects genuinely incomplete/rushed content:
-
-[Content & Relevance /${pMax[0]}]
-- Apply Hard Rule 4 first if subPartsAnswered < subPartsRequired — use the exact same subPartsAnswered/subPartsRequired numbers, do not recount.
-- Full marks: All key points covered with accurate, question-specific detail and banking/professional knowledge.
-- 75%: Most key points covered, minor gaps.
-- 50%: Some relevant points but significant gaps or vague content.
-- 25%: Very few relevant points, mostly generic.
-- 0%: Off-topic, irrelevant, or gibberish.
-
-[Structure & Format /${pMax[1]}]
-- Use the STRUCTURAL CHECK note above the question — it's already verified by code, so trust it rather than re-scanning yourself. Any element marked MISSING there is a confirmed absence, not something to give benefit of the doubt on.
-- For EMAIL: Must have Subject, Greeting, and Closing at minimum. Missing any = heavy deduction.
-- For REPORT: Must have Heading, Date, and Recommendation at minimum. Missing = heavy deduction.
-- For SITUATION/PRECIS/ESSAY/COMPREHENSION: Requires visible paragraphing/clear separation between answers and logical flow.
-- CONCRETE PENALTY: a single unbroken block of text with no breaks at all (for a type that requires them) caps this parameter at 50%, regardless of how logical the content order is.
-- 0 if format is completely wrong for the type.
-
-[Language & Grammar /${pMax[2]}]
-- This score MUST use the exact table from Hard Rule 6, applied to languageErrorCount from your analysis: 0 errors=100%, 1-2=85%, 3-4=65%, 5-6=33%, 7+=0%. No other value is permitted.
-
-STEP 4 — totalScore must equal the sum of the 3 parameter scores exactly (may be a half-mark value, e.g. 9.5).
-
-STEP 5 — CORRECTED VERSION OF THE STUDENT'S OWN ANSWER (REQUIRED for every eligible non-gibberish answer — do not skip this):
-${eligibleForCorrection?`Produce "correctedAnswer": the student's own answer with ONLY genuine spelling, grammar, and punctuation errors fixed. This is a light edit, not a rewrite:
-- Do NOT add new content, points, or sentences that weren't in the original.
-- Do NOT remove or restructure sentences/paragraphs, reorder ideas, or change the answer's structure.
-- Do NOT upgrade vocabulary or reword something that was already grammatically correct just to sound smoother — only touch text that is an actual error. If the student wrote "give" don't change it to "provide" unless "give" is actually grammatically wrong there.
-- Wrap every word or phrase you actually changed in double curly braces, e.g. "I will {{listen to}} the customer" (original had "listen the customer"). Only wrap what changed. If you changed nothing at all, return the original answer unwrapped.
-- If the answer was gibberish/blank, return correctedAnswer as an empty string instead.
-
-Then produce "mistakes": one entry per genuine error, matching what you actually changed above. Each item: {"type":"Spelling"|"Grammar"|"Word Choice"|"Punctuation","original":"<exact original text>","corrected":"<exact fixed text>","reason":"<short plain-English reason, under 10 words, describing only the difference between original and corrected shown in THIS entry>"}.
-STRICT RULES for this list, all mandatory:
-- NEVER include an entry where "original" and "corrected" are the same text — that means nothing actually changed, so it is not a mistake.
-- Category definitions, use them precisely: Spelling = a misspelled word. Grammar = wrong tense, article, preposition, subject-verb agreement, or a run-on/fragment sentence. Word Choice = grammatically fine but a different word is standard/idiomatic usage where the original is genuinely non-standard (not just less polished). Punctuation = missing/wrong comma, period, or capitalization.
-- Do NOT list something as a mistake just because a smoother phrasing exists — only genuine errors count, not style preferences.
-- Do NOT list the same underlying fix twice at different granularities (e.g. don't list two word-level fixes individually AND then also list the whole sentence containing both as one more "mistake") — each distinct error appears exactly once.
-- List individual word/phrase-level entries, not whole-sentence rewrites, unless the entire sentence structure itself was broken (e.g. a run-on).
-- Cap the list at the 8 most illustrative genuine errors. If there were no genuine mistakes at all, return an empty array — the key must still be present.`:
-`The student wrote only ${wc} words, below the ${correctionThreshold}-word minimum needed for this feature to be useful. Skip this step entirely: return correctedAnswer as an empty string and mistakes as an empty array.`}
-
-Return ONLY this JSON — every key must be present in this order (analysis before parameters before everything else). Remember Hard Rule 9: overallVerdict, strengths, and improvements must contain ZERO numbers/fractions/percentages anywhere:
-{"analysis":{"subPartsRequired":<n>,"subPartsAnswered":<n>,"missingParts":"<exact part number(s) or 'none'>","languageErrorCount":<n>,"formatIssues":"<text or 'none'>"},"parameters":[{"name":"Content & Relevance","score":<n>,"max":${pMax[0]},"comment":"<specific 1-sentence critique, no numbers>"},{"name":"Structure & Format","score":<n>,"max":${pMax[1]},"comment":"<specific 1-sentence critique, no numbers>"},{"name":"Language & Grammar","score":<n>,"max":${pMax[2]},"comment":"<specific 1-sentence critique, no numbers>"}],"totalScore":<n>,"correctedAnswer":"<answer with only genuine errors fixed, changed parts wrapped in {{double curly braces}}, or empty string if gibberish>","mistakes":[{"type":"<Spelling|Grammar|Word Choice|Punctuation>","original":"<text>","corrected":"<text>","reason":"<short reason>"}],"strengths":["<specific strength, no numbers, or 'None identified' if gibberish>"],"improvements":["<specific actionable point, no numbers>","<specific actionable point, no numbers>","<specific actionable point, no numbers>"],"overallVerdict":"<2-3 honest sentences, ZERO numbers anywhere — state clearly if answer is unacceptable, below average, average, good, or excellent and why, referencing missingParts by name if any>"}`;
   try{
     const res=await fetch(ep,{method:"POST",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({model:"gemini-2.5-flash-lite",max_tokens:1800,system:sys,messages:[{role:"user",content:p}]})});
     const data=await res.json();
     if(data.error)throw new Error(data.error.message);
-    const result=JSON.parse(data.content.map(i=>i.text||"").join("").replace(/```json|```/g,"").trim());
-    if(result&&Array.isArray(result.parameters)){
-      result.parameters=result.parameters.map(pr=>({...pr,score:Math.round(Math.max(0,Math.min(pr.score,pr.max))*2)/2}));
-      // If the AI's 3 judged parameters are all zero, this was flagged as gibberish/blank/off-topic —
-      // in that case word-limit compliance is meaningless, so zero it out too instead of trusting the word count.
-      const isGibberish=result.parameters.every(pr=>pr.score===0);
-      // Enforce a hard ceiling on Structure & Format from the code-verified structural check, same
-      // pattern as word limit — don't just trust the AI to have honored what the prompt asked it to.
-      if(!isGibberish){
-        const structParam=result.parameters.find(pr=>pr.name==="Structure & Format");
-        if(structParam){
-          const grace=structCheck.kind==="generic"?0:0.10;
-          const structCap=Math.round(Math.min(structParam.max,structCapPct*structParam.max+structParam.max*grace)*2)/2;
-          if(structParam.score>structCap)structParam.score=structCap;
-        }
-      }
-      const wl=computeWordLimitScore(wc,q.wordLimit,wlMax);
-      if(isGibberish)wl.score=0;
-      result.parameters.push(wl);
-      // Never trust the model's self-reported totalScore — recompute it deterministically
-      // from the parameter scores (3 AI-judged + 1 computed) so the displayed total always matches the breakdown.
-      result.totalScore=Math.round(result.parameters.reduce((a,pr)=>a+pr.score,0)*2)/2;
-      // Defensive backstop for Hard Rule 9: even though the AI is instructed never to state a
-      // number in the verdict, if it slips one in anyway (as seen in testing — e.g. stating a
-      // different total than the real score), that number could contradict the real total.
-      // Rather than risk displaying a false/contradictory number, detect and replace it with a
-      // safe verdict generated from the actual, correct percentage.
-      const _fullMax=q.marks;
-      const _pct=_fullMax>0?Math.round((result.totalScore/_fullMax)*100):0;
-      const _numberPattern=/\d+(\.\d+)?\s*(\/|out of|-)\s*\d+|\d+(\.\d+)?\s*%|\bscor(e|ing)\s+\d/i;
-      if(typeof result.overallVerdict==="string"&&_numberPattern.test(result.overallVerdict)){
-        const _band=isGibberish?"unacceptable":_pct<40?"below average":_pct<60?"an average":_pct<75?"a good":_pct<90?"an excellent":"an outstanding";
-        result.overallVerdict=isGibberish?"This response does not meaningfully attempt the question, so no credit can be given.":
-          `This is ${_band} response. See the parameter breakdown above for specific strengths and gaps.`;
-      }
-      if(Array.isArray(result.strengths)){result.strengths=result.strengths.filter(s=>typeof s!=="string"||!_numberPattern.test(s));if(!result.strengths.length)result.strengths=["Attempted the question with a relevant response."];}
-      if(Array.isArray(result.improvements)){result.improvements=result.improvements.filter(s=>typeof s!=="string"||!_numberPattern.test(s));}
-      if(isGibberish||!eligibleForCorrection){result.correctedAnswer="";result.mistakes=[];}
-      if(typeof result.correctedAnswer!=="string")result.correctedAnswer="";
-      if(!Array.isArray(result.mistakes))result.mistakes=[];
+    const raw=JSON.parse(data.content.map(i=>i.text||"").join("").replace(/```json|```/g,"").trim());
+    if(!raw||!raw.analysis||!Array.isArray(raw.criterionEvaluation))return null; // malformed core scoring data → fail safely, never fabricate
+
+    const analysis=raw.analysis||{};
+    const isGibberish=!!analysis.isGibberish||analysis.attempted===false;
+    const majorlyOffTask=!!analysis.majorlyOffTask;
+    const taskRequirements=extractTaskRequirements(analysis.taskRequirements);
+    const requirementCapPct=computeRequirementCap(taskRequirements,majorlyOffTask,isGibberish);
+
+    // Map the AI's criterionEvaluation to {id:{quality,evidence}}, then apply the code-verified
+    // structural cap to whichever single criterion represents structure/format for this type —
+    // same "don't just trust the AI" pattern used for word limit.
+    const qualityById={};
+    (raw.criterionEvaluation||[]).forEach(ce=>{if(ce&&ce.id)qualityById[ce.id]={quality:Number(ce.quality)||0,evidence:typeof ce.evidence==="string"?ce.evidence:""};});
+    const structId=profile.structCriterionId;
+    if(structId&&qualityById[structId]){
+      const grace=structCheck.kind==="generic"?0:0.10;
+      const cap=Math.min(1,structCapPct+grace);
+      if(qualityById[structId].quality>cap)qualityById[structId].quality=cap;
     }
+
+    const wordLimitCriterion=profile.criteria.find(c=>c.deterministic);
+    const wl=wordLimitCriterion?computeWordLimitScore(wc,q.wordLimit,distributeMarks(max,profile.criteria)[wordLimitCriterion.id]):null;
+
+    const scored=calculateFinalScore(q,profile,qualityById,wl,requirementCapPct,isGibberish);
+    let result=validateEvaluation(scored,max);
+    if(!result)return null; // controlled failure — never fabricate a score
+
+    result.mistakes=validateCorrections(raw.mistakes);
+    const styleSuggestions=validateCorrections(raw.styleSuggestions).map(s=>Object.assign({},s,{type:"Style"}));
+    result.mistakes=result.mistakes.concat(styleSuggestions).slice(0,8);
+
+    if(isGibberish||!eligibleForCorrection){result.correctedAnswer="";result.mistakes=[];}
+    else result.correctedAnswer=typeof raw.correctedAnswer==="string"?raw.correctedAnswer:"";
+
+    const pct=max>0?Math.round((result.totalScore/max)*100):0;
+    result.overallVerdict=(typeof raw.overallVerdict==="string"&&raw.overallVerdict.trim()&&!_NUMBER_PATTERN.test(raw.overallVerdict))
+      ?raw.overallVerdict
+      :bandPhrase(pct,isGibberish);
+
+    result.strengths=Array.isArray(raw.strengths)?raw.strengths.filter(s=>typeof s==="string"&&!_NUMBER_PATTERN.test(s)):[];
+    if(!result.strengths.length&&!isGibberish)result.strengths=["Attempted the question with a relevant response."];
+    result.improvements=Array.isArray(raw.improvements)?raw.improvements.filter(s=>typeof s==="string"&&!_NUMBER_PATTERN.test(s)):[];
+
     return result;
   }catch(e){return null;}
 }
+
+// Public names requested alongside the internal pipeline — same functions, so there is exactly
+// ONE authoritative evaluation path, never two competing evaluators.
+const evaluateAnswer=evalWithAI;
+const evaluateComprehension=evalComprehensionAI;
+
 // This is the manual copy-paste fallback prompt, shown after the automated worker fails
-// repeatedly (see aiFailHTML / manualEvalPractice / manualEvalMock). It MUST mirror the same
-// marking rules as the automated path (evalWithAI/evalComprehensionAI) — this function used to
-// always emit the generic 4-parameter template below even for comprehension questions, which is
-// exactly what produced results like "Content & Relevance 2/3, Structure & Format 1.5/2,
-// Language & Grammar 2/2, Word Limit 3/3 = 8.5/10" for a 5-question, 10-mark comprehension
-// answer: two different scoring systems disagreeing on the same question. Comprehension now
-// branches to its own per-sub-question rubric here, same as it does in evalWithAI.
+// repeatedly (see aiFailHTML / manualEvalPractice / manualEvalMock). It mirrors MARKING_PROFILES
+// exactly — same criteria, same weighted marks-per-criterion via distributeMarks — so the manual
+// path can never silently diverge from the automated one.
 function buildManualEvalText(q,ans,wc){
   if(q.type==="comprehension")return buildManualEvalTextComprehension(q,ans,wc);
   const d=D(),tm={};d.sectionTypes.forEach(s=>tm[s.id]=s);
   const typeName=tm[q.type]?.name||q.type,max=q.marks;
-  const marks=splitMarksByWeight(max,q.type);
-  return `You are a strict, senior examiner for the SBI PO / IBPS PO Mains Descriptive Paper (2026 pattern). Evaluate my answer below the way a real bank exam evaluator would — be honest and rigorous, don't inflate the score.
+  const profile=getMarkingProfile(q.type);
+  const marksByCriterion=distributeMarks(max,profile.criteria);
+  const lines=profile.criteria.map((c,i)=>`${i+1}. ${c.name} (out of ${marksByCriterion[c.id]})`).join("\n");
+  return `You are a strict, senior examiner for the SBI PO / IBPS PO Mains Descriptive Paper (2026 pattern). Evaluate my answer below the way a real bank exam evaluator would — be honest and rigorous, don't inflate the score. Do not give near-full marks on content merely because the writing is polished — first check whether every part of the task was actually completed.
 
 SECTION TYPE: ${typeName}
 WORD LIMIT: ${q.wordLimit}
@@ -2816,17 +2999,14 @@ ${q.text}
 MY ANSWER (${wc} words):
 ${ans||"(blank)"}
 
-Please score me on these 4 parameters — the max marks per parameter are weighted by what matters most for this question type (not split equally), and add up to exactly ${max}:
-1. Content & Relevance (out of ${marks.content})
-2. Structure & Format (out of ${marks.structure})
-3. Language & Grammar (out of ${marks.language})
-4. Word Limit Adherence (out of ${marks.wordLimit})
+Please score me on these parameters — the max marks per parameter are weighted by what matters most for this question type (not split equally), and add up to exactly ${max}:
+${lines}
 
-For each parameter give a score and a one-line reason. Then give a total out of ${max} — please add up the 4 scores yourself and double-check the total actually equals their sum before giving it to me. Then give 2-3 strengths, 2-3 specific improvements, and a short overall verdict (below average / average / good / excellent).`;
+For each parameter give a score and a one-line reason. Then give a total out of ${max} — add up the scores yourself and double-check the total actually equals their sum. Then give 2-3 strengths, 2-3 specific improvements, and a short overall verdict (below average / average / good / excellent / outstanding).`;
 }
 // Comprehension's manual fallback: mirrors evalComprehensionAI's HARD RULE that each sub-question
 // is worth EXACTLY 2 marks, scored 0/1/2 (half-marks allowed), with no separate global Structure/
-// Word-Limit marks — never the generic 4-parameter template above.
+// Word-Limit marks — never the generic multi-parameter template above.
 function buildManualEvalTextComprehension(q,ans,wc){
   const numQ=countCompQuestions(q.text);
   const perQMax=2;
@@ -2843,6 +3023,8 @@ Score EACH of the ${numQ} sub-questions separately and independently, using ONLY
 - 0 = not attempted at all, factually wrong, or completely off-topic
 - 1 = attempted, on-topic, but incomplete or vague (partial credit)
 - 2 = attempted, on-topic, and substantively correct — even if brief, since these answers are meant to be short (~30-40 words each)
+
+For a "find one word from the passage meaning…" question: the correct word = 2, a close-but-inadequate word = 1, a wrong word = 0.
 
 Do NOT create any separate "Structure & Format" or "Word Limit Adherence" marks for this section — those don't apply here, only the ${numQ} sub-question scores above. Genuine grammar/spelling errors can cost at most 0.5 off an individual sub-question's score, never more, and never a whole separate category.
 
