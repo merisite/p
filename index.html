@@ -2442,9 +2442,46 @@ function parseWordLimitRange(wlStr){
 // "quality" per criterion. All multiplication, capping, rounding, and totalling happens here.
 // =====================================================================================
 
+// ---- SEVERE UNDERLENGTH PROTECTION ----
+// lengthRatio = student word count / minimum required word count. This drives BOTH the
+// deterministic Word Limit score for underlength answers AND, via getUnderlengthContentCap()
+// below, a hard ceiling on the profile's content-family criterion for severely underlength
+// answers — never applied to comprehension. Word count, ratio, and the resulting caps are all
+// computed here in code; the AI is never asked to count words or judge length. Being short does
+// NOT zero the whole answer — only the Word Limit criterion goes to 0, and only in the severe
+// tiers does Content get capped (not zeroed); every other criterion is still scored on its own
+// merits.
+const UNDERLENGTH_BANDS=[
+  {min:1.00,wordLimitPct:1.00,contentCap:1.00,label:null},
+  {min:0.90,wordLimitPct:0.85,contentCap:1.00,label:"minor"},
+  {min:0.80,wordLimitPct:0.65,contentCap:1.00,label:"moderate"},
+  {min:0.70,wordLimitPct:0.45,contentCap:1.00,label:"significant"},
+  {min:0.60,wordLimitPct:0.25,contentCap:1.00,label:"heavy"},
+  {min:0.50,wordLimitPct:0.00,contentCap:0.70,label:"severe"},
+  {min:0.40,wordLimitPct:0.00,contentCap:0.60,label:"very severe"},
+  {min:0,   wordLimitPct:0.00,contentCap:0.50,label:"extremely severe"}
+];
+function computeLengthRatio(wc,minWords){
+  if(!minWords||minWords<=0)return 1;
+  return wc/minWords;
+}
+function getUnderlengthBand(ratio){
+  for(const b of UNDERLENGTH_BANDS){if(ratio>=b.min)return b;}
+  return UNDERLENGTH_BANDS[UNDERLENGTH_BANDS.length-1];
+}
+// The Content-family cap from underlength alone (1 = no cap). Combined with the essential-
+// requirement cap (computeRequirementCap) via Math.min — the stricter of the two always wins.
+function getUnderlengthContentCap(wc,wlStr){
+  const range=parseWordLimitRange(wlStr);
+  if(!range||!range.min||wc>=range.min)return 1;
+  return getUnderlengthBand(computeLengthRatio(wc,range.min)).contentCap;
+}
+
 // ---- Deterministic word-limit score (code counts words; AI is never asked to). ----
-// Policy (configurable in one place): within range = 100%, within 10% outside = 80%,
-// within 20% outside = 50%, more than 20% outside = 0%. Never applied to comprehension.
+// Over-length policy (configurable in one place): within range = 100%, within 10% over = 80%,
+// within 20% over = 50%, more than 20% over = 0%. Under-length uses the lengthRatio bands above
+// instead, so a merely-short answer is deducted gradually rather than falling off a cliff.
+// Never applied to comprehension.
 function computeWordLimitScore(wc,wlStr,maxMarks){
   const range=parseWordLimitRange(wlStr);
   if(!range||maxMarks<=0)return{name:"Word Limit",score:maxMarks,max:maxMarks,comment:"Word limit not specified numerically."};
@@ -2455,12 +2492,16 @@ function computeWordLimitScore(wc,wlStr,maxMarks){
   if(wc>=min&&wc<=max){
     pct=1;
     comment=`${wc} words — within the ${label} word limit. Full marks.`;
+  }else if(wc>max){
+    const dev=(wc-max)/max;
+    if(dev<=0.10){pct=0.8;comment=`${wc} words — slightly above the maximum of the ${label} word limit.`;}
+    else if(dev<=0.20){pct=0.5;comment=`${wc} words — noticeably over the ${label} word limit.`;}
+    else{pct=0;comment=`${wc} words — far over the ${label} word limit.`;}
   }else{
-    const under=wc<min;
-    const dev=under?(min-wc)/min:(wc-max)/max;
-    if(dev<=0.10){pct=0.8;comment=`${wc} words — slightly ${under?"below the minimum":"above the maximum"} of the ${label} word limit.`;}
-    else if(dev<=0.20){pct=0.5;comment=`${wc} words — noticeably ${under?"short of":"over"} the ${label} word limit.`;}
-    else{pct=0;comment=`${wc} words — far ${under?"short of":"over"} the ${label} word limit.`;}
+    const ratio=computeLengthRatio(wc,min);
+    const band=getUnderlengthBand(ratio);
+    pct=band.wordLimitPct;
+    comment=`${wc} words — ${band.label} underlength (${Math.round(ratio*100)}% of the required minimum of ${min===max?max:min}).`;
   }
   const score=Math.round(pct*maxMarks*2)/2;
   return{name:"Word Limit",score,max:maxMarks,comment};
@@ -2863,6 +2904,15 @@ async function evalWithAI(q,ans,wc,wpm){
   const correctionThreshold=_wlRange&&_wlRange.min>0?Math.ceil(_wlRange.min*2/3):15;
   const eligibleForCorrection=wc>=correctionThreshold;
 
+  // Context only — the actual underlength cap on Content is applied by code afterward
+  // regardless of what the AI does with this note (see getUnderlengthContentCap). It's here so
+  // the AI doesn't independently double-penalise a short-but-substantive answer for its length.
+  let lengthPromptNote="";
+  if(_wlRange&&_wlRange.min>0&&wc<_wlRange.min){
+    const ratio=computeLengthRatio(wc,_wlRange.min);
+    lengthPromptNote=`\nLENGTH CHECK (already verified by code): ${wc} words written vs a required minimum of ${_wlRange.min} (${Math.round(ratio*100)}% of the minimum). The system applies its own severity-based cap to the Content criterion for this independently of your scoring — judge each criterion's quality honestly based only on what is actually written, do not additionally zero out or double-penalise criteria just because the answer is short.`;
+  }
+
   const criteriaList=profile.criteria.filter(c=>!c.deterministic);
   const criteriaIdsLine=criteriaList.map(c=>c.id).join(", ");
   const criteriaDescLine=criteriaList.map(c=>`- "${c.id}" = ${c.name}`).join("\n");
@@ -2881,7 +2931,7 @@ STEP 2 — VALIDITY CHECK:
 - "isGibberish": is the answer blank, random characters, keyboard mashing, a copy of the question only, or completely unrelated to the question? If true, every criterion's quality must be 0 — code also forces this independently.
 - "majorlyOffTask": true only if the response is largely off the actual task even though something substantive was written (not the same as merely weak).
 
-${structPromptNote}
+${structPromptNote}${lengthPromptNote}
 
 STEP 3 — LANGUAGE: do NOT use a rigid errors-to-percentage table. Judge quality by frequency, severity, clarity impact, and recurrence. Minor = small errors that don't affect meaning. Moderate = repeated issues reducing professionalism. Severe = frequent errors materially affecting clarity or correctness. Report "languageSeverity" as "minor"|"moderate"|"severe" and let that inform (not mechanically dictate) the language criterion's quality.
 
@@ -2931,6 +2981,11 @@ Follow the steps in the system instructions in order: extract task requirements 
     const majorlyOffTask=!!analysis.majorlyOffTask;
     const taskRequirements=extractTaskRequirements(analysis.taskRequirements);
     const requirementCapPct=computeRequirementCap(taskRequirements,majorlyOffTask,isGibberish);
+    // Severe-underlength protection: an independent Content-family cap driven purely by
+    // word count vs. the question's minimum. When combined with a missing-requirement cap,
+    // the stricter (lower) of the two always wins — never averaged, never the looser one.
+    const underlengthContentCap=isGibberish?1:getUnderlengthContentCap(wc,q.wordLimit);
+    const contentCapPct=Math.min(requirementCapPct,underlengthContentCap);
 
     // Map the AI's criterionEvaluation to {id:{quality,evidence}}, then apply the code-verified
     // structural cap to whichever single criterion represents structure/format for this type —
@@ -2947,7 +3002,7 @@ Follow the steps in the system instructions in order: extract task requirements 
     const wordLimitCriterion=profile.criteria.find(c=>c.deterministic);
     const wl=wordLimitCriterion?computeWordLimitScore(wc,q.wordLimit,distributeMarks(max,profile.criteria)[wordLimitCriterion.id]):null;
 
-    const scored=calculateFinalScore(q,profile,qualityById,wl,requirementCapPct,isGibberish);
+    const scored=calculateFinalScore(q,profile,qualityById,wl,contentCapPct,isGibberish);
     let result=validateEvaluation(scored,max);
     if(!result)return null; // controlled failure — never fabricate a score
 
@@ -2987,6 +3042,14 @@ function buildManualEvalText(q,ans,wc){
   const profile=getMarkingProfile(q.type);
   const marksByCriterion=distributeMarks(max,profile.criteria);
   const lines=profile.criteria.map((c,i)=>`${i+1}. ${c.name} (out of ${marksByCriterion[c.id]})`).join("\n");
+  const _wlRange=parseWordLimitRange(q.wordLimit);
+  let lengthNote="";
+  if(_wlRange&&_wlRange.min>0){
+    const ratio=computeLengthRatio(wc,_wlRange.min);
+    if(ratio<1){
+      lengthNote=`\n\nSEVERE UNDERLENGTH POLICY — this answer is ${Math.round(ratio*100)}% of the required minimum (${_wlRange.min} words), so apply this in addition to the parameters above: 90-99% of minimum = minor Word Limit deduction only; 80-89% = moderate; 70-79% = significant; 60-69% = heavy; 50-59% = Word Limit score 0 AND cap the Content/Task-fulfilment-type parameter at 70% of its max; below 50% = Word Limit 0 AND cap that parameter at 60% of its max; below 40% = Word Limit 0 AND cap it at 50% of its max. Do not zero the whole answer just because it's short — every other parameter should still be scored on its own genuine merit.`;
+    }
+  }
   return `You are a strict, senior examiner for the SBI PO / IBPS PO Mains Descriptive Paper (2026 pattern). Evaluate my answer below the way a real bank exam evaluator would — be honest and rigorous, don't inflate the score. Do not give near-full marks on content merely because the writing is polished — first check whether every part of the task was actually completed.
 
 SECTION TYPE: ${typeName}
@@ -3000,7 +3063,7 @@ MY ANSWER (${wc} words):
 ${ans||"(blank)"}
 
 Please score me on these parameters — the max marks per parameter are weighted by what matters most for this question type (not split equally), and add up to exactly ${max}:
-${lines}
+${lines}${lengthNote}
 
 For each parameter give a score and a one-line reason. Then give a total out of ${max} — add up the scores yourself and double-check the total actually equals their sum. Then give 2-3 strengths, 2-3 specific improvements, and a short overall verdict (below average / average / good / excellent / outstanding).`;
 }
