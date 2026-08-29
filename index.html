@@ -230,15 +230,16 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .cust-row.show{display:flex}
 .mini-n{width:60px;background:var(--bg3);border:1px solid var(--b);border-radius:var(--rs);padding:4px 8px;color:var(--t);font-size:.78rem;text-align:center;outline:none;font-family:var(--mono)}
 .mini-n:focus{border-color:var(--accent)}
-.q-list{display:flex;flex-direction:column;gap:6px}
-.q-item{background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:12px 14px;cursor:pointer;transition:border-color var(--tr),background var(--tr);display:flex;gap:10px;align-items:flex-start}
-.q-item:hover{border-color:var(--accent);background:var(--ch)}
+.q-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.q-item{background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:16px 17px;cursor:pointer;transition:border-color var(--tr),background var(--tr),transform var(--tr),box-shadow var(--tr);display:flex;flex-direction:column;box-shadow:0 1px 4px rgba(30,58,120,.06)}
+.q-item:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 6px 20px rgba(37,99,235,.12)}
+.q-badge{width:26px;height:26px;border-radius:7px;background:var(--adim);border:1px solid var(--aborder);display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;font-family:var(--mono);color:var(--accent);flex-shrink:0}
 .q-n{font-family:var(--mono);font-size:.62rem;color:var(--accent);min-width:18px;padding-top:2px;flex-shrink:0}
 .q-prev{font-size:.8rem;color:var(--t2);line-height:1.5}
 .q-item:hover .q-prev{color:var(--t)}
 .chips{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
 .chip{font-family:var(--mono);font-size:.6rem;padding:2px 6px;border-radius:3px;background:var(--bg3);border:1px solid var(--b);color:var(--t2)}
-.empty-q{text-align:center;padding:28px;color:var(--t2);font-size:.8rem}
+.empty-q{text-align:center;padding:28px;color:var(--t2);font-size:.8rem;grid-column:1/-1}
 /* EXAM */
 #exam,#fullmock{max-width:1300px;margin:0 auto;padding:12px 14px}
 .exam-bar{display:flex;align-items:center;justify-content:space-between;background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:8px 14px;margin-bottom:11px;gap:10px}
@@ -819,14 +820,14 @@ header .h-brand:hover{background:var(--brut-tint);}
   </div>
 </div>
 <div id="instr" class="screen">
-  <div style="max-width:1300px;margin:0 auto;padding:12px 14px 40px">
+  <div style="max-width:1600px;margin:0 auto;padding:12px 24px 40px">
     <div class="exam-bar" style="margin-bottom:16px">
       <div class="bar-l" id="instr-meta"></div>
       <div style="display:flex;gap:6px;flex-shrink:0">
         <button class="btn bg bsm" onclick="cancelInstr()"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Cancel</button>
       </div>
     </div>
-    <div class="panel" style="max-width:760px;margin:0 auto;overflow:visible">
+    <div class="panel" style="width:100%;margin:0;overflow:visible">
       <div class="ph"><span id="instr-ph-lbl">Before You Begin</span></div>
       <div class="pb" style="padding:26px 28px">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px">
@@ -1615,42 +1616,73 @@ function renderQS(type){
   document.getElementById("cust-row").classList.remove("show");tMode="default";
   // Show up to 20 questions for practice
   const qs=d.questions.filter(q=>q.type===type&&q.active).slice(0,20);
-  document.getElementById("q-list").innerHTML=qs.length===0?"<div class='empty-q'>No questions yet for this section. Add questions in the Admin panel.</div>":qs.map((q,i)=>`<div class="q-item" onclick="launchExam('${q.id}')"><div class="q-n">Q${i+1}</div><div style="flex:1"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:5px"><div style="font-size:.65rem;font-family:var(--mono);color:var(--accent);text-transform:uppercase;letter-spacing:.08em">Question ${i+1}</div><button onclick="event.stopPropagation();copyShareLink('question-${q.id}',this)" title="Copy direct link to this question" style="flex-shrink:0;display:flex;align-items:center;gap:4px;font-size:.62rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>Copy Link</button></div><div style="font-size:.83rem;line-height:1.75;white-space:pre-wrap;color:var(--t)">${q.text}</div><div class="chips" style="margin-top:8px"><span class="chip">${q.wordLimit}</span><span class="chip">${q.marks} marks</span><span class="chip">${q.difficulty||"medium"}</span></div><div style="margin-top:8px;font-size:.72rem;color:var(--accent);font-weight:600">→ Click to attempt</div></div></div>`).join("");
+  // Short label for card titles: "Email Writing" -> "Email", "Situation Analysis" -> "Situation Analysis"
+  const shortLabel=(sec.name||"Practice").replace(/\s*Writing\s*/i,"").trim()||sec.name||"Practice";
+  document.getElementById("q-list").innerHTML=qs.length===0?"<div class='empty-q'>No questions yet for this section. Add questions in the Admin panel.</div>":qs.map((q,i)=>`<div class="q-item" onclick="launchExam('${q.id}')"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px"><div style="font-size:.94rem;font-weight:700;color:var(--t)">${shortLabel} Test ${i+1}</div><button onclick="event.stopPropagation();copyShareLink('question-${q.id}',this)" title="Copy direct link to this question" style="flex-shrink:0;display:flex;align-items:center;gap:4px;font-size:.62rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>Copy Link</button></div><div class="chips">${'<span class="chip">'+q.wordLimit+'</span><span class="chip">'+q.marks+' marks</span><span class="chip">'+(q.difficulty||"medium")+'</span>'}</div><div style="margin-top:12px;font-size:.72rem;color:var(--accent);font-weight:600">→ Click to attempt</div></div>`).join("");
 }
 function setTO(btn,v){document.querySelectorAll(".tob").forEach(b=>b.classList.remove("on"));btn.classList.add("on");tMode=v;document.getElementById("cust-row").classList.toggle("show",v==="custom");}
 let _instrReturnTo="home",_instrOnStart=null;
 let _instrOnResume=null;
-// ---- OFFICIAL EXAM RULES GATE (2-page overlay shown before every practice/mock session) ----
-let _rulesOnReady=null;
-function showExamRulesGate(cfg){
-  _rulesOnReady=cfg.onReady;
-  const headerTitle=cfg.headerTitle||"Descriptive Test — Instructions";
-  document.getElementById("rules-header-1").textContent=headerTitle;
-  document.getElementById("rules-header-2").textContent=headerTitle;
-  document.getElementById("rules-duration-mins").textContent=(cfg.duration||30)+" minutes";
-  document.getElementById("rules-structure-intro").textContent=cfg.structureIntro||"";
-  document.getElementById("rules-structure-rows").innerHTML=(cfg.rows||[]).map((r,i)=>
+// ---- Builds the full official-exam-rules content (duration, test structure table,
+//      navigation rules, scoring criteria, post-test info, declaration) as bodyHTML
+//      for the single full-screen Instructions page (id="instr"). ----
+function buildRulesBodyHTML(duration,structureIntro,rows,totalMarks){
+  const rowsHTML=(rows||[]).map((r,i)=>
     `<tr><td style="padding:6px 8px;border:1px solid var(--b);color:var(--t)">${i+1}</td><td style="padding:6px 8px;border:1px solid var(--b);color:var(--t)">${r.name}</td><td style="padding:6px 8px;border:1px solid var(--b);color:var(--accent)">${r.qCount}</td><td style="padding:6px 8px;border:1px solid var(--b);color:var(--accent)">${r.marks}</td></tr>`
   ).join("");
-  document.getElementById("rules-total-marks").textContent=cfg.totalMarks;
-  document.getElementById("rules-page1").style.display="";
-  document.getElementById("rules-page2").style.display="none";
-  const chk=document.getElementById("rules-agree-chk");if(chk)chk.checked=false;
-  const rb=document.getElementById("rules-ready-btn");if(rb)rb.disabled=true;
-  document.getElementById("rules-cov").classList.add("open");
-}
-function rulesGoPage2(){
-  document.getElementById("rules-page1").style.display="none";
-  document.getElementById("rules-page2").style.display="";
-}
-function rulesGoPage1(){
-  document.getElementById("rules-page2").style.display="none";
-  document.getElementById("rules-page1").style.display="";
-}
-function rulesReady(){
-  const fn=_rulesOnReady;_rulesOnReady=null;
-  document.getElementById("rules-cov").classList.remove("open");
-  if(fn)fn();
+  return `
+    <div style="font-weight:700;color:var(--t);font-size:.78rem;margin:0 0 6px">Duration &amp; Auto-Submission</div>
+    <ul style="margin:0 0 16px;padding-left:18px;font-size:.76rem;line-height:1.85;color:var(--t2)">
+      <li>The total duration of this Descriptive Test is <strong style="color:var(--t)">${duration===0?"No timer":duration+" minutes"}</strong>.</li>
+      <li>The countdown timer in the top right corner of the screen will display the remaining time.</li>
+      <li>Once the timer reaches zero, the test will <strong style="color:var(--t)">auto-submit</strong>. You do not need to manually submit your answers.</li>
+    </ul>
+
+    <div style="font-weight:700;color:var(--t);font-size:.78rem;margin:0 0 6px">Test Structure</div>
+    <div style="font-size:.76rem;color:var(--t2);margin-bottom:8px">${structureIntro||""}</div>
+    <table style="width:100%;border-collapse:collapse;font-size:.74rem;margin-bottom:8px">
+      <thead><tr style="background:var(--bg3)">
+        <th style="text-align:left;padding:6px 8px;border:1px solid var(--b);color:var(--t2)">Sl. No.</th>
+        <th style="text-align:left;padding:6px 8px;border:1px solid var(--b);color:var(--t2)">Name of the Test</th>
+        <th style="text-align:left;padding:6px 8px;border:1px solid var(--b);color:var(--t2)">No. of Questions</th>
+        <th style="text-align:left;padding:6px 8px;border:1px solid var(--b);color:var(--t2)">Maximum Marks</th>
+      </tr></thead>
+      <tbody>${rowsHTML}</tbody>
+    </table>
+    <div style="font-size:.76rem;color:var(--t2);margin-bottom:16px">The total marks for this test are <strong style="color:var(--t)">${totalMarks}</strong> marks. Marks will be allotted based on the evaluation criteria mentioned below.</div>
+
+    <div style="font-weight:700;color:var(--t);font-size:.78rem;margin:0 0 6px">Navigation Rules</div>
+    <ul style="margin:0 0 16px;padding-left:18px;font-size:.76rem;line-height:1.85;color:var(--t2)">
+      <li>After completing a section, click the <strong style="color:var(--t)">"Save &amp; Next"</strong> button to proceed to the next section.</li>
+      <li>Do not click the <strong style="color:var(--t)">"Submit"</strong> button until you have attempted all questions, as the test cannot be resumed once submitted.</li>
+      <li>The word count limit will be displayed at the bottom right corner of the panel.</li>
+      <li>The timer will continue running at the top right corner.</li>
+    </ul>
+
+    <div style="font-weight:700;color:var(--t);font-size:.78rem;margin:0 0 6px">Scoring Criteria</div>
+    <div style="font-size:.76rem;color:var(--t2);margin-bottom:6px">Your score will be calculated based on the following three criteria:</div>
+    <ul style="margin:0 0 16px;padding-left:18px;font-size:.76rem;line-height:1.85;color:var(--t2)">
+      <li><strong style="color:var(--t)">Format</strong> — Adherence to the required structure.</li>
+      <li><strong style="color:var(--t)">Content</strong> — Relevance, clarity, and completeness of the response.</li>
+      <li><strong style="color:var(--t)">Language</strong> — Grammar, coherence, fluency, vocabulary, and sentence structure.</li>
+      <li>Marks will be deducted for exceeding or falling short of the word limit.</li>
+    </ul>
+
+    <div style="font-weight:700;color:var(--t);font-size:.78rem;margin:0 0 6px">Post-Test Information</div>
+    <ul style="margin:0 0 16px;padding-left:18px;font-size:.76rem;line-height:1.85;color:var(--t2)">
+      <li>After submitting the test, you will be able to view your score.</li>
+      <li>A model answer for each section is available for review after evaluation.</li>
+    </ul>
+
+    <div style="font-weight:700;color:var(--t);font-size:.78rem;margin:0 0 6px">Other Important Instructions</div>
+    <div style="font-size:.76rem;color:var(--t2);line-height:1.8;margin-bottom:8px">Question Paper displayed is for practice purpose only. Under no circumstances should this be presumed as a sample paper.</div>
+    <div style="font-size:.72rem;color:var(--red);margin-bottom:16px">Please note all questions will appear in your default language.</div>
+
+    <label style="display:flex;align-items:flex-start;gap:8px;font-size:.72rem;color:var(--t2);line-height:1.7;cursor:pointer">
+      <input type="checkbox" id="instr-agree-chk" style="margin-top:3px;flex-shrink:0">
+      <span>I have read and understood the instructions. I declare that I am not in possession of / not wearing / not carrying any prohibited gadget like mobile phone, bluetooth devices etc. / any prohibited material with me. I agree that in case of not adhering to the instructions, I shall be liable to be debarred from this Test and/or to disciplinary action, which may include ban from future Tests / Examinations.</span>
+    </label>
+  `;
 }
 function showInstr(cfg){
   _instrReturnTo=document.querySelector(".screen.active")?.id||"home";
@@ -1662,15 +1694,25 @@ function showInstr(cfg){
   document.getElementById("instr-body").innerHTML=cfg.bodyHTML;
   const resumeBtn=document.getElementById("instr-resume-btn");
   const resumeNote=document.getElementById("instr-resume-note");
+  const startBtn=document.getElementById("instr-start-btn");
   if(cfg.resumeInfo){
-    document.getElementById("instr-start-btn").textContent="Start Over";
+    startBtn.textContent="Start Over";
     resumeBtn.style.display="";
     resumeBtn.textContent="Resume — "+cfg.resumeInfo.timeLabel+" left";
     if(resumeNote){resumeNote.style.display="";resumeNote.textContent="You have an unfinished attempt on this question, saved "+cfg.resumeInfo.savedAgo+".";}
   }else{
-    document.getElementById("instr-start-btn").textContent=cfg.startLabel||"I Understand — Start";
+    startBtn.textContent=cfg.startLabel||"I Understand — Start";
     resumeBtn.style.display="none";
     if(resumeNote)resumeNote.style.display="none";
+  }
+  // Gate the Start button behind the declaration checkbox, when present in bodyHTML
+  const chk=document.getElementById("instr-agree-chk");
+  if(chk){
+    chk.checked=false;
+    startBtn.disabled=true;
+    chk.onchange=()=>{startBtn.disabled=!chk.checked;};
+  }else{
+    startBtn.disabled=false;
   }
   showS("instr",{skipHash:true});
 }
@@ -1705,31 +1747,18 @@ function launchExam(qid){
   const draft=getDraft(qid);
   const canResume=draft&&draft.text&&draft.text.trim()&&draft.timeLeft>0;
   const m=canResume?Math.floor(draft.timeLeft/60):0,s=canResume?draft.timeLeft%60:0;
-  showExamRulesGate({
-    headerTitle:(sec.name||"Practice")+" — Instructions",
-    duration:mins,
-    structureIntro:"This practice session consists of 1 question:",
-    rows:[{name:sec.name||"Practice",qCount:1,marks:q.marks}],
-    totalMarks:q.marks,
-    onReady:()=>showInstr({
-      phLabel:"Practice Session",
-      title:(sec.name||"Practice")+" — Instructions",
-      metaHTML:`<div class="bstat"><div class="bval">${mins===0?"—":mins}</div><div class="blbl">Minutes</div></div><div class="bstat"><div class="bval">${q.wordLimit}</div><div class="blbl">Word Limit</div></div><div class="bstat"><div class="bval">${q.marks}</div><div class="blbl">Marks</div></div>`,
-      bodyHTML:`
-        <div style="display:flex;align-items:flex-start;gap:9px"><span style="color:var(--accent);flex-shrink:0">●</span><span><strong style="color:var(--t)">Single question:</strong> You'll answer one ${sec.name||"practice"} question.</span></div>
-        <div style="display:flex;align-items:flex-start;gap:9px;margin-top:9px"><span style="color:var(--accent);flex-shrink:0">●</span><span><strong style="color:var(--t)">Timer:</strong> ${mins===0?"No timer for this attempt.":"A "+mins+"-minute countdown starts once you begin writing."}</span></div>
-        <div style="display:flex;align-items:flex-start;gap:9px;margin-top:9px"><span style="color:var(--accent);flex-shrink:0">●</span><span><strong style="color:var(--t)">Word limit:</strong> Stay within <strong style="color:var(--accent)">${q.wordLimit}</strong> words for full marks.</span></div>
-        <div style="display:flex;align-items:flex-start;gap:9px;margin-top:9px"><span style="color:var(--accent);flex-shrink:0">●</span><span><strong style="color:var(--t)">AI feedback:</strong> After submitting, you'll get an AI-evaluated score, a model answer, and specific improvement tips.</span></div>
-        <div style="display:flex;align-items:flex-start;gap:9px;margin-top:9px"><span style="color:var(--accent);flex-shrink:0">●</span><span><strong style="color:var(--t)">No going back:</strong> Once you submit, your answer is final for this attempt.</span></div>
-      `,
-      startLabel:"I Understand — Start Practice",
-      onStart:()=>launchExamReal(qid,false),
-      resumeInfo:canResume?{
-        timeLabel:String(m).padStart(2,"0")+":"+String(s).padStart(2,"0"),
-        savedAgo:timeAgoLabel(draft.savedAt),
-        onResume:()=>launchExamReal(qid,true)
-      }:null
-    })
+  showInstr({
+    phLabel:"Practice Session",
+    title:(sec.name||"Practice")+" — Instructions",
+    metaHTML:`<div class="bstat"><div class="bval">${mins===0?"—":mins}</div><div class="blbl">Minutes</div></div><div class="bstat"><div class="bval">${q.wordLimit}</div><div class="blbl">Word Limit</div></div><div class="bstat"><div class="bval">${q.marks}</div><div class="blbl">Marks</div></div>`,
+    bodyHTML:buildRulesBodyHTML(mins,"This practice session consists of 1 question:",[{name:sec.name||"Practice",qCount:1,marks:q.marks}],q.marks),
+    startLabel:"I Understand — Start Practice",
+    onStart:()=>launchExamReal(qid,false),
+    resumeInfo:canResume?{
+      timeLabel:String(m).padStart(2,"0")+":"+String(s).padStart(2,"0"),
+      savedAgo:timeAgoLabel(draft.savedAt),
+      onResume:()=>launchExamReal(qid,true)
+    }:null
   });
 }
 function saveDraft(qid,text,timeLeftSec,timeTotalSec){
@@ -2018,27 +2047,13 @@ function showMockInstr(ex,labelSuffix){
     rows.push({name:s.name,qCount:1,marks:s.marks||0});
   });
   const totalMarks=rows.reduce((a,r)=>a+(Number(r.marks)||0),0);
-  showExamRulesGate({
-    headerTitle:ex.name+" — "+labelSuffix+" Instructions",
-    duration:ex.duration||30,
-    structureIntro:`The ${ex.name} Descriptive Writing Test consists of ${rows.length} question${rows.length!==1?"s":""}:`,
-    rows,
-    totalMarks,
-    onReady:()=>showInstr({
-      phLabel:"Mock Test",
-      title:ex.name+" — "+labelSuffix+" Instructions",
-      metaHTML:`<div class="bstat"><div class="bval">${ex.duration||30}</div><div class="blbl">Minutes</div></div><div class="bstat"><div class="bval">${secCount}</div><div class="blbl">Sections</div></div><div class="bstat"><div class="bval">2</div><div class="blbl">Qs / Section</div></div>`,
-      bodyHTML:`
-        <div style="display:flex;align-items:flex-start;gap:9px"><span style="color:var(--accent);flex-shrink:0">●</span><span><strong style="color:var(--t)">Sections:</strong> This mock covers all descriptive sections of the exam.</span></div>
-        <div style="display:flex;align-items:flex-start;gap:9px;margin-top:9px"><span style="color:var(--accent);flex-shrink:0">●</span><span><strong style="color:var(--t)">Timer:</strong> A single combined countdown runs for the full <strong style="color:var(--accent)">${ex.duration||30}-minute</strong> exam duration.</span></div>
-        <div style="display:flex;align-items:flex-start;gap:9px;margin-top:9px"><span style="color:var(--accent);flex-shrink:0">●</span><span><strong style="color:var(--t)">Question choice:</strong> Each section gives you <strong style="color:var(--accent)">2 questions</strong> — choose one to answer.</span></div>
-        <div style="display:flex;align-items:flex-start;gap:9px;margin-top:9px"><span style="color:var(--accent);flex-shrink:0">●</span><span><strong style="color:var(--t)">Word limits:</strong> Stay within the prescribed word limit for each section.</span></div>
-        <div style="display:flex;align-items:flex-start;gap:9px;margin-top:9px"><span style="color:var(--accent);flex-shrink:0">●</span><span><strong style="color:var(--t)">No going back:</strong> Once you submit, your answers are final.</span></div>
-        <div style="display:flex;align-items:flex-start;gap:9px;margin-top:9px"><span style="color:var(--accent);flex-shrink:0">●</span><span><strong style="color:var(--t)">Tip:</strong> Manage your time wisely — allocate time per section before starting.</span></div>
-      `,
-      startLabel:"I Understand — Start Mock",
-      onStart:()=>startMockAfterInstr()
-    })
+  showInstr({
+    phLabel:"Mock Test",
+    title:ex.name+" — "+labelSuffix+" Instructions",
+    metaHTML:`<div class="bstat"><div class="bval">${ex.duration||30}</div><div class="blbl">Minutes</div></div><div class="bstat"><div class="bval">${secCount}</div><div class="blbl">Sections</div></div><div class="bstat"><div class="bval">2</div><div class="blbl">Qs / Section</div></div>`,
+    bodyHTML:buildRulesBodyHTML(ex.duration||30,`The ${ex.name} Descriptive Writing Test consists of ${rows.length} question${rows.length!==1?"s":""}:`,rows,totalMarks),
+    startLabel:"I Understand — Start Mock",
+    onStart:()=>startMockAfterInstr()
   });
 }
 function startMockAfterInstr(){
@@ -3829,102 +3844,6 @@ function clearAllProgress(){
 
 const initPromise=init();
 </script>
-<!-- OFFICIAL EXAM RULES GATE — two-page instruction overlay shown before every test/practice
-     session begins (mirrors the real exam portal's "Descriptive Test — Instructions" pages). -->
-<div class="cov" id="rules-cov">
-  <div class="cbox" id="rules-page1" style="max-width:860px;width:100%;max-height:90vh;overflow-y:auto;text-align:left;padding:0">
-    <div style="background:var(--adim);border-bottom:1px solid var(--b);padding:14px 22px;text-align:center;font-weight:700;color:var(--accent);font-size:.95rem" id="rules-header-1">Descriptive Test — Instructions</div>
-    <div style="display:flex;flex-wrap:wrap">
-      <div style="flex:1 1 480px;padding:22px 24px;border-right:1px solid var(--b)">
-        <div style="font-weight:700;color:var(--t);font-size:.85rem;margin-bottom:12px">Instructions</div>
-
-        <div style="font-weight:700;color:var(--t);font-size:.78rem;margin:14px 0 6px">Duration &amp; Auto-Submission</div>
-        <ul style="margin:0;padding-left:18px;font-size:.76rem;line-height:1.85;color:var(--t2)">
-          <li>The total duration of this Descriptive Test is <strong style="color:var(--t)" id="rules-duration-mins">30 minutes</strong>.</li>
-          <li>The countdown timer in the top right corner of the screen will display the remaining time.</li>
-          <li>Once the timer reaches zero, the test will <strong style="color:var(--t)">auto-submit</strong>. You do not need to manually submit your answers.</li>
-        </ul>
-
-        <div style="font-weight:700;color:var(--t);font-size:.78rem;margin:14px 0 6px">Test Structure</div>
-        <div style="font-size:.76rem;color:var(--t2);margin-bottom:8px" id="rules-structure-intro"></div>
-        <table style="width:100%;border-collapse:collapse;font-size:.74rem;margin-bottom:8px">
-          <thead><tr style="background:var(--bg3)">
-            <th style="text-align:left;padding:6px 8px;border:1px solid var(--b);color:var(--t2)">Sl. No.</th>
-            <th style="text-align:left;padding:6px 8px;border:1px solid var(--b);color:var(--t2)">Name of the Test</th>
-            <th style="text-align:left;padding:6px 8px;border:1px solid var(--b);color:var(--t2)">No. of Questions</th>
-            <th style="text-align:left;padding:6px 8px;border:1px solid var(--b);color:var(--t2)">Maximum Marks</th>
-          </tr></thead>
-          <tbody id="rules-structure-rows"></tbody>
-        </table>
-        <div style="font-size:.76rem;color:var(--t2)">The total marks for this test are <strong style="color:var(--t)" id="rules-total-marks">30</strong> marks.</div>
-        <div style="font-size:.76rem;color:var(--t2);margin-top:2px">Marks will be allotted based on the evaluation criteria mentioned below.</div>
-
-        <div style="font-weight:700;color:var(--t);font-size:.78rem;margin:14px 0 6px">Navigation Rules</div>
-        <ul style="margin:0;padding-left:18px;font-size:.76rem;line-height:1.85;color:var(--t2)">
-          <li>After completing a section, click the <strong style="color:var(--t)">"Save &amp; Next"</strong> button to proceed to the next section.</li>
-          <li>Do not click the <strong style="color:var(--t)">"Submit"</strong> button until you have attempted all questions, as the test cannot be resumed once submitted.</li>
-          <li>The word count limit will be displayed at the bottom right corner of the panel.</li>
-          <li>The timer will continue running at the top right corner.</li>
-        </ul>
-
-        <div style="font-weight:700;color:var(--t);font-size:.78rem;margin:14px 0 6px">Scoring Criteria</div>
-        <div style="font-size:.76rem;color:var(--t2);margin-bottom:6px">Your score will be calculated based on the following three criteria:</div>
-        <ul style="margin:0;padding-left:18px;font-size:.76rem;line-height:1.85;color:var(--t2)">
-          <li><strong style="color:var(--t)">Format</strong> — Adherence to the required structure (Email, Report, Situation Analysis, and Precis).</li>
-          <li><strong style="color:var(--t)">Content</strong> — Relevance, clarity, and completeness of the response.</li>
-          <li><strong style="color:var(--t)">Language</strong> — Grammar, coherence, fluency, vocabulary, and sentence structure.</li>
-          <li>Marks will be deducted for exceeding or falling short of the word limit.</li>
-          <li><strong style="color:var(--t)">Email Writing</strong> will be evaluated based on professionalism, tone, and clarity.</li>
-          <li><strong style="color:var(--t)">Report Writing</strong> will be assessed for organisation, factual accuracy, and logical flow.</li>
-          <li><strong style="color:var(--t)">Situation Analysis Writing</strong> will be judged on problem identification, analysis, and appropriate solution/suggestion.</li>
-          <li><strong style="color:var(--t)">Precis Writing</strong> will be checked for conciseness, accuracy, and retention of key points from the given passage.</li>
-        </ul>
-
-        <div style="font-weight:700;color:var(--t);font-size:.78rem;margin:14px 0 6px">Post-Test Information</div>
-        <ul style="margin:0;padding-left:18px;font-size:.76rem;line-height:1.85;color:var(--t2)">
-          <li>After submitting the test, you will be able to view your score.</li>
-          <li>A model answer for each section is available for review after evaluation.</li>
-        </ul>
-      </div>
-      <div style="flex:0 0 180px;padding:22px 20px;text-align:center">
-        <div style="width:64px;height:64px;border-radius:50%;background:var(--bg3);border:1px solid var(--b);display:flex;align-items:center;justify-content:center;margin:0 auto 10px">
-          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--t2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a7 7 0 0114 0v1"/></svg>
-        </div>
-        <div style="font-weight:700;color:var(--t);font-size:.85rem">User</div>
-      </div>
-    </div>
-    <div style="display:flex;justify-content:flex-end;gap:8px;padding:14px 22px;border-top:1px solid var(--b)">
-      <button class="btn bp" onclick="rulesGoPage2()">Next →</button>
-    </div>
-  </div>
-
-  <div class="cbox" id="rules-page2" style="max-width:820px;width:100%;max-height:90vh;overflow-y:auto;text-align:left;padding:0;display:none">
-    <div style="background:var(--adim);border-bottom:1px solid var(--b);padding:14px 22px;text-align:center;font-weight:700;color:var(--accent);font-size:.95rem" id="rules-header-2">Descriptive Test — Instructions</div>
-    <div style="display:flex;flex-wrap:wrap">
-      <div style="flex:1 1 480px;padding:22px 24px;border-right:1px solid var(--b);display:flex;flex-direction:column">
-        <div style="font-weight:700;color:var(--t);font-size:.85rem;margin-bottom:10px">Other Important Instructions</div>
-        <div style="font-size:.76rem;color:var(--t2);line-height:1.8">Question Paper displayed is for practice purpose only. Under no circumstances should this be presumed as a sample paper.</div>
-        <div style="flex:1;min-height:90px"></div>
-        <div style="font-size:.72rem;color:var(--red);margin-top:14px">Please note all questions will appear in your default language. This language can be changed for a particular question later on.</div>
-        <label style="display:flex;align-items:flex-start;gap:8px;margin-top:12px;font-size:.72rem;color:var(--t2);line-height:1.7;cursor:pointer">
-          <input type="checkbox" id="rules-agree-chk" onchange="document.getElementById('rules-ready-btn').disabled=!this.checked" style="margin-top:3px;flex-shrink:0">
-          <span>I have read and understood the instructions. I declare that I am not in possession of / not wearing / not carrying any prohibited gadget like mobile phone, bluetooth devices etc. / any prohibited material with me. I agree that in case of not adhering to the instructions, I shall be liable to be debarred from this Test and/or to disciplinary action, which may include ban from future Tests / Examinations.</span>
-        </label>
-      </div>
-      <div style="flex:0 0 180px;padding:22px 20px;text-align:center">
-        <div style="width:64px;height:64px;border-radius:50%;background:var(--bg3);border:1px solid var(--b);display:flex;align-items:center;justify-content:center;margin:0 auto 10px">
-          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--t2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a7 7 0 0114 0v1"/></svg>
-        </div>
-        <div style="font-weight:700;color:var(--t);font-size:.85rem">User</div>
-      </div>
-    </div>
-    <div style="display:flex;justify-content:space-between;gap:8px;padding:14px 22px;border-top:1px solid var(--b)">
-      <button class="btn bg" onclick="rulesGoPage1()">← Previous</button>
-      <button class="btn bp" id="rules-ready-btn" disabled onclick="rulesReady()">I am ready to begin</button>
-    </div>
-  </div>
-</div>
-
 <!-- REPORT/PRECIS CHOICE OVERLAY -->
 <div class="cov" id="choice-cov">
   <div class="cbox" style="max-width:420px">
