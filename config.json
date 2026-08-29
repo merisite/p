@@ -28,7 +28,7 @@
     "apiProxy": "https://weathered-math-4ca8.descriptivepreptoday.workers.dev/",
     "marqueeText": "★ Descriptive Practice ★ AI Evaluation ★ Model Answers ★ Typing Speed Test ★ Exam-Pattern Interface ★",
     "marqueeSpeed": 25,
-    "festiveTheme": "christmas",
+    "festiveTheme": "pongal",
     "maintenanceMode": false,
     "maintenanceMessage": "We'll be back soon."
   },
@@ -1612,7 +1612,7 @@
       "mockNo": 1,
       "title": "SBI PO Mock 1",
       "active": true,
-      "status": "active"
+      "status": "upcoming"
     },
     {
       "id": "sbi_po_mock_2",
