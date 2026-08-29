@@ -1505,7 +1505,7 @@ function renderFestiveTheme(theme){
   };
   const cfgT=FESTIVE_THEMES[theme];
   if(!cfgT)return;
-  if(cfgT.icon&&badge&&FESTIVE_ICONS[cfgT.icon]){badge.style.display='flex';badge.innerHTML=FESTIVE_ICONS[cfgT.icon];}
+  // Badge icon intentionally disabled — keep only the falling/dropping particle animation.
   if(cfgT.type==='bar'){
     particles.innerHTML='<div class="festive-tricolor-bar"></div>';
   }else if(cfgT.type==='dots'&&!reduced){
