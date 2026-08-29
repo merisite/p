@@ -232,8 +232,16 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .mini-n{width:60px;background:var(--bg3);border:1px solid var(--b);border-radius:var(--rs);padding:4px 8px;color:var(--t);font-size:.78rem;text-align:center;outline:none;font-family:var(--mono)}
 .mini-n:focus{border-color:var(--accent)}
 .q-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
-.q-item{background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:16px 17px;cursor:pointer;transition:border-color var(--tr),background var(--tr),transform var(--tr),box-shadow var(--tr);display:flex;flex-direction:column;box-shadow:0 1px 4px rgba(30,58,120,.06)}
+.q-item{background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:16px 17px;cursor:pointer;transition:border-color var(--tr),background var(--tr),transform var(--tr),box-shadow var(--tr);display:flex;flex-direction:column;box-shadow:0 1px 4px rgba(30,58,120,.06);position:relative}
 .q-item:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 6px 20px rgba(37,99,235,.12)}
+/* ATTEMPTED BADGE + PREVIOUS-SCORE TOOLTIP (practice & mock cards) */
+.attempt-badge{position:absolute;top:10px;right:10px;z-index:3;display:inline-flex;align-items:center;gap:3px;font-size:.58rem;font-family:var(--mono);font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;border-radius:999px;background:var(--gdim);color:var(--green);border:1px solid var(--gborder);cursor:default}
+.attempt-badge svg{stroke:var(--green);flex-shrink:0}
+.attempt-tip{position:absolute;bottom:calc(100% + 8px);right:0;min-width:150px;max-width:220px;background:var(--t);color:var(--bg2);font-size:.7rem;font-weight:600;line-height:1.5;padding:7px 10px;border-radius:7px;box-shadow:0 4px 14px rgba(0,0,0,.22);opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity var(--tr),transform var(--tr);pointer-events:none;z-index:10;text-transform:none;letter-spacing:normal;font-family:var(--font)}
+.attempt-tip::after{content:'';position:absolute;top:100%;right:14px;border:5px solid transparent;border-top-color:var(--t)}
+.attempt-badge:hover .attempt-tip,.attempt-badge.tip-open .attempt-tip{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
+.attempt-badge.inline{position:static;flex-shrink:0}
+.attempt-badge.inline .attempt-tip{right:0;left:auto}
 .q-badge{width:26px;height:26px;border-radius:7px;background:var(--adim);border:1px solid var(--aborder);display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;font-family:var(--mono);color:var(--accent);flex-shrink:0}
 .q-n{font-family:var(--mono);font-size:.62rem;color:var(--accent);min-width:18px;padding-top:2px;flex-shrink:0}
 .q-prev{font-size:.8rem;color:var(--t2);line-height:1.5}
@@ -394,6 +402,12 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .cbox-t{font-size:.95rem;font-weight:700;margin-bottom:7px}
 .cbox-s{font-size:.78rem;color:var(--t2);margin-bottom:20px;line-height:1.6}
 .cbox-btns{display:flex;gap:8px;justify-content:center}
+/* REPORT / PRECIS CHOICE POPUP — justified text, fixed blue & white theme (matches exam screen) */
+#choice-cov-box{text-align:left;background:#fff !important;border-color:#cfd9ee !important;color:#18243a}
+#choice-cov-box .cbox-t{color:#18243a;text-align:left}
+#choice-cov-box .cbox-s{color:#526080;text-align:justify}
+#choice-cov-box .cbox-s strong{color:#18243a !important}
+#choice-cov-options .cp-qtext{text-align:justify}
 @media(max-width:640px){.exam-grid{height:auto;max-height:none}.score-row{grid-template-columns:repeat(2,1fr)}.trc-grid{grid-template-columns:repeat(2,1fr)}.h-title{font-size:1.55rem}.tm-grid{grid-template-columns:1fr}.bar-l{gap:10px}.prog-track{display:none}}
 /* OFFERS HOME BUTTON */
 #home{position:relative;}
@@ -1619,7 +1633,12 @@ function renderQS(type){
   const qs=d.questions.filter(q=>q.type===type&&q.active).slice(0,20);
   // Short label for card titles: "Email Writing" -> "Email", "Situation Analysis" -> "Situation Analysis"
   const shortLabel=(sec.name||"Practice").replace(/\s*Writing\s*/i,"").trim()||sec.name||"Practice";
-  document.getElementById("q-list").innerHTML=qs.length===0?"<div class='empty-q'>No questions yet for this section. Add questions in the Admin panel.</div>":qs.map((q,i)=>`<div class="q-item" onclick="launchExam('${q.id}')"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px"><div style="font-size:.94rem;font-weight:700;color:var(--t)">${shortLabel} Test ${i+1}</div><button onclick="event.stopPropagation();copyShareLink('question-${q.id}',this)" title="Copy direct link to this question" style="flex-shrink:0;display:flex;align-items:center;gap:4px;font-size:.62rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>Copy Link</button></div><div class="chips">${'<span class="chip">'+q.wordLimit+'</span><span class="chip">'+q.marks+' marks</span><span class="chip">'+(q.difficulty||"medium")+'</span>'}</div><div style="margin-top:12px;font-size:.72rem;color:var(--accent);font-weight:600">→ Click to attempt</div></div>`).join("");
+  document.getElementById("q-list").innerHTML=qs.length===0?"<div class='empty-q'>No questions yet for this section. Add questions in the Admin panel.</div>":qs.map((q,i)=>{
+    const lastAttempt=getLastPracticeAttempt(q.id);
+    const badge=lastAttempt?attemptBadgeHTML(lastAttempt.score,true):"";
+    const cta=lastAttempt?"↻ Reattempt":"→ Click to attempt";
+    return `<div class="q-item" onclick="launchExam('${q.id}')"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px"><div style="font-size:.94rem;font-weight:700;color:var(--t)">${shortLabel} Test ${i+1}</div><div style="display:flex;align-items:center;gap:6px;flex-shrink:0">${badge}<button onclick="event.stopPropagation();copyShareLink('question-${q.id}',this)" title="Copy direct link to this question" style="flex-shrink:0;display:flex;align-items:center;gap:4px;font-size:.62rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>Copy Link</button></div></div><div class="chips">${'<span class="chip">'+q.wordLimit+'</span><span class="chip">'+q.marks+' marks</span><span class="chip">'+(q.difficulty||"medium")+'</span>'}</div><div style="margin-top:12px;font-size:.72rem;color:var(--accent);font-weight:600">${cta}</div></div>`;
+  }).join("");
 }
 function setTO(btn,v){document.querySelectorAll(".tob").forEach(b=>b.classList.remove("on"));btn.classList.add("on");tMode=v;document.getElementById("cust-row").classList.toggle("show",v==="custom");}
 let _instrReturnTo="home",_instrOnStart=null;
@@ -2004,11 +2023,17 @@ function showMockList(examId,opts){
           <div style="margin-top:8px;font-size:.62rem;font-family:var(--mono);color:var(--amber,#d97706);text-align:center;letter-spacing:.05em">Coming Soon</div>
         </div>`;
       }
+      const lastAttempt=getLastMockAttempt(examId,m.mockNo);
+      const badge=lastAttempt?attemptBadgeHTML(lastAttempt.totalScore):"";
+      const cta=lastAttempt?"↻ Reattempt":"→ Start Mock";
+      const copyLinkTop=lastAttempt?36:10;
       return `<div class="hcard exam-card" onclick="startMockByNo('${examId}',${m.mockNo})" style="border-color:var(--aborder);background:var(--adim);position:relative">
-        <button onclick="event.stopPropagation();copyShareLink('mock-${examId}-${m.mockNo}',this)" title="Copy direct link to this mock" style="position:absolute;top:10px;right:10px;display:flex;align-items:center;gap:4px;font-size:.6rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer;z-index:2"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>Copy Link</button>
+        ${badge}
+        <button onclick="event.stopPropagation();copyShareLink('mock-${examId}-${m.mockNo}',this)" title="Copy direct link to this mock" style="position:absolute;top:${copyLinkTop}px;right:10px;display:flex;align-items:center;gap:4px;font-size:.6rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer;z-index:2"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>Copy Link</button>
         <div class="hc-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
         <div class="hc-title">${m.title}</div>
         <div class="hc-sub" style="font-size:.7rem;color:var(--t2)">${qc} question${qc!==1?'s':''} · ${ex.duration||30} min</div>
+        <div style="margin-top:8px;font-size:.72rem;color:var(--accent);font-weight:600">${cta}</div>
       </div>`;
     }).join("");
   }
@@ -2085,6 +2110,7 @@ function startMockAfterInstr(){
   }
   if(!secs.length){alert("No questions available for this mock. Please add questions in the Admin panel.");return;}
   MS.s=secs;MS.a={};MS.idx=0;MS.st=Date.now();MS.mr={};
+  MS.examId=examId;MS.mockNo=mockNo;
   // Start timer immediately and go into fullmock — question picker fires on first section load
   const ex2=MS.currentExam;
   clearInterval(TI);startTimer((ex2.duration||30)*60,"mock-timer",null,()=>submitMock());
@@ -2120,15 +2146,15 @@ function showTypePicker(secIdx){
     const c=sec.choices[tid];if(!c||!c.questions.length)return"";
     const q=c.questions[0];
     const meta=tmMeta(tid)||{};
-    return `<div style="border:1px solid var(--b);border-radius:var(--r);overflow:hidden;background:var(--bg2)">
-      <div style="display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--b);background:var(--bg3)">
-        <svg width="15" height="15" viewBox="0 0 24 24" stroke="var(--accent)" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0">${_choicePickerIcons[tid]||""}</svg>
-        <span style="font-weight:700;font-size:.85rem;color:var(--t)">${c.name}</span>
-        <span style="margin-left:auto;font-size:.68rem;color:var(--t2);font-family:var(--mono)">${meta.wordLimit||""}</span>
+    return `<div style="border:1px solid #cfd9ee;border-radius:var(--r);overflow:hidden;background:#fff">
+      <div style="display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid #cfd9ee;background:#f0f5ff">
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke="#2563eb" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0">${_choicePickerIcons[tid]||""}</svg>
+        <span style="font-weight:700;font-size:.85rem;color:#18243a">${c.name}</span>
+        <span style="margin-left:auto;font-size:.68rem;color:#526080;font-family:var(--mono)">${meta.wordLimit||""}</span>
       </div>
-      <div style="padding:12px 14px;font-size:.78rem;line-height:1.65;color:var(--t);white-space:pre-wrap;max-height:280px;overflow-y:auto">${escapeHTML(q.text||"")}</div>
-      <div style="padding:10px 14px;border-top:1px solid var(--b)">
-        <button class="btn bp" style="width:100%;justify-content:center" onclick="chooseSection('${tid}')">Choose ${c.name}</button>
+      <div class="cp-qtext" style="padding:12px 14px;font-size:.78rem;line-height:1.65;color:#18243a;white-space:pre-wrap;max-height:280px;overflow-y:auto">${escapeHTML(q.text||"")}</div>
+      <div style="padding:10px 14px;border-top:1px solid #cfd9ee">
+        <button class="btn bp" style="width:100%;justify-content:center;background:#2563eb;color:#fff" onclick="chooseSection('${tid}')">Choose ${c.name}</button>
       </div>
     </div>`;
   }).join("");
@@ -3537,6 +3563,29 @@ function getProgress(){
   try{ return JSON.parse(localStorage.getItem(PROG_KEY)) || []; }
   catch(e){ return []; }
 }
+// ── Reattempt helpers: find the most recent attempt for a given practice
+//    question or mock, so cards can show an "Attempted" badge + last score. ──
+function getLastPracticeAttempt(questionId){
+  if(!questionId)return null;
+  const list=getProgress();
+  return list.find(function(e){return e.kind==='practice'&&e.questionId===questionId;})||null;
+}
+function getLastMockAttempt(examId,mockNo){
+  if(!examId)return null;
+  const list=getProgress();
+  return list.find(function(e){return e.kind==='mock'&&e.examId===examId&&e.mockNo===mockNo;})||null;
+}
+document.addEventListener('click',function(e){
+  if(e.target.closest('.attempt-badge'))return;
+  document.querySelectorAll('.attempt-badge.tip-open').forEach(function(b){b.classList.remove('tip-open');});
+});
+function attemptBadgeHTML(scoreText,inline){
+  const label=escapeHTML(scoreText||'—');
+  return '<span class="attempt-badge'+(inline?' inline':'')+'" onclick="event.stopPropagation();this.classList.toggle(\'tip-open\')">'
+    +'<svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Attempted'
+    +'<span class="attempt-tip">Last score: '+label+'</span>'
+    +'</span>';
+}
 function saveProgress(entry){
   const list = getProgress();
   entry.id = entry.id || (Date.now()+'_'+Math.random().toString(36).slice(2,9));
@@ -3680,6 +3729,8 @@ async function submitMock(){
     kind: 'mock',
     date: new Date().toISOString(),
     examName: ex.name||'Mock',
+    examId: MS.examId||ex.id||'',
+    mockNo: (MS.mockNo!=null)?MS.mockNo:null,
     sections: MS.s.map(function(s,i){
       return {
         name: s.meta&&s.meta.name||s.typeId||'Section',
