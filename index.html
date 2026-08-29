@@ -2101,24 +2101,35 @@ function startMockAfterInstr(){
 }
 
 // Type picker overlay — used ONLY for the SBI PO "choose Report OR Precis" case.
+// Both full questions are shown side-by-side (stacked) so the candidate can
+// actually read each one before deciding which section to attempt.
 let _pickSecIdx=null;
+const _choicePickerIcons={
+  report:'<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>',
+  precis:'<line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="13" y1="18" x2="3" y2="18"/>'
+};
 function showTypePicker(secIdx){
   _pickSecIdx=secIdx;
   const sec=MS.s[secIdx];if(!sec||!sec.isReportPrecis)return;
-  const overlay=document.getElementById("qpick-cov");
-  document.getElementById("qpick-title").textContent="Choose your question type";
-  const subtitle=overlay.querySelector(".cbox-s");
-  if(subtitle) subtitle.textContent="As per the exam pattern, attempt ONE of the following. This cannot be changed once selected.";
+  document.getElementById("choice-cov-title").textContent="Choose your third section";
+  const sub=document.getElementById("choice-cov-sub");
+  if(sub) sub.textContent="As per the exam pattern, attempt ONE of the following. Read both questions, then choose one to continue — this cannot be changed once selected.";
   const order=["report","precis"];
-  document.getElementById("qpick-list").innerHTML=order.map(tid=>{
+  document.getElementById("choice-cov-options").innerHTML=order.map(tid=>{
     const c=sec.choices[tid];if(!c||!c.questions.length)return"";
-    return `<button class="qpick-btn" onclick="pickType(${secIdx},'${tid}')">
-      <div style="display:flex;align-items:center;justify-content:space-between">
-        <span style="font-size:.85rem;font-weight:700;color:var(--t)">${c.name}</span>
-        <span style="font-size:.68rem;color:var(--accent);font-weight:600">→ Select</span>
+    const q=c.questions[0];
+    const meta=tmMeta(tid)||{};
+    return `<div style="border:1px solid var(--b);border-radius:var(--r);overflow:hidden;background:var(--bg2)">
+      <div style="display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--b);background:var(--bg3)">
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke="var(--accent)" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0">${_choicePickerIcons[tid]||""}</svg>
+        <span style="font-weight:700;font-size:.85rem;color:var(--t)">${c.name}</span>
+        <span style="margin-left:auto;font-size:.68rem;color:var(--t2);font-family:var(--mono)">${meta.wordLimit||""}</span>
       </div>
-      <div style="font-size:.7rem;color:var(--t2);margin-top:4px">${c.questions.length} question option${c.questions.length!==1?"s":""} available</div>
-    </button>`;
+      <div style="padding:12px 14px;font-size:.78rem;line-height:1.65;color:var(--t);white-space:pre-wrap;max-height:280px;overflow-y:auto">${escapeHTML(q.text||"")}</div>
+      <div style="padding:10px 14px;border-top:1px solid var(--b)">
+        <button class="btn bp" style="width:100%;justify-content:center" onclick="chooseSection('${tid}')">Choose ${c.name}</button>
+      </div>
+    </div>`;
   }).join("");
   pauseTimer();
   document.getElementById("choice-cov").classList.add("open");
@@ -3846,19 +3857,10 @@ const initPromise=init();
 </script>
 <!-- REPORT/PRECIS CHOICE OVERLAY -->
 <div class="cov" id="choice-cov">
-  <div class="cbox" style="max-width:420px">
-    <div class="cbox-t">Choose your third section</div>
-    <div class="cbox-s">In SBI PO Mains you must attempt <strong style="color:var(--t)">either Report Writing or Precis Writing.</strong> Choose one to continue.</div>
-    <div style="display:flex;flex-direction:column;gap:9px">
-      <button class="btn bp" onclick="chooseSection('report')" style="justify-content:flex-start;padding:12px 16px;font-size:.82rem">
-        <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-        <div style="text-align:left"><div style="font-weight:700">Report Writing</div><div style="font-size:.72rem;opacity:.8;margin-top:1px">100–150 words · Formal banking report</div></div>
-      </button>
-      <button class="btn bg" onclick="chooseSection('precis')" style="justify-content:flex-start;padding:12px 16px;font-size:.82rem;color:var(--t)">
-        <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="13" y1="18" x2="3" y2="18"/></svg>
-        <div style="text-align:left"><div style="font-weight:700">Precis Writing</div><div style="font-size:.72rem;color:var(--t2);margin-top:1px">~1/3rd of passage · Summarisation skill</div></div>
-      </button>
-    </div>
+  <div class="cbox" id="choice-cov-box" style="max-width:680px;width:100%;max-height:88vh;overflow-y:auto">
+    <div class="cbox-t" id="choice-cov-title">Choose your third section</div>
+    <div class="cbox-s" id="choice-cov-sub">In SBI PO Mains you must attempt <strong style="color:var(--t)">either Report Writing or Precis Writing.</strong> Read both questions below, then choose one to continue — this cannot be changed once selected.</div>
+    <div id="choice-cov-options" style="display:flex;flex-direction:column;gap:12px"></div>
   </div>
 </div>
 
