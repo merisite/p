@@ -2832,6 +2832,8 @@ function extractTaskRequirements(raw){
 // Turns AI-judged 0.0–1.0 "quality" per criterion into actual marks. This is the ONLY place
 // quality × marks multiplication happens. The AI is never allowed to state a mark value or a
 // maximum itself — only a quality fraction — so it can never invent or exceed a ceiling.
+// Rounds to the nearest 0.1 mark (spec §2: "displayScore = Math.round(score*10)/10" — decimal
+// scores such as 3.6/5 and 2.3/2.5 are valid and expected, not forced onto 0.5-mark steps).
 function calculateFinalScore(question,profile,criterionQualityById,requirementCapPct,isGibberish){
   const criteriaMax=distributeMarks(question.marks,profile.criteria);
   const parameters=profile.criteria.map(c=>{
@@ -2839,11 +2841,11 @@ function calculateFinalScore(question,profile,criterionQualityById,requirementCa
     const entry=criterionQualityById[c.id]||{};
     const quality=isGibberish?0:Math.max(0,Math.min(Number(entry.quality)||0,1));
     const cap=(c.id===profile.contentCriterionId)?requirementCapPct:1;
-    let score=Math.round(quality*cap*max*2)/2;
+    let score=Math.round(quality*cap*max*10)/10;
     score=Math.max(0,Math.min(score,max));
     return{id:c.id,name:c.name,score,max,comment:entry.evidence||""};
   });
-  let totalScore=Math.round(parameters.reduce((a,p)=>a+p.score,0)*2)/2;
+  let totalScore=Math.round(parameters.reduce((a,p)=>a+p.score,0)*10)/10;
   totalScore=Math.max(0,Math.min(totalScore,question.marks));
   return{parameters,totalScore};
 }
@@ -2864,7 +2866,7 @@ function validateEvaluation(result,maxMarks){
     p.score=Math.max(0,Math.min(p.score,p.max)); // no negative marks, never exceeds its own max
     sum+=p.score;
   }
-  sum=Math.round(sum*2)/2;
+  sum=Math.round(sum*10)/10;
   if(!isFinite(sum)||sum<0)return null;
   result.totalScore=Math.max(0,Math.min(sum,maxMarks)); // sum(criteria)=finalScore, finalScore<=maxMarks
   return result;
@@ -2905,6 +2907,38 @@ function bandPhrase(pct,isGibberish){
   return`This is ${article} ${band.toLowerCase()} response. See the parameter breakdown above for specific strengths and gaps.`;
 }
 
+// ---- §12 LANGUAGE SCORE CONSISTENCY — CODE enforces these caps, never the AI. ----
+// The AI's qualitative "languageSeverity" is a signal, not the final word. The actual list of
+// validated GENUINE (non-style) corrections is independently converted to an implied severity,
+// and the STRICTER (lower-cap) of the two always wins. This guarantees a response can never be
+// described as having "several grammatical errors" while still scoring 100% on Language — the
+// exact failure mode spec §24's regression test targets. Style suggestions alone never trigger
+// this cap (only genuine, validated mistakes feed languageSeverityFromMistakeCount).
+const LANGUAGE_SEVERITY_ORDER=["none","minor","moderate","severe"];
+const LANGUAGE_SEVERITY_CAPS={none:1,minor:0.95,moderate:0.80,severe:0.60};
+function languageSeverityFromMistakeCount(n){
+  if(n<=0)return"none";
+  if(n<=2)return"minor";
+  if(n<=5)return"moderate";
+  return"severe";
+}
+function stricterSeverity(a,b){
+  const ia=LANGUAGE_SEVERITY_ORDER.indexOf(a),ib=LANGUAGE_SEVERITY_ORDER.indexOf(b);
+  return(Math.max(ia,0)>=Math.max(ib,0))?a:b;
+}
+// Applies the cap in place to a {quality,evidence} entry for the profile's "language" criterion.
+// Returns the effective severity actually applied so callers can keep verdict text consistent
+// with the number (e.g. deciding whether "No significant language errors found." is accurate).
+function applyLanguageConsistencyCap(qualityById,aiSeverityRaw,genuineMistakes){
+  const entry=qualityById&&qualityById.language;
+  const countSeverity=languageSeverityFromMistakeCount((genuineMistakes||[]).length);
+  const aiSeverity=LANGUAGE_SEVERITY_ORDER.includes(aiSeverityRaw)?aiSeverityRaw:countSeverity;
+  const effectiveSeverity=stricterSeverity(aiSeverity,countSeverity);
+  const cap=LANGUAGE_SEVERITY_CAPS[effectiveSeverity];
+  if(entry&&typeof entry.quality==="number"&&entry.quality>cap)entry.quality=cap;
+  return effectiveSeverity;
+}
+
 // Type-specific grading guidance injected into the AI prompt (spec §29-33).
 const TYPE_GUIDANCE={
   essay:`ESSAY-SPECIFIC RULES: Do not require exact factual points unless the question itself demands them. Judge relevance, depth, development, balance, argument quality, use of examples, logical progression, and conclusion. Generic filler or buzzwords mentioned without explanation must NOT earn high content marks.`,
@@ -2928,6 +2962,7 @@ async function evalComprehensionAI(q,ans,wc,ep){
       totalScore:0,
       correctedAnswer:"",
       mistakes:[],
+      styleSuggestions:[],
       strengths:[],
       improvements:["Answer the questions in your own words instead of copying from the passage.","Focus on directly addressing what each question asks, using the passage only as a reference."],
       overallVerdict:"This response largely repeats the passage itself rather than answering the questions asked, so no credit can be given. Please write the answers in your own words.",
@@ -2988,11 +3023,11 @@ Return ONLY this JSON (one object per sub-question in "subQuestions" — ${numQ}
     result=validateEvaluation(result,totalPossible);
     if(!result)return null;
 
-    result.mistakes=validateCorrections(raw.mistakes);
-    const styleSuggestions=validateCorrections(raw.styleSuggestions).map(s=>Object.assign({},s,{type:"Style"}));
-    result.mistakes=result.mistakes.concat(styleSuggestions).slice(0,8);
+    // §16/§22: GENUINE errors and STYLE suggestions stay in two separate lists — never merged.
+    result.mistakes=validateCorrections(raw.mistakes).slice(0,8);
+    result.styleSuggestions=validateCorrections(raw.styleSuggestions).slice(0,8);
 
-    if(copyCheck.copied||!eligibleForCorrection){result.correctedAnswer="";result.mistakes=[];}
+    if(copyCheck.copied||!eligibleForCorrection){result.correctedAnswer="";result.mistakes=[];result.styleSuggestions=[];}
     else result.correctedAnswer=typeof raw.correctedAnswer==="string"?raw.correctedAnswer:"";
 
     const pct=totalPossible>0?Math.round((result.totalScore/totalPossible)*100):0;
@@ -3067,7 +3102,7 @@ CRITICAL: you generate text in order and cannot revise something already written
 
 YOUR ROLE IN THIS PIPELINE: you are the examiner's EYES ONLY. You identify what is present, what is missing, what is wrong, and how well each requirement is fulfilled. You do NOT decide final marks, criterion maximums, or the total — code does that afterward from the "quality" (0.0 to 1.0) you report per criterion. NEVER write an absolute mark value or a maximum anywhere in your response.
 
-STEP 1 — TASK REQUIREMENT EXTRACTION (from the question text only, before looking at the answer's quality): list the concrete requirements this specific question is actually asking for. Do NOT invent information the question didn't provide — e.g. if no exact charge/amount/name is given, "state the exact charge" is not a requirement. For each: id, a short description, importance ("essential"|"important"|"minor"), whether the student's answer satisfies it (true/false), a quality estimate 0.0-1.0 for how well it's satisfied if attempted, and a one-line evidence note.
+STEP 1 — TASK REQUIREMENT EXTRACTION (from the question text only, before looking at the answer's quality): list the concrete requirements this specific question is actually asking for. Do NOT invent information the question didn't provide — e.g. if no exact charge/amount/name is given, "state the exact charge" is not a requirement. For each: id, a short description, importance ("essential"|"important"|"minor"), whether the student's answer satisfies it (true/false), a quality estimate 0.0-1.0 for how well it's satisfied if attempted, and a one-line evidence note. While checking satisfaction, also watch for UNSUPPORTED INVENTED SPECIFICS in the student's answer: if the student states a specific amount, date, policy figure, legal consequence, statistic, or reference number that the question did NOT supply and that is not universal public knowledge, do not treat it as automatically correct just because it looks plausible or matches a typical model answer — note this in "evidence" and reflect it in that requirement's "quality" as a content/accuracy issue. Never invent your own "correct" figure to compare it against, and never treat this as a language/grammar issue.
 
 STEP 2 — VALIDITY CHECK:
 - "attempted": did the student make any real attempt at all?
@@ -3076,7 +3111,9 @@ STEP 2 — VALIDITY CHECK:
 
 ${structPromptNote}${lengthPromptNote}
 
-STEP 3 — LANGUAGE: do NOT use a rigid errors-to-percentage table. Judge quality by frequency, severity, clarity impact, and recurrence. Minor = small errors that don't affect meaning. Moderate = repeated issues reducing professionalism. Severe = frequent errors materially affecting clarity or correctness. Report "languageSeverity" as "minor"|"moderate"|"severe" and let that inform (not mechanically dictate) the language criterion's quality.
+STEP 3 — LANGUAGE: judge quality by frequency, severity, clarity impact, and recurrence — not a rigid errors-per-word formula. None = no significant genuine errors. Minor = small errors that don't affect meaning. Moderate = repeated issues reducing correctness/professionalism. Severe = frequent errors materially affecting clarity. Report "languageSeverity" as "none"|"minor"|"moderate"|"severe". IMPORTANT — your qualitative severity and your numeric "language" quality MUST agree: the system will enforce this regardless (none→up to 100%, minor→capped at 95%, moderate→capped at 80%, severe→capped at 60%), so score consistently with the severity you report rather than fighting the cap.
+
+GENUINE ERROR TEST (apply before labelling ANYTHING a Genuine Error rather than a Style Suggestion): "If this correction were not made, would a competent English examiner consider the original objectively wrong — ungrammatical, misspelled, mispunctuated, semantically incorrect, or structurally defective?" If the honest answer is no — the original is correct but another version is merely more elegant, more formal, more concise, or more native-sounding — it is a Style Suggestion, never a Genuine Error, however inelegant it reads. Do not invent a grammatical category to justify a stylistic preference (e.g. do not call something "article usage," "noun agreement," or "spelling" when the real, or only, issue is wordiness or word choice). Every "reason" must name the actual, specific linguistic problem, never a vague or inaccurate label.
 
 STEP 4 — CRITERION QUALITY (0.0 to 1.0 each, for EXACTLY these criteria — do not add, remove, or rename any):
 ${criteriaDescLine}
@@ -3096,11 +3133,12 @@ Cap each list at 8 entries. If there are no genuine errors, "mistakes" must be a
 HARD RULES:
 - NUMBERS MUST NEVER APPEAR in overallVerdict, strengths, or improvements — no score, fraction, or percentage anywhere in that text. Describe performance only in words.
 - Do not inflate: a response must not score high merely for being polite, grammatical, well formatted, long, or professional-sounding if it does not actually complete the task.
-- Do not over-penalise: harmless wording differences, legitimate synonyms, natural alternative phrasing, and correct-but-different-from-model-answer grammar are NOT errors.
+- Do not over-penalise: harmless wording differences, legitimate synonyms, natural alternative phrasing, and correct-but-different-from-model-answer grammar are NOT errors. "We request you to visit the branch," "at the earliest possible," and similarly plain-but-correct constructions are NOT grammar errors merely because a more polished version exists — a sentence can be less elegant without being wrong.
+- UNSUPPORTED/INVENTED SPECIFICS (see STEP 1): never silently accept an invented amount/date/figure the question never gave, and never invent your own "correct" value to check the student against.
 - Respond ONLY with valid JSON, no markdown, no explanation outside JSON.
 
 Return ONLY this JSON, every key present, in this order:
-{"analysis":{"attempted":true,"isGibberish":false,"majorlyOffTask":false,"taskRequirements":[{"id":"requirement_1","description":"","importance":"essential","satisfied":true,"quality":1,"evidence":""}],"languageSeverity":"minor","formatIssues":[]},"criterionEvaluation":[${criteriaList.map(c=>`{"id":"${c.id}","quality":0.0,"evidence":""}`).join(",")}],"mistakes":[{"type":"Grammar","original":"","corrected":"","reason":""}],"styleSuggestions":[],"strengths":["<no numbers>"],"improvements":["<no numbers>"],"correctedAnswer":"","overallVerdict":"<no numbers>"}`;
+{"analysis":{"attempted":true,"isGibberish":false,"majorlyOffTask":false,"taskRequirements":[{"id":"requirement_1","description":"","importance":"essential","satisfied":true,"quality":1,"evidence":""}],"languageSeverity":"none","formatIssues":[]},"criterionEvaluation":[${criteriaList.map(c=>`{"id":"${c.id}","quality":0.0,"evidence":""}`).join(",")}],"mistakes":[{"type":"Grammar","original":"","corrected":"","reason":""}],"styleSuggestions":[],"strengths":["<no numbers>"],"improvements":["<no numbers>"],"correctedAnswer":"","overallVerdict":"<no numbers>"}`;
 
   const p=`SECTION TYPE: ${typeName}
 WORD LIMIT: ${q.wordLimit}
@@ -3148,6 +3186,17 @@ Follow the steps in the system instructions in order: extract task requirements 
       if(qualityById[structId].quality>cap)qualityById[structId].quality=cap;
     }
 
+    // §16/§22: keep GENUINE errors and STYLE suggestions as two separate, independently-
+    // validated lists — never merged into one array. Style suggestions must never influence any
+    // score (they're validated but excluded entirely from the language-severity computation).
+    const genuineMistakes=validateCorrections(raw.mistakes);
+    const styleSuggestions=validateCorrections(raw.styleSuggestions);
+
+    // §12: CODE-enforced language cap, computed from the validated genuine mistakes list (never
+    // styleSuggestions) and the AI's reported severity — the stricter of the two always wins.
+    // Must run BEFORE calculateFinalScore, since that's the one place quality×max happens.
+    applyLanguageConsistencyCap(qualityById,analysis.languageSeverity,genuineMistakes);
+
     const scored=calculateFinalScore(q,profile,qualityById,contentCapPct,isGibberish);
     let result=validateEvaluation(scored,max);
     if(!result)return null; // controlled failure — never fabricate a score
@@ -3156,11 +3205,10 @@ Follow the steps in the system instructions in order: extract task requirements 
     result.wordsWritten=wlInfo.wordsWritten;
     result.wordLimitDisplay=q.wordLimit||"";
 
-    result.mistakes=validateCorrections(raw.mistakes);
-    const styleSuggestions=validateCorrections(raw.styleSuggestions).map(s=>Object.assign({},s,{type:"Style"}));
-    result.mistakes=result.mistakes.concat(styleSuggestions).slice(0,8);
+    result.mistakes=genuineMistakes.slice(0,8);
+    result.styleSuggestions=styleSuggestions.slice(0,8);
 
-    if(isGibberish||!eligibleForCorrection){result.correctedAnswer="";result.mistakes=[];}
+    if(isGibberish||!eligibleForCorrection){result.correctedAnswer="";result.mistakes=[];result.styleSuggestions=[];}
     else result.correctedAnswer=typeof raw.correctedAnswer==="string"?raw.correctedAnswer:"";
 
     const pct=max>0?Math.round((result.totalScore/max)*100):0;
@@ -3296,32 +3344,45 @@ function renderCorrectedText(text){
   const esc=escapeHTML(text);
   return esc.replace(/\{\{(.+?)\}\}/g,'<mark class="wl-mark">$1</mark>');
 }
+// Renders one labelled block of correction cards (shared by the Genuine Errors and Style
+// Suggestions sections below — spec §16/§22 requires these stay visually separate, never merged).
+function _renderMistakeCards(list){
+  const typeColor={Spelling:'var(--red)',Grammar:'var(--accent)',"Word Choice":'var(--teal)',Punctuation:'var(--amber)',Style:'var(--t2)'};
+  return '<div style="display:flex;flex-direction:column;gap:8px;margin-top:6px">'+
+    list.map(function(m){
+      const col=typeColor[m.type]||'var(--t2)';
+      return '<div style="border:1px solid var(--b);border-radius:var(--rs);padding:8px 10px">'+
+        '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">'+
+          '<span style="font-size:.62rem;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;color:'+col+';border:1px solid '+col+';border-radius:999px;padding:1px 8px;flex-shrink:0">'+escapeHTML(m.type)+'</span>'+
+          '<span style="font-size:.8rem"><s style="color:var(--red);opacity:.8">'+escapeHTML(m.original)+'</s> → <strong style="color:var(--green)">'+escapeHTML(m.corrected)+'</strong></span>'+
+        '</div>'+
+        (m.reason?'<div style="font-size:.72rem;color:var(--t2);margin-top:4px">'+escapeHTML(m.reason)+'</div>':'')+
+      '</div>';
+    }).join('')+
+  '</div>';
+}
 function renderCorrectedAnswer(result){
   const card=document.getElementById('r-corrected-card');
   const wrap=document.getElementById('r-corrected');
   if(!card||!wrap)return;
   const hasCorrected=result.correctedAnswer&&result.correctedAnswer.trim();
-  const hasMistakes=Array.isArray(result.mistakes)&&result.mistakes.length>0;
-  if(!hasCorrected&&!hasMistakes){card.style.display='none';return;}
+  const mistakes=Array.isArray(result.mistakes)?result.mistakes:[];
+  const styleSuggestions=Array.isArray(result.styleSuggestions)?result.styleSuggestions:[];
+  // Nothing to show at all (e.g. answer too short for the correction feature) — hide the card.
+  if(!hasCorrected&&!mistakes.length&&!styleSuggestions.length){card.style.display='none';return;}
   card.style.display='';
   let html='';
   if(hasCorrected){
     html+='<div class="model-box" style="white-space:pre-wrap;line-height:1.8">'+renderCorrectedText(result.correctedAnswer)+'</div>';
   }
-  if(hasMistakes){
-    const typeColor={Spelling:'var(--red)',Grammar:'var(--accent)',"Word Choice":'var(--teal)',Punctuation:'var(--amber)'};
-    html+='<div style="margin-top:14px"><div class="blbl-s">Mistakes Fixed</div><div style="display:flex;flex-direction:column;gap:8px;margin-top:6px">'+
-      result.mistakes.map(function(m){
-        const col=typeColor[m.type]||'var(--t2)';
-        return '<div style="border:1px solid var(--b);border-radius:var(--rs);padding:8px 10px">'+
-          '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">'+
-            '<span style="font-size:.62rem;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;color:'+col+';border:1px solid '+col+';border-radius:999px;padding:1px 8px;flex-shrink:0">'+escapeHTML(m.type)+'</span>'+
-            '<span style="font-size:.8rem"><s style="color:var(--red);opacity:.8">'+escapeHTML(m.original)+'</s> → <strong style="color:var(--green)">'+escapeHTML(m.corrected)+'</strong></span>'+
-          '</div>'+
-          (m.reason?'<div style="font-size:.72rem;color:var(--t2);margin-top:4px">'+escapeHTML(m.reason)+'</div>':'')+
-        '</div>';
-      }).join('')+
-    '</div></div>';
+  // §16/§22: two clearly separate sections — GENUINE LANGUAGE ERRORS vs STYLE SUGGESTIONS.
+  // If there are no genuine errors at all, say so explicitly rather than showing nothing.
+  html+='<div style="margin-top:14px"><div class="blbl-s">Genuine Language Errors</div>'+
+    (mistakes.length?_renderMistakeCards(mistakes):
+      '<div style="font-size:.78rem;color:var(--t2);margin-top:6px">No significant language errors found.</div>')+
+  '</div>';
+  if(styleSuggestions.length){
+    html+='<div style="margin-top:14px"><div class="blbl-s">Style Suggestions</div>'+_renderMistakeCards(styleSuggestions)+'</div>';
   }
   wrap.innerHTML=html;
 }
