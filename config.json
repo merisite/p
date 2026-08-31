@@ -223,7 +223,7 @@
       "marks": 10,
       "difficulty": "medium",
       "active": true,
-      "mockNo": 2
+      "mockNo": null
     },
     {
       "id": "q_email_3",
@@ -235,7 +235,7 @@
       "marks": 10,
       "difficulty": "medium",
       "active": true,
-      "mockNo": 3
+      "mockNo": null
     },
     {
       "id": "q_email_4",
@@ -247,7 +247,7 @@
       "marks": 10,
       "difficulty": "medium",
       "active": true,
-      "mockNo": 4
+      "mockNo": null
     },
     {
       "id": "q_email_5",
@@ -259,7 +259,7 @@
       "marks": 10,
       "difficulty": "medium",
       "active": true,
-      "mockNo": 5
+      "mockNo": null
     },
     {
       "id": "q_email_6",
@@ -271,7 +271,7 @@
       "marks": 10,
       "difficulty": "medium",
       "active": true,
-      "mockNo": 6
+      "mockNo": null
     },
     {
       "id": "q_email_7",
@@ -283,7 +283,7 @@
       "marks": 20,
       "difficulty": "medium",
       "active": false,
-      "mockNo": 7
+      "mockNo": null
     },
     {
       "id": "q_email_8",
@@ -1592,6 +1592,18 @@
       "difficulty": "medium",
       "active": true,
       "mockNo": null
+    },
+    {
+      "id": "q_1788170732059",
+      "examId": "sbi_po",
+      "type": "email",
+      "text": "Write an email to your bank's branch manager complaining about incorrect EMI deduction on your home loan account despite timely payments, requesting immediate rectification and a revised statement.",
+      "modelAnswer": "To: branchmanager@sbi.co.in\nSubject: Incorrect EMI Deduction from Home Loan Account\n\nDear Sir/Madam,\nI am writing to inform you about an incorrect deduction from my home loan account. I have been paying my EMIs regularly and on time. However, I noticed that an amount higher than my fixed EMI was deducted from my savings account this month.\nI request you to kindly check the transaction and find out the reason for this extra deduction. I have always maintained sufficient balance in my account and have not missed any EMI payment. Therefore, I believe that the excess deduction may have occurred due to an error.\nI request you to rectify the issue immediately and refund the excess amount, if deducted wrongly. I also request you to provide me with a revised loan statement showing the correct EMI deduction and outstanding balance.\nKindly look into the matter at the earliest and confirm the correction.\n\nYours faithfully,\nKaran Ranjan\nHome Loan Account No.: 4587219630\nMobile No.: 9999199191",
+      "wordLimit": "150-200 words",
+      "marks": 20,
+      "difficulty": "medium",
+      "active": false,
+      "mockNo": 2
     }
   ],
   "typingParas": [
