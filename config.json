@@ -439,7 +439,7 @@
       "marks": 10,
       "difficulty": "easy",
       "active": true,
-      "mockNo": 2
+      "mockNo": null
     },
     {
       "id": "q_report_3",
@@ -1087,7 +1087,7 @@
       "marks": 15,
       "difficulty": "easy",
       "active": false,
-      "mockNo": 1
+      "mockNo": null
     },
     {
       "id": "q_rp2",
@@ -1099,7 +1099,7 @@
       "marks": 15,
       "difficulty": "hard",
       "active": false,
-      "mockNo": 2
+      "mockNo": null
     },
     {
       "id": "q_rp3",
@@ -1602,7 +1602,7 @@
       "wordLimit": "150-200 words",
       "marks": 20,
       "difficulty": "medium",
-      "active": false,
+      "active": true,
       "mockNo": 2
     },
     {
@@ -1614,7 +1614,19 @@
       "wordLimit": "150-200 words",
       "marks": 20,
       "difficulty": "medium",
-      "active": false,
+      "active": true,
+      "mockNo": 2
+    },
+    {
+      "id": "q_1788171871989",
+      "examId": "sbi_po",
+      "type": "report",
+      "text": "Write a report based on a survey conducted by your bank to assess the adoption of digital banking services (UPI, mobile banking, internet banking) among customers in your region.",
+      "modelAnswer": "Date: August 31, 2026\nTo: Head Office\nFrom: Roshan Kumar, Branch Manager\nSubject: Report on Adoption of Digital Banking Services\n\nDear Sir/Madam,\nI am pleased to submit a report on the survey conducted by our bank to assess the adoption of digital banking services among customers in our region. The survey covered around 500 customers from different age groups.\nThe survey showed that UPI was the most widely used service, with nearly 70% of customers using it regularly. About 50% used mobile banking, while 35% used internet banking. Younger customers showed greater interest in digital services, whereas many senior citizens preferred traditional banking.\nThe main reasons for limited adoption were lack of awareness, fear of online fraud, difficulty in using digital applications and poor internet connectivity in some areas. Some customers also expressed concerns about transaction failures and data security.\nIt is recommended that the bank organise awareness camps, provide simple demonstrations and educate customers about safe digital banking practices. Special assistance should also be provided to senior citizens.\nWe look forward to increasing digital banking adoption among our customers.\n\nBest regards,\nRoshan Kumar\nBranch Manager",
+      "wordLimit": "100-150 words",
+      "marks": 20,
+      "difficulty": "medium",
+      "active": true,
       "mockNo": 2
     }
   ],
