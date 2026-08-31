@@ -1611,7 +1611,7 @@
       "type": "situation",
       "text": "A public sector bank's rural branch is witnessing a sharp rise in loan defaults among farmers due to crop failure and delayed monsoons. As the branch manager, analyze the situation and suggest measures to manage the NPA crisis while supporting genuine borrowers.",
       "modelAnswer": "The rural branch is facing a sharp rise in loan defaults among farmers due to crop failure and delayed monsoons. This may increase the branch’s NPAs and put genuine borrowers under financial pressure. Therefore, the situation needs a balanced approach that supports affected farmers while protecting the bank’s interests.\nAs the branch manager, I would first review the affected loan accounts and identify borrowers facing genuine financial difficulties. Field visits can be conducted to assess crop losses and repayment capacity. Eligible borrowers may be provided loan restructuring or rescheduling as per applicable banking guidelines. Crop insurance claims and government relief schemes should also be explained and facilitated.\nAt the same time, borrowers who have the ability to repay but deliberately avoid payment should be dealt with through regular recovery measures. The branch should maintain close contact with borrowers and monitor stressed accounts regularly to prevent further defaults.\nCoordination with local authorities and agricultural agencies can help farmers access available support. A combination of timely assistance, proper recovery and regular monitoring will help control NPAs while protecting genuine farmers from unnecessary financial hardship.",
-      "wordLimit": "150-200 words",
+      "wordLimit": "100-150 words",
       "marks": 20,
       "difficulty": "medium",
       "active": true,
