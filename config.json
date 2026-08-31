@@ -547,7 +547,7 @@
       "marks": 10,
       "difficulty": "easy",
       "active": true,
-      "mockNo": 2
+      "mockNo": null
     },
     {
       "id": "q_precis_3",
@@ -1219,7 +1219,7 @@
       "marks": 15,
       "difficulty": "medium",
       "active": false,
-      "mockNo": 2
+      "mockNo": null
     },
     {
       "id": "q_pp3",
@@ -1624,6 +1624,18 @@
       "text": "Write a report based on a survey conducted by your bank to assess the adoption of digital banking services (UPI, mobile banking, internet banking) among customers in your region.",
       "modelAnswer": "Date: August 31, 2026\nTo: Head Office\nFrom: Roshan Kumar, Branch Manager\nSubject: Report on Adoption of Digital Banking Services\n\nDear Sir/Madam,\nI am pleased to submit a report on the survey conducted by our bank to assess the adoption of digital banking services among customers in our region. The survey covered around 500 customers from different age groups.\nThe survey showed that UPI was the most widely used service, with nearly 70% of customers using it regularly. About 50% used mobile banking, while 35% used internet banking. Younger customers showed greater interest in digital services, whereas many senior citizens preferred traditional banking.\nThe main reasons for limited adoption were lack of awareness, fear of online fraud, difficulty in using digital applications and poor internet connectivity in some areas. Some customers also expressed concerns about transaction failures and data security.\nIt is recommended that the bank organise awareness camps, provide simple demonstrations and educate customers about safe digital banking practices. Special assistance should also be provided to senior citizens.\nWe look forward to increasing digital banking adoption among our customers.\n\nBest regards,\nRoshan Kumar\nBranch Manager",
       "wordLimit": "100-150 words",
+      "marks": 20,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": 2
+    },
+    {
+      "id": "q_1788172166237",
+      "examId": "sbi_po",
+      "type": "precis",
+      "text": "Financial inclusion has traditionally been understood as providing people with access to basic banking services such as savings accounts, credit, insurance and payment facilities. In India, several government and banking initiatives have helped bring millions of people into the formal financial system. However, opening a bank account alone does not ensure meaningful financial inclusion. People must also be able to use financial services safely, regularly and according to their needs.\nDigital banking has significantly changed the way financial services reach underserved communities. Mobile banking, UPI and internet banking have made payments faster and reduced the need to visit bank branches. Small businesses and rural customers can now receive and transfer money with greater convenience. Digital records can also improve transparency and help financial institutions understand customers’ needs. However, digital inclusion has not progressed equally across all sections of society.\nLimited digital literacy, poor internet connectivity, fear of online fraud and lack of confidence in using mobile applications continue to discourage many people, particularly senior citizens and those living in remote areas. In some cases, customers depend on others to conduct digital transactions, which can expose them to financial fraud. Therefore, simply promoting digital services without educating users can create new risks instead of solving existing problems.\nBanks need to adopt a balanced approach. They should continue expanding digital services while ensuring that customers understand how to use them securely. Awareness programmes, simple interfaces, customer support and financial education can help bridge the digital divide. Physical branches and assisted banking services should also remain available for people who cannot easily use digital platforms.\nTrue financial inclusion is achieved when individuals not only have access to financial services but can use them confidently, safely and independently. The future of inclusive banking, therefore, depends not merely on technology but on combining technological progress with customer awareness and support.",
+      "modelAnswer": "Financial inclusion is not limited to opening bank accounts; people must be able to use financial services safely and effectively. Digital banking through UPI, mobile banking and internet banking has improved convenience and access, especially for underserved communities. However, digital illiteracy, poor connectivity, fear of fraud and lack of confidence prevent many people from benefiting fully. Banks must therefore combine technological expansion with customer education and support. Awareness programmes, simple digital platforms, customer assistance and financial education can reduce these barriers. Physical branches should also remain available for those unable to use digital services. Thus, inclusive banking requires both technology and informed, confident users.",
+      "wordLimit": "80-100 words",
       "marks": 20,
       "difficulty": "medium",
       "active": true,
