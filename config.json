@@ -331,7 +331,7 @@
       "marks": 10,
       "difficulty": "medium",
       "active": true,
-      "mockNo": 2
+      "mockNo": null
     },
     {
       "id": "q_situation_3",
@@ -979,7 +979,7 @@
       "marks": 15,
       "difficulty": "hard",
       "active": false,
-      "mockNo": 2
+      "mockNo": null
     },
     {
       "id": "q_sp3",
@@ -1599,6 +1599,18 @@
       "type": "email",
       "text": "Write an email to your bank's branch manager complaining about incorrect EMI deduction on your home loan account despite timely payments, requesting immediate rectification and a revised statement.",
       "modelAnswer": "To: branchmanager@sbi.co.in\nSubject: Incorrect EMI Deduction from Home Loan Account\n\nDear Sir/Madam,\nI am writing to inform you about an incorrect deduction from my home loan account. I have been paying my EMIs regularly and on time. However, I noticed that an amount higher than my fixed EMI was deducted from my savings account this month.\nI request you to kindly check the transaction and find out the reason for this extra deduction. I have always maintained sufficient balance in my account and have not missed any EMI payment. Therefore, I believe that the excess deduction may have occurred due to an error.\nI request you to rectify the issue immediately and refund the excess amount, if deducted wrongly. I also request you to provide me with a revised loan statement showing the correct EMI deduction and outstanding balance.\nKindly look into the matter at the earliest and confirm the correction.\n\nYours faithfully,\nKaran Ranjan\nHome Loan Account No.: 4587219630\nMobile No.: 9999199191",
+      "wordLimit": "150-200 words",
+      "marks": 20,
+      "difficulty": "medium",
+      "active": false,
+      "mockNo": 2
+    },
+    {
+      "id": "q_1788171108804",
+      "examId": "sbi_po",
+      "type": "situation",
+      "text": "A public sector bank's rural branch is witnessing a sharp rise in loan defaults among farmers due to crop failure and delayed monsoons. As the branch manager, analyze the situation and suggest measures to manage the NPA crisis while supporting genuine borrowers.",
+      "modelAnswer": "The rural branch is facing a sharp rise in loan defaults among farmers due to crop failure and delayed monsoons. This may increase the branch’s NPAs and put genuine borrowers under financial pressure. Therefore, the situation needs a balanced approach that supports affected farmers while protecting the bank’s interests.\nAs the branch manager, I would first review the affected loan accounts and identify borrowers facing genuine financial difficulties. Field visits can be conducted to assess crop losses and repayment capacity. Eligible borrowers may be provided loan restructuring or rescheduling as per applicable banking guidelines. Crop insurance claims and government relief schemes should also be explained and facilitated.\nAt the same time, borrowers who have the ability to repay but deliberately avoid payment should be dealt with through regular recovery measures. The branch should maintain close contact with borrowers and monitor stressed accounts regularly to prevent further defaults.\nCoordination with local authorities and agricultural agencies can help farmers access available support. A combination of timely assistance, proper recovery and regular monitoring will help control NPAs while protecting genuine farmers from unnecessary financial hardship.",
       "wordLimit": "150-200 words",
       "marks": 20,
       "difficulty": "medium",
