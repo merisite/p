@@ -1725,7 +1725,7 @@ function renderQS(type){
     const badge=lastAttempt?attemptBadgeHTML(lastAttempt.score,true):"";
     const cta=lastAttempt?"↻ Reattempt":"→ Click to attempt";
     const viewResultBtn=lastAttempt?`<span onclick="event.stopPropagation();viewSavedResult('practice','${lastAttempt.id}')" style="font-size:.72rem;font-weight:700;color:var(--bg);background:var(--accent);padding:5px 12px;border-radius:999px;cursor:pointer">View Result</span>`:"";
-    return `<div class="q-item" onclick="launchExam('${q.id}')"><div style="font-size:.94rem;font-weight:700;color:var(--t);margin-bottom:9px">${shortLabel} Test ${i+1}</div><div style="display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:10px">${badge}<button onclick="event.stopPropagation();copyShareLink('question-${q.id}',this)" title="Copy direct link to this question" style="flex-shrink:0;display:flex;align-items:center;gap:4px;font-size:.62rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>Copy Link</button></div><div class="chips"><span class="chip">${q.difficulty||"medium"}</span></div><div style="margin-top:12px;display:flex;align-items:center;justify-content:space-between"><span style="font-size:.72rem;color:var(--accent);font-weight:600">${cta}</span>${viewResultBtn}</div></div>`;
+    return `<div class="q-item" onclick="launchExam('${q.id}')"><div style="font-size:.94rem;font-weight:700;color:var(--t);margin-bottom:9px">${shortLabel} Test ${i+1}</div><div style="display:flex;align-items:center;justify-content:flex-end;gap:6px;margin-bottom:10px">${badge}<button onclick="event.stopPropagation();copyShareLink('question-${q.id}',this)" title="Copy direct link to this question" style="flex-shrink:0;display:flex;align-items:center;gap:4px;font-size:.62rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>Copy Link</button></div><div class="chips"><span class="chip">${q.difficulty||"medium"}</span></div><div style="margin-top:12px;display:flex;align-items:center;justify-content:space-between"><span style="font-size:.72rem;color:var(--accent);font-weight:600">${cta}</span>${viewResultBtn}</div></div>`;
   }).join("");
 }
 function setTO(btn,v){document.querySelectorAll(".tob").forEach(b=>b.classList.remove("on"));btn.classList.add("on");tMode=v;document.getElementById("cust-row").classList.toggle("show",v==="custom");}
@@ -2112,13 +2112,14 @@ function showMockList(examId,opts){
         </div>`;
       }
       const lastAttempt=getLastMockAttempt(examId,m.mockNo);
-      const badge=lastAttempt?attemptBadgeHTML(lastAttempt.totalScore,false):"";
+      const badge=lastAttempt?attemptBadgeHTML(lastAttempt.totalScore,true):"";
       const cta=lastAttempt?"↻ Reattempt":"→ Start Mock";
-      const copyLinkTop=lastAttempt?36:10;
       const viewResultBtn=lastAttempt?`<span onclick="event.stopPropagation();viewSavedResult('mock','${lastAttempt.id}')" style="font-size:.7rem;font-weight:700;color:var(--bg);background:var(--accent);padding:4px 11px;border-radius:999px;cursor:pointer">View Result</span>`:"";
       return `<div class="hcard exam-card" onclick="startMockByNo('${examId}',${m.mockNo})" style="border-color:var(--aborder);background:var(--adim);position:relative">
-        ${badge}
-        <button onclick="event.stopPropagation();copyShareLink('mock-${examId}-${m.mockNo}',this)" title="Copy direct link to this mock" style="position:absolute;top:${copyLinkTop}px;right:10px;display:flex;align-items:center;gap:4px;font-size:.6rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer;z-index:2"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>Copy Link</button>
+        <div style="position:absolute;top:10px;right:10px;display:flex;align-items:center;gap:6px;z-index:2">
+          ${badge}
+          <button onclick="event.stopPropagation();copyShareLink('mock-${examId}-${m.mockNo}',this)" title="Copy direct link to this mock" style="flex-shrink:0;display:flex;align-items:center;gap:4px;font-size:.6rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>Copy Link</button>
+        </div>
         <div class="hc-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
         <div class="hc-title">${m.title}</div>
         <div class="hc-sub" style="font-size:.7rem;color:var(--t2)">${qc} question${qc!==1?'s':''} · ${ex.duration||30} min</div>
@@ -3501,30 +3502,53 @@ function renderAIBlock(result,max){
     </div>`;
   }
   const pct=Math.round((result.totalScore/max)*100);
+  const pctColor=pct>=70?"var(--green,#22c55e)":pct>=45?"var(--amber,#f59e0b)":"var(--red,#ef4444)";
   // Words Written / Required — shown separately from the marking breakdown below, never as a
   // scored row (spec §7, §22). Not shown for comprehension when a per-answer word limit isn't
   // meaningful as a single figure — only rendered when code actually computed a word count.
   const wcRow=(typeof result.wordsWritten==="number")?
-    `<div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px;font-size:.74rem;color:var(--t2)">
+    `<div style="display:flex;gap:16px;flex-wrap:wrap;margin:10px 0 4px;font-size:.74rem;color:var(--t2)">
       <span><strong style="color:var(--t)">Words Written:</strong> ${result.wordsWritten}</span>
       ${result.wordLimitDisplay?`<span><strong style="color:var(--t)">Required:</strong> ${escapeHTML(result.wordLimitDisplay)}</span>`:""}
     </div>`:"";
-  const bars=(result.parameters||[]).map(p=>{
-    const p100=Math.round((p.score/p.max)*100);
+  // Score tile grid — one small tile per criterion, colour-coded by that criterion's own
+  // percentage, plus a highlighted Total tile. Same underlying numbers as before, just laid
+  // out as scannable tiles instead of progress bars.
+  const critTiles=(result.parameters||[]).map(p=>{
+    const p100=p.max>0?Math.round((p.score/p.max)*100):0;
     const col=p100>=70?"var(--green,#22c55e)":p100>=45?"var(--amber,#f59e0b)":"var(--red,#ef4444)";
-    return`<div class="sbar"><div class="sbar-top"><span>${p.name}</span><span>${p.score}/${p.max}</span></div><div class="sbar-track"><div class="sbar-fill" style="width:${p100}%;background:${col}"></div></div><div class="sbar-note">${p.comment}</div></div>`;
+    return `<div class="stile" style="border-top:3px solid ${col}"><div class="stile-v" style="color:${col};font-size:1.05rem">${p.score}/${p.max}</div><div class="stile-l">${escapeHTML(p.name)}</div></div>`;
   }).join("");
+  const totalTile=`<div class="stile" style="border-top:3px solid var(--accent);background:var(--adim)"><div class="stile-v" style="color:var(--accent);font-size:1.25rem">${result.totalScore}/${max}</div><div class="stile-l">Total Score</div></div>`;
+  // Per-criterion feedback table — Criterion / Score / Feedback, using the same comment text
+  // the criterion already carried (result.parameters[].comment) — no new evaluation data.
+  const rows=(result.parameters||[]).map(p=>{
+    const p100=p.max>0?Math.round((p.score/p.max)*100):0;
+    const col=p100>=70?"var(--green,#22c55e)":p100>=45?"var(--amber,#f59e0b)":"var(--red,#ef4444)";
+    return `<tr>
+      <td style="padding:9px 10px;border:1px solid var(--b);font-weight:700;color:var(--t);font-size:.78rem;white-space:nowrap">${escapeHTML(p.name)}</td>
+      <td style="padding:9px 10px;border:1px solid var(--b);font-family:var(--mono);font-weight:700;color:${col};font-size:.8rem;text-align:center;white-space:nowrap">${p.score}/${p.max}</td>
+      <td style="padding:9px 10px;border:1px solid var(--b);color:var(--t2);font-size:.76rem;line-height:1.55">${escapeHTML(p.comment||"")}</td>
+    </tr>`;
+  }).join("");
+  const table=rows?`<div style="overflow-x:auto;margin-top:16px;border-radius:var(--rs)"><table style="width:100%;border-collapse:collapse;font-size:.8rem"><thead><tr>
+      <th style="padding:8px 10px;border:1px solid var(--b);background:var(--adim);text-align:left;font-size:.6rem;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--accent)">Criterion</th>
+      <th style="padding:8px 10px;border:1px solid var(--b);background:var(--adim);text-align:center;font-size:.6rem;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--accent)">Score</th>
+      <th style="padding:8px 10px;border:1px solid var(--b);background:var(--adim);text-align:left;font-size:.6rem;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--accent)">Feedback</th>
+    </tr></thead><tbody>${rows}</tbody></table></div>`:"";
   const s=(result.strengths||[]).map(x=>`<span class="ftag ftag-g">${x}</span>`).join("");
   const imp=(result.improvements||[]).map(x=>`<span class="ftag ftag-a">${x}</span>`).join("");
-  return`<div style="border-top:1px solid var(--b);padding-top:10px">
-    <div style="font-size:.6rem;font-family:var(--mono);color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">YOUR SCORE</div>
-    <div style="font-size:1.15rem;font-weight:700;color:var(--t);margin-bottom:2px">${result.totalScore}/${max}</div>
-    <div style="font-size:.72rem;color:var(--t2);margin-bottom:10px">${pct}%</div>
+  return`<div style="border-top:1px solid var(--b);padding-top:12px">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-bottom:10px">
+      <div style="font-size:.6rem;font-family:var(--mono);color:var(--accent);text-transform:uppercase;letter-spacing:.08em">Your Score</div>
+      <div style="font-size:.74rem;font-weight:700;color:${pctColor}">${pct}% overall</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:8px">${totalTile}${critTiles}</div>
     ${wcRow}
-    ${bars}
-    ${s?`<div style="margin-top:10px"><div class="blbl-s">Strengths</div><div class="ftags">${s}</div></div>`:""}
+    ${table}
+    ${s?`<div style="margin-top:14px"><div class="blbl-s">Strengths</div><div class="ftags">${s}</div></div>`:""}
     ${imp?`<div style="margin-top:8px"><div class="blbl-s">Improve</div><div class="ftags">${imp}</div></div>`:""}
-    <div class="verdict" style="margin-top:9px"><div class="blbl-s">Verdict</div>${result.overallVerdict||""}</div>
+    <div class="verdict" style="margin-top:12px"><div class="blbl-s">Verdict</div>${result.overallVerdict||""}</div>
   </div>`;
 }
 let _lastAIArgs=null;
