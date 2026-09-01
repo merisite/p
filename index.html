@@ -701,6 +701,53 @@ header .h-brand:hover{background:var(--brut-tint);}
 </style>
 </head>
 <body>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+  import {
+    getAuth, GoogleAuthProvider, signInWithPopup,
+    createUserWithEmailAndPassword, signInWithEmailAndPassword,
+    signInAnonymously, onAuthStateChanged, signOut,
+    linkWithCredential, EmailAuthProvider, updateProfile
+  } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+  import {
+    getFirestore, doc, setDoc, getDoc, collection,
+    getDocs, serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDRa4IzaCD_vctiAZDiqQ-sbb8TUlBJtCI",
+    authDomain: "descriptiveprepoday.firebaseapp.com",
+    projectId: "descriptiveprepoday",
+    storageBucket: "descriptiveprepoday.firebasestorage.app",
+    messagingSenderId: "528438655900",
+    appId: "1:528438655900:web:e3d38bef8ab1bcd997a659",
+    measurementId: "G-FXN2V8405D"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // Expose the bits the classic (non-module) app script needs.
+  window.FB = {
+    auth, db,
+    GoogleAuthProvider, signInWithPopup,
+    createUserWithEmailAndPassword, signInWithEmailAndPassword,
+    signInAnonymously, signOut,
+    linkWithCredential, EmailAuthProvider, updateProfile,
+    doc, setDoc, getDoc, collection, getDocs, serverTimestamp
+  };
+
+  onAuthStateChanged(auth, function(user){
+    window.dispatchEvent(new CustomEvent("fb-auth-changed", { detail: { user: user } }));
+  });
+
+  // Give every visitor a stable uid immediately (even before they choose to log in),
+  // so progress can sync to the cloud from the very first practice attempt.
+  if(!auth.currentUser){
+    signInAnonymously(auth).catch(function(e){ console.warn("Anonymous sign-in failed", e); });
+  }
+</script>
 <div id="maintenance-screen" style="display:none;position:fixed;inset:0;z-index:99999;background:#0F1420;color:#F5F5F7;align-items:center;justify-content:center;text-align:center;padding:32px;font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif;">
   <div style="max-width:460px;">
     <div style="width:56px;height:56px;margin:0 auto 20px;border-radius:14px;background:#E2B714;display:flex;align-items:center;justify-content:center;">
@@ -741,6 +788,10 @@ header .h-brand:hover{background:var(--brut-tint);}
     <button class="ib" onclick="toggleP('tp',event)" title="Theme">
       <svg id="theme-ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 109 9c0-.46-.04-.92-.1-1.36a5.5 5.5 0 01-7.54-7.54A8.94 8.94 0 0012 3z"/></svg>
     </button>
+    <button class="ib" id="auth-btn" onclick="toggleP('ap',event)" title="Account">
+      <svg id="auth-ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20c0-4.2 3.6-7 7.5-7s7.5 2.8 7.5 7"/></svg>
+      <span id="auth-ico-init" style="display:none"></span>
+    </button>
   </div>
 </header>
 <div class="panel-pop" id="fp" style="width:195px">
@@ -753,6 +804,41 @@ header .h-brand:hover{background:var(--brut-tint);}
   <div class="tp-grp">
     <div class="t-choice" data-m="light" onclick="setMode('light')"><div class="t-swatch" style="background:linear-gradient(135deg,#F4F6FA 50%,#E2B714 50%)"></div>Light</div>
     <div class="t-choice" data-m="dark" onclick="setMode('dark')"><div class="t-swatch" style="background:linear-gradient(135deg,#0F1420 50%,#E2B714 50%)"></div>Dark</div>
+  </div>
+</div>
+<div class="panel-pop" id="ap" style="width:225px">
+  <div class="pop-title">Account</div>
+  <div id="ap-signedout">
+    <div style="font-size:.76rem;color:var(--t2);line-height:1.5;margin-bottom:12px">Log in to save your progress and access it on any device.</div>
+    <button class="btn bp" style="width:100%" onclick="openAuthModal();document.getElementById('ap').classList.remove('open')">Login / Sign up</button>
+  </div>
+  <div id="ap-signedin" style="display:none">
+    <div style="font-size:.85rem;font-weight:700;color:var(--t);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" id="ap-name"></div>
+    <div style="font-size:.7rem;color:var(--t2);margin-bottom:12px;word-break:break-all" id="ap-email"></div>
+    <button class="btn bg" style="width:100%" onclick="doLogout()">Log out</button>
+  </div>
+</div>
+<div class="cov" id="auth-cov">
+  <div class="cbox" style="max-width:340px;text-align:left">
+    <div class="cbox-t" id="auth-title">Log in</div>
+    <div class="cbox-s" style="margin-bottom:16px">Save your progress and access it on any device.</div>
+    <button class="btn bg" style="width:100%;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:14px" onclick="doGoogleLogin()">
+      <svg width="16" height="16" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.3 29.3 35 24 35c-6.1 0-11-4.9-11-11s4.9-11 11-11c2.8 0 5.3 1 7.3 2.7l5.7-5.7C33.6 6.5 29 4.5 24 4.5 13.2 4.5 4.5 13.2 4.5 24S13.2 43.5 24 43.5 43.5 34.8 43.5 24c0-1.2-.1-2.4-.3-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 16 19 13 24 13c2.8 0 5.3 1 7.3 2.7l5.7-5.7C33.6 6.5 29 4.5 24 4.5c-7.7 0-14.3 4.4-17.7 10.2z"/><path fill="#4CAF50" d="M24 43.5c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 34.7 26.7 35.5 24 35.5c-5.3 0-9.7-3.4-11.3-8.1l-6.5 5C9.6 39 16.2 43.5 24 43.5z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.2-4.2 5.6l6.2 5.2C40.9 36.3 43.5 30.7 43.5 24c0-1.2-.1-2.4-.3-3.5z"/></svg>
+      Continue with Google
+    </button>
+    <div style="display:flex;align-items:center;gap:10px;margin:4px 0 14px;color:var(--t2);font-size:.68rem">
+      <div style="flex:1;height:1px;background:var(--b)"></div>OR<div style="flex:1;height:1px;background:var(--b)"></div>
+    </div>
+    <input type="email" id="auth-email" placeholder="Email" style="width:100%;margin-bottom:9px;padding:10px 12px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg);color:var(--t);font-size:.85rem;font-family:var(--font)"/>
+    <input type="password" id="auth-pass" placeholder="Password" style="width:100%;margin-bottom:4px;padding:10px 12px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg);color:var(--t);font-size:.85rem;font-family:var(--font)"/>
+    <div id="auth-err" style="color:var(--red);font-size:.72rem;min-height:18px;margin:4px 0"></div>
+    <div class="cbox-btns" style="flex-direction:column;gap:8px">
+      <button class="btn bp" style="width:100%" id="auth-submit-btn" onclick="doEmailAuth()">Log in</button>
+      <button class="btn" style="width:100%;background:none;color:var(--accent);font-size:.76rem;box-shadow:none" onclick="toggleAuthMode()">
+        <span id="auth-toggle-text">Don't have an account? Sign up</span>
+      </button>
+      <button class="btn" style="width:100%;background:none;color:var(--t2);font-size:.76rem;box-shadow:none" onclick="closeAuthModal()">Cancel</button>
+    </div>
   </div>
 </div>
 <div class="cov" id="exit-cov">
@@ -1150,7 +1236,7 @@ function updateLogo(m){
   if(url){l.src=url;l.style.display="block";}else l.style.display="none";
 }
 function setFS(v,save=true){document.documentElement.style.setProperty("--fs",v+"px");if(save)localStorage.setItem("dpt_font",v);}
-function toggleP(id,e){e.stopPropagation();const el=document.getElementById(id);el.classList.toggle("open");["fp","tp"].filter(x=>x!==id).forEach(x=>document.getElementById(x).classList.remove("open"));}
+function toggleP(id,e){e.stopPropagation();const el=document.getElementById(id);el.classList.toggle("open");["fp","tp","ap"].filter(x=>x!==id).forEach(x=>document.getElementById(x).classList.remove("open"));}
 document.addEventListener("click",()=>{["fp","tp"].forEach(id=>document.getElementById(id).classList.remove("open"));});
 function ocCopy(code,uid){
   const lbl=document.getElementById(uid+'-lbl');
@@ -3654,6 +3740,7 @@ function saveProgress(entry){
   if(list.length > 200) list.length = 200;
   localStorage.setItem(PROG_KEY, JSON.stringify(list));
   updateProgCard();
+  cloudSaveProgress(entry);
   return entry.id;
 }
 function updateProgressEntry(id,patch){
@@ -3664,11 +3751,145 @@ function updateProgressEntry(id,patch){
   Object.assign(list[idx],patch);
   localStorage.setItem(PROG_KEY, JSON.stringify(list));
   updateProgCard();
+  cloudSaveProgress(list[idx]);
   // If the Progress screen is currently open, refresh it so the fix is visible immediately
   if(document.getElementById('progress')&&document.getElementById('progress').classList.contains('active')){
     renderHistList();
   }
 }
+
+/* ============================================================
+   CLOUD SYNC (Firebase) — mirrors the above localStorage entries
+   into Firestore when the visitor has an account. Local storage
+   stays the source of truth for instant/offline reads; cloud is
+   best-effort and never blocks the UI.
+   ============================================================ */
+function cloudSaveProgress(entry){
+  try{
+    if(!window.FB || !window.FB.auth.currentUser) return;
+    const uid = window.FB.auth.currentUser.uid;
+    const ref = window.FB.doc(window.FB.db,'users',uid,'progress',entry.id);
+    window.FB.setDoc(ref, entry, {merge:true}).catch(function(e){ console.warn('Cloud save failed',e); });
+  }catch(e){ console.warn('Cloud save failed',e); }
+}
+async function cloudFetchAllProgress(uid){
+  try{
+    const colRef = window.FB.collection(window.FB.db,'users',uid,'progress');
+    const snap = await window.FB.getDocs(colRef);
+    const list = [];
+    snap.forEach(function(d){ list.push(d.data()); });
+    return list;
+  }catch(e){ console.warn('Cloud fetch failed',e); return []; }
+}
+// Runs once whenever someone finishes logging in with a real (non-anonymous)
+// account: unions local + cloud progress by entry id, saves the union back to
+// both places, so nothing is lost whichever device/session it started on.
+async function mergeLocalAndCloud(uid){
+  const local = getProgress();
+  const cloud = await cloudFetchAllProgress(uid);
+  const byId = {};
+  cloud.forEach(function(e){ byId[e.id]=e; });
+  local.forEach(function(e){ if(!byId[e.id]) byId[e.id]=e; });
+  const merged = Object.values(byId).sort(function(a,b){ return (b.date||0)-(a.date||0); });
+  if(merged.length>200) merged.length=200;
+  localStorage.setItem(PROG_KEY, JSON.stringify(merged));
+  const localOnly = local.filter(function(e){ return !cloud.find(function(c){ return c.id===e.id; }); });
+  localOnly.forEach(function(e){ cloudSaveProgress(e); });
+  updateProgCard();
+  if(document.getElementById('progress')&&document.getElementById('progress').classList.contains('active')){
+    renderHistList();
+  }
+}
+
+/* ============================================================
+   AUTH UI
+   ============================================================ */
+let _authMode = 'login'; // 'login' | 'signup'
+function openAuthModal(){
+  document.getElementById('auth-err').textContent='';
+  document.getElementById('auth-cov').classList.add('open');
+}
+function closeAuthModal(){
+  document.getElementById('auth-cov').classList.remove('open');
+}
+function toggleAuthMode(){
+  _authMode = _authMode==='login' ? 'signup' : 'login';
+  document.getElementById('auth-title').textContent = _authMode==='login' ? 'Log in' : 'Sign up';
+  document.getElementById('auth-submit-btn').textContent = _authMode==='login' ? 'Log in' : 'Sign up';
+  document.getElementById('auth-toggle-text').textContent = _authMode==='login' ? "Don't have an account? Sign up" : 'Already have an account? Log in';
+  document.getElementById('auth-err').textContent='';
+}
+async function doGoogleLogin(){
+  const errEl = document.getElementById('auth-err');
+  errEl.textContent='';
+  try{
+    const provider = new window.FB.GoogleAuthProvider();
+    const current = window.FB.auth.currentUser;
+    if(current && current.isAnonymous){
+      // Upgrade the anonymous session in place so existing local progress
+      // stays tied to the same uid instead of being orphaned.
+      try{
+        await window.FB.signInWithPopup(window.FB.auth, provider);
+      }catch(e){
+        await window.FB.signInWithPopup(window.FB.auth, provider);
+      }
+    }else{
+      await window.FB.signInWithPopup(window.FB.auth, provider);
+    }
+    closeAuthModal();
+  }catch(e){
+    errEl.textContent = e && e.message ? e.message.replace('Firebase: ','').replace(/\(auth\/.*\)\.?/,'').trim() : 'Google sign-in failed. Please try again.';
+  }
+}
+async function doEmailAuth(){
+  const email = document.getElementById('auth-email').value.trim();
+  const pass = document.getElementById('auth-pass').value;
+  const errEl = document.getElementById('auth-err');
+  errEl.textContent='';
+  if(!email || !pass){ errEl.textContent='Please enter both email and password.'; return; }
+  try{
+    if(_authMode==='signup'){
+      await window.FB.createUserWithEmailAndPassword(window.FB.auth, email, pass);
+    }else{
+      await window.FB.signInWithEmailAndPassword(window.FB.auth, email, pass);
+    }
+    closeAuthModal();
+  }catch(e){
+    errEl.textContent = e && e.message ? e.message.replace('Firebase: ','').replace(/\(auth\/.*\)\.?/,'').trim() : 'Something went wrong. Please try again.';
+  }
+}
+async function doLogout(){
+  try{ await window.FB.signOut(window.FB.auth); }catch(e){}
+  document.getElementById('ap').classList.remove('open');
+}
+function updateAuthUI(user){
+  const initEl = document.getElementById('auth-ico-init');
+  const svgEl = document.getElementById('auth-ico');
+  const soEl = document.getElementById('ap-signedout');
+  const siEl = document.getElementById('ap-signedin');
+  const loggedIn = !!(user && !user.isAnonymous);
+  if(loggedIn){
+    const label = user.displayName || user.email || 'Account';
+    document.getElementById('ap-name').textContent = user.displayName || 'My account';
+    document.getElementById('ap-email').textContent = user.email || '';
+    soEl.style.display='none'; siEl.style.display='block';
+    svgEl.style.display='none';
+    initEl.style.display='inline-flex';
+    initEl.style.cssText='display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:var(--accent);color:var(--bg);font-size:.6rem;font-weight:700;text-transform:uppercase';
+    initEl.textContent = label.charAt(0);
+  }else{
+    soEl.style.display='block'; siEl.style.display='none';
+    svgEl.style.display='block';
+    initEl.style.display='none';
+  }
+}
+window.addEventListener('fb-auth-changed', function(e){
+  const user = e.detail.user;
+  updateAuthUI(user);
+  if(user && !user.isAnonymous){
+    mergeLocalAndCloud(user.uid);
+  }
+});
 function updateProgCard(){
   const list = getProgress();
   const el = document.getElementById('prog-card-desc');
