@@ -242,6 +242,7 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .attempt-badge:hover .attempt-tip,.attempt-badge.tip-open .attempt-tip{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
 .attempt-badge.inline{position:static;flex-shrink:0}
 .attempt-badge.inline .attempt-tip{right:0;left:auto}
+.hcard:has(.attempt-badge:hover),.hcard:has(.attempt-badge.tip-open){overflow:visible}
 .q-badge{width:26px;height:26px;border-radius:7px;background:var(--adim);border:1px solid var(--aborder);display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;font-family:var(--mono);color:var(--accent);flex-shrink:0}
 .q-n{font-family:var(--mono);font-size:.62rem;color:var(--accent);min-width:18px;padding-top:2px;flex-shrink:0}
 .q-prev{font-size:.8rem;color:var(--t2);line-height:1.5}
@@ -1721,7 +1722,7 @@ function renderQS(type){
   const shortLabel=(sec.name||"Practice").replace(/\s*Writing\s*/i,"").trim()||sec.name||"Practice";
   document.getElementById("q-list").innerHTML=qs.length===0?"<div class='empty-q'>No questions yet for this section. Add questions in the Admin panel.</div>":qs.map((q,i)=>{
     const lastAttempt=getLastPracticeAttempt(q.id);
-    const badge=lastAttempt?attemptBadgeHTML(lastAttempt.score,true):"";
+    const badge=lastAttempt?attemptBadgeHTML(lastAttempt.score,true,lastAttempt.id,'practice'):"";
     const cta=lastAttempt?"↻ Reattempt":"→ Click to attempt";
     return `<div class="q-item" onclick="launchExam('${q.id}')"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px"><div style="font-size:.94rem;font-weight:700;color:var(--t)">${shortLabel} Test ${i+1}</div><div style="display:flex;align-items:center;gap:6px;flex-shrink:0">${badge}<button onclick="event.stopPropagation();copyShareLink('question-${q.id}',this)" title="Copy direct link to this question" style="flex-shrink:0;display:flex;align-items:center;gap:4px;font-size:.62rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>Copy Link</button></div></div><div class="chips">${'<span class="chip">'+q.wordLimit+'</span><span class="chip">'+q.marks+' marks</span><span class="chip">'+(q.difficulty||"medium")+'</span>'}</div><div style="margin-top:12px;font-size:.72rem;color:var(--accent);font-weight:600">${cta}</div></div>`;
   }).join("");
@@ -2110,7 +2111,7 @@ function showMockList(examId,opts){
         </div>`;
       }
       const lastAttempt=getLastMockAttempt(examId,m.mockNo);
-      const badge=lastAttempt?attemptBadgeHTML(lastAttempt.totalScore):"";
+      const badge=lastAttempt?attemptBadgeHTML(lastAttempt.totalScore,false,lastAttempt.id,'mock'):"";
       const cta=lastAttempt?"↻ Reattempt":"→ Start Mock";
       const copyLinkTop=lastAttempt?36:10;
       return `<div class="hcard exam-card" onclick="startMockByNo('${examId}',${m.mockNo})" style="border-color:var(--aborder);background:var(--adim);position:relative">
@@ -2612,7 +2613,17 @@ async function retryMockAI(idx){
     if(scoreEl)scoreEl.innerHTML='<span style="color:var(--accent)">'+result.totalScore+'/'+s.question.marks+'</span>';
     if(aiEl)aiEl.innerHTML=renderAIBlock(result,s.question.marks);
     const {totScore,totMax}=recomputeMockTotal();
-    if(totMax>0)updateProgressEntry(MS.progressId,{totalScore:totScore+"/"+totMax,parameters:aggregateMockParameters()});
+    if(totMax>0){
+      const patch={totalScore:totScore+"/"+totMax,parameters:aggregateMockParameters()};
+      try{
+        const entry=(getProgress()||[]).find(function(e){return e.id===MS.progressId;});
+        if(entry&&Array.isArray(entry.sectionsFull)&&entry.sectionsFull[idx]){
+          entry.sectionsFull[idx].aiResult=result;
+          patch.sectionsFull=entry.sectionsFull;
+        }
+      }catch(e){}
+      updateProgressEntry(MS.progressId,patch);
+    }
   } else {
     if(scoreEl)scoreEl.textContent="AI failed";
     MS.aiFails=MS.aiFails||{};MS.aiFails[idx]=(MS.aiFails[idx]||1)+1;
@@ -3533,7 +3544,7 @@ async function retryRunAI(){
     aiEl.innerHTML=renderAIBlock(result,q.marks);
     renderCorrectedAnswer(result);
     _lastAIArgs.result=result;
-    updateProgressEntry(_lastAIArgs.progressId,{score:result.totalScore+"/"+q.marks,parameters:result.parameters});
+    updateProgressEntry(_lastAIArgs.progressId,{score:result.totalScore+"/"+q.marks,parameters:result.parameters,aiResult:result});
   } else {
     _lastAIArgs.fails=(_lastAIArgs.fails||1)+1;
     aiEl.innerHTML=aiFailHTML("retryRunAI()","manualEvalPractice()",_lastAIArgs.fails);
@@ -3710,6 +3721,98 @@ function getProgress(){
   try{ return JSON.parse(localStorage.getItem(PROG_KEY)) || []; }
   catch(e){ return []; }
 }
+// Opens the #result screen populated entirely from a previously-saved
+// progress entry — no AI call, no re-evaluation. Used by the "View Result"
+// action on the attempt badge shown on practice/mock cards.
+function viewSavedResult(kind,id){
+  const entry=(getProgress()||[]).find(function(e){return e.id===id;});
+  if(!entry){alert('This saved result could not be found.');return;}
+  if(document.fullscreenElement){(document.exitFullscreen?.()||Promise.resolve()).catch(()=>{});}
+  if(kind==='practice'){
+    document.getElementById('r-single').style.display='';
+    document.getElementById('r-mock').style.display='none';
+    document.getElementById('r-try-btn').style.display='';
+    document.getElementById('r-title').textContent='Saved Result';
+    document.getElementById('r-sub').textContent=entry.typeName||entry.type||'';
+    document.getElementById('r-words').textContent=entry.wc||0;
+    document.getElementById('r-wpm').textContent=entry.wpm||0;
+    const taken=entry.timeSec||0,mm=Math.floor(taken/60),ss=taken%60;
+    document.getElementById('r-time').textContent=mm+'m '+ss+'s';
+    document.getElementById('r-score').textContent=entry.score||'—';
+    document.getElementById('r-question').textContent=entry.questionFull||entry.question||'';
+    document.getElementById('r-ans').textContent=entry.answerFull||entry.answer||'(No answer saved)';
+    document.getElementById('r-model').textContent=entry.modelAnswer||'';
+    const aiEl=document.getElementById('r-ai');
+    if(entry.aiResult){
+      aiEl.innerHTML=renderAIBlock(entry.aiResult,entry.marks||1);
+      renderCorrectedAnswer(entry.aiResult);
+    }else{
+      aiEl.innerHTML='<div class="ai-notice">Full AI feedback wasn\'t saved for this older attempt — only the score is available: <strong>'+escapeHTML(entry.score||'—')+'</strong></div>';
+      const card=document.getElementById('r-corrected-card');if(card)card.style.display='none';
+    }
+    renderQuestionHistory(entry.questionId);
+    showS('result');
+  }else if(kind==='mock'){
+    document.getElementById('r-single').style.display='none';
+    document.getElementById('r-mock').style.display='';
+    document.getElementById('r-try-btn').style.display='none';
+    document.getElementById('r-title').textContent=(entry.examName||'Mock')+' — Saved Result';
+    const taken=entry.timeSec||0,mm=Math.floor(taken/60),ss=String(taken%60).padStart(2,'0');
+    const totalSections=(entry.sectionsFull||entry.sections||[]).length;
+    document.getElementById('r-sub').textContent=(entry.attempted||0)+' of '+totalSections+' sections attempted · '+mm+'m '+ss+'s';
+    document.getElementById('r-mock-stats').innerHTML=
+      '<div class="stile"><div class="stile-v">'+(entry.attempted||0)+'/'+totalSections+'</div><div class="stile-l">Sections Done</div></div>'+
+      '<div class="stile"><div class="stile-v">'+(entry.totalWC||0)+'</div><div class="stile-l">Total Words</div></div>'+
+      '<div class="stile"><div class="stile-v">'+escapeHTML(entry.totalScore||'—')+'</div><div class="stile-l">Total Score</div></div>'+
+      '<div class="stile"><div class="stile-v">'+mm+'m '+ss+'s</div><div class="stile-l">Time Taken</div></div>';
+    const sections=entry.sectionsFull;
+    if(sections&&sections.length){
+      document.getElementById('r-mock-sections').innerHTML=sections.map(function(s){
+        const attempted=(s.answer||'').trim().length>0;
+        let aiHTML;
+        if(s.aiResult){
+          aiHTML='<div style="padding:12px 14px">'+renderAIBlock(s.aiResult,s.marks||1)+'</div>';
+        }else if(attempted){
+          aiHTML='<div style="padding:12px 14px"><div class="ai-notice">Full AI feedback wasn\'t saved for this attempt.</div></div>';
+        }else{
+          aiHTML='';
+        }
+        return '<div class="rcard" style="margin-bottom:14px">'
+          +'<div class="rcard-h" style="display:flex;align-items:center;justify-content:space-between">'
+            +'<span>'+escapeHTML((s.name||'Section').toUpperCase())+'</span>'
+            +'<span style="font-size:.72rem;font-family:var(--mono);color:var(--t2)">'+(s.aiResult?escapeHTML(s.aiResult.totalScore+'/'+(s.marks||0)):(attempted?'Not scored':'Not attempted'))+'</span>'
+          +'</div>'
+          +'<div class="rcard-b" style="padding:0">'
+            +'<div style="padding:12px 14px;border-bottom:1px solid var(--b)">'
+              +'<div style="font-size:.6rem;font-family:var(--mono);color:var(--t2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px">Question</div>'
+              +'<div style="font-size:.82rem;line-height:1.75;white-space:pre-wrap;color:var(--t)">'+escapeHTML(s.question||'')+'</div>'
+            +'</div>'
+            +'<div style="padding:12px 14px;border-bottom:1px solid var(--b)">'
+              +'<div style="font-size:.6rem;font-family:var(--mono);color:var(--t2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px">Your Answer</div>'
+              +'<div class="ans-box" style="margin:0">'+(attempted?escapeHTML(s.answer):"<em style='color:var(--t2)'>Not attempted</em>")+'</div>'
+            +'</div>'
+            +'<div style="padding:12px 14px;border-bottom:1px solid var(--b)">'
+              +'<div style="font-size:.6rem;font-family:var(--mono);color:var(--green,#22c55e);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px">✓ Model Answer</div>'
+              +'<div class="model-box" style="margin:0">'+(s.modelAnswer?escapeHTML(s.modelAnswer):'No model answer provided.')+'</div>'
+            +'</div>'
+            +aiHTML
+          +'</div>'
+        +'</div>';
+      }).join('');
+    }else{
+      // Old entry saved before full-result storage existed — fall back to the lighter summary fields.
+      document.getElementById('r-mock-sections').innerHTML=(entry.sections||[]).map(function(s){
+        return '<div class="rcard" style="margin-bottom:14px"><div class="rcard-h">'+escapeHTML((s.name||'Section').toUpperCase())+'</div>'
+          +'<div class="rcard-b" style="padding:12px 14px">'
+          +'<div style="font-size:.6rem;font-family:var(--mono);color:var(--t2);text-transform:uppercase;margin-bottom:5px">Your Answer ('+(s.wc||0)+' words)</div>'
+          +'<div class="ans-box" style="margin:0 0 8px">'+escapeHTML(s.answer||'')+'</div>'
+          +'<div class="ai-notice">Full AI feedback wasn\'t saved for this older attempt.</div>'
+          +'</div></div>';
+      }).join('');
+    }
+    showS('result');
+  }
+}
 // ── Reattempt helpers: find the most recent attempt for a given practice
 //    question or mock, so cards can show an "Attempted" badge + last score. ──
 function getLastPracticeAttempt(questionId){
@@ -3726,11 +3829,12 @@ document.addEventListener('click',function(e){
   if(e.target.closest('.attempt-badge'))return;
   document.querySelectorAll('.attempt-badge.tip-open').forEach(function(b){b.classList.remove('tip-open');});
 });
-function attemptBadgeHTML(scoreText,inline){
+function attemptBadgeHTML(scoreText,inline,id,kind){
   const label=escapeHTML(scoreText||'—');
+  const viewLink=id?('<button onclick="event.stopPropagation();viewSavedResult(\''+kind+'\',\''+id+'\')" style="margin-top:6px;width:100%;background:var(--accent);color:var(--bg);border:none;border-radius:6px;padding:5px 0;font-size:.68rem;font-weight:700;font-family:var(--font);cursor:pointer">View Result</button>'):'';
   return '<span class="attempt-badge'+(inline?' inline':'')+'" onclick="event.stopPropagation();this.classList.toggle(\'tip-open\')">'
     +'<svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Attempted'
-    +'<span class="attempt-tip">Last score: '+label+'</span>'
+    +'<span class="attempt-tip">Last score: '+label+viewLink+'</span>'
     +'</span>';
 }
 function saveProgress(entry){
@@ -3976,12 +4080,16 @@ async function submitSingle(){
     type: CQ ? CQ.type||'' : '',
     typeName: (function(){ try{ const d=D(),tm={};d.sectionTypes.forEach(function(s){tm[s.id]=s;}); return tm[CQ&&CQ.type]&&tm[CQ.type].name||CQ&&CQ.type||''; }catch(e){return '';} })(),
     question: CQ&&CQ.text ? CQ.text.slice(0,120) : '',
+    questionFull: CQ&&CQ.text ? CQ.text : '',
+    modelAnswer: CQ&&CQ.modelAnswer ? CQ.modelAnswer : '',
     answer: ans.slice(0,800),
+    answerFull: ans,
     wc: wc, wpm: wpm2, timeSec: taken,
     score: scoreEl ? scoreEl.textContent : '',
     marks: CQ ? CQ.marks||0 : 0,
     questionId: CQ ? CQ.id||'' : '',
-    parameters: (_lastAIArgs&&_lastAIArgs.result&&_lastAIArgs.result.parameters)||null
+    parameters: (_lastAIArgs&&_lastAIArgs.result&&_lastAIArgs.result.parameters)||null,
+    aiResult: (_lastAIArgs&&_lastAIArgs.result)||null
   });
   if(_lastAIArgs)_lastAIArgs.progressId=_practiceProgressId;
   // Update snapshot with final AI score
@@ -4029,6 +4137,18 @@ async function submitMock(){
         answer: (MS.a[i]||'').slice(0,400),
         wc: cw(MS.a[i]||''),
         marks: s.question&&s.question.marks||0
+      };
+    }),
+    sectionsFull: MS.s.map(function(s,i){
+      const q=s.question;
+      return {
+        name: q?(function(){try{const d=D(),tm={};d.sectionTypes.forEach(function(st){tm[st.id]=st;});return tm[q.type]&&tm[q.type].name||s.meta&&s.meta.name||s.typeId;}catch(e){return s.meta&&s.meta.name||s.typeId;}})():(s.meta&&s.meta.name||s.typeId||'Section'),
+        question: q?q.text||'':'',
+        modelAnswer: q?q.modelAnswer||'':'',
+        wordLimit: q?q.wordLimit||'':'',
+        marks: q?q.marks||0:0,
+        answer: MS.a[i]||'',
+        aiResult: (MS.aiResults&&MS.aiResults[i])||null
       };
     }),
     attempted: attempted, totalWC: totalWC, timeSec: taken,
