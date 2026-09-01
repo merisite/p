@@ -788,7 +788,7 @@ header .h-brand:hover{background:var(--brut-tint);}
     <button class="ib" onclick="toggleP('tp',event)" title="Theme">
       <svg id="theme-ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 109 9c0-.46-.04-.92-.1-1.36a5.5 5.5 0 01-7.54-7.54A8.94 8.94 0 0012 3z"/></svg>
     </button>
-    <button class="ib" id="auth-btn" onclick="toggleP('ap',event)" title="Account">
+    <button class="ib" id="auth-btn" onclick="toggleP('ap',event)" title="Account" style="border-color:var(--accent);color:var(--accent)">
       <svg id="auth-ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20c0-4.2 3.6-7 7.5-7s7.5 2.8 7.5 7"/></svg>
       <span id="auth-ico-init" style="display:none"></span>
     </button>
@@ -3736,6 +3736,9 @@ function attemptBadgeHTML(scoreText,inline){
 function saveProgress(entry){
   const list = getProgress();
   entry.id = entry.id || (Date.now()+'_'+Math.random().toString(36).slice(2,9));
+  // Tag with whichever session (anonymous or logged-in) created it, so a
+  // later login on a shared device only ever claims its own entries.
+  entry.ownerUid = (window.FB && window.FB.auth.currentUser) ? window.FB.auth.currentUser.uid : entry.ownerUid || null;
   list.unshift(entry);
   if(list.length > 200) list.length = 200;
   localStorage.setItem(PROG_KEY, JSON.stringify(list));
@@ -3782,19 +3785,27 @@ async function cloudFetchAllProgress(uid){
   }catch(e){ console.warn('Cloud fetch failed',e); return []; }
 }
 // Runs once whenever someone finishes logging in with a real (non-anonymous)
-// account: unions local + cloud progress by entry id, saves the union back to
-// both places, so nothing is lost whichever device/session it started on.
-async function mergeLocalAndCloud(uid){
+// account: unions cloud progress with ONLY the local entries created under
+// the anonymous session that just logged in (matched by ownerUid) — entries
+// left behind by a previous person on a shared device are never adopted.
+async function mergeLocalAndCloud(uid, priorAnonUid){
   const local = getProgress();
   const cloud = await cloudFetchAllProgress(uid);
   const byId = {};
   cloud.forEach(function(e){ byId[e.id]=e; });
-  local.forEach(function(e){ if(!byId[e.id]) byId[e.id]=e; });
+  const claimable = local.filter(function(e){
+    return e.ownerUid === priorAnonUid || e.ownerUid === uid;
+  });
+  claimable.forEach(function(e){ if(!byId[e.id]) byId[e.id]=e; });
   const merged = Object.values(byId).sort(function(a,b){ return (b.date||0)-(a.date||0); });
   if(merged.length>200) merged.length=200;
+  // Re-tag everything kept as belonging to this account, and replace
+  // localStorage entirely — entries from a different prior session on this
+  // device are intentionally dropped here, not just left unmerged.
+  merged.forEach(function(e){ e.ownerUid = uid; });
   localStorage.setItem(PROG_KEY, JSON.stringify(merged));
-  const localOnly = local.filter(function(e){ return !cloud.find(function(c){ return c.id===e.id; }); });
-  localOnly.forEach(function(e){ cloudSaveProgress(e); });
+  const localOnly = claimable.filter(function(e){ return !cloud.find(function(c){ return c.id===e.id; }); });
+  localOnly.forEach(function(e){ e.ownerUid = uid; cloudSaveProgress(e); });
   updateProgCard();
   if(document.getElementById('progress')&&document.getElementById('progress').classList.contains('active')){
     renderHistList();
@@ -3805,6 +3816,7 @@ async function mergeLocalAndCloud(uid){
    AUTH UI
    ============================================================ */
 let _authMode = 'login'; // 'login' | 'signup'
+let _priorAnonUid = null; // captured right before a login attempt starts
 function openAuthModal(){
   document.getElementById('auth-err').textContent='';
   document.getElementById('auth-cov').classList.add('open');
@@ -3825,17 +3837,8 @@ async function doGoogleLogin(){
   try{
     const provider = new window.FB.GoogleAuthProvider();
     const current = window.FB.auth.currentUser;
-    if(current && current.isAnonymous){
-      // Upgrade the anonymous session in place so existing local progress
-      // stays tied to the same uid instead of being orphaned.
-      try{
-        await window.FB.signInWithPopup(window.FB.auth, provider);
-      }catch(e){
-        await window.FB.signInWithPopup(window.FB.auth, provider);
-      }
-    }else{
-      await window.FB.signInWithPopup(window.FB.auth, provider);
-    }
+    _priorAnonUid = (current && current.isAnonymous) ? current.uid : null;
+    await window.FB.signInWithPopup(window.FB.auth, provider);
     closeAuthModal();
   }catch(e){
     errEl.textContent = e && e.message ? e.message.replace('Firebase: ','').replace(/\(auth\/.*\)\.?/,'').trim() : 'Google sign-in failed. Please try again.';
@@ -3848,6 +3851,8 @@ async function doEmailAuth(){
   errEl.textContent='';
   if(!email || !pass){ errEl.textContent='Please enter both email and password.'; return; }
   try{
+    const current = window.FB.auth.currentUser;
+    _priorAnonUid = (current && current.isAnonymous) ? current.uid : null;
     if(_authMode==='signup'){
       await window.FB.createUserWithEmailAndPassword(window.FB.auth, email, pass);
     }else{
@@ -3887,7 +3892,8 @@ window.addEventListener('fb-auth-changed', function(e){
   const user = e.detail.user;
   updateAuthUI(user);
   if(user && !user.isAnonymous){
-    mergeLocalAndCloud(user.uid);
+    mergeLocalAndCloud(user.uid, _priorAnonUid);
+    _priorAnonUid = null;
   }
 });
 function updateProgCard(){
