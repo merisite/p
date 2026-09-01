@@ -3770,8 +3770,12 @@ function updateProgressEntry(id,patch){
 function cloudSaveProgress(entry){
   try{
     if(!window.FB || !window.FB.auth.currentUser) return;
-    const uid = window.FB.auth.currentUser.uid;
-    const ref = window.FB.doc(window.FB.db,'users',uid,'progress',entry.id);
+    const user = window.FB.auth.currentUser;
+    // Anonymous sessions stay local-only — cloud writes only happen once
+    // someone has an actual account, so we don't burn Firestore quota (or
+    // leave orphaned documents) for visitors who never log in.
+    if(user.isAnonymous) return;
+    const ref = window.FB.doc(window.FB.db,'users',user.uid,'progress',entry.id);
     window.FB.setDoc(ref, entry, {merge:true}).catch(function(e){ console.warn('Cloud save failed',e); });
   }catch(e){ console.warn('Cloud save failed',e); }
 }
