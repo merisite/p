@@ -1019,7 +1019,7 @@ header .h-brand:hover{background:var(--brut-tint);}
 </div>
 <div id="result" class="screen">
   <div style="max-width:1000px;margin:0 auto;padding:24px 24px">
-    <div class="r-top"><h2 id="r-title">Your Result</h2><p id="r-sub"></p></div>
+    <div class="r-top"><button class="btn" id="r-back-btn" onclick="closeSavedResult()" style="display:none;margin-bottom:10px;font-size:.76rem;padding:6px 12px">← Back</button><h2 id="r-title">Your Result</h2><p id="r-sub"></p></div>
     <!-- Single section practice result -->
     <div id="r-single">
       <div class="score-row">
@@ -1725,7 +1725,7 @@ function renderQS(type){
     const badge=lastAttempt?attemptBadgeHTML(lastAttempt.score,true):"";
     const cta=lastAttempt?"↻ Reattempt":"→ Click to attempt";
     const viewResultBtn=lastAttempt?`<span onclick="event.stopPropagation();viewSavedResult('practice','${lastAttempt.id}')" style="font-size:.72rem;font-weight:700;color:var(--bg);background:var(--accent);padding:5px 12px;border-radius:999px;cursor:pointer">View Result</span>`:"";
-    return `<div class="q-item" onclick="launchExam('${q.id}')"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px"><div style="font-size:.94rem;font-weight:700;color:var(--t)">${shortLabel} Test ${i+1}</div><div style="display:flex;align-items:center;gap:6px;flex-shrink:0">${badge}<button onclick="event.stopPropagation();copyShareLink('question-${q.id}',this)" title="Copy direct link to this question" style="flex-shrink:0;display:flex;align-items:center;gap:4px;font-size:.62rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>Copy Link</button></div></div><div class="chips"><span class="chip">${q.difficulty||"medium"}</span></div><div style="margin-top:12px;display:flex;align-items:center;justify-content:space-between"><span style="font-size:.72rem;color:var(--accent);font-weight:600">${cta}</span>${viewResultBtn}</div></div>`;
+    return `<div class="q-item" onclick="launchExam('${q.id}')"><div style="font-size:.94rem;font-weight:700;color:var(--t);margin-bottom:9px">${shortLabel} Test ${i+1}</div><div style="display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:10px">${badge}<button onclick="event.stopPropagation();copyShareLink('question-${q.id}',this)" title="Copy direct link to this question" style="flex-shrink:0;display:flex;align-items:center;gap:4px;font-size:.62rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>Copy Link</button></div><div class="chips"><span class="chip">${q.difficulty||"medium"}</span></div><div style="margin-top:12px;display:flex;align-items:center;justify-content:space-between"><span style="font-size:.72rem;color:var(--accent);font-weight:600">${cta}</span>${viewResultBtn}</div></div>`;
   }).join("");
 }
 function setTO(btn,v){document.querySelectorAll(".tob").forEach(b=>b.classList.remove("on"));btn.classList.add("on");tMode=v;document.getElementById("cust-row").classList.toggle("show",v==="custom");}
@@ -2476,6 +2476,7 @@ function updateMockSubmitGuard(){
 }
 /* submitMock moved to progress system below */
 function showResult(ans,wc,wpm,taken){
+  document.getElementById("r-back-btn").style.display="none";
   if(document.fullscreenElement){
     (document.exitFullscreen?.()||Promise.resolve()).catch(()=>{});
   }
@@ -2496,6 +2497,7 @@ function showResult(ans,wc,wpm,taken){
   document.getElementById("r-ai").innerHTML='<div class="loading-row"><div class="spin"></div>Evaluating...</div>';
 }
 function showMockResult(taken){
+  document.getElementById("r-back-btn").style.display="none";
   document.getElementById("r-single").style.display="none";
   document.getElementById("r-mock").style.display="";
   document.getElementById("r-try-btn").style.display="none";
@@ -3076,6 +3078,8 @@ async function evalComprehensionAI(q,ans,wc,ep){
 
 CRITICAL: you generate text in order and cannot revise something already written — analyze BEFORE you score, never the reverse. You are the examiner's eyes only: report requiredPoints and a scoreRecommendation per sub-question; the code independently clamps and rounds every score before it counts.
 
+FIRST — VALIDITY CHECK: set top-level "isGibberish" to true if the ENTIRE answer is blank, random characters, keyboard mashing, or completely unrelated to the passage/questions (not a genuine attempt at all). If true, every sub-question's scoreRecommendation must be 0.
+
 HARD RULES:
 1. For each sub-question, first identify the "requiredPoints" — the distinct acceptable ideas a correct answer needs — from the passage and question, then judge which ones the student actually conveyed (do not invent points the passage doesn't support).
 2. Score each sub-question 0 to ${perQMax}. Prefer whole numbers (0, 1, 2); use a half mark (0.5 or 1.5) only when genuinely in between. No other increment is allowed.
@@ -3096,7 +3100,7 @@ STEP 2 — Score each sub-question 0-${perQMax} using the hard rules above, deri
 STEP 3 — ${eligibleForCorrection?`Produce a light-edit "correctedAnswer" (only genuine spelling/grammar fixed, changed parts wrapped in {{double curly braces}}) and split language feedback into "mistakes" (genuine objective errors only) and "styleSuggestions" (optional, non-scoring improvements). Never "correct" something merely because another phrasing is more natural — only objective errors belong in "mistakes".`:`The student wrote only ${wc} words, below the ${correctionThreshold}-word minimum for this feature to be useful — return correctedAnswer as an empty string, mistakes as [], styleSuggestions as [].`}
 
 Return ONLY this JSON (one object per sub-question in "subQuestions" — ${numQ} objects, numbered 1 to ${numQ}):
-{"subQuestions":[{"num":1,"attempted":true,"requiredPoints":[{"point":"","satisfied":true}],"scoreRecommendation":<0-${perQMax}>,"evidence":"<short 1-sentence note, no numbers>"}],"mistakes":[{"type":"<Spelling|Grammar|Word Choice|Punctuation>","original":"","corrected":"","reason":""}],"styleSuggestions":[],"correctedAnswer":"","strengths":["<no numbers>"],"improvements":["<no numbers>","<no numbers>"],"overallVerdict":"<2-3 honest sentences, ZERO numbers anywhere>"}`;
+{"isGibberish":false,"subQuestions":[{"num":1,"attempted":true,"requiredPoints":[{"point":"","satisfied":true}],"scoreRecommendation":<0-${perQMax}>,"evidence":"<short 1-sentence note, no numbers>"}],"mistakes":[{"type":"<Spelling|Grammar|Word Choice|Punctuation>","original":"","corrected":"","reason":""}],"styleSuggestions":[],"correctedAnswer":"","strengths":["<no numbers>"],"improvements":["<no numbers>","<no numbers>"],"overallVerdict":"<2-3 honest sentences, ZERO numbers anywhere>"}`;
   try{
     const res=await fetch(ep,{method:"POST",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({model:"gemini-2.5-flash-lite",max_tokens:1800,system:sys,messages:[{role:"user",content:p}]})});
@@ -3107,7 +3111,8 @@ Return ONLY this JSON (one object per sub-question in "subQuestions" — ${numQ}
 
     // Deterministic enforcement, regardless of what the AI returned: an unattempted sub-question
     // is forced to 0, scores are clamped to [0,2] and rounded to the nearest half-mark, and a
-    // copied-passage answer is forced to 0 across the board.
+    // copied-passage or gibberish answer is forced to 0 across the board.
+    const isGibberish=!!raw.isGibberish;
     const subQuestions=[];
     for(let i=0;i<numQ;i++){
       const sq=raw.subQuestions.find(x=>Number(x.num)===i+1)||raw.subQuestions[i]||{};
@@ -3115,7 +3120,7 @@ Return ONLY this JSON (one object per sub-question in "subQuestions" — ${numQ}
       if(!isFinite(score))score=0;
       score=Math.max(0,Math.min(score,perQMax));
       score=Math.round(score*2)/2;
-      if(!sq.attempted||copyCheck.copied)score=0;
+      if(!sq.attempted||copyCheck.copied||isGibberish)score=0;
       subQuestions.push({name:"Question "+(i+1),score,max:perQMax,comment:typeof sq.evidence==="string"?sq.evidence:""});
     }
     let result={parameters:subQuestions,totalScore:0};
@@ -3126,19 +3131,20 @@ Return ONLY this JSON (one object per sub-question in "subQuestions" — ${numQ}
     result.mistakes=validateCorrections(raw.mistakes).slice(0,8);
     result.styleSuggestions=validateCorrections(raw.styleSuggestions).slice(0,8);
 
-    if(copyCheck.copied||!eligibleForCorrection){result.correctedAnswer="";result.mistakes=[];result.styleSuggestions=[];}
+    if(copyCheck.copied||isGibberish||!eligibleForCorrection){result.correctedAnswer="";result.mistakes=[];result.styleSuggestions=[];}
     else result.correctedAnswer=typeof raw.correctedAnswer==="string"?raw.correctedAnswer:"";
 
     const pct=totalPossible>0?Math.round((result.totalScore/totalPossible)*100):0;
     result.overallVerdict=(typeof raw.overallVerdict==="string"&&raw.overallVerdict.trim()&&!_NUMBER_PATTERN.test(raw.overallVerdict))
       ?raw.overallVerdict
-      :(copyCheck.copied?"This response largely repeats the passage itself rather than answering the questions asked, so no meaningful credit can be given.":bandPhrase(pct,false));
+      :(copyCheck.copied?"This response largely repeats the passage itself rather than answering the questions asked, so no meaningful credit can be given.":bandPhrase(pct,isGibberish));
 
     result.strengths=Array.isArray(raw.strengths)?raw.strengths.filter(s=>typeof s==="string"&&!_NUMBER_PATTERN.test(s)):[];
-    if(!result.strengths.length&&!copyCheck.copied)result.strengths=["Attempted the comprehension questions with relevant responses."];
+    if(!result.strengths.length&&!copyCheck.copied&&!isGibberish)result.strengths=["Attempted the comprehension questions with relevant responses."];
     result.improvements=Array.isArray(raw.improvements)?raw.improvements.filter(s=>typeof s==="string"&&!_NUMBER_PATTERN.test(s)):[];
     result.wordsWritten=wc;
     result.wordLimitDisplay=q.wordLimit||"";
+    result.isGibberish=isGibberish;
 
     return result;
   }catch(e){return null;}
@@ -3319,6 +3325,7 @@ Follow the steps in the system instructions in order: extract task requirements 
     if(!result.strengths.length&&!isGibberish)result.strengths=["Attempted the question with a relevant response."];
     result.improvements=Array.isArray(raw.improvements)?raw.improvements.filter(s=>typeof s==="string"&&!_NUMBER_PATTERN.test(s)):[];
 
+    result.isGibberish=isGibberish;
     return result;
   }catch(e){return null;}
 }
@@ -3486,6 +3493,13 @@ function renderCorrectedAnswer(result){
   wrap.innerHTML=html;
 }
 function renderAIBlock(result,max){
+  if(result.isGibberish){
+    return `<div style="border-top:1px solid var(--b);padding-top:10px">
+      <div style="font-size:.6rem;font-family:var(--mono);color:var(--red,#ef4444);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Invalid Answer</div>
+      <div style="font-size:1rem;font-weight:700;color:var(--t);margin-bottom:6px">Your answer appears to be gibberish</div>
+      <div style="font-size:.82rem;color:var(--t2);line-height:1.7">This doesn't look like a genuine attempt at the question — it may be blank, random characters, or unrelated to what was asked. Score: <strong style="color:var(--t)">${result.totalScore}/${max}</strong>. Please write a proper, relevant answer to get detailed AI feedback.</div>
+    </div>`;
+  }
   const pct=Math.round((result.totalScore/max)*100);
   // Words Written / Required — shown separately from the marking breakdown below, never as a
   // scored row (spec §7, §22). Not shown for comprehension when a per-answer word limit isn't
@@ -3726,9 +3740,17 @@ function getProgress(){
 // Opens the #result screen populated entirely from a previously-saved
 // progress entry — no AI call, no re-evaluation. Used by the "View Result"
 // action on the attempt badge shown on practice/mock cards.
+let _savedResultReturnScreen=null;
+function closeSavedResult(){
+  document.getElementById('r-back-btn').style.display='none';
+  showS(_savedResultReturnScreen||'home',{skipHash:true});
+}
 function viewSavedResult(kind,id){
   const entry=(getProgress()||[]).find(function(e){return e.id===id;});
   if(!entry){alert('This saved result could not be found.');return;}
+  const activeScreen=document.querySelector('.screen.active');
+  _savedResultReturnScreen=activeScreen?activeScreen.id:'home';
+  document.getElementById('r-back-btn').style.display='';
   if(document.fullscreenElement){(document.exitFullscreen?.()||Promise.resolve()).catch(()=>{});}
   if(kind==='practice'){
     document.getElementById('r-single').style.display='';
