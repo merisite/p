@@ -1272,7 +1272,12 @@ function showS(id,opts){
   if(heinfo) heinfo.classList.toggle("show",id==="fullmock");
   const tg=document.getElementById("tg-hbtn");
   if(tg) tg.style.display=(id==="fullmock")?"none":"";
-  ["fp","tp"].forEach(id=>document.getElementById(id).classList.remove("open"));
+  // Hide the login/account button while someone is actually inside a practice
+  // question or a mock test — it stays available everywhere else (including
+  // the instructions screen before starting).
+  const authBtn=document.getElementById("auth-btn");
+  if(authBtn) authBtn.style.display=(id==="exam"||id==="fullmock")?"none":"";
+  ["fp","tp","ap"].forEach(id=>document.getElementById(id).classList.remove("open"));
   if(!opts||!opts.skipHash){
     const hash=(opts&&opts.hash)?opts.hash:id;
     if(NON_LINKABLE_SCREENS.has(id)){
@@ -1725,7 +1730,7 @@ function renderQS(type){
     const badge=lastAttempt?attemptBadgeHTML(lastAttempt.score,true):"";
     const cta=lastAttempt?"↻ Reattempt":"→ Click to attempt";
     const viewResultBtn=lastAttempt?`<span onclick="event.stopPropagation();viewSavedResult('practice','${lastAttempt.id}')" style="font-size:.72rem;font-weight:700;color:var(--bg);background:var(--accent);padding:5px 12px;border-radius:999px;cursor:pointer">View Result</span>`:"";
-    return `<div class="q-item" onclick="launchExam('${q.id}')"><div style="font-size:.94rem;font-weight:700;color:var(--t);margin-bottom:9px">${shortLabel} Test ${i+1}</div><div style="display:flex;align-items:center;justify-content:flex-end;gap:6px;margin-bottom:10px">${badge}<button onclick="event.stopPropagation();copyShareLink('question-${q.id}',this)" title="Copy direct link to this question" style="flex-shrink:0;display:flex;align-items:center;gap:4px;font-size:.62rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>Copy Link</button></div><div class="chips"><span class="chip">${q.difficulty||"medium"}</span></div><div style="margin-top:12px;display:flex;align-items:center;justify-content:space-between"><span style="font-size:.72rem;color:var(--accent);font-weight:600">${cta}</span>${viewResultBtn}</div></div>`;
+    return `<div class="q-item" onclick="launchExam('${q.id}')"><div style="font-size:.94rem;font-weight:700;color:var(--t);margin-bottom:9px">${shortLabel} Test ${i+1}</div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px"><span class="chip">${q.difficulty||"medium"}</span><button onclick="event.stopPropagation();copyShareLink('question-${q.id}',this)" title="Copy direct link to this question" style="flex-shrink:0;display:flex;align-items:center;gap:4px;font-size:.62rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>Copy Link</button></div><div style="margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:8px"><span style="font-size:.72rem;color:var(--accent);font-weight:600;flex-shrink:0">${cta}</span>${badge}${viewResultBtn}</div></div>`;
   }).join("");
 }
 function setTO(btn,v){document.querySelectorAll(".tob").forEach(b=>b.classList.remove("on"));btn.classList.add("on");tMode=v;document.getElementById("cust-row").classList.toggle("show",v==="custom");}
@@ -1823,8 +1828,16 @@ function showInstr(cfg){
     startBtn.disabled=false;
   }
   showS("instr",{skipHash:true});
+  // Enter full screen as soon as the instructions page opens, same as the
+  // actual practice/mock session that follows it — not just once they start.
+  if(!document.fullscreenElement){
+    (document.documentElement.requestFullscreen?.()||Promise.resolve()).catch(()=>{});
+  }
 }
-function cancelInstr(){showS(_instrReturnTo,{skipHash:true});}
+function cancelInstr(){
+  if(document.fullscreenElement){(document.exitFullscreen?.()||Promise.resolve()).catch(()=>{});}
+  showS(_instrReturnTo,{skipHash:true});
+}
 function confirmInstr(){
   const fn=_instrOnStart;_instrOnStart=null;_instrOnResume=null;
   if(!document.fullscreenElement){
@@ -2116,14 +2129,11 @@ function showMockList(examId,opts){
       const cta=lastAttempt?"↻ Reattempt":"→ Start Mock";
       const viewResultBtn=lastAttempt?`<span onclick="event.stopPropagation();viewSavedResult('mock','${lastAttempt.id}')" style="font-size:.7rem;font-weight:700;color:var(--bg);background:var(--accent);padding:4px 11px;border-radius:999px;cursor:pointer">View Result</span>`:"";
       return `<div class="hcard exam-card" onclick="startMockByNo('${examId}',${m.mockNo})" style="border-color:var(--aborder);background:var(--adim);position:relative">
-        <div style="position:absolute;top:10px;right:10px;display:flex;align-items:center;gap:6px;z-index:2">
-          ${badge}
-          <button onclick="event.stopPropagation();copyShareLink('mock-${examId}-${m.mockNo}',this)" title="Copy direct link to this mock" style="flex-shrink:0;display:flex;align-items:center;gap:4px;font-size:.6rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>Copy Link</button>
-        </div>
+        <button onclick="event.stopPropagation();copyShareLink('mock-${examId}-${m.mockNo}',this)" title="Copy direct link to this mock" style="position:absolute;top:10px;right:10px;flex-shrink:0;display:flex;align-items:center;gap:4px;font-size:.6rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer;z-index:2"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>Copy Link</button>
         <div class="hc-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
         <div class="hc-title">${m.title}</div>
         <div class="hc-sub" style="font-size:.7rem;color:var(--t2)">${qc} question${qc!==1?'s':''} · ${ex.duration||30} min</div>
-        <div style="margin-top:8px;display:flex;align-items:center;justify-content:space-between;gap:8px"><span style="font-size:.72rem;color:var(--accent);font-weight:600">${cta}</span>${viewResultBtn}</div>
+        <div style="margin-top:8px;display:flex;align-items:center;justify-content:space-between;gap:8px"><span style="font-size:.72rem;color:var(--accent);font-weight:600;flex-shrink:0">${cta}</span>${badge}${viewResultBtn}</div>
       </div>`;
     }).join("");
   }
