@@ -268,6 +268,8 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .attempt-tip::after{content:'';position:absolute;top:100%;right:14px;border:5px solid transparent;border-top-color:var(--t)}
 .attempt-badge:hover .attempt-tip,.attempt-badge.tip-open .attempt-tip{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
 .attempt-badge.inline{position:relative;flex-shrink:0}
+.attempt-badge.compact{padding:4px 6px;gap:0;border-radius:50%}
+.attempt-badge.compact .attempt-tip{right:auto;left:50%;transform:translateX(-50%)}
 .attempt-badge.inline .attempt-tip{right:0;left:auto}
 .hcard:has(.attempt-badge:hover),.hcard:has(.attempt-badge.tip-open){overflow:visible}
 .q-badge{width:26px;height:26px;border-radius:7px;background:var(--adim);border:1px solid var(--aborder);display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;font-family:var(--mono);color:var(--accent);flex-shrink:0}
@@ -1429,6 +1431,16 @@ window.addEventListener("popstate",function(e){
   } else if(isInActiveTyping()){
     history.pushState({typing:true},"",location.pathname+location.search+"#typing-guard");
     document.getElementById("typing-exit-cov").classList.add("open");
+  } else if(document.getElementById("result").classList.contains("active")){
+    // Pressing Back while viewing a result (fresh or saved) returns to the exact
+    // practice list or mock list it was reached from. This is checked against the
+    // screen's own DOM state directly, not the browser's history stack, so it
+    // works correctly no matter how many guarded entries (exam-guard etc.) sit
+    // underneath it.
+    const dest=_savedResultReturnScreen||_instrReturnTo||"home";
+    showS(dest,{skipHash:true});
+    const fallbackHash=_instrReturnHash&&_instrReturnHash!=="#exam-guard"&&_instrReturnHash!=="#result-guard"?_instrReturnHash:"#"+dest;
+    history.replaceState(null,"",location.pathname+location.search+fallbackHash);
   }
 });
 function closeBackExitCov(){document.getElementById("back-exit-cov").classList.remove("open");history.pushState({exam:true},"",location.pathname+location.search+"#exam-guard");}
@@ -1754,11 +1766,11 @@ function renderQS(type){
   const shortLabel=(sec.name||"Practice").replace(/\s*Writing\s*/i,"").trim()||sec.name||"Practice";
   document.getElementById("q-list").innerHTML=qs.length===0?"<div class='empty-q'>No questions yet for this section. Add questions in the Admin panel.</div>":qs.map((q,i)=>{
     const lastAttempt=getLastPracticeAttempt(q.id);
-    const badge=lastAttempt?attemptBadgeHTML(lastAttempt.score,true):"";
+    const badge=lastAttempt?attemptBadgeHTML(lastAttempt.score,true,true):"";
     const cta=lastAttempt?"↻ Reattempt":"→ Click to attempt";
-    const ctaHTML=`<span style="font-size:.7rem;font-weight:700;color:var(--accent);border:1px solid var(--aborder);background:var(--adim);padding:5px 11px;border-radius:999px;white-space:nowrap">${cta}</span>`;
-    const viewResultBtn=lastAttempt?`<span onclick="event.stopPropagation();viewSavedResult('practice','${lastAttempt.id}')" style="font-size:.72rem;font-weight:700;color:var(--bg);background:var(--accent);padding:5px 12px;border-radius:999px;cursor:pointer">View Result</span>`:"";
-    return `<div class="q-item" onclick="launchExam('${q.id}')"><div style="font-size:.94rem;font-weight:700;color:var(--t);margin-bottom:9px">${shortLabel} Test ${i+1}</div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px"><span class="chip">${q.difficulty||"medium"}</span><button onclick="event.stopPropagation();copyShareLink('question-${q.id}',this)" title="Copy direct link to this question" style="flex-shrink:0;display:flex;align-items:center;gap:4px;font-size:.62rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>Copy Link</button></div><div style="margin-top:12px;display:flex;align-items:center;justify-content:${lastAttempt?"space-evenly":"flex-start"};gap:8px;flex-wrap:wrap">${ctaHTML}${badge}${viewResultBtn}</div></div>`;
+    const ctaHTML=`<span style="font-size:.66rem;font-weight:700;color:var(--accent);border:1px solid var(--aborder);background:var(--adim);padding:4px 9px;border-radius:999px;white-space:nowrap">${cta}</span>`;
+    const viewResultBtn=lastAttempt?`<span onclick="event.stopPropagation();viewSavedResult('practice','${lastAttempt.id}')" style="font-size:.66rem;font-weight:700;color:var(--bg);background:var(--accent);padding:4px 10px;border-radius:999px;cursor:pointer;white-space:nowrap">View Result</span>`:"";
+    return `<div class="q-item" onclick="launchExam('${q.id}')"><div style="font-size:.94rem;font-weight:700;color:var(--t);margin-bottom:9px">${shortLabel} Test ${i+1}</div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px"><span class="chip">${q.difficulty||"medium"}</span><button onclick="event.stopPropagation();copyShareLink('question-${q.id}',this)" title="Copy direct link to this question" style="flex-shrink:0;display:flex;align-items:center;gap:4px;font-size:.62rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>Copy Link</button></div><div style="margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:nowrap">${ctaHTML}${badge}${viewResultBtn}</div></div>`;
   }).join("");
 }
 function setTO(btn,v){document.querySelectorAll(".tob").forEach(b=>b.classList.remove("on"));btn.classList.add("on");tMode=v;document.getElementById("cust-row").classList.toggle("show",v==="custom");}
@@ -2166,16 +2178,16 @@ function showMockList(examId,opts){
         </div>`;
       }
       const lastAttempt=getLastMockAttempt(examId,m.mockNo);
-      const badge=lastAttempt?attemptBadgeHTML(lastAttempt.totalScore,true):"";
+      const badge=lastAttempt?attemptBadgeHTML(lastAttempt.totalScore,true,true):"";
       const cta=lastAttempt?"↻ Reattempt":"→ Start Mock";
-      const ctaHTML=`<span style="font-size:.68rem;font-weight:700;color:var(--accent);border:1px solid var(--aborder);background:var(--adim);padding:4px 10px;border-radius:999px;white-space:nowrap">${cta}</span>`;
-      const viewResultBtn=lastAttempt?`<span onclick="event.stopPropagation();viewSavedResult('mock','${lastAttempt.id}')" style="font-size:.7rem;font-weight:700;color:var(--bg);background:var(--accent);padding:4px 11px;border-radius:999px;cursor:pointer">View Result</span>`:"";
+      const ctaHTML=`<span style="font-size:.64rem;font-weight:700;color:var(--accent);border:1px solid var(--aborder);background:var(--adim);padding:4px 9px;border-radius:999px;white-space:nowrap">${cta}</span>`;
+      const viewResultBtn=lastAttempt?`<span onclick="event.stopPropagation();viewSavedResult('mock','${lastAttempt.id}')" style="font-size:.64rem;font-weight:700;color:var(--bg);background:var(--accent);padding:4px 10px;border-radius:999px;cursor:pointer;white-space:nowrap">View Result</span>`:"";
       return `<div class="hcard exam-card" onclick="startMockByNo('${examId}',${m.mockNo})" style="border-color:var(--aborder);background:var(--adim);position:relative">
         <button onclick="event.stopPropagation();copyShareLink('mock-${examId}-${m.mockNo}',this)" title="Copy direct link to this mock" style="position:absolute;top:10px;right:10px;flex-shrink:0;display:flex;align-items:center;gap:4px;font-size:.6rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer;z-index:2"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>Copy Link</button>
         <div class="hc-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
         <div class="hc-title">${m.title}</div>
         <div class="hc-sub" style="font-size:.7rem;color:var(--t2)">${qc} question${qc!==1?'s':''} · ${ex.duration||30} min</div>
-        <div style="margin-top:8px;display:flex;align-items:center;justify-content:${lastAttempt?"space-evenly":"flex-start"};gap:8px;flex-wrap:wrap">${ctaHTML}${badge}${viewResultBtn}</div>
+        <div style="margin-top:8px;display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:nowrap">${ctaHTML}${badge}${viewResultBtn}</div>
       </div>`;
     }).join("");
   }
@@ -2530,6 +2542,7 @@ function updateMockSubmitGuard(){
 /* submitMock moved to progress system below */
 function showResult(ans,wc,wpm,taken){
   document.getElementById("r-back-btn").style.display="none";
+  _savedResultReturnScreen=null; // a fresh result overrides any stale saved-result destination
   if(document.fullscreenElement){
     (document.exitFullscreen?.()||Promise.resolve()).catch(()=>{});
   }
@@ -2551,6 +2564,7 @@ function showResult(ans,wc,wpm,taken){
 }
 function showMockResult(taken){
   document.getElementById("r-back-btn").style.display="none";
+  _savedResultReturnScreen=null; // a fresh result overrides any stale saved-result destination
   document.getElementById("r-single").style.display="none";
   document.getElementById("r-mock").style.display="";
   document.getElementById("r-try-btn").style.display="none";
@@ -3929,10 +3943,10 @@ document.addEventListener('click',function(e){
   if(e.target.closest('.attempt-badge'))return;
   document.querySelectorAll('.attempt-badge.tip-open').forEach(function(b){b.classList.remove('tip-open');});
 });
-function attemptBadgeHTML(scoreText,inline){
+function attemptBadgeHTML(scoreText,inline,compact){
   const label=escapeHTML(scoreText||'—');
-  return '<span class="attempt-badge'+(inline?' inline':'')+'" onclick="event.stopPropagation();this.classList.toggle(\'tip-open\')">'
-    +'<svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Attempted'
+  return '<span class="attempt-badge'+(inline?' inline':'')+(compact?' compact':'')+'" onclick="event.stopPropagation();this.classList.toggle(\'tip-open\')" title="Attempted">'
+    +'<svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>'+(compact?'':'Attempted')
     +'<span class="attempt-tip">Last score: '+label+'</span>'
     +'</span>';
 }
