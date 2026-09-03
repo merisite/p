@@ -1657,7 +1657,7 @@
       "id": "q_1788418048716",
       "examId": "sbi_po",
       "type": "situation",
-      "text": "You find a colleague sharing customer data with outsiders. What steps will you take?",
+      "text": "You are a Probationary Officer in a bank. You notice that one of your colleagues is sharing confidential customer information with an outsider without any apparent official authorisation. What steps would you take in this situation? Explain your course of action, keeping in mind customer confidentiality, banking regulations, and professional ethics.",
       "modelAnswer": "If I notice a colleague sharing customer data with outsiders, I would treat the matter as a serious breach of confidentiality and banking ethics. Customer information is highly sensitive, and its unauthorised disclosure can lead to financial fraud and reputational damage to the bank.\nFirst, I would discreetly verify the situation to ensure that there is no legitimate official purpose behind the information sharing. I would avoid confronting the colleague publicly or engaging in an argument. If the disclosure is unauthorised, I would immediately report the matter to my Branch Manager or the designated compliance/vigilance authority, following the bank’s prescribed reporting procedure.\nI would maintain confidentiality throughout the process and preserve any relevant evidence without altering or circulating it further. I would not attempt to investigate or punish the colleague on my own, as that is the responsibility of the competent authority.\nMy priority would be to protect customer interests, prevent further data leakage, and ensure that the matter is handled fairly and according to the bank’s rules.",
       "wordLimit": "120-150",
       "marks": 10,
