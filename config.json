@@ -343,7 +343,7 @@
       "marks": 10,
       "difficulty": "medium",
       "active": true,
-      "mockNo": 3
+      "mockNo": null
     },
     {
       "id": "q_situation_4",
@@ -451,7 +451,7 @@
       "marks": 10,
       "difficulty": "easy",
       "active": true,
-      "mockNo": 3
+      "mockNo": null
     },
     {
       "id": "q_report_4",
@@ -559,7 +559,7 @@
       "marks": 10,
       "difficulty": "easy",
       "active": true,
-      "mockNo": 3
+      "mockNo": null
     },
     {
       "id": "q_precis_4",
@@ -871,7 +871,7 @@
       "marks": 10,
       "difficulty": "medium",
       "active": false,
-      "mockNo": 3
+      "mockNo": null
     },
     {
       "id": "q_ep4",
@@ -991,7 +991,7 @@
       "marks": 15,
       "difficulty": "medium",
       "active": false,
-      "mockNo": 3
+      "mockNo": null
     },
     {
       "id": "q_sp4",
@@ -1111,7 +1111,7 @@
       "marks": 15,
       "difficulty": "medium",
       "active": false,
-      "mockNo": 3
+      "mockNo": null
     },
     {
       "id": "q_rp4",
@@ -1231,7 +1231,7 @@
       "marks": 15,
       "difficulty": "medium",
       "active": false,
-      "mockNo": 3
+      "mockNo": null
     },
     {
       "id": "q_pp4",
@@ -1640,6 +1640,54 @@
       "difficulty": "medium",
       "active": true,
       "mockNo": 2
+    },
+    {
+      "id": "q_1788417921719",
+      "examId": "sbi_po",
+      "type": "email",
+      "text": "Write an email to customers advising them to be cautious of phishing and fraud calls.",
+      "modelAnswer": "To: amanlal@gmail.com\nSubject: Caution Against Phishing and Fraudulent Calls\n\nDear Customer,\nWe wish to alert you about the increasing incidents of phishing attempts and fraudulent calls targeting bank customers. Fraudsters may impersonate bank officials and ask for confidential information such as your account number, debit card details, CVV, PIN, OTP, password, or internet banking credentials.\nPlease note that the bank will never ask you to share such sensitive information over phone calls, emails, SMS, or social media. Do not click on suspicious links, open unknown attachments, or install applications suggested by unverified callers. Be particularly cautious of messages creating urgency or threatening account suspension.\nIf you receive a suspicious call or message, do not respond or share any information. Report it immediately through the bank’s official customer-care channels. If you notice an unauthorised transaction or accidentally disclose your credentials, contact the bank without delay and report the matter to the appropriate cybercrime authorities.\nYour vigilance can help protect your hard-earned money. Stay alert and practise safe banking.\n\nYours faithfully,\nPrakash Raj\nCustomer Service Manager\nState Bank Of India",
+      "wordLimit": "150-200 words",
+      "marks": 10,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": 3
+    },
+    {
+      "id": "q_1788418048716",
+      "examId": "sbi_po",
+      "type": "situation",
+      "text": "You find a colleague sharing customer data with outsiders. What steps will you take?",
+      "modelAnswer": "If I notice a colleague sharing customer data with outsiders, I would treat the matter as a serious breach of confidentiality and banking ethics. Customer information is highly sensitive, and its unauthorised disclosure can lead to financial fraud and reputational damage to the bank.\nFirst, I would discreetly verify the situation to ensure that there is no legitimate official purpose behind the information sharing. I would avoid confronting the colleague publicly or engaging in an argument. If the disclosure is unauthorised, I would immediately report the matter to my Branch Manager or the designated compliance/vigilance authority, following the bank’s prescribed reporting procedure.\nI would maintain confidentiality throughout the process and preserve any relevant evidence without altering or circulating it further. I would not attempt to investigate or punish the colleague on my own, as that is the responsibility of the competent authority.\nMy priority would be to protect customer interests, prevent further data leakage, and ensure that the matter is handled fairly and according to the bank’s rules.",
+      "wordLimit": "120-150",
+      "marks": 10,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": 3
+    },
+    {
+      "id": "q_1788418131128",
+      "examId": "sbi_po",
+      "type": "report",
+      "text": "Report on Implementation of Green Banking Practices and Their Benefits",
+      "modelAnswer": "Date: September 3, 2026\nTo: Head Office\nFrom: Prince Pandey, Branch Manager\nSubject: Report on Implementation of Green Banking Practices and Their Benefits\n\nDear Sir/Madam,\nI am pleased to submit a report on the implementation of green banking practices at our branch and their benefits. The initiative was introduced to reduce paper usage, save energy and promote environmentally friendly banking.\nAs part of the initiative, customers were encouraged to use internet banking, mobile banking and e-statements instead of paper documents. The branch also reduced unnecessary printing and introduced digital communication for routine notices. Energy-saving lights and equipment were installed, while staff members were encouraged to switch off electrical devices when not in use.\nThese measures have helped reduce paper consumption, electricity usage and operating costs. They have also encouraged customers to adopt digital banking services, making transactions faster and more convenient. In addition, the initiative has increased awareness among customers and employees about environmental responsibility.\nWe recommend continuing these practices and organising awareness programmes to encourage wider participation. Green banking will help the bank reduce its environmental impact while improving operational efficiency.\n\nBest regards,\nPrince Pandey\nBranch Manager\nSBI Kanpur",
+      "wordLimit": "150-200 words",
+      "marks": 10,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": 3
+    },
+    {
+      "id": "q_1788418253137",
+      "examId": "sbi_po",
+      "type": "precis",
+      "text": "Write a précis of the passage in about 100 words.\n\nThe rapid advancement of technology has significantly transformed human life in the past few decades. From the internet to artificial intelligence, innovations have reshaped communication, education, healthcare, and commerce. One of the most profound impacts has been on the way people access and share information. With smartphones and high-speed internet, knowledge is available instantly, making learning more flexible and accessible. Students can now attend virtual classes, professionals can upskill through online courses, and individuals from remote areas can connect with the rest of the world without leaving their homes.\nHealthcare too has witnessed revolutionary changes. Telemedicine allows patients to consult doctors online, reducing the burden on hospitals and making healthcare more accessible in rural areas. Artificial intelligence aids in diagnosing diseases and personalising treatments, improving patient outcomes. Similarly, businesses have embraced e-commerce and digital payment systems, enabling global reach and financial inclusion. Small enterprises now have opportunities to compete with larger corporations by reaching customers worldwide through digital platforms.\nHowever, these benefits come with challenges. The digital divide continues to exclude sections of society without internet access or digital literacy. Privacy concerns and cybercrime pose significant risks, as personal data can be misused. Moreover, overreliance on technology may lead to reduced human interaction, affecting mental health and social skills. Automation also threatens traditional jobs, raising concerns about unemployment and inequality.\nDespite these drawbacks, technology’s role in human progress cannot be denied. The key lies in using it responsibly, bridging the digital gap, and ensuring that ethical considerations guide its application. If managed wisely, technology has the potential to create a more inclusive, efficient, and prosperous world.",
+      "modelAnswer": "Technological advancements have revolutionised communication, education, healthcare, and commerce. The internet and smartphones have democratised access to information, enabling online learning and global connectivity. Telemedicine and artificial intelligence have improved healthcare, while e-commerce has expanded opportunities for businesses worldwide. Yet, challenges persist in the form of the digital divide, privacy risks, cybercrime, job losses, and declining social interaction. Despite these issues, technology remains vital for progress. Its benefits can be maximised by responsible use, bridging inequalities, and adhering to ethical principles, ensuring it serves as a driver of inclusive and sustainable development.",
+      "wordLimit": "80-100 words",
+      "marks": 10,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": 3
     }
   ],
   "typingParas": [
