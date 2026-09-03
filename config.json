@@ -44,7 +44,7 @@
     {
       "id": "situation",
       "name": "Situation Analysis",
-      "wordLimit": "200-250 words",
+      "wordLimit": "120-150 words",
       "marks": 10,
       "timer": 10,
       "noTimer": true
