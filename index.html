@@ -755,7 +755,8 @@ header .h-brand:hover{background:var(--brut-tint);}
     getAuth, GoogleAuthProvider, signInWithPopup,
     createUserWithEmailAndPassword, signInWithEmailAndPassword,
     signInAnonymously, onAuthStateChanged, signOut,
-    linkWithCredential, EmailAuthProvider, updateProfile
+    linkWithCredential, EmailAuthProvider, updateProfile,
+    sendPasswordResetEmail
   } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
   import {
     getFirestore, doc, setDoc, getDoc, collection,
@@ -783,7 +784,8 @@ header .h-brand:hover{background:var(--brut-tint);}
     createUserWithEmailAndPassword, signInWithEmailAndPassword,
     signInAnonymously, signOut,
     linkWithCredential, EmailAuthProvider, updateProfile,
-    doc, setDoc, getDoc, collection, getDocs, serverTimestamp
+    doc, setDoc, getDoc, collection, getDocs, serverTimestamp,
+    sendPasswordResetEmail
   };
 
   onAuthStateChanged(auth, function(user){
@@ -879,7 +881,11 @@ header .h-brand:hover{background:var(--brut-tint);}
     </div>
     <input type="email" id="auth-email" placeholder="Email" style="width:100%;margin-bottom:9px;padding:10px 12px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg);color:var(--t);font-size:.85rem;font-family:var(--font)"/>
     <input type="password" id="auth-pass" placeholder="Password" style="width:100%;margin-bottom:4px;padding:10px 12px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg);color:var(--t);font-size:.85rem;font-family:var(--font)"/>
+    <div id="auth-forgot-row" style="text-align:right;margin-bottom:4px">
+      <span onclick="doForgotPassword()" style="font-size:.72rem;color:var(--accent);cursor:pointer;font-weight:600">Forgot password?</span>
+    </div>
     <div id="auth-err" style="color:var(--red);font-size:.72rem;min-height:18px;margin:4px 0"></div>
+    <div id="auth-info" style="color:var(--green);font-size:.72rem;min-height:0;margin:0 0 4px"></div>
     <div class="cbox-btns" style="flex-direction:column;gap:8px">
       <button class="btn bp" style="width:100%" id="auth-submit-btn" onclick="doEmailAuth()">Log in</button>
       <button class="btn" style="width:100%;background:none;color:var(--accent);font-size:.76rem;box-shadow:none" onclick="toggleAuthMode()">
@@ -4109,6 +4115,7 @@ let _authMode = 'login'; // 'login' | 'signup'
 let _priorAnonUid = null; // captured right before a login attempt starts
 function openAuthModal(){
   document.getElementById('auth-err').textContent='';
+  document.getElementById('auth-info').textContent='';
   document.getElementById('auth-cov').classList.add('open');
 }
 function closeAuthModal(){
@@ -4119,7 +4126,22 @@ function toggleAuthMode(){
   document.getElementById('auth-title').textContent = _authMode==='login' ? 'Log in' : 'Sign up';
   document.getElementById('auth-submit-btn').textContent = _authMode==='login' ? 'Log in' : 'Sign up';
   document.getElementById('auth-toggle-text').textContent = _authMode==='login' ? "Don't have an account? Sign up" : 'Already have an account? Log in';
+  document.getElementById('auth-forgot-row').style.display = _authMode==='login' ? '' : 'none';
   document.getElementById('auth-err').textContent='';
+  document.getElementById('auth-info').textContent='';
+}
+async function doForgotPassword(){
+  const email = document.getElementById('auth-email').value.trim();
+  const errEl = document.getElementById('auth-err');
+  const infoEl = document.getElementById('auth-info');
+  errEl.textContent=''; infoEl.textContent='';
+  if(!email){ errEl.textContent='Enter your email above first, then tap "Forgot password?" again.'; return; }
+  try{
+    await window.FB.sendPasswordResetEmail(window.FB.auth, email);
+    infoEl.textContent='Password reset link sent — check your inbox (and spam folder).';
+  }catch(e){
+    errEl.textContent = e && e.message ? e.message.replace('Firebase: ','').replace(/\(auth\/.*\)\.?/,'').trim() : 'Could not send reset email. Please check the address and try again.';
+  }
 }
 async function doGoogleLogin(){
   const errEl = document.getElementById('auth-err');
