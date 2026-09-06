@@ -4143,9 +4143,31 @@ async function doForgotPassword(){
     errEl.textContent = e && e.message ? e.message.replace('Firebase: ','').replace(/\(auth\/.*\)\.?/,'').trim() : 'Could not send reset email. Please check the address and try again.';
   }
 }
+// Maps Firebase's error codes to clear messages — far more reliable than parsing e.message
+// text, which can end up empty for some errors (e.g. "Firebase: (auth/wrong-password)."
+// strips down to nothing), silently hiding the failure from the user.
+function friendlyAuthError(e){
+  const code=e&&e.code||'';
+  const map={
+    'auth/wrong-password':'Incorrect password. Please try again, or use "Forgot password?" below.',
+    'auth/user-not-found':'No account found with this email. Try signing up instead.',
+    'auth/invalid-credential':'Incorrect email or password. Please try again.',
+    'auth/email-already-in-use':'An account already exists with this email. Try logging in instead.',
+    'auth/weak-password':'Password should be at least 6 characters.',
+    'auth/invalid-email':'Please enter a valid email address.',
+    'auth/network-request-failed':'Network error — please check your connection and try again.',
+    'auth/too-many-requests':'Too many attempts. Please wait a moment and try again.',
+    'auth/popup-closed-by-user':'Sign-in was cancelled.',
+    'auth/popup-blocked':'Your browser blocked the sign-in popup. Please allow popups and try again.'
+  };
+  if(map[code])return map[code];
+  if(e&&e.message&&e.message.replace('Firebase: ','').trim())return e.message.replace('Firebase: ','').trim();
+  return 'Something went wrong. Please try again.';
+}
 async function doGoogleLogin(){
   const errEl = document.getElementById('auth-err');
   errEl.textContent='';
+  if(!window.FB){ errEl.textContent='Still loading — please wait a moment and try again.'; return; }
   try{
     const provider = new window.FB.GoogleAuthProvider();
     const current = window.FB.auth.currentUser;
@@ -4153,15 +4175,20 @@ async function doGoogleLogin(){
     await window.FB.signInWithPopup(window.FB.auth, provider);
     closeAuthModal();
   }catch(e){
-    errEl.textContent = e && e.message ? e.message.replace('Firebase: ','').replace(/\(auth\/.*\)\.?/,'').trim() : 'Google sign-in failed. Please try again.';
+    errEl.textContent = friendlyAuthError(e);
   }
 }
 async function doEmailAuth(){
   const email = document.getElementById('auth-email').value.trim();
   const pass = document.getElementById('auth-pass').value;
   const errEl = document.getElementById('auth-err');
+  const btn = document.getElementById('auth-submit-btn');
   errEl.textContent='';
   if(!email || !pass){ errEl.textContent='Please enter both email and password.'; return; }
+  if(!window.FB){ errEl.textContent='Still loading — please wait a moment and try again.'; return; }
+  const originalLabel = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = _authMode==='signup' ? 'Signing up…' : 'Logging in…';
   try{
     const current = window.FB.auth.currentUser;
     _priorAnonUid = (current && current.isAnonymous) ? current.uid : null;
@@ -4172,7 +4199,10 @@ async function doEmailAuth(){
     }
     closeAuthModal();
   }catch(e){
-    errEl.textContent = e && e.message ? e.message.replace('Firebase: ','').replace(/\(auth\/.*\)\.?/,'').trim() : 'Something went wrong. Please try again.';
+    errEl.textContent = friendlyAuthError(e);
+  }finally{
+    btn.disabled = false;
+    btn.textContent = originalLabel;
   }
 }
 async function doLogout(){
