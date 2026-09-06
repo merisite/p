@@ -880,9 +880,14 @@ header .h-brand:hover{background:var(--brut-tint);}
       <div style="flex:1;height:1px;background:var(--b)"></div>OR<div style="flex:1;height:1px;background:var(--b)"></div>
     </div>
     <input type="email" id="auth-email" placeholder="Email" style="width:100%;margin-bottom:9px;padding:10px 12px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg);color:var(--t);font-size:.85rem;font-family:var(--font)"/>
-    <input type="password" id="auth-pass" placeholder="Password" style="width:100%;margin-bottom:4px;padding:10px 12px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg);color:var(--t);font-size:.85rem;font-family:var(--font)"/>
+    <div style="position:relative;margin-bottom:4px">
+      <input type="password" id="auth-pass" placeholder="Password" style="width:100%;padding:10px 38px 10px 12px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg);color:var(--t);font-size:.85rem;font-family:var(--font)"/>
+      <button type="button" onclick="toggleAuthPassVisibility()" id="auth-pass-eye" title="Show password" style="position:absolute;top:0;right:0;bottom:0;width:36px;background:none;border:none;cursor:pointer;color:var(--t2);display:flex;align-items:center;justify-content:center">
+        <svg id="auth-pass-eye-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+      </button>
+    </div>
     <div id="auth-forgot-row" style="text-align:right;margin-bottom:4px">
-      <span onclick="doForgotPassword()" style="font-size:.72rem;color:var(--accent);cursor:pointer;font-weight:600">Forgot password?</span>
+      <span id="auth-forgot-link" onclick="doForgotPassword()" style="font-size:.72rem;color:var(--accent);cursor:pointer;font-weight:600">Forgot password?</span>
     </div>
     <div id="auth-err" style="color:var(--red);font-size:.72rem;min-height:18px;margin:4px 0"></div>
     <div id="auth-info" style="color:var(--green);font-size:.72rem;min-height:0;margin:0 0 4px"></div>
@@ -4112,6 +4117,27 @@ function openAuthModal(){
 }
 function closeAuthModal(){
   document.getElementById('auth-cov').classList.remove('open');
+  resetAuthPassVisibility();
+}
+function toggleAuthPassVisibility(){
+  const input = document.getElementById('auth-pass');
+  const icon = document.getElementById('auth-pass-eye-icon');
+  const btn = document.getElementById('auth-pass-eye');
+  const hidden = input.type === 'password';
+  input.type = hidden ? 'text' : 'password';
+  btn.title = hidden ? 'Hide password' : 'Show password';
+  icon.innerHTML = hidden
+    ? '<path d="M1 1l22 22"/><path d="M17.94 17.94A10.94 10.94 0 0112 19c-7 0-11-7-11-7a21.6 21.6 0 015.06-5.94M9.9 4.24A10.94 10.94 0 0112 4c7 0 11 7 11 7a21.6 21.6 0 01-2.61 3.53"/><path d="M14.12 14.12a3 3 0 11-4.24-4.24"/>'
+    : '<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/>';
+}
+function resetAuthPassVisibility(){
+  const input = document.getElementById('auth-pass');
+  const icon = document.getElementById('auth-pass-eye-icon');
+  const btn = document.getElementById('auth-pass-eye');
+  if(!input)return;
+  input.type = 'password';
+  btn.title = 'Show password';
+  icon.innerHTML = '<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/>';
 }
 function toggleAuthMode(){
   _authMode = _authMode==='login' ? 'signup' : 'login';
@@ -4126,13 +4152,26 @@ async function doForgotPassword(){
   const email = document.getElementById('auth-email').value.trim();
   const errEl = document.getElementById('auth-err');
   const infoEl = document.getElementById('auth-info');
+  const link = document.getElementById('auth-forgot-link');
   errEl.textContent=''; infoEl.textContent='';
   if(!email){ errEl.textContent='Enter your email above first, then tap "Forgot password?" again.'; return; }
+  if(!window.FB){ errEl.textContent='Still loading — please wait a moment and try again.'; return; }
+  if(link.dataset.sending==='1') return; // already in flight — ignore extra taps entirely
+  link.dataset.sending='1';
+  const originalText = link.textContent;
+  link.style.pointerEvents='none';
+  link.style.opacity='.6';
+  link.textContent='Sending…';
   try{
     await window.FB.sendPasswordResetEmail(window.FB.auth, email);
     infoEl.textContent='Password reset link sent — check your inbox (and spam folder).';
   }catch(e){
-    errEl.textContent = e && e.message ? e.message.replace('Firebase: ','').replace(/\(auth\/.*\)\.?/,'').trim() : 'Could not send reset email. Please check the address and try again.';
+    errEl.textContent = friendlyAuthError(e);
+  }finally{
+    link.dataset.sending='0';
+    link.style.pointerEvents='';
+    link.style.opacity='';
+    link.textContent=originalText;
   }
 }
 // Maps Firebase's error codes to clear messages — far more reliable than parsing e.message
@@ -4177,6 +4216,10 @@ async function doEmailAuth(){
   const btn = document.getElementById('auth-submit-btn');
   errEl.textContent='';
   if(!email || !pass){ errEl.textContent='Please enter both email and password.'; return; }
+  // The input has type="email" but isn't inside a real <form>, so the browser's built-in
+  // validation never actually runs — check the format ourselves before ever contacting Firebase.
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ errEl.textContent='Please enter a valid email address.'; return; }
+  if(_authMode==='signup' && pass.length<6){ errEl.textContent='Password should be at least 6 characters.'; return; }
   if(!window.FB){ errEl.textContent='Still loading — please wait a moment and try again.'; return; }
   const originalLabel = btn.textContent;
   btn.disabled = true;
@@ -4198,6 +4241,7 @@ async function doEmailAuth(){
   }
 }
 async function doLogout(){
+  if(!confirm('Log out of your account? Your saved progress will still be here next time you log in.')) return;
   try{ await window.FB.signOut(window.FB.auth); }catch(e){}
   document.getElementById('ap').classList.remove('open');
 }
