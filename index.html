@@ -3150,7 +3150,6 @@ async function evalComprehensionAI(q,ans,wc,ep){
     return{
       parameters:subQuestions,
       totalScore:0,
-      correctedAnswer:"",
       mistakes:[],
       styleSuggestions:[],
       strengths:[],
@@ -3165,12 +3164,12 @@ async function evalComprehensionAI(q,ans,wc,ep){
   const eligibleForCorrection=wc>=correctionThreshold;
   const sys=`You are a strict, senior examiner grading a Comprehension section for SBI PO / IBPS PO Mains (2026 pattern). This section has ${numQ} sub-questions, each worth EXACTLY ${perQMax} marks — no other distribution is allowed, and comprehension NEVER uses generic Content/Structure/Language/Word-Limit criteria. Total for this answer: ${totalPossible} marks.
 
-CRITICAL: you generate text in order and cannot revise something already written — analyze BEFORE you score, never the reverse. You are the examiner's eyes only: report requiredPoints and a scoreRecommendation per sub-question; the code independently clamps and rounds every score before it counts.
+CRITICAL: you generate text in order and cannot revise something already written — analyze BEFORE you score, never the reverse. You are the examiner's eyes only: report a scoreRecommendation per sub-question; the code independently clamps and rounds every score before it counts.
 
 FIRST — VALIDITY CHECK: set top-level "isGibberish" to true if the ENTIRE answer is blank, random characters, keyboard mashing, or completely unrelated to the passage/questions (not a genuine attempt at all). If true, every sub-question's scoreRecommendation must be 0.
 
 HARD RULES:
-1. For each sub-question, first identify the "requiredPoints" — the distinct acceptable ideas a correct answer needs — from the passage and question, then judge which ones the student actually conveyed (do not invent points the passage doesn't support).
+1. For each sub-question, judge it against the distinct acceptable ideas a correct answer needs, drawn from the passage and question (do not invent points the passage doesn't support).
 2. Score each sub-question 0 to ${perQMax}. Prefer whole numbers (0, 1, 2); use a half mark (0.5 or 1.5) only when genuinely in between. No other increment is allowed.
 3. attempted=false (no attempt at all) → scoreRecommendation MUST be 0. Do not give partial credit "for effort."
 4. Attempted but factually wrong, contradictory, or completely off-topic → 0.
@@ -3184,12 +3183,12 @@ HARD RULES:
 STUDENT'S FULL ANSWER: ${ans||"(blank)"}
 WORD COUNT: ${wc} words (guideline: roughly ${numQ*30}-${numQ*40} words total is expected, about 30-40 per sub-question)
 
-STEP 1 — For each of the ${numQ} sub-questions in order, list requiredPoints and determine: was it attempted at all? If the student used different numbering/lettering than the passage, match by content/position, not by label text.
+STEP 1 — For each of the ${numQ} sub-questions in order, determine: was it attempted at all, and does it satisfy the required ideas? If the student used different numbering/lettering than the passage, match by content/position, not by label text.
 STEP 2 — Score each sub-question 0-${perQMax} using the hard rules above, derived directly from Step 1.
-STEP 3 — ${eligibleForCorrection?`Produce a light-edit "correctedAnswer" (only genuine spelling/grammar fixed, changed parts wrapped in {{double curly braces}}) and split language feedback into "mistakes" (genuine objective errors only) and "styleSuggestions" (optional, non-scoring improvements). Never "correct" something merely because another phrasing is more natural — only objective errors belong in "mistakes".`:`The student wrote only ${wc} words, below the ${correctionThreshold}-word minimum for this feature to be useful — return correctedAnswer as an empty string, mistakes as [], styleSuggestions as [].`}
+STEP 3 — ${eligibleForCorrection?`Split language feedback into "mistakes" (genuine objective errors only) and "styleSuggestions" (optional, non-scoring improvements). Never "correct" something merely because another phrasing is more natural — only objective errors belong in "mistakes".`:`The student wrote only ${wc} words, below the ${correctionThreshold}-word minimum for this feature to be useful — return mistakes as [], styleSuggestions as [].`}
 
 Return ONLY this JSON (one object per sub-question in "subQuestions" — ${numQ} objects, numbered 1 to ${numQ}):
-{"isGibberish":false,"subQuestions":[{"num":1,"attempted":true,"requiredPoints":[{"point":"","satisfied":true}],"scoreRecommendation":<0-${perQMax}>,"evidence":"<short 1-sentence note, no numbers>"}],"mistakes":[{"type":"<Spelling|Grammar|Word Choice|Punctuation>","original":"","corrected":"","reason":""}],"styleSuggestions":[],"correctedAnswer":"","strengths":["<no numbers>"],"improvements":["<no numbers>","<no numbers>"],"overallVerdict":"<2-3 honest sentences, ZERO numbers anywhere>"}`;
+{"isGibberish":false,"subQuestions":[{"num":1,"attempted":true,"scoreRecommendation":<0-${perQMax}>,"evidence":"<short 1-sentence note, no numbers>"}],"mistakes":[{"type":"<Spelling|Grammar|Word Choice|Punctuation>","original":"","corrected":"","reason":""}],"styleSuggestions":[],"strengths":["<no numbers>"],"improvements":["<no numbers>","<no numbers>"],"overallVerdict":"<2-3 honest sentences, ZERO numbers anywhere>"}`;
   try{
     const res=await fetch(ep,{method:"POST",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({model:"gemini-2.5-flash-lite",max_tokens:1800,system:sys,messages:[{role:"user",content:p}]})});
@@ -3220,8 +3219,7 @@ Return ONLY this JSON (one object per sub-question in "subQuestions" — ${numQ}
     result.mistakes=validateCorrections(raw.mistakes).slice(0,8);
     result.styleSuggestions=validateCorrections(raw.styleSuggestions).slice(0,8);
 
-    if(copyCheck.copied||isGibberish||!eligibleForCorrection){result.correctedAnswer="";result.mistakes=[];result.styleSuggestions=[];}
-    else result.correctedAnswer=typeof raw.correctedAnswer==="string"?raw.correctedAnswer:"";
+    if(copyCheck.copied||isGibberish||!eligibleForCorrection){result.mistakes=[];result.styleSuggestions=[];}
 
     const pct=totalPossible>0?Math.round((result.totalScore/totalPossible)*100):0;
     result.overallVerdict=(typeof raw.overallVerdict==="string"&&raw.overallVerdict.trim()&&!_NUMBER_PATTERN.test(raw.overallVerdict))
@@ -3315,14 +3313,12 @@ If an essential task requirement is missing, the criteria most related to conten
 
 ${typeGuidance}
 
-STEP 5 — CORRECTED ANSWER + LANGUAGE FEEDBACK:
-${eligibleForCorrection?`Produce "correctedAnswer": the student's own answer with ONLY genuine spelling/grammar/punctuation errors fixed — a light edit, never a rewrite. Do not add content, remove/reorder sentences, or upgrade correct-but-plain vocabulary just to sound smoother. Wrap only the words/phrases you actually changed in double curly braces, e.g. "I will {{listen to}} the customer". If nothing changed, return the original unwrapped. If gibberish/blank, return an empty string.
-
-Then split language feedback into TWO separate lists:
+STEP 5 — LANGUAGE FEEDBACK (mistakes + style suggestions):
+${eligibleForCorrection?`Split language feedback into TWO separate lists:
 - "mistakes": GENUINE, OBJECTIVE errors only (wrong tense/article/preposition/agreement, misspelling, run-on/fragment sentence, wrong punctuation). Each: {"type":"Spelling"|"Grammar"|"Word Choice"|"Punctuation","original":"<exact text>","corrected":"<exact fixed text>","reason":"<short reason, under 10 words>"}. NEVER include an entry where original and corrected are the same. Never "correct" something merely because another phrasing is more elegant, formal, concise, or native-like — e.g. "We request you to visit the branch", "at the earliest possible", or "it will be debited" are NOT grammar errors merely because another construction is preferred.
 - "styleSuggestions": OPTIONAL improvements only — a phrase that is already correct but where a more natural/idiomatic alternative exists in formal banking communication. Same object shape as mistakes. Nothing in this list may affect any quality score — it is feedback only.
 Cap each list at 8 entries. If there are no genuine errors, "mistakes" must be an empty array — never invent one to populate the section.`:
-`The student wrote only ${wc} words, below the ${correctionThreshold}-word minimum needed for this feature to be useful. Skip this step: return correctedAnswer as an empty string, mistakes as [], styleSuggestions as [].`}
+`The student wrote only ${wc} words, below the ${correctionThreshold}-word minimum needed for this feature to be useful. Skip this step: return mistakes as [], styleSuggestions as [].`}
 
 HARD RULES:
 - NUMBERS MUST NEVER APPEAR in overallVerdict, strengths, or improvements — no score, fraction, or percentage anywhere in that text. Describe performance only in words.
@@ -3332,7 +3328,7 @@ HARD RULES:
 - Respond ONLY with valid JSON, no markdown, no explanation outside JSON.
 
 Return ONLY this JSON, every key present, in this order:
-{"analysis":{"attempted":true,"isGibberish":false,"majorlyOffTask":false,"taskRequirements":[{"id":"requirement_1","description":"","importance":"essential","satisfied":true,"quality":1,"evidence":""}],"languageSeverity":"none","formatIssues":[]},"criterionEvaluation":[${criteriaList.map(c=>`{"id":"${c.id}","quality":0.0,"evidence":""}`).join(",")}],"mistakes":[{"type":"Grammar","original":"","corrected":"","reason":""}],"styleSuggestions":[],"strengths":["<no numbers>"],"improvements":["<no numbers>"],"correctedAnswer":"","overallVerdict":"<no numbers>"}`;
+{"analysis":{"attempted":true,"isGibberish":false,"majorlyOffTask":false,"taskRequirements":[{"id":"requirement_1","description":"","importance":"essential","satisfied":true,"quality":1,"evidence":""}],"languageSeverity":"none"},"criterionEvaluation":[${criteriaList.map(c=>`{"id":"${c.id}","quality":0.0,"evidence":""}`).join(",")}],"mistakes":[{"type":"Grammar","original":"","corrected":"","reason":""}],"styleSuggestions":[],"strengths":["<no numbers>"],"improvements":["<no numbers>"],"overallVerdict":"<no numbers>"}`;
 
   const p=`SECTION TYPE: ${typeName}
 WORD LIMIT: ${q.wordLimit}
@@ -3402,8 +3398,7 @@ Follow the steps in the system instructions in order: extract task requirements 
     result.mistakes=genuineMistakes.slice(0,8);
     result.styleSuggestions=styleSuggestions.slice(0,8);
 
-    if(isGibberish||!eligibleForCorrection){result.correctedAnswer="";result.mistakes=[];result.styleSuggestions=[];}
-    else result.correctedAnswer=typeof raw.correctedAnswer==="string"?raw.correctedAnswer:"";
+    if(isGibberish||!eligibleForCorrection){result.mistakes=[];result.styleSuggestions=[];}
 
     const pct=max>0?Math.round((result.totalScore/max)*100):0;
     result.overallVerdict=(typeof raw.overallVerdict==="string"&&raw.overallVerdict.trim()&&!_NUMBER_PATTERN.test(raw.overallVerdict))
@@ -3592,11 +3587,10 @@ function renderCorrectedAnswer(result,originalAnswer){
   const card=document.getElementById('r-corrected-card');
   const wrap=document.getElementById('r-corrected');
   if(!card||!wrap)return;
-  const hasCorrected=result.correctedAnswer&&result.correctedAnswer.trim();
   const mistakes=Array.isArray(result.mistakes)?result.mistakes:[];
   const styleSuggestions=Array.isArray(result.styleSuggestions)?result.styleSuggestions:[];
   // Nothing to show at all (e.g. answer too short for the correction feature) — hide the card.
-  if(!hasCorrected&&!mistakes.length&&!styleSuggestions.length){card.style.display='none';return;}
+  if(!mistakes.length&&!styleSuggestions.length){card.style.display='none';return;}
   card.style.display='';
   let html='';
   if(typeof originalAnswer==="string"&&originalAnswer.trim()&&mistakes.length){
@@ -3606,8 +3600,6 @@ function renderCorrectedAnswer(result,originalAnswer){
         +'<span style="display:inline-flex;align-items:center;gap:5px"><span style="width:9px;height:9px;border-radius:2px;background:var(--red);opacity:.5;display:inline-block"></span>Original / incorrect</span>'
         +'<span style="display:inline-flex;align-items:center;gap:5px"><span style="width:9px;height:9px;border-radius:2px;background:var(--gdim);border:1px solid var(--green);display:inline-block"></span>Corrected</span>'
       +'</div>';
-  }else if(hasCorrected){
-    html+='<div class="model-box" style="white-space:pre-wrap;line-height:1.8">'+renderCorrectedText(result.correctedAnswer)+'</div>';
   }
   // §16/§22: two clearly separate sections — GENUINE LANGUAGE ERRORS vs STYLE SUGGESTIONS.
   // If there are no genuine errors at all, say so explicitly rather than showing nothing.
