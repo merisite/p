@@ -747,6 +747,7 @@ header .h-brand:hover{background:var(--brut-tint);}
   .festive-layer .fp{animation:none!important;opacity:0!important;}
 }
 </style>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
 <script type="module">
@@ -762,6 +763,9 @@ header .h-brand:hover{background:var(--brut-tint);}
     getFirestore, doc, setDoc, getDoc, collection,
     getDocs, serverTimestamp
   } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+  import {
+    getFunctions, httpsCallable
+  } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-functions.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyDRa4IzaCD_vctiAZDiqQ-sbb8TUlBJtCI",
@@ -776,6 +780,7 @@ header .h-brand:hover{background:var(--brut-tint);}
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const db = getFirestore(app);
+  const functions = getFunctions(app);
 
   // Expose the bits the classic (non-module) app script needs.
   window.FB = {
@@ -785,7 +790,9 @@ header .h-brand:hover{background:var(--brut-tint);}
     signInAnonymously, signOut,
     linkWithCredential, EmailAuthProvider, updateProfile,
     doc, setDoc, getDoc, collection, getDocs, serverTimestamp,
-    sendPasswordResetEmail
+    sendPasswordResetEmail,
+    createRazorpayOrder: httpsCallable(functions, "createRazorpayOrder"),
+    verifyRazorpayPayment: httpsCallable(functions, "verifyRazorpayPayment")
   };
 
   onAuthStateChanged(auth, function(user){
@@ -2181,6 +2188,7 @@ function showMockList(examId,opts){
   const d=D();
   const ex=d.exams.find(e=>e.id===examId);
   if(!ex)return;
+  _lastMockListExamId=examId;
   const mocks=(d.mocks||[]).filter(m=>m.examId===examId&&m.active).sort((a,b)=>a.mockNo-b.mockNo);
   document.getElementById("ml-exam-name").textContent=ex.name;
   document.getElementById("ml-exam-desc").textContent=ex.desc||"";
@@ -4272,8 +4280,77 @@ window.addEventListener('fb-auth-changed', function(e){
   if(user && !user.isAnonymous){
     mergeLocalAndCloud(user.uid, _priorAnonUid);
     _priorAnonUid = null;
+    refreshPurchasedProducts();
+  }else{
+    _purchasedProducts = [];
   }
 });
+
+/* ============================================================
+   PAID MOCKS — purchase flow (Razorpay + Cloud Functions)
+   ============================================================ */
+let _purchasedProducts = [];
+let _lastMockListExamId = null;
+async function refreshPurchasedProducts(){
+  try{
+    if(!window.FB || !window.FB.auth.currentUser || window.FB.auth.currentUser.isAnonymous){ _purchasedProducts=[]; return; }
+    const ref = window.FB.doc(window.FB.db,'users',window.FB.auth.currentUser.uid);
+    const snap = await window.FB.getDoc(ref);
+    _purchasedProducts = (snap.exists() && snap.data().purchasedProducts) || [];
+  }catch(e){ console.warn('Could not load purchased products',e); }
+}
+function isProductUnlocked(productId){
+  return !productId || _purchasedProducts.indexOf(productId) !== -1;
+}
+async function unlockProduct(productId, priceDisplay){
+  if(!window.FB || !window.FB.auth.currentUser || window.FB.auth.currentUser.isAnonymous){
+    openAuthModal();
+    return;
+  }
+  if(typeof Razorpay==='undefined'){
+    alert('Payment system is still loading — please try again in a moment.');
+    return;
+  }
+  try{
+    const orderRes = await window.FB.createRazorpayOrder({ productId: productId });
+    const data = orderRes.data;
+    const options = {
+      key: data.keyId,
+      amount: data.amount,
+      currency: 'INR',
+      name: 'Descriptive Prep Today',
+      description: data.productName,
+      order_id: data.orderId,
+      prefill: { email: window.FB.auth.currentUser.email || '' },
+      theme: { color: getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#c2460a' },
+      handler: async function(response){
+        try{
+          await window.FB.verifyRazorpayPayment({
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature,
+            productId: productId
+          });
+          await refreshPurchasedProducts();
+          alert(data.productName+' unlocked! You can now start any mock in this pack.');
+          if(_lastMockListExamId && document.getElementById('mocklist').classList.contains('active')){
+            showMockList(_lastMockListExamId,{skipHash:true});
+          }
+        }catch(e){
+          alert('Your payment went through, but we could not confirm it automatically. Please contact us with this payment ID so we can unlock it manually: '+response.razorpay_payment_id);
+        }
+      },
+      modal: { ondismiss: function(){ /* user closed the popup — no action needed */ } }
+    };
+    const rzp = new Razorpay(options);
+    rzp.on('payment.failed', function(response){
+      alert('Payment failed: '+(response.error&&response.error.description||'please try again.'));
+    });
+    rzp.open();
+  }catch(e){
+    alert('Could not start checkout: '+(e&&e.message?e.message:'please try again.'));
+  }
+}
 function updateProgCard(){
   const list = getProgress();
   const el = document.getElementById('prog-card-desc');
