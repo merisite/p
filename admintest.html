@@ -747,6 +747,14 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
       <div class="fr c1"><div class="ff"><label>Question Text</label><textarea id="qm-text" class="tall" placeholder="Write the full question here…"></textarea></div></div>
       <div class="fr c1"><div class="ff"><label>Model Answer</label><textarea id="qm-ans" class="tall" placeholder="Write a complete model answer…"></textarea></div></div>
       <label class="tgl"><label class="tgl-sw"><input type="checkbox" id="qm-active" checked/><span class="tgl-tr"></span></label>Visible to students</label>
+      <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--b)">
+        <label class="tgl"><label class="tgl-sw"><input type="checkbox" id="qm-paid" onchange="onQmPaidToggle()"/><span class="tgl-tr"></span></label>Paid question (part of a product)</label>
+        <div id="qm-products-wrap" style="display:none;margin-top:10px">
+          <label style="font-size:.72rem;color:var(--t2);display:block;margin-bottom:6px">Unlocked by which product(s)?</label>
+          <div id="qm-products-checklist" style="display:flex;flex-wrap:wrap;gap:8px">Loading…</div>
+          <div style="font-size:.66rem;color:var(--t2);margin-top:6px">The actual question text + model answer for a paid question must still be published separately in the Paid Content tab, using this same question's ID.</div>
+        </div>
+      </div>
       <input type="hidden" id="qm-id"/>
     </div>
     <div class="mf"><button class="btn bo" onclick="cm('qm')">Cancel</button><button class="btn bp" onclick="saveQ()">Save Question</button></div>
@@ -877,6 +885,15 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
       </div>
       <input type="hidden" id="mm-active" value="1"/>
       <input type="hidden" id="mm-id"/>
+
+      <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--b)">
+        <label class="tgl"><label class="tgl-sw"><input type="checkbox" id="mm-paid" onchange="onMmPaidToggle()"/><span class="tgl-tr"></span></label>Paid mock (part of a product)</label>
+        <div id="mm-products-wrap" style="display:none;margin-top:10px">
+          <label style="font-size:.72rem;color:var(--t2);display:block;margin-bottom:6px">Unlocked by which product(s)?</label>
+          <div id="mm-products-checklist" style="display:flex;flex-wrap:wrap;gap:8px">Loading…</div>
+          <div style="font-size:.66rem;color:var(--t2);margin-top:6px">The actual sections/questions for a paid mock must still be published separately in the Paid Content tab, using this same mock's ID.</div>
+        </div>
+      </div>
 
       <!-- Question Assignment Panel -->
       <div id="mm-qpanel" style="margin-top:16px;display:none">
@@ -1190,6 +1207,7 @@ function openMockModal(id){
   sel.innerHTML=exams.map(e=>`<option value="${e.id}">${e.name}</option>`).join('');
   document.getElementById('mock-modal-title').textContent=id?'Manage Mock':'Add Mock';
   document.getElementById('mm-id').value=id||'';
+  let existingProductIds=[];
   if(id){
     const m=(d.mocks||[]).find(x=>x.id===id);
     if(m){
@@ -1199,14 +1217,39 @@ function openMockModal(id){
       // Map legacy active flag to status
       const st=m.status||(m.active?'active':'hidden');
       document.getElementById('mm-status').value=st;
+      existingProductIds=m.productIds||[];
     }
   } else {
     document.getElementById('mm-no').value='';
     document.getElementById('mm-title').value='';
     document.getElementById('mm-status').value='active';
   }
+  document.getElementById('mm-paid').checked=!!existingProductIds.length;
+  renderProductChecklist('mm-products-checklist','mm-product-check',existingProductIds);
+  document.getElementById('mm-products-wrap').style.display=existingProductIds.length?'':'none';
   mmRenderSections();
   document.getElementById('mock-modal').classList.add('op');
+}
+function onMmPaidToggle(){
+  document.getElementById('mm-products-wrap').style.display=document.getElementById('mm-paid').checked?'':'none';
+}
+function onQmPaidToggle(){
+  document.getElementById('qm-products-wrap').style.display=document.getElementById('qm-paid').checked?'':'none';
+}
+// Shared by the Mock and Question editors — renders a checkbox per known product,
+// reusing the same _pcProducts cache the Paid Content tab already loads.
+function renderProductChecklist(containerId,checkboxClass,checkedIds){
+  const el=document.getElementById(containerId);
+  if(!_pcProducts||!_pcProducts.length){
+    el.innerHTML='<em style="font-size:.76rem;color:var(--t2)">No products yet — add one on the Paid Content tab first.</em>';
+    return;
+  }
+  el.innerHTML=_pcProducts.map(function(p){
+    const checked=checkedIds.indexOf(p.id)!==-1?'checked':'';
+    return '<label style="display:flex;align-items:center;gap:6px;font-size:.78rem;background:var(--bg3);border:1px solid var(--b);border-radius:999px;padding:5px 12px;cursor:pointer">'
+      + '<input type="checkbox" class="'+checkboxClass+'" value="'+p.id+'" '+checked+' style="margin:0"/> '+(p.name||p.id)
+      + '</label>';
+  }).join('');
 }
 
 function mmRenderSections(){
@@ -1315,15 +1358,18 @@ function saveMock(){
   const title=document.getElementById('mm-title').value.trim();
   const status=document.getElementById('mm-status').value||'active';
   const active=status!=='hidden';
+  const isPaid=document.getElementById('mm-paid').checked;
+  const productIds=isPaid?Array.from(document.querySelectorAll('.mm-product-check:checked')).map(el=>el.value):[];
   if(!examId||!mockNo||!title){t('Please fill in all fields','er');return;}
+  if(isPaid&&!productIds.length){t('Check at least one product, or turn off "Paid mock"','er');return;}
   const d=D();
   if(!d.mocks)d.mocks=[];
   if(id){
     const i=d.mocks.findIndex(m=>m.id===id);
-    if(i>-1)d.mocks[i]={...d.mocks[i],examId,mockNo,title,active,status};
+    if(i>-1)d.mocks[i]={...d.mocks[i],examId,mockNo,title,active,status,productIds};
   } else {
     const newId=examId+'_mock_'+mockNo;
-    d.mocks.push({id:newId,examId,mockNo,title,active,status});
+    d.mocks.push({id:newId,examId,mockNo,title,active,status,productIds});
   }
   SD(d);cm('mock-modal');renderMocks();t('Mock saved','ok');
 }
@@ -1350,8 +1396,8 @@ function rDash(){const d=D(),tot=d.questions.length,act=d.questions.filter(q=>q.
 function rQP(){const d=D();document.getElementById('qs-ft').innerHTML='<option value="">All Types</option>'+d.sectionTypes.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');document.getElementById('qs-fe').innerHTML='<option value="">All Exams</option>'+d.exams.map(e=>`<option value="${e.id}">${e.name}</option>`).join('');renderQT();}
 function renderQT(){const d=D(),s=(document.getElementById('qs-s')||{}).value||'',ft=(document.getElementById('qs-ft')||{}).value||'',fe=(document.getElementById('qs-fe')||{}).value||'';const tm={};d.sectionTypes.forEach(s=>tm[s.id]=s.name);const em={};d.exams.forEach(e=>em[e.id]=e.name);const qs=d.questions.filter(q=>(ft?q.type===ft:true)&&(fe?q.examId===fe:true)&&(s?q.text.toLowerCase().includes(s.toLowerCase()):true));
   document.getElementById('q-tb').innerHTML=qs.length===0?'<tr><td colspan="8" style="text-align:center;padding:24px;color:var(--t2)">No questions found.</td></tr>':qs.map(q=>`<tr><td class="td-p">${q.text.substring(0,70)}…</td><td style="font-size:.72rem;color:var(--t2)">${em[q.examId]||'<span style=\'color:var(--red)\'>Unassigned</span>'}</td><td style="font-size:.72rem;color:var(--t2)">${tm[q.type]||q.type}</td><td style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--t2)">${q.mockNo||'—'}</td><td style="font-family:'JetBrains Mono',monospace;font-size:.72rem">${q.marks}</td><td style="font-size:.72rem;color:var(--t2)">${q.wordLimit}</td><td><span class="bge ${q.active?'bg-g':'bg-r'}">${q.active?'Active':'Hidden'}</span></td><td><div class="tda"><button class="btn bo sm" onclick="openQM('${q.id}')">Edit</button><button class="btn bd sm" onclick="delQ('${q.id}')">Del</button></div></td></tr>`).join('');}
-function openQM(id){const d=D();document.getElementById('qm-type').innerHTML='<option value="">Select…</option>'+d.sectionTypes.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');document.getElementById('qm-exam').innerHTML=d.exams.map(e=>`<option value="${e.id}">${e.name}</option>`).join('')||'<option value="">No exams yet</option>';if(id){const q=d.questions.find(x=>x.id===id);if(!q)return;document.getElementById('qm-t').textContent='Edit Question';document.getElementById('qm-type').value=q.type;document.getElementById('qm-exam').value=q.examId||d.exams[0]?.id||'';document.getElementById('qm-marks').value=q.marks;document.getElementById('qm-wl').value=q.wordLimit;document.getElementById('qm-mockno').value=q.mockNo||'';document.getElementById('qm-diff').value=q.difficulty||'medium';document.getElementById('qm-text').value=q.text;document.getElementById('qm-ans').value=q.modelAnswer;document.getElementById('qm-active').checked=q.active;document.getElementById('qm-id').value=q.id;}else{document.getElementById('qm-t').textContent='Add Question';['qm-text','qm-ans','qm-wl','qm-id','qm-mockno'].forEach(i=>document.getElementById(i).value='');document.getElementById('qm-marks').value=20;document.getElementById('qm-active').checked=true;document.getElementById('qm-exam').value=d.exams[0]?.id||'';}om('qm');}
-function saveQ(){const d=D(),type=document.getElementById('qm-type').value,text=document.getElementById('qm-text').value.trim(),ans=document.getElementById('qm-ans').value.trim();if(!type||!text||!ans){t('Fill all fields','er');return;}const examIdEl=document.getElementById('qm-exam');const examId=examIdEl?examIdEl.value:'';const mockNoVal=document.getElementById('qm-mockno').value;const q={id:document.getElementById('qm-id').value||'q_'+Date.now(),examId:examId||d.exams[0]?.id||'sbi_po',type,text,modelAnswer:ans,wordLimit:document.getElementById('qm-wl').value,marks:parseInt(document.getElementById('qm-marks').value)||15,difficulty:document.getElementById('qm-diff').value,active:document.getElementById('qm-active').checked,mockNo:mockNoVal?parseInt(mockNoVal):null};const idx=d.questions.findIndex(x=>x.id===q.id);if(idx>=0)d.questions[idx]=q;else d.questions.push(q);SD(d);cm('qm');renderQT();t('Question saved','ok');}
+function openQM(id){const d=D();document.getElementById('qm-type').innerHTML='<option value="">Select…</option>'+d.sectionTypes.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');document.getElementById('qm-exam').innerHTML=d.exams.map(e=>`<option value="${e.id}">${e.name}</option>`).join('')||'<option value="">No exams yet</option>';let existingProductIds=[];if(id){const q=d.questions.find(x=>x.id===id);if(!q)return;document.getElementById('qm-t').textContent='Edit Question';document.getElementById('qm-type').value=q.type;document.getElementById('qm-exam').value=q.examId||d.exams[0]?.id||'';document.getElementById('qm-marks').value=q.marks;document.getElementById('qm-wl').value=q.wordLimit;document.getElementById('qm-mockno').value=q.mockNo||'';document.getElementById('qm-diff').value=q.difficulty||'medium';document.getElementById('qm-text').value=q.text;document.getElementById('qm-ans').value=q.modelAnswer;document.getElementById('qm-active').checked=q.active;document.getElementById('qm-id').value=q.id;existingProductIds=q.productIds||[];}else{document.getElementById('qm-t').textContent='Add Question';['qm-text','qm-ans','qm-wl','qm-id','qm-mockno'].forEach(i=>document.getElementById(i).value='');document.getElementById('qm-marks').value=20;document.getElementById('qm-active').checked=true;document.getElementById('qm-exam').value=d.exams[0]?.id||'';}document.getElementById('qm-paid').checked=!!existingProductIds.length;renderProductChecklist('qm-products-checklist','qm-product-check',existingProductIds);document.getElementById('qm-products-wrap').style.display=existingProductIds.length?'':'none';om('qm');}
+function saveQ(){const d=D(),type=document.getElementById('qm-type').value,text=document.getElementById('qm-text').value.trim(),ans=document.getElementById('qm-ans').value.trim();if(!type||!text||!ans){t('Fill all fields','er');return;}const examIdEl=document.getElementById('qm-exam');const examId=examIdEl?examIdEl.value:'';const mockNoVal=document.getElementById('qm-mockno').value;const isPaid=document.getElementById('qm-paid').checked;const productIds=isPaid?Array.from(document.querySelectorAll('.qm-product-check:checked')).map(el=>el.value):[];if(isPaid&&!productIds.length){t('Check at least one product, or turn off "Paid question"','er');return;}const q={id:document.getElementById('qm-id').value||'q_'+Date.now(),examId:examId||d.exams[0]?.id||'sbi_po',type,text,modelAnswer:ans,wordLimit:document.getElementById('qm-wl').value,marks:parseInt(document.getElementById('qm-marks').value)||15,difficulty:document.getElementById('qm-diff').value,active:document.getElementById('qm-active').checked,mockNo:mockNoVal?parseInt(mockNoVal):null,productIds};const idx=d.questions.findIndex(x=>x.id===q.id);if(idx>=0)d.questions[idx]=q;else d.questions.push(q);SD(d);cm('qm');renderQT();t('Question saved','ok');}
 function delQ(id){if(!confirm('Delete?'))return;const d=D();d.questions=d.questions.filter(q=>q.id!==id);SD(d);renderQT();t('Deleted','ok');}
 
 // ── EXAMS ──
