@@ -571,7 +571,8 @@
       "marks": 10,
       "difficulty": "easy",
       "active": true,
-      "mockNo": 4
+      "mockNo": null,
+      "productIds": []
     },
     {
       "id": "q_precis_5",
@@ -1243,7 +1244,8 @@
       "marks": 15,
       "difficulty": "easy",
       "active": false,
-      "mockNo": 4
+      "mockNo": null,
+      "productIds": []
     },
     {
       "id": "q_pp5",
