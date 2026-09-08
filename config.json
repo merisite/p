@@ -886,7 +886,8 @@
       "marks": 20,
       "difficulty": "medium",
       "active": false,
-      "mockNo": 4
+      "mockNo": null,
+      "productIds": []
     },
     {
       "id": "q_ep5",
