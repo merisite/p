@@ -1807,7 +1807,8 @@
       "mockNo": 4,
       "title": "SBI PO Mock 4",
       "active": true,
-      "status": "upcoming"
+      "status": "active",
+      "productIds": []
     },
     {
       "id": "sbi_po_mock_5",
