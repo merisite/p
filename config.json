@@ -355,7 +355,8 @@
       "marks": 10,
       "difficulty": "medium",
       "active": true,
-      "mockNo": 4
+      "mockNo": null,
+      "productIds": []
     },
     {
       "id": "q_situation_5",
@@ -1005,7 +1006,8 @@
       "marks": 15,
       "difficulty": "medium",
       "active": false,
-      "mockNo": 4
+      "mockNo": null,
+      "productIds": []
     },
     {
       "id": "q_sp5",
