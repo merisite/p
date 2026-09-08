@@ -463,7 +463,8 @@
       "marks": 10,
       "difficulty": "easy",
       "active": true,
-      "mockNo": 4
+      "mockNo": null,
+      "productIds": []
     },
     {
       "id": "q_report_5",
@@ -1124,7 +1125,8 @@
       "marks": 15,
       "difficulty": "hard",
       "active": false,
-      "mockNo": 4
+      "mockNo": null,
+      "productIds": []
     },
     {
       "id": "q_rp5",
