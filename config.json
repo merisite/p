@@ -1688,6 +1688,32 @@
       "difficulty": "medium",
       "active": true,
       "mockNo": 3
+    },
+    {
+      "id": "q_1788895676751",
+      "examId": "sbi_po",
+      "type": "email",
+      "text": "Draft an email to your Branch Manager requesting the reactivation of your internet banking service, which has been locked after you entered incorrect login credentials multiple times. Mention the reason for the lockout and request the necessary assistance to restore access.",
+      "modelAnswer": "To: managerbranch@gmail.com\nSubject: Request for Internet Banking Activation\n\nDear Sir,\nI hope you are doing well. I am writing to request the reactivation of my internet banking facility linked to my savings account (Account No: 360150678965) maintained at your branch. The facility has been temporarily blocked after multiple incorrect login attempts while trying to access my account.\nI kindly request you to reactivate the internet banking facility at the earliest so that I can continue using online banking services without interruption. I understand the importance of security and assure you that I will take necessary precautions while accessing my account in the future. I am ready to complete any verification or formalities required for reactivation.\nPlease let me know if I need to submit any written request or identity proof for this purpose. I would be grateful if you could process my request and confirm once the facility has been successfully activated.\n\nThank you for your support and cooperation.\nYours faithfully,\nManish Ranjan",
+      "wordLimit": "150-200 words",
+      "marks": 10,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": 4,
+      "productIds": []
+    },
+    {
+      "id": "q_1788895806251",
+      "examId": "sbi_po",
+      "type": "situation",
+      "text": "As a bank officer, you notice a customer has left some important financial papers behind unattended at the counter. What would you do?",
+      "modelAnswer": "If I notice that a customer has left important financial documents unattended at the counter, I would immediately secure them to prevent loss, misuse or unauthorised access. I would avoid examining their contents unnecessarily, as customer confidentiality is paramount.\nI would first check whether the customer is still in the branch and, if possible, inform them immediately. If the customer has already left, I would hand over the documents to the designated branch official or place them in the prescribed secure location, as per bank procedures.\nI would make a record of the incident, if required, to ensure proper accountability and traceability. If the documents contain sensitive financial information, I would ensure that only authorised personnel handle them.\nI would never disclose, copy or use the information for any personal purpose. This approach would protect the customer’s interests, maintain confidentiality and uphold the bank’s integrity.",
+      "wordLimit": "120-150",
+      "marks": 10,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": 4,
+      "productIds": []
     }
   ],
   "typingParas": [
