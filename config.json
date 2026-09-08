@@ -1714,6 +1714,19 @@
       "active": true,
       "mockNo": 4,
       "productIds": []
+    },
+    {
+      "id": "q_1788895974985",
+      "examId": "sbi_po",
+      "type": "report",
+      "text": "As a newspaper correspondent, cover an insurance awareness camp that an insurance firm organised in a semi-urban locality, describing its activities, turnout, and impact.",
+      "modelAnswer": "Date: September 12, 2026\nTo: Editor, The Hindu Newspaper\nFrom: Raman, Correspondent, The Hindu Newspaper\nSubject: Insurance Awareness Camp in the City\n\nDear Sir,\nAn insurance awareness camp was organised in a semi-urban area on Wednesday by ABC Insurance Company to educate people about the importance of insurance and financial protection. Around 180 residents, small business owners and young professionals attended the programme.\nInsurance experts explained the key features of health, life and general insurance policies. They highlighted the importance of selecting adequate coverage based on individual requirements, financial capacity and risk exposure. Participants were also informed about policy documents, premium payments, claim procedures and common mistakes made while purchasing insurance policies.\nA question-and-answer session was conducted to address participants’ concerns and clarify their doubts. The experts also encouraged attendees to compare policies carefully before making decisions.\nSuch initiatives can improve financial literacy, promote informed insurance choices and strengthen financial security among the public.\n\nBest regards,\nRaman\nCorrespondent, The Hindu Newspaper",
+      "wordLimit": "150-250 words",
+      "marks": 10,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": 4,
+      "productIds": []
     }
   ],
   "typingParas": [
