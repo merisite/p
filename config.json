@@ -706,7 +706,10 @@
       "marks": 15,
       "difficulty": "medium",
       "active": false,
-      "mockNo": 7
+      "mockNo": 7,
+      "productIds": [
+        "TestPack"
+      ]
     },
     {
       "id": "q_essay_8",
