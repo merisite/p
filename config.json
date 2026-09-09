@@ -1830,10 +1830,8 @@
       "mockNo": 1,
       "title": "IBPS PO Mock 1",
       "active": true,
-      "status": "active",
-      "productIds": [
-        "TestPack"
-      ]
+      "status": "upcoming",
+      "productIds": []
     },
     {
       "id": "ibps_po_mock_2",
