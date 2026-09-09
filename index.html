@@ -747,21 +747,23 @@ header .h-brand:hover{background:var(--brut-tint);}
   .festive-layer .fp{animation:none!important;opacity:0!important;}
 }
 </style>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
   import {
     getAuth, GoogleAuthProvider, signInWithPopup,
-    createUserWithEmailAndPassword, signInWithEmailAndPassword,
     signInAnonymously, onAuthStateChanged, signOut,
-    linkWithCredential, EmailAuthProvider, updateProfile,
-    sendPasswordResetEmail
+    linkWithCredential, EmailAuthProvider, updateProfile
   } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
   import {
     getFirestore, doc, setDoc, getDoc, collection,
     getDocs, serverTimestamp
   } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+  import {
+    getFunctions, httpsCallable
+  } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-functions.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyDRa4IzaCD_vctiAZDiqQ-sbb8TUlBJtCI",
@@ -776,16 +778,17 @@ header .h-brand:hover{background:var(--brut-tint);}
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const db = getFirestore(app);
+  const functions = getFunctions(app);
 
   // Expose the bits the classic (non-module) app script needs.
   window.FB = {
     auth, db,
     GoogleAuthProvider, signInWithPopup,
-    createUserWithEmailAndPassword, signInWithEmailAndPassword,
     signInAnonymously, signOut,
     linkWithCredential, EmailAuthProvider, updateProfile,
     doc, setDoc, getDoc, collection, getDocs, serverTimestamp,
-    sendPasswordResetEmail
+    createRazorpayOrder: httpsCallable(functions, "createRazorpayOrder"),
+    verifyRazorpayPayment: httpsCallable(functions, "verifyRazorpayPayment")
   };
 
   onAuthStateChanged(auth, function(user){
@@ -870,36 +873,32 @@ header .h-brand:hover{background:var(--brut-tint);}
 </div>
 <div class="cov" id="auth-cov">
   <div class="cbox" style="max-width:340px;text-align:left">
-    <div class="cbox-t" id="auth-title">Log in</div>
-    <div class="cbox-s" style="margin-bottom:16px">Save your progress and access it on any device.</div>
-    <button class="btn bg" style="width:100%;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:14px" onclick="doGoogleLogin()">
+    <div class="cbox-t">Log in</div>
+    <div class="cbox-s" style="margin-bottom:16px">Save your progress and unlock purchases on any device. We only offer Google sign-in — this way you never risk losing access to something you paid for by signing up with an email you don't actually control.</div>
+    <button class="btn bg" style="width:100%;display:flex;align-items:center;justify-content:center;gap:8px" onclick="doGoogleLogin()">
       <svg width="16" height="16" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.3 29.3 35 24 35c-6.1 0-11-4.9-11-11s4.9-11 11-11c2.8 0 5.3 1 7.3 2.7l5.7-5.7C33.6 6.5 29 4.5 24 4.5 13.2 4.5 4.5 13.2 4.5 24S13.2 43.5 24 43.5 43.5 34.8 43.5 24c0-1.2-.1-2.4-.3-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 16 19 13 24 13c2.8 0 5.3 1 7.3 2.7l5.7-5.7C33.6 6.5 29 4.5 24 4.5c-7.7 0-14.3 4.4-17.7 10.2z"/><path fill="#4CAF50" d="M24 43.5c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 34.7 26.7 35.5 24 35.5c-5.3 0-9.7-3.4-11.3-8.1l-6.5 5C9.6 39 16.2 43.5 24 43.5z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.2-4.2 5.6l6.2 5.2C40.9 36.3 43.5 30.7 43.5 24c0-1.2-.1-2.4-.3-3.5z"/></svg>
       Continue with Google
     </button>
-    <div style="display:flex;align-items:center;gap:10px;margin:4px 0 14px;color:var(--t2);font-size:.68rem">
-      <div style="flex:1;height:1px;background:var(--b)"></div>OR<div style="flex:1;height:1px;background:var(--b)"></div>
-    </div>
-    <input type="email" id="auth-email" placeholder="Email" style="width:100%;margin-bottom:9px;padding:10px 12px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg);color:var(--t);font-size:.85rem;font-family:var(--font)"/>
-    <div style="position:relative;margin-bottom:4px">
-      <input type="password" id="auth-pass" placeholder="Password" style="width:100%;padding:10px 38px 10px 12px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg);color:var(--t);font-size:.85rem;font-family:var(--font)"/>
-      <button type="button" onclick="toggleAuthPassVisibility()" id="auth-pass-eye" title="Show password" style="position:absolute;top:0;right:0;bottom:0;width:36px;background:none;border:none;cursor:pointer;color:var(--t2);display:flex;align-items:center;justify-content:center">
-        <svg id="auth-pass-eye-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
-      </button>
-    </div>
-    <div id="auth-forgot-row" style="text-align:right;margin-bottom:4px">
-      <span id="auth-forgot-link" onclick="doForgotPassword()" style="font-size:.72rem;color:var(--accent);cursor:pointer;font-weight:600">Forgot password?</span>
-    </div>
-    <div id="auth-err" style="color:var(--red);font-size:.72rem;min-height:18px;margin:4px 0"></div>
-    <div id="auth-info" style="color:var(--green);font-size:.72rem;min-height:0;margin:0 0 4px"></div>
-    <div class="cbox-btns" style="flex-direction:column;gap:8px">
-      <button class="btn bp" style="width:100%" id="auth-submit-btn" onclick="doEmailAuth()">Log in</button>
-      <button class="btn" style="width:100%;background:none;color:var(--accent);font-size:.76rem;box-shadow:none" onclick="toggleAuthMode()">
-        <span id="auth-toggle-text">Don't have an account? Sign up</span>
-      </button>
-      <button class="btn" style="width:100%;background:none;color:var(--t2);font-size:.76rem;box-shadow:none" onclick="closeAuthModal()">Cancel</button>
-    </div>
+    <div id="auth-err" style="color:var(--red);font-size:.72rem;min-height:18px;margin:10px 0 0;text-align:center"></div>
+    <button class="btn" style="width:100%;background:none;color:var(--t2);font-size:.76rem;box-shadow:none;margin-top:6px" onclick="closeAuthModal()">Cancel</button>
   </div>
 </div>
+<div class="cov" id="unlock-cov">
+  <div class="cbox" style="max-width:380px;text-align:left">
+    <div class="cbox-t" id="unlock-title">Unlock this content</div>
+    <div class="cbox-s" style="margin-bottom:14px" id="unlock-sub">Choose a package to purchase — you'll get instant access after payment.</div>
+    <div id="unlock-options" style="display:flex;flex-direction:column;gap:10px;margin-bottom:6px"></div>
+    <button class="btn" style="width:100%;background:none;color:var(--t2);font-size:.76rem;box-shadow:none;margin-top:10px" onclick="closeUnlockOptions()">Cancel</button>
+  </div>
+</div>
+<div class="cov" id="payment-processing-cov">
+  <div class="cbox" style="max-width:320px;text-align:center">
+    <div style="width:40px;height:40px;border:3px solid var(--b);border-top-color:var(--accent);border-radius:50%;margin:0 auto 16px;animation:spin 0.8s linear infinite"></div>
+    <div class="cbox-t" style="font-size:1rem">Processing your payment…</div>
+    <div class="cbox-s" style="margin-top:6px">Your payment went through — we're confirming it and unlocking your content. This usually takes just a few seconds. Please don't close this page.</div>
+  </div>
+</div>
+<style>@keyframes spin{to{transform:rotate(360deg)}}</style>
 <div class="cov" id="exit-cov">
   <div class="cbox">
     <div class="cbox-t">Exit exam?</div>
@@ -1182,6 +1181,7 @@ header .h-brand:hover{background:var(--brut-tint);}
     <button class="back-btn" onclick="showS('home')"><svg width="13" height="13" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Home</button>
     <div style="font-size:1rem;font-weight:700;margin-bottom:3px" id="ml-exam-name">Mock Tests</div>
     <div style="color:var(--t2);font-size:.78rem;margin-bottom:18px" id="ml-exam-desc"></div>
+    <div id="ml-unlock-banner" style="display:none"></div>
     <div id="ml-cards" class="card-grid"></div>
     <div id="ml-empty" style="display:none;color:var(--t2);font-size:.82rem;padding:18px 0">No mocks available yet. Check back soon!</div>
   </div>
@@ -1415,6 +1415,7 @@ function copyShareLink(hash,btn){
   }
 }
 window.addEventListener("DOMContentLoaded",function(){
+  refreshProductsCache();
   // Restore result page if user refreshed while on it
   const savedHtml=sessionStorage.getItem('dpt_result_html');
   const savedKind=sessionStorage.getItem('dpt_result_kind');
@@ -1795,10 +1796,19 @@ function renderQS(type){
   const shortLabel=(sec.name||"Practice").replace(/\s*Writing\s*/i,"").trim()||sec.name||"Practice";
   document.getElementById("q-list").innerHTML=qs.length===0?"<div class='empty-q'>No questions yet for this section. Add questions in the Admin panel.</div>":qs.map((q,i)=>{
     const lastAttempt=getLastPracticeAttempt(q.id);
-    const cta=lastAttempt?"↻ Reattempt":"→ Click to attempt";
-    const ctaHTML=`<button onclick="event.stopPropagation();launchExam('${q.id}')" style="font-size:.7rem;font-weight:700;color:var(--accent);border:1px solid var(--aborder);background:var(--adim);padding:5px 12px;border-radius:999px;white-space:nowrap;cursor:pointer;font-family:var(--font)">${cta}</button>`;
-    const viewResultBtn=lastAttempt?`<span onclick="event.stopPropagation();viewSavedResult('practice','${lastAttempt.id}')" style="font-size:.7rem;font-weight:700;color:var(--bg);background:var(--accent);padding:5px 12px;border-radius:999px;cursor:pointer;white-space:nowrap">View Result</span>`:"";
-    return `<div class="q-item" style="cursor:default"><div style="font-size:.94rem;font-weight:700;color:var(--t);margin-bottom:9px">${shortLabel} Test ${i+1}</div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px"><span class="chip">${q.difficulty||"medium"}</span><button onclick="event.stopPropagation();copyShareLink('question-${q.id}',this)" title="Copy direct link to this question" style="flex-shrink:0;display:flex;align-items:center;gap:4px;font-size:.62rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>Copy Link</button></div><div style="margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:nowrap">${ctaHTML}${viewResultBtn}</div></div>`;
+    const locked=!isPracticeQuestionUnlocked(q);
+    let ctaHTML,viewResultBtn;
+    if(locked){
+      const unlockIds=getUnlockingProductIds(q);
+      const prod=cheapestUnlockingProduct(unlockIds);
+      ctaHTML=`<button onclick="event.stopPropagation();showUnlockOptions(${JSON.stringify(unlockIds)})" style="font-size:.7rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:5px 12px;border-radius:999px;white-space:nowrap;cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:4px"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Unlock — ${priceLabel(prod)}</button>`;
+      viewResultBtn="";
+    }else{
+      const cta=lastAttempt?"↻ Reattempt":"→ Click to attempt";
+      ctaHTML=`<button onclick="event.stopPropagation();launchExam('${q.id}')" style="font-size:.7rem;font-weight:700;color:var(--accent);border:1px solid var(--aborder);background:var(--adim);padding:5px 12px;border-radius:999px;white-space:nowrap;cursor:pointer;font-family:var(--font)">${cta}</button>`;
+      viewResultBtn=lastAttempt?`<span onclick="event.stopPropagation();viewSavedResult('practice','${lastAttempt.id}')" style="font-size:.7rem;font-weight:700;color:var(--bg);background:var(--accent);padding:5px 12px;border-radius:999px;cursor:pointer;white-space:nowrap">View Result</span>`:"";
+    }
+    return `<div class="q-item" style="cursor:default">${locked?'<div style="position:absolute;top:12px;right:12px;color:var(--accent)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>':''}<div style="font-size:.94rem;font-weight:700;color:var(--t);margin-bottom:9px">${shortLabel} Test ${i+1}</div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px"><span class="chip">${q.difficulty||"medium"}</span><button onclick="event.stopPropagation();copyShareLink('question-${q.id}',this)" title="Copy direct link to this question" style="flex-shrink:0;display:flex;align-items:center;gap:4px;font-size:.62rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>Copy Link</button></div><div style="margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:nowrap">${ctaHTML}${viewResultBtn}</div></div>`;
   }).join("");
 }
 function setTO(btn,v){document.querySelectorAll(".tob").forEach(b=>b.classList.remove("on"));btn.classList.add("on");tMode=v;document.getElementById("cust-row").classList.toggle("show",v==="custom");}
@@ -1942,8 +1952,28 @@ function timeAgoLabel(ts){
   const days=Math.round(hrs/24);
   return days+" day"+(days===1?"":"s")+" ago";
 }
-function launchExam(qid){
+async function launchExam(qid){
   const d=D();const q=d.questions.find(x=>x.id===qid);if(!q)return;
+  if(!isPracticeQuestionUnlocked(q)){
+    showUnlockOptions(getUnlockingProductIds(q));
+    return;
+  }
+  if(q.productIds&&q.productIds.length){
+    // Paid content — the real question/model answer live in Firestore, not config.json.
+    // Fetch it now and patch it into the shared question object before proceeding.
+    try{
+      const snap=await window.FB.getDoc(window.FB.doc(window.FB.db,'paidContent',qid));
+      if(!snap.exists()){ alert("This question's content couldn't be loaded. Please try again or contact support."); return; }
+      const data=snap.data();
+      q.text=data.question||q.text;
+      q.modelAnswer=data.modelAnswer||q.modelAnswer;
+      if(data.marks)q.marks=data.marks;
+      if(data.wordLimit)q.wordLimit=data.wordLimit;
+    }catch(e){
+      alert('Could not load this question — please make sure you\'re logged in and try again.');
+      return;
+    }
+  }
   const tm={};d.sectionTypes.forEach(s=>tm[s.id]=s);const sec=tm[q.type]||{};
   const mins=sec.timer||10;
   const draft=getDraft(qid);
@@ -2181,12 +2211,13 @@ function showMockList(examId,opts){
   const d=D();
   const ex=d.exams.find(e=>e.id===examId);
   if(!ex)return;
+  _lastMockListExamId=examId;
   const mocks=(d.mocks||[]).filter(m=>m.examId===examId&&m.active).sort((a,b)=>a.mockNo-b.mockNo);
   document.getElementById("ml-exam-name").textContent=ex.name;
   document.getElementById("ml-exam-desc").textContent=ex.desc||"";
   const container=document.getElementById("ml-cards");
   const empty=document.getElementById("ml-empty");
-  if(!mocks.length){container.innerHTML="";empty.style.display="block";}
+  if(!mocks.length){container.innerHTML="";empty.style.display="block";const b=document.getElementById("ml-unlock-banner");if(b){b.style.display="none";b.innerHTML="";}}
   else{
     empty.style.display="none";
     container.innerHTML=mocks.map(m=>{
@@ -2206,10 +2237,19 @@ function showMockList(examId,opts){
         </div>`;
       }
       const lastAttempt=getLastMockAttempt(examId,m.mockNo);
-      const cta=lastAttempt?"↻ Reattempt":"→ Start Mock";
-      const ctaHTML=`<button onclick="event.stopPropagation();startMockByNo('${examId}',${m.mockNo})" style="font-size:.68rem;font-weight:700;color:var(--accent);border:1px solid var(--aborder);background:var(--adim);padding:4px 10px;border-radius:999px;white-space:nowrap;cursor:pointer;font-family:var(--font)">${cta}</button>`;
-      const viewResultBtn=lastAttempt?`<span onclick="event.stopPropagation();viewSavedResult('mock','${lastAttempt.id}')" style="font-size:.68rem;font-weight:700;color:var(--bg);background:var(--accent);padding:4px 11px;border-radius:999px;cursor:pointer;white-space:nowrap">View Result</span>`:"";
+      const locked=!isMockUnlocked(m);
+      let ctaHTML,viewResultBtn;
+      if(locked){
+        const prod=cheapestUnlockingProduct(m.productIds);
+        ctaHTML=`<button onclick="event.stopPropagation();showUnlockOptions(${JSON.stringify(m.productIds)})" style="font-size:.66rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:4px 10px;border-radius:999px;white-space:nowrap;cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:4px"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Unlock — ${priceLabel(prod)}</button>`;
+        viewResultBtn="";
+      }else{
+        const cta=lastAttempt?"↻ Reattempt":"→ Start Mock";
+        ctaHTML=`<button onclick="event.stopPropagation();startMockByNo('${examId}',${m.mockNo})" style="font-size:.68rem;font-weight:700;color:var(--accent);border:1px solid var(--aborder);background:var(--adim);padding:4px 10px;border-radius:999px;white-space:nowrap;cursor:pointer;font-family:var(--font)">${cta}</button>`;
+        viewResultBtn=lastAttempt?`<span onclick="event.stopPropagation();viewSavedResult('mock','${lastAttempt.id}')" style="font-size:.68rem;font-weight:700;color:var(--bg);background:var(--accent);padding:4px 11px;border-radius:999px;cursor:pointer;white-space:nowrap">View Result</span>`:"";
+      }
       return `<div class="hcard exam-card" style="border-color:var(--aborder);background:var(--adim);position:relative;cursor:default">
+        ${locked?'<div style="position:absolute;top:10px;left:10px;color:var(--accent);z-index:2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>':''}
         <button onclick="event.stopPropagation();copyShareLink('mock-${examId}-${m.mockNo}',this)" title="Copy direct link to this mock" style="position:absolute;top:10px;right:10px;flex-shrink:0;display:flex;align-items:center;gap:4px;font-size:.6rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer;z-index:2"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>Copy Link</button>
         <div class="hc-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
         <div class="hc-title">${m.title}</div>
@@ -2217,15 +2257,40 @@ function showMockList(examId,opts){
         <div style="margin-top:8px;display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:nowrap">${ctaHTML}${viewResultBtn}</div>
       </div>`;
     }).join("");
+    // Banner offering to unlock every locked mock in this list at once, using whichever
+    // product covers the most of them (falls back to the first locked mock's own option).
+    const bannerEl=document.getElementById("ml-unlock-banner");
+    if(bannerEl){
+      const lockedMocks=mocks.filter(m=>m.status!=="upcoming"&&!isMockUnlocked(m));
+      if(lockedMocks.length){
+        const allIds=[].concat(...lockedMocks.map(m=>m.productIds||[]));
+        const counts={};allIds.forEach(id=>counts[id]=(counts[id]||0)+1);
+        const bestId=Object.keys(counts).sort((a,b)=>counts[b]-counts[a])[0];
+        const prod=getProduct(bestId);
+        bannerEl.style.display="";
+        bannerEl.innerHTML=`<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:var(--adim);border:1px solid var(--aborder);border-radius:var(--rl);padding:14px 18px;margin-bottom:16px">
+          <div style="font-size:.85rem;font-weight:700;color:var(--t)">🔓 Unlock ${counts[bestId]||lockedMocks.length} mock${(counts[bestId]||lockedMocks.length)!==1?'s':''} for this exam</div>
+          <button onclick="showUnlockOptions(['${bestId||''}'])" style="font-size:.78rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:8px 18px;border-radius:999px;cursor:pointer;font-family:var(--font)">Unlock — ${priceLabel(prod)}</button>
+        </div>`;
+      }else{
+        bannerEl.style.display="none";
+        bannerEl.innerHTML="";
+      }
+    }
   }
   showS("mocklist",{skipHash:opts&&opts.skipHash,hash:"mocks-"+examId});
 }
 // Ensure mocklist hash is handled correctly for deep-link and back-button
 // (mocklist is now a normal linkable screen, so routeFromHash can restore it)
 function startMockByNo(examId,mockNo){
+  const d=D();
+  const mock=(d.mocks||[]).find(m=>m.examId===examId&&m.mockNo===mockNo);
+  if(mock&&!isMockUnlocked(mock)){
+    showUnlockOptions(mock.productIds);
+    return;
+  }
   _pendingMockExamId=examId;
   _pendingMockNo=mockNo;
-  const d=D();
   const ex=d.exams.find(e=>e.id===examId);
   if(!ex){alert("Exam not found.");return;}
   showMockInstr(ex,"Mock "+mockNo);
@@ -2263,7 +2328,26 @@ function showMockInstr(ex,labelSuffix){
     onStart:()=>startMockAfterInstr()
   });
 }
-function startMockAfterInstr(){
+// Fetches real content for any paid+unlocked question that hasn't been loaded yet,
+// patching it directly into the shared question object (same pattern as launchExam).
+async function hydratePaidQuestions(qs){
+  for(const q of qs){
+    if(q&&q.productIds&&q.productIds.length&&!q._paidContentLoaded){
+      try{
+        const snap=await window.FB.getDoc(window.FB.doc(window.FB.db,'paidContent',q.id));
+        if(snap.exists()){
+          const data=snap.data();
+          q.text=data.question||q.text;
+          q.modelAnswer=data.modelAnswer||q.modelAnswer;
+          if(data.marks)q.marks=data.marks;
+          if(data.wordLimit)q.wordLimit=data.wordLimit;
+          q._paidContentLoaded=true;
+        }
+      }catch(e){ console.warn('Could not load paid question content',q.id,e); }
+    }
+  }
+}
+async function startMockAfterInstr(){
   const examId=_pendingMockExamId;const mockNo=_pendingMockNo;_pendingMockExamId=null;_pendingMockNo=null;
   const d=D();
   const ex=d.exams.find(e=>e.id===examId);
@@ -2290,6 +2374,16 @@ function startMockAfterInstr(){
     }
   }
   if(!secs.length){alert("No questions available for this mock. Please add questions in the Admin panel.");return;}
+  // Fetch real content for any paid question before the exam actually starts.
+  const allQs=[];
+  secs.forEach(s=>{
+    (s.questions||[]).forEach(q=>allQs.push(q));
+    if(s.choices){Object.values(s.choices).forEach(c=>(c.questions||[]).forEach(q=>allQs.push(q)));}
+  });
+  if(allQs.some(q=>q.productIds&&q.productIds.length)){
+    showToast("Loading your unlocked content…");
+    await hydratePaidQuestions(allQs);
+  }
   MS.s=secs;MS.a={};MS.idx=0;MS.st=Date.now();MS.mr={};
   MS.examId=examId;MS.mockNo=mockNo;
   // Start timer immediately and go into fullmock — question picker fires on first section load
@@ -4112,80 +4206,16 @@ let _authMode = 'login'; // 'login' | 'signup'
 let _priorAnonUid = null; // captured right before a login attempt starts
 function openAuthModal(){
   document.getElementById('auth-err').textContent='';
-  document.getElementById('auth-info').textContent='';
   document.getElementById('auth-cov').classList.add('open');
 }
 function closeAuthModal(){
   document.getElementById('auth-cov').classList.remove('open');
-  resetAuthPassVisibility();
-}
-function toggleAuthPassVisibility(){
-  const input = document.getElementById('auth-pass');
-  const icon = document.getElementById('auth-pass-eye-icon');
-  const btn = document.getElementById('auth-pass-eye');
-  const hidden = input.type === 'password';
-  input.type = hidden ? 'text' : 'password';
-  btn.title = hidden ? 'Hide password' : 'Show password';
-  icon.innerHTML = hidden
-    ? '<path d="M1 1l22 22"/><path d="M17.94 17.94A10.94 10.94 0 0112 19c-7 0-11-7-11-7a21.6 21.6 0 015.06-5.94M9.9 4.24A10.94 10.94 0 0112 4c7 0 11 7 11 7a21.6 21.6 0 01-2.61 3.53"/><path d="M14.12 14.12a3 3 0 11-4.24-4.24"/>'
-    : '<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/>';
-}
-function resetAuthPassVisibility(){
-  const input = document.getElementById('auth-pass');
-  const icon = document.getElementById('auth-pass-eye-icon');
-  const btn = document.getElementById('auth-pass-eye');
-  if(!input)return;
-  input.type = 'password';
-  btn.title = 'Show password';
-  icon.innerHTML = '<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/>';
-}
-function toggleAuthMode(){
-  _authMode = _authMode==='login' ? 'signup' : 'login';
-  document.getElementById('auth-title').textContent = _authMode==='login' ? 'Log in' : 'Sign up';
-  document.getElementById('auth-submit-btn').textContent = _authMode==='login' ? 'Log in' : 'Sign up';
-  document.getElementById('auth-toggle-text').textContent = _authMode==='login' ? "Don't have an account? Sign up" : 'Already have an account? Log in';
-  document.getElementById('auth-forgot-row').style.display = _authMode==='login' ? '' : 'none';
-  document.getElementById('auth-err').textContent='';
-  document.getElementById('auth-info').textContent='';
-}
-async function doForgotPassword(){
-  const email = document.getElementById('auth-email').value.trim();
-  const errEl = document.getElementById('auth-err');
-  const infoEl = document.getElementById('auth-info');
-  const link = document.getElementById('auth-forgot-link');
-  errEl.textContent=''; infoEl.textContent='';
-  if(!email){ errEl.textContent='Enter your email above first, then tap "Forgot password?" again.'; return; }
-  if(!window.FB){ errEl.textContent='Still loading — please wait a moment and try again.'; return; }
-  if(link.dataset.sending==='1') return; // already in flight — ignore extra taps entirely
-  link.dataset.sending='1';
-  const originalText = link.textContent;
-  link.style.pointerEvents='none';
-  link.style.opacity='.6';
-  link.textContent='Sending…';
-  try{
-    await window.FB.sendPasswordResetEmail(window.FB.auth, email);
-    infoEl.textContent='Password reset link sent — check your inbox (and spam folder).';
-  }catch(e){
-    errEl.textContent = friendlyAuthError(e);
-  }finally{
-    link.dataset.sending='0';
-    link.style.pointerEvents='';
-    link.style.opacity='';
-    link.textContent=originalText;
-  }
 }
 // Maps Firebase's error codes to clear messages — far more reliable than parsing e.message
-// text, which can end up empty for some errors (e.g. "Firebase: (auth/wrong-password)."
-// strips down to nothing), silently hiding the failure from the user.
+// text, which can end up empty for some errors, silently hiding the failure from the user.
 function friendlyAuthError(e){
   const code=e&&e.code||'';
   const map={
-    'auth/wrong-password':'Incorrect password. Please try again, or use "Forgot password?" below.',
-    'auth/user-not-found':'No account found with this email. Try signing up instead.',
-    'auth/invalid-credential':'Incorrect email or password. Please try again.',
-    'auth/email-already-in-use':'An account already exists with this email. Try logging in instead.',
-    'auth/weak-password':'Password should be at least 6 characters.',
-    'auth/invalid-email':'Please enter a valid email address.',
     'auth/network-request-failed':'Network error — please check your connection and try again.',
     'auth/too-many-requests':'Too many attempts. Please wait a moment and try again.',
     'auth/popup-closed-by-user':'Sign-in was cancelled.',
@@ -4205,39 +4235,12 @@ async function doGoogleLogin(){
     _priorAnonUid = (current && current.isAnonymous) ? current.uid : null;
     await window.FB.signInWithPopup(window.FB.auth, provider);
     closeAuthModal();
-  }catch(e){
-    errEl.textContent = friendlyAuthError(e);
-  }
-}
-async function doEmailAuth(){
-  const email = document.getElementById('auth-email').value.trim();
-  const pass = document.getElementById('auth-pass').value;
-  const errEl = document.getElementById('auth-err');
-  const btn = document.getElementById('auth-submit-btn');
-  errEl.textContent='';
-  if(!email || !pass){ errEl.textContent='Please enter both email and password.'; return; }
-  // The input has type="email" but isn't inside a real <form>, so the browser's built-in
-  // validation never actually runs — check the format ourselves before ever contacting Firebase.
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ errEl.textContent='Please enter a valid email address.'; return; }
-  if(_authMode==='signup' && pass.length<6){ errEl.textContent='Password should be at least 6 characters.'; return; }
-  if(!window.FB){ errEl.textContent='Still loading — please wait a moment and try again.'; return; }
-  const originalLabel = btn.textContent;
-  btn.disabled = true;
-  btn.textContent = _authMode==='signup' ? 'Signing up…' : 'Logging in…';
-  try{
-    const current = window.FB.auth.currentUser;
-    _priorAnonUid = (current && current.isAnonymous) ? current.uid : null;
-    if(_authMode==='signup'){
-      await window.FB.createUserWithEmailAndPassword(window.FB.auth, email, pass);
-    }else{
-      await window.FB.signInWithEmailAndPassword(window.FB.auth, email, pass);
+    if(_pendingUnlockAfterLogin){
+      const p=_pendingUnlockAfterLogin;_pendingUnlockAfterLogin=null;
+      setTimeout(function(){ showUnlockOptions(p); }, 300);
     }
-    closeAuthModal();
   }catch(e){
     errEl.textContent = friendlyAuthError(e);
-  }finally{
-    btn.disabled = false;
-    btn.textContent = originalLabel;
   }
 }
 async function doLogout(){
@@ -4272,8 +4275,155 @@ window.addEventListener('fb-auth-changed', function(e){
   if(user && !user.isAnonymous){
     mergeLocalAndCloud(user.uid, _priorAnonUid);
     _priorAnonUid = null;
+    refreshPurchasedProducts();
+  }else{
+    _purchasedProducts = [];
   }
 });
+
+/* ============================================================
+   PAID MOCKS — purchase flow (Razorpay + Cloud Functions)
+   ============================================================ */
+let _purchasedProducts = [];
+let _lastMockListExamId = null;
+async function refreshPurchasedProducts(){
+  try{
+    if(!window.FB || !window.FB.auth.currentUser || window.FB.auth.currentUser.isAnonymous){ _purchasedProducts=[]; return; }
+    const ref = window.FB.doc(window.FB.db,'users',window.FB.auth.currentUser.uid);
+    const snap = await window.FB.getDoc(ref);
+    _purchasedProducts = (snap.exists() && snap.data().purchasedProducts) || [];
+  }catch(e){ console.warn('Could not load purchased products',e); }
+}
+function isProductUnlocked(productId){
+  return !productId || _purchasedProducts.indexOf(productId) !== -1;
+}
+// Public product catalog — needed for price/name display and for the "buying this exam's
+// mocks also unlocks all its practice" rule. Public read, doesn't need login.
+let _productsCache = [];
+async function refreshProductsCache(){
+  try{
+    if(!window.FB) return;
+    const snap = await window.FB.getDocs(window.FB.collection(window.FB.db,'products'));
+    _productsCache = [];
+    snap.forEach(function(d){ _productsCache.push({ id:d.id, ...d.data() }); });
+  }catch(e){ console.warn('Could not load products',e); }
+}
+function getProduct(productId){
+  return _productsCache.find(function(p){ return p.id===productId; }) || null;
+}
+// A mock is unlocked if it's free (no productIds) or the buyer owns any product it's tagged with.
+function isMockUnlocked(mock){
+  if(!mock || !mock.productIds || !mock.productIds.length) return true;
+  return mock.productIds.some(isProductUnlocked);
+}
+// A practice question is unlocked if it's free, tagged explicitly with an owned product, OR
+// the buyer owns a product that blanket-unlocks all practice for this question's exam.
+function isPracticeQuestionUnlocked(q){
+  if(!q || !q.productIds || !q.productIds.length) return true;
+  if(q.productIds.some(isProductUnlocked)) return true;
+  return _productsCache.some(function(p){
+    return isProductUnlocked(p.id) && (p.unlocksExamPractice||[]).indexOf(q.examId)!==-1;
+  });
+}
+// Every product that would unlock this question — explicit tags PLUS any product that
+// blanket-unlocks all practice for this exam, even if not individually tagged on it.
+function getUnlockingProductIds(q){
+  const explicit=(q&&q.productIds)||[];
+  const blanket=_productsCache.filter(function(p){ return (p.unlocksExamPractice||[]).indexOf(q&&q.examId)!==-1; }).map(function(p){ return p.id; });
+  return Array.from(new Set(explicit.concat(blanket)));
+}
+// Picks which product to actually offer purchasing when several would unlock the same
+// content (e.g. a solo pack and a combo pack both cover it) — defaults to the cheapest.
+function cheapestUnlockingProduct(productIds){
+  const options=(productIds||[]).map(getProduct).filter(Boolean);
+  if(!options.length)return null;
+  options.sort(function(a,b){ return (a.amount||0)-(b.amount||0); });
+  return options[0];
+}
+function priceLabel(product){
+  return product && typeof product.amount==='number' ? '₹'+Math.round(product.amount/100) : '';
+}
+let _pendingUnlockAfterLogin = null;
+// The entry point every lock icon / "Unlock" button should call — takes the list of product
+// IDs that would unlock this content (could be one, could be several for combo packs).
+// Requires login first; then shows a popup to actually choose which package to buy.
+function showUnlockOptions(productIds){
+  if(typeof productIds === 'string') productIds = [productIds];
+  if(!window.FB || !window.FB.auth.currentUser || window.FB.auth.currentUser.isAnonymous){
+    _pendingUnlockAfterLogin = productIds;
+    openAuthModal();
+    return;
+  }
+  const options = (productIds||[]).map(getProduct).filter(Boolean).sort(function(a,b){ return (a.amount||0)-(b.amount||0); });
+  if(!options.length){ alert('This content is not available for purchase right now.'); return; }
+  document.getElementById('unlock-sub').textContent = options.length>1
+    ? 'A few packages include this content — pick the one that works for you.'
+    : "You'll get instant access after payment.";
+  document.getElementById('unlock-options').innerHTML = options.map(function(p){
+    return `<button onclick="closeUnlockOptions();unlockProduct('${p.id}')" style="display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;text-align:left;padding:12px 14px;border-radius:var(--rs);border:1px solid var(--aborder);background:var(--adim);cursor:pointer;font-family:var(--font)">
+      <span style="font-size:.85rem;font-weight:700;color:var(--t)">${p.name||p.id}</span>
+      <span style="font-size:.85rem;font-weight:800;color:var(--accent);flex-shrink:0">${priceLabel(p)}</span>
+    </button>`;
+  }).join('');
+  document.getElementById('unlock-cov').classList.add('open');
+}
+function closeUnlockOptions(){
+  document.getElementById('unlock-cov').classList.remove('open');
+}
+async function unlockProduct(productId){
+  if(!window.FB || !window.FB.auth.currentUser || window.FB.auth.currentUser.isAnonymous){
+    _pendingUnlockAfterLogin = [productId];
+    openAuthModal();
+    return;
+  }
+  if(typeof Razorpay==='undefined'){
+    alert('Payment system is still loading — please try again in a moment.');
+    return;
+  }
+  try{
+    const orderRes = await window.FB.createRazorpayOrder({ productId: productId });
+    const data = orderRes.data;
+    const options = {
+      key: data.keyId,
+      amount: data.amount,
+      currency: 'INR',
+      name: 'Descriptive Prep Today',
+      description: data.productName,
+      order_id: data.orderId,
+      prefill: { email: window.FB.auth.currentUser.email || '' },
+      theme: { color: getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#c2460a' },
+      handler: async function(response){
+        // Payment succeeded on Razorpay's side — but we still need our own server to verify
+        // and record it, which takes a moment. Show a clear "processing" state so it never
+        // looks stuck or broken during that gap.
+        document.getElementById('payment-processing-cov').classList.add('open');
+        try{
+          await window.FB.verifyRazorpayPayment({
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature,
+            productId: productId
+          });
+          // Reload so every part of the page — cards, banners, everything — reflects the
+          // newly-unlocked content immediately, without needing to track down every place
+          // that would otherwise need a manual re-render.
+          location.reload();
+        }catch(e){
+          document.getElementById('payment-processing-cov').classList.remove('open');
+          alert('Your payment went through, but we could not confirm it automatically. Please contact us with this payment ID so we can unlock it manually: '+response.razorpay_payment_id);
+        }
+      },
+      modal: { ondismiss: function(){ /* user closed the popup — no action needed */ } }
+    };
+    const rzp = new Razorpay(options);
+    rzp.on('payment.failed', function(response){
+      alert('Payment failed: '+(response.error&&response.error.description||'please try again.'));
+    });
+    rzp.open();
+  }catch(e){
+    alert('Could not start checkout: '+(e&&e.message?e.message:'please try again.'));
+  }
+}
 function updateProgCard(){
   const list = getProgress();
   const el = document.getElementById('prog-card-desc');
