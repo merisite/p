@@ -1444,11 +1444,9 @@
       "wordLimit": "250-300 words",
       "marks": 20,
       "difficulty": "medium",
-      "active": true,
+      "active": false,
       "mockNo": null,
-      "productIds": [
-        "TestPack"
-      ]
+      "productIds": []
     },
     {
       "id": "q_compP1",
