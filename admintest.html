@@ -177,7 +177,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
     getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged
   } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
   import {
-    getFirestore, doc, setDoc, getDocs, collection
+    getFirestore, doc, setDoc, getDocs, collection, deleteDoc
   } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
   const firebaseConfig = {
@@ -194,7 +194,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
   const auth = getAuth(app);
   const db = getFirestore(app);
 
-  window.FB = { auth, db, GoogleAuthProvider, signInWithPopup, signOut, doc, setDoc, getDocs, collection };
+  window.FB = { auth, db, GoogleAuthProvider, signInWithPopup, signOut, doc, setDoc, getDocs, collection, deleteDoc };
 
   onAuthStateChanged(auth, function(user){
     window.dispatchEvent(new CustomEvent("admin-auth-changed", { detail: { user: user } }));
@@ -337,6 +337,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
           <div style="background:var(--bg2);border:1px solid var(--b);border-radius:var(--rl);padding:18px;margin-bottom:24px">
             <div style="font-size:.85rem;font-weight:700;margin-bottom:12px">Products &amp; Pricing</div>
             <div id="pm-products-list" style="margin-bottom:14px;font-size:.8rem;color:var(--t2)">Loading…</div>
+            <div id="pp-form-title" style="font-size:.76rem;color:var(--accent);font-weight:700;margin-bottom:8px;display:none">Editing existing product — Product ID can't be changed once created.</div>
             <div style="display:grid;grid-template-columns:1fr 1.4fr 0.8fr auto;gap:10px;align-items:end">
               <div>
                 <label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:5px">Product ID</label>
@@ -352,43 +353,33 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
               </div>
               <button class="btn bp" style="padding:8px 14px;font-size:.78rem" onclick="saveProduct()">Save Product</button>
             </div>
+
+            <label style="font-size:.72rem;color:var(--t2);display:block;margin:14px 0 6px">Buying this also unlocks ALL practice questions for these exams (not just the mocks it's explicitly tagged on):</label>
+            <div id="pp-exam-checklist" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px">Loading…</div>
+            <div style="font-size:.66rem;color:var(--t2);margin-bottom:10px">Leave all unchecked if this product should only unlock the specific mocks/questions you've individually tagged it on.</div>
+
+            <button class="btn" id="pp-cancel-edit" onclick="resetProductForm()" style="padding:6px 12px;font-size:.74rem;display:none">Cancel Edit</button>
             <div id="pp-status" style="font-size:.75rem;margin-top:8px"></div>
           </div>
 
           <!-- PAID CONTENT -->
           <div style="background:var(--bg2);border:1px solid var(--b);border-radius:var(--rl);padding:18px;margin-bottom:18px">
-            <div style="font-size:.85rem;font-weight:700;margin-bottom:12px">Publish Protected Content</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
-              <div>
-                <label style="font-size:.72rem;color:var(--t2);display:block;margin-bottom:5px">Content Type</label>
-                <select id="pc-type" onchange="onPcTypeChange()" style="width:100%;padding:8px 11px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.82rem">
-                  <option value="mock">Mock (multiple sections)</option>
-                  <option value="practice">Single Practice Question</option>
-                </select>
-              </div>
-              <div>
-                <label style="font-size:.72rem;color:var(--t2);display:block;margin-bottom:5px">Content ID</label>
-                <input id="pc-id" placeholder="e.g. ibps-po-2 or the question's own ID" style="width:100%;padding:8px 11px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.82rem"/>
-              </div>
+            <div style="font-size:.85rem;font-weight:700;margin-bottom:12px">Publish Protected Question Content</div>
+            <div style="font-size:.72rem;color:var(--t2);margin-bottom:14px;line-height:1.6">Use this for BOTH standalone paid practice questions AND paid mock sections — a mock is just a group of questions sharing the same Mock No, same as your free mocks. The "Paid question" toggle + product checklist on the Questions editor already handles which product(s) unlock the public listing; publish the matching real content here using the exact same Content ID as that question.</div>
+            <div>
+              <label style="font-size:.72rem;color:var(--t2);display:block;margin-bottom:5px">Content ID (must match the question's own ID from the Questions editor)</label>
+              <input id="pc-id" placeholder="e.g. q_1699999999999" style="width:100%;margin-bottom:14px;padding:8px 11px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.82rem"/>
             </div>
-            <div style="font-size:.68rem;color:var(--t2);margin-bottom:14px">Content ID must match the matching public "shell" entry's ID (title/marks/duration) you create on the Mocks or Questions page — that public entry is what shows the lock icon; this is what's actually protected behind it.</div>
 
-            <label style="font-size:.72rem;color:var(--t2);display:block;margin-bottom:6px">Unlocked by which product(s)? — check every product that should include this content (a mock can belong to more than one, e.g. a solo pack AND a combo pack)</label>
+            <label style="font-size:.72rem;color:var(--t2);display:block;margin-bottom:6px">Unlocked by which product(s)? — check every product that should include this content (a question can belong to more than one, e.g. a solo pack AND a combo pack)</label>
             <div id="pc-products-checklist" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px">Loading…</div>
 
-            <div id="pc-mock-fields">
-              <div id="pm-sections"></div>
-              <button class="btn" style="margin-top:6px" onclick="addPaidMockSection()">+ Add Section</button>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+              <input id="pc-p-marks" type="number" placeholder="Marks" style="padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/>
+              <input id="pc-p-wordlimit" placeholder="Word limit (e.g. 150-200 words)" style="padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/>
             </div>
-
-            <div id="pc-practice-fields" style="display:none">
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
-                <input id="pc-p-marks" type="number" placeholder="Marks" style="padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/>
-                <input id="pc-p-wordlimit" placeholder="Word limit (e.g. 150-200 words)" style="padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/>
-              </div>
-              <textarea id="pc-p-question" placeholder="Question text" rows="3" style="width:100%;margin-bottom:10px;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem;font-family:inherit;resize:vertical"></textarea>
-              <textarea id="pc-p-model" placeholder="Model answer" rows="4" style="width:100%;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem;font-family:inherit;resize:vertical"></textarea>
-            </div>
+            <textarea id="pc-p-question" placeholder="Question text" rows="3" style="width:100%;margin-bottom:10px;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem;font-family:inherit;resize:vertical"></textarea>
+            <textarea id="pc-p-model" placeholder="Model answer" rows="4" style="width:100%;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem;font-family:inherit;resize:vertical"></textarea>
           </div>
 
           <button class="btn bp" onclick="publishPaidContent()">Publish to Firestore</button>
@@ -1919,7 +1910,6 @@ if(li()){document.getElementById('ls').style.display='none';document.getElementB
    PAID CONTENT — admin sign-in, product management, and
    Firestore authoring for mocks / practice questions
    ============================================================ */
-let _pmSectionCount = 0;
 let _pcProducts = []; // cached list of {id, name, amount}
 
 window.addEventListener('admin-auth-changed', function(e){
@@ -1930,7 +1920,6 @@ window.addEventListener('admin-auth-changed', function(e){
     signedOut.style.display = 'none';
     signedIn.style.display = '';
     document.getElementById('pm-admin-email').textContent = user.email || '(no email)';
-    if(!document.getElementById('pm-sections').children.length) addPaidMockSection();
     loadProducts();
   }else{
     signedOut.style.display = '';
@@ -1951,6 +1940,7 @@ async function adminSignOut(){
 }
 
 /* ---------- Products & pricing ---------- */
+let _pp_editingId = null; // null = creating new, otherwise the ID currently being edited
 async function loadProducts(){
   const listEl = document.getElementById('pm-products-list');
   const checklistEl = document.getElementById('pc-products-checklist');
@@ -1961,20 +1951,77 @@ async function loadProducts(){
     if(!_pcProducts.length){
       listEl.innerHTML = '<em>No products yet — add one below.</em>';
       checklistEl.innerHTML = '<em style="font-size:.78rem;color:var(--t2)">Add a product first.</em>';
-      return;
+    }else{
+      listEl.innerHTML = '<table style="width:100%;border-collapse:collapse;font-size:.78rem">'
+        + _pcProducts.map(function(p){
+            const examNote = (p.unlocksExamPractice||[]).length ? ' <span style="color:var(--t2);font-size:.7rem">+ all practice for '+p.unlocksExamPractice.length+' exam(s)</span>' : '';
+            return '<tr>'
+              + '<td style="padding:6px 0;color:var(--t)"><strong>'+esc(p.id)+'</strong></td>'
+              + '<td style="padding:6px 10px;color:var(--t2)">'+esc(p.name||'')+examNote+'</td>'
+              + '<td style="padding:6px 0;color:var(--accent)">₹'+((p.amount||0)/100)+'</td>'
+              + '<td style="padding:6px 0;text-align:right"><button class="btn" style="padding:3px 9px;font-size:.68rem;margin-right:6px" onclick="editProduct(\''+esc(p.id)+'\')">Edit</button><button class="btn bd" style="padding:3px 9px;font-size:.68rem" onclick="deleteProduct(\''+esc(p.id)+'\')">Delete</button></td>'
+              + '</tr>';
+          }).join('')
+        + '</table>';
     }
-    listEl.innerHTML = '<table style="width:100%;border-collapse:collapse;font-size:.78rem">'
-      + _pcProducts.map(function(p){
-          return '<tr><td style="padding:5px 0;color:var(--t)"><strong>'+esc(p.id)+'</strong></td><td style="padding:5px 10px;color:var(--t2)">'+esc(p.name||'')+'</td><td style="padding:5px 0;color:var(--accent)">₹'+((p.amount||0)/100)+'</td></tr>';
-        }).join('')
-      + '</table>';
-    checklistEl.innerHTML = _pcProducts.map(function(p){
+    checklistEl.innerHTML = _pcProducts.length ? _pcProducts.map(function(p){
       return '<label style="display:flex;align-items:center;gap:6px;font-size:.78rem;background:var(--bg3);border:1px solid var(--b);border-radius:999px;padding:5px 12px;cursor:pointer">'
         + '<input type="checkbox" class="pc-product-check" value="'+esc(p.id)+'" style="margin:0"/> '+esc(p.name||p.id)
         + '</label>';
-    }).join('');
+    }).join('') : '<em style="font-size:.78rem;color:var(--t2)">Add a product first.</em>';
+    renderExamChecklist();
   }catch(e){
     listEl.innerHTML = '<span style="color:#e5484d">Could not load products: '+esc(e.message||'')+'</span>';
+  }
+}
+function renderExamChecklist(checkedExamIds){
+  checkedExamIds = checkedExamIds || [];
+  const el = document.getElementById('pp-exam-checklist');
+  const d = D();
+  const exams = (d && d.exams) || [];
+  if(!exams.length){ el.innerHTML = '<em style="font-size:.76rem;color:var(--t2)">No exams set up yet.</em>'; return; }
+  el.innerHTML = exams.map(function(e){
+    const checked = checkedExamIds.indexOf(e.id)!==-1 ? 'checked' : '';
+    return '<label style="display:flex;align-items:center;gap:6px;font-size:.78rem;background:var(--bg3);border:1px solid var(--b);border-radius:999px;padding:5px 12px;cursor:pointer">'
+      + '<input type="checkbox" class="pp-exam-check" value="'+esc(e.id)+'" '+checked+' style="margin:0"/> '+esc(e.name||e.id)
+      + '</label>';
+  }).join('');
+}
+function editProduct(id){
+  const p = _pcProducts.find(function(x){ return x.id === id; });
+  if(!p) return;
+  _pp_editingId = id;
+  document.getElementById('pp-id').value = p.id;
+  document.getElementById('pp-id').disabled = true;
+  document.getElementById('pp-name').value = p.name || '';
+  document.getElementById('pp-price').value = ((p.amount||0)/100);
+  document.getElementById('pp-form-title').style.display = '';
+  document.getElementById('pp-cancel-edit').style.display = '';
+  renderExamChecklist(p.unlocksExamPractice || []);
+  document.getElementById('pp-id').scrollIntoView({behavior:'smooth', block:'center'});
+}
+function resetProductForm(){
+  _pp_editingId = null;
+  document.getElementById('pp-id').value = '';
+  document.getElementById('pp-id').disabled = false;
+  document.getElementById('pp-name').value = '';
+  document.getElementById('pp-price').value = '';
+  document.getElementById('pp-form-title').style.display = 'none';
+  document.getElementById('pp-cancel-edit').style.display = 'none';
+  renderExamChecklist([]);
+}
+async function deleteProduct(id){
+  if(!confirm('Delete product "'+id+'"? Anyone who already purchased it keeps their access (that\'s recorded on their own account), but it will disappear from checklists and can no longer be bought.'))return;
+  const statusEl = document.getElementById('pp-status');
+  try{
+    await window.FB.deleteDoc(window.FB.doc(window.FB.db, 'products', id));
+    statusEl.style.color = '#22c55e';
+    statusEl.textContent = 'Deleted "'+id+'".';
+    if(_pp_editingId===id) resetProductForm();
+    loadProducts();
+  }catch(e){
+    statusEl.style.color = '#e5484d';
+    statusEl.textContent = 'Delete failed: ' + (e && e.message ? e.message : 'please try again.');
   }
 }
 async function saveProduct(){
@@ -1982,18 +2029,17 @@ async function saveProduct(){
   const id = document.getElementById('pp-id').value.trim();
   const name = document.getElementById('pp-name').value.trim();
   const priceRupees = Number(document.getElementById('pp-price').value);
+  const unlocksExamPractice = Array.from(document.querySelectorAll('.pp-exam-check:checked')).map(function(el){ return el.value; });
   statusEl.textContent = '';
   if(!id || !name || !priceRupees){ statusEl.style.color='#e5484d'; statusEl.textContent='Fill in Product ID, Name, and Price.'; return; }
   statusEl.style.color = 'var(--t2)';
   statusEl.textContent = 'Saving…';
   try{
     const ref = window.FB.doc(window.FB.db, 'products', id);
-    await window.FB.setDoc(ref, { name: name, amount: Math.round(priceRupees * 100) }); // amount stored in paise
+    await window.FB.setDoc(ref, { name: name, amount: Math.round(priceRupees * 100), unlocksExamPractice: unlocksExamPractice }); // amount stored in paise
     statusEl.style.color = '#22c55e';
-    statusEl.textContent = 'Saved "'+name+'" at ₹'+priceRupees+'.';
-    document.getElementById('pp-id').value = '';
-    document.getElementById('pp-name').value = '';
-    document.getElementById('pp-price').value = '';
+    statusEl.textContent = 'Saved "'+name+'" at ₹'+priceRupees+(unlocksExamPractice.length?' — also unlocks all practice for '+unlocksExamPractice.length+' exam(s).':'.');
+    resetProductForm();
     loadProducts();
   }catch(e){
     statusEl.style.color = '#e5484d';
@@ -2002,39 +2048,10 @@ async function saveProduct(){
 }
 
 /* ---------- Content type toggle ---------- */
-function onPcTypeChange(){
-  const type = document.getElementById('pc-type').value;
-  document.getElementById('pc-mock-fields').style.display = type === 'mock' ? '' : 'none';
-  document.getElementById('pc-practice-fields').style.display = type === 'practice' ? '' : 'none';
-}
-
-/* ---------- Mock section builder ---------- */
-function addPaidMockSection(){
-  const id = 'pms-' + (_pmSectionCount++);
-  const wrap = document.createElement('div');
-  wrap.id = id;
-  wrap.style.cssText = 'border:1px solid var(--b);border-radius:var(--rs);padding:14px;margin-bottom:12px;background:var(--bg3)';
-  wrap.innerHTML = `
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-      <span style="font-size:.72rem;color:var(--t2);font-weight:700;text-transform:uppercase;letter-spacing:.05em">Section</span>
-      <button class="btn" style="padding:3px 9px;font-size:.68rem" onclick="document.getElementById('${id}').remove()">Remove</button>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
-      <input class="pm-f-name" placeholder="Section name (e.g. Essay Writing)" style="padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg2);color:var(--t);font-size:.8rem"/>
-      <input class="pm-f-marks" type="number" placeholder="Marks" style="padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg2);color:var(--t);font-size:.8rem"/>
-    </div>
-    <input class="pm-f-wordlimit" placeholder="Word limit (e.g. 250-300 words)" style="width:100%;margin-bottom:10px;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg2);color:var(--t);font-size:.8rem"/>
-    <textarea class="pm-f-question" placeholder="Question text" rows="3" style="width:100%;margin-bottom:10px;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg2);color:var(--t);font-size:.8rem;font-family:inherit;resize:vertical"></textarea>
-    <textarea class="pm-f-model" placeholder="Model answer" rows="4" style="width:100%;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg2);color:var(--t);font-size:.8rem;font-family:inherit;resize:vertical"></textarea>
-  `;
-  document.getElementById('pm-sections').appendChild(wrap);
-}
-
-/* ---------- Publish (handles both mocks and single practice questions) ---------- */
+/* ---------- Publish (one shape covers both standalone practice and mock sections) ---------- */
 function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 async function publishPaidContent(){
   const statusEl = document.getElementById('pm-publish-status');
-  const type = document.getElementById('pc-type').value;
   const contentId = document.getElementById('pc-id').value.trim();
   statusEl.style.color = 'var(--t2)';
   statusEl.textContent = '';
@@ -2043,30 +2060,13 @@ async function publishPaidContent(){
   if(!contentId){ statusEl.style.color='#e5484d'; statusEl.textContent='Please enter a Content ID.'; return; }
   if(!allowedProducts.length){ statusEl.style.color='#e5484d'; statusEl.textContent='Check at least one product that should unlock this content.'; return; }
 
-  let payload = { type: type, allowedProducts: allowedProducts, updatedAt: Date.now() };
+  const marks = Number(document.getElementById('pc-p-marks').value) || 0;
+  const wordLimit = document.getElementById('pc-p-wordlimit').value.trim();
+  const question = document.getElementById('pc-p-question').value.trim();
+  const modelAnswer = document.getElementById('pc-p-model').value.trim();
+  if(!question || !marks){ statusEl.style.color='#e5484d'; statusEl.textContent='Question text and marks are required.'; return; }
 
-  if(type === 'mock'){
-    const sectionEls = document.querySelectorAll('#pm-sections > div');
-    if(!sectionEls.length){ statusEl.style.color='#e5484d'; statusEl.textContent='Add at least one section.'; return; }
-    const sections = [];
-    for(const el of sectionEls){
-      const name = el.querySelector('.pm-f-name').value.trim();
-      const marks = Number(el.querySelector('.pm-f-marks').value) || 0;
-      const wordLimit = el.querySelector('.pm-f-wordlimit').value.trim();
-      const question = el.querySelector('.pm-f-question').value.trim();
-      const modelAnswer = el.querySelector('.pm-f-model').value.trim();
-      if(!name || !question || !marks){ statusEl.style.color='#e5484d'; statusEl.textContent='Every section needs at least a name, marks, and question text.'; return; }
-      sections.push({ name, marks, wordLimit, question, modelAnswer });
-    }
-    payload.sections = sections;
-  }else{
-    const marks = Number(document.getElementById('pc-p-marks').value) || 0;
-    const wordLimit = document.getElementById('pc-p-wordlimit').value.trim();
-    const question = document.getElementById('pc-p-question').value.trim();
-    const modelAnswer = document.getElementById('pc-p-model').value.trim();
-    if(!question || !marks){ statusEl.style.color='#e5484d'; statusEl.textContent='Question text and marks are required.'; return; }
-    payload.marks = marks; payload.wordLimit = wordLimit; payload.question = question; payload.modelAnswer = modelAnswer;
-  }
+  const payload = { allowedProducts, marks, wordLimit, question, modelAnswer, updatedAt: Date.now() };
 
   statusEl.style.color = 'var(--t2)';
   statusEl.textContent = 'Publishing…';
