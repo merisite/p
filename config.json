@@ -1878,7 +1878,8 @@
       "mockNo": 5,
       "title": "SBI PO Mock 5",
       "active": true,
-      "status": "upcoming"
+      "status": "active",
+      "productIds": []
     },
     {
       "id": "ibps_po_mock_1",
