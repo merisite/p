@@ -1861,10 +1861,8 @@
       "mockNo": 5,
       "title": "IBPS PO Mock 5",
       "active": true,
-      "status": "active",
-      "productIds": [
-        "Demo"
-      ]
+      "status": "upcoming",
+      "productIds": []
     }
   ],
   "liveTrackerEntries": [],
