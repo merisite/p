@@ -1796,6 +1796,19 @@
       "active": true,
       "mockNo": 5,
       "productIds": []
+    },
+    {
+      "id": "q_1789021851317",
+      "examId": "sbi_po",
+      "type": "precis",
+      "text": "Bringing everyone into the formal banking fold matters greatly for a country's economic progress, since it lets people from every walk of life tap into useful financial services. For a long time, low-income households, rural residents, small traders, and workers in the informal sector stayed outside the reach of formal banks. Being far from a branch, not having proper documents, having little awareness of finance, and earning irregular income all kept such people from opening or maintaining bank accounts.\nThe spread of banking networks has since improved matters. Basic savings accounts, easier procedures, and government schemes have drawn more people into the formal financial fold. Direct benefit transfers have also let citizens receive subsidies and welfare payments straight into their accounts, cutting delays, boosting transparency, and shrinking the scope for leakages.\nTechnology has pushed financial inclusion further still. Mobile banking, UPI, banking correspondents, and digital payment systems let customers use services without frequent branch visits. Small businesses can take digital payments while individuals move money quickly and safely — a real boon in places where regular banking infrastructure is thin.\nYet access on its own isn't the whole story. Customers also need to understand how to use accounts, digital payments, loans, insurance, and other products sensibly, which is where financial literacy comes in. Those unfamiliar with interest rates, repayment terms, fraud risks, or investment products can end up making poor financial choices.\nCybersecurity poses another serious worry. New users can fall prey to phishing, fake calls, and fraudulent payment requests, so banks and authorities need to offer simple safety guidance along with fast complaint channels. Rural connectivity and digital literacy also call for improvement.\nFinancial inclusion has the power to build stronger communities by encouraging savings, backing entrepreneurship, and opening up access to formal credit. It can cut reliance on informal lenders and strengthen financial stability. For this reason, banks, governments, technology providers, and communities must all pull together to keep financial services affordable, safe, simple, and within everyone's reach — with banks and governments continuing to widen access while keeping services secure and inclusive everywhere.",
+      "modelAnswer": "Precis Title: Financial Inclusion and Accessible Banking\n\nFinancial inclusion connects underserved people with banking through accounts, direct benefit transfers, digital payments, and banking correspondents. These services improve access, reduce dependence on informal lenders, and support savings and entrepreneurship. However, access alone is insufficient because customers also need financial literacy to understand loans, insurance, interest, and investments. Cybersecurity is another concern, especially for users who may face phishing and fraud. Banks and authorities should provide safety guidance and complaint mechanisms. Improving rural connectivity is equally important. Overall, financial inclusion requires cooperation among banks, governments, technology providers, and communities to make financial services affordable, safe, simple, and accessible to people.",
+      "wordLimit": "80-100 words",
+      "marks": 10,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": 5,
+      "productIds": []
     }
   ],
   "typingParas": [
