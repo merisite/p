@@ -1801,7 +1801,7 @@ function renderQS(type){
     if(locked){
       const unlockIds=getUnlockingProductIds(q);
       const prod=cheapestUnlockingProduct(unlockIds);
-      ctaHTML=`<button onclick="event.stopPropagation();showUnlockOptions(${JSON.stringify(unlockIds)})" style="font-size:.7rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:5px 12px;border-radius:999px;white-space:nowrap;cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:4px"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Unlock — ${priceLabel(prod)}</button>`;
+      ctaHTML=`<button onclick="event.stopPropagation();showUnlockOptions(${jsArrayAttr(unlockIds)})" style="font-size:.7rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:5px 12px;border-radius:999px;white-space:nowrap;cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:4px"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Unlock — ${priceLabel(prod)}</button>`;
       viewResultBtn="";
     }else{
       const cta=lastAttempt?"↻ Reattempt":"→ Click to attempt";
@@ -2241,7 +2241,7 @@ function showMockList(examId,opts){
       let ctaHTML,viewResultBtn;
       if(locked){
         const prod=cheapestUnlockingProduct(m.productIds);
-        ctaHTML=`<button onclick="event.stopPropagation();showUnlockOptions(${JSON.stringify(m.productIds)})" style="font-size:.66rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:4px 10px;border-radius:999px;white-space:nowrap;cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:4px"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Unlock — ${priceLabel(prod)}</button>`;
+        ctaHTML=`<button onclick="event.stopPropagation();showUnlockOptions(${jsArrayAttr(m.productIds)})" style="font-size:.66rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:4px 10px;border-radius:999px;white-space:nowrap;cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:4px"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Unlock — ${priceLabel(prod)}</button>`;
         viewResultBtn="";
       }else{
         const cta=lastAttempt?"↻ Reattempt":"→ Start Mock";
@@ -3629,6 +3629,12 @@ function manualEvalMock(idx){
 function escapeHTML(s){
   return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 }
+// JSON.stringify produces double-quoted strings, which breaks when embedded inside a
+// double-quoted HTML onclick="..." attribute — this builds a single-quoted array literal
+// instead, safe to embed directly (e.g. ['id1','id2']).
+function jsArrayAttr(arr){
+  return "["+(arr||[]).map(function(v){ return "'"+String(v).replace(/\\/g,"\\\\").replace(/'/g,"\\'")+"'"; }).join(",")+"]";
+}
 function renderCorrectedText(text){
   const esc=escapeHTML(text);
   return esc.replace(/\{\{(.+?)\}\}/g,'<mark class="wl-mark">$1</mark>');
@@ -4380,6 +4386,9 @@ async function unlockProduct(productId){
     alert('Payment system is still loading — please try again in a moment.');
     return;
   }
+  // Creating the order is a network round-trip to our own server — show a clear "preparing"
+  // state the instant Buy is clicked, so that gap never feels like the click did nothing.
+  showProcessingOverlay('Preparing your payment…', "Just a moment while we set things up — the payment window will open shortly.");
   try{
     const orderRes = await window.FB.createRazorpayOrder({ productId: productId });
     const data = orderRes.data;
@@ -4396,7 +4405,7 @@ async function unlockProduct(productId){
         // Payment succeeded on Razorpay's side — but we still need our own server to verify
         // and record it, which takes a moment. Show a clear "processing" state so it never
         // looks stuck or broken during that gap.
-        document.getElementById('payment-processing-cov').classList.add('open');
+        showProcessingOverlay('Processing your payment…', "Your payment went through — we're confirming it and unlocking your content. This usually takes just a few seconds. Please don't close this page.");
         try{
           await window.FB.verifyRazorpayPayment({
             razorpay_order_id: response.razorpay_order_id,
@@ -4409,20 +4418,33 @@ async function unlockProduct(productId){
           // that would otherwise need a manual re-render.
           location.reload();
         }catch(e){
-          document.getElementById('payment-processing-cov').classList.remove('open');
+          hideProcessingOverlay();
           alert('Your payment went through, but we could not confirm it automatically. Please contact us with this payment ID so we can unlock it manually: '+response.razorpay_payment_id);
         }
       },
-      modal: { ondismiss: function(){ /* user closed the popup — no action needed */ } }
+      modal: { ondismiss: function(){ hideProcessingOverlay(); } }
     };
     const rzp = new Razorpay(options);
+    hideProcessingOverlay(); // Razorpay's own window is about to take over visually
     rzp.on('payment.failed', function(response){
       alert('Payment failed: '+(response.error&&response.error.description||'please try again.'));
     });
     rzp.open();
   }catch(e){
+    hideProcessingOverlay();
     alert('Could not start checkout: '+(e&&e.message?e.message:'please try again.'));
   }
+}
+function showProcessingOverlay(title,sub){
+  const cov=document.getElementById('payment-processing-cov');
+  const titleEl=cov.querySelector('.cbox-t');
+  const subEl=cov.querySelector('.cbox-s');
+  if(titleEl)titleEl.textContent=title;
+  if(subEl)subEl.textContent=sub;
+  cov.classList.add('open');
+}
+function hideProcessingOverlay(){
+  document.getElementById('payment-processing-cov').classList.remove('open');
 }
 function updateProgCard(){
   const list = getProgress();
