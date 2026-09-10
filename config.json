@@ -1783,6 +1783,19 @@
       "active": true,
       "mockNo": 5,
       "productIds": []
+    },
+    {
+      "id": "q_1789021708494",
+      "examId": "sbi_po",
+      "type": "report",
+      "text": "You are the manager of a bank branch. Your branch recently conducted a digital banking awareness session specifically for senior citizens. Write a report to the Head Office covering the activities conducted during the session, the number of participants, the key benefits discussed, and the overall response of the attendees.",
+      "modelAnswer": "Date: 12 September 2026\nTo: The Head Office\nFrom: Suraj Pandey, Branch Manager, SBI, Kanpur Branch\nSubject: Report on Digital Banking Awareness Session for Senior Citizens\n\nA digital banking awareness session for senior citizens was organised at our branch on 8 September 2026 to familiarise them with safe, convenient, and accessible digital banking services.\nThe session was attended by 42 senior citizens. Bank officials demonstrated mobile banking, internet banking, UPI payments, ATM operations, and digital fund transfers. Participants were also educated about creating strong PINs and passwords, identifying fraudulent calls and messages, and never sharing OTPs, PINs, or banking credentials with anyone.\nThe key benefits of digital banking, including convenience, faster transactions, reduced dependence on branch visits, and access to banking services from home, were explained. Participants actively participated in the demonstrations and raised several practical queries regarding security and transaction limits.\nThe overall response was encouraging. The session helped improve the participants' confidence in using digital banking services safely and independently. Based on the positive feedback, similar awareness programmes may be conducted regularly.\n\nSuraj Pandey\nBranch Manager",
+      "wordLimit": "150-250 words",
+      "marks": 10,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": 5,
+      "productIds": []
     }
   ],
   "typingParas": [
