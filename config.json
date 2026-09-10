@@ -477,7 +477,8 @@
       "marks": 10,
       "difficulty": "easy",
       "active": true,
-      "mockNo": 5
+      "mockNo": null,
+      "productIds": []
     },
     {
       "id": "q_report_6",
@@ -586,7 +587,8 @@
       "marks": 10,
       "difficulty": "easy",
       "active": true,
-      "mockNo": 5
+      "mockNo": null,
+      "productIds": []
     },
     {
       "id": "q_precis_6",
@@ -902,7 +904,8 @@
       "marks": 20,
       "difficulty": "medium",
       "active": false,
-      "mockNo": 5
+      "mockNo": null,
+      "productIds": []
     },
     {
       "id": "q_ep6",
@@ -1023,7 +1026,8 @@
       "marks": 15,
       "difficulty": "medium",
       "active": false,
-      "mockNo": 5
+      "mockNo": null,
+      "productIds": []
     },
     {
       "id": "q_sp6",
@@ -1144,7 +1148,8 @@
       "marks": 15,
       "difficulty": "easy",
       "active": false,
-      "mockNo": 5
+      "mockNo": null,
+      "productIds": []
     },
     {
       "id": "q_rp6",
@@ -1265,7 +1270,8 @@
       "marks": 15,
       "difficulty": "medium",
       "active": false,
-      "mockNo": 5
+      "mockNo": null,
+      "productIds": []
     },
     {
       "id": "q_pp6",
