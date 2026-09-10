@@ -1757,6 +1757,32 @@
       "active": true,
       "mockNo": 4,
       "productIds": []
+    },
+    {
+      "id": "q_1789020683071",
+      "examId": "sbi_po",
+      "type": "email",
+      "text": "Write an email to your bank manager asking for a replacement debit card because your current one has broken and no longer works.",
+      "modelAnswer": "To: managerabcbranch@gmail.com\nSubject: Request for Issuance of Duplicate Debit Card\n\nDear Sir,\nI am writing to request the issuance of a duplicate debit card linked to my savings account (Account No. 4564367891) maintained at your branch. My existing debit card has been damaged and is no longer functioning properly, causing inconvenience in carrying out ATM and card-based transactions.\nI kindly request you to block the damaged card and issue a replacement at the earliest. I am ready to complete the required formalities and submit valid identity proof for verification. Please also inform me about any applicable charges for the replacement.\nI would appreciate it if the new card could either be delivered to my registered address or made available for collection at the branch, as per the bank's procedure.\nKindly process my request at the earliest and confirm once the replacement has been initiated.\n\nThank you for your assistance.\n\nYours faithfully,\nSalman Khan",
+      "wordLimit": "150-200 words",
+      "marks": 10,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": 5,
+      "productIds": []
+    },
+    {
+      "id": "q_1789021024577",
+      "examId": "sbi_po",
+      "type": "situation",
+      "text": "As a bank officer, a customer pushes you to skip a mandatory bank procedure so an urgent transaction can go through quickly. How would you respond?",
+      "modelAnswer": "I would first listen to the customer and understand the urgency of the transaction. However, I would not bypass any mandatory banking procedure, as compliance with rules is essential for protecting the customer and the bank.\nI would politely explain the reason for the required procedure and assure the customer that I would try to resolve the issue as quickly as possible. I would check whether any alternative solution is permitted under the bank's guidelines. If necessary, I would consult my manager or the concerned department for further guidance or approval.\nI would clearly communicate the available options and expected timeline to the customer while maintaining a calm and professional attitude. I would ensure that no mandatory verification or security check is compromised merely to save time.\nThus, I would balance customer service with compliance and ensure that the transaction is handled efficiently, securely, and according to banking regulations.",
+      "wordLimit": "120-150",
+      "marks": 10,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": 5,
+      "productIds": []
     }
   ],
   "typingParas": [
