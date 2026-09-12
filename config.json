@@ -1961,5 +1961,19 @@
       "ratingCount": 26478,
       "featured": true
     }
+  ],
+  "essays": [
+    {
+      "id": "essay_1789187030418",
+      "title": "climate",
+      "category": "Social Issues",
+      "tags": [
+        "climate"
+      ],
+      "image": "",
+      "body": "fsdfdf",
+      "practiceQuestionId": "q5",
+      "active": true
+    }
   ]
 }
