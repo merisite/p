@@ -278,6 +278,19 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .q-item:hover .q-prev{color:var(--t)}
 .chips{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
 .chip{font-family:var(--mono);font-size:.6rem;padding:2px 6px;border-radius:3px;background:var(--bg3);border:1px solid var(--b);color:var(--t2)}
+.chip-btn{font-family:var(--font);font-size:.76rem;font-weight:600;padding:6px 14px;border-radius:999px;background:var(--bg2);border:1px solid var(--b);color:var(--t2);cursor:pointer}
+.chip-btn.on{background:var(--adim);border-color:var(--aborder);color:var(--accent)}
+.es-layout{display:flex;gap:18px;align-items:flex-start}
+.es-list{flex:1;min-width:260px;max-width:380px;display:flex;flex-direction:column;gap:10px;max-height:70vh;overflow-y:auto}
+.es-detail{flex:2;background:var(--bg2);border:1px solid var(--b);border-radius:var(--rl);padding:20px;min-height:300px}
+.es-back-btn{display:none}
+@media(max-width:720px){
+  .es-layout{flex-direction:column}
+  .es-list{max-width:100%;max-height:none}
+  .es-layout.es-mobile-detail .es-list{display:none}
+  .es-layout:not(.es-mobile-detail) .es-detail{display:none}
+  .es-back-btn{display:inline-block!important}
+}
 .empty-q{text-align:center;padding:28px;color:var(--t2);font-size:.8rem;grid-column:1/-1}
 /* EXAM */
 #exam,#fullmock{max-width:1300px;margin:0 auto;padding:12px 14px}
@@ -932,12 +945,23 @@ header .h-brand:hover{background:var(--brut-tint);}
   <div class="sec-lbl sl-mock">Full Mock Tests</div>
   <div class="card-grid" id="sec-cards" style="margin-bottom:26px"></div>
   <div class="sec-divider"></div>
+  <div class="sec-lbl" style="display:flex;align-items:center;justify-content:space-between">
+    <span>📚 Essay Library</span>
+    <span onclick="showS('essays');renderEssayLibrary()" style="font-size:.74rem;color:var(--accent);font-weight:600;cursor:pointer;text-transform:none;letter-spacing:0">Browse All →</span>
+  </div>
+  <div id="home-essay-cards" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-bottom:26px"></div>
+  <div class="sec-divider"></div>
   <div class="sec-lbl sl-tools" id="h-tlbl">Tools</div>
   <div class="card-grid">
     <div class="hcard" onclick="showS('typing')">
       <div class="hc-icon hc-tool"><svg width="16" height="16" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M8 12h.01M12 12h.01M16 12h.01M7 16h10"/></svg></div>
       <div class="hc-title" id="typ-card-t">Typing Speed Test</div>
       <div class="hc-desc" id="typ-card-d">Check your WPM and accuracy with a countdown timer</div>
+    </div>
+    <div class="hcard" onclick="showS('essays');renderEssayLibrary()">
+      <div class="hc-icon" style="background:var(--adim);border-color:var(--aborder);color:var(--accent)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
+      <div class="hc-title">Essay Library</div>
+      <div class="hc-desc">Browse model essays by topic — read free, practice writing your own</div>
     </div>
     <div class="hcard" onclick="showS('progress')">
       <div class="hc-icon" style="background:var(--gdim);border-color:var(--gborder);color:var(--green)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
@@ -1415,7 +1439,7 @@ function copyShareLink(hash,btn){
   }
 }
 window.addEventListener("DOMContentLoaded",function(){
-  refreshProductsCache();
+  refreshProductsCache().then(refreshLockedContentUI);
   // Restore result page if user refreshed while on it
   const savedHtml=sessionStorage.getItem('dpt_result_html');
   const savedKind=sessionStorage.getItem('dpt_result_kind');
@@ -1677,6 +1701,7 @@ function renderFestiveTheme(theme){
 }
 function renderHome(){
   const d=D(),cfg=d.siteSettings||{};
+  renderFeaturedEssays();
   if(cfg.name)updateSiteName(cfg.name);
   updateLogo(localStorage.getItem("dpt_mode")||"light");
   renderFestiveTheme(cfg.festiveTheme||"none");
@@ -1723,9 +1748,93 @@ function renderHome(){
       <div class="hc-icon"><svg width="16" height="16" viewBox="0 0 24 24">${icons[s.id]||icons.report}</svg></div>
       <div class="hc-title">${s.name}</div>
       <div class="hc-desc">${s.wordLimit} &middot; ${s.marks} marks</div>
+      ${s.id==='essay'?'<div style="margin-top:8px;font-size:.72rem;color:var(--accent);font-weight:600" onclick="event.stopPropagation();showS(\'essays\');renderEssayLibrary()">Need inspiration? Browse our Essay Library →</div>':''}
     </div>`).join("");
 }
 function goSec(t,opts){renderQS(t);showS("qselect",{skipHash:opts&&opts.skipHash,hash:"qselect-"+t});}
+
+/* ============================================================
+   ESSAY LIBRARY
+   ============================================================ */
+function renderFeaturedEssays(){
+  const d=D();
+  const essays=(d.essays||[]).filter(e=>e.active!==false).slice(0,4);
+  const el=document.getElementById('home-essay-cards');
+  if(!el)return;
+  if(!essays.length){el.innerHTML='';return;}
+  el.innerHTML=essays.map(e=>`
+    <div onclick="showS('essays');renderEssayLibrary();selectEssay('${e.id}')" style="cursor:pointer;background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);overflow:hidden">
+      ${e.image?`<img src="${escapeHTML(e.image)}" style="width:100%;height:100px;object-fit:cover;display:block"/>`:`<div style="width:100%;height:100px;background:var(--adim)"></div>`}
+      <div style="padding:10px 12px">
+        <div style="font-size:.6rem;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.04em">${escapeHTML(e.category||'')}</div>
+        <div style="font-size:.82rem;font-weight:700;color:var(--t);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHTML(e.title||'')}</div>
+      </div>
+    </div>`).join('');
+}
+let _esSelectedId=null;
+let _esCategory='all';
+function renderEssayLibrary(){
+  const d=D();
+  const essays=(d.essays||[]).filter(e=>e.active!==false);
+  const cats=Array.from(new Set(essays.map(e=>e.category).filter(Boolean)));
+  document.getElementById('es-cat-pills').innerHTML=
+    `<button class="chip-btn ${_esCategory==='all'?'on':''}" onclick="setEsCategory('all')">All</button>`+
+    cats.map(c=>`<button class="chip-btn ${_esCategory===c?'on':''}" onclick="setEsCategory('${escapeHTML(c).replace(/'/g,"\\'")}')">${escapeHTML(c)}</button>`).join('');
+  document.getElementById('es-layout').classList.remove('es-mobile-detail');
+  filterEssays();
+  renderEsDetailPlaceholder();
+}
+function setEsCategory(c){_esCategory=c;renderEssayLibrary();}
+function filterEssays(){
+  const d=D();
+  const q=(document.getElementById('es-search').value||'').toLowerCase().trim();
+  const essays=(d.essays||[]).filter(e=>e.active!==false)
+    .filter(e=>_esCategory==='all'||e.category===_esCategory)
+    .filter(e=>!q||(e.title||'').toLowerCase().includes(q)||(e.tags||[]).join(' ').toLowerCase().includes(q)||(e.category||'').toLowerCase().includes(q));
+  const listEl=document.getElementById('es-list');
+  if(!essays.length){listEl.innerHTML='<div style="color:var(--t2);font-size:.82rem;padding:16px 4px">No essays found.</div>';return;}
+  listEl.innerHTML=essays.map(e=>`
+    <div onclick="selectEssay('${e.id}')" style="display:flex;gap:10px;padding:10px;border-radius:var(--rs);border:1px solid ${_esSelectedId===e.id?'var(--aborder)':'var(--b)'};background:${_esSelectedId===e.id?'var(--adim)':'var(--bg2)'};cursor:pointer">
+      ${e.image?`<img src="${escapeHTML(e.image)}" style="width:56px;height:56px;object-fit:cover;border-radius:8px;flex-shrink:0"/>`:'<div style="width:56px;height:56px;border-radius:8px;background:var(--bg3);flex-shrink:0"></div>'}
+      <div style="min-width:0">
+        <div style="font-size:.6rem;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.04em">${escapeHTML(e.category||'')}</div>
+        <div style="font-size:.84rem;font-weight:700;color:var(--t);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHTML(e.title||'')}</div>
+      </div>
+    </div>`).join('');
+}
+function renderEsDetailPlaceholder(){
+  document.getElementById('es-detail').innerHTML='<div style="text-align:center;color:var(--t2);padding:60px 20px;font-size:.85rem">Select an essay from the list to start reading.</div>';
+}
+function selectEssay(id){
+  const d=D();
+  const e=(d.essays||[]).find(x=>x.id===id);
+  if(!e)return;
+  _esSelectedId=id;
+  filterEssays();
+  document.getElementById('es-layout').classList.add('es-mobile-detail');
+  const pq=(d.questions||[]).find(x=>x.id===e.practiceQuestionId);
+  let practiceBtnHTML='';
+  if(pq){
+    const locked=!isPracticeQuestionUnlocked(pq);
+    if(locked){
+      const unlockIds=getUnlockingProductIds(pq);
+      practiceBtnHTML=`<button onclick="showUnlockOptions(${jsArrayAttr(unlockIds)})" style="margin-top:18px;font-size:.8rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:10px 20px;border-radius:999px;cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:6px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Unlock Practice for this Essay</button>`;
+    }else{
+      practiceBtnHTML=`<button onclick="launchExam('${pq.id}')" style="margin-top:18px;font-size:.8rem;font-weight:700;color:var(--accent);background:var(--adim);border:1px solid var(--aborder);padding:10px 20px;border-radius:999px;cursor:pointer;font-family:var(--font)">✍️ Practice This Essay</button>`;
+    }
+  }
+  document.getElementById('es-detail').innerHTML=`
+    <button class="btn es-back-btn" onclick="backToEssayList()" style="margin-bottom:14px;font-size:.76rem;padding:6px 12px">← Back to list</button>
+    ${e.image?`<img src="${escapeHTML(e.image)}" style="width:100%;max-height:260px;object-fit:cover;border-radius:var(--r);margin-bottom:16px"/>`:''}
+    <div style="font-size:.66rem;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">${escapeHTML(e.category||'')}</div>
+    <div style="font-size:1.15rem;font-weight:800;color:var(--t);margin-bottom:12px">${escapeHTML(e.title||'')}</div>
+    <div style="font-size:.88rem;line-height:1.85;color:var(--t);white-space:pre-wrap">${escapeHTML(e.body||'')}</div>
+    ${practiceBtnHTML}
+  `;
+}
+function backToEssayList(){
+  document.getElementById('es-layout').classList.remove('es-mobile-detail');
+}
 function showLiveTracker(){
   renderLiveTracker();
   showS("live-tracker",{hash:"live-tracker"});
@@ -1778,7 +1887,9 @@ function renderLiveTracker(){
   });
   list.innerHTML=html;
 }
+let _lastSectionType=null;
 function renderQS(type){
+  _lastSectionType=type;
   const d=D();
   const tm={};d.sectionTypes.forEach(s=>tm[s.id]=s);const sec=tm[type]||{};
   // Practice: show section name, not exam name
@@ -2249,8 +2360,10 @@ function showMockList(examId,opts){
         viewResultBtn=lastAttempt?`<span onclick="event.stopPropagation();viewSavedResult('mock','${lastAttempt.id}')" style="font-size:.68rem;font-weight:700;color:var(--bg);background:var(--accent);padding:4px 11px;border-radius:999px;cursor:pointer;white-space:nowrap">View Result</span>`:"";
       }
       return `<div class="hcard exam-card" style="border-color:var(--aborder);background:var(--adim);position:relative;cursor:default">
-        ${locked?'<div style="position:absolute;top:10px;left:10px;color:var(--accent);z-index:2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>':''}
-        <button onclick="event.stopPropagation();copyShareLink('mock-${examId}-${m.mockNo}',this)" title="Copy direct link to this mock" style="position:absolute;top:10px;right:10px;flex-shrink:0;display:flex;align-items:center;gap:4px;font-size:.6rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer;z-index:2"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>Copy Link</button>
+        <div style="position:absolute;top:10px;right:10px;display:flex;align-items:center;gap:6px;z-index:2">
+          ${locked?'<span style="color:var(--accent);display:flex"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></span>':''}
+          <button onclick="event.stopPropagation();copyShareLink('mock-${examId}-${m.mockNo}',this)" title="Copy direct link to this mock" style="flex-shrink:0;display:flex;align-items:center;gap:4px;font-size:.6rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>Copy Link</button>
+        </div>
         <div class="hc-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
         <div class="hc-title">${m.title}</div>
         <div class="hc-sub" style="font-size:.7rem;color:var(--t2)">${qc} question${qc!==1?'s':''} · ${ex.duration||30} min</div>
@@ -4281,11 +4394,28 @@ window.addEventListener('fb-auth-changed', function(e){
   if(user && !user.isAnonymous){
     mergeLocalAndCloud(user.uid, _priorAnonUid);
     _priorAnonUid = null;
-    refreshPurchasedProducts();
+    // Purchase data loads asynchronously — the currently-visible list may have already
+    // rendered as "locked" using stale/empty data before this resolves. Re-render it once
+    // the real entitlements are in, so a purchase (or just logging in) is reflected without
+    // needing a manual refresh.
+    refreshPurchasedProducts().then(refreshLockedContentUI);
   }else{
     _purchasedProducts = [];
+    refreshLockedContentUI();
   }
 });
+// Re-renders whichever list (practice or mock) is currently on screen, so lock/unlock state
+// stays correct once purchase/product data finishes loading — see comment above.
+function refreshLockedContentUI(){
+  const qsEl=document.getElementById('qselect');
+  if(qsEl&&qsEl.classList.contains('active')&&_lastSectionType){
+    renderQS(_lastSectionType);
+  }
+  const mlEl=document.getElementById('mocklist');
+  if(mlEl&&mlEl.classList.contains('active')&&_lastMockListExamId){
+    showMockList(_lastMockListExamId,{skipHash:true});
+  }
+}
 
 /* ============================================================
    PAID MOCKS — purchase flow (Razorpay + Cloud Functions)
@@ -4366,10 +4496,17 @@ function showUnlockOptions(productIds){
     ? 'A few packages include this content — pick the one that works for you.'
     : "You'll get instant access after payment.";
   document.getElementById('unlock-options').innerHTML = options.map(function(p){
-    return `<button onclick="closeUnlockOptions();unlockProduct('${p.id}')" style="display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;text-align:left;padding:12px 14px;border-radius:var(--rs);border:1px solid var(--aborder);background:var(--adim);cursor:pointer;font-family:var(--font)">
-      <span style="font-size:.85rem;font-weight:700;color:var(--t)">${p.name||p.id}</span>
-      <span style="font-size:.85rem;font-weight:800;color:var(--accent);flex-shrink:0">${priceLabel(p)}</span>
-    </button>`;
+    const features=(p.features||[]).map(function(f){
+      return `<div style="display:flex;align-items:center;gap:7px;font-size:.76rem;color:var(--t2)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><polyline points="20 6 9 17 4 12"/></svg>${escapeHTML(f)}</div>`;
+    }).join('');
+    return `<div style="border:1px solid var(--b);border-radius:var(--rl);padding:14px;background:var(--bg2)">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:${features?'10px':'12px'}">
+        <span style="font-size:.9rem;font-weight:800;color:var(--t)">${escapeHTML(p.name||p.id)}</span>
+        <span style="font-size:1rem;font-weight:800;color:var(--accent);flex-shrink:0">${priceLabel(p)}</span>
+      </div>
+      ${features?`<div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px">${features}</div>`:''}
+      <button onclick="closeUnlockOptions();unlockProduct('${p.id}')" style="width:100%;padding:9px;border-radius:999px;border:none;background:var(--accent);color:var(--bg);font-weight:700;font-size:.8rem;font-family:var(--font);cursor:pointer">Buy Now</button>
+    </div>`;
   }).join('');
   document.getElementById('unlock-cov').classList.add('open');
 }
@@ -4755,6 +4892,19 @@ const initPromise=init();
 </div>
 
 
+<div id="essays" class="screen">
+  <div class="ph">
+    <button class="btn" onclick="showS('home')" style="margin-bottom:10px;font-size:.78rem;padding:6px 14px">← Back</button>
+    <div class="ph-ti">Essay Library</div>
+    <div class="ph-su">Browse model essays by topic — free to read, practice writing your own anytime.</div>
+  </div>
+  <input id="es-search" placeholder="Search essays by topic, title, or keyword…" oninput="filterEssays()" style="width:100%;margin:14px 0;padding:11px 14px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg2);color:var(--t);font-size:.86rem;font-family:var(--font)"/>
+  <div id="es-cat-pills" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px"></div>
+  <div id="es-layout" class="es-layout">
+    <div id="es-list" class="es-list"></div>
+    <div id="es-detail" class="es-detail"></div>
+  </div>
+</div>
 <div id="progress" class="screen">
   <div class="page-wrap">
     <button class="back-btn" onclick="showS('home')"><svg width="13" height="13" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Home</button>

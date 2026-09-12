@@ -177,7 +177,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
     getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged
   } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
   import {
-    getFirestore, doc, setDoc, getDocs, collection, deleteDoc
+    getFirestore, doc, setDoc, getDoc, getDocs, collection, deleteDoc
   } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
   const firebaseConfig = {
@@ -194,7 +194,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
   const auth = getAuth(app);
   const db = getFirestore(app);
 
-  window.FB = { auth, db, GoogleAuthProvider, signInWithPopup, signOut, doc, setDoc, getDocs, collection, deleteDoc };
+  window.FB = { auth, db, GoogleAuthProvider, signInWithPopup, signOut, doc, setDoc, getDoc, getDocs, collection, deleteDoc };
 
   onAuthStateChanged(auth, function(user){
     window.dispatchEvent(new CustomEvent("admin-auth-changed", { detail: { user: user } }));
@@ -258,6 +258,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
       <div class="ni" data-p="exams" onclick="nav('exams')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></span>Exams</div>
       <div class="ni" data-p="mocks" onclick="nav('mocks')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></span>Mocks</div>
       <div class="ni" data-p="paidmocks" onclick="nav('paidmocks')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></span>Paid Mocks</div>
+      <div class="ni" data-p="essays" onclick="nav('essays')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></span>Essays</div>
       <div class="ni" data-p="livetracker" onclick="nav('livetracker')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></span>Live Tracker</div>
       <div class="ni" data-p="secs" onclick="nav('secs')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="21"/></svg></span>Sections</div>
       <div class="ni" data-p="typing" onclick="nav('typing')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M8 12h.01M12 12h.01M16 12h.01M7 16h10"/></svg></span>Typing Paras</div>
@@ -354,6 +355,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
               <button class="btn bp" style="padding:8px 14px;font-size:.78rem" onclick="saveProduct()">Save Product</button>
             </div>
 
+            <label style="font-size:.7rem;color:var(--t2);display:block;margin:14px 0 5px">What's included (shown to buyers) — one line per feature, e.g. "10 Full Mocks"</label>
+            <textarea id="pp-features" placeholder="10 Full Mocks&#10;All Practice Questions&#10;Detailed AI Feedback" rows="3" style="width:100%;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem;font-family:inherit;resize:vertical"></textarea>
+
             <label style="font-size:.72rem;color:var(--t2);display:block;margin:14px 0 6px">Buying this also unlocks ALL practice questions for these exams (not just the mocks it's explicitly tagged on):</label>
             <div id="pp-exam-checklist" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px">Loading…</div>
             <div style="font-size:.66rem;color:var(--t2);margin-bottom:10px">Leave all unchecked if this product should only unlock the specific mocks/questions you've individually tagged it on.</div>
@@ -362,29 +366,64 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
             <div id="pp-status" style="font-size:.75rem;margin-top:8px"></div>
           </div>
 
-          <!-- PAID CONTENT -->
-          <div style="background:var(--bg2);border:1px solid var(--b);border-radius:var(--rl);padding:18px;margin-bottom:18px">
-            <div style="font-size:.85rem;font-weight:700;margin-bottom:12px">Publish Protected Question Content</div>
-            <div style="font-size:.72rem;color:var(--t2);margin-bottom:14px;line-height:1.6">Use this for BOTH standalone paid practice questions AND paid mock sections — a mock is just a group of questions sharing the same Mock No, same as your free mocks. The "Paid question" toggle + product checklist on the Questions editor already handles which product(s) unlock the public listing; publish the matching real content here using the exact same Content ID as that question.</div>
-            <div>
-              <label style="font-size:.72rem;color:var(--t2);display:block;margin-bottom:5px">Content ID (must match the question's own ID from the Questions editor)</label>
-              <input id="pc-id" placeholder="e.g. q_1699999999999" style="width:100%;margin-bottom:14px;padding:8px 11px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.82rem"/>
-            </div>
-
-            <label style="font-size:.72rem;color:var(--t2);display:block;margin-bottom:6px">Unlocked by which product(s)? — check every product that should include this content (a question can belong to more than one, e.g. a solo pack AND a combo pack)</label>
-            <div id="pc-products-checklist" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px">Loading…</div>
-
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
-              <input id="pc-p-marks" type="number" placeholder="Marks" style="padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/>
-              <input id="pc-p-wordlimit" placeholder="Word limit (e.g. 150-200 words)" style="padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/>
-            </div>
-            <textarea id="pc-p-question" placeholder="Question text" rows="3" style="width:100%;margin-bottom:10px;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem;font-family:inherit;resize:vertical"></textarea>
-            <textarea id="pc-p-model" placeholder="Model answer" rows="4" style="width:100%;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem;font-family:inherit;resize:vertical"></textarea>
+          <div style="font-size:.78rem;color:var(--t2);background:var(--bg2);border:1px solid var(--b);border-radius:var(--rs);padding:12px 14px">
+            💡 Paid questions are published automatically from the <strong>Questions editor</strong> now — turn on "Paid question" there, fill in the real text, and Save handles both the public listing and the protected content together. Nothing else to do here except manage products above.
           </div>
-
-          <button class="btn bp" onclick="publishPaidContent()">Publish to Firestore</button>
-          <div id="pm-publish-status" style="font-size:.78rem;margin-top:10px"></div>
         </div>
+      </div>
+
+      <!-- ESSAYS -->
+      <div id="pg-essays" class="pg">
+        <div class="ph"><div class="ph-ey">Content</div><div class="ph-ti">Essay Library</div><div class="ph-su">Model essays organized by topic — always free to read. Link each one to a practice question from your Questions editor to power the "Practice this essay" button.</div></div>
+
+        <div style="background:var(--bg2);border:1px solid var(--b);border-radius:var(--rl);padding:18px;margin-bottom:18px">
+          <div id="es-form-title" style="font-size:.85rem;font-weight:700;margin-bottom:12px">Add Essay</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+            <div>
+              <label style="font-size:.72rem;color:var(--t2);display:block;margin-bottom:5px">Title</label>
+              <input id="es-title" placeholder="e.g. Climate Change and India's Response" style="width:100%;padding:8px 11px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.82rem"/>
+            </div>
+            <div>
+              <label style="font-size:.72rem;color:var(--t2);display:block;margin-bottom:5px">Category</label>
+              <input id="es-category" list="es-category-list" placeholder="e.g. Environment" style="width:100%;padding:8px 11px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.82rem"/>
+              <datalist id="es-category-list">
+                <option value="Social Issues"></option>
+                <option value="Environment"></option>
+                <option value="Economy &amp; Finance"></option>
+                <option value="Technology"></option>
+                <option value="Government &amp; Policy"></option>
+                <option value="International Relations"></option>
+                <option value="Education"></option>
+                <option value="Health"></option>
+              </datalist>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+            <div>
+              <label style="font-size:.72rem;color:var(--t2);display:block;margin-bottom:5px">Tags (comma separated, for search)</label>
+              <input id="es-tags" placeholder="e.g. climate change, COP28, sustainability" style="width:100%;padding:8px 11px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.82rem"/>
+            </div>
+            <div>
+              <label style="font-size:.72rem;color:var(--t2);display:block;margin-bottom:5px">Image URL</label>
+              <input id="es-image" placeholder="https://... or a path in your repo" style="width:100%;padding:8px 11px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.82rem"/>
+            </div>
+          </div>
+          <label style="font-size:.72rem;color:var(--t2);display:block;margin-bottom:5px">Essay Text (always free to read)</label>
+          <textarea id="es-body" placeholder="The full essay text..." rows="8" style="width:100%;margin-bottom:12px;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.82rem;font-family:inherit;resize:vertical"></textarea>
+
+          <label style="font-size:.72rem;color:var(--t2);display:block;margin-bottom:5px">Linked Practice Question (from the Questions editor — must be an Essay Writing type question)</label>
+          <select id="es-practice-q" style="width:100%;margin-bottom:12px;padding:8px 11px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.82rem"></select>
+
+          <label class="tgl" style="margin-bottom:14px"><label class="tgl-sw"><input type="checkbox" id="es-active" checked/><span class="tgl-tr"></span></label>Visible to students</label>
+
+          <div>
+            <button class="btn bp" onclick="saveEssay()">Save Essay</button>
+            <button class="btn" id="es-cancel-edit" onclick="resetEssayForm()" style="display:none">Cancel Edit</button>
+          </div>
+          <input type="hidden" id="es-id"/>
+        </div>
+
+        <div id="essay-list"></div>
       </div>
 
       <!-- LIVE TRACKER -->
@@ -743,7 +782,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
         <div id="qm-products-wrap" style="display:none;margin-top:10px">
           <label style="font-size:.72rem;color:var(--t2);display:block;margin-bottom:6px">Unlocked by which product(s)?</label>
           <div id="qm-products-checklist" style="display:flex;flex-wrap:wrap;gap:8px">Loading…</div>
-          <div style="font-size:.66rem;color:var(--t2);margin-top:6px">The actual question text + model answer for a paid question must still be published separately in the Paid Content tab, using this same question's ID.</div>
+          <div style="font-size:.66rem;color:var(--t2);margin-top:6px">When this is on, the Question text and Model Answer fields above are the protected content — they'll be saved to Firestore automatically when you click Save, never published in the public listing.</div>
         </div>
       </div>
       <input type="hidden" id="qm-id"/>
@@ -882,7 +921,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
         <div id="mm-products-wrap" style="display:none;margin-top:10px">
           <label style="font-size:.72rem;color:var(--t2);display:block;margin-bottom:6px">Unlocked by which product(s)?</label>
           <div id="mm-products-checklist" style="display:flex;flex-wrap:wrap;gap:8px">Loading…</div>
-          <div style="font-size:.66rem;color:var(--t2);margin-top:6px">The actual sections/questions for a paid mock must still be published separately in the Paid Content tab, using this same mock's ID.</div>
+          <div style="font-size:.66rem;color:var(--t2);margin-top:6px">This controls the lock icon shown on the mock's card in the list. To actually protect each section's content, also mark every question that belongs to this mock as paid (same product) in the Questions editor — a mock is just a group of questions sharing this Mock No.</div>
         </div>
       </div>
 
@@ -1057,7 +1096,7 @@ function toggleTheme(){
 
 // ── NAV ──
 function nav(p){document.querySelectorAll('.pg').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.ni').forEach(x=>x.classList.remove('on'));document.getElementById('pg-'+p).classList.add('on');document.querySelector(`[data-p="${p}"]`).classList.add('on');rp(p);}
-function rp(p){if(p==='dash')rDash();if(p==='qs')rQP();if(p==='exams')rExams();if(p==='mocks')renderMocks();if(p==='secs')rSecs();if(p==='typing')rTypingParas();if(p==='timing')rTiming();if(p==='appear')rAppear();if(p==='content')rContent();if(p==='cfg')rCfg();if(p==='livetracker')rLiveTracker();if(p==='offers')rOffers();if(p==='platforms')rPlatforms();}
+function rp(p){if(p==='dash')rDash();if(p==='qs')rQP();if(p==='exams')rExams();if(p==='mocks')renderMocks();if(p==='secs')rSecs();if(p==='typing')rTypingParas();if(p==='timing')rTiming();if(p==='appear')rAppear();if(p==='content')rContent();if(p==='cfg')rCfg();if(p==='livetracker')rLiveTracker();if(p==='offers')rOffers();if(p==='platforms')rPlatforms();if(p==='essays')renderEssayList();}
 
 // ── LIVE TRACKER ──
 function rLiveTracker(){
@@ -1387,8 +1426,44 @@ function rDash(){const d=D(),tot=d.questions.length,act=d.questions.filter(q=>q.
 function rQP(){const d=D();document.getElementById('qs-ft').innerHTML='<option value="">All Types</option>'+d.sectionTypes.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');document.getElementById('qs-fe').innerHTML='<option value="">All Exams</option>'+d.exams.map(e=>`<option value="${e.id}">${e.name}</option>`).join('');renderQT();}
 function renderQT(){const d=D(),s=(document.getElementById('qs-s')||{}).value||'',ft=(document.getElementById('qs-ft')||{}).value||'',fe=(document.getElementById('qs-fe')||{}).value||'';const tm={};d.sectionTypes.forEach(s=>tm[s.id]=s.name);const em={};d.exams.forEach(e=>em[e.id]=e.name);const qs=d.questions.filter(q=>(ft?q.type===ft:true)&&(fe?q.examId===fe:true)&&(s?q.text.toLowerCase().includes(s.toLowerCase()):true));
   document.getElementById('q-tb').innerHTML=qs.length===0?'<tr><td colspan="8" style="text-align:center;padding:24px;color:var(--t2)">No questions found.</td></tr>':qs.map(q=>`<tr><td class="td-p">${q.text.substring(0,70)}…</td><td style="font-size:.72rem;color:var(--t2)">${em[q.examId]||'<span style=\'color:var(--red)\'>Unassigned</span>'}</td><td style="font-size:.72rem;color:var(--t2)">${tm[q.type]||q.type}</td><td style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--t2)">${q.mockNo||'—'}</td><td style="font-family:'JetBrains Mono',monospace;font-size:.72rem">${q.marks}</td><td style="font-size:.72rem;color:var(--t2)">${q.wordLimit}</td><td><span class="bge ${q.active?'bg-g':'bg-r'}">${q.active?'Active':'Hidden'}</span></td><td><div class="tda"><button class="btn bo sm" onclick="openQM('${q.id}')">Edit</button><button class="btn bd sm" onclick="delQ('${q.id}')">Del</button></div></td></tr>`).join('');}
-function openQM(id){const d=D();document.getElementById('qm-type').innerHTML='<option value="">Select…</option>'+d.sectionTypes.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');document.getElementById('qm-exam').innerHTML=d.exams.map(e=>`<option value="${e.id}">${e.name}</option>`).join('')||'<option value="">No exams yet</option>';let existingProductIds=[];if(id){const q=d.questions.find(x=>x.id===id);if(!q)return;document.getElementById('qm-t').textContent='Edit Question';document.getElementById('qm-type').value=q.type;document.getElementById('qm-exam').value=q.examId||d.exams[0]?.id||'';document.getElementById('qm-marks').value=q.marks;document.getElementById('qm-wl').value=q.wordLimit;document.getElementById('qm-mockno').value=q.mockNo||'';document.getElementById('qm-diff').value=q.difficulty||'medium';document.getElementById('qm-text').value=q.text;document.getElementById('qm-ans').value=q.modelAnswer;document.getElementById('qm-active').checked=q.active;document.getElementById('qm-id').value=q.id;existingProductIds=q.productIds||[];}else{document.getElementById('qm-t').textContent='Add Question';['qm-text','qm-ans','qm-wl','qm-id','qm-mockno'].forEach(i=>document.getElementById(i).value='');document.getElementById('qm-marks').value=20;document.getElementById('qm-active').checked=true;document.getElementById('qm-exam').value=d.exams[0]?.id||'';}document.getElementById('qm-paid').checked=!!existingProductIds.length;renderProductChecklist('qm-products-checklist','qm-product-check',existingProductIds);document.getElementById('qm-products-wrap').style.display=existingProductIds.length?'':'none';om('qm');}
-function saveQ(){const d=D(),type=document.getElementById('qm-type').value,text=document.getElementById('qm-text').value.trim(),ans=document.getElementById('qm-ans').value.trim();if(!type||!text||!ans){t('Fill all fields','er');return;}const examIdEl=document.getElementById('qm-exam');const examId=examIdEl?examIdEl.value:'';const mockNoVal=document.getElementById('qm-mockno').value;const isPaid=document.getElementById('qm-paid').checked;const productIds=isPaid?Array.from(document.querySelectorAll('.qm-product-check:checked')).map(el=>el.value):[];if(isPaid&&!productIds.length){t('Check at least one product, or turn off "Paid question"','er');return;}const q={id:document.getElementById('qm-id').value||'q_'+Date.now(),examId:examId||d.exams[0]?.id||'sbi_po',type,text,modelAnswer:ans,wordLimit:document.getElementById('qm-wl').value,marks:parseInt(document.getElementById('qm-marks').value)||15,difficulty:document.getElementById('qm-diff').value,active:document.getElementById('qm-active').checked,mockNo:mockNoVal?parseInt(mockNoVal):null,productIds};const idx=d.questions.findIndex(x=>x.id===q.id);if(idx>=0)d.questions[idx]=q;else d.questions.push(q);SD(d);cm('qm');renderQT();t('Question saved','ok');}
+async function openQM(id){const d=D();document.getElementById('qm-type').innerHTML='<option value="">Select…</option>'+d.sectionTypes.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');document.getElementById('qm-exam').innerHTML=d.exams.map(e=>`<option value="${e.id}">${e.name}</option>`).join('')||'<option value="">No exams yet</option>';let existingProductIds=[];if(id){const q=d.questions.find(x=>x.id===id);if(!q)return;document.getElementById('qm-t').textContent='Edit Question';document.getElementById('qm-type').value=q.type;document.getElementById('qm-exam').value=q.examId||d.exams[0]?.id||'';document.getElementById('qm-marks').value=q.marks;document.getElementById('qm-wl').value=q.wordLimit;document.getElementById('qm-mockno').value=q.mockNo||'';document.getElementById('qm-diff').value=q.difficulty||'medium';document.getElementById('qm-active').checked=q.active;document.getElementById('qm-id').value=q.id;existingProductIds=q.productIds||[];
+  if(existingProductIds.length){
+    // Paid question — its real text lives in Firestore, not here. Fetch it so editing shows
+    // what was actually published, instead of the blank placeholder stored in config.json.
+    document.getElementById('qm-text').value='Loading…';
+    document.getElementById('qm-ans').value='Loading…';
+    try{
+      const snap=await window.FB.getDoc(window.FB.doc(window.FB.db,'paidContent',q.id));
+      const data=snap.exists()?snap.data():null;
+      document.getElementById('qm-text').value=data?data.question||'':'';
+      document.getElementById('qm-ans').value=data?data.modelAnswer||'':'';
+    }catch(e){
+      document.getElementById('qm-text').value='';
+      document.getElementById('qm-ans').value='';
+    }
+  }else{
+    document.getElementById('qm-text').value=q.text;
+    document.getElementById('qm-ans').value=q.modelAnswer;
+  }
+}else{document.getElementById('qm-t').textContent='Add Question';['qm-text','qm-ans','qm-wl','qm-id','qm-mockno'].forEach(i=>document.getElementById(i).value='');document.getElementById('qm-marks').value=20;document.getElementById('qm-active').checked=true;document.getElementById('qm-exam').value=d.exams[0]?.id||'';}document.getElementById('qm-paid').checked=!!existingProductIds.length;renderProductChecklist('qm-products-checklist','qm-product-check',existingProductIds);document.getElementById('qm-products-wrap').style.display=existingProductIds.length?'':'none';om('qm');}
+async function saveQ(){const d=D(),type=document.getElementById('qm-type').value,text=document.getElementById('qm-text').value.trim(),ans=document.getElementById('qm-ans').value.trim();if(!type||!text||!ans){t('Fill all fields','er');return;}const examIdEl=document.getElementById('qm-exam');const examId=examIdEl?examIdEl.value:'';const mockNoVal=document.getElementById('qm-mockno').value;const isPaid=document.getElementById('qm-paid').checked;const productIds=isPaid?Array.from(document.querySelectorAll('.qm-product-check:checked')).map(el=>el.value):[];if(isPaid&&!productIds.length){t('Check at least one product, or turn off "Paid question"','er');return;}
+  const marks=parseInt(document.getElementById('qm-marks').value)||15;
+  const wordLimit=document.getElementById('qm-wl').value;
+  const qId=document.getElementById('qm-id').value||'q_'+Date.now();
+  if(isPaid){
+    // Publish the real, protected content to Firestore in this same save action —
+    // no separate tab, no copying an ID by hand.
+    if(!window.FB||!window.FB.auth.currentUser){t('Sign in as admin (Paid Content tab) before saving a paid question','er');return;}
+    try{
+      await window.FB.setDoc(window.FB.doc(window.FB.db,'paidContent',qId),{allowedProducts:productIds,marks,wordLimit,question:text,modelAnswer:ans,updatedAt:Date.now()});
+    }catch(e){
+      t('Could not publish protected content: '+(e&&e.message?e.message:'please try again'),'er');
+      return;
+    }
+  }
+  // The public listing NEVER holds the real text/answer for a paid question — only enough
+  // to render the card (marks, word limit, which product unlocks it).
+  const q={id:qId,examId:examId||d.exams[0]?.id||'sbi_po',type,text:isPaid?'':text,modelAnswer:isPaid?'':ans,wordLimit,marks,difficulty:document.getElementById('qm-diff').value,active:document.getElementById('qm-active').checked,mockNo:mockNoVal?parseInt(mockNoVal):null,productIds};const idx=d.questions.findIndex(x=>x.id===q.id);if(idx>=0)d.questions[idx]=q;else d.questions.push(q);SD(d);cm('qm');renderQT();t(isPaid?'Question saved — protected content published too':'Question saved','ok');}
 function delQ(id){if(!confirm('Delete?'))return;const d=D();d.questions=d.questions.filter(q=>q.id!==id);SD(d);renderQT();t('Deleted','ok');}
 
 // ── EXAMS ──
@@ -1943,14 +2018,12 @@ async function adminSignOut(){
 let _pp_editingId = null; // null = creating new, otherwise the ID currently being edited
 async function loadProducts(){
   const listEl = document.getElementById('pm-products-list');
-  const checklistEl = document.getElementById('pc-products-checklist');
   try{
     const snap = await window.FB.getDocs(window.FB.collection(window.FB.db, 'products'));
     _pcProducts = [];
     snap.forEach(function(d){ _pcProducts.push({ id: d.id, ...d.data() }); });
     if(!_pcProducts.length){
       listEl.innerHTML = '<em>No products yet — add one below.</em>';
-      checklistEl.innerHTML = '<em style="font-size:.78rem;color:var(--t2)">Add a product first.</em>';
     }else{
       listEl.innerHTML = '<table style="width:100%;border-collapse:collapse;font-size:.78rem">'
         + _pcProducts.map(function(p){
@@ -1964,11 +2037,6 @@ async function loadProducts(){
           }).join('')
         + '</table>';
     }
-    checklistEl.innerHTML = _pcProducts.length ? _pcProducts.map(function(p){
-      return '<label style="display:flex;align-items:center;gap:6px;font-size:.78rem;background:var(--bg3);border:1px solid var(--b);border-radius:999px;padding:5px 12px;cursor:pointer">'
-        + '<input type="checkbox" class="pc-product-check" value="'+esc(p.id)+'" style="margin:0"/> '+esc(p.name||p.id)
-        + '</label>';
-    }).join('') : '<em style="font-size:.78rem;color:var(--t2)">Add a product first.</em>';
     renderExamChecklist();
   }catch(e){
     listEl.innerHTML = '<span style="color:#e5484d">Could not load products: '+esc(e.message||'')+'</span>';
@@ -1995,6 +2063,7 @@ function editProduct(id){
   document.getElementById('pp-id').disabled = true;
   document.getElementById('pp-name').value = p.name || '';
   document.getElementById('pp-price').value = ((p.amount||0)/100);
+  document.getElementById('pp-features').value = (p.features||[]).join('\n');
   document.getElementById('pp-form-title').style.display = '';
   document.getElementById('pp-cancel-edit').style.display = '';
   renderExamChecklist(p.unlocksExamPractice || []);
@@ -2006,6 +2075,7 @@ function resetProductForm(){
   document.getElementById('pp-id').disabled = false;
   document.getElementById('pp-name').value = '';
   document.getElementById('pp-price').value = '';
+  document.getElementById('pp-features').value = '';
   document.getElementById('pp-form-title').style.display = 'none';
   document.getElementById('pp-cancel-edit').style.display = 'none';
   renderExamChecklist([]);
@@ -2029,6 +2099,7 @@ async function saveProduct(){
   const id = document.getElementById('pp-id').value.trim();
   const name = document.getElementById('pp-name').value.trim();
   const priceRupees = Number(document.getElementById('pp-price').value);
+  const features = document.getElementById('pp-features').value.split('\n').map(function(s){ return s.trim(); }).filter(Boolean);
   const unlocksExamPractice = Array.from(document.querySelectorAll('.pp-exam-check:checked')).map(function(el){ return el.value; });
   statusEl.textContent = '';
   if(!id || !name || !priceRupees){ statusEl.style.color='#e5484d'; statusEl.textContent='Fill in Product ID, Name, and Price.'; return; }
@@ -2036,7 +2107,7 @@ async function saveProduct(){
   statusEl.textContent = 'Saving…';
   try{
     const ref = window.FB.doc(window.FB.db, 'products', id);
-    await window.FB.setDoc(ref, { name: name, amount: Math.round(priceRupees * 100), unlocksExamPractice: unlocksExamPractice }); // amount stored in paise
+    await window.FB.setDoc(ref, { name: name, amount: Math.round(priceRupees * 100), features: features, unlocksExamPractice: unlocksExamPractice }); // amount stored in paise
     statusEl.style.color = '#22c55e';
     statusEl.textContent = 'Saved "'+name+'" at ₹'+priceRupees+(unlocksExamPractice.length?' — also unlocks all practice for '+unlocksExamPractice.length+' exam(s).':'.');
     resetProductForm();
@@ -2047,40 +2118,90 @@ async function saveProduct(){
   }
 }
 
-/* ---------- Content type toggle ---------- */
-/* ---------- Publish (one shape covers both standalone practice and mock sections) ---------- */
-function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-async function publishPaidContent(){
-  const statusEl = document.getElementById('pm-publish-status');
-  const contentId = document.getElementById('pc-id').value.trim();
-  statusEl.style.color = 'var(--t2)';
-  statusEl.textContent = '';
+/* ============================================================
+   ESSAY LIBRARY — always free to read; links to an existing
+   Questions-editor entry (type "essay") for the practice button.
+   ============================================================ */
+let _es_editingId = null;
+function renderEssayList(){
+  const d=D();
+  const essays=d.essays||[];
+  // Practice question dropdown — pulled from your existing essay-writing questions.
+  const essayQs=(d.questions||[]).filter(q=>q.type==='essay');
+  const sel=document.getElementById('es-practice-q');
+  sel.innerHTML='<option value="">— None —</option>'+essayQs.map(q=>`<option value="${q.id}">${esc((q.text||'(no text yet)').slice(0,60))}${(q.text||'').length>60?'…':''}</option>`).join('');
 
-  const allowedProducts = Array.from(document.querySelectorAll('.pc-product-check:checked')).map(function(el){ return el.value; });
-  if(!contentId){ statusEl.style.color='#e5484d'; statusEl.textContent='Please enter a Content ID.'; return; }
-  if(!allowedProducts.length){ statusEl.style.color='#e5484d'; statusEl.textContent='Check at least one product that should unlock this content.'; return; }
-
-  const marks = Number(document.getElementById('pc-p-marks').value) || 0;
-  const wordLimit = document.getElementById('pc-p-wordlimit').value.trim();
-  const question = document.getElementById('pc-p-question').value.trim();
-  const modelAnswer = document.getElementById('pc-p-model').value.trim();
-  if(!question || !marks){ statusEl.style.color='#e5484d'; statusEl.textContent='Question text and marks are required.'; return; }
-
-  const payload = { allowedProducts, marks, wordLimit, question, modelAnswer, updatedAt: Date.now() };
-
-  statusEl.style.color = 'var(--t2)';
-  statusEl.textContent = 'Publishing…';
-  try{
-    if(!window.FB.auth.currentUser){ statusEl.style.color='#e5484d'; statusEl.textContent='You are not signed in.'; return; }
-    const ref = window.FB.doc(window.FB.db, 'paidContent', contentId);
-    await window.FB.setDoc(ref, payload);
-    statusEl.style.color = '#22c55e';
-    statusEl.textContent = 'Published! Unlocked by: ' + allowedProducts.join(', ') + '.';
-  }catch(e){
-    statusEl.style.color = '#e5484d';
-    statusEl.textContent = 'Publish failed: ' + (e && e.message ? e.message : 'please try again.') + ' (Check that your signed-in email matches the one in your Firestore security rule.)';
-  }
+  const listEl=document.getElementById('essay-list');
+  if(!essays.length){listEl.innerHTML='<div style="color:var(--t2);font-size:.82rem;padding:16px 0">No essays yet — add one above.</div>';return;}
+  listEl.innerHTML='<table style="width:100%;border-collapse:collapse;font-size:.8rem">'
+    +'<thead><tr style="text-align:left;color:var(--t2);font-size:.68rem;text-transform:uppercase"><th style="padding:6px 0">Title</th><th style="padding:6px 10px">Category</th><th style="padding:6px 0">Status</th><th></th></tr></thead><tbody>'
+    +essays.map(e=>`<tr style="border-top:1px solid var(--b)">
+      <td style="padding:8px 0;color:var(--t)">${esc(e.title||'')}</td>
+      <td style="padding:8px 10px;color:var(--t2)">${esc(e.category||'')}</td>
+      <td style="padding:8px 0;color:${e.active!==false?'#22c55e':'var(--t2)'}">${e.active!==false?'Visible':'Hidden'}</td>
+      <td style="padding:8px 0;text-align:right"><button class="btn" style="padding:3px 9px;font-size:.68rem;margin-right:6px" onclick="editEssay('${e.id}')">Edit</button><button class="btn bd" style="padding:3px 9px;font-size:.68rem" onclick="deleteEssay('${e.id}')">Delete</button></td>
+    </tr>`).join('')
+    +'</tbody></table>';
 }
+function editEssay(id){
+  const d=D();
+  const e=(d.essays||[]).find(x=>x.id===id);
+  if(!e)return;
+  _es_editingId=id;
+  document.getElementById('es-form-title').textContent='Edit Essay';
+  document.getElementById('es-title').value=e.title||'';
+  document.getElementById('es-category').value=e.category||'';
+  document.getElementById('es-tags').value=(e.tags||[]).join(', ');
+  document.getElementById('es-image').value=e.image||'';
+  document.getElementById('es-body').value=e.body||'';
+  document.getElementById('es-practice-q').value=e.practiceQuestionId||'';
+  document.getElementById('es-active').checked=e.active!==false;
+  document.getElementById('es-id').value=e.id;
+  document.getElementById('es-cancel-edit').style.display='';
+  document.getElementById('es-form-title').scrollIntoView({behavior:'smooth',block:'center'});
+}
+function resetEssayForm(){
+  _es_editingId=null;
+  document.getElementById('es-form-title').textContent='Add Essay';
+  ['es-title','es-category','es-tags','es-image','es-body','es-id'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('es-practice-q').value='';
+  document.getElementById('es-active').checked=true;
+  document.getElementById('es-cancel-edit').style.display='none';
+}
+function saveEssay(){
+  const title=document.getElementById('es-title').value.trim();
+  const body=document.getElementById('es-body').value.trim();
+  if(!title||!body){t('Title and essay text are required','er');return;}
+  const d=D();
+  if(!d.essays)d.essays=[];
+  const essay={
+    id:document.getElementById('es-id').value||'essay_'+Date.now(),
+    title,
+    category:document.getElementById('es-category').value.trim(),
+    tags:document.getElementById('es-tags').value.split(',').map(s=>s.trim()).filter(Boolean),
+    image:document.getElementById('es-image').value.trim(),
+    body,
+    practiceQuestionId:document.getElementById('es-practice-q').value||null,
+    active:document.getElementById('es-active').checked
+  };
+  const idx=d.essays.findIndex(x=>x.id===essay.id);
+  if(idx>=0)d.essays[idx]=essay;else d.essays.push(essay);
+  SD(d);
+  resetEssayForm();
+  renderEssayList();
+  t('Essay saved','ok');
+}
+function deleteEssay(id){
+  if(!confirm('Delete this essay? This cannot be undone.'))return;
+  const d=D();
+  d.essays=(d.essays||[]).filter(e=>e.id!==id);
+  SD(d);
+  if(_es_editingId===id)resetEssayForm();
+  renderEssayList();
+  t('Essay deleted','ok');
+}
+
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 </script>
 </body>
 </html>
