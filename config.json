@@ -29,7 +29,7 @@
     "marqueeText": "★ Descriptive Practice ★ AI Evaluation ★ Model Answers ★ Typing Speed Test ★ Exam-Pattern Interface ★",
     "marqueeSpeed": 25,
     "festiveTheme": "ganesh",
-    "maintenanceMode": true,
+    "maintenanceMode": false,
     "maintenanceMessage": "We'll be back soon."
   },
   "sectionTypes": [
@@ -1576,16 +1576,14 @@
       "id": "q_1789461021674",
       "examId": "ibps_po",
       "type": "essay",
-      "text": "",
-      "modelAnswer": "",
+      "text": "Artificial Intelligence in Banking: Implementation, Ethics, and the Road Ahead",
+      "modelAnswer": "Artificial Intelligence (AI) is changing the banking sector by making services faster, smarter, and more convenient. Banks are increasingly using AI to improve customer service, detect fraud, assess credit risk, and automate routine tasks. As digital banking continues to grow, AI is becoming an important part of modern banking.\n\nOne major use of AI is customer support through chatbots and virtual assistants. These systems can answer common questions and provide services at any time. AI can also study transaction patterns to identify unusual activities and prevent fraud. In lending, it can help banks assess the creditworthiness of customers by analysing different types of financial data. AI can therefore reduce processing time and improve the efficiency of banking operations.\n\nHowever, the use of AI also creates ethical concerns. Banking decisions based on AI must be fair and free from discrimination. If an AI system is trained on biased data, it may unfairly reject certain customers for loans or other services. Privacy is another major concern because AI systems require large amounts of customer data. Banks must ensure that this information is collected, stored, and used responsibly. Human supervision is also necessary, especially for important financial decisions.\n\nLooking ahead, banks should adopt AI carefully rather than simply adopting it for the sake of technology. They need strong data protection, regular testing of AI systems, transparent decision-making, and skilled employees who can supervise these systems. Customers should also be informed about how AI affects important decisions.\n\nIn conclusion, AI can make banking more efficient and secure, but technology alone cannot guarantee responsible banking. The road ahead requires a balance between innovation, ethics, human judgement, and customer trust.",
       "wordLimit": "250-300 words",
       "marks": 15,
       "difficulty": "medium",
       "active": true,
       "mockNo": null,
-      "productIds": [
-        "IBPSPO"
-      ]
+      "productIds": []
     }
   ],
   "typingParas": [
@@ -1733,41 +1731,5 @@
       "featured": true
     }
   ],
-  "essays": [
-    {
-      "id": "essay_1789461405407",
-      "title": "Artificial Intelligence in Banking: Implementation, Ethics, and the Road Ahead",
-      "category": "Economy & Finance",
-      "tags": [
-        "AI",
-        "Artificial Intelligence"
-      ],
-      "image": "",
-      "body": "Artificial Intelligence (AI) is changing the banking sector by making services faster, smarter, and more convenient. Banks are increasingly using AI to improve customer service, detect fraud, assess credit risk, and automate routine tasks. As digital banking continues to grow, AI is becoming an important part of modern banking.\n\nOne major use of AI is customer support through chatbots and virtual assistants. These systems can answer common questions and provide services at any time. AI can also study transaction patterns to identify unusual activities and prevent fraud. In lending, it can help banks assess the creditworthiness of customers by analysing different types of financial data. AI can therefore reduce processing time and improve the efficiency of banking operations.\n\nHowever, the use of AI also creates ethical concerns. Banking decisions based on AI must be fair and free from discrimination. If an AI system is trained on biased data, it may unfairly reject certain customers for loans or other services. Privacy is another major concern because AI systems require large amounts of customer data. Banks must ensure that this information is collected, stored, and used responsibly. Human supervision is also necessary, especially for important financial decisions.\n\nLooking ahead, banks should adopt AI carefully rather than simply adopting it for the sake of technology. They need strong data protection, regular testing of AI systems, transparent decision-making, and skilled employees who can supervise these systems. Customers should also be informed about how AI affects important decisions.\n\nIn conclusion, AI can make banking more efficient and secure, but technology alone cannot guarantee responsible banking. The road ahead requires a balance between innovation, ethics, human judgement, and customer trust.",
-      "structure": [
-        {
-          "heading": "Introduction",
-          "content": "Artificial Intelligence (AI) is changing the banking sector by making services faster, smarter, and more convenient. Banks are increasingly using AI to improve customer service, detect fraud, assess credit risk, and automate routine tasks. As digital banking continues to grow, AI is becoming an important part of modern banking."
-        },
-        {
-          "heading": "Body – Implementation and Applications",
-          "content": "One major use of AI is customer support through chatbots and virtual assistants. These systems can answer common questions and provide services at any time. AI can also study transaction patterns to identify unusual activities and prevent fraud. In lending, it can help banks assess the creditworthiness of customers by analysing different types of financial data. AI can therefore reduce processing time and improve the efficiency of banking operations."
-        },
-        {
-          "heading": "Body – Ethical Concerns and Challenges",
-          "content": "However, the use of AI also creates ethical concerns. Banking decisions based on AI must be fair and free from discrimination. If an AI system is trained on biased data, it may unfairly reject certain customers for loans or other services. Privacy is another major concern because AI systems require large amounts of customer data. Banks must ensure that this information is collected, stored, and used responsibly. Human supervision is also necessary, especially for important financial decisions."
-        },
-        {
-          "heading": "Body – Road Ahead / Measures",
-          "content": "Looking ahead, banks should adopt AI carefully rather than simply adopting it for the sake of technology. They need strong data protection, regular testing of AI systems, transparent decision-making, and skilled employees who can supervise these systems. Customers should also be informed about how AI affects important decisions."
-        },
-        {
-          "heading": "Conclusion",
-          "content": "In conclusion, AI can make banking more efficient and secure, but technology alone cannot guarantee responsible banking. The road ahead requires a balance between innovation, ethics, human judgement, and customer trust."
-        }
-      ],
-      "practiceQuestionId": "q_1789461021674",
-      "active": true
-    }
-  ]
+  "essays": []
 }
