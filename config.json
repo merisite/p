@@ -1755,7 +1755,11 @@
         },
         {
           "heading": "Body – Ethical Concerns and Challenges",
-          "content": "However, the use of AI also creates ethical concerns. Banking decisions based on AI must be fair and free from discrimination. If an AI system is trained on biased data, it may unfairly reject certain customers for loans or other services. Privacy is another major concern because AI systems require large amounts of customer data. Banks must ensure that this information is collected, stored, and used responsibly. Human supervision is also necessary, especially for important financial decisions.\n\n&*Body – Road Ahead / Measures@*\nLooking ahead, banks should adopt AI carefully rather than simply adopting it for the sake of technology. They need strong data protection, regular testing of AI systems, transparent decision-making, and skilled employees who can supervise these systems. Customers should also be informed about how AI affects important decisions."
+          "content": "However, the use of AI also creates ethical concerns. Banking decisions based on AI must be fair and free from discrimination. If an AI system is trained on biased data, it may unfairly reject certain customers for loans or other services. Privacy is another major concern because AI systems require large amounts of customer data. Banks must ensure that this information is collected, stored, and used responsibly. Human supervision is also necessary, especially for important financial decisions."
+        },
+        {
+          "heading": "Body – Road Ahead / Measures",
+          "content": "Looking ahead, banks should adopt AI carefully rather than simply adopting it for the sake of technology. They need strong data protection, regular testing of AI systems, transparent decision-making, and skilled employees who can supervise these systems. Customers should also be informed about how AI affects important decisions."
         },
         {
           "heading": "Conclusion",
