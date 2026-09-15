@@ -1672,43 +1672,49 @@
       "id": "q_1789475536617",
       "examId": "ibps_po",
       "type": "essay",
-      "text": "Dilution of PSU Banks’ Stakes by the Government: Implications and Concerns",
-      "modelAnswer": "Public Sector Undertaking (PSU) banks play an important role in India’s financial system by providing loans, supporting government schemes, and serving people in rural and semi-urban areas. The government has periodically reduced its stake in these banks to raise capital, improve efficiency, and increase public participation. However, such dilution also raises important concerns.\n\nReducing government ownership can bring several benefits. It can provide banks with additional capital for expansion, technology, and lending. Greater participation by private investors may improve transparency, professional management, and accountability. A lower government stake can also reduce the financial burden on the government and allow banks to operate with greater independence. Stronger market discipline may encourage banks to improve their performance and compete more effectively.\n\nHowever, excessive dilution may affect the public character of these banks. PSU banks are expected to support priority sectors, farmers, small businesses, and weaker sections, even when such lending may not always be highly profitable. A major reduction in government ownership could create pressure to focus mainly on commercial returns. There are also concerns about job security, financial inclusion, and the possibility of greater concentration of ownership. The government must ensure that strategic and social objectives are not ignored.\n\nThe government should follow a gradual and carefully planned approach. It must retain enough control to protect public interest while allowing banks to benefit from private investment and professional expertise. Strong regulation, transparent governance, and clear lending obligations are essential.\n\nIn conclusion, dilution of government stakes can make PSU banks stronger and more efficient, but it should not come at the cost of their social responsibilities. The right balance between commercial efficiency and public interest is essential for sustainable banking growth.",
+      "text": "",
+      "modelAnswer": "",
       "label": "Dilution of PSU Banks’ Stakes by the Government: Implications and Concerns",
       "wordLimit": "250-300 words",
       "marks": 15,
       "difficulty": "medium",
       "active": true,
       "mockNo": null,
-      "productIds": []
+      "productIds": [
+        "IBPSPO"
+      ]
     },
     {
       "id": "q_1789478055925",
       "examId": "ibps_po",
       "type": "essay",
-      "text": "AI-Driven Financial Frauds: How Banks Can Balance Technological Innovation with Consumer Security.",
-      "modelAnswer": "Artificial Intelligence (AI) is transforming the banking sector by making services faster, smarter, and more convenient. Banks use AI for fraud detection, customer support, credit assessment, and digital payments. However, the same technology can also be misused by criminals to create more advanced financial frauds. Therefore, banks must balance innovation with consumer security.\n\nCriminals can use AI to create fake voices, images, messages, and websites that appear genuine. Such methods can make phishing and identity theft more difficult to detect. AI can also help criminals study personal information and target customers with highly convincing scams. As digital banking grows, these threats can affect both individuals and financial institutions.\n\nBanks face the difficult task of protecting customers without making digital banking slow or complicated. Strong security systems require continuous investment, skilled professionals, and regular monitoring. At the same time, excessive security checks may inconvenience genuine customers. Banks must also protect customer data while using AI-based systems to identify suspicious activities.\n\nBanks should use AI itself to detect unusual transactions, identify suspicious patterns, and stop fraudulent payments quickly. Multi-factor authentication, real-time alerts, strong encryption, and regular security audits can provide additional protection. Banks should also conduct awareness campaigns to teach customers about phishing, fake calls, and unsafe links. Clear grievance redressal systems and quick action after fraud are equally important.\n\nIn conclusion, AI can become both a powerful tool for fraudsters and an effective defence for banks. The solution is not to avoid technological innovation but to use it responsibly. A combination of advanced security, customer awareness, data protection, and human supervision can help banks build a safer and more trustworthy digital banking system.",
+      "text": "",
+      "modelAnswer": "",
       "label": "AI-Driven Financial Frauds: How Banks Can Balance Technological Innovation with Consumer Security.",
       "wordLimit": "250-300 words",
       "marks": 15,
       "difficulty": "medium",
       "active": true,
       "mockNo": null,
-      "productIds": []
+      "productIds": [
+        "IBPSPO"
+      ]
     },
     {
       "id": "q_1789487303913",
       "examId": "ibps_po",
       "type": "essay",
-      "text": "Building Climate-Resilient Cities: Urban Infrastructure vs. Frequent Extreme Weather Events",
-      "modelAnswer": "Cities are engines of economic growth, but they are increasingly facing floods, heatwaves, cyclones, and heavy rainfall. Rapid urbanisation and changing climate patterns have made extreme weather events more frequent and damaging. This has exposed weaknesses in urban infrastructure and created an urgent need for climate-resilient cities.\n\nMany cities have roads, drainage systems, buildings, and power networks that were not designed for today's weather conditions. Heavy rainfall can overwhelm drainage systems and cause urban flooding, while heatwaves increase pressure on electricity and water supplies. Poorly planned construction and the loss of green spaces further increase these risks. Such events can damage property, disrupt transport, affect businesses, and threaten lives.\n\nCities must now focus on infrastructure that can withstand extreme weather. Better drainage systems, flood-resistant roads, rainwater harvesting, and stronger power networks can reduce damage. More trees, parks, wetlands, and green roofs can help control heat and absorb excess rainwater. Buildings should also follow climate-friendly construction standards. Early warning systems and disaster-response plans can help authorities protect people during emergencies.\n\nThe main challenges are limited funding, poor urban planning, rapid population growth, and weak coordination among agencies. Governments should invest in resilient infrastructure and include climate risks in every major urban project. Public participation and cooperation between government, private companies, and local communities are also necessary.\n\nIn conclusion, frequent extreme weather events show that traditional urban planning is no longer enough. Building climate-resilient cities requires long-term investment, better planning, green solutions, and public awareness. Resilient infrastructure will not only reduce disaster losses but also make cities safer, healthier, and more sustainable.",
+      "text": "",
+      "modelAnswer": "",
       "label": "Building Climate-Resilient Cities: Urban Infrastructure vs. Frequent Extreme Weather Events",
       "wordLimit": "250-300 words",
       "marks": 15,
       "difficulty": "medium",
       "active": true,
       "mockNo": null,
-      "productIds": []
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
