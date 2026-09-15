@@ -784,6 +784,7 @@ In conclusion, while digital banking has significantly advanced financial inclus
         <div class="ff"><label>Word Limit</label><input type="text" id="qm-wl" placeholder="e.g. 150-200 words"/><div style="font-size:11px;color:var(--t2);margin-top:3px">Email: 150-200 | Situation/Report: 200-250 | Precis: 80-100 | Essay: 250-300 | Comp: 30-50/ans</div></div>
         <div class="ff"><label>Mock #</label><input type="number" id="qm-mockno" min="1" placeholder="e.g. 1"/></div>
       </div>
+      <div class="fr c1"><div class="ff"><label>Internal Label <span style="font-weight:400;color:var(--t2)">(admin-only — never shown to students; stays visible here even for Paid questions, so you can identify and link them correctly)</span></label><input type="text" id="qm-label" placeholder="e.g. Digital Banking essay — for essay_1734..."/></div></div>
       <div class="fr c1"><div class="ff"><label>Question Text</label><textarea id="qm-text" class="tall" placeholder="Write the full question here…"></textarea></div></div>
       <div class="fr c1"><div class="ff"><label>Model Answer</label><textarea id="qm-ans" class="tall" placeholder="Write a complete model answer…"></textarea></div></div>
       <label class="tgl"><label class="tgl-sw"><input type="checkbox" id="qm-active" checked/><span class="tgl-tr"></span></label>Visible to students</label>
@@ -1435,8 +1436,8 @@ function rDash(){const d=D(),tot=d.questions.length,act=d.questions.filter(q=>q.
 // ── QUESTIONS ──
 function rQP(){const d=D();document.getElementById('qs-ft').innerHTML='<option value="">All Types</option>'+d.sectionTypes.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');document.getElementById('qs-fe').innerHTML='<option value="">All Exams</option>'+d.exams.map(e=>`<option value="${e.id}">${e.name}</option>`).join('');renderQT();}
 function renderQT(){const d=D(),s=(document.getElementById('qs-s')||{}).value||'',ft=(document.getElementById('qs-ft')||{}).value||'',fe=(document.getElementById('qs-fe')||{}).value||'';const tm={};d.sectionTypes.forEach(s=>tm[s.id]=s.name);const em={};d.exams.forEach(e=>em[e.id]=e.name);const qs=d.questions.filter(q=>(ft?q.type===ft:true)&&(fe?q.examId===fe:true)&&(s?q.text.toLowerCase().includes(s.toLowerCase()):true));
-  document.getElementById('q-tb').innerHTML=qs.length===0?'<tr><td colspan="8" style="text-align:center;padding:24px;color:var(--t2)">No questions found.</td></tr>':qs.map(q=>{const isPaid=q.productIds&&q.productIds.length;const preview=isPaid?'🔒 Paid question — click Edit to view/edit':(q.text?(q.text.substring(0,70)+(q.text.length>70?'…':'')):'<span style="color:var(--red)">(No question text yet)</span>');return `<tr><td class="td-p">${preview}</td><td style="font-size:.72rem;color:var(--t2)">${em[q.examId]||'<span style=\'color:var(--red)\'>Unassigned</span>'}</td><td style="font-size:.72rem;color:var(--t2)">${tm[q.type]||q.type}</td><td style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--t2)">${q.mockNo||'—'}</td><td style="font-family:'JetBrains Mono',monospace;font-size:.72rem">${q.marks}</td><td style="font-size:.72rem;color:var(--t2)">${q.wordLimit}</td><td><span class="bge ${q.active?'bg-g':'bg-r'}">${q.active?'Active':'Hidden'}</span></td><td><div class="tda"><button class="btn bo sm" onclick="openQM('${q.id}')">Edit</button><button class="btn bd sm" onclick="delQ('${q.id}')">Del</button></div></td></tr>`;}).join('');}
-async function openQM(id){const d=D();document.getElementById('qm-type').innerHTML='<option value="">Select…</option>'+d.sectionTypes.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');document.getElementById('qm-exam').innerHTML=d.exams.map(e=>`<option value="${e.id}">${e.name}</option>`).join('')||'<option value="">No exams yet</option>';let existingProductIds=[];if(id){const q=d.questions.find(x=>x.id===id);if(!q)return;document.getElementById('qm-t').textContent='Edit Question';document.getElementById('qm-type').value=q.type;document.getElementById('qm-exam').value=q.examId||d.exams[0]?.id||'';document.getElementById('qm-marks').value=q.marks;document.getElementById('qm-wl').value=q.wordLimit;document.getElementById('qm-mockno').value=q.mockNo||'';document.getElementById('qm-diff').value=q.difficulty||'medium';document.getElementById('qm-active').checked=q.active;document.getElementById('qm-id').value=q.id;existingProductIds=q.productIds||[];
+  document.getElementById('q-tb').innerHTML=qs.length===0?'<tr><td colspan="8" style="text-align:center;padding:24px;color:var(--t2)">No questions found.</td></tr>':qs.map(q=>{const isPaid=q.productIds&&q.productIds.length;const preview=isPaid?('🔒 '+(q.label||'Paid question — click Edit to view/edit')):(q.text?(q.text.substring(0,70)+(q.text.length>70?'…':'')):'<span style="color:var(--red)">(No question text yet)</span>');return `<tr><td class="td-p">${preview}</td><td style="font-size:.72rem;color:var(--t2)">${em[q.examId]||'<span style=\'color:var(--red)\'>Unassigned</span>'}</td><td style="font-size:.72rem;color:var(--t2)">${tm[q.type]||q.type}</td><td style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--t2)">${q.mockNo||'—'}</td><td style="font-family:'JetBrains Mono',monospace;font-size:.72rem">${q.marks}</td><td style="font-size:.72rem;color:var(--t2)">${q.wordLimit}</td><td><span class="bge ${q.active?'bg-g':'bg-r'}">${q.active?'Active':'Hidden'}</span></td><td><div class="tda"><button class="btn bo sm" onclick="openQM('${q.id}')">Edit</button><button class="btn bd sm" onclick="delQ('${q.id}')">Del</button></div></td></tr>`;}).join('');}
+async function openQM(id){const d=D();document.getElementById('qm-type').innerHTML='<option value="">Select…</option>'+d.sectionTypes.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');document.getElementById('qm-exam').innerHTML=d.exams.map(e=>`<option value="${e.id}">${e.name}</option>`).join('')||'<option value="">No exams yet</option>';let existingProductIds=[];if(id){const q=d.questions.find(x=>x.id===id);if(!q)return;document.getElementById('qm-t').textContent='Edit Question';document.getElementById('qm-type').value=q.type;document.getElementById('qm-exam').value=q.examId||d.exams[0]?.id||'';document.getElementById('qm-marks').value=q.marks;document.getElementById('qm-wl').value=q.wordLimit;document.getElementById('qm-mockno').value=q.mockNo||'';document.getElementById('qm-diff').value=q.difficulty||'medium';document.getElementById('qm-active').checked=q.active;document.getElementById('qm-id').value=q.id;document.getElementById('qm-label').value=q.label||'';existingProductIds=q.productIds||[];
   if(existingProductIds.length){
     // Paid question — its real text lives in Firestore, not here. Fetch it so editing shows
     // what was actually published, instead of the blank placeholder stored in config.json.
@@ -1455,8 +1456,15 @@ async function openQM(id){const d=D();document.getElementById('qm-type').innerHT
     document.getElementById('qm-text').value=q.text;
     document.getElementById('qm-ans').value=q.modelAnswer;
   }
-}else{document.getElementById('qm-t').textContent='Add Question';['qm-text','qm-ans','qm-wl','qm-id','qm-mockno'].forEach(i=>document.getElementById(i).value='');document.getElementById('qm-marks').value=20;document.getElementById('qm-active').checked=true;document.getElementById('qm-exam').value=d.exams[0]?.id||'';}document.getElementById('qm-paid').checked=!!existingProductIds.length;renderProductChecklist('qm-products-checklist','qm-product-check',existingProductIds);document.getElementById('qm-products-wrap').style.display=existingProductIds.length?'':'none';om('qm');}
+}else{document.getElementById('qm-t').textContent='Add Question';['qm-text','qm-ans','qm-wl','qm-id','qm-mockno','qm-label'].forEach(i=>document.getElementById(i).value='');document.getElementById('qm-marks').value=20;document.getElementById('qm-active').checked=true;document.getElementById('qm-exam').value=d.exams[0]?.id||'';}document.getElementById('qm-paid').checked=!!existingProductIds.length;renderProductChecklist('qm-products-checklist','qm-product-check',existingProductIds);document.getElementById('qm-products-wrap').style.display=existingProductIds.length?'':'none';om('qm');}
 async function saveQ(){const d=D(),type=document.getElementById('qm-type').value,text=document.getElementById('qm-text').value.trim(),ans=document.getElementById('qm-ans').value.trim();if(!type||!text||!ans){t('Fill all fields','er');return;}const examIdEl=document.getElementById('qm-exam');const examId=examIdEl?examIdEl.value:'';const mockNoVal=document.getElementById('qm-mockno').value;const isPaid=document.getElementById('qm-paid').checked;const productIds=isPaid?Array.from(document.querySelectorAll('.qm-product-check:checked')).map(el=>el.value):[];if(isPaid&&!productIds.length){t('Check at least one product, or turn off "Paid question"','er');return;}
+  // Internal label always survives in config.json, even for Paid questions whose real
+  // text/answer get blanked out below — this is what lets you identify/search/link a
+  // paid question later without needing to fetch its protected Firestore content first.
+  // Auto-derived from the question text if left blank, so you never lose the ability
+  // to tell questions apart just because you forgot to fill this in.
+  let label=document.getElementById('qm-label').value.trim();
+  if(!label&&text)label=text.slice(0,70)+(text.length>70?'…':'');
   const marks=parseInt(document.getElementById('qm-marks').value)||15;
   const wordLimit=document.getElementById('qm-wl').value;
   const qId=document.getElementById('qm-id').value||'q_'+Date.now();
@@ -1472,8 +1480,9 @@ async function saveQ(){const d=D(),type=document.getElementById('qm-type').value
     }
   }
   // The public listing NEVER holds the real text/answer for a paid question — only enough
-  // to render the card (marks, word limit, which product unlocks it).
-  const q={id:qId,examId:examId||d.exams[0]?.id||'sbi_po',type,text:isPaid?'':text,modelAnswer:isPaid?'':ans,wordLimit,marks,difficulty:document.getElementById('qm-diff').value,active:document.getElementById('qm-active').checked,mockNo:mockNoVal?parseInt(mockNoVal):null,productIds};const idx=d.questions.findIndex(x=>x.id===q.id);if(idx>=0)d.questions[idx]=q;else d.questions.push(q);SD(d);cm('qm');renderQT();t(isPaid?'Question saved — protected content published too':'Question saved','ok');}
+  // to render the card (marks, word limit, which product unlocks it). The internal label
+  // is the one exception: it's admin-only text, so it's safe to keep even when paid.
+  const q={id:qId,examId:examId||d.exams[0]?.id||'sbi_po',type,text:isPaid?'':text,modelAnswer:isPaid?'':ans,label,wordLimit,marks,difficulty:document.getElementById('qm-diff').value,active:document.getElementById('qm-active').checked,mockNo:mockNoVal?parseInt(mockNoVal):null,productIds};const idx=d.questions.findIndex(x=>x.id===q.id);if(idx>=0)d.questions[idx]=q;else d.questions.push(q);SD(d);cm('qm');renderQT();t(isPaid?'Question saved — protected content published too':'Question saved','ok');}
 function delQ(id){if(!confirm('Delete?'))return;const d=D();d.questions=d.questions.filter(q=>q.id!==id);SD(d);renderQT();t('Deleted','ok');}
 
 // ── EXAMS ──
@@ -2139,7 +2148,13 @@ function renderEssayList(){
   // Practice question dropdown — pulled from your existing essay-writing questions.
   const essayQs=(d.questions||[]).filter(q=>q.type==='essay');
   const sel=document.getElementById('es-practice-q');
-  sel.innerHTML='<option value="">— None —</option>'+essayQs.map(q=>`<option value="${q.id}">${esc((q.text||'(no text yet)').slice(0,60))}${(q.text||'').length>60?'…':''}</option>`).join('');
+  sel.innerHTML='<option value="">— None —</option>'+essayQs.map(q=>{
+    const isPaid=q.productIds&&q.productIds.length;
+    const raw=isPaid?(q.label||'Paid question — no label set'):(q.text||q.label||'(no text yet)');
+    const lockIcon=isPaid?'🔒 ':'';
+    const extra=' — '+q.marks+' marks'+(q.mockNo?', Mock '+q.mockNo:'');
+    return `<option value="${q.id}">${lockIcon}${esc(raw.slice(0,60))}${raw.length>60?'…':''}${esc(extra)}</option>`;
+  }).join('');
 
   const listEl=document.getElementById('essay-list');
   if(!essays.length){listEl.innerHTML='<div style="color:var(--t2);font-size:.82rem;padding:16px 0">No essays yet — add one above.</div>';return;}
