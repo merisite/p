@@ -1588,21 +1588,6 @@
       ]
     },
     {
-      "id": "q_1789464863121",
-      "examId": "ibps_po",
-      "type": "essay",
-      "text": "",
-      "modelAnswer": "",
-      "wordLimit": "250-300 words",
-      "marks": 15,
-      "difficulty": "easy",
-      "active": true,
-      "mockNo": null,
-      "productIds": [
-        "IBPSPO"
-      ]
-    },
-    {
       "id": "q_1789466342083",
       "examId": "ibps_po",
       "type": "essay",
