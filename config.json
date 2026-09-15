@@ -177,7 +177,7 @@
       "marks": 10,
       "difficulty": "medium",
       "active": true,
-      "mockNo": null,
+      "mockNo": 1,
       "productIds": []
     },
     {
@@ -1513,7 +1513,7 @@
       "marks": 15,
       "difficulty": "medium",
       "active": true,
-      "mockNo": null,
+      "mockNo": 1,
       "productIds": [
         "IBPSPO"
       ]
@@ -1657,7 +1657,7 @@
       "mockNo": 1,
       "title": "IBPS PO Mock 1",
       "active": true,
-      "status": "upcoming",
+      "status": "active",
       "productIds": []
     },
     {
