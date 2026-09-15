@@ -1411,6 +1411,10 @@ function routeFromHash(){
     initPromise.then(()=>openMockLink(sectionArg));
     return;
   }
+  if(screenId==="essays"){
+    initPromise.then(()=>{showS("essays",{skipHash:true});if(typeof renderEssayLibrary==="function")renderEssayLibrary();});
+    return;
+  }
   if(NON_LINKABLE_SCREENS.has(screenId))return;
   const el=document.getElementById(screenId);
   if(el&&el.classList.contains("screen"))initPromise.then(()=>showS(screenId,{skipHash:true}));
