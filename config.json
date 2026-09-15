@@ -1747,6 +1747,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1789488521745",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "Overhauling India's Food Safety Framework: Standards, Enforcement, and Public Health",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -2276,6 +2292,40 @@
         }
       ],
       "practiceQuestionId": "q_1789488037604",
+      "active": true
+    },
+    {
+      "id": "essay_1789488902470",
+      "title": "Overhauling India's Food Safety Framework: Standards, Enforcement, and Public Health",
+      "category": "Governance & Institutional Reforms",
+      "tags": [
+        "Food Safety"
+      ],
+      "image": "https://i.postimg.cc/G2Cy31Cm/june-7-world-food-safety-awareness-with-fruits-vegetables-and-clean-food-message-vector.jpg",
+      "body": "Food safety is an important part of public health and economic well-being. India has a large and diverse food industry, ranging from street vendors to major food companies. However, cases of food contamination, adulteration, and poor hygiene show that the existing food safety system needs stronger standards and better enforcement.\n\nOne major challenge is the uneven implementation of food safety rules across states and cities. Small food businesses may lack proper knowledge, training, and facilities to maintain hygiene. In some cases, inspections are irregular and testing laboratories are not adequately equipped. The growth of packaged, processed, and online food delivery has also created new risks. Consumers often find it difficult to know whether the food they buy meets safety standards.\n\nIndia needs clear and science-based food safety standards that are regularly updated. Food testing laboratories should be modernised, and food safety officers should receive better training and resources. Regular and transparent inspections can improve compliance, while strict action against repeated violations can act as a deterrent. Small food businesses should also receive simple guidelines and training instead of facing only penalties. Technology can help track food products and improve monitoring across the supply chain.\n\nPublic awareness is equally important. Consumers should check labels, expiry dates, and hygiene conditions before buying food. Authorities should provide simple information about food safety through schools, media, and digital platforms. Easy complaint and grievance systems can also help consumers report unsafe products.\n\nIn conclusion, improving India's food safety framework requires more than stricter rules. Strong standards, effective enforcement, modern testing facilities, responsible food businesses, and aware consumers must work together. A stronger food safety system will protect public health and build greater trust in India's food sector.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "Food safety is an important part of public health and economic well-being. India has a large and diverse food industry, ranging from street vendors to major food companies. However, cases of food contamination, adulteration, and poor hygiene show that the existing food safety system needs stronger standards and better enforcement."
+        },
+        {
+          "heading": "Body – Existing Challenges",
+          "content": "One major challenge is the uneven implementation of food safety rules across states and cities. Small food businesses may lack proper knowledge, training, and facilities to maintain hygiene. In some cases, inspections are irregular and testing laboratories are not adequately equipped. The growth of packaged, processed, and online food delivery has also created new risks. Consumers often find it difficult to know whether the food they buy meets safety standards."
+        },
+        {
+          "heading": "Body – Measures to Strengthen Food Safety",
+          "content": "India needs clear and science-based food safety standards that are regularly updated. Food testing laboratories should be modernised, and food safety officers should receive better training and resources. Regular and transparent inspections can improve compliance, while strict action against repeated violations can act as a deterrent. Small food businesses should also receive simple guidelines and training instead of facing only penalties. Technology can help track food products and improve monitoring across the supply chain."
+        },
+        {
+          "heading": "Body – Public Awareness and Consumer Responsibility",
+          "content": "Public awareness is equally important. Consumers should check labels, expiry dates, and hygiene conditions before buying food. Authorities should provide simple information about food safety through schools, media, and digital platforms. Easy complaint and grievance systems can also help consumers report unsafe products."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, improving India's food safety framework requires more than stricter rules. Strong standards, effective enforcement, modern testing facilities, responsible food businesses, and aware consumers must work together. A stronger food safety system will protect public health and build greater trust in India's food sector."
+        }
+      ],
+      "practiceQuestionId": "q_1789488521745",
       "active": true
     }
   ]
