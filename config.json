@@ -1651,6 +1651,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1789475038332",
+      "examId": "sbi_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "The Global Climate Crisis and India’s Response",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -1970,6 +1986,41 @@
         }
       ],
       "practiceQuestionId": "q_1789468237775",
+      "active": true
+    },
+    {
+      "id": "essay_1789474950968",
+      "title": "The Global Climate Crisis and India’s Response",
+      "category": "Environment",
+      "tags": [
+        "Global Warming",
+        "Climate"
+      ],
+      "image": "",
+      "body": "Climate change has become one of the biggest challenges facing the world. Rising temperatures, extreme weather, melting glaciers, and changing rainfall patterns are affecting lives, agriculture, and economies. India is also highly vulnerable to heatwaves, floods, cyclones, droughts, and rising sea levels. Therefore, India needs both climate protection and sustainable development.\n\nIndia has taken several steps to address this crisis. It is rapidly increasing the use of solar and wind energy and promoting electric mobility, energy efficiency, and green hydrogen. The International Solar Alliance, led by India and France, encourages countries to adopt solar power. India has also set a target of achieving net-zero emissions by 2070. Recent progress is significant: India’s non-fossil electricity capacity has crossed 50% of its total capacity, while solar capacity has grown sharply.\n\nTechnology is also helping India respond to climate risks. Mission Mausam is improving weather forecasting and climate monitoring through advanced models, radar systems, and artificial intelligence. India’s successful NISAR mission, a joint ISRO-NASA Earth-observation mission, is providing valuable data that can support the study of forests, agriculture, disasters, and environmental changes.\n\nDespite this progress, India must balance economic growth with environmental protection. Greater investment in clean energy, public transport, climate-resilient agriculture, water conservation, and disaster preparedness is needed. Citizens must also adopt sustainable lifestyles.\n\nIn conclusion, India has made meaningful progress in fighting climate change, but the road ahead remains difficult. Strong policies, new technology, international cooperation, and public participation are necessary to build a cleaner, safer, and more climate-resilient future.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "Climate change has become one of the biggest challenges facing the world. Rising temperatures, extreme weather, melting glaciers, and changing rainfall patterns are affecting lives, agriculture, and economies. India is also highly vulnerable to heatwaves, floods, cyclones, droughts, and rising sea levels. Therefore, India needs both climate protection and sustainable development."
+        },
+        {
+          "heading": "Body - India’s Climate Response",
+          "content": "India has taken several steps to address this crisis. It is rapidly increasing the use of solar and wind energy and promoting electric mobility, energy efficiency, and green hydrogen. The International Solar Alliance, led by India and France, encourages countries to adopt solar power. India has also set a target of achieving net-zero emissions by 2070. Recent progress is significant: India’s non-fossil electricity capacity has crossed 50% of its total capacity, while solar capacity has grown sharply."
+        },
+        {
+          "heading": "Body - Technology, Innovation and Recent Successes",
+          "content": "Technology is also helping India respond to climate risks. Mission Mausam is improving weather forecasting and climate monitoring through advanced models, radar systems, and artificial intelligence. India’s successful NISAR mission, a joint ISRO-NASA Earth-observation mission, is providing valuable data that can support the study of forests, agriculture, disasters, and environmental changes."
+        },
+        {
+          "heading": "Body - Challenges and Way Forward",
+          "content": "Despite this progress, India must balance economic growth with environmental protection. Greater investment in clean energy, public transport, climate-resilient agriculture, water conservation, and disaster preparedness is needed. Citizens must also adopt sustainable lifestyles."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, India has made meaningful progress in fighting climate change, but the road ahead remains difficult. Strong policies, new technology, international cooperation, and public participation are necessary to build a cleaner, safer, and more climate-resilient future."
+        }
+      ],
+      "practiceQuestionId": "q_1789475038332",
       "active": true
     }
   ]
