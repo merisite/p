@@ -1354,12 +1354,14 @@ function mmOpenPicker(examId,mockNo,secType){
     list.innerHTML=`<div style="color:var(--t2);font-size:.8rem;padding:12px 0">All ${secName} questions are already assigned to this mock, or none exist. Go to Questions to add more.</div>`;
   } else {
     list.innerHTML=available.map(q=>{
-      const currentMock=q.mockNo?`<span style="font-size:.6rem;font-family:'JetBrains Mono',monospace;color:var(--amber);background:rgba(217,119,6,.1);border:1px solid rgba(217,119,6,.25);border-radius:4px;padding:1px 6px;margin-left:6px">Currently Mock #${q.mockNo}</span>`:`<span style="font-size:.6rem;font-family:'JetBrains Mono',monospace;color:var(--t2);background:var(--bg3);border:1px solid var(--b);border-radius:4px;padding:1px 6px;margin-left:6px">Unassigned</span>`;
+      const currentMock=q.mockNo
+        ? `<div style="font-size:.72rem;font-weight:700;font-family:'JetBrains Mono',monospace;color:#d97706;background:rgba(217,119,6,.12);border:1px solid rgba(217,119,6,.35);border-radius:4px;padding:4px 8px;margin-bottom:7px;display:inline-block">⚠ Currently assigned to Mock #${q.mockNo} — picking this will move it here</div>`
+        : `<div style="font-size:.72rem;font-weight:600;font-family:'JetBrains Mono',monospace;color:#57606a;background:#f0f2f5;border:1px solid #d0d7de;border-radius:4px;padding:4px 8px;margin-bottom:7px;display:inline-block">Unassigned</div>`;
       return `<div style="background:var(--bg2);border:1px solid var(--b);border-radius:var(--rs);padding:11px 13px;cursor:pointer;transition:border-color .15s" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--b)'" onclick="mmAssignQ('${q.id}')">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
           <span style="font-size:.65rem;font-family:'JetBrains Mono',monospace;color:var(--accent);text-transform:uppercase;letter-spacing:.06em">${secName}</span>
-          ${currentMock}
         </div>
+        ${currentMock}
         <div style="font-size:.78rem;color:var(--t);line-height:1.6">${q.text.substring(0,150)}${q.text.length>150?'…':''}</div>
         <div style="margin-top:6px;font-size:.7rem;color:var(--accent);font-weight:600">→ Click to assign to Mock #${mockNo}</div>
       </div>`;
