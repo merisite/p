@@ -1916,6 +1916,41 @@
       ],
       "practiceQuestionId": null,
       "active": true
+    },
+    {
+      "id": "essay_1789467829367",
+      "title": "India in Space: A Journey of Vision, Struggle, and Success",
+      "category": "National & Global Affairs",
+      "tags": [
+        "ISRO",
+        "Space"
+      ],
+      "image": "https://i.postimg.cc/X7PNqhqV/Indian-space.jpg",
+      "body": "India’s journey in space is a story of vision, hard work and determination. From starting with limited resources to becoming a major space power, India has made remarkable progress through the efforts of the Indian Space Research Organisation (ISRO). Its space programme has not only increased national pride but has also supported communication, weather forecasting, navigation and disaster management.\n\nIndia’s space programme began with a clear focus on using space technology for national development. In the early years, ISRO faced limited funds, basic infrastructure and technological challenges. Scientists had to develop many technologies themselves. Despite these difficulties, missions such as Aryabhata, PSLV and later GSLV helped India build strong capabilities in satellites and launch vehicles.\n\nIndia’s success has grown significantly in recent years. Chandrayaan-3 achieved a historic soft landing near the Moon’s south polar region in 2023, while Aditya-L1 began studying the Sun. More recently, the SpaDeX mission successfully demonstrated space docking and power transfer, making India the fourth country to demonstrate space docking. The NISAR mission, a joint ISRO-NASA project launched in July 2025, has further strengthened India’s Earth-observation capabilities.\n\nDespite these achievements, India must continue to improve funding, private participation and advanced technology. Future goals such as Gaganyaan, lunar exploration and deeper space missions will require greater international cooperation and strong research capabilities.\n\nIn conclusion, India’s space journey shows how vision and persistence can overcome limitations. ISRO’s achievements have placed India among leading space-faring nations. The future should focus not only on exploration but also on using space technology to solve problems on Earth and improve the lives of ordinary citizens.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "India’s journey in space is a story of vision, hard work and determination. From starting with limited resources to becoming a major space power, India has made remarkable progress through the efforts of the Indian Space Research Organisation (ISRO). Its space programme has not only increased national pride but has also supported communication, weather forecasting, navigation and disaster management."
+        },
+        {
+          "heading": "Vision and Early Struggles",
+          "content": "India’s space programme began with a clear focus on using space technology for national development. In the early years, ISRO faced limited funds, basic infrastructure and technological challenges. Scientists had to develop many technologies themselves. Despite these difficulties, missions such as Aryabhata, PSLV and later GSLV helped India build strong capabilities in satellites and launch vehicles."
+        },
+        {
+          "heading": "Major Successes and Recent Achievements",
+          "content": "India’s success has grown significantly in recent years. Chandrayaan-3 achieved a historic soft landing near the Moon’s south polar region in 2023, while Aditya-L1 began studying the Sun. More recently, the SpaDeX mission successfully demonstrated space docking and power transfer, making India the fourth country to demonstrate space docking. The NISAR mission, a joint ISRO-NASA project launched in July 2025, has further strengthened India’s Earth-observation capabilities."
+        },
+        {
+          "heading": "Challenges and the Road Ahead",
+          "content": "Despite these achievements, India must continue to improve funding, private participation and advanced technology. Future goals such as Gaganyaan, lunar exploration and deeper space missions will require greater international cooperation and strong research capabilities."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, India’s space journey shows how vision and persistence can overcome limitations. ISRO’s achievements have placed India among leading space-faring nations. The future should focus not only on exploration but also on using space technology to solve problems on Earth and improve the lives of ordinary citizens."
+        }
+      ],
+      "practiceQuestionId": null,
+      "active": true
     }
   ]
 }
