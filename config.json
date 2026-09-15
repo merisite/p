@@ -1577,7 +1577,7 @@
       "marks": 10,
       "difficulty": "medium",
       "active": false,
-      "mockNo": null,
+      "mockNo": 1,
       "productIds": []
     }
   ],
