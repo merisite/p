@@ -1681,6 +1681,20 @@
       "active": true,
       "mockNo": null,
       "productIds": []
+    },
+    {
+      "id": "q_1789478055925",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "AI-Driven Financial Frauds: How Banks Can Balance Technological Innovation with Consumer Security.",
+      "modelAnswer": "Artificial Intelligence (AI) is transforming the banking sector by making services faster, smarter, and more convenient. Banks use AI for fraud detection, customer support, credit assessment, and digital payments. However, the same technology can also be misused by criminals to create more advanced financial frauds. Therefore, banks must balance innovation with consumer security.\n\nCriminals can use AI to create fake voices, images, messages, and websites that appear genuine. Such methods can make phishing and identity theft more difficult to detect. AI can also help criminals study personal information and target customers with highly convincing scams. As digital banking grows, these threats can affect both individuals and financial institutions.\n\nBanks face the difficult task of protecting customers without making digital banking slow or complicated. Strong security systems require continuous investment, skilled professionals, and regular monitoring. At the same time, excessive security checks may inconvenience genuine customers. Banks must also protect customer data while using AI-based systems to identify suspicious activities.\n\nBanks should use AI itself to detect unusual transactions, identify suspicious patterns, and stop fraudulent payments quickly. Multi-factor authentication, real-time alerts, strong encryption, and regular security audits can provide additional protection. Banks should also conduct awareness campaigns to teach customers about phishing, fake calls, and unsafe links. Clear grievance redressal systems and quick action after fraud are equally important.\n\nIn conclusion, AI can become both a powerful tool for fraudsters and an effective defence for banks. The solution is not to avoid technological innovation but to use it responsibly. A combination of advanced security, customer awareness, data protection, and human supervision can help banks build a safer and more trustworthy digital banking system.",
+      "label": "AI-Driven Financial Frauds: How Banks Can Balance Technological Innovation with Consumer Security.",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": []
     }
   ],
   "typingParas": [
@@ -2069,6 +2083,42 @@
         }
       ],
       "practiceQuestionId": "q_1789475536617",
+      "active": true
+    },
+    {
+      "id": "essay_1789477979942",
+      "title": "AI-Driven Financial Frauds: How Banks Can Balance Technological Innovation with Consumer Security.",
+      "category": "Technology",
+      "tags": [
+        "AI",
+        "Frauds",
+        "Spam"
+      ],
+      "image": "https://i.postimg.cc/HxVC7qzJ/How-Machine-Learning-Helps-in-Financial-Fraud-Detection-in-the-Fin-Tech-Industry-01-scaled-1.webp",
+      "body": "Artificial Intelligence (AI) is transforming the banking sector by making services faster, smarter, and more convenient. Banks use AI for fraud detection, customer support, credit assessment, and digital payments. However, the same technology can also be misused by criminals to create more advanced financial frauds. Therefore, banks must balance innovation with consumer security.\n\nCriminals can use AI to create fake voices, images, messages, and websites that appear genuine. Such methods can make phishing and identity theft more difficult to detect. AI can also help criminals study personal information and target customers with highly convincing scams. As digital banking grows, these threats can affect both individuals and financial institutions.\n\nBanks face the difficult task of protecting customers without making digital banking slow or complicated. Strong security systems require continuous investment, skilled professionals, and regular monitoring. At the same time, excessive security checks may inconvenience genuine customers. Banks must also protect customer data while using AI-based systems to identify suspicious activities.\n\nBanks should use AI itself to detect unusual transactions, identify suspicious patterns, and stop fraudulent payments quickly. Multi-factor authentication, real-time alerts, strong encryption, and regular security audits can provide additional protection. Banks should also conduct awareness campaigns to teach customers about phishing, fake calls, and unsafe links. Clear grievance redressal systems and quick action after fraud are equally important.\n\nIn conclusion, AI can become both a powerful tool for fraudsters and an effective defence for banks. The solution is not to avoid technological innovation but to use it responsibly. A combination of advanced security, customer awareness, data protection, and human supervision can help banks build a safer and more trustworthy digital banking system.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "Artificial Intelligence (AI) is transforming the banking sector by making services faster, smarter, and more convenient. Banks use AI for fraud detection, customer support, credit assessment, and digital payments. However, the same technology can also be misused by criminals to create more advanced financial frauds. Therefore, banks must balance innovation with consumer security."
+        },
+        {
+          "heading": "Body – Rise of AI-Driven Financial Frauds",
+          "content": "Criminals can use AI to create fake voices, images, messages, and websites that appear genuine. Such methods can make phishing and identity theft more difficult to detect. AI can also help criminals study personal information and target customers with highly convincing scams. As digital banking grows, these threats can affect both individuals and financial institutions."
+        },
+        {
+          "heading": "Body – Challenges for Banks",
+          "content": "Banks face the difficult task of protecting customers without making digital banking slow or complicated. Strong security systems require continuous investment, skilled professionals, and regular monitoring. At the same time, excessive security checks may inconvenience genuine customers. Banks must also protect customer data while using AI-based systems to identify suspicious activities."
+        },
+        {
+          "heading": "Body – Measures / Way Forward",
+          "content": "Banks should use AI itself to detect unusual transactions, identify suspicious patterns, and stop fraudulent payments quickly. Multi-factor authentication, real-time alerts, strong encryption, and regular security audits can provide additional protection. Banks should also conduct awareness campaigns to teach customers about phishing, fake calls, and unsafe links. Clear grievance redressal systems and quick action after fraud are equally important."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, AI can become both a powerful tool for fraudsters and an effective defence for banks. The solution is not to avoid technological innovation but to use it responsibly. A combination of advanced security, customer awareness, data protection, and human supervision can help banks build a safer and more trustworthy digital banking system."
+        }
+      ],
+      "practiceQuestionId": "q_1789478055925",
       "active": true
     }
   ]
