@@ -1818,6 +1818,40 @@
       ],
       "practiceQuestionId": null,
       "active": true
+    },
+    {
+      "id": "essay_1789465982791",
+      "title": "The Rise of the Gig Economy in India: Opportunities and Challenges",
+      "category": "Economy & Finance",
+      "tags": [
+        "Gig Economy"
+      ],
+      "image": "https://i.postimg.cc/0NfvqHw8/food-delivery-ecommerce-01.png",
+      "body": "The gig economy is becoming an important part of India’s employment system. It refers to short-term or flexible work where people earn through individual tasks, projects, or assignments instead of permanent jobs. The growth of digital platforms, smartphones, and changing work preferences has helped the gig economy expand rapidly in India.\n\nThe gig economy provides employment opportunities to people who may not find traditional jobs easily. Delivery workers, drivers, freelancers, tutors, designers, and online professionals can earn through flexible work. It also allows students and homemakers to work according to their schedules. For businesses, gig workers can reduce costs and provide access to skilled workers when required. The sector can therefore support employment and contribute to economic growth.\n\nHowever, gig work also has several challenges. Many gig workers do not receive benefits such as health insurance, paid leave, or retirement support. Their income may also be uncertain because it depends on demand and platform policies. Long working hours, pressure to meet targets, and limited job security can affect their well-being. In addition, workers may have little control over how platforms decide payments, ratings, and work opportunities.\n\nTo make the gig economy more sustainable, workers need better social security and fair working conditions. The government and companies should create suitable insurance, pension, and welfare schemes. Platforms should maintain transparency in payment and rating systems. Skill development can also help workers move towards better-paying opportunities.\n\nIn conclusion, the gig economy can create jobs, flexibility, and new opportunities for millions of Indians. However, its growth must be supported by worker protection, fair policies, and social security. A balanced approach can make the gig economy beneficial for both workers and businesses.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "The gig economy is becoming an important part of India’s employment system. It refers to short-term or flexible work where people earn through individual tasks, projects, or assignments instead of permanent jobs. The growth of digital platforms, smartphones, and changing work preferences has helped the gig economy expand rapidly in India."
+        },
+        {
+          "heading": "Body – Opportunities and Benefits",
+          "content": "The gig economy provides employment opportunities to people who may not find traditional jobs easily. Delivery workers, drivers, freelancers, tutors, designers, and online professionals can earn through flexible work. It also allows students and homemakers to work according to their schedules. For businesses, gig workers can reduce costs and provide access to skilled workers when required. The sector can therefore support employment and contribute to economic growth."
+        },
+        {
+          "heading": "Body – Challenges and Concerns",
+          "content": "However, gig work also has several challenges. Many gig workers do not receive benefits such as health insurance, paid leave, or retirement support. Their income may also be uncertain because it depends on demand and platform policies. Long working hours, pressure to meet targets, and limited job security can affect their well-being. In addition, workers may have little control over how platforms decide payments, ratings, and work opportunities."
+        },
+        {
+          "heading": "Body – Measures / Way Forward",
+          "content": "To make the gig economy more sustainable, workers need better social security and fair working conditions. The government and companies should create suitable insurance, pension, and welfare schemes. Platforms should maintain transparency in payment and rating systems. Skill development can also help workers move towards better-paying opportunities."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, the gig economy can create jobs, flexibility, and new opportunities for millions of Indians. However, its growth must be supported by worker protection, fair policies, and social security. A balanced approach can make the gig economy beneficial for both workers and businesses."
+        }
+      ],
+      "practiceQuestionId": null,
+      "active": true
     }
   ]
 }
