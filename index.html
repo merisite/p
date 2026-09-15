@@ -885,6 +885,10 @@ header .h-brand:hover{background:var(--brut-tint);}
   <div id="ap-signedin" style="display:none">
     <div style="font-size:.85rem;font-weight:700;color:var(--t);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" id="ap-name"></div>
     <div style="font-size:.7rem;color:var(--t2);margin-bottom:12px;word-break:break-all" id="ap-email"></div>
+    <div style="border-top:1px solid var(--b);margin-bottom:10px;padding-top:10px">
+      <div style="font-size:.64rem;color:var(--t2);font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">My Subscription</div>
+      <div id="ap-sub-list" style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px"></div>
+    </div>
     <button class="btn bg" style="width:100%" onclick="doLogout()">Log out</button>
   </div>
 </div>
@@ -4428,11 +4432,30 @@ function updateAuthUI(user){
     initEl.style.display='inline-flex';
     initEl.style.cssText='display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:var(--accent);color:var(--bg);font-size:.6rem;font-weight:700;text-transform:uppercase';
     initEl.textContent = label.charAt(0);
+    renderAccountSubscription();
   }else{
     soEl.style.display='block'; siEl.style.display='none';
     svgEl.style.display='block';
     initEl.style.display='none';
   }
+}
+// Shows what the logged-in user currently has unlocked, in the Account popover. Reflects
+// _purchasedProducts, so call this any time that list is refreshed (login, purchase, etc.)
+function renderAccountSubscription(){
+  const listEl=document.getElementById('ap-sub-list');
+  if(!listEl)return;
+  if(!_purchasedProducts||!_purchasedProducts.length){
+    listEl.innerHTML='<div style="font-size:.72rem;color:var(--t2);line-height:1.5">No active purchases yet — unlock a package to see it here.</div>';
+    return;
+  }
+  listEl.innerHTML=_purchasedProducts.map(function(pid){
+    const p=getProduct(pid);
+    const name=p?(p.name||pid):pid;
+    return `<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:.76rem;padding:7px 9px;border-radius:var(--rs);background:var(--bg2);border:1px solid var(--b)">
+      <span style="color:var(--t);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHTML(name)}</span>
+      <span style="color:var(--green);font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;flex-shrink:0">Active</span>
+    </div>`;
+  }).join('');
 }
 window.addEventListener('fb-auth-changed', function(e){
   const user = e.detail.user;
@@ -4461,6 +4484,11 @@ function refreshLockedContentUI(){
   if(mlEl&&mlEl.classList.contains('active')&&_lastMockListExamId){
     showMockList(_lastMockListExamId,{skipHash:true});
   }
+  const esEl=document.getElementById('essays');
+  if(esEl&&esEl.classList.contains('active')&&_esSelectedId){
+    selectEssay(_esSelectedId);
+  }
+  renderAccountSubscription();
 }
 
 /* ============================================================
@@ -4596,10 +4624,14 @@ async function unlockProduct(productId){
             razorpay_signature: response.razorpay_signature,
             productId: productId
           });
-          // Reload so every part of the page — cards, banners, everything — reflects the
-          // newly-unlocked content immediately, without needing to track down every place
-          // that would otherwise need a manual re-render.
-          location.reload();
+          // Refresh entitlements and re-render just the screen the person is already on
+          // (question list, mock list, or the essay they had open) instead of reloading the
+          // whole page — that way they land right back where they were, not on the home/
+          // library landing screen, and any in-progress state elsewhere isn't lost.
+          await refreshPurchasedProducts();
+          hideProcessingOverlay();
+          refreshLockedContentUI();
+          showToast('Payment successful — content unlocked!');
         }catch(e){
           hideProcessingOverlay();
           alert('Your payment went through, but we could not confirm it automatically. Please contact us with this payment ID so we can unlock it manually: '+response.razorpay_payment_id);
