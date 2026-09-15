@@ -1955,7 +1955,7 @@ function renderQS(type){
   document.querySelectorAll(".tob").forEach(b=>b.classList.remove("on"));
   document.querySelector("[data-v='default']").classList.add("on");
   document.getElementById("cust-row").classList.remove("show");tMode="default";
-  const qs=d.questions.filter(q=>q.type===type&&q.active);
+  const qs=d.questions.filter(q=>q.type===type&&q.active&&hasUsableContent(q));
   // Short label for card titles: "Email Writing" -> "Email", "Situation Analysis" -> "Situation Analysis"
   const shortLabel=(sec.name||"Practice").replace(/\s*Writing\s*/i,"").trim()||sec.name||"Practice";
   document.getElementById("q-list").innerHTML=qs.length===0?"<div class='empty-q'>No questions yet for this section. Add questions in the Admin panel.</div>":qs.map((q,i)=>{
@@ -2140,6 +2140,11 @@ async function launchExam(qid){
       return;
     }
   }
+  if(!q.text||!q.text.trim()){
+    alert("This question's content couldn't be loaded — it appears to be empty. Please contact support or try a different question.");
+    console.warn('[DPT] Blank question reached launchExam:',qid,q);
+    return;
+  }
   const tm={};d.sectionTypes.forEach(s=>tm[s.id]=s);const sec=tm[q.type]||{};
   const mins=sec.timer||10;
   const draft=getDraft(qid);
@@ -2190,7 +2195,7 @@ function launchExamReal(qid,resume){
   let mins=sec.timer||10;if(tMode==="none")mins=0;else if(tMode==="custom")mins=parseInt(document.getElementById("cust-mins").value)||10;
   document.getElementById("exam-type-lbl").textContent=(tm[CQ.type]?.name||"").toUpperCase();
   document.getElementById("exam-wl").textContent=CQ.wordLimit;
-  document.getElementById("exam-qtext").textContent=CQ.text;
+  document.getElementById("exam-qtext").textContent=(CQ.text&&CQ.text.trim())?CQ.text:"⚠️ This question's content is missing. Please go back and contact support.";
   document.getElementById("exam-qmeta").innerHTML=`<span class="chip">${CQ.wordLimit}</span><span class="chip">${CQ.marks} marks</span>`;
   const ta=document.getElementById("exam-ta");ta.value="";tyStarted=false;tStart=null;autoGrow(ta);
   const _draft=getDraft(qid);
@@ -2498,6 +2503,11 @@ function showMockInstr(ex,labelSuffix){
 }
 // Fetches real content for any paid+unlocked question that hasn't been loaded yet,
 // patching it directly into the shared question object (same pattern as launchExam).
+// A question is "usable" for students if it's paid (real text lives in Firestore,
+// fetched at launch time) or if it actually has free text saved in config.json.
+// Free questions with blank text are hidden from every student-facing list/selection —
+// they'd otherwise open into a blank exam screen with nothing to answer.
+function hasUsableContent(q){return !!(q&&((q.productIds&&q.productIds.length)||(q.text&&q.text.trim())));}
 async function hydratePaidQuestions(qs){
   for(const q of qs){
     if(q&&q.productIds&&q.productIds.length&&!q._paidContentLoaded){
@@ -2524,14 +2534,14 @@ async function startMockAfterInstr(){
   const tm={};d.sectionTypes.forEach(s=>tm[s.id]=s);
   const hasBoth=(ex.sections||[]).includes("report")&&(ex.sections||[]).includes("precis");
   const fixedIds=hasBoth?(ex.sections||[]).filter(s=>s!=="report"&&s!=="precis"):(ex.sections||[]);
-  const secs=fixedIds.map(tid=>{
-    const qs=d.questions.filter(q=>q.examId===ex.id&&q.type===tid&&q.active&&(mockNo==null||q.mockNo===mockNo));
+  let secs=fixedIds.map(tid=>{
+    const qs=d.questions.filter(q=>q.examId===ex.id&&q.type===tid&&q.active&&hasUsableContent(q)&&(mockNo==null||q.mockNo===mockNo));
     if(!qs.length)return null;
     return{typeId:tid,meta:tm[tid]||{},questions:qs.slice(0,2),question:null};
   }).filter(Boolean);
   if(hasBoth){
-    const reportQs=d.questions.filter(q=>q.examId===ex.id&&q.type==="report"&&q.active&&(mockNo==null||q.mockNo===mockNo)).slice(0,2);
-    const precisQs=d.questions.filter(q=>q.examId===ex.id&&q.type==="precis"&&q.active&&(mockNo==null||q.mockNo===mockNo)).slice(0,2);
+    const reportQs=d.questions.filter(q=>q.examId===ex.id&&q.type==="report"&&q.active&&hasUsableContent(q)&&(mockNo==null||q.mockNo===mockNo)).slice(0,2);
+    const precisQs=d.questions.filter(q=>q.examId===ex.id&&q.type==="precis"&&q.active&&hasUsableContent(q)&&(mockNo==null||q.mockNo===mockNo)).slice(0,2);
     if(reportQs.length||precisQs.length){
       secs.push({
         typeId:"report_precis",meta:{name:"Report / Precis"},
@@ -2552,6 +2562,20 @@ async function startMockAfterInstr(){
     showToast("Loading your unlocked content…");
     await hydratePaidQuestions(allQs);
   }
+  // Safety net: drop any question whose text is still blank after hydration (e.g. a
+  // paid question whose Firestore content failed to load, or free content that was
+  // never actually filled in) so the mock can never open into a blank prompt.
+  const hasLoadedText=q=>!!(q&&q.text&&q.text.trim());
+  secs.forEach(s=>{
+    if(s.questions)s.questions=s.questions.filter(hasLoadedText);
+    if(s.choices){
+      Object.keys(s.choices).forEach(k=>{
+        s.choices[k].questions=(s.choices[k].questions||[]).filter(hasLoadedText);
+      });
+    }
+  });
+  secs=secs.filter(s=>s.isReportPrecis?Object.values(s.choices).some(c=>c.questions&&c.questions.length):(s.questions&&s.questions.length));
+  if(!secs.length){alert("No usable questions are available for this mock right now — some may be missing content. Please contact support or check the Admin panel.");return;}
   MS.s=secs;MS.a={};MS.idx=0;MS.st=Date.now();MS.mr={};
   MS.examId=examId;MS.mockNo=mockNo;
   // Start timer immediately and go into fullmock — question picker fires on first section load
@@ -2777,7 +2801,7 @@ function loadMSContent(idx){
   const typeMeta=tm[s.question.type]||s.meta;
   document.getElementById("mock-type-lbl").textContent=(typeMeta.name||s.meta.name||"").toUpperCase();
   document.getElementById("mock-wl").textContent=s.question.wordLimit;
-  document.getElementById("mock-qtext").textContent=s.question.text;
+  document.getElementById("mock-qtext").textContent=(s.question.text&&s.question.text.trim())?s.question.text:"⚠️ This question's content is missing. Please go back and contact support.";
   document.getElementById("mock-qmeta").innerHTML=`<span class="chip">${s.question.wordLimit}</span><span class="chip">${s.question.marks} marks</span>`;
   const ta=document.getElementById("mock-ta");ta.value=MS.a[idx]||"";updMWC();autoGrow(ta);
   restrictTA(ta);
