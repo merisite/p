@@ -1715,6 +1715,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1789487717815",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "BRICS and the Global South: Local Currency Trade, Financial Autonomy, and Economic Realities",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -2174,6 +2190,40 @@
         }
       ],
       "practiceQuestionId": "q_1789487303913",
+      "active": true
+    },
+    {
+      "id": "essay_1789487814031",
+      "title": "BRICS and the Global South: Local Currency Trade, Financial Autonomy, and Economic Realities",
+      "category": "International Relations",
+      "tags": [
+        "BRICS"
+      ],
+      "image": "",
+      "body": "BRICS has emerged as an important platform for the Global South to seek a stronger voice in the world economy. With India holding the BRICS chair in 2026, the group has focused on resilience, innovation, cooperation and sustainability. Its economic agenda includes easier trade, greater financial cooperation and reduced dependence on a single currency.\n\nOne major focus is the use of local currencies in trade. The 2026 BRICS discussions supported cross-border payment interoperability and settlement in national currencies to reduce transaction costs. However, there is currently no proposal for a common BRICS currency. The aim is not to suddenly replace the dollar but to give member countries more choices in international payments.\n\nBRICS can help developing countries increase trade, strengthen financial independence and improve access to development finance. The New Development Bank can support infrastructure and development projects, while new measures can help small businesses enter global markets. Yet economic differences among members, dependence on the dollar, weak payment links and geopolitical tensions can slow progress.\n\nThe practical way forward is gradual cooperation. BRICS should strengthen local-currency settlement systems, improve digital payment links, expand development finance and make trade rules more transparent. The 2026 agenda also stresses support for MSMEs through better credit assessment and trade finance.\n\nIn conclusion, BRICS cannot create financial autonomy overnight. Its real strength lies in building practical alternatives and giving the Global South greater economic choices. A balanced approach can make BRICS a stronger force for a fairer and more inclusive global economy.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "BRICS has emerged as an important platform for the Global South to seek a stronger voice in the world economy. With India holding the BRICS chair in 2026, the group has focused on resilience, innovation, cooperation and sustainability. Its economic agenda includes easier trade, greater financial cooperation and reduced dependence on a single currency."
+        },
+        {
+          "heading": "Body – Local Currency Trade and Financial Autonomy",
+          "content": "One major focus is the use of local currencies in trade. The 2026 BRICS discussions supported cross-border payment interoperability and settlement in national currencies to reduce transaction costs. However, there is currently no proposal for a common BRICS currency. The aim is not to suddenly replace the dollar but to give member countries more choices in international payments."
+        },
+        {
+          "heading": "Body – Economic Opportunities and Challenges",
+          "content": "BRICS can help developing countries increase trade, strengthen financial independence and improve access to development finance. The New Development Bank can support infrastructure and development projects, while new measures can help small businesses enter global markets. Yet economic differences among members, dependence on the dollar, weak payment links and geopolitical tensions can slow progress."
+        },
+        {
+          "heading": "Body – Road Ahead",
+          "content": "The practical way forward is gradual cooperation. BRICS should strengthen local-currency settlement systems, improve digital payment links, expand development finance and make trade rules more transparent. The 2026 agenda also stresses support for MSMEs through better credit assessment and trade finance."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, BRICS cannot create financial autonomy overnight. Its real strength lies in building practical alternatives and giving the Global South greater economic choices. A balanced approach can make BRICS a stronger force for a fairer and more inclusive global economy."
+        }
+      ],
+      "practiceQuestionId": "q_1789487717815",
       "active": true
     }
   ]
