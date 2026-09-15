@@ -1614,32 +1614,35 @@
       "examId": "sbi_po",
       "mockNo": 1,
       "title": "SBI PO Mock 1",
-      "active": true,
-      "status": "active"
+      "active": false,
+      "status": "hidden",
+      "productIds": []
     },
     {
       "id": "sbi_po_mock_2",
       "examId": "sbi_po",
       "mockNo": 2,
       "title": "SBI PO Mock 2",
-      "active": true,
-      "status": "active"
+      "active": false,
+      "status": "hidden",
+      "productIds": []
     },
     {
       "id": "sbi_po_mock_3",
       "examId": "sbi_po",
       "mockNo": 3,
       "title": "SBI PO Mock 3",
-      "active": true,
-      "status": "active"
+      "active": false,
+      "status": "hidden",
+      "productIds": []
     },
     {
       "id": "sbi_po_mock_4",
       "examId": "sbi_po",
       "mockNo": 4,
       "title": "SBI PO Mock 4",
-      "active": true,
-      "status": "active",
+      "active": false,
+      "status": "hidden",
       "productIds": []
     },
     {
@@ -1647,8 +1650,8 @@
       "examId": "sbi_po",
       "mockNo": 5,
       "title": "SBI PO Mock 5",
-      "active": true,
-      "status": "active",
+      "active": false,
+      "status": "hidden",
       "productIds": []
     },
     {
