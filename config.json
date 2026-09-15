@@ -1586,6 +1586,21 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1789464863121",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "easy",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -1764,6 +1779,41 @@
         {
           "heading": "Conclusion",
           "content": "In conclusion, AI can make banking more efficient and secure, but technology alone cannot guarantee responsible banking. The road ahead requires a balance between innovation, ethics, human judgement, and customer trust."
+        }
+      ],
+      "practiceQuestionId": "q_1789461021674",
+      "active": true
+    },
+    {
+      "id": "essay_1789465614712",
+      "title": "Social Media: Empowering the People or Polarising the Polity?",
+      "category": "Technology",
+      "tags": [
+        "Social Media",
+        "Technology"
+      ],
+      "image": "https://i.postimg.cc/BQGmxZz7/fomo-fear-missing-out-concept-23-2148662721.avif",
+      "body": "Social media has become an important part of modern life. Platforms such as Facebook, Instagram, X, and YouTube allow people to share opinions, access information, and communicate instantly. It has given ordinary citizens a stronger voice, but it has also created new challenges for society and democracy.\n\nSocial media has made communication faster and more accessible. Citizens can raise their concerns, support social causes, and hold governments and institutions accountable. It also helps people during emergencies by spreading important information quickly. Small businesses, students, and content creators can reach large audiences without depending on traditional media. During elections, social media can also help voters learn about issues and candidates.\n\nHowever, social media can also divide society. False information, hate speech, and edited content can spread rapidly, influencing public opinion. People often follow accounts that support their existing views and avoid opposing opinions. This creates echo chambers and increases political and social divisions. Political groups may also use social media to spread propaganda or manipulate public emotions. Excessive use of social media can further reduce meaningful public discussion.\n\nTo reduce these risks, social media platforms must improve content moderation and act against fake accounts and harmful misinformation. Users should also verify information before sharing it. Schools and institutions should promote digital literacy and critical thinking. At the same time, freedom of expression must be protected while preventing the misuse of these platforms.\n\nIn conclusion, social media is neither completely empowering nor completely divisive. Its impact depends on how it is used. Responsible users, transparent platforms, and informed citizens can ensure that social media strengthens democracy rather than weakening social unity.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "Social media has become an important part of modern life. Platforms such as Facebook, Instagram, X, and YouTube allow people to share opinions, access information, and communicate instantly. It has given ordinary citizens a stronger voice, but it has also created new challenges for society and democracy."
+        },
+        {
+          "heading": "Body – Empowering the People",
+          "content": "Social media has made communication faster and more accessible. Citizens can raise their concerns, support social causes, and hold governments and institutions accountable. It also helps people during emergencies by spreading important information quickly. Small businesses, students, and content creators can reach large audiences without depending on traditional media. During elections, social media can also help voters learn about issues and candidates."
+        },
+        {
+          "heading": "Body – Polarisation and Challenges",
+          "content": "However, social media can also divide society. False information, hate speech, and edited content can spread rapidly, influencing public opinion. People often follow accounts that support their existing views and avoid opposing opinions. This creates echo chambers and increases political and social divisions. Political groups may also use social media to spread propaganda or manipulate public emotions. Excessive use of social media can further reduce meaningful public discussion."
+        },
+        {
+          "heading": "Body – Measures / Way Forward",
+          "content": "To reduce these risks, social media platforms must improve content moderation and act against fake accounts and harmful misinformation. Users should also verify information before sharing it. Schools and institutions should promote digital literacy and critical thinking. At the same time, freedom of expression must be protected while preventing the misuse of these platforms."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, social media is neither completely empowering nor completely divisive. Its impact depends on how it is used. Responsible users, transparent platforms, and informed citizens can ensure that social media strengthens democracy rather than weakening social unity."
         }
       ],
       "practiceQuestionId": null,
