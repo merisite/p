@@ -1731,6 +1731,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1789488037604",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "Recognizing the Unpaid Care Economy: Strategies for Boosting Women's Formal Workforce Participation",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -2199,7 +2215,7 @@
       "tags": [
         "BRICS"
       ],
-      "image": "",
+      "image": "https://i.postimg.cc/4310wsw2/hand-labeled-brics-cutting-paper-money-with-scissors.webp",
       "body": "BRICS has emerged as an important platform for the Global South to seek a stronger voice in the world economy. With India holding the BRICS chair in 2026, the group has focused on resilience, innovation, cooperation and sustainability. Its economic agenda includes easier trade, greater financial cooperation and reduced dependence on a single currency.\n\nOne major focus is the use of local currencies in trade. The 2026 BRICS discussions supported cross-border payment interoperability and settlement in national currencies to reduce transaction costs. However, there is currently no proposal for a common BRICS currency. The aim is not to suddenly replace the dollar but to give member countries more choices in international payments.\n\nBRICS can help developing countries increase trade, strengthen financial independence and improve access to development finance. The New Development Bank can support infrastructure and development projects, while new measures can help small businesses enter global markets. Yet economic differences among members, dependence on the dollar, weak payment links and geopolitical tensions can slow progress.\n\nThe practical way forward is gradual cooperation. BRICS should strengthen local-currency settlement systems, improve digital payment links, expand development finance and make trade rules more transparent. The 2026 agenda also stresses support for MSMEs through better credit assessment and trade finance.\n\nIn conclusion, BRICS cannot create financial autonomy overnight. Its real strength lies in building practical alternatives and giving the Global South greater economic choices. A balanced approach can make BRICS a stronger force for a fairer and more inclusive global economy.",
       "structure": [
         {
@@ -2224,6 +2240,42 @@
         }
       ],
       "practiceQuestionId": "q_1789487717815",
+      "active": true
+    },
+    {
+      "id": "essay_1789488148144",
+      "title": "Recognizing the Unpaid Care Economy: Strategies for Boosting Women's Formal Workforce Participation",
+      "category": "Social Issues",
+      "tags": [
+        "Women",
+        "Care Economy",
+        "Economy"
+      ],
+      "image": "https://i.postimg.cc/bYGhYSms/Vapj-Sq-OT2NLC1d-EXm6PUIPHk-Qj8U8gam-S2Mawbi-F.jpg",
+      "body": "Women make a major contribution to the economy through both paid and unpaid work. However, household chores, childcare, care of elderly family members, and other domestic responsibilities are often unpaid and not properly recognized. This unpaid care work can limit women's opportunities to join and remain in the formal workforce.\n\nUnpaid care work is essential for the smooth functioning of families and society. Yet, because it does not directly generate income, its economic value is often ignored. Women spend a large amount of time on such responsibilities, leaving them with less time for education, skill development, and employment. Recognizing this contribution is important for creating a more equal and productive economy.\n\nThe burden of unpaid care work is one of the major barriers to women's employment. Limited access to affordable childcare, inadequate maternity support, unsafe workplaces, and unequal sharing of household responsibilities make it difficult for many women to take up formal jobs. In rural and low-income households, these challenges can be even greater.\n\nGovernments and employers should expand affordable childcare and elderly-care services, provide flexible work options, and ensure safe and supportive workplaces. Better maternity and parental leave can also help families share care responsibilities. Skill development, reliable transport, and equal pay are equally important. Men should also be encouraged to share household duties.\n\nIn conclusion, recognizing unpaid care work is not only a matter of gender equality but also an economic necessity. By reducing the unequal care burden and creating supportive workplaces, India can help more women enter the formal workforce. Greater female participation will improve household incomes, productivity, and overall economic growth.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "Women make a major contribution to the economy through both paid and unpaid work. However, household chores, childcare, care of elderly family members, and other domestic responsibilities are often unpaid and not properly recognized. This unpaid care work can limit women's opportunities to join and remain in the formal workforce."
+        },
+        {
+          "heading": "Body – Importance of the Unpaid Care Economy",
+          "content": "Unpaid care work is essential for the smooth functioning of families and society. Yet, because it does not directly generate income, its economic value is often ignored. Women spend a large amount of time on such responsibilities, leaving them with less time for education, skill development, and employment. Recognizing this contribution is important for creating a more equal and productive economy."
+        },
+        {
+          "heading": "Body – Challenges to Women's Workforce Participation",
+          "content": "The burden of unpaid care work is one of the major barriers to women's employment. Limited access to affordable childcare, inadequate maternity support, unsafe workplaces, and unequal sharing of household responsibilities make it difficult for many women to take up formal jobs. In rural and low-income households, these challenges can be even greater."
+        },
+        {
+          "heading": "Body – Strategies / Way Forward",
+          "content": "Governments and employers should expand affordable childcare and elderly-care services, provide flexible work options, and ensure safe and supportive workplaces. Better maternity and parental leave can also help families share care responsibilities. Skill development, reliable transport, and equal pay are equally important. Men should also be encouraged to share household duties."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, recognizing unpaid care work is not only a matter of gender equality but also an economic necessity. By reducing the unequal care burden and creating supportive workplaces, India can help more women enter the formal workforce. Greater female participation will improve household incomes, productivity, and overall economic growth."
+        }
+      ],
+      "practiceQuestionId": "q_1789488037604",
       "active": true
     }
   ]
