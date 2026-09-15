@@ -1371,7 +1371,7 @@
       "marks": 15,
       "difficulty": "easy",
       "active": true,
-      "mockNo": null,
+      "mockNo": 2,
       "productIds": [
         "IBPSPO"
       ]
@@ -1513,7 +1513,7 @@
       "marks": 15,
       "difficulty": "medium",
       "active": true,
-      "mockNo": 1,
+      "mockNo": null,
       "productIds": [
         "IBPSPO"
       ]
