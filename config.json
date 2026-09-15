@@ -1586,21 +1586,6 @@
       "productIds": [
         "IBPSPO"
       ]
-    },
-    {
-      "id": "q_1789464863121",
-      "examId": "ibps_po",
-      "type": "essay",
-      "text": "",
-      "modelAnswer": "",
-      "wordLimit": "250-300 words",
-      "marks": 15,
-      "difficulty": "easy",
-      "active": true,
-      "mockNo": null,
-      "productIds": [
-        "IBPSPO"
-      ]
     }
   ],
   "typingParas": [
@@ -1781,7 +1766,7 @@
           "content": "In conclusion, AI can make banking more efficient and secure, but technology alone cannot guarantee responsible banking. The road ahead requires a balance between innovation, ethics, human judgement, and customer trust."
         }
       ],
-      "practiceQuestionId": "q_1789461021674",
+      "practiceQuestionId": null,
       "active": true
     }
   ]
