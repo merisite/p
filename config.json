@@ -1763,6 +1763,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1789489069808",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "Bridging the Rural-Urban Divide through Rural Industrialization and Digital Empowerment",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -2326,6 +2342,43 @@
         }
       ],
       "practiceQuestionId": "q_1789488521745",
+      "active": true
+    },
+    {
+      "id": "essay_1789489215021",
+      "title": "Bridging the Rural-Urban Divide through Rural Industrialization and Digital Empowerment",
+      "category": "Social Issues & Human Development",
+      "tags": [
+        "Rural",
+        "Urban",
+        "Development",
+        "Digital"
+      ],
+      "image": "https://i.postimg.cc/DyLmZMBR/democracy-initiative-urban-rural-divide-header-1920x1280.jpg",
+      "body": "India has made rapid progress in cities, but rural areas still face challenges such as limited employment, weak infrastructure, and poor access to modern services. This rural-urban divide leads many people to migrate to cities in search of better opportunities. Rural industrialization and digital empowerment can help reduce this gap and create balanced development.\n\nRural industrialization can create jobs near people's homes and reduce dependence on agriculture. Small industries based on local resources, food processing, handicrafts, textiles, and agro-based businesses can provide stable income to rural families. Better roads, electricity, storage facilities, and access to affordable credit can further support rural enterprises. Such development can also encourage young people to build businesses in their own communities.\n\nDigital technology can connect rural citizens with opportunities that were earlier available mainly in cities. Affordable internet, digital payments, online education, telemedicine, e-commerce, and digital banking can improve access to essential services. Farmers can use digital platforms to obtain information about weather, markets, and prices. Rural entrepreneurs can also sell their products to customers across the country through online platforms.\n\nTo achieve this transformation, governments and private organisations must invest in reliable internet, digital literacy, skill development, and rural infrastructure. Local institutions should also help people understand and safely use digital services. Special support should be provided to women, small entrepreneurs, and disadvantaged communities.\n\nIn conclusion, bridging the rural-urban divide requires more than improving physical infrastructure. Rural industrialization can create livelihoods, while digital empowerment can expand access to knowledge, markets, and services. Together, they can promote inclusive growth and ensure that development reaches every section of society.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "India has made rapid progress in cities, but rural areas still face challenges such as limited employment, weak infrastructure, and poor access to modern services. This rural-urban divide leads many people to migrate to cities in search of better opportunities. Rural industrialization and digital empowerment can help reduce this gap and create balanced development."
+        },
+        {
+          "heading": "Body – Need for Rural Industrialization",
+          "content": "Rural industrialization can create jobs near people's homes and reduce dependence on agriculture. Small industries based on local resources, food processing, handicrafts, textiles, and agro-based businesses can provide stable income to rural families. Better roads, electricity, storage facilities, and access to affordable credit can further support rural enterprises. Such development can also encourage young people to build businesses in their own communities."
+        },
+        {
+          "heading": "Body – Role of Digital Empowerment",
+          "content": "Digital technology can connect rural citizens with opportunities that were earlier available mainly in cities. Affordable internet, digital payments, online education, telemedicine, e-commerce, and digital banking can improve access to essential services. Farmers can use digital platforms to obtain information about weather, markets, and prices. Rural entrepreneurs can also sell their products to customers across the country through online platforms."
+        },
+        {
+          "heading": "Body – Measures / Way Forward",
+          "content": "To achieve this transformation, governments and private organisations must invest in reliable internet, digital literacy, skill development, and rural infrastructure. Local institutions should also help people understand and safely use digital services. Special support should be provided to women, small entrepreneurs, and disadvantaged communities."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, bridging the rural-urban divide requires more than improving physical infrastructure. Rural industrialization can create livelihoods, while digital empowerment can expand access to knowledge, markets, and services. Together, they can promote inclusive growth and ensure that development reaches every section of society."
+        }
+      ],
+      "practiceQuestionId": "q_1789489069808",
       "active": true
     }
   ]
