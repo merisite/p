@@ -411,9 +411,15 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
           <label style="font-size:.72rem;color:var(--t2);display:block;margin-bottom:5px">Essay Text (always free to read)</label>
           <textarea id="es-body" placeholder="The full essay text..." rows="8" style="width:100%;margin-bottom:12px;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.82rem;font-family:inherit;resize:vertical"></textarea>
 
-          <label style="font-size:.72rem;color:var(--t2);display:block;margin-bottom:8px">Structural Breakdown (optional) — add a subheading (Introduction, Body Paragraph 1, Conclusion, etc.) with its paragraph underneath. Plain text, no bullets.</label>
-          <div id="es-structure-sections" style="margin-bottom:10px"></div>
-          <button class="btn" style="margin-bottom:14px" onclick="addEssayStructureSection()">+ Add Section</button>
+          <label style="font-size:.72rem;color:var(--t2);display:block;margin-bottom:8px">Structural Breakdown (optional) — paste the whole essay again in one go, wrapping each heading (Introduction, Body Paragraph 1, Conclusion, etc.) between <code>&amp;*</code> markers on its own line, with the paragraph right underneath. No need to add sections one at a time.</label>
+          <textarea id="es-structure-raw" placeholder="&*Introduction&*
+Digital banking has grown rapidly in India over the past decade...
+
+&*Body Paragraph 1&*
+UPI alone processes billions of transactions every month...
+
+&*Conclusion&*
+In conclusion, while digital banking has significantly advanced financial inclusion..." rows="10" style="width:100%;margin-bottom:14px;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.82rem;font-family:inherit;resize:vertical"></textarea>
 
           <label style="font-size:.72rem;color:var(--t2);display:block;margin-bottom:5px">Linked Practice Question (from the Questions editor — must be an Essay Writing type question)</label>
           <select id="es-practice-q" style="width:100%;margin-bottom:12px;padding:8px 11px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.82rem"></select>
@@ -2147,24 +2153,31 @@ function renderEssayList(){
     </tr>`).join('')
     +'</tbody></table>';
 }
-let _es_sectionCount=0;
-function addEssayStructureSection(heading,content){
-  const id='ess-'+(_es_sectionCount++);
-  const wrap=document.createElement('div');
-  wrap.id=id;
-  wrap.className='es-structure-block';
-  wrap.style.cssText='border:1px solid var(--b);border-radius:var(--rs);padding:12px;margin-bottom:10px;background:var(--bg3)';
-  wrap.innerHTML=`
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-      <span style="font-size:.68rem;color:var(--t2);font-weight:700;text-transform:uppercase;letter-spacing:.05em">Section</span>
-      <button class="btn" style="padding:3px 9px;font-size:.66rem" onclick="document.getElementById('${id}').remove()">Remove</button>
-    </div>
-    <input class="es-sec-heading" placeholder="Heading (e.g. Introduction, Body Paragraph 1, Conclusion)" style="width:100%;margin-bottom:8px;padding:7px 9px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg2);color:var(--t);font-size:.8rem"/>
-    <textarea class="es-sec-content" placeholder="Paragraph text for this section" rows="3" style="width:100%;padding:7px 9px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg2);color:var(--t);font-size:.8rem;font-family:inherit;resize:vertical"></textarea>
-  `;
-  document.getElementById('es-structure-sections').appendChild(wrap);
-  if(heading!=null)wrap.querySelector('.es-sec-heading').value=heading;
-  if(content!=null)wrap.querySelector('.es-sec-content').value=content;
+// Parses text where each heading is wrapped like &*Introduction&* with its
+// paragraph directly underneath, into [{heading, content}, ...]. Anything
+// typed before the first &*...&* marker is ignored (it needs a heading to
+// belong to a section).
+function parseEssayStructureText(raw){
+  if(!raw)return[];
+  const re=/&\*([^*]*?)&\*/g;
+  const marks=[];
+  let m;
+  while((m=re.exec(raw))!==null){
+    marks.push({heading:m[1].trim(),start:m.index,end:re.lastIndex});
+  }
+  const out=[];
+  for(let i=0;i<marks.length;i++){
+    if(!marks[i].heading)continue;
+    const contentStart=marks[i].end;
+    const contentEnd=i+1<marks.length?marks[i+1].start:raw.length;
+    out.push({heading:marks[i].heading,content:raw.slice(contentStart,contentEnd).trim()});
+  }
+  return out;
+}
+// Rebuilds the &*Heading&* marked text from a saved structure array, so
+// editing an existing essay shows it back in the same paste-friendly format.
+function buildEssayStructureText(structure){
+  return (structure||[]).map(s=>`&*${s.heading}&*\n${s.content||''}`).join('\n\n');
 }
 function editEssay(id){
   const d=D();
@@ -2177,8 +2190,7 @@ function editEssay(id){
   document.getElementById('es-tags').value=(e.tags||[]).join(', ');
   document.getElementById('es-image').value=e.image||'';
   document.getElementById('es-body').value=e.body||'';
-  document.getElementById('es-structure-sections').innerHTML='';
-  (e.structure||[]).forEach(sec=>addEssayStructureSection(sec.heading,sec.content));
+  document.getElementById('es-structure-raw').value=buildEssayStructureText(e.structure);
   document.getElementById('es-practice-q').value=e.practiceQuestionId||'';
   document.getElementById('es-active').checked=e.active!==false;
   document.getElementById('es-id').value=e.id;
@@ -2188,8 +2200,7 @@ function editEssay(id){
 function resetEssayForm(){
   _es_editingId=null;
   document.getElementById('es-form-title').textContent='Add Essay';
-  ['es-title','es-category','es-tags','es-image','es-body','es-id'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('es-structure-sections').innerHTML='';
+  ['es-title','es-category','es-tags','es-image','es-body','es-id','es-structure-raw'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('es-practice-q').value='';
   document.getElementById('es-active').checked=true;
   document.getElementById('es-cancel-edit').style.display='none';
@@ -2198,10 +2209,7 @@ function saveEssay(){
   const title=document.getElementById('es-title').value.trim();
   const body=document.getElementById('es-body').value.trim();
   if(!title||!body){t('Title and essay text are required','er');return;}
-  const structure=Array.from(document.querySelectorAll('#es-structure-sections .es-structure-block')).map(block=>({
-    heading:block.querySelector('.es-sec-heading').value.trim(),
-    content:block.querySelector('.es-sec-content').value.trim()
-  })).filter(sec=>sec.heading); // a section needs at least a heading to count
+  const structure=parseEssayStructureText(document.getElementById('es-structure-raw').value);
   const d=D();
   if(!d.essays)d.essays=[];
   const essay={

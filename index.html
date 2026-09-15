@@ -1828,7 +1828,7 @@ function renderEssayBodyHTML(e,mode){
     return structure.map(sec=>`
       <div style="margin-bottom:18px">
         <div style="font-size:.88rem;font-weight:800;color:var(--accent);margin-bottom:7px">${escapeHTML(sec.heading)}</div>
-        <div style="font-size:.84rem;color:var(--t);line-height:1.7">${escapeHTML(sec.content||'')}</div>
+        <div style="font-size:.84rem;color:var(--t);line-height:1.7;white-space:pre-wrap">${escapeHTML(sec.content||'')}</div>
       </div>`).join('');
   }
   return `<div style="font-size:.88rem;line-height:1.85;color:var(--t);white-space:pre-wrap">${escapeHTML(e.body||'')}</div>`;
