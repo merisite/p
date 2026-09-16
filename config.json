@@ -170,29 +170,33 @@
       "id": "q_1781760136257",
       "examId": "ibps_po",
       "type": "comprehension",
-      "text": "Read the passage and answer the questions that follow in your own words.\n\nThe recent standoff between social media platform X (formerly Twitter) and the Indian government has reignited a broader debate over censorship, digital sovereignty, and freedom of expression. The conflict began when the Indian government directed X to block several posts and user accounts that it deemed “misleading,” “provocative,” or “harmful to public order.” While X complied with the takedown orders in part to avoid legal repercussions, it also issued a public statement expressing disagreement and concern over the implications for transparency and users’ rights.\nIndia’s Information Technology (Intermediary Guidelines and Digital Media Ethics Code) Rules, 2021, grant the government authority to instruct platforms to remove content deemed a threat to sovereignty, national security, or public morality. Officials argue that these rules are necessary to curb misinformation, hate speech, and incitement. However, civil liberties advocates contend that such provisions lack adequate judicial scrutiny and may be prone to misuse.\nThe confrontation with X is not an isolated incident. Platforms like WhatsApp, Meta, and YouTube have also faced similar directives, though most complied silently. X’s approach stands out because of its willingness to publish transparency reports and resist blanket takedown orders, thereby opening up a public conversation about digital rights and platform accountability.\nThis episode reflects a global challenge: democracies everywhere are struggling to balance national security with freedom of speech in the digital age. In India, home to over 800 million internet users and a vibrant political discourse, the question becomes even more pressing. How India manages this tension will likely set the tone for digital governance in other democracies facing similar dilemmas. \n\nQuestions\n(1) What led to the recent standoff between X and the Indian government, and how did X respond to the government’s directives?\n(2) Why does the Indian government consider the IT Rules, 2021 necessary for regulating online content?\n(3) What concerns have civil liberties advocates raised regarding the government’s power under the IT Rules, 2021?\n(4) How does X’s response differ from that of other platforms such as WhatsApp, Meta, and YouTube?\n(5) Why is the issue of balancing national security and freedom of expression particularly significant for India?",
-      "modelAnswer": "(1) The standoff arose after the government ordered X to remove posts and accounts considered harmful or misleading. X partly complied to avoid legal consequences but publicly questioned the orders, particularly their impact on transparency and users’ rights. \n\n(2) The government considers the IT Rules, 2021 necessary to address online threats such as misinformation, hate speech, and incitement. The rules provide legal authority to remove content that may endanger national security, sovereignty, or public morality. \n\n(3) Civil liberties advocates fear that the government’s extensive powers may be misused because the provisions do not provide sufficient judicial oversight. They argue that unchecked authority to remove online content could restrict legitimate expression and weaken individual freedoms. \n\n(4) Unlike most other platforms, which generally complied with government directives without public resistance, X openly expressed disagreement with certain orders. Its transparency reports and opposition to broad takedown demands have encouraged wider discussion about digital rights and platform accountability. \n\n(5) India’s large internet population and active political discourse make this balance especially important. Decisions regarding online regulation can significantly affect democratic debate and individual freedoms. India’s approach may also influence how other democracies address similar digital governance challenges.",
+      "text": "",
+      "modelAnswer": "",
       "label": "1 Read the passage and answer the questions that follow in your own word…",
       "wordLimit": "150 words (30-40 words per answer)",
       "marks": 10,
       "difficulty": "medium",
       "active": true,
       "mockNo": 1,
-      "productIds": []
+      "productIds": [
+        "IBPSPO"
+      ]
     },
     {
       "id": "q10",
       "examId": "ibps_po",
       "type": "comprehension",
-      "text": "Read the passage and answer the questions that follow in your own words.\n\nIn recent years, the expansion of mental health services in rural India has begun gaining traction, addressing a long-standing gap in public healthcare delivery. Traditionally, mental health remained a neglected domain—particularly in non-urban regions—due to stigma, lack of awareness, and limited institutional infrastructure. However, with rising cases of anxiety, depression, and substance abuse being reported in rural communities, the need for inclusive mental health interventions has become urgent.\nGovernment schemes like the National Mental Health Programme (NMHP) and the Tele-MANAS initiative are now being strengthened to penetrate beyond district headquarters into primary health centres and community clinics. The use of tele-counselling, mobile vans, and trained local health workers is helping decentralize services and reach populations that were previously underserved.\nOne notable shift is the integration of mental health with broader public health missions. Accredited Social Health Activists (ASHAs) and auxiliary nurse midwives are being trained to identify early symptoms and provide initial counselling or referrals. Local language content and culturally contextual outreach are also being prioritized to dismantle stigma and encourage openness.\nDespite these developments, significant hurdles persist. A shortage of qualified psychiatrists and clinical psychologists in rural belts continues to constrain long-term support. Moreover, societal taboos and myths around mental illness often deter individuals from seeking help.\nStill, the growing policy focus and grassroots-level efforts represent a hopeful turn. Building sustained awareness, strengthening referral chains, and ensuring continuity of care will be essential for impact.\nThis evolving effort underlines that mental wellness in rural India can no longer remain on the periphery of public health planning. It deserves structured investment, policy innovation, and long-term political will.\n\nQUESTIONS:\n\n(1) Why has the expansion of mental health services in rural India become increasingly necessary in recent years?\n(2) What measures are being adopted by the government to make mental health services more accessible in rural areas?\n(3) How are ASHAs and auxiliary nurse midwives contributing to the delivery of rural mental health services?\n(4) What major challenges continue to restrict the effective delivery of mental healthcare in rural India?\n(5) What steps does the passage suggest are necessary to ensure the long-term success of rural mental health initiatives?",
-      "modelAnswer": "(1) Mental health services have become increasingly necessary because rural communities are witnessing rising cases of anxiety, depression, and substance abuse. Historically, stigma, inadequate awareness, and poor healthcare infrastructure prevented many rural residents from accessing appropriate mental health support.\n\n(2) The government is strengthening initiatives such as NMHP and Tele-MANAS while extending services to primary health centres and community clinics. Tele-counselling, mobile medical units, trained local workers, and culturally relevant content are also being used to improve accessibility.\n\n(3) ASHAs and auxiliary nurse midwives are being trained to recognise early signs of mental illness and provide basic counselling or referrals. Their involvement helps integrate mental healthcare into existing community-level health services and enables earlier intervention among rural populations.\n\n(4) Rural mental healthcare continues to face a shortage of qualified psychiatrists and clinical psychologists, limiting sustained treatment. In addition, social stigma, misconceptions, and deeply rooted taboos discourage people from acknowledging mental health problems or seeking professional assistance when required.\n\n(5) Long-term success requires sustained public awareness, stronger referral systems, and continuity of treatment. The passage also emphasises structured investment, innovative policies, and consistent political commitment to ensure that rural mental healthcare becomes a lasting part of public health planning.",
+      "text": "",
+      "modelAnswer": "",
       "label": "2 Read the passage and answer the questions that follow in your own word…",
       "wordLimit": "150 words (30-40 words per answer)",
       "marks": 10,
       "difficulty": "medium",
       "active": true,
       "mockNo": 2,
-      "productIds": []
+      "productIds": [
+        "IBPSPO"
+      ]
     },
     {
       "id": "q_email_2",
@@ -1572,15 +1576,17 @@
       "id": "q_1789497068222",
       "examId": "ibps_po",
       "type": "comprehension",
-      "text": "Read the passage and answer the questions that follow in your own words.\n\nThe global demand for energy continues to increase as populations grow, industries expand, and living standards improve. For many decades, coal, oil, and natural gas have supplied a large share of this energy. However, dependence on fossil fuels has created environmental concerns, particularly because their use contributes significantly to greenhouse gas emissions.\nRenewable energy sources such as solar, wind, hydropower, and biomass offer alternatives to conventional fuels. Unlike fossil fuels, renewable sources are naturally replenished. The expansion of clean energy can help reduce emissions and support efforts to address climate change.\nSolar and wind power have grown rapidly due to technological improvements and declining costs across many markets. Solar panels can be installed on rooftops, industrial sites, and large solar farms. Wind turbines can generate electricity in areas with suitable wind conditions. These technologies can also create employment in manufacturing, installation, maintenance, and research.\nHowever, renewable energy has its own challenges. Solar and wind generation can vary depending on weather conditions. This creates a need for energy storage, flexible electricity networks, and better forecasting systems. Large renewable projects may also require significant land and infrastructure.\nAnother challenge is ensuring that the transition is fair. Communities and workers connected to traditional energy industries may be affected as economies move towards cleaner sources. Governments need policies that support retraining, new employment opportunities, and regional development.\nInvestment in renewable energy can provide economic and environmental benefits. Countries can reduce dependence on imported fuels, encourage domestic industries, and improve energy security. Innovation in battery storage, smart grids, green hydrogen, and other technologies may further strengthen the renewable-energy sector.\nThe transition to cleaner energy will require cooperation among governments, businesses, researchers, and consumers. Renewable energy alone cannot solve every energy challenge, but it can become a major part of a diversified and sustainable energy system. Long-term planning and consistent investment will be necessary to achieve a reliable and cleaner energy future.\n\nQuestions\n\n(1) Why is the world moving towards renewable energy?\n(2) What challenges are associated with solar and wind power?\n(3) Why should the energy transition be fair to workers and communities?\n(4) What economic benefits can renewable energy provide? \n(5) Why is cooperation among different stakeholders necessary for the clean-energy transition?",
-      "modelAnswer": "(1) Growing energy demand and environmental concerns are encouraging countries to explore cleaner sources. Fossil fuels produce significant emissions, whereas renewable sources can provide energy with lower environmental impact. Therefore, clean energy is increasingly important for sustainable long-term development. \n\n(2) Solar and wind generation depend on weather conditions, so their output can fluctuate. This requires better electricity networks, forecasting, and storage systems. Large renewable projects may also need considerable land and supporting infrastructure. \n\n(3) Workers and communities dependent on traditional energy industries may experience economic difficulties during the transition. Governments should therefore support retraining, alternative employment, and regional development so that the shift towards cleaner energy does not create severe social problems. \n\n(4) Renewable energy can reduce dependence on imported fuels and improve energy security. It can also support domestic industries and create employment in manufacturing, installation, maintenance, research, and emerging technologies, thereby providing both environmental and economic advantages. \n\n(5) The transition involves technological, economic, social, and infrastructure-related challenges. Governments, businesses, researchers, and consumers must therefore work together to develop effective policies, encourage innovation, provide investment, and promote responsible energy consumption.",
+      "text": "",
+      "modelAnswer": "",
       "label": "3 Read the passage and answer the questions that follow in your own words.",
       "wordLimit": "150 words (30-40 words per answer)",
       "marks": 10,
       "difficulty": "medium",
-      "active": false,
+      "active": true,
       "mockNo": null,
-      "productIds": []
+      "productIds": [
+        "IBPSPO"
+      ]
     },
     {
       "id": "q_1789543252073",
@@ -1687,6 +1693,70 @@
       "label": "The Growing Challenge of Electronic Waste in a Digital Economy: Policy Interventions for a Circular Economy.",
       "wordLimit": "250-300 words",
       "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
+    },
+    {
+      "id": "q_1789548923735",
+      "examId": "ibps_po",
+      "type": "comprehension",
+      "text": "",
+      "modelAnswer": "",
+      "label": "4 Read the passage and answer the questions that follow in your own word…",
+      "wordLimit": "150 words (30-40 words per answer)",
+      "marks": 10,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
+    },
+    {
+      "id": "q_1789549178897",
+      "examId": "ibps_po",
+      "type": "comprehension",
+      "text": "",
+      "modelAnswer": "",
+      "label": "5 Read the passage and answer the questions that follow in your own words.",
+      "wordLimit": "150 words (30-40 words per answer)",
+      "marks": 10,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
+    },
+    {
+      "id": "q_1789549409292",
+      "examId": "ibps_po",
+      "type": "comprehension",
+      "text": "",
+      "modelAnswer": "",
+      "label": "6 Read the passage and answer the questions that follow in your own words.",
+      "wordLimit": "150 words (30-40 words per answer)",
+      "marks": 10,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
+    },
+    {
+      "id": "q_1789549573098",
+      "examId": "ibps_po",
+      "type": "comprehension",
+      "text": "",
+      "modelAnswer": "",
+      "label": "7 Read the passage and answer the questions that follow in your own words.",
+      "wordLimit": "150 words (30-40 words per answer)",
+      "marks": 10,
       "difficulty": "medium",
       "active": true,
       "mockNo": null,
