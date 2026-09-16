@@ -191,7 +191,7 @@
       "marks": 10,
       "difficulty": "medium",
       "active": true,
-      "mockNo": null,
+      "mockNo": 2,
       "productIds": []
     },
     {
@@ -1669,7 +1669,8 @@
       "mockNo": 2,
       "title": "IBPS PO Mock 2",
       "active": true,
-      "status": "upcoming"
+      "status": "upcoming",
+      "productIds": []
     },
     {
       "id": "ibps_po_mock_3",
@@ -1803,7 +1804,7 @@
     {
       "id": "essay_1789465982791",
       "title": "The Rise of the Gig Economy in India: Opportunities and Challenges",
-      "category": "Economy & Finance",
+      "category": "Government & Policy",
       "tags": [
         "Gig Economy"
       ],
@@ -1975,7 +1976,7 @@
     {
       "id": "essay_1789477979942",
       "title": "AI-Driven Financial Frauds: How Banks Can Balance Technological Innovation with Consumer Security.",
-      "category": "Technology",
+      "category": "Economy & Finance",
       "tags": [
         "AI",
         "Frauds",
@@ -2116,7 +2117,7 @@
     {
       "id": "essay_1789488902470",
       "title": "Overhauling India's Food Safety Framework: Standards, Enforcement, and Public Health",
-      "category": "Governance & Institutional Reforms",
+      "category": "Government & Policy",
       "tags": [
         "Food Safety"
       ],
