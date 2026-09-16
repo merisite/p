@@ -1756,19 +1756,35 @@ function renderHome(){
     </div>`;
   }).join("");
   document.getElementById("sec-cards").innerHTML=examCards||"<div style='color:var(--t2);font-size:.8rem;padding:12px 0'>No active exams. Add exams in Admin panel.</div>";
-  // Practice section — Typing Speed Test first, then section types
-  const allSections=d.sectionTypes;
+  // Practice section — Typing Speed Test first, then section types in a fixed
+  // display order (Essay, Comprehension, then Email/Situation/Report/Precis),
+  // with any other configured section types kept at the end in their original order.
+  const sectionDisplayOrder=["essay","comprehension","email","situation","report","precis"];
+  const allSections=[...d.sectionTypes].sort((a,b)=>{
+    const ai=sectionDisplayOrder.indexOf(a.id),bi=sectionDisplayOrder.indexOf(b.id);
+    const aRank=ai===-1?sectionDisplayOrder.length:ai,bRank=bi===-1?sectionDisplayOrder.length:bi;
+    return aRank-bRank;
+  });
   const typingCardHTML=`<div class="hcard" onclick="showS('typing')">
     <div class="hc-icon hc-tool"><svg width="16" height="16" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M8 12h.01M12 12h.01M16 12h.01M7 16h10"/></svg></div>
     <div class="hc-title" id="typ-pcard-t">${cfg.typingCardTitle||"Typing Speed Test"}</div>
     <div class="hc-desc" id="typ-pcard-d">${cfg.typingCardDesc||"Check your WPM and accuracy with a countdown timer"}</div>
   </div>`;
-  document.getElementById("sec-practice-cards").innerHTML=typingCardHTML+allSections.map(s=>`
+  const sectionCardsArr=allSections.map(s=>`
     <div class="hcard" onclick="goSec('${s.id}')">
       <div class="hc-icon"><svg width="16" height="16" viewBox="0 0 24 24">${icons[s.id]||icons.report}</svg></div>
       <div class="hc-title">${s.name}</div>
       <div class="hc-desc">${s.wordLimit} &middot; ${s.marks} marks</div>
-    </div>`).join("");
+    </div>`);
+  const essayLibCardHTML=`
+    <div class="hcard" onclick="showS('essays');renderEssayLibrary()" style="border-color:var(--aborder);background:var(--adim)">
+      <div class="hc-icon" style="background:var(--adim);border-color:var(--aborder);color:var(--accent)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
+      <div class="hc-title">Essay Library</div>
+      <div class="hc-desc">Browse model essays by topic — read free, get inspired</div>
+    </div>`;
+  const essayInsertIdx=allSections.findIndex(s=>s.id==="essay"||s.id==="comprehension");
+  if(essayInsertIdx>=0)sectionCardsArr.splice(essayInsertIdx,0,essayLibCardHTML);
+  document.getElementById("sec-practice-cards").innerHTML=typingCardHTML+sectionCardsArr.join("");
 }
 function goSec(t,opts){renderQS(t);showS("qselect",{skipHash:opts&&opts.skipHash,hash:"qselect-"+t});}
 
