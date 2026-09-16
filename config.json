@@ -1659,6 +1659,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1789545086616",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "Democratic AI: Leveraging Artificial Intelligence for Informal Workers and Women's Empowerment",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -2433,6 +2449,41 @@
         }
       ],
       "practiceQuestionId": "q_1789544699802",
+      "active": true
+    },
+    {
+      "id": "essay_1789545045090",
+      "title": "Democratic AI: Leveraging Artificial Intelligence for Informal Workers and Women's Empowerment",
+      "category": "Technology",
+      "tags": [
+        "AI",
+        "Women"
+      ],
+      "image": "https://i.postimg.cc/MprWSJ85/ai-women.jpg",
+      "body": "Artificial Intelligence (AI) is becoming an important part of the modern economy. While advanced technology is often associated with large companies and skilled professionals, it can also improve the lives of informal workers and women. If AI is made affordable, accessible, and easy to use, it can create new opportunities for people who are often left out of formal systems.\n\nInformal workers such as street vendors, domestic workers, small farmers, and daily-wage workers often face problems related to income, credit, skills, and access to government schemes. AI-powered mobile applications can provide information about jobs, market prices, training programmes, and welfare schemes in local languages. AI can also help small workers understand digital payments, manage expenses, and access suitable financial services. This can improve their productivity and economic security.\n\nAI can also support women's economic empowerment. Women can use AI-based platforms to learn new skills, find flexible work, start small businesses, and access information about financial services. Voice-based AI tools can be particularly useful for women with limited digital literacy. AI can also help women entrepreneurs with basic tasks such as marketing, accounting, and customer communication.\n\nHowever, unequal access to smartphones, the internet, and digital education can prevent many people from benefiting from AI. Privacy, biased algorithms, and job displacement are other concerns. Governments and technology companies must therefore provide affordable digital access, local-language tools, skill training, and strong data protection.\n\nIn conclusion, democratic AI should not remain a tool only for the privileged. When designed around inclusion and human needs, it can strengthen livelihoods, expand opportunities for women, and make economic growth more inclusive.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "Artificial Intelligence (AI) is becoming an important part of the modern economy. While advanced technology is often associated with large companies and skilled professionals, it can also improve the lives of informal workers and women. If AI is made affordable, accessible, and easy to use, it can create new opportunities for people who are often left out of formal systems."
+        },
+        {
+          "heading": "Body – AI for Informal Workers",
+          "content": "Informal workers such as street vendors, domestic workers, small farmers, and daily-wage workers often face problems related to income, credit, skills, and access to government schemes. AI-powered mobile applications can provide information about jobs, market prices, training programmes, and welfare schemes in local languages. AI can also help small workers understand digital payments, manage expenses, and access suitable financial services. This can improve their productivity and economic security."
+        },
+        {
+          "heading": "Body – AI for Women's Empowerment",
+          "content": "AI can also support women's economic empowerment. Women can use AI-based platforms to learn new skills, find flexible work, start small businesses, and access information about financial services. Voice-based AI tools can be particularly useful for women with limited digital literacy. AI can also help women entrepreneurs with basic tasks such as marketing, accounting, and customer communication."
+        },
+        {
+          "heading": "Body – Challenges and Way Forward",
+          "content": "However, unequal access to smartphones, the internet, and digital education can prevent many people from benefiting from AI. Privacy, biased algorithms, and job displacement are other concerns. Governments and technology companies must therefore provide affordable digital access, local-language tools, skill training, and strong data protection."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, democratic AI should not remain a tool only for the privileged. When designed around inclusion and human needs, it can strengthen livelihoods, expand opportunities for women, and make economic growth more inclusive."
+        }
+      ],
+      "practiceQuestionId": "q_1789545086616",
       "active": true
     }
   ]
