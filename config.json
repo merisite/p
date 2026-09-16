@@ -1476,15 +1476,17 @@
       "id": "q_1789478055925",
       "examId": "ibps_po",
       "type": "essay",
-      "text": "AI-Driven Financial Frauds: How Banks Can Balance Technological Innovation with Consumer Security.",
-      "modelAnswer": "Artificial Intelligence (AI) is transforming the banking sector by making services faster, smarter, and more convenient. Banks use AI for fraud detection, customer support, credit assessment, and digital payments. However, the same technology can also be misused by criminals to create more advanced financial frauds. Therefore, banks must balance innovation with consumer security.\n\nCriminals can use AI to create fake voices, images, messages, and websites that appear genuine. Such methods can make phishing and identity theft more difficult to detect. AI can also help criminals study personal information and target customers with highly convincing scams. As digital banking grows, these threats can affect both individuals and financial institutions.\n\nBanks face the difficult task of protecting customers without making digital banking slow or complicated. Strong security systems require continuous investment, skilled professionals, and regular monitoring. At the same time, excessive security checks may inconvenience genuine customers. Banks must also protect customer data while using AI-based systems to identify suspicious activities.\n\nBanks should use AI itself to detect unusual transactions, identify suspicious patterns, and stop fraudulent payments quickly. Multi-factor authentication, real-time alerts, strong encryption, and regular security audits can provide additional protection. Banks should also conduct awareness campaigns to teach customers about phishing, fake calls, and unsafe links. Clear grievance redressal systems and quick action after fraud are equally important.\n\nIn conclusion, AI can become both a powerful tool for fraudsters and an effective defence for banks. The solution is not to avoid technological innovation but to use it responsibly. A combination of advanced security, customer awareness, data protection, and human supervision can help banks build a safer and more trustworthy digital banking system.",
+      "text": "",
+      "modelAnswer": "",
       "label": "AI-Driven Financial Frauds: How Banks Can Balance Technological Innovation with Consumer Security.",
       "wordLimit": "250-300 words",
       "marks": 15,
       "difficulty": "medium",
-      "active": false,
+      "active": true,
       "mockNo": 1,
-      "productIds": []
+      "productIds": [
+        "IBPSPO"
+      ]
     },
     {
       "id": "q_1789487303913",
@@ -1667,6 +1669,22 @@
       "text": "",
       "modelAnswer": "",
       "label": "Democratic AI: Leveraging Artificial Intelligence for Informal Workers and Women's Empowerment",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
+    },
+    {
+      "id": "q_1789545865879",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "The Growing Challenge of Electronic Waste in a Digital Economy: Policy Interventions for a Circular Economy.",
       "wordLimit": "250-300 words",
       "marks": 15,
       "difficulty": "medium",
@@ -2484,6 +2502,40 @@
         }
       ],
       "practiceQuestionId": "q_1789545086616",
+      "active": true
+    },
+    {
+      "id": "essay_1789545779211",
+      "title": "The Growing Challenge of Electronic Waste in a Digital Economy: Policy Interventions for a Circular Economy.",
+      "category": "Environment",
+      "tags": [
+        "Environment"
+      ],
+      "image": "https://i.postimg.cc/Bnw1wz7G/images.jpg",
+      "body": "The rapid growth of the digital economy has made electronic devices an essential part of modern life. Smartphones, computers, televisions, and other electronic products are being replaced more frequently due to technological changes and consumer demand. As a result, electronic waste, or e-waste, is becoming a serious environmental challenge.\n\nThe short life of electronic devices, frequent upgrades, and poor disposal practices are major causes of e-waste. When electronic products are thrown away without proper treatment, harmful substances can pollute soil and water and affect human health. At the same time, valuable materials such as copper, aluminium, and other metals are lost. Informal recycling methods can also expose workers to dangerous substances.\n\nA circular economy can help address this problem by keeping products and materials in use for as long as possible. Devices should be designed to last longer, be repaired easily, and be recycled efficiently. Consumers can also contribute by repairing old devices, reusing them, and giving unwanted electronics to authorised collection centres instead of throwing them away.\n\nGovernments need strong policies to support responsible e-waste management. Extended Producer Responsibility can make manufacturers responsible for collecting and recycling discarded products. Better recycling facilities, strict monitoring, awareness campaigns, and incentives for repair and recycling can further improve the system. Manufacturers should also be encouraged to use recyclable materials and adopt eco-friendly designs.\n\nIn conclusion, e-waste is an unavoidable challenge of a growing digital economy, but it can be managed effectively. A combination of responsible consumption, better product design, efficient recycling, and strong government policies can help India move towards a cleaner and more sustainable circular economy.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "The rapid growth of the digital economy has made electronic devices an essential part of modern life. Smartphones, computers, televisions, and other electronic products are being replaced more frequently due to technological changes and consumer demand. As a result, electronic waste, or e-waste, is becoming a serious environmental challenge."
+        },
+        {
+          "heading": "Body – Causes and Impact of E-Waste",
+          "content": "The short life of electronic devices, frequent upgrades, and poor disposal practices are major causes of e-waste. When electronic products are thrown away without proper treatment, harmful substances can pollute soil and water and affect human health. At the same time, valuable materials such as copper, aluminium, and other metals are lost. Informal recycling methods can also expose workers to dangerous substances."
+        },
+        {
+          "heading": "Body – Need for a Circular Economy",
+          "content": "A circular economy can help address this problem by keeping products and materials in use for as long as possible. Devices should be designed to last longer, be repaired easily, and be recycled efficiently. Consumers can also contribute by repairing old devices, reusing them, and giving unwanted electronics to authorised collection centres instead of throwing them away."
+        },
+        {
+          "heading": "Body – Policy Interventions",
+          "content": "Governments need strong policies to support responsible e-waste management. Extended Producer Responsibility can make manufacturers responsible for collecting and recycling discarded products. Better recycling facilities, strict monitoring, awareness campaigns, and incentives for repair and recycling can further improve the system. Manufacturers should also be encouraged to use recyclable materials and adopt eco-friendly designs."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, e-waste is an unavoidable challenge of a growing digital economy, but it can be managed effectively. A combination of responsible consumption, better product design, efficient recycling, and strong government policies can help India move towards a cleaner and more sustainable circular economy."
+        }
+      ],
+      "practiceQuestionId": null,
       "active": true
     }
   ]
