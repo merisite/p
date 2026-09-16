@@ -1986,7 +1986,7 @@ function renderQS(type){
     if(locked){
       const unlockIds=getUnlockingProductIds(q);
       const prod=cheapestUnlockingProduct(unlockIds);
-      ctaHTML=`<button onclick="event.stopPropagation();showUnlockOptions(${jsArrayAttr(unlockIds)})" style="font-size:.7rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:5px 12px;border-radius:999px;white-space:nowrap;cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:4px"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Unlock — ${priceLabel(prod)}</button>`;
+      ctaHTML=`<button onclick="event.stopPropagation();showUnlockOptions(${jsArrayAttr(unlockIds)})" style="font-size:.7rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:5px 12px;border-radius:999px;white-space:nowrap;cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:4px"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Unlock</button>`;
       viewResultBtn="";
     }else{
       const cta=lastAttempt?"↻ Reattempt":"→ Click to attempt";
@@ -2447,7 +2447,7 @@ function showMockList(examId,opts){
       let ctaHTML,viewResultBtn;
       if(locked){
         const prod=cheapestUnlockingProduct(m.productIds);
-        ctaHTML=`<button onclick="event.stopPropagation();showUnlockOptions(${jsArrayAttr(m.productIds)})" style="font-size:.66rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:4px 10px;border-radius:999px;white-space:nowrap;cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:4px"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Unlock — ${priceLabel(prod)}</button>`;
+        ctaHTML=`<button onclick="event.stopPropagation();showUnlockOptions(${jsArrayAttr(m.productIds)})" style="font-size:.66rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:4px 10px;border-radius:999px;white-space:nowrap;cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:4px"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Unlock</button>`;
         viewResultBtn="";
       }else{
         const cta=lastAttempt?"↻ Reattempt":"→ Start Mock";
@@ -2478,7 +2478,7 @@ function showMockList(examId,opts){
         bannerEl.style.display="";
         bannerEl.innerHTML=`<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:var(--adim);border:1px solid var(--aborder);border-radius:var(--rl);padding:14px 18px;margin-bottom:16px">
           <div style="font-size:.85rem;font-weight:700;color:var(--t)">🔓 Unlock ${counts[bestId]||lockedMocks.length} mock${(counts[bestId]||lockedMocks.length)!==1?'s':''} for this exam</div>
-          <button onclick="showUnlockOptions(['${bestId||''}'])" style="font-size:.78rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:8px 18px;border-radius:999px;cursor:pointer;font-family:var(--font)">Unlock — ${priceLabel(prod)}</button>
+          <button onclick="showUnlockOptions(['${bestId||''}'])" style="font-size:.78rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:8px 18px;border-radius:999px;cursor:pointer;font-family:var(--font)">Unlock</button>
         </div>`;
       }else{
         bannerEl.style.display="none";
