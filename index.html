@@ -1421,9 +1421,13 @@ function routeFromHash(){
     return;
   }
   if(screenId==="buy"&&sectionArg){
-    Promise.all([initPromise,_productsCachePromise||Promise.resolve()]).then(()=>{
+    Promise.all([initPromise,_productsCachePromise||Promise.resolve(),_entitlementsReadyPromise]).then(()=>{
       showS("home",{skipHash:true});
-      showUnlockOptions([sectionArg]);
+      if(isProductUnlocked(sectionArg)){
+        showToast("You already have access to this — no need to buy it again!");
+      }else{
+        showUnlockOptions([sectionArg]);
+      }
     });
     return;
   }
@@ -4505,7 +4509,13 @@ async function doGoogleLogin(){
     closeAuthModal();
     if(_pendingUnlockAfterLogin){
       const p=_pendingUnlockAfterLogin;_pendingUnlockAfterLogin=null;
-      setTimeout(function(){ showUnlockOptions(p); }, 300);
+      await refreshPurchasedProducts();
+      const stillLocked=p.filter(function(id){ return !isProductUnlocked(id); });
+      if(!stillLocked.length){
+        showToast("You already have access to this — no need to buy it again!");
+      }else{
+        showUnlockOptions(stillLocked);
+      }
     }
   }catch(e){
     errEl.textContent = friendlyAuthError(e);
@@ -4566,10 +4576,11 @@ window.addEventListener('fb-auth-changed', function(e){
     // rendered as "locked" using stale/empty data before this resolves. Re-render it once
     // the real entitlements are in, so a purchase (or just logging in) is reflected without
     // needing a manual refresh.
-    refreshPurchasedProducts().then(refreshLockedContentUI);
+    refreshPurchasedProducts().then(refreshLockedContentUI).then(markEntitlementsReady);
   }else{
     _purchasedProducts = [];
     refreshLockedContentUI();
+    markEntitlementsReady();
   }
 });
 // Re-renders whichever list (practice or mock) is currently on screen, so lock/unlock state
@@ -4610,6 +4621,14 @@ function isProductUnlocked(productId){
 // mocks also unlocks all its practice" rule. Public read, doesn't need login.
 let _productsCache = [];
 let _productsCachePromise = null;
+let _entitlementsReadyFired = false;
+let _entitlementsReadyResolve = null;
+const _entitlementsReadyPromise = new Promise(function(r){ _entitlementsReadyResolve = r; });
+function markEntitlementsReady(){
+  if(_entitlementsReadyFired)return;
+  _entitlementsReadyFired = true;
+  _entitlementsReadyResolve();
+}
 async function refreshProductsCache(){
   try{
     if(!window.FB) return;
