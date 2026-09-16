@@ -177,7 +177,7 @@
       "marks": 10,
       "difficulty": "medium",
       "active": true,
-      "mockNo": 1,
+      "mockNo": null,
       "productIds": [
         "IBPSPO"
       ]
@@ -193,7 +193,7 @@
       "marks": 10,
       "difficulty": "medium",
       "active": true,
-      "mockNo": 2,
+      "mockNo": null,
       "productIds": [
         "IBPSPO"
       ]
@@ -1760,6 +1760,86 @@
       "difficulty": "medium",
       "active": true,
       "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
+    },
+    {
+      "id": "q_1789549802356",
+      "examId": "ibps_po",
+      "type": "comprehension",
+      "text": "",
+      "modelAnswer": "",
+      "label": "8 Read the passage and answer the questions that follow in your own words.",
+      "wordLimit": "150 words (30-40 words per answer)",
+      "marks": 10,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
+    },
+    {
+      "id": "q_1789549966957",
+      "examId": "ibps_po",
+      "type": "comprehension",
+      "text": "",
+      "modelAnswer": "",
+      "label": "9 Read the passage and answer the questions that follow in your own words.",
+      "wordLimit": "150 words (30-40 words per answer)",
+      "marks": 10,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
+    },
+    {
+      "id": "q_1789550171455",
+      "examId": "ibps_po",
+      "type": "comprehension",
+      "text": "",
+      "modelAnswer": "",
+      "label": "10 Read the passage and answer the questions that follow in your own words.",
+      "wordLimit": "150 words (30-40 words per answer)",
+      "marks": 10,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
+    },
+    {
+      "id": "q_1789550382016",
+      "examId": "ibps_po",
+      "type": "comprehension",
+      "text": "",
+      "modelAnswer": "",
+      "label": "11 Read the passage and answer the questions that follow in your own words.",
+      "wordLimit": "150 words (30-40 words per answer)",
+      "marks": 10,
+      "difficulty": "medium",
+      "active": false,
+      "mockNo": 1,
+      "productIds": [
+        "IBPSPO"
+      ]
+    },
+    {
+      "id": "q_1789550578347",
+      "examId": "ibps_po",
+      "type": "comprehension",
+      "text": "",
+      "modelAnswer": "",
+      "label": "12 Read the passage and answer the questions that follow in your own words.",
+      "wordLimit": "150 words (30-40 words per answer)",
+      "marks": 10,
+      "difficulty": "medium",
+      "active": false,
+      "mockNo": 2,
       "productIds": [
         "IBPSPO"
       ]
