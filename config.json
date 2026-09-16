@@ -1579,6 +1579,38 @@
       "active": false,
       "mockNo": 1,
       "productIds": []
+    },
+    {
+      "id": "q_1789543252073",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "Globalizing India’s UPI & Fast Payment Networks: Opportunities and Challenges for the Banking Sector",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
+    },
+    {
+      "id": "q_1789543612638",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "Strengthening Credit Access for MSMEs: Role of Public Sector Banks in Driving Economic Growth",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -2183,6 +2215,74 @@
         }
       ],
       "practiceQuestionId": "q_1789489069808",
+      "active": true
+    },
+    {
+      "id": "essay_1789543165183",
+      "title": "Globalizing India’s UPI & Fast Payment Networks: Opportunities and Challenges for the Banking Sector",
+      "category": "Economy & Finance",
+      "tags": [
+        "UPI"
+      ],
+      "image": "https://i.postimg.cc/8cvMgm3z/1689905656839-removebg-preview.png",
+      "body": "India’s Unified Payments Interface (UPI) has transformed the country’s digital payment system by making transactions quick, simple, and affordable. Its growing international presence reflects India’s progress in digital financial infrastructure. As more countries explore fast payment systems, globalizing UPI can create new opportunities for India’s banking sector while also bringing several challenges.\n\nThe international expansion of UPI can help Indian banks serve customers travelling or doing business abroad. Faster cross-border payments can reduce transaction time and costs for individuals and businesses. Banks can also gain new customers and develop services for international payments, remittances, and digital banking. UPI’s success can further strengthen India’s position as a leader in digital payment technology and encourage cooperation between different countries’ payment networks.\n\nHowever, global expansion is not easy. Different countries have different rules, banking systems, currencies, and data protection laws. Connecting payment networks across countries requires strong technical infrastructure and common standards. Cybersecurity is another major concern because international payment systems may become targets for fraud and cyberattacks. Banks must also manage foreign exchange risks and ensure that customer data remains secure.\n\nTo address these challenges, Indian banks and regulators need to work closely with foreign financial institutions and governments. Common technical and security standards should be developed for cross-border payments. Banks should invest in cybersecurity, fraud detection, and reliable payment infrastructure. Clear regulations and strong customer protection will also be necessary to build trust.\n\nIn conclusion, globalizing UPI can expand opportunities for Indian banks and make international payments easier. However, its success will depend on secure technology, regulatory cooperation, data protection, and customer trust. A careful and coordinated approach can help India build a stronger global digital payment network.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "India’s Unified Payments Interface (UPI) has transformed the country’s digital payment system by making transactions quick, simple, and affordable. Its growing international presence reflects India’s progress in digital financial infrastructure. As more countries explore fast payment systems, globalizing UPI can create new opportunities for India’s banking sector while also bringing several challenges."
+        },
+        {
+          "heading": "Body – Opportunities for the Banking Sector",
+          "content": "The international expansion of UPI can help Indian banks serve customers travelling or doing business abroad. Faster cross-border payments can reduce transaction time and costs for individuals and businesses. Banks can also gain new customers and develop services for international payments, remittances, and digital banking. UPI’s success can further strengthen India’s position as a leader in digital payment technology and encourage cooperation between different countries’ payment networks."
+        },
+        {
+          "heading": "Body – Challenges and Risks",
+          "content": "However, global expansion is not easy. Different countries have different rules, banking systems, currencies, and data protection laws. Connecting payment networks across countries requires strong technical infrastructure and common standards. Cybersecurity is another major concern because international payment systems may become targets for fraud and cyberattacks. Banks must also manage foreign exchange risks and ensure that customer data remains secure."
+        },
+        {
+          "heading": "Body – Measures / Way Forward",
+          "content": "To address these challenges, Indian banks and regulators need to work closely with foreign financial institutions and governments. Common technical and security standards should be developed for cross-border payments. Banks should invest in cybersecurity, fraud detection, and reliable payment infrastructure. Clear regulations and strong customer protection will also be necessary to build trust."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, globalizing UPI can expand opportunities for Indian banks and make international payments easier. However, its success will depend on secure technology, regulatory cooperation, data protection, and customer trust. A careful and coordinated approach can help India build a stronger global digital payment network."
+        }
+      ],
+      "practiceQuestionId": "q_1789543252073",
+      "active": true
+    },
+    {
+      "id": "essay_1789543564271",
+      "title": "Strengthening Credit Access for MSMEs: Role of Public Sector Banks in Driving Economic Growth",
+      "category": "Economy & Finance",
+      "tags": [
+        "MSME"
+      ],
+      "image": "https://i.postimg.cc/4yYw7c0Z/1748867372-615262f5e6ecffa4f95b.webp",
+      "body": "Micro, Small and Medium Enterprises (MSMEs) are an important part of the Indian economy. They create jobs, support local businesses, promote entrepreneurship, and contribute to exports. However, limited access to affordable credit remains a major challenge for many MSMEs, especially small businesses in rural and semi-urban areas.\n\nAdequate credit helps MSMEs purchase machinery, raw materials, and technology and expand their operations. It also helps them manage cash-flow problems and survive temporary financial difficulties. Without timely credit, many small businesses depend on informal lenders who may charge high interest rates. Therefore, easy and affordable institutional credit is essential for their growth and stability.\n\nPublic sector banks can play a key role in improving credit access. They have a wide branch network and can reach businesses in areas where private financial institutions may have limited presence. Banks can simplify loan procedures, improve digital lending systems, provide suitable working-capital loans, and increase awareness about government-backed credit schemes. Better use of financial data can also help banks assess genuine borrowers more efficiently.\n\nMSMEs often face problems such as lack of proper records, limited financial knowledge, and insufficient collateral. Banks should address these issues through financial literacy, faster processing, flexible credit products, and stronger support for first-time borrowers. At the same time, proper risk assessment is necessary to prevent bad loans.\n\nIn conclusion, stronger credit access can help MSMEs grow, create employment, and contribute to economic development. Public sector banks can become an important bridge between formal finance and small businesses. A balanced approach combining easy credit, responsible lending, and financial awareness can make MSMEs stronger and support India's long-term economic growth.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "Micro, Small and Medium Enterprises (MSMEs) are an important part of the Indian economy. They create jobs, support local businesses, promote entrepreneurship, and contribute to exports. However, limited access to affordable credit remains a major challenge for many MSMEs, especially small businesses in rural and semi-urban areas."
+        },
+        {
+          "heading": "Body – Importance of Credit for MSMEs",
+          "content": "Adequate credit helps MSMEs purchase machinery, raw materials, and technology and expand their operations. It also helps them manage cash-flow problems and survive temporary financial difficulties. Without timely credit, many small businesses depend on informal lenders who may charge high interest rates. Therefore, easy and affordable institutional credit is essential for their growth and stability."
+        },
+        {
+          "heading": "Body – Role of Public Sector Banks",
+          "content": "Public sector banks can play a key role in improving credit access. They have a wide branch network and can reach businesses in areas where private financial institutions may have limited presence. Banks can simplify loan procedures, improve digital lending systems, provide suitable working-capital loans, and increase awareness about government-backed credit schemes. Better use of financial data can also help banks assess genuine borrowers more efficiently."
+        },
+        {
+          "heading": "Body – Challenges and Way Forward",
+          "content": "MSMEs often face problems such as lack of proper records, limited financial knowledge, and insufficient collateral. Banks should address these issues through financial literacy, faster processing, flexible credit products, and stronger support for first-time borrowers. At the same time, proper risk assessment is necessary to prevent bad loans."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, stronger credit access can help MSMEs grow, create employment, and contribute to economic development. Public sector banks can become an important bridge between formal finance and small businesses. A balanced approach combining easy credit, responsible lending, and financial awareness can make MSMEs stronger and support India's long-term economic growth."
+        }
+      ],
+      "practiceQuestionId": "q_1789543612638",
       "active": true
     }
   ]
