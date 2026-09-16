@@ -373,7 +373,7 @@
       "marks": 15,
       "difficulty": "medium",
       "active": false,
-      "mockNo": 7
+      "mockNo": null
     },
     {
       "id": "q_situation_8",
@@ -483,7 +483,7 @@
       "marks": 15,
       "difficulty": "easy",
       "active": false,
-      "mockNo": 7
+      "mockNo": null
     },
     {
       "id": "q_report_8",
@@ -596,7 +596,7 @@
       "marks": 15,
       "difficulty": "easy",
       "active": false,
-      "mockNo": 7
+      "mockNo": null
     },
     {
       "id": "q_precis_8",
@@ -1942,7 +1942,10 @@
       "mockNo": 3,
       "title": "IBPS PO Mock 3",
       "active": true,
-      "status": "upcoming"
+      "status": "upcoming",
+      "productIds": [
+        "IBPSPO"
+      ]
     },
     {
       "id": "ibps_po_mock_4",
@@ -1950,7 +1953,10 @@
       "mockNo": 4,
       "title": "IBPS PO Mock 4",
       "active": true,
-      "status": "upcoming"
+      "status": "upcoming",
+      "productIds": [
+        "IBPSPO"
+      ]
     },
     {
       "id": "ibps_po_mock_5",
@@ -1959,7 +1965,64 @@
       "title": "IBPS PO Mock 5",
       "active": true,
       "status": "upcoming",
-      "productIds": []
+      "productIds": [
+        "IBPSPO"
+      ]
+    },
+    {
+      "id": "ibps_po_mock_6",
+      "examId": "ibps_po",
+      "mockNo": 6,
+      "title": "IBPS PO Mock 6",
+      "active": true,
+      "status": "upcoming",
+      "productIds": [
+        "IBPSPO"
+      ]
+    },
+    {
+      "id": "ibps_po_mock_7",
+      "examId": "ibps_po",
+      "mockNo": 7,
+      "title": "IBPS PO Mock 7",
+      "active": true,
+      "status": "upcoming",
+      "productIds": [
+        "IBPSPO"
+      ]
+    },
+    {
+      "id": "ibps_po_mock_8",
+      "examId": "ibps_po",
+      "mockNo": 8,
+      "title": "IBPS PO Mock 8",
+      "active": true,
+      "status": "upcoming",
+      "productIds": [
+        "IBPSPO"
+      ]
+    },
+    {
+      "id": "ibps_po_mock_9",
+      "examId": "ibps_po",
+      "mockNo": 9,
+      "title": "IBPS PO Mock 9",
+      "active": true,
+      "status": "upcoming",
+      "productIds": [
+        "IBPSPO"
+      ]
+    },
+    {
+      "id": "ibps_po_mock_10",
+      "examId": "ibps_po",
+      "mockNo": 10,
+      "title": "IBPS PO Mock 10",
+      "active": true,
+      "status": "upcoming",
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "liveTrackerEntries": [],
