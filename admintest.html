@@ -2043,6 +2043,24 @@ async function adminSignOut(){
 
 /* ---------- Products & pricing ---------- */
 let _pp_editingId = null; // null = creating new, otherwise the ID currently being edited
+// Generates a shareable direct-purchase link for a product: opens the live site straight
+// into the "choose a package / buy now" popup for that exact product (login required first
+// if not already signed in — handled automatically by the site's own unlock flow).
+// Resolved relative to admin's own location, same convention as the "Preview Site" button.
+function copyProductLink(productId,btn){
+  const url = new URL('index.html#buy-'+encodeURIComponent(productId), location.href).href;
+  const done = function(){
+    if(!btn)return;
+    const orig = btn.innerHTML;
+    btn.innerHTML = '✓ Copied';
+    setTimeout(function(){ btn.innerHTML = orig; }, 1400);
+  };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(url).then(done).catch(function(){ prompt('Copy this link:', url); });
+  }else{
+    prompt('Copy this link:', url);
+  }
+}
 async function loadProducts(){
   const listEl = document.getElementById('pm-products-list');
   try{
@@ -2059,7 +2077,7 @@ async function loadProducts(){
               + '<td style="padding:6px 0;color:var(--t)"><strong>'+esc(p.id)+'</strong></td>'
               + '<td style="padding:6px 10px;color:var(--t2)">'+esc(p.name||'')+examNote+'</td>'
               + '<td style="padding:6px 0;color:var(--accent)">₹'+((p.amount||0)/100)+'</td>'
-              + '<td style="padding:6px 0;text-align:right"><button class="btn" style="padding:3px 9px;font-size:.68rem;margin-right:6px" onclick="editProduct(\''+esc(p.id)+'\')">Edit</button><button class="btn bd" style="padding:3px 9px;font-size:.68rem" onclick="deleteProduct(\''+esc(p.id)+'\')">Delete</button></td>'
+              + '<td style="padding:6px 0;text-align:right"><button class="btn" style="padding:3px 9px;font-size:.68rem;margin-right:6px" onclick="copyProductLink(\''+esc(p.id)+'\',this)">🔗 Copy Link</button><button class="btn" style="padding:3px 9px;font-size:.68rem;margin-right:6px" onclick="editProduct(\''+esc(p.id)+'\')">Edit</button><button class="btn bd" style="padding:3px 9px;font-size:.68rem" onclick="deleteProduct(\''+esc(p.id)+'\')">Delete</button></td>'
               + '</tr>';
           }).join('')
         + '</table>';
