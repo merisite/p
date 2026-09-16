@@ -1047,7 +1047,7 @@ header .h-brand:hover{background:var(--brut-tint);}
     </div>
     <div style="display:flex;gap:6px;flex-shrink:0">
       <button class="btn bg bsm fs-toggle-btn" onclick="toggleFullscreen()" title="Toggle full screen"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 00-2 2v3M16 3h3a2 2 0 012 2v3M21 16v3a2 2 0 01-2 2h-3M3 16v3a2 2 0 002 2h3"/></svg></button>
-      <button class="btn bg bsm" onclick="askExit('qselect')"><svg width="11" height="11" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Exit</button>
+      <button class="btn bg bsm" onclick="askExit(_instrReturnTo)"><svg width="11" height="11" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Exit</button>
     </div>
   </div>
   <div class="exam-layout">
@@ -1518,7 +1518,14 @@ window.addEventListener("popstate",function(e){
   }
 });
 function closeBackExitCov(){document.getElementById("back-exit-cov").classList.remove("open");history.pushState({exam:true},"",location.pathname+location.search+"#exam-guard");}
-function doBackExit(){document.getElementById("back-exit-cov").classList.remove("open");clearInterval(TI);clearInterval(WI);showS("home");}
+function doBackExit(){
+  document.getElementById("back-exit-cov").classList.remove("open");
+  clearInterval(TI);clearInterval(WI);
+  const dest=_instrReturnTo||"home";
+  showS(dest,{skipHash:true});
+  const fallbackHash=_instrReturnHash&&_instrReturnHash!=="#exam-guard"&&_instrReturnHash!=="#result-guard"?_instrReturnHash:"#"+dest;
+  history.replaceState(null,"",location.pathname+location.search+fallbackHash);
+}
 function doTypingExit(){document.getElementById("typing-exit-cov").classList.remove("open");showS("home");}
 function keepGoingTyping(){document.getElementById("typing-exit-cov").classList.remove("open");history.pushState({typing:true},"",location.pathname+location.search+"#typing-guard");}
 function typingBackBtn(){if(isInActiveTyping()){document.getElementById("typing-exit-cov").classList.add("open");}else{showS("home");}}
@@ -1547,7 +1554,14 @@ function doExit(){
   if(document.fullscreenElement){
     (document.exitFullscreen?.()||Promise.resolve()).catch(()=>{});
   }
-  if(exitDest)showS(exitDest);exitDest=null;
+  if(exitDest){
+    showS(exitDest,{skipHash:true});
+    // When actually returning to the screen the person launched from, restore its
+    // precise URL (e.g. #qselect-essay, #mocks-ibps_po) instead of a bare hash.
+    const fallbackHash=(exitDest===_instrReturnTo&&_instrReturnHash&&_instrReturnHash!=="#exam-guard"&&_instrReturnHash!=="#result-guard")?_instrReturnHash:"#"+exitDest;
+    history.replaceState(null,"",location.pathname+location.search+fallbackHash);
+  }
+  exitDest=null;
 }
 function setT(id,v){const e=document.getElementById(id);if(e&&v)e.textContent=v;}
 // Deterministic PRNG (mulberry32) so the same seed always produces the same shuffle order —
@@ -2427,7 +2441,7 @@ function showMockList(examId,opts){
   else{
     empty.style.display="none";
     container.innerHTML=mocks.map(m=>{
-      const qc=d.questions.filter(q=>q.examId===examId&&q.mockNo===m.mockNo&&q.active).length;
+      const qc=d.questions.filter(q=>q.examId===examId&&q.mockNo===m.mockNo).length;
       const isUpcoming=m.status==="upcoming";
       if(isUpcoming){
         const logoUrl=ex.logoUrl||ex.icon||"";
@@ -2580,13 +2594,13 @@ async function startMockAfterInstr(){
   const hasBoth=(ex.sections||[]).includes("report")&&(ex.sections||[]).includes("precis");
   const fixedIds=hasBoth?(ex.sections||[]).filter(s=>s!=="report"&&s!=="precis"):(ex.sections||[]);
   let secs=fixedIds.map(tid=>{
-    const qs=d.questions.filter(q=>q.examId===ex.id&&q.type===tid&&q.active&&hasUsableContent(q)&&(mockNo==null||q.mockNo===mockNo));
+    const qs=d.questions.filter(q=>q.examId===ex.id&&q.type===tid&&hasUsableContent(q)&&(mockNo==null?q.active:q.mockNo===mockNo));
     if(!qs.length)return null;
     return{typeId:tid,meta:tm[tid]||{},questions:qs.slice(0,2),question:null};
   }).filter(Boolean);
   if(hasBoth){
-    const reportQs=d.questions.filter(q=>q.examId===ex.id&&q.type==="report"&&q.active&&hasUsableContent(q)&&(mockNo==null||q.mockNo===mockNo)).slice(0,2);
-    const precisQs=d.questions.filter(q=>q.examId===ex.id&&q.type==="precis"&&q.active&&hasUsableContent(q)&&(mockNo==null||q.mockNo===mockNo)).slice(0,2);
+    const reportQs=d.questions.filter(q=>q.examId===ex.id&&q.type==="report"&&hasUsableContent(q)&&(mockNo==null?q.active:q.mockNo===mockNo)).slice(0,2);
+    const precisQs=d.questions.filter(q=>q.examId===ex.id&&q.type==="precis"&&hasUsableContent(q)&&(mockNo==null?q.active:q.mockNo===mockNo)).slice(0,2);
     if(reportQs.length||precisQs.length){
       secs.push({
         typeId:"report_precis",meta:{name:"Report / Precis"},
@@ -2718,7 +2732,7 @@ function renderMTabs(){
   document.getElementById("mock-tabs").innerHTML=
     `<div class="mock-tabs-inner">${tabs}</div>`+
     `<button class="btn bg bsm fs-toggle-btn" style="flex-shrink:0;margin-left:4px" onclick="toggleFullscreen()" title="${document.fullscreenElement?'Exit full screen':'Toggle full screen'}">${document.fullscreenElement?FS_COMPRESS_ICON:FS_EXPAND_ICON}</button>`+
-    `<button class="btn bg bsm" style="flex-shrink:0;margin-left:4px" onclick="askExit('home')"><svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Exit</button>`;
+    `<button class="btn bg bsm" style="flex-shrink:0;margin-left:4px" onclick="askExit(_instrReturnTo)"><svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Exit</button>`;
   renderExamSide();
 }
 
