@@ -1851,6 +1851,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1789716614883",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "UPI and the Transformation of India’s Digital Payments Ecosystem",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -2799,6 +2815,41 @@
         }
       ],
       "practiceQuestionId": "q_1789715539816",
+      "active": true
+    },
+    {
+      "id": "essay_1789716566262",
+      "title": "UPI and the Transformation of India’s Digital Payments Ecosystem",
+      "category": "Economy & Finance",
+      "tags": [
+        "UPI",
+        "Digital Payments"
+      ],
+      "image": "https://i.postimg.cc/2yrN6VnJ/ad16bb9c-caf3-40c8-be9d-d0b00a9cc988.png",
+      "body": "The Unified Payments Interface (UPI) has changed the way people make payments in India. Launched by the National Payments Corporation of India (NPCI), UPI allows users to transfer money instantly through mobile phones, without needing bank account details for every transaction. Its simple and convenient system has made digital payments a part of everyday life.\n\nUPI has made payments faster, easier, and more accessible. People can use it to pay shopkeepers, transfer money to family members, pay bills, and make online purchases. Small businesses and street vendors have also benefited because they can accept payments through QR codes without expensive payment machines. UPI has reduced dependence on cash and has helped bring more people into the formal digital financial system.\n\nDespite its success, UPI faces several challenges. Cyber fraud, phishing, fake payment requests, and other online scams can cause financial losses. Some people, especially those with limited digital knowledge, may find digital payments difficult to use safely. Internet connectivity problems in remote areas can also limit access. Moreover, users need greater awareness about protecting their PINs, passwords, and other financial information.\n\nThe future of UPI depends on making digital payments safer and more inclusive. Banks and authorities should strengthen cybersecurity, improve grievance redressal, and promote digital financial literacy. Better connectivity and simple interfaces in regional languages can help more people use these services confidently.\n\nIn conclusion, UPI has transformed India's digital payments ecosystem by making transactions quick, convenient, and accessible. With stronger security, better awareness, and wider connectivity, it can continue to support India's journey towards a less-cash and more digitally connected economy.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "The Unified Payments Interface (UPI) has changed the way people make payments in India. Launched by the National Payments Corporation of India (NPCI), UPI allows users to transfer money instantly through mobile phones, without needing bank account details for every transaction. Its simple and convenient system has made digital payments a part of everyday life."
+        },
+        {
+          "heading": "Body – Growth and Benefits of UPI",
+          "content": "UPI has made payments faster, easier, and more accessible. People can use it to pay shopkeepers, transfer money to family members, pay bills, and make online purchases. Small businesses and street vendors have also benefited because they can accept payments through QR codes without expensive payment machines. UPI has reduced dependence on cash and has helped bring more people into the formal digital financial system."
+        },
+        {
+          "heading": "Body – Challenges and Concerns",
+          "content": "Despite its success, UPI faces several challenges. Cyber fraud, phishing, fake payment requests, and other online scams can cause financial losses. Some people, especially those with limited digital knowledge, may find digital payments difficult to use safely. Internet connectivity problems in remote areas can also limit access. Moreover, users need greater awareness about protecting their PINs, passwords, and other financial information."
+        },
+        {
+          "heading": "Body – Way Forward",
+          "content": "The future of UPI depends on making digital payments safer and more inclusive. Banks and authorities should strengthen cybersecurity, improve grievance redressal, and promote digital financial literacy. Better connectivity and simple interfaces in regional languages can help more people use these services confidently."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, UPI has transformed India's digital payments ecosystem by making transactions quick, convenient, and accessible. With stronger security, better awareness, and wider connectivity, it can continue to support India's journey towards a less-cash and more digitally connected economy."
+        }
+      ],
+      "practiceQuestionId": "q_1789716614883",
       "active": true
     }
   ]
