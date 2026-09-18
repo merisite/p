@@ -1860,7 +1860,7 @@ function filterEssays(){
       ${e.image?`<img src="${escapeHTML(e.image)}" style="width:56px;height:56px;object-fit:cover;border-radius:8px;flex-shrink:0"/>`:'<div style="width:56px;height:56px;border-radius:8px;background:var(--bg3);flex-shrink:0"></div>'}
       <div style="min-width:0;flex:1">
         <div style="font-size:.6rem;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.04em">${escapeHTML(e.category||'')}</div>
-        <div style="font-size:.84rem;font-weight:700;color:var(--t);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHTML(e.title||'')}</div>
+        <div style="font-size:.84rem;font-weight:700;color:var(--t);margin-top:2px;line-height:1.35">${escapeHTML(e.title||'')}</div>
       </div>
     </div>`;
   }).join('');
@@ -1933,6 +1933,7 @@ function selectEssay(id){
     <div id="es-body-content" class="es-body-fade">${renderEssayBodyHTML(e,_esViewMode)}</div>
     ${practiceBtnHTML}
   `;
+  document.getElementById('es-detail').scrollIntoView({behavior:'auto',block:'start'});
 }
 function backToEssayList(){
   document.getElementById('es-layout').classList.remove('es-mobile-detail');
