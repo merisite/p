@@ -1835,6 +1835,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1789715539816",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "FinTech and Its Impact on Traditional Banking",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -2747,6 +2763,42 @@
         }
       ],
       "practiceQuestionId": "q_1789545865879",
+      "active": true
+    },
+    {
+      "id": "essay_1789715471944",
+      "title": "FinTech and Its Impact on Traditional Banking",
+      "category": "Economy & Finance",
+      "tags": [
+        "Fintech",
+        "bank",
+        "finance"
+      ],
+      "image": "https://i.postimg.cc/X7tnb7pV/RBI-moves.webp",
+      "body": "Financial Technology, or FinTech, has changed the way people use financial services. Mobile banking, digital payments, online lending, and digital wallets have made banking faster and more convenient. The rapid growth of smartphones and internet access has further increased the use of FinTech in India. As a result, traditional banks are facing both new opportunities and challenges.\n\nFinTech companies provide services that are quick, simple, and often available at lower costs. Customers can transfer money, make payments, invest, and apply for loans without visiting a bank branch. Digital platforms also help small businesses and individuals access financial services more easily. Technologies such as Artificial Intelligence and data analysis can help financial institutions detect fraud, understand customer needs, and make faster decisions.\n\nThe growth of FinTech has increased competition for traditional banks. Customers now expect faster services and easy digital experiences. Banks are therefore investing in mobile applications, digital payments, automation, and partnerships with FinTech companies. At the same time, traditional banks have advantages such as established customer relationships, regulatory experience, and public trust. Instead of replacing banks completely, FinTech is pushing them to improve their services and adopt new technologies.\n\nFinTech also brings risks such as cyber fraud, data theft, privacy concerns, and lack of digital awareness. Strong cybersecurity, clear regulations, and customer education are necessary to address these problems. Banks and FinTech companies should work together while maintaining high standards of data protection.\n\nIn conclusion, FinTech is transforming traditional banking rather than simply replacing it. The future of banking will depend on combining technological innovation with security, trust, and responsible financial practices.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "Financial Technology, or FinTech, has changed the way people use financial services. Mobile banking, digital payments, online lending, and digital wallets have made banking faster and more convenient. The rapid growth of smartphones and internet access has further increased the use of FinTech in India. As a result, traditional banks are facing both new opportunities and challenges."
+        },
+        {
+          "heading": "Body – Growth and Benefits of FinTech",
+          "content": "FinTech companies provide services that are quick, simple, and often available at lower costs. Customers can transfer money, make payments, invest, and apply for loans without visiting a bank branch. Digital platforms also help small businesses and individuals access financial services more easily. Technologies such as Artificial Intelligence and data analysis can help financial institutions detect fraud, understand customer needs, and make faster decisions."
+        },
+        {
+          "heading": "Body – Impact on Traditional Banking",
+          "content": "The growth of FinTech has increased competition for traditional banks. Customers now expect faster services and easy digital experiences. Banks are therefore investing in mobile applications, digital payments, automation, and partnerships with FinTech companies. At the same time, traditional banks have advantages such as established customer relationships, regulatory experience, and public trust. Instead of replacing banks completely, FinTech is pushing them to improve their services and adopt new technologies."
+        },
+        {
+          "heading": "Body – Challenges and Way Forward",
+          "content": "FinTech also brings risks such as cyber fraud, data theft, privacy concerns, and lack of digital awareness. Strong cybersecurity, clear regulations, and customer education are necessary to address these problems. Banks and FinTech companies should work together while maintaining high standards of data protection."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, FinTech is transforming traditional banking rather than simply replacing it. The future of banking will depend on combining technological innovation with security, trust, and responsible financial practices."
+        }
+      ],
+      "practiceQuestionId": "q_1789715539816",
       "active": true
     }
   ]
