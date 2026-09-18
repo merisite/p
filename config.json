@@ -1883,6 +1883,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1789725470847",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "Women-Led Development: From Participation to Leadership",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -2901,6 +2917,40 @@
         }
       ],
       "practiceQuestionId": "q_1789724131874",
+      "active": true
+    },
+    {
+      "id": "essay_1789725426545",
+      "title": "Women-Led Development: From Participation to Leadership",
+      "category": "Government & Policy",
+      "tags": [
+        "Women"
+      ],
+      "image": "https://i.postimg.cc/3xMhbXrx/281820a3-bd8c-4c78-b7c2-8a88f86095bf.png",
+      "body": "Women-led development means creating an environment where women are not only participants in economic and social activities but also leaders and decision-makers. For a country like India, the full participation of women is essential for inclusive and sustainable development. Women must have equal opportunities to contribute to and shape the nation's progress.\n\nOver the years, women have made progress in education, employment, entrepreneurship, politics, and public services. Government initiatives, self-help groups, financial inclusion, and better access to education have helped more women become economically independent. However, participation alone is not enough. Women need opportunities to take leadership roles in businesses, local institutions, government, science, and other important sectors. Their experiences can bring different perspectives to decision-making and improve the quality of development.\n\nDespite progress, women continue to face several barriers. Unequal access to education and employment, unpaid care work, safety concerns, social expectations, and limited access to finance can restrict their growth. Women entrepreneurs may also struggle to obtain credit, markets, and professional networks. In many workplaces, women remain underrepresented in senior positions. These barriers prevent society from making full use of its human potential.\n\nTo promote women-led development, India needs better access to quality education, skill training, healthcare, finance, and digital technology. Safe workplaces and equal pay are also important. Mentorship and leadership programmes can help women move into senior roles. Families, institutions, and society must also support women in balancing professional and personal responsibilities.\n\nIn conclusion, women-led development is not only about increasing women's participation but also about giving them equal power to lead and make decisions. When women move from participation to leadership, development becomes more inclusive, balanced, and sustainable.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "Women-led development means creating an environment where women are not only participants in economic and social activities but also leaders and decision-makers. For a country like India, the full participation of women is essential for inclusive and sustainable development. Women must have equal opportunities to contribute to and shape the nation's progress."
+        },
+        {
+          "heading": "Body – From Participation to Leadership",
+          "content": "Over the years, women have made progress in education, employment, entrepreneurship, politics, and public services. Government initiatives, self-help groups, financial inclusion, and better access to education have helped more women become economically independent. However, participation alone is not enough. Women need opportunities to take leadership roles in businesses, local institutions, government, science, and other important sectors. Their experiences can bring different perspectives to decision-making and improve the quality of development."
+        },
+        {
+          "heading": "Body – Challenges to Women-Led Development",
+          "content": "Despite progress, women continue to face several barriers. Unequal access to education and employment, unpaid care work, safety concerns, social expectations, and limited access to finance can restrict their growth. Women entrepreneurs may also struggle to obtain credit, markets, and professional networks. In many workplaces, women remain underrepresented in senior positions. These barriers prevent society from making full use of its human potential."
+        },
+        {
+          "heading": "Body – Measures / Way Forward",
+          "content": "To promote women-led development, India needs better access to quality education, skill training, healthcare, finance, and digital technology. Safe workplaces and equal pay are also important. Mentorship and leadership programmes can help women move into senior roles. Families, institutions, and society must also support women in balancing professional and personal responsibilities."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, women-led development is not only about increasing women's participation but also about giving them equal power to lead and make decisions. When women move from participation to leadership, development becomes more inclusive, balanced, and sustainable."
+        }
+      ],
+      "practiceQuestionId": "q_1789725470847",
       "active": true
     }
   ]
