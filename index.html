@@ -535,7 +535,7 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
    Because #exam/#fullmock are separate sibling containers, none of this
    touches them — they keep resolving the original [data-theme] variables
    exactly as before, so the exam module's own look is untouched. */
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,.cov,.panel-pop){
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,.cov,.panel-pop){
   --r:20px;--rs:12px;--rl:26px;
   color:var(--t);
 }
@@ -543,7 +543,7 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 /* Light / Dark mode — Navy & Gold, deliberately echoing the exam module's own
    "Clean & Blue" (light) and "Navy & Gold" (dark) themes so the whole platform
    reads as one coherent brand. Doesn't touch #exam/#fullmock (see note above). */
-[data-mode="light"] :is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,.cov,.panel-pop){
+[data-mode="light"] :is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,.cov,.panel-pop){
   --bg:#F4F6FA;--bg2:#FFFFFF;--bg3:#E7ECF6;--bg4:#D8E2F2;
   --t:#16213A;--t2:#55617A;--t3:#B7C1D6;--b:#1C2A47;
   --accent:#A8791B;--ah:#8A6414;--adim:#F5E9C7;--aborder:#1C2A47;
@@ -556,7 +556,7 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
   --shadow:2px 2px 0 color-mix(in srgb,var(--b) 45%,transparent);
   --dotbg:radial-gradient(rgba(22,33,58,.09) 1px,transparent 1px);
 }
-[data-mode="dark"] :is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,.cov,.panel-pop){
+[data-mode="dark"] :is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,.cov,.panel-pop){
   --bg:#0F1420;--bg2:#161C27;--bg3:#1C2333;--bg4:#232D40;
   --t:#E7ECF5;--t2:#8A93A8;--t3:#3A4150;--b:#C7D0E0;
   --accent:#E2B714;--ah:#F0C633;--adim:#2E2712;--aborder:#C7D0E0;
@@ -571,7 +571,7 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 }
 [data-mode="light"]{--brut-fill:#E2B714;--brut-fill-t:#16213A;--brut-tint:#F5E9C7;}
 [data-mode="dark"]{--brut-fill:#E2B714;--brut-fill-t:#12151C;--brut-tint:#2E2712;}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker){
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays){
   background-color:var(--bg);
   color:var(--t);
   background-image:var(--dotbg);
@@ -579,8 +579,8 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 }
 
 /* headline / label voice */
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) h1,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) h2,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) h1,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) h2,
 .h-title,.r-top h2,.hc-title,.hi-title,.oc-title,.tmode-t,#offers-head,#ml-exam-name,.trc-grade{
   font-family:'Space Grotesk',sans-serif;
 }
@@ -600,96 +600,96 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 @media(max-width:640px){.nb-marquee{margin:0 -24px 24px}}
 
 /* buttons */
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,.cov,.panel-pop) .btn,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,.cov,.panel-pop) .tgs-cta,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .oc-link,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .oc-coupon-btn,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .clr-btn,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .lt-btn,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .back-btn{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,.cov,.panel-pop) .btn,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,.cov,.panel-pop) .tgs-cta,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .oc-link,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .oc-coupon-btn,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .clr-btn,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .lt-btn,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .back-btn{
   font-family:'Space Grotesk',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.02em;
   border:2px solid var(--b)!important;border-radius:999px;
   box-shadow:2px 2px 0 color-mix(in srgb,var(--b) 45%,transparent);transition:transform .12s ease,box-shadow .12s ease,background .12s ease,color .12s ease!important;
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,.cov,.panel-pop) .btn:hover,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .oc-link:hover,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .lt-btn:hover,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .back-btn:hover{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,.cov,.panel-pop) .btn:hover,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .oc-link:hover,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .lt-btn:hover,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .back-btn:hover{
   transform:translate(-2px,-2px);box-shadow:3px 3px 0 color-mix(in srgb,var(--b) 40%,transparent);
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,.cov,.panel-pop) .btn:active{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,.cov,.panel-pop) .btn:active{
   transform:translate(0,0);box-shadow:1px 1px 0 var(--b);
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,.cov,.panel-pop) .bp,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .oc-link,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .tgs-cta{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,.cov,.panel-pop) .bp,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .oc-link,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .tgs-cta{
   background:var(--brut-fill)!important;color:var(--brut-fill-t)!important;box-shadow:2px 2px 0 color-mix(in srgb,var(--b) 45%,transparent);
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,.cov,.panel-pop) .bg,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .back-btn,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .clr-btn{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,.cov,.panel-pop) .bg,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .back-btn,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .clr-btn{
   background:var(--bg2)!important;
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .clr-btn{color:var(--red)!important;border-color:var(--b)!important;}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .clr-btn:hover{background:var(--red)!important;color:var(--bg)!important;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .clr-btn{color:var(--red)!important;border-color:var(--b)!important;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .clr-btn:hover{background:var(--red)!important;color:var(--bg)!important;}
 
 /* pills — pattern for chips/tabs, thick-ish border, no heavy shadow (keeps dense rows calm) */
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) :is(.stab,.tob,.ptab,.tl-btn,.mtab){
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) :is(.stab,.tob,.ptab,.tl-btn,.mtab){
   border:2px solid var(--b);font-weight:600;
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) :is(.stab.on,.tob.on,.ptab.on,.tl-btn.on){
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) :is(.stab.on,.tob.on,.ptab.on,.tl-btn.on){
   background:var(--brut-fill);color:var(--brut-fill-t);
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) :is(.chip,.hi-badge,.hi-score-chip,.ftag,.lt-badge,.oc-price-save){
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) :is(.chip,.hi-badge,.hi-score-chip,.ftag,.lt-badge,.oc-price-save){
   border:2px solid var(--b);font-weight:600;border-radius:999px;
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .oc-top-badge{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .oc-top-badge{
   position:absolute;top:10px;right:12px;left:auto;
   background:var(--brut-fill);color:var(--brut-fill-t);
   border:1.5px solid var(--b);border-radius:999px;
   padding:2px 8px;font-family:'Space Grotesk',sans-serif;font-size:.5rem;font-weight:700;letter-spacing:.03em;
   box-shadow:1.5px 1.5px 0 color-mix(in srgb,var(--b) 45%,transparent);line-height:1.4;white-space:nowrap;z-index:2;
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .oc-title{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .oc-title{
   padding-right:0;
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .oc-header.has-badge{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .oc-header.has-badge{
   margin-top:30px;
 }
 
 /* card / surface family: thick border + hard offset shadow */
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,.cov) :is(.hcard,.offer-card,.stile,.rcard,.ph-tile,.hist-item,.timer-box,.q-item,.tmode,.trc,.trc-tile,.cbox,.card,.qpick-btn,.paste-area,.typing-input,.para-disp,.tbar,.lt-card,.weak-areas-card){
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,.cov) :is(.hcard,.offer-card,.stile,.rcard,.ph-tile,.hist-item,.timer-box,.q-item,.tmode,.trc,.trc-tile,.cbox,.card,.qpick-btn,.paste-area,.typing-input,.para-disp,.tbar,.lt-card,.weak-areas-card){
   border:2px solid var(--b);
   box-shadow:3px 3px 0 color-mix(in srgb,var(--b) 40%,transparent);
   border-radius:var(--r);
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .hcard{transition:transform .12s ease,box-shadow .12s ease;}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .hcard::after{display:none;}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .hcard:hover{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .hcard{transition:transform .12s ease,box-shadow .12s ease;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .hcard::after{display:none;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .hcard:hover{
   transform:translate(-3px,-3px);box-shadow:5px 5px 0 color-mix(in srgb,var(--b) 40%,transparent);background:var(--bg2);border-color:var(--b);
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .hcard.exam-card:hover{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .hcard.exam-card:hover{
   box-shadow:8px 8px 0 var(--teal);
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .hc-icon{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .hc-icon{
   border:2px solid var(--b);border-radius:8px;
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .oc-icon-wrap{border:2px solid var(--b);}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .offer-card.featured{border:2px solid var(--b);box-shadow:4px 4px 0 var(--brut-fill);}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .q-item:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 color-mix(in srgb,var(--b) 40%,transparent);}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .model-box{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .oc-icon-wrap{border:2px solid var(--b);}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .offer-card.featured{border:2px solid var(--b);box-shadow:4px 4px 0 var(--brut-fill);}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .q-item:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 color-mix(in srgb,var(--b) 40%,transparent);}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .model-box{
   border-top:2px solid var(--b);border-right:2px solid var(--b);border-bottom:2px solid var(--b);border-left:4px solid var(--green);
   box-shadow:3px 3px 0 color-mix(in srgb,var(--b) 40%,transparent);border-radius:var(--rs);
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .ans-box,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .verdict,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .ai-notice{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .ans-box,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .verdict,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .ai-notice{
   border:2px solid var(--b);border-radius:var(--rs);
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .lt-row{border-bottom:2px solid var(--b);}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .lt-logo,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .lt-logo-fb{border:2px solid var(--b);border-radius:8px;}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .cring .ring-bg{stroke:var(--b);opacity:.25;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .lt-row{border-bottom:2px solid var(--b);}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .lt-logo,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .lt-logo-fb{border:2px solid var(--b);border-radius:8px;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .cring .ring-bg{stroke:var(--b);opacity:.25;}
 
 /* homepage-closing CTA banner, inspired by the reference site's footer */
 .nb-footer{position:relative;overflow:hidden;background:#0F1420;margin:44px -32px 0;padding:52px 32px 0;color:#E7ECF5;border-top:3px solid #0F1420;}
@@ -707,15 +707,15 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .panel-pop{border:2px solid var(--b)!important;box-shadow:3px 3px 0 color-mix(in srgb,var(--b) 40%,transparent)!important;}
 
 /* value chips / dividers */
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .sec-divider{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .sec-divider{
   background:repeating-linear-gradient(90deg,var(--b) 0 8px,transparent 8px 16px);height:2.5px;
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .prog-tabs{gap:8px;}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .stile-v,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .ph-v,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .trc-v,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .tst-v,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker) .t-v{font-family:'Space Grotesk',sans-serif;font-weight:800;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .prog-tabs{gap:8px;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .stile-v,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .ph-v,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .trc-v,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .tst-v,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .t-v{font-family:'Space Grotesk',sans-serif;font-weight:800;}
 
 /* HEADER — default (non-exam) look only.
    Kept at plain, low-specificity selectors so the existing
@@ -1856,7 +1856,7 @@ function filterEssays(){
   if(!essays.length){listEl.innerHTML='<div style="color:var(--t2);font-size:.82rem;padding:16px 4px">No essays found.</div>';return;}
   listEl.innerHTML=essays.map(e=>{
     const isSelected=_esSelectedId===e.id;
-    return `<div onclick="selectEssay('${e.id}')" style="display:flex;align-items:center;gap:10px;padding:10px;border-radius:var(--rs);border:1px solid ${isSelected?'var(--aborder)':'var(--b)'};background:${isSelected?'var(--adim)':'var(--bg2)'};cursor:pointer">
+    return `<div class="q-item" onclick="selectEssay('${e.id}')" style="flex-direction:row;align-items:center;gap:10px;padding:10px;${isSelected?'border-color:var(--aborder);background:var(--adim)':''}">
       ${e.image?`<img src="${escapeHTML(e.image)}" style="width:56px;height:56px;object-fit:cover;border-radius:8px;flex-shrink:0"/>`:'<div style="width:56px;height:56px;border-radius:8px;background:var(--bg3);flex-shrink:0"></div>'}
       <div style="min-width:0;flex:1">
         <div style="font-size:.6rem;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.04em">${escapeHTML(e.category||'')}</div>
@@ -5099,7 +5099,7 @@ const initPromise=init();
   <div id="es-cat-pills" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px"></div>
   <div id="es-layout" class="es-layout">
     <div id="es-list" class="es-list"></div>
-    <div id="es-detail" class="es-detail"></div>
+    <div id="es-detail" class="es-detail card"></div>
   </div>
 </div>
 <div id="progress" class="screen">
