@@ -1867,6 +1867,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1789724131874",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "Role of Banks in Making India a $5 Trillion Economy",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -2850,6 +2866,41 @@
         }
       ],
       "practiceQuestionId": "q_1789716614883",
+      "active": true
+    },
+    {
+      "id": "essay_1789724028167",
+      "title": "Role of Banks in Making India a $5 Trillion Economy",
+      "category": "Economy & Finance",
+      "tags": [
+        "RBI",
+        "India"
+      ],
+      "image": "https://i.postimg.cc/CLL6NzpN/afe9519e-9db1-410c-812b-d7f85eded4a6.png",
+      "body": "India has set an ambitious goal of becoming a $5 trillion economy. Achieving this target requires strong economic growth, higher investment, more jobs, and greater participation from different sectors. Banks have a central role in this process because they connect savings with productive investment and provide credit to individuals and businesses.\n\nBanks provide loans to industries, infrastructure projects, small businesses, farmers, and individuals. Easy and affordable credit can help businesses expand, adopt new technology, and create employment. Banks also support infrastructure development by financing roads, transport, energy, and other important projects. A strong flow of credit can therefore increase production and economic activity.\n\nFinancial inclusion is another important contribution of banks. Through initiatives such as Jan Dhan accounts, banking correspondents, and digital payments, banks can bring more people into the formal financial system. Digital banking and UPI have also made transactions faster and more convenient. Greater financial inclusion can increase savings, improve access to credit, and encourage wider participation in economic growth.\n\nHowever, banks face challenges such as bad loans, financial fraud, limited credit access in some areas, and low financial literacy. Banks must strengthen risk management, improve customer awareness, and use technology responsibly. They should also support green projects, startups, MSMEs, and innovation while maintaining financial stability.\n\nIn conclusion, banks are not merely financial institutions; they are important drivers of economic development. By providing credit, promoting financial inclusion, supporting businesses, and encouraging innovation, banks can contribute significantly to India's economic growth. A strong and responsible banking system will be essential for achieving India's long-term economic ambitions.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "India has set an ambitious goal of becoming a $5 trillion economy. Achieving this target requires strong economic growth, higher investment, more jobs, and greater participation from different sectors. Banks have a central role in this process because they connect savings with productive investment and provide credit to individuals and businesses."
+        },
+        {
+          "heading": "Body – Credit and Investment",
+          "content": "Banks provide loans to industries, infrastructure projects, small businesses, farmers, and individuals. Easy and affordable credit can help businesses expand, adopt new technology, and create employment. Banks also support infrastructure development by financing roads, transport, energy, and other important projects. A strong flow of credit can therefore increase production and economic activity."
+        },
+        {
+          "heading": "Body – Financial Inclusion and Digital Banking",
+          "content": "Financial inclusion is another important contribution of banks. Through initiatives such as Jan Dhan accounts, banking correspondents, and digital payments, banks can bring more people into the formal financial system. Digital banking and UPI have also made transactions faster and more convenient. Greater financial inclusion can increase savings, improve access to credit, and encourage wider participation in economic growth."
+        },
+        {
+          "heading": "Body – Challenges and Way Forward",
+          "content": "However, banks face challenges such as bad loans, financial fraud, limited credit access in some areas, and low financial literacy. Banks must strengthen risk management, improve customer awareness, and use technology responsibly. They should also support green projects, startups, MSMEs, and innovation while maintaining financial stability."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, banks are not merely financial institutions; they are important drivers of economic development. By providing credit, promoting financial inclusion, supporting businesses, and encouraging innovation, banks can contribute significantly to India's economic growth. A strong and responsible banking system will be essential for achieving India's long-term economic ambitions."
+        }
+      ],
+      "practiceQuestionId": "q_1789724131874",
       "active": true
     }
   ]
