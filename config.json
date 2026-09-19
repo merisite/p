@@ -2089,35 +2089,6 @@
   "liveTrackerEntries": [],
   "offers": [
     {
-      "title": "CA Mock Drill™ Pro (6Months)",
-      "badge": "Discount",
-      "desc": "All CA PDFs + Tests + AI Based Learning\nValidity : 6 Month(s)",
-      "coupon": "PREP2DAY",
-      "link": "https://testzone.smartkeeda.com/pricing?tabId=ca-mock-drill",
-      "iconUrl": "https://i.postimg.cc/J0jxXkdg/1000146054-removebg-preview.png",
-      "logoUrl": "",
-      "price": 369,
-      "originalPrice": 699,
-      "platform": "SmartKeeda",
-      "rating": 4.7,
-      "ratingCount": 77059
-    },
-    {
-      "title": "SBI Clerk 2026 (Pre+Mains) Cracker Package",
-      "badge": "Offer",
-      "desc": "20 SBI Clerk Prelims Mock Tests\n10 SBI Clerk Mains Mock Tests\n35 Sectional Tests (15 Prelims + 20 Mains)\n50+50 Days PDF Course for Pre+Mains\nAvailable in Bilingual (Hindi & English)\nVideo Solution for PDF Course",
-      "coupon": "PAW12",
-      "link": "https://guidely.in/combo/sbi-clerk-2026-cracker-package",
-      "iconUrl": "https://i.postimg.cc/rFXJMDRq/1000146027-removebg-preview.png",
-      "logoUrl": "https://i.postimg.cc/rFXJMDRq/1000146027-removebg-preview.png",
-      "price": 194,
-      "originalPrice": 799,
-      "platform": "Guidely",
-      "rating": 4.9,
-      "ratingCount": 26478,
-      "featured": true
-    },
-    {
       "title": "IBPS PO Descriptive 2026 Pack",
       "badge": "Offer Price",
       "desc": "10 Full IBPS PO Descriptive Mocks\n30+ Essay Practice Session\n20 Comprehension Practice Session\nDetailed AI Feedback",
