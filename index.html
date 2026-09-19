@@ -3056,14 +3056,17 @@ async function runAIMock(){
       } else {
         if(scoreEl)scoreEl.textContent="AI failed";
         MS.aiFails=MS.aiFails||{};MS.aiFails[i]=1;
-        if(aiEl)aiEl.innerHTML=aiFailHTML("retryMockAI("+i+")","manualEvalMock("+i+")",1);
+        if(aiEl)aiEl.innerHTML=aiFailHTML("retryMockAI("+i+")");
       }
     }
   }
 }
+let _mockRetryInFlight={};
 async function retryMockAI(idx){
+  if(_mockRetryInFlight[idx])return; // already retrying this section — ignore extra clicks
   const s=MS.s[idx];const ans=MS.a[idx]||"";
   if(!s||!s.question||!ans.trim())return;
+  _mockRetryInFlight[idx]=true;
   const aiEl=document.getElementById("mai-"+idx);
   const scoreEl=document.getElementById("mscore-"+idx);
   if(aiEl)aiEl.innerHTML='<div class="ai-notice">Retrying AI evaluation…</div>';
@@ -3089,8 +3092,9 @@ async function retryMockAI(idx){
   } else {
     if(scoreEl)scoreEl.textContent="AI failed";
     MS.aiFails=MS.aiFails||{};MS.aiFails[idx]=(MS.aiFails[idx]||1)+1;
-    if(aiEl)aiEl.innerHTML=aiFailHTML("retryMockAI("+idx+")","manualEvalMock("+idx+")",MS.aiFails[idx]);
+    if(aiEl)aiEl.innerHTML=aiFailHTML("retryMockAI("+idx+")");
   }
+  _mockRetryInFlight[idx]=false; // re-enabled only now — either the new score rendered, or a fresh Retry button just appeared
   try{
     sessionStorage.setItem('dpt_result_html', document.getElementById('result').innerHTML);
     sessionStorage.setItem('dpt_result_data', JSON.stringify({kind:'mock',MS:MS}));
@@ -3788,113 +3792,8 @@ Follow the steps in the system instructions in order: extract task requirements 
 const evaluateAnswer=evalWithAI;
 const evaluateComprehension=evalComprehensionAI;
 
-// This is the manual copy-paste fallback prompt, shown after the automated worker fails
-// repeatedly (see aiFailHTML / manualEvalPractice / manualEvalMock). It mirrors MARKING_PROFILES
-// exactly — same criteria, same weighted marks-per-criterion via distributeMarks — so the manual
-// path can never silently diverge from the automated one.
-function buildManualEvalText(q,ans,wc){
-  if(q.type==="comprehension")return buildManualEvalTextComprehension(q,ans,wc);
-  const d=D(),tm={};d.sectionTypes.forEach(s=>tm[s.id]=s);
-  const typeName=tm[q.type]?.name||q.type,max=q.marks;
-  const profile=getMarkingProfile(q.type);
-  const marksByCriterion=distributeMarks(max,profile.criteria);
-  const lines=profile.criteria.map((c,i)=>`${i+1}. ${c.name} (out of ${marksByCriterion[c.id]})`).join("\n");
-  const _wlRange=parseWordLimitRange(q.wordLimit);
-  let lengthNote="";
-  if(_wlRange&&_wlRange.min>0){
-    const ratio=computeLengthRatio(wc,_wlRange.min);
-    if(ratio<1){
-      lengthNote=`\n\nWORD LIMIT IS NOT A SEPARATE MARK — do not create a "Word Limit" parameter. Being under the required word count should only affect the Format score (and, if severely underlength, also cap Content) — never Language, and never counted twice. This answer is ${Math.round(ratio*100)}% of the required minimum (${_wlRange.min} words): 90-99% of minimum = minor Format impact only; 80-89% = moderate Format impact; 70-79% = significant Format impact; 60-69% = heavy Format impact; 50-59% = heavy Format impact AND cap Content at 70% of its max; below 50% = same Format impact AND cap Content at 60% of its max; below 40% = same Format impact AND cap Content at 50% of its max. Do not zero the whole answer just because it's short — Language should still be scored purely on its own merit.`;
-    }
-  }
-  return `You are a strict, senior examiner for the SBI PO / IBPS PO Mains Descriptive Paper (2026 pattern). Evaluate my answer below the way a real bank exam evaluator would — be honest and rigorous, don't inflate the score. Do not give near-full marks on content merely because the writing is polished — first check whether every part of the task was actually completed.
-
-SECTION TYPE: ${typeName}
-WORD LIMIT: ${q.wordLimit}
-MAX MARKS: ${max}
-
-QUESTION:
-${q.text}
-
-MY ANSWER (${wc} words):
-${ans||"(blank)"}
-
-Score me on EXACTLY these three parameters — no more, no fewer — weighted as shown, adding up to exactly ${max}:
-${lines}${lengthNote}
-
-For each parameter give a score and a one-line reason. Then give a total out of ${max} — add up the scores yourself and double-check the total actually equals their sum. Separately (not as a score), tell me my word count against the required range. Then give 2-3 strengths, 2-3 specific improvements, and a short overall verdict (below average / average / good / excellent / outstanding).`;
-}
-// Comprehension's manual fallback: mirrors evalComprehensionAI's HARD RULE that each sub-question
-// is worth EXACTLY 2 marks, scored 0/1/2 (half-marks allowed), with no separate global Structure/
-// Word-Limit marks — never the generic multi-parameter template above.
-function buildManualEvalTextComprehension(q,ans,wc){
-  const numQ=countCompQuestions(q.text);
-  const perQMax=2;
-  const totalPossible=numQ*perQMax;
-  return `You are a strict, senior examiner grading a Comprehension section for SBI PO / IBPS PO Mains (2026 pattern). This section has ${numQ} sub-questions, each worth EXACTLY ${perQMax} marks — no other distribution is allowed. Total for this answer: ${totalPossible} marks.
-
-PASSAGE + QUESTIONS:
-${q.text}
-
-MY ANSWER (${wc} words):
-${ans||"(blank)"}
-
-Score EACH of the ${numQ} sub-questions separately and independently, using ONLY this scale per sub-question (half-marks like 0.5/1.5 allowed where genuinely in between):
-- 0 = not attempted at all, factually wrong, or completely off-topic
-- 1 = attempted, on-topic, but incomplete or vague (partial credit)
-- 2 = attempted, on-topic, and substantively correct — even if brief, since these answers are meant to be short (~30-40 words each)
-
-For a "find one word from the passage meaning…" question: the correct word = 2, a close-but-inadequate word = 1, a wrong word = 0.
-
-Do NOT create any separate "Structure & Format" or "Word Limit Adherence" marks for this section — those don't apply here, only the ${numQ} sub-question scores above. Genuine grammar/spelling errors can cost at most 0.5 off an individual sub-question's score, never more, and never a whole separate category.
-
-List each sub-question's score with a one-line reason, then give the total (sum of all ${numQ} sub-question scores, out of ${totalPossible} — add them up yourself and double-check the total actually equals their sum). Then give 2-3 strengths, 2-3 specific improvements, and a short overall verdict (below average / average / good / excellent).`;
-}
-function fallbackCopy(text,onDone){
-  try{
-    const ta=document.createElement("textarea");
-    ta.value=text;ta.style.position="fixed";ta.style.opacity="0";
-    document.body.appendChild(ta);ta.focus();ta.select();
-    document.execCommand("copy");
-    document.body.removeChild(ta);
-    onDone();
-  }catch(e){alert("Could not copy automatically. Please select and copy the prompt manually.");}
-}
-function manualEvalInstructionsHTML(copyAgainOnclick){
-  return `<div class="ai-notice" style="border-color:var(--accent)">
-    <strong>✓ Copied to clipboard!</strong>
-    <div style="margin-top:8px;font-size:.78rem;line-height:1.8;color:var(--t2)">
-      <b>How to get your evaluation:</b><br>
-      1. Open any AI chatbot — ChatGPT, Gemini, or Claude (app or website).<br>
-      2. Paste it into the chat box (long-press → Paste, or Ctrl/Cmd+V).<br>
-      3. Send the message — it will score your answer and give feedback in seconds.
-    </div>
-    <button onclick="${copyAgainOnclick}" style="margin-top:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--accent);cursor:pointer;font-size:.75rem;font-family:var(--font)">Copy Again</button>
-  </div>`;
-}
-function doManualEvalCopy(q,ans,wc,targetElId,copyAgainOnclick){
-  const text=buildManualEvalText(q,ans,wc);
-  const el=document.getElementById(targetElId);
-  const onDone=()=>{if(el)el.innerHTML=manualEvalInstructionsHTML(copyAgainOnclick);};
-  if(navigator.clipboard&&navigator.clipboard.writeText){
-    navigator.clipboard.writeText(text).then(onDone).catch(()=>fallbackCopy(text,onDone));
-  } else fallbackCopy(text,onDone);
-}
-function aiFailHTML(retryOnclick,manualOnclick,fails){
-  const manualBtn=fails>=3?` <button onclick="${manualOnclick}" style="margin-left:6px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--accent);cursor:pointer;font-size:.75rem;font-family:var(--font)">Evaluate Manually</button>`:"";
-  const hint=fails>=3?`<div style="margin-top:8px;font-size:.72rem;color:var(--t2);line-height:1.7">AI evaluation keeps failing — this usually happens when too many users submit at once. Click <strong>Evaluate Manually</strong> to copy a ready-made prompt with your question and answer, then paste it into ChatGPT, Gemini, or any AI chatbot for instant feedback.</div>`:"";
-  return `<div class="ai-notice"><strong>AI evaluation failed.</strong> <button onclick="${retryOnclick}" style="margin-left:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--accent);cursor:pointer;font-size:.75rem;font-family:var(--font)">Retry</button>${manualBtn}${hint}</div>`;
-}
-function manualEvalPractice(){
-  if(!_lastAIArgs)return;
-  const{ans,wc,q}=_lastAIArgs;
-  doManualEvalCopy(q,ans,wc,"r-ai","manualEvalPractice()");
-}
-function manualEvalMock(idx){
-  const s=MS.s[idx];const ans=MS.a[idx]||"";
-  if(!s||!s.question)return;
-  const wc=cw(ans);
-  doManualEvalCopy(s.question,ans,wc,"mai-"+idx,"manualEvalMock("+idx+")");
+function aiFailHTML(retryOnclick){
+  return `<div class="ai-notice"><strong>AI evaluation failed.</strong> <button onclick="${retryOnclick}" style="margin-left:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--accent);cursor:pointer;font-size:.75rem;font-family:var(--font)">Retry</button></div>`;
 }
 function escapeHTML(s){
   return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
@@ -4077,12 +3976,15 @@ async function runAI(ans,wc,wpm){
       document.getElementById("r-ai").innerHTML='<div class="ai-notice"><strong>AI evaluation not configured.</strong> Add your Cloudflare Worker URL in Admin → Settings → AI Evaluation Proxy.</div>';
     } else {
       _lastAIArgs.fails=1;
-      document.getElementById("r-ai").innerHTML=aiFailHTML("retryRunAI()","manualEvalPractice()",1);
+      document.getElementById("r-ai").innerHTML=aiFailHTML("retryRunAI()");
     }
   }
 }
+let _practiceRetryInFlight=false;
 async function retryRunAI(){
+  if(_practiceRetryInFlight)return; // already retrying — ignore extra clicks
   if(!_lastAIArgs)return;
+  _practiceRetryInFlight=true;
   const{ans,wc,wpm,q}=_lastAIArgs;
   const aiEl=document.getElementById("r-ai");
   aiEl.innerHTML='<div class="ai-notice">Retrying AI evaluation…</div>';
@@ -4095,8 +3997,9 @@ async function retryRunAI(){
     updateProgressEntry(_lastAIArgs.progressId,{score:result.totalScore+"/"+q.marks,parameters:result.parameters,aiResult:result});
   } else {
     _lastAIArgs.fails=(_lastAIArgs.fails||1)+1;
-    aiEl.innerHTML=aiFailHTML("retryRunAI()","manualEvalPractice()",_lastAIArgs.fails);
+    aiEl.innerHTML=aiFailHTML("retryRunAI()");
   }
+  _practiceRetryInFlight=false; // re-enabled only now — either the new score rendered, or a fresh Retry button just appeared
   try{
     sessionStorage.setItem('dpt_result_html', document.getElementById('result').innerHTML);
     sessionStorage.setItem('dpt_result_data', JSON.stringify({kind:'practice',CQ:q,ans:ans,wc:wc,wpm:wpm,fails:_lastAIArgs.fails||0}));
