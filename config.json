@@ -30,7 +30,8 @@
     "marqueeSpeed": 25,
     "festiveTheme": "ganesh",
     "maintenanceMode": false,
-    "maintenanceMessage": "The website will be live at 8:00 PM today."
+    "maintenanceMessage": "The website will be live at 8:00 PM today.",
+    "offersMsg": "Offers & Discounts"
   },
   "sectionTypes": [
     {
