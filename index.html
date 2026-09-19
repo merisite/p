@@ -1654,7 +1654,8 @@ function renderOfferCards(){
             <svg width="12" height="12" viewBox="0 0 24 24" id="${uid}-ico"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
             <span id="${uid}-lbl">CODE: ${o.coupon}</span>
           </button>`:''}
-          ${o.link?`<a class="oc-link" href="${o.link}" target="_blank">View Offer <svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>`:''}
+          ${o.productId?`<button class="oc-link" style="border:none;cursor:pointer;font-family:var(--font)" onclick="showUnlockOptions(['${o.productId}'])">Unlock <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></button>`:
+            (o.link?`<a class="oc-link" href="${o.link}" target="_blank">View Offer <svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>`:'')}
         </div>
       </div>`;
   };
