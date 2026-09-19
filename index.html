@@ -4687,7 +4687,13 @@ function showUnlockOptions(productIds){
     openAuthModal();
     return;
   }
-  const options = (productIds||[]).map(getProduct).filter(Boolean).sort(function(a,b){ return (a.amount||0)-(b.amount||0); });
+  // Already-logged-in user: don't show the buy screen for anything they already own.
+  const stillLocked = (productIds||[]).filter(function(id){ return !isProductUnlocked(id); });
+  if(!stillLocked.length){
+    showToast("You already have access to this — no need to buy it again!");
+    return;
+  }
+  const options = stillLocked.map(getProduct).filter(Boolean).sort(function(a,b){ return (a.amount||0)-(b.amount||0); });
   if(!options.length){ alert('This content is not available for purchase right now.'); return; }
   document.getElementById('unlock-sub').textContent = options.length>1
     ? 'A few packages include this content — pick the one that works for you.'
