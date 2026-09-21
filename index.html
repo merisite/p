@@ -978,6 +978,11 @@ header .h-brand:hover{background:var(--brut-tint);}
       <div class="hc-title">My Progress</div>
       <div class="hc-desc" id="prog-card-desc">View your practice history, scores &amp; typing results</div>
     </div>
+    <div class="hcard" onclick="showS('quizlist');renderQuizList()" id="qz-home-card">
+      <div class="hc-icon" id="qz-home-icon" style="background:var(--gdim);border-color:var(--gborder);color:var(--green)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div class="hc-title">Computer Quiz Course <span id="qz-home-badge"></span></div>
+      <div class="hc-desc">Timed MCQ practice sets by topic, with instant scoring &amp; explanations</div>
+    </div>
     <div class="hcard" onclick="showLiveTracker()">
       <div class="hc-icon" style="background:var(--tealdim);border-color:var(--tealborder);color:var(--teal)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
       <div class="hc-title">Live Mock Tracker</div>
@@ -1354,7 +1359,7 @@ function ocCopy(code,uid){
    like yoursite.com/#typing or yoursite.com/#qselect-quant.
    "exam","fullmock","result" are deliberately left out of the shareable
    set below (a stale link shouldn't drop someone into a live/expired test). */
-const NON_LINKABLE_SCREENS=new Set(["exam","fullmock","result","typing"]);
+const NON_LINKABLE_SCREENS=new Set(["exam","fullmock","result","typing","quizrun"]);
 function showS(id,opts){
   // Clear result snapshot when user deliberately navigates away
   if(id!=='result') sessionStorage.removeItem('dpt_result_html');
@@ -1503,7 +1508,7 @@ window.addEventListener("DOMContentLoaded",function(){
   }
   routeFromHash();
 });
-function isInActiveExam(){return document.getElementById("exam").classList.contains("active")||document.getElementById("fullmock").classList.contains("active");}
+function isInActiveExam(){return document.getElementById("exam").classList.contains("active")||document.getElementById("fullmock").classList.contains("active")||(document.getElementById("quizrun").classList.contains("active")&&!(QZ&&QZ.reviewMode));}
 function isInActiveTyping(){return document.getElementById("typing").classList.contains("active")&&tyTStarted&&!tyDone;}
 // Refresh guard — browser shows its own dialog ("Refresh page? Changes you made may not be saved")
 window.addEventListener("beforeunload",function(e){if(isInActiveExam()||isInActiveTyping()){e.preventDefault();e.returnValue="";}});
@@ -1754,6 +1759,16 @@ function renderHome(){
   updateLogo(localStorage.getItem("dpt_mode")||"light");
   renderFestiveTheme(cfg.festiveTheme||"none");
   setT("h-eyebrow",cfg.homeEyebrow);
+  const qzBadgeEl=document.getElementById("qz-home-badge");
+  if(qzBadgeEl){
+    if(quizCourseIsUpcoming()){
+      qzBadgeEl.innerHTML='<span style="font-size:.6rem;font-weight:700;color:var(--amber);background:rgba(217,119,6,.12);border:1px solid rgba(217,119,6,.35);border-radius:999px;padding:2px 7px;vertical-align:middle">COMING SOON</span>';
+      const iconEl=document.getElementById("qz-home-icon");
+      if(iconEl){iconEl.style.background="var(--adim)";iconEl.style.borderColor="var(--aborder)";iconEl.style.color="var(--accent)";}
+    }else{
+      qzBadgeEl.innerHTML="";
+    }
+  }
   const mqTxt=cfg.marqueeText||"★ Descriptive Practice ★ AI Evaluation ★ Model Answers ★ Typing Speed Test ★ Exam-Pattern Interface ★";
   const mq1=document.getElementById("nb-marquee-span1"),mq2=document.getElementById("nb-marquee-span2");
   if(mq1)mq1.textContent=mqTxt;if(mq2)mq2.textContent=mqTxt;
@@ -4957,6 +4972,264 @@ function clearAllProgress(){
   updateProgCard();
 }
 
+// ============================================================
+// COMPUTER QUIZ COURSE — CBT-style MCQ runner. Reuses the exact same
+// exam-bar / palette system (.es-qgrid/.es-qbtn, es-answered/es-notdone/
+// es-marked/es-notvisited) already built for mocks, so it looks and
+// behaves consistently with the rest of the site rather than introducing
+// a second, separate UI language.
+// ============================================================
+let QZ=null;
+function qzGetData(){
+  const d=D();
+  return {sets:(d.quizSets||[]).filter(function(s){return s.active!==false;}),questions:d.quizQuestions||[],topics:d.quizTopics||[]};
+}
+function isQuizSetUnlocked(set){
+  const courseProductId=(D().siteSettings||{}).quizCourseProductId;
+  if(courseProductId&&isProductUnlocked(courseProductId))return true;
+  if(!set||!set.productIds||!set.productIds.length)return true;
+  return set.productIds.some(isProductUnlocked);
+}
+function quizCourseIsUpcoming(){
+  return (D().siteSettings||{}).quizCourseStatus==="upcoming";
+}
+function renderQuizList(){
+  const data=qzGetData();
+  const topicPillsEl=document.getElementById("qz-topic-pills");
+  if(topicPillsEl){
+    topicPillsEl.innerHTML=data.topics.length?data.topics.map(function(tp){
+      const cnt=data.questions.filter(function(q){return q.topicId===tp.id&&q.active!==false;}).length;
+      return '<span style="font-size:.72rem;font-weight:600;padding:5px 12px;border-radius:999px;background:var(--bg2);border:1px solid var(--b);color:var(--t2)">'+escapeHTML(tp.name)+' <span style="opacity:.6">('+cnt+')</span></span>';
+    }).join(""):"";
+  }
+  const cardsEl=document.getElementById("qz-set-cards");
+  const emptyEl=document.getElementById("qz-list-empty");
+  if(quizCourseIsUpcoming()){
+    document.getElementById("qz-topic-pills").innerHTML="";
+    emptyEl.style.display="none";
+    cardsEl.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:50px 20px;background:var(--bg2);border:1px solid var(--b);border-radius:var(--rl)">'
+      +'<div style="font-size:1.6rem;margin-bottom:10px">🚧</div>'
+      +'<div style="font-size:1rem;font-weight:700;color:var(--t);margin-bottom:6px">Coming Soon</div>'
+      +'<div style="font-size:.82rem;color:var(--t2);max-width:360px;margin:0 auto">The Computer Quiz Course is being put together and isn\'t open yet. Check back soon!</div>'
+      +'</div>';
+    return;
+  }
+  const sortedSets=data.sets.slice().sort(function(a,b){return (a.setNo||0)-(b.setNo||0);});
+  if(!sortedSets.length){cardsEl.innerHTML="";emptyEl.style.display="block";return;}
+  emptyEl.style.display="none";
+  const courseProductId=(D().siteSettings||{}).quizCourseProductId;
+  cardsEl.innerHTML=sortedSets.map(function(s){
+    const qCount=data.questions.filter(function(q){return q.setNo===s.setNo&&q.active!==false;}).length;
+    const locked=!isQuizSetUnlocked(s);
+    const unlockIds=(s.productIds&&s.productIds.length)?s.productIds:(courseProductId?[courseProductId]:[]);
+    const cta=locked
+      ? '<button onclick="event.stopPropagation();showUnlockOptions('+jsArrayAttr(unlockIds)+')" style="font-size:.7rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:6px 14px;border-radius:999px;cursor:pointer;font-family:var(--font)">Unlock</button>'
+      : '<button onclick="startQuizSet(\''+s.id+'\')" style="font-size:.7rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:6px 14px;border-radius:999px;cursor:pointer;font-family:var(--font)">→ Start</button>';
+    return '<div class="q-item" style="cursor:default">'
+      +(locked?'<div style="position:absolute;top:12px;right:12px;color:var(--accent)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>':'')
+      +'<div style="font-size:.94rem;font-weight:700;color:var(--t);margin-bottom:8px">'+escapeHTML(s.title||('Set '+s.setNo))+'</div>'
+      +'<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">'
+      +'<span class="chip">'+qCount+' question'+(qCount===1?'':'s')+'</span>'
+      +(s.timeLimitMin?'<span class="chip">'+s.timeLimitMin+' min</span>':'<span class="chip">No timer</span>')
+      +(s.negMarkEnabled?'<span class="chip" style="color:var(--red)">-'+s.negMarkValue+'/wrong</span>':'')
+      +'</div>'
+      +'<div style="margin-top:auto">'+cta+'</div>'
+      +'</div>';
+  }).join("");
+}
+function startQuizSet(setId){
+  if(quizCourseIsUpcoming()){alert("This course isn't open yet — check back soon!");return;}
+  const data=qzGetData();
+  const s=data.sets.find(function(x){return x.id===setId;});
+  if(!s)return;
+  if(!isQuizSetUnlocked(s)){
+    const courseProductId=(D().siteSettings||{}).quizCourseProductId;
+    const unlockIds=(s.productIds&&s.productIds.length)?s.productIds:(courseProductId?[courseProductId]:[]);
+    showUnlockOptions(unlockIds);
+    return;
+  }
+  const qs=data.questions.filter(function(q){return q.setNo===s.setNo&&q.active!==false;});
+  if(!qs.length){alert("This set has no questions yet — please check back soon.");return;}
+  const warnLines=["This quiz has "+qs.length+" question(s)."+(s.timeLimitMin?" Time limit: "+s.timeLimitMin+" minutes — it will auto-submit when time runs out.":" No time limit.")];
+  if(s.negMarkEnabled)warnLines.push("Negative marking is ON: "+s.negMarkValue+" mark deducted for every wrong answer.");
+  if(!confirm(warnLines.join("\n\n")+"\n\nStart now?"))return;
+  launchQuiz(s,qs);
+}
+function launchQuiz(set,qs){
+  // Same origin-tracking pattern used by showInstr() for practice questions/mocks, so
+  // Exit correctly returns to wherever the person actually launched the quiz from.
+  _instrReturnTo=document.querySelector(".screen.active")?.id||"quizlist";
+  _instrReturnHash=location.hash||"#"+_instrReturnTo;
+  QZ={
+    setId:set.id,setNo:set.setNo,title:set.title,
+    questions:qs.map(function(q){return{id:q.id,text:q.text,options:q.options||[],correctIndex:q.correctIndex,explanation:q.explanation||"",topicId:q.topicId};}),
+    a:{},visited:{},mr:{},idx:0,
+    negMarkEnabled:!!set.negMarkEnabled,negMarkValue:set.negMarkValue||0,
+    timeLimitMin:set.timeLimitMin||null,
+    submitted:false,reviewMode:false,startedAt:Date.now()
+  };
+  showS("quizrun",{skipHash:true});
+  document.getElementById("qzr-total-no").textContent=QZ.questions.length;
+  document.getElementById("qzr-exit-btn").innerHTML='<svg width="11" height="11" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Exit';
+  document.getElementById("qzr-actionbar").style.display="flex";
+  document.getElementById("qzr-review-actionbar").style.display="none";
+  loadQuizQ(0);
+  if(QZ.timeLimitMin){
+    startTimer(QZ.timeLimitMin*60,"qzr-timer-val",null,function(){submitQuiz(true);});
+  }
+}
+function loadQuizQ(idx){
+  if(!QZ||!QZ.questions[idx])return;
+  QZ.idx=idx;
+  QZ.visited[idx]=true;
+  const q=QZ.questions[idx];
+  const tm={};(D().quizTopics||[]).forEach(function(tp){tm[tp.id]=tp.name;});
+  document.getElementById("qzr-current-no").textContent=idx+1;
+  document.getElementById("qzr-topic-lbl").textContent=(q.topicId&&tm[q.topicId])?tm[q.topicId]:(QZ.title||"Question");
+  document.getElementById("qzr-q-no-lbl").textContent="Q"+(idx+1)+" of "+QZ.questions.length;
+  document.getElementById("qzr-qtext").textContent=q.text;
+  const letters=["A","B","C","D"];
+  const selected=QZ.a[idx];
+  const optsEl=document.getElementById("qzr-options");
+  if(QZ.reviewMode){
+    optsEl.innerHTML=q.options.map(function(o,oi){
+      const isCorrect=oi===q.correctIndex;
+      const isPicked=oi===selected;
+      let style="border:1px solid var(--b);background:var(--bg2)";
+      if(isCorrect)style="border:1px solid var(--gborder);background:var(--gdim);color:var(--green)";
+      else if(isPicked&&!isCorrect)style="border:1px solid var(--rborder);background:var(--rdim);color:var(--red)";
+      const tag=isCorrect?' ✓ Correct answer':(isPicked?' ✕ Your answer':'');
+      return '<div style="padding:11px 14px;border-radius:var(--rs);font-size:.85rem;'+style+'">'+letters[oi]+') '+escapeHTML(o)+'<strong>'+tag+'</strong></div>';
+    }).join("");
+    const expEl=document.getElementById("qzr-explanation");
+    if(q.explanation){expEl.style.display="block";expEl.innerHTML="<strong>Explanation:</strong> "+escapeHTML(q.explanation);}
+    else{expEl.style.display="none";}
+  }else{
+    optsEl.innerHTML=q.options.map(function(o,oi){
+      const isSelected=oi===selected;
+      return '<label style="display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:var(--rs);border:1px solid '+(isSelected?'var(--aborder)':'var(--b)')+';background:'+(isSelected?'var(--adim)':'var(--bg2)')+';cursor:pointer;font-size:.85rem">'
+        +'<input type="radio" name="qzr-opt" value="'+oi+'" '+(isSelected?'checked':'')+' onchange="selectQuizOption('+oi+')" style="margin:0"/>'
+        +letters[oi]+') '+escapeHTML(o)
+        +'</label>';
+    }).join("");
+    document.getElementById("qzr-explanation").style.display="none";
+  }
+  renderQuizPalette();
+}
+function selectQuizOption(oi){
+  if(!QZ||QZ.reviewMode)return;
+  QZ.a[QZ.idx]=oi;
+  renderQuizPalette();
+}
+function saveQuizAndNext(){
+  if(!QZ||QZ.reviewMode)return;
+  renderQuizPalette();
+  if(QZ.idx<QZ.questions.length-1)loadQuizQ(QZ.idx+1);
+  else renderQuizPalette();
+}
+function clearQuizResponse(){
+  if(!QZ||QZ.reviewMode)return;
+  delete QZ.a[QZ.idx];
+  loadQuizQ(QZ.idx);
+}
+function markQuizForReview(){
+  if(!QZ||QZ.reviewMode)return;
+  QZ.mr[QZ.idx]=true;
+  if(QZ.idx<QZ.questions.length-1)loadQuizQ(QZ.idx+1);
+  else renderQuizPalette();
+}
+function renderQuizPalette(){
+  if(!QZ)return;
+  const el=document.getElementById("qzr-side");
+  if(!el)return;
+  let answered=0,notAnswered=0,notVisited=0,marked=0;
+  QZ.questions.forEach(function(q,i){
+    const hasAns=QZ.a[i]!==undefined;
+    const isMarked=!!QZ.mr[i];
+    const visited=!!QZ.visited[i];
+    if(isMarked)marked++;
+    else if(hasAns)answered++;
+    else if(visited)notAnswered++;
+    else notVisited++;
+    if(isMarked&&hasAns){} // counted under marked, matches combo-state legend below
+  });
+  // hasAns questions that are ALSO marked already counted as "marked" above (matches real CBT convention);
+  // still count them toward "answered" too for the summary badge, since they are in fact answered.
+  answered=QZ.questions.filter(function(q,i){return QZ.a[i]!==undefined;}).length;
+  marked=QZ.questions.filter(function(q,i){return !!QZ.mr[i];}).length;
+  notVisited=QZ.questions.filter(function(q,i){return !QZ.visited[i];}).length;
+  notAnswered=QZ.questions.length-answered-notVisited;
+  const qgrid=QZ.questions.map(function(q,i){
+    const hasAns=QZ.a[i]!==undefined;
+    const isMarked=!!QZ.mr[i];
+    const visited=!!QZ.visited[i];
+    const isCurrent=i===QZ.idx;
+    let cls="es-notvisited";
+    if(isMarked&&hasAns)cls="es-marked es-marked-done";
+    else if(isMarked)cls="es-marked";
+    else if(hasAns)cls="es-done";
+    else if(visited)cls="es-notdone";
+    if(isCurrent)cls+=" es-current";
+    return '<button class="es-qbtn '+cls+'" onclick="loadQuizQ('+i+')">'+(i+1)+'</button>';
+  }).join("");
+  if(QZ.reviewMode){
+    el.innerHTML='<div class="es-sec-title">Your Result</div>'
+      +'<div style="text-align:center;padding:10px 0">'
+      +'<div style="font-size:1.6rem;font-weight:800;color:var(--accent)">'+QZ._resultScore+'</div>'
+      +'<div style="font-size:.68rem;color:var(--t2)">out of '+QZ._resultMax+'</div>'
+      +'</div>'
+      +'<div class="es-stat-grid">'
+      +'<div class="es-stat"><div class="es-badge green">'+QZ._correctCount+'</div>Correct</div>'
+      +'<div class="es-stat"><div class="es-badge orange">'+QZ._wrongCount+'</div>Wrong</div>'
+      +'</div>'
+      +'<div class="es-sec-title" style="margin-top:6px">Review — click any question</div>'
+      +'<div class="es-qgrid">'+QZ.questions.map(function(q,i){
+        const hasAns=QZ.a[i]!==undefined;
+        const isCorrect=hasAns&&QZ.a[i]===q.correctIndex;
+        const isCurrent=i===QZ.idx;
+        let cls=hasAns?(isCorrect?"es-done":"es-notdone"):"es-notvisited";
+        if(isCurrent)cls+=" es-current";
+        return '<button class="es-qbtn '+cls+'" onclick="loadQuizQ('+i+')">'+(i+1)+'</button>';
+      }).join("")+'</div>';
+    return;
+  }
+  el.innerHTML='<div class="es-timer"><div class="es-timer-val" id="qzr-timer-val">'+(QZ.timeLimitMin?"--:--":"No limit")+'</div><div class="es-timer-lbl">Time Remaining</div></div>'
+    +'<div class="es-stat-grid">'
+    +'<div class="es-stat"><div class="es-badge green">'+answered+'</div>Answered</div>'
+    +'<div class="es-stat"><div class="es-badge orange">'+notAnswered+'</div>Not<br>Answered</div>'
+    +'<div class="es-stat"><div class="es-badge grey">'+notVisited+'</div>Not<br>Visited</div>'
+    +'<div class="es-stat"><div class="es-badge purple">'+marked+'</div>Marked For<br>Review</div>'
+    +'</div>'
+    +'<div class="es-sec-title">'+escapeHTML(QZ.title||"Questions")+'</div>'
+    +'<div class="es-qgrid">'+qgrid+'</div>'
+    +'<button class="btn bp" style="width:100%;margin-top:8px" onclick="submitQuiz(false)">Submit Quiz</button>';
+}
+function submitQuiz(auto){
+  if(!QZ||QZ.submitted)return;
+  if(!auto){
+    const unattempted=QZ.questions.length-QZ.questions.filter(function(q,i){return QZ.a[i]!==undefined;}).length;
+    const msg=unattempted>0?("You have "+unattempted+" unanswered question(s). Submit anyway?"):"Submit this quiz?";
+    if(!confirm(msg))return;
+  }
+  clearInterval(TI);
+  QZ.submitted=true;
+  QZ.reviewMode=true;
+  let correct=0,wrong=0;
+  QZ.questions.forEach(function(q,i){
+    if(QZ.a[i]===undefined)return;
+    if(QZ.a[i]===q.correctIndex)correct++;else wrong++;
+  });
+  const rawScore=correct-(QZ.negMarkEnabled?wrong*QZ.negMarkValue:0);
+  QZ._correctCount=correct;
+  QZ._wrongCount=wrong;
+  QZ._resultScore=Math.round(rawScore*100)/100;
+  QZ._resultMax=QZ.questions.length;
+  document.getElementById("qzr-actionbar").style.display="none";
+  document.getElementById("qzr-review-actionbar").style.display="block";
+  document.getElementById("qzr-exit-btn").innerHTML='<svg width="11" height="11" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back';
+  loadQuizQ(0);
+}
+
 const initPromise=init();
 </script>
 <!-- REPORT/PRECIS CHOICE OVERLAY -->
@@ -5053,6 +5326,53 @@ const initPromise=init();
     <div class="card" style="overflow:hidden" id="lt-card">
       <div id="lt-list"></div>
     </div>
+  </div>
+</div>
+
+<div id="quizlist" class="screen">
+  <div class="page-wrap">
+    <button class="back-btn" onclick="showS('home')"><svg width="13" height="13" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Home</button>
+    <div style="font-size:1rem;font-weight:700;margin-bottom:3px">Computer Quiz Course</div>
+    <div style="color:var(--t2);font-size:.78rem;margin-bottom:16px">Topic-wise MCQ practice sets — timed, with negative marking where enabled</div>
+    <div id="qz-topic-pills" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px"></div>
+    <div id="qz-set-cards" class="card-grid"></div>
+    <div id="qz-list-empty" style="display:none;color:var(--t2);font-size:.82rem;padding:18px 0">No quiz sets available yet. Check back soon!</div>
+  </div>
+</div>
+
+<div id="quizrun" class="screen">
+  <div class="exam-bar">
+    <div class="bar-l">
+      <div class="bstat"><div class="bval" id="qzr-current-no">1</div><div class="blbl">Question</div></div>
+      <div class="bstat"><div class="bval" id="qzr-total-no">0</div><div class="blbl">Total</div></div>
+    </div>
+    <div style="display:flex;gap:6px;flex-shrink:0">
+      <button class="btn bg bsm fs-toggle-btn" onclick="toggleFullscreen()" title="Toggle full screen"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 00-2 2v3M16 3h3a2 2 0 012 2v3M21 16v3a2 2 0 01-2 2h-3M3 16v3a2 2 0 002 2h3"/></svg></button>
+      <button class="btn bg bsm" id="qzr-exit-btn" onclick="askExit(_instrReturnTo)"><svg width="11" height="11" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Exit</button>
+    </div>
+  </div>
+  <div class="exam-layout">
+    <div class="exam-main">
+      <div class="exam-grid">
+        <div class="panel">
+          <div class="ph"><span id="qzr-topic-lbl">Question</span><span id="qzr-q-no-lbl"></span></div>
+          <div class="pb">
+            <div class="q-text" id="qzr-qtext"></div>
+            <div id="qzr-options" style="margin-top:16px;display:flex;flex-direction:column;gap:9px"></div>
+            <div id="qzr-explanation" style="display:none;margin-top:16px;padding:12px 14px;border-radius:var(--rs);background:var(--adim);border:1px solid var(--aborder);font-size:.82rem;line-height:1.6;color:var(--t)"></div>
+          </div>
+        </div>
+      </div>
+      <div id="qzr-actionbar" style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+        <button class="btn bg" onclick="clearQuizResponse()">Clear Response</button>
+        <button class="btn bg" onclick="markQuizForReview()">Mark for Review &amp; Next</button>
+        <button class="btn bp" style="margin-left:auto" onclick="saveQuizAndNext()">Save &amp; Next →</button>
+      </div>
+      <div id="qzr-review-actionbar" style="display:none;margin-top:12px">
+        <button class="btn bp" onclick="showS('quizlist');renderQuizList()">← Back to Quiz List</button>
+      </div>
+    </div>
+    <div class="exam-side" id="qzr-side"></div>
   </div>
 </div>
 </body>
