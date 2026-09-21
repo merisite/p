@@ -31,7 +31,9 @@
     "festiveTheme": "ganesh",
     "maintenanceMode": false,
     "maintenanceMessage": "The website will be live at 8:00 PM today.",
-    "offersMsg": "Offers & Discounts"
+    "offersMsg": "Offers & Discounts",
+    "quizCourseStatus": "live",
+    "quizCourseProductId": "Demoquiz"
   },
   "sectionTypes": [
     {
@@ -2939,6 +2941,1726 @@
       ],
       "practiceQuestionId": "q_1789725470847",
       "active": true
+    }
+  ],
+  "quizTopics": [
+    {
+      "id": "qt_1789980795213",
+      "name": "PYQ"
+    }
+  ],
+  "quizQuestions": [
+    {
+      "id": "qq_1789980873931_0",
+      "topicId": "qt_1789980795213",
+      "text": "In which one of the following errors are displayed for every instruction?",
+      "options": [
+        "Assembler",
+        "Both c and d",
+        "Compiler",
+        "Interpreter"
+      ],
+      "correctIndex": 3,
+      "explanation": "An interpreter takes a single instruction as input, generates no intermediate object code, and displays errors for every instruction.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_1",
+      "topicId": "qt_1789980795213",
+      "text": "What does dots per inch (DPI) measure?",
+      "options": [
+        "Number of bits",
+        "Density of the pixels on a computer screen",
+        "The density of bits on a disk",
+        "Density of graphic files stored on a hard disk"
+      ],
+      "correctIndex": 1,
+      "explanation": "In printing, DPI refers to the output resolution of a printer or image setter, while PPI refers to the input resolution of a photograph or image.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_2",
+      "topicId": "qt_1789980795213",
+      "text": "What is the full form of 'MAN'?",
+      "options": [
+        "Man Area Network",
+        "Meter Area Network",
+        "Metropolitan Area Network",
+        "Manage Area Network"
+      ],
+      "correctIndex": 2,
+      "explanation": "A MAN is a larger network that usually covers a certain area, village or several buildings.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_3",
+      "topicId": "qt_1789980795213",
+      "text": "Which of the following is not a network protocol?",
+      "options": [
+        "HTTP",
+        "FTP",
+        "SMTP",
+        "HTML"
+      ],
+      "correctIndex": 3,
+      "explanation": "HTML (Hypertext Markup Language) is a markup language, not a network protocol.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_4",
+      "topicId": "qt_1789980795213",
+      "text": "What is access time?",
+      "options": [
+        "It is the time taken by the memory to store or retrieve a piece of data.",
+        "It is the number marked on all memory chips.",
+        "It is the memory clock.",
+        "It is the transaction period between the CPU and the memory"
+      ],
+      "correctIndex": 0,
+      "explanation": "Access time is the time a memory device takes to store or retrieve a piece of data.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_5",
+      "topicId": "qt_1789980795213",
+      "text": "The data are modified to specific code and protected in the sender side while transferring, and the special key is used to retrieve the original data in the receiver side. What is the process used in receiver side to retrieve the original data?",
+      "options": [
+        "Decoding",
+        "Encoding",
+        "Encrypting",
+        "Decrypting"
+      ],
+      "correctIndex": 3,
+      "explanation": "Decryption transforms data that was made unreadable through encryption back to its original form, using a set of keys or passwords.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_6",
+      "topicId": "qt_1789980795213",
+      "text": "What is the term used to denote the repetition of data in DBMS?",
+      "options": [
+        "Repeating",
+        "Restrict",
+        "Reappear",
+        "Redundancy"
+      ],
+      "correctIndex": 3,
+      "explanation": "Repetition of data in a DBMS is called data redundancy.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_7",
+      "topicId": "qt_1789980795213",
+      "text": "____ is the most important/powerful computer in a typical network.",
+      "options": [
+        "Network client",
+        "Desktop",
+        "Network station",
+        "Network server"
+      ],
+      "correctIndex": 3,
+      "explanation": "The server is the most powerful computer in a typical network, because it serves the clients.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_8",
+      "topicId": "qt_1789980795213",
+      "text": "The Artificial satellite which revolves around the earth and provide transmit information from earth is basically called _____.",
+      "options": [
+        "Geosynchronous satellites",
+        "Geostationary satellites",
+        "Low Earth Orbits",
+        "Sun-Synchronous orbits"
+      ],
+      "correctIndex": 1,
+      "explanation": "Most communication satellites are geostationary. They are positioned directly over the equator and follow the equatorial plane, taking 24 hours to complete a rotation.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_9",
+      "topicId": "qt_1789980795213",
+      "text": "What is the name of the portal in computer, which allow additional devices to connect?",
+      "options": [
+        "Primary",
+        "Secondary",
+        "Peripheral",
+        "Optional"
+      ],
+      "correctIndex": 2,
+      "explanation": "A peripheral device connects to a computer system to add functionality. Examples are a mouse, keyboard, monitor, printer and scanner.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_10",
+      "topicId": "qt_1789980795213",
+      "text": "What is the short cut key to close currently opened document in Microsoft word?",
+      "options": [
+        "Ctrl + W",
+        "Ctrl + D",
+        "Ctrl + T",
+        "Ctrl + B"
+      ],
+      "correctIndex": 0,
+      "explanation": "Ctrl + W closes the currently opened document.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_11",
+      "topicId": "qt_1789980795213",
+      "text": "In the C coding '<stdio.h>' is used as a ______ file.",
+      "options": [
+        "Subroutines",
+        "Footer",
+        "Header",
+        "Increment"
+      ],
+      "correctIndex": 2,
+      "explanation": "'<stdio.h>' and '<conio.h>' are used as header files in a C program.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_12",
+      "topicId": "qt_1789980795213",
+      "text": "Raw, unprocessed facts, including text, numbers, images, and sounds, are called ______",
+      "options": [
+        "Applets",
+        "Data",
+        "Metaware",
+        "Product"
+      ],
+      "correctIndex": 1,
+      "explanation": "Raw, unprocessed facts are called data. Processed data becomes information.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_13",
+      "topicId": "qt_1789980795213",
+      "text": "All of the following are TRUE of Safe Mode EXCEPT:",
+      "options": [
+        "Safe Mode is a special diagnostic mode",
+        "Safe Mode loads all non-essential icons",
+        "Safe Mode allows users to troubleshoot errors.",
+        "Safe Mode loads only the most essential devices"
+      ],
+      "correctIndex": 1,
+      "explanation": "Safe Mode loads only the essential drivers and devices, not all non-essential icons, so (b) is the false statement.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_14",
+      "topicId": "qt_1789980795213",
+      "text": "Changing the appearance of a document is called",
+      "options": [
+        "Proofing",
+        "Editing",
+        "Formatting",
+        "Correcting"
+      ],
+      "correctIndex": 2,
+      "explanation": "Formatting changes how a document looks (font, size, alignment). Editing changes its content.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_15",
+      "topicId": "qt_1789980795213",
+      "text": "You can detect spelling and grammar errors by:",
+      "options": [
+        "Press Shift + F7",
+        "Press Ctrl + F7",
+        "Press Alt + F7",
+        "Press F7"
+      ],
+      "correctIndex": 3,
+      "explanation": "F7 runs the Spelling and Grammar check in MS Word. Shift + F7 opens the Thesaurus.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_16",
+      "topicId": "qt_1789980795213",
+      "text": "Which of the following is necessary to track computer, while connecting to Internet?",
+      "options": [
+        "System Number",
+        "Memory",
+        "IP",
+        "VP"
+      ],
+      "correctIndex": 2,
+      "explanation": "An Internet Protocol (IP) address is required to identify and track a computer on the Internet.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_17",
+      "topicId": "qt_1789980795213",
+      "text": "Which of following is not an example for simplex?",
+      "options": [
+        "Radio broadcasting",
+        "Television broadcasting",
+        "Speaker",
+        "Walkie-talkie"
+      ],
+      "correctIndex": 3,
+      "explanation": "Simplex sends information in one direction only. A walkie-talkie is half duplex: transmission is possible in both directions, but only one direction at a time.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_18",
+      "topicId": "qt_1789980795213",
+      "text": "Which of the following layer is responsible for converting electrical impulse to bit streams?",
+      "options": [
+        "Presentation",
+        "Physical",
+        "Data link",
+        "Network"
+      ],
+      "correctIndex": 1,
+      "explanation": "OSI Layer 1 (Physical) conveys the bit stream (electrical impulse, light or radio signal) through the network, including cables, cards and physical aspects.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_19",
+      "topicId": "qt_1789980795213",
+      "text": "What is the maximum number, that each of the four parts of an IP Address can have?",
+      "options": [
+        "345",
+        "255",
+        "197",
+        "301"
+      ],
+      "correctIndex": 1,
+      "explanation": "An IP address is XXX.XXX.XXX.XXX. Each part is stored in 8 bits, giving 2^8 = 256 possibilities (0 to 255).",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_20",
+      "topicId": "qt_1789980795213",
+      "text": "Which of the following extension is used to save image in the computer?",
+      "options": [
+        ".cmd",
+        ".xls",
+        ".vlc",
+        ".jpeg"
+      ],
+      "correctIndex": 3,
+      "explanation": "Images are saved with extensions such as .jpeg. .xls is Excel, and .vlc is not an image format.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_21",
+      "topicId": "qt_1789980795213",
+      "text": "Machine language sometimes also referred as:",
+      "options": [
+        "Binary language",
+        "High level language",
+        "Middle level language",
+        "Low level language"
+      ],
+      "correctIndex": 0,
+      "explanation": "Machine language consists of 0s and 1s, so it is also called binary language.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_22",
+      "topicId": "qt_1789980795213",
+      "text": "Which is an another name for functional language?",
+      "options": [
+        "Machine",
+        "Application",
+        "Low-level language",
+        "High-level language"
+      ],
+      "correctIndex": 1,
+      "explanation": "The PDF gives (b) with no explanation. This question is debatable, so go with the key for the exam.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_23",
+      "topicId": "qt_1789980795213",
+      "text": "..........translates the semantic instructions developed by programmers into the machine language.",
+      "options": [
+        "Assembler",
+        "Interpreter",
+        "Loader",
+        "Compiler"
+      ],
+      "correctIndex": 0,
+      "explanation": "An assembler translates assembly language into machine language. Compilers and interpreters also translate, so the question is ambiguous. Follow the key.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_24",
+      "topicId": "qt_1789980795213",
+      "text": "'Chrome' is a ______ software.",
+      "options": [
+        "Operating System",
+        "Application",
+        "System",
+        "Utility"
+      ],
+      "correctIndex": 1,
+      "explanation": "Chrome is a web browser, which is application software used to perform a specific task.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_25",
+      "topicId": "qt_1789980795213",
+      "text": "SRAM retains data as long as power is provided to the memory chip and need not be refreshed periodically. What does 'S' represents?",
+      "options": [
+        "Stagnant",
+        "Storage",
+        "Simple",
+        "Static"
+      ],
+      "correctIndex": 3,
+      "explanation": "SRAM stands for Static Random Access Memory.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_26",
+      "topicId": "qt_1789980795213",
+      "text": "The computer's capability of distinguishing spoken words is called _________",
+      "options": [
+        "Voice analysis",
+        "Speech acknowledgment",
+        "Speech interpretation",
+        "Voice recognition"
+      ],
+      "correctIndex": 3,
+      "explanation": "The ability of a computer to distinguish spoken words is called voice recognition.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_27",
+      "topicId": "qt_1789980795213",
+      "text": "While working in mail we may came under the 'BCC', what does B represents?",
+      "options": [
+        "Blink",
+        "Black",
+        "Blind",
+        "Broad"
+      ],
+      "correctIndex": 2,
+      "explanation": "BCC means Blind Carbon Copy. Recipients in BCC are hidden from the other recipients.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_28",
+      "topicId": "qt_1789980795213",
+      "text": "Deleted mails from the Inbox can be found in______",
+      "options": [
+        "Trash",
+        "Spam",
+        "Promotions",
+        "All Mail"
+      ],
+      "correctIndex": 0,
+      "explanation": "Trash holds deleted mails for 30 days after deletion.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_29",
+      "topicId": "qt_1789980795213",
+      "text": "What is the components that are used in second generation computers?",
+      "options": [
+        "Vacuum tube",
+        "LSI",
+        "Punch cards",
+        "Transistors"
+      ],
+      "correctIndex": 3,
+      "explanation": "Second generation computers used transistors. First generation used vacuum tubes, third used ICs, and fourth used LSI/microprocessors.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_30",
+      "topicId": "qt_1789980795213",
+      "text": ".........is an artificial language designed to communicate instructions to a computer.",
+      "options": [
+        "Programming language",
+        "Machine Language",
+        "Software Language",
+        "Assembly Language"
+      ],
+      "correctIndex": 0,
+      "explanation": "A programming language is an artificial language designed to give instructions to a computer.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_31",
+      "topicId": "qt_1789980795213",
+      "text": "Expand \"MODEM\"?",
+      "options": [
+        "Modern development",
+        "Medium Development",
+        "Modulation and Demolition",
+        "Modulation and Demodulation"
+      ],
+      "correctIndex": 3,
+      "explanation": "A modem modulates digital signals into analog for transmission and demodulates them back at the receiving end.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_32",
+      "topicId": "qt_1789980795213",
+      "text": "What is the short cut to justify the paragraph?",
+      "options": [
+        "Ctrl + R",
+        "Ctrl + J",
+        "Ctrl + U",
+        "Ctrl + E"
+      ],
+      "correctIndex": 1,
+      "explanation": "Ctrl + J justifies the paragraph. Ctrl + R is right align, Ctrl + E is center, Ctrl + U is underline.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_33",
+      "topicId": "qt_1789980795213",
+      "text": "Which of the following is a non-volatile memory?",
+      "options": [
+        "RAM",
+        "ROM",
+        "Cache",
+        "Primary"
+      ],
+      "correctIndex": 1,
+      "explanation": "ROM keeps its contents when power is off. RAM and cache are volatile.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_34",
+      "topicId": "qt_1789980795213",
+      "text": "Which one of the following command is used to display both query and output?",
+      "options": [
+        "List",
+        "Select",
+        "Describe",
+        "R"
+      ],
+      "correctIndex": 3,
+      "explanation": "The R command is used to display both the query and its output.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_35",
+      "topicId": "qt_1789980795213",
+      "text": "OSI is an ISO standard for worldwide communications that defines a networking framework for implementing protocols. What does 'O' stands for?",
+      "options": [
+        "Operation",
+        "Open",
+        "Organisation",
+        "Optical"
+      ],
+      "correctIndex": 1,
+      "explanation": "OSI stands for Open Systems Interconnection. The model defines a networking framework in seven layers.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_36",
+      "topicId": "qt_1789980795213",
+      "text": "An operation in which data is moved to a different location is referred as _______.",
+      "options": [
+        "Block move",
+        "Street move",
+        "Delete",
+        "Shift remove"
+      ],
+      "correctIndex": 0,
+      "explanation": "Moving data to a different location is called a block move.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_37",
+      "topicId": "qt_1789980795213",
+      "text": "Which among the following is not an Object Oriented Programming Language?",
+      "options": [
+        "Python",
+        "C++",
+        "Java",
+        "PASCAL"
+      ],
+      "correctIndex": 3,
+      "explanation": "Pascal is an imperative and procedural programming language designed by Niklaus Wirth in 1968-69 and published in 1970.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_38",
+      "topicId": "qt_1789980795213",
+      "text": "This is a standard way for a Web server to pass a Web user's request to an application program and to receive data back to forward to the user -",
+      "options": [
+        "Interrupt request",
+        "Forward DNS lookup",
+        "Data-Link layer",
+        "Common gateway interface"
+      ],
+      "correctIndex": 3,
+      "explanation": "CGI is the standard interface between a web server and an application program.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_39",
+      "topicId": "qt_1789980795213",
+      "text": "This type of software is designed for users who want to customize the programs they use.",
+      "options": [
+        "Shareware",
+        "Open-source software",
+        "Freeware",
+        "Macros"
+      ],
+      "correctIndex": 0,
+      "explanation": "The PDF gives (a) with no explanation. Open-source software (b), which lets users modify the source code, is generally a better fit for \"customize\", so verify this one.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_40",
+      "topicId": "qt_1789980795213",
+      "text": "The effect of the ROLLBACK command in a transaction is the following_________",
+      "options": [
+        "Undo all changes to the data-base resulting from the execution of the transaction",
+        "Undo the effects of the last UPDATE command",
+        "Restore the content of the database to its state at the end of the previous day",
+        "Make sure that all changes to the database are in effect"
+      ],
+      "correctIndex": 0,
+      "explanation": "ROLLBACK undoes all changes made by the current transaction. COMMIT is what makes changes permanent.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_41",
+      "topicId": "qt_1789980795213",
+      "text": "A(n) -----system is a small, wireless handheld computer that scans an item's tag and pulls up the current price (and any special offers) as you shop.",
+      "options": [
+        "PSS",
+        "POS",
+        "Inventory",
+        "data mining"
+      ],
+      "correctIndex": 0,
+      "explanation": "PSS is a Personal Shopping System.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_42",
+      "topicId": "qt_1789980795213",
+      "text": "Single parity disk relying on the disk controller for finding out which disk has failed is used by",
+      "options": [
+        "RAID level 5",
+        "RAID level 2",
+        "RAID level 4",
+        "RAID level 3"
+      ],
+      "correctIndex": 3,
+      "explanation": "RAID 3 uses a single dedicated parity disk, and the controller identifies which disk has failed.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_43",
+      "topicId": "qt_1789980795213",
+      "text": "What happens when you click on insert>Picture>Clip Art?",
+      "options": [
+        "It inserts a clipart picture into document",
+        "It lets you choose clipart to insert into document",
+        "It opens Clip Art taskbar",
+        "It insets symbols"
+      ],
+      "correctIndex": 2,
+      "explanation": "The command opens the Clip Art task pane, where you search for and choose a picture.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_44",
+      "topicId": "qt_1789980795213",
+      "text": "Which one allows Movements in all directions (360 degree)?",
+      "options": [
+        "Mouse",
+        "Joystick",
+        "Light pen",
+        "Track ball"
+      ],
+      "correctIndex": 1,
+      "explanation": "A joystick allows movement in all directions (360 degrees).",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_45",
+      "topicId": "qt_1789980795213",
+      "text": "_____ and _____ refers to the action of clicking and holding down the mouse button while moving the mouse and realign it.",
+      "options": [
+        "Drag, Click",
+        "Drop, Drag",
+        "Drag, Drop",
+        "Click, Right Click"
+      ],
+      "correctIndex": 2,
+      "explanation": "Drag and drop means holding the mouse button while moving an item, then releasing it at the new position.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_46",
+      "topicId": "qt_1789980795213",
+      "text": "File record length",
+      "options": [
+        "Should always be fixed",
+        "Should always be variable",
+        "Depends upon the size of file",
+        "Should be chosen to match the data characteristics."
+      ],
+      "correctIndex": 1,
+      "explanation": "The PDF gives no explanation. Option (d) sounds more logical in theory, so treat this as a doubtful key.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_47",
+      "topicId": "qt_1789980795213",
+      "text": "Which one is used to open a document or program?",
+      "options": [
+        "Click",
+        "Double Click",
+        "Right Click",
+        "Drag and Drop"
+      ],
+      "correctIndex": 1,
+      "explanation": "Double-clicking is used to open a document or program.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_48",
+      "topicId": "qt_1789980795213",
+      "text": "______is another pointing device which is an alternative to a mouse.",
+      "options": [
+        "Track ball",
+        "Joystick",
+        "Light pen",
+        "Touch Screen"
+      ],
+      "correctIndex": 0,
+      "explanation": "A track ball is a pointing device that works as an alternative to a mouse.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_49",
+      "topicId": "qt_1789980795213",
+      "text": "Laser printer can print ___ pages of text per minute and their resolution ranges from ______dpi.",
+      "options": [
+        "5-25, 400-1300",
+        "5-25, 400-1200",
+        "5-24, 400-1200",
+        "5-25, 500-1300"
+      ],
+      "correctIndex": 2,
+      "explanation": "Laser printers can print 5-24 pages of text per minute, with a resolution of 400-1200 dpi.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_50",
+      "topicId": "qt_1789980795213",
+      "text": "Electromagnetic printer can produce documents at a speed of over _____ lines.",
+      "options": [
+        "10000",
+        "20000",
+        "30000",
+        "40000"
+      ],
+      "correctIndex": 1,
+      "explanation": "It produces documents at over 20,000 lines, which is more than 250 pages per minute.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_51",
+      "topicId": "qt_1789980795213",
+      "text": "The main computer in a network is called.",
+      "options": [
+        "host processor",
+        "front-end processor",
+        "commentator",
+        "KIPS"
+      ],
+      "correctIndex": 0,
+      "explanation": "The main computer in a network is called the host processor (host computer).",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_52",
+      "topicId": "qt_1789980795213",
+      "text": "Caps lock and Num lock Keys are called as ____ keys.",
+      "options": [
+        "Ctrl",
+        "Shift",
+        "Toggle",
+        "Window"
+      ],
+      "correctIndex": 2,
+      "explanation": "When pressed, they toggle (switch) their status from one state to another.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_53",
+      "topicId": "qt_1789980795213",
+      "text": "If you change Windows 98 to Windows XP, you are actually performing?",
+      "options": [
+        "Upstart",
+        "Update",
+        "Upgrade",
+        "Patch"
+      ],
+      "correctIndex": 2,
+      "explanation": "Changing to a newer version of software is an upgrade.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_54",
+      "topicId": "qt_1789980795213",
+      "text": "Which one performs simply an informal way of describing a program and it does not follow any Syntax Strictly?",
+      "options": [
+        "Mnemonic",
+        "Opcode",
+        "Pseudocode",
+        "Operand"
+      ],
+      "correctIndex": 2,
+      "explanation": "Pseudocode is not a programming language. It is simply an informal way of describing a program and does not follow any syntax strictly.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_55",
+      "topicId": "qt_1789980795213",
+      "text": "Which one is a typical rectangular shaped monitor that you see on a desktop computer?",
+      "options": [
+        "CRT",
+        "LCD",
+        "LED",
+        "BIOS"
+      ],
+      "correctIndex": 0,
+      "explanation": "The PDF says a CRT (Cathode Ray Tube) monitor works by moving an electron beam back and forth across the back of the screen. Modern flat monitors are LCD/LED, but the key is (a).",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_56",
+      "topicId": "qt_1789980795213",
+      "text": "A pixel is_____",
+      "options": [
+        "Picture element or dot on a screen",
+        "Point of ink on a user printed paper",
+        "Point of ink on a inkjet printed page",
+        "Light beam used in printing paper"
+      ],
+      "correctIndex": 0,
+      "explanation": "Pixel stands for \"picture element\", the smallest dot on a screen.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_57",
+      "topicId": "qt_1789980795213",
+      "text": "In which printers, Printing is achieved by deflecting laser beam on to photosensitive surface of a drum?",
+      "options": [
+        "Dot Matrix",
+        "Daisy Wheel",
+        "Laser printer",
+        "Electromagnetic printer"
+      ],
+      "correctIndex": 2,
+      "explanation": "Laser printers form the image by deflecting a laser beam onto the photosensitive surface of a drum.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_58",
+      "topicId": "qt_1789980795213",
+      "text": "First generation computer were based on?",
+      "options": [
+        "Vacuum tubes",
+        "ICs",
+        "Transistors",
+        "Conductors"
+      ],
+      "correctIndex": 0,
+      "explanation": "First generation computers were based on vacuum tubes.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_59",
+      "topicId": "qt_1789980795213",
+      "text": "Which language is directly understood by the computer without translation Program?",
+      "options": [
+        "Machine language",
+        "C# Language",
+        "High level language",
+        "C language"
+      ],
+      "correctIndex": 0,
+      "explanation": "Machine language is the only language a computer executes directly without a translator.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_60",
+      "topicId": "qt_1789980795213",
+      "text": "The speed of Which Generation Computer was in Pico Seconds?",
+      "options": [
+        "First",
+        "Second",
+        "Fourth",
+        "Fifth"
+      ],
+      "correctIndex": 2,
+      "explanation": "The PDF says fourth generation computers had speed in picoseconds, and the microprocessor is the main concept behind them.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_61",
+      "topicId": "qt_1789980795213",
+      "text": "JS kilby developed which chips?",
+      "options": [
+        "Silicon",
+        "Silica",
+        "Integrated",
+        "Iron oxide"
+      ],
+      "correctIndex": 2,
+      "explanation": "Jack S. Kilby developed the integrated circuit (IC) chip.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_62",
+      "topicId": "qt_1789980795213",
+      "text": "First Super computer of World is_____",
+      "options": [
+        "PARAM",
+        "Siddhart",
+        "IBM -370",
+        "CRAY-1"
+      ],
+      "correctIndex": 3,
+      "explanation": "The PDF gives CRAY-1 as the first supercomputer of the world.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_63",
+      "topicId": "qt_1789980795213",
+      "text": "Which one is example for Fifth Generation computer?",
+      "options": [
+        "DBMS",
+        "Distributed System",
+        "Real time System",
+        "Artificial Intelligence"
+      ],
+      "correctIndex": 3,
+      "explanation": "Artificial Intelligence is an example of fifth generation computing.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_64",
+      "topicId": "qt_1789980795213",
+      "text": "Which Storage devices is used in Fourth Generation Computer?",
+      "options": [
+        "Magnetic drum",
+        "Magnetic core technology",
+        "Semiconductor memory",
+        "Primary Storage medium"
+      ],
+      "correctIndex": 2,
+      "explanation": "Semiconductor memory and Winchester disk storage devices were used in fourth generation computers.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_65",
+      "topicId": "qt_1789980795213",
+      "text": "PDP-8 is an example for Which Generation Computer?",
+      "options": [
+        "First",
+        "Second",
+        "Third",
+        "Fourth"
+      ],
+      "correctIndex": 1,
+      "explanation": "The PDF lists PDP-8 and IBM 1401 as second generation examples. Many textbooks place PDP-8 in the third generation, but follow the key.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_66",
+      "topicId": "qt_1789980795213",
+      "text": "Which Operating System is used in Third Generation Computer?",
+      "options": [
+        "Batch",
+        "Time Sharing System",
+        "Real-Time System",
+        "GUI Interface"
+      ],
+      "correctIndex": 2,
+      "explanation": "The PDF gives Real-Time System. Many sources say time-sharing operating systems appeared in the third generation, so this is debatable.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_67",
+      "topicId": "qt_1789980795213",
+      "text": "Programming Language introduced in Which Generation?",
+      "options": [
+        "First",
+        "Second",
+        "Third",
+        "Fourth"
+      ],
+      "correctIndex": 2,
+      "explanation": "The PDF states it was introduced in the third generation. Some sources say the second generation, so follow the key.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_68",
+      "topicId": "qt_1789980795213",
+      "text": "Which one is generally used in banks to process the Cheques?",
+      "options": [
+        "OMR",
+        "MICR",
+        "OCR",
+        "MIC"
+      ],
+      "correctIndex": 1,
+      "explanation": "MICR (Magnetic Ink Character Recognition) reads the magnetic-ink encoded numbers printed at the bottom of a cheque.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_69",
+      "topicId": "qt_1789980795213",
+      "text": "Which one is an Optical disk storage medium designed to recapture the data normally in DVD format?",
+      "options": [
+        "Compact Disk",
+        "Digital Video Disk",
+        "Blue-ray Disk",
+        "Floppy Disk"
+      ],
+      "correctIndex": 2,
+      "explanation": "Blu-ray is an optical disc storage medium that holds about 25 GB (23.31 GB) per layer.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_70",
+      "topicId": "qt_1789980795213",
+      "text": "Who designed the first electronics computer-ENIAC?",
+      "options": [
+        "Van Neuman",
+        "Joseph M Jacquard",
+        "J presper Eckert and John W Mauchly",
+        "Both (a) and (b)"
+      ],
+      "correctIndex": 2,
+      "explanation": "The PDF's key says (a), but ENIAC was designed by J. Presper Eckert and John W. Mauchly, which is option (c). Von Neumann is associated with the stored-program concept.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_71",
+      "topicId": "qt_1789980795213",
+      "text": "............is a collection of web-pages and ............is the very first page that we see on opening of a website.",
+      "options": [
+        "Home page, Web page",
+        "Website, Home page",
+        "Web page, Home page",
+        "Web page, Website"
+      ],
+      "correctIndex": 1,
+      "explanation": "A website is a collection of web pages, and the home page is the first page you see when a website opens.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_72",
+      "topicId": "qt_1789980795213",
+      "text": "When we run program in HTML coding, ........is used as backend and..........works as frontend.",
+      "options": [
+        "Notepad, Internet Explorer",
+        "Notepad, MSN messenger",
+        "MS Word, Internet Explorer",
+        "Both (a) and (c)"
+      ],
+      "correctIndex": 0,
+      "explanation": "The code is written in a text editor such as Notepad (backend), and a browser such as Internet Explorer displays it (frontend).",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_73",
+      "topicId": "qt_1789980795213",
+      "text": "The main memory of a computer can also be called.............",
+      "options": [
+        "primary storage",
+        "internal memory",
+        "primary memory",
+        "all of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "The PDF gives (c). Main memory is also called primary storage and internal memory, so (d) would arguably be better. Follow the key.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_74",
+      "topicId": "qt_1789980795213",
+      "text": "A GUI is",
+      "options": [
+        "hardware",
+        "language interpreter",
+        "software interface",
+        "an operating system"
+      ],
+      "correctIndex": 2,
+      "explanation": "A Graphical User Interface is a software interface that lets users interact with the computer using icons and windows.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_75",
+      "topicId": "qt_1789980795213",
+      "text": "Which one holds a block of data that is read or written at one time?",
+      "options": [
+        "Data Transfer rate",
+        "Track",
+        "Sector",
+        "Hard disk"
+      ],
+      "correctIndex": 2,
+      "explanation": "A sector holds a block of data that is read or written at one time.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_76",
+      "topicId": "qt_1789980795213",
+      "text": "The rate at which data is written to disk or read from disk is called as ____.",
+      "options": [
+        "Data Transfer rate",
+        "Track",
+        "Sector",
+        "Hard disk"
+      ],
+      "correctIndex": 0,
+      "explanation": "The rate at which data is written to or read from disk is called the data transfer rate.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_77",
+      "topicId": "qt_1789980795213",
+      "text": "Which one records data bits as tiny magnetic spots?",
+      "options": [
+        "Data Transfer rate",
+        "Track",
+        "Sector",
+        "Hard disk"
+      ],
+      "correctIndex": 1,
+      "explanation": "As per the PDF, a track records data bits as tiny magnetic spots.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_78",
+      "topicId": "qt_1789980795213",
+      "text": "BIOS Stands for?",
+      "options": [
+        "Basic Input Output Server",
+        "Basic Input Output Storage",
+        "Basic Input Output System",
+        "Basic Input Output Standard"
+      ],
+      "correctIndex": 2,
+      "explanation": "BIOS is the program a computer's microprocessor uses to start the system after power-on. It also manages data flow between the operating system and attached devices such as the hard disk, video adapter, keyboard, mouse and printer.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_79",
+      "topicId": "qt_1789980795213",
+      "text": "Which one is used in a program to execute a particular set of statements repeatedly?",
+      "options": [
+        "Visual basic",
+        "Pseudocode",
+        "Condition",
+        "Looping"
+      ],
+      "correctIndex": 3,
+      "explanation": "Looping is a control structure used in a program to execute a particular set of statements repeatedly.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_80",
+      "topicId": "qt_1789980795213",
+      "text": "Which works on the supply of Continuous electrical pulses?",
+      "options": [
+        "Analog Computer",
+        "Digital Computer",
+        "Both a and b",
+        "Super Compute"
+      ],
+      "correctIndex": 0,
+      "explanation": "An analog computer operates on data in the form of continuous variable physical quantities.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_81",
+      "topicId": "qt_1789980795213",
+      "text": "The Characteristics of any entity are called it as ________",
+      "options": [
+        "Attributes",
+        "Relationship",
+        "Entity set",
+        "Information"
+      ],
+      "correctIndex": 0,
+      "explanation": "The characteristics of an entity are called attributes. They are drawn in elliptical shape in an ER diagram.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_82",
+      "topicId": "qt_1789980795213",
+      "text": "Which key must be Unique?",
+      "options": [
+        "Alternate",
+        "Primary",
+        "Candidate",
+        "Foreign"
+      ],
+      "correctIndex": 1,
+      "explanation": "A primary key must be unique and it should not accept NULL values.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_83",
+      "topicId": "qt_1789980795213",
+      "text": "_______ are the actual data contained in the database at a particular point of time.",
+      "options": [
+        "Schema",
+        "Data mining",
+        "Instances",
+        "Information"
+      ],
+      "correctIndex": 2,
+      "explanation": "Instances are the actual data contained in the database at a particular point of time. The schema is the structure of the database.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_84",
+      "topicId": "qt_1789980795213",
+      "text": "Dr EF Codd represented _____ rules for relational database management system (RDBMS) in 1970.",
+      "options": [
+        "9",
+        "12",
+        "14",
+        "11"
+      ],
+      "correctIndex": 1,
+      "explanation": "Dr. E.F. Codd's 12 rules define a relational database management system.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_85",
+      "topicId": "qt_1789980795213",
+      "text": "A set of possible data values is called as _____.",
+      "options": [
+        "Tuple",
+        "Attribute",
+        "Degree",
+        "Domain"
+      ],
+      "correctIndex": 3,
+      "explanation": "A domain is the set of possible values that an attribute can take.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_86",
+      "topicId": "qt_1789980795213",
+      "text": "Which one defines how the data are actually stored and organised on the storage medium?",
+      "options": [
+        "Physical level",
+        "Logical level",
+        "View level",
+        "Conceptual level"
+      ],
+      "correctIndex": 0,
+      "explanation": "The physical level (also known as the internal level) defines how data is actually stored and organised on the storage medium.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_87",
+      "topicId": "qt_1789980795213",
+      "text": "Which one defines what type of data is stored in the database?",
+      "options": [
+        "Internal level",
+        "Physical level",
+        "View level",
+        "Logical level"
+      ],
+      "correctIndex": 3,
+      "explanation": "The logical level (also known as the conceptual level) defines what type of data is stored and the relationships among the data, without affecting the physical level.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_88",
+      "topicId": "qt_1789980795213",
+      "text": "A device needed to communicate with computers using telephone lines is _____.",
+      "options": [
+        "Disk",
+        "CPU",
+        "VDU",
+        "Modem"
+      ],
+      "correctIndex": 3,
+      "explanation": "A modem is needed to communicate with computers over telephone lines.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_89",
+      "topicId": "qt_1789980795213",
+      "text": "Which one of the following domain is used by Non-Profit Organisation?",
+      "options": [
+        ".com",
+        ".gov",
+        ".org",
+        ".edu"
+      ],
+      "correctIndex": 2,
+      "explanation": "The .org domain is used by non-profit organisations. .com is commercial, .gov is government, and .edu is educational.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_90",
+      "topicId": "qt_1789980795213",
+      "text": "In which one of the following errors are displayed after entire program is checked?",
+      "options": [
+        "Assembler",
+        "Both C and D",
+        "Compiler",
+        "Interpreter"
+      ],
+      "correctIndex": 2,
+      "explanation": "A compiler takes the entire program as input, generates intermediate object code, and displays errors after the entire program is checked.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_91",
+      "topicId": "qt_1789980795213",
+      "text": "A _____ generator is used to print files on paper.",
+      "options": [
+        "Printer",
+        "Scanner",
+        "Both A and B",
+        "Report"
+      ],
+      "correctIndex": 3,
+      "explanation": "A report generator is used to print files on paper.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_92",
+      "topicId": "qt_1789980795213",
+      "text": "If we want to eliminate the duplicate values than _____ keyword is also to be used.",
+      "options": [
+        "Values",
+        "Groups",
+        "Distinct values",
+        "Columns"
+      ],
+      "correctIndex": 2,
+      "explanation": "The DISTINCT keyword is used to eliminate duplicate values (for example, to count only distinct values).",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_93",
+      "topicId": "qt_1789980795213",
+      "text": "If we want to check the structure of the table____ Command is used.",
+      "options": [
+        "List",
+        "Select",
+        "Describe",
+        "R"
+      ],
+      "correctIndex": 2,
+      "explanation": "The DESCRIBE command is used to check the structure of a table.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_94",
+      "topicId": "qt_1789980795213",
+      "text": "A............'s main purpose is to prohibit unauthorized access to your computer via the Internet.",
+      "options": [
+        "popup blocker",
+        "firewall",
+        "spyware blocker",
+        "spam assassin"
+      ],
+      "correctIndex": 1,
+      "explanation": "A firewall blocks unauthorized access to a computer or network via the Internet.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_95",
+      "topicId": "qt_1789980795213",
+      "text": "If configured correctly, the..........will prevent interaction with your computer after a specified time period.",
+      "options": [
+        "firewall",
+        "filter",
+        "screen saver",
+        "popup blocker"
+      ],
+      "correctIndex": 2,
+      "explanation": "A screen saver, when configured with a password, locks the screen and prevents interaction after a period of inactivity.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_96",
+      "topicId": "qt_1789980795213",
+      "text": "What is the name of the series of Laptop computers manufactured by IBM called?",
+      "options": [
+        "LapPad",
+        "Vaio",
+        "Aptiva",
+        "Thinkpad"
+      ],
+      "correctIndex": 3,
+      "explanation": "The PDF's key says (b), but Vaio is Sony's brand. IBM's laptop series is the ThinkPad, which is option (d).",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_97",
+      "topicId": "qt_1789980795213",
+      "text": "Which one of the following command is used to show only the last query?",
+      "options": [
+        "List",
+        "Select",
+        "Describe",
+        "R"
+      ],
+      "correctIndex": 0,
+      "explanation": "The LIST command is used to show only the last query.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_98",
+      "topicId": "qt_1789980795213",
+      "text": "Which one is not a Necessary conditions for deadlock?",
+      "options": [
+        "Non pre-emptive",
+        "Preemptive",
+        "Partial allocation",
+        "Circular wait"
+      ],
+      "correctIndex": 1,
+      "explanation": "The necessary conditions for deadlock are mutual exclusion, non-pre-emption, circular wait and partial allocation. \"Preemptive\" is not one of them.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1789980873932_99",
+      "topicId": "qt_1789980795213",
+      "text": "Which one is true about generation of computers?",
+      "options": [
+        "The first generation (1942-1954)",
+        "The second generation of computer (1954-1964)",
+        "Third generation of computer (1965-71)",
+        "Fourth generation of computer (1975-1984)"
+      ],
+      "correctIndex": 2,
+      "explanation": "As per the PDF, the third generation of computers ran from 1965 to 1971.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    }
+  ],
+  "quizSets": [
+    {
+      "id": "qs_1789980918279",
+      "setNo": 1,
+      "title": "PYQ",
+      "timeLimitMin": 10,
+      "negMarkEnabled": true,
+      "negMarkValue": 0.25,
+      "active": true,
+      "productIds": []
     }
   ]
 }
