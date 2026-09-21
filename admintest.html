@@ -259,6 +259,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
       <div class="ni" data-p="mocks" onclick="nav('mocks')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></span>Mocks</div>
       <div class="ni" data-p="paidmocks" onclick="nav('paidmocks')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></span>Paid Mocks</div>
       <div class="ni" data-p="essays" onclick="nav('essays')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></span>Essays</div>
+      <div class="ni" data-p="quizcourse" onclick="nav('quizcourse')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>Quiz Course</div>
       <div class="ni" data-p="livetracker" onclick="nav('livetracker')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></span>Live Tracker</div>
       <div class="ni" data-p="secs" onclick="nav('secs')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="21"/></svg></span>Sections</div>
       <div class="ni" data-p="typing" onclick="nav('typing')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M8 12h.01M12 12h.01M16 12h.01M7 16h10"/></svg></span>Typing Paras</div>
@@ -434,6 +435,169 @@ In conclusion, while digital banking has significantly advanced financial inclus
         </div>
 
         <div id="essay-list"></div>
+      </div>
+
+      <!-- QUIZ COURSE -->
+      <div id="pg-quizcourse" class="pg">
+        <div class="ph"><div class="ph-ey">Content</div><div class="ph-ti">Quiz Course</div><div class="ph-su">MCQ question bank for Computer Awareness (or any quiz-style course) — bulk-paste and parse with AI, or add/edit questions one at a time. Organize into topics and timed Quiz Sets.</div></div>
+
+        <!-- COURSE SETTINGS -->
+        <div style="background:var(--bg2);border:2px solid var(--aborder);border-radius:var(--rl);padding:18px;margin-bottom:18px">
+          <div style="font-size:.85rem;font-weight:700;margin-bottom:4px">Course Settings</div>
+          <div style="font-size:.74rem;color:var(--t2);margin-bottom:14px">Controls the whole course at once — whether it's live or shown as "Upcoming" on the site, and (optionally) a single price covering every Quiz Set, so you don't have to price each set separately.</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+            <div>
+              <label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:5px">Course Status</label>
+              <select id="qzc-status" style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem">
+                <option value="live">Live — visible &amp; open to students</option>
+                <option value="upcoming">Upcoming — shown as "Coming Soon", not yet accessible</option>
+              </select>
+            </div>
+            <div>
+              <label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:5px">Course Product ID <span style="font-size:.65rem;color:var(--t2)">(optional — one price for the whole course)</span></label>
+              <input id="qzc-product-id" placeholder="e.g. computer-quiz-course" style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/>
+            </div>
+          </div>
+          <div style="font-size:.68rem;color:var(--t2);margin-bottom:12px">When a Course Product ID is set here, buying it unlocks <strong>every</strong> Quiz Set automatically — new sets you add later are covered too, with nothing extra to configure per set. Leave blank if you'd rather price sets individually using each set's own "Paid access" field below.</div>
+          <button class="btn bp" style="padding:7px 16px;font-size:.78rem" onclick="saveQuizCourseSettings()">Save Course Settings</button>
+          <span id="qzc-settings-status" style="font-size:.74rem;margin-left:10px"></span>
+        </div>
+
+        <!-- TOPICS -->
+        <div style="background:var(--bg2);border:1px solid var(--b);border-radius:var(--rl);padding:18px;margin-bottom:18px">
+          <div style="font-size:.85rem;font-weight:700;margin-bottom:10px">Topics</div>
+          <div id="qz-topics-list" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">Loading…</div>
+          <div style="display:flex;gap:8px">
+            <input id="qz-new-topic" placeholder="e.g. Networking, MS Office, Shortcuts" style="flex:1;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem" onkeydown="if(event.key==='Enter')addQuizTopic()"/>
+            <button class="btn bp" style="padding:6px 14px;font-size:.78rem" onclick="addQuizTopic()">+ Add Topic</button>
+          </div>
+        </div>
+
+        <!-- BULK AI PARSER -->
+        <div style="background:var(--bg2);border:1px solid var(--b);border-radius:var(--rl);padding:18px;margin-bottom:18px">
+          <div style="font-size:.85rem;font-weight:700;margin-bottom:4px">Bulk Add — Paste &amp; Parse with AI</div>
+          <div style="font-size:.74rem;color:var(--t2);margin-bottom:12px">Paste raw questions in any reasonable format (Q/A/Answer/Explanation labels, numbered lists, copied straight from a PDF — the parser is forgiving). Nothing is saved until you review the preview below and click Import.</div>
+          <textarea id="qz-bulk-raw" rows="9" placeholder="Q: What does CPU stand for?
+A) Central Processing Unit
+B) Central Program Unit
+C) Computer Processing Unit
+D) Central Processor Utility
+Answer: A
+Explanation: The CPU executes instructions and performs calculations.
+
+Q: Which of these is an input device?
+..." style="width:100%;margin-bottom:12px;padding:9px 11px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem;font-family:'JetBrains Mono',monospace;resize:vertical"></textarea>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px">
+            <div>
+              <label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:5px">Assign Topic (optional — applies to all parsed)</label>
+              <select id="qz-bulk-topic" style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"><option value="">— No topic —</option></select>
+            </div>
+            <div>
+              <label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:5px">Assign to Set # (optional)</label>
+              <input id="qz-bulk-setno" type="number" min="1" placeholder="Leave blank to keep unassigned" style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/>
+            </div>
+            <div>
+              <label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:5px">Difficulty (optional — applies to all parsed)</label>
+              <select id="qz-bulk-difficulty" style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem">
+                <option value="">— Let AI guess —</option><option value="easy">Easy</option><option value="medium">Medium</option><option value="hard">Hard</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn bp" style="padding:8px 16px;font-size:.8rem" id="qz-parse-btn" onclick="parseQuizBulk()">✨ Parse with AI</button>
+          <div id="qz-parse-status" style="font-size:.75rem;margin-top:8px"></div>
+          <div id="qz-preview-wrap" style="display:none;margin-top:16px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+              <div style="font-size:.8rem;font-weight:700">Preview — uncheck any question to exclude it before importing</div>
+              <button class="btn bp" style="padding:6px 14px;font-size:.78rem" onclick="importQuizPreview()">Import Checked Questions</button>
+            </div>
+            <div id="qz-preview-list" style="display:flex;flex-direction:column;gap:10px;max-height:520px;overflow-y:auto"></div>
+          </div>
+        </div>
+
+        <!-- MANUAL ADD -->
+        <div style="background:var(--bg2);border:1px solid var(--b);border-radius:var(--rl);padding:18px;margin-bottom:18px">
+          <div id="qz-form-title" style="font-size:.85rem;font-weight:700;margin-bottom:12px">Add Question Manually</div>
+          <textarea id="qz-q-text" rows="2" placeholder="Question text" style="width:100%;margin-bottom:10px;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.82rem;font-family:inherit;resize:vertical"></textarea>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+            <div style="display:flex;align-items:center;gap:8px"><input type="radio" name="qz-correct" value="0" checked/><input id="qz-opt-0" placeholder="Option A" style="flex:1;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/></div>
+            <div style="display:flex;align-items:center;gap:8px"><input type="radio" name="qz-correct" value="1"/><input id="qz-opt-1" placeholder="Option B" style="flex:1;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/></div>
+            <div style="display:flex;align-items:center;gap:8px"><input type="radio" name="qz-correct" value="2"/><input id="qz-opt-2" placeholder="Option C" style="flex:1;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/></div>
+            <div style="display:flex;align-items:center;gap:8px"><input type="radio" name="qz-correct" value="3"/><input id="qz-opt-3" placeholder="Option D" style="flex:1;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/></div>
+          </div>
+          <div style="font-size:.68rem;color:var(--t2);margin-bottom:10px">Select the radio button next to the correct option.</div>
+          <textarea id="qz-explanation" rows="2" placeholder="Explanation (shown below the question in the solution review)" style="width:100%;margin-bottom:10px;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.82rem;font-family:inherit;resize:vertical"></textarea>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px">
+            <div>
+              <label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:5px">Topic</label>
+              <select id="qz-q-topic" style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"><option value="">— No topic —</option></select>
+            </div>
+            <div>
+              <label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:5px">Difficulty</label>
+              <select id="qz-q-difficulty" style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"><option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Hard</option></select>
+            </div>
+            <div>
+              <label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:5px">Set # (optional)</label>
+              <input id="qz-q-setno" type="number" min="1" placeholder="Unassigned" style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/>
+            </div>
+          </div>
+          <label style="display:flex;align-items:center;gap:7px;font-size:.78rem;margin-bottom:14px;cursor:pointer"><input type="checkbox" id="qz-q-active" checked style="margin:0"/> Active (visible to students)</label>
+          <div style="display:flex;gap:8px">
+            <button class="btn bp" style="padding:8px 16px;font-size:.8rem" onclick="saveQuizQuestion()">Save Question</button>
+            <button class="btn" id="qz-q-cancel" style="padding:6px 14px;font-size:.76rem;display:none" onclick="resetQuizQuestionForm()">Cancel Edit</button>
+          </div>
+        </div>
+
+        <!-- QUESTIONS TABLE -->
+        <div style="background:var(--bg2);border:1px solid var(--b);border-radius:var(--rl);padding:18px;margin-bottom:18px">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;flex-wrap:wrap">
+            <div style="font-size:.85rem;font-weight:700">All Quiz Questions</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <input id="qz-filter-search" placeholder="Search question text…" oninput="renderQuizQuestionsTable()" style="padding:6px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.76rem"/>
+              <select id="qz-filter-topic" onchange="renderQuizQuestionsTable()" style="padding:6px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.76rem"><option value="">All Topics</option></select>
+              <select id="qz-filter-set" onchange="renderQuizQuestionsTable()" style="padding:6px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.76rem"><option value="">All Sets</option></select>
+            </div>
+          </div>
+          <div id="qz-questions-table" style="overflow-x:auto"></div>
+        </div>
+
+        <!-- QUIZ SETS -->
+        <div style="background:var(--bg2);border:1px solid var(--b);border-radius:var(--rl);padding:18px">
+          <div style="font-size:.85rem;font-weight:700;margin-bottom:4px">Quiz Sets</div>
+          <div style="font-size:.74rem;color:var(--t2);margin-bottom:12px">A Quiz Set groups every question with a matching Set # above into one timed attempt, same pattern as your Mocks. Negative marking, time limit and paid access are all configured per set here.</div>
+          <div id="qz-sets-list" style="margin-bottom:14px"></div>
+          <div id="qz-set-form-title" style="font-size:.8rem;font-weight:700;margin-bottom:10px">Add Quiz Set</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+            <div>
+              <label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:5px">Set #</label>
+              <input id="qzs-setno" type="number" min="1" style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/>
+            </div>
+            <div>
+              <label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:5px">Title</label>
+              <input id="qzs-title" placeholder="e.g. Computer Awareness — Set 1" style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px">
+            <div>
+              <label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:5px">Time Limit (minutes)</label>
+              <input id="qzs-timelimit" type="number" min="1" placeholder="e.g. 20" style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/>
+            </div>
+            <div>
+              <label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:5px">Negative Marking</label>
+              <select id="qzs-negenabled" onchange="document.getElementById('qzs-negval-wrap').style.display=this.value==='1'?'block':'none'" style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"><option value="0">Off</option><option value="1">On</option></select>
+            </div>
+            <div id="qzs-negval-wrap" style="display:none">
+              <label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:5px">Deduction per wrong answer</label>
+              <input id="qzs-negval" type="number" min="0" step="0.05" placeholder="e.g. 0.25" style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/>
+            </div>
+          </div>
+          <label style="font-size:.72rem;color:var(--t2);display:block;margin-bottom:6px">Paid access (leave unchecked = free for everyone):</label>
+          <div id="qzs-product-checklist" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">Loading…</div>
+          <label style="display:flex;align-items:center;gap:7px;font-size:.78rem;margin-bottom:14px;cursor:pointer"><input type="checkbox" id="qzs-active" checked style="margin:0"/> Active (visible to students)</label>
+          <div style="display:flex;gap:8px">
+            <button class="btn bp" style="padding:8px 16px;font-size:.8rem" onclick="saveQuizSet()">Save Set</button>
+            <button class="btn" id="qzs-cancel" style="padding:6px 14px;font-size:.76rem;display:none" onclick="resetQuizSetForm()">Cancel Edit</button>
+          </div>
+        </div>
       </div>
 
       <!-- LIVE TRACKER -->
@@ -1110,7 +1274,7 @@ function toggleTheme(){
 
 // ── NAV ──
 function nav(p){document.querySelectorAll('.pg').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.ni').forEach(x=>x.classList.remove('on'));document.getElementById('pg-'+p).classList.add('on');document.querySelector(`[data-p="${p}"]`).classList.add('on');rp(p);}
-function rp(p){if(p==='dash')rDash();if(p==='qs')rQP();if(p==='exams')rExams();if(p==='mocks')renderMocks();if(p==='secs')rSecs();if(p==='typing')rTypingParas();if(p==='timing')rTiming();if(p==='appear')rAppear();if(p==='content')rContent();if(p==='cfg')rCfg();if(p==='livetracker')rLiveTracker();if(p==='offers')rOffers();if(p==='platforms')rPlatforms();if(p==='essays')renderEssayList();}
+function rp(p){if(p==='dash')rDash();if(p==='qs')rQP();if(p==='exams')rExams();if(p==='mocks')renderMocks();if(p==='secs')rSecs();if(p==='typing')rTypingParas();if(p==='timing')rTiming();if(p==='appear')rAppear();if(p==='content')rContent();if(p==='cfg')rCfg();if(p==='livetracker')rLiveTracker();if(p==='offers')rOffers();if(p==='platforms')rPlatforms();if(p==='essays')renderEssayList();if(p==='quizcourse')renderQuizAdmin();}
 
 // ── LIVE TRACKER ──
 function rLiveTracker(){
@@ -2088,6 +2252,7 @@ async function loadProducts(){
         + '</table>';
     }
     renderExamChecklist();
+    loadQuizSetProductChecklist();
   }catch(e){
     listEl.innerHTML = '<span style="color:#e5484d">Could not load products: '+esc(e.message||'')+'</span>';
   }
@@ -2284,6 +2449,382 @@ function deleteEssay(id){
   if(_es_editingId===id)resetEssayForm();
   renderEssayList();
   t('Essay deleted','ok');
+}
+
+// ============================================================
+// QUIZ COURSE — data lives in d.quizTopics / d.quizQuestions / d.quizSets.
+// Membership in a Quiz Set works exactly like Mocks: a question's own `setNo` field
+// determines which set it belongs to — the set itself just holds timing/negative-marking/
+// paid-access config, same separation of concerns as exams/mocks/questions.
+// ============================================================
+let _quizEditingQId=null, _quizEditingSetId=null, _quizParsedPreview=[];
+
+function qzD(){ // ensures the three arrays always exist, even on data saved before this feature existed
+  const d=D();
+  d.quizTopics=d.quizTopics||[];
+  d.quizQuestions=d.quizQuestions||[];
+  d.quizSets=d.quizSets||[];
+  return d;
+}
+
+function renderQuizAdmin(){
+  const d=qzD();
+  document.getElementById('qzc-status').value=(d.siteSettings||{}).quizCourseStatus||'live';
+  document.getElementById('qzc-product-id').value=(d.siteSettings||{}).quizCourseProductId||'';
+  renderQuizTopicsList();
+  populateQuizTopicSelects();
+  renderQuizQuestionsTable();
+  renderQuizSetsList();
+  loadQuizSetProductChecklist();
+}
+function saveQuizCourseSettings(){
+  const d=qzD();
+  d.siteSettings=d.siteSettings||{};
+  d.siteSettings.quizCourseStatus=document.getElementById('qzc-status').value;
+  d.siteSettings.quizCourseProductId=document.getElementById('qzc-product-id').value.trim();
+  SD(d);
+  const statusEl=document.getElementById('qzc-settings-status');
+  statusEl.textContent='✓ Saved';
+  statusEl.style.color='var(--green)';
+  setTimeout(function(){statusEl.textContent='';},2000);
+}
+
+// ---------- TOPICS ----------
+function renderQuizTopicsList(){
+  const d=qzD();
+  const el=document.getElementById('qz-topics-list');
+  if(!d.quizTopics.length){el.innerHTML='<div style="font-size:.76rem;color:var(--t2)">No topics yet — add one below.</div>';return;}
+  el.innerHTML=d.quizTopics.map(function(tp){
+    const count=d.quizQuestions.filter(function(q){return q.topicId===tp.id;}).length;
+    return '<span style="display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;border:1px solid var(--b);background:var(--bg3);font-size:.76rem;color:var(--t)">'+esc(tp.name)+' <span style="color:var(--t2);font-size:.68rem">('+count+')</span> <button onclick="deleteQuizTopic(\''+tp.id+'\')" style="border:none;background:none;color:var(--red);cursor:pointer;font-size:.75rem;padding:0;line-height:1">✕</button></span>';
+  }).join('');
+}
+function addQuizTopic(){
+  const input=document.getElementById('qz-new-topic');
+  const name=input.value.trim();
+  if(!name)return;
+  const d=qzD();
+  if(d.quizTopics.some(function(tp){return tp.name.toLowerCase()===name.toLowerCase();})){t('That topic already exists','err');return;}
+  d.quizTopics.push({id:'qt_'+Date.now(),name:name});
+  SD(d);
+  input.value='';
+  renderQuizTopicsList();
+  populateQuizTopicSelects();
+  t('Topic added','ok');
+}
+function deleteQuizTopic(id){
+  const d=qzD();
+  const count=d.quizQuestions.filter(function(q){return q.topicId===id;}).length;
+  if(count&&!confirm('This topic has '+count+' question(s) — they will become untagged (not deleted). Continue?'))return;
+  d.quizTopics=d.quizTopics.filter(function(tp){return tp.id!==id;});
+  d.quizQuestions.forEach(function(q){if(q.topicId===id)q.topicId=null;});
+  SD(d);
+  renderQuizAdmin();
+}
+function populateQuizTopicSelects(){
+  const d=qzD();
+  const opts='<option value="">— No topic —</option>'+d.quizTopics.map(function(tp){return '<option value="'+tp.id+'">'+esc(tp.name)+'</option>';}).join('');
+  ['qz-bulk-topic','qz-q-topic'].forEach(function(id){
+    const el=document.getElementById(id);
+    if(el){const cur=el.value;el.innerHTML=opts;el.value=cur;}
+  });
+  const filterEl=document.getElementById('qz-filter-topic');
+  if(filterEl){const cur=filterEl.value;filterEl.innerHTML='<option value="">All Topics</option>'+d.quizTopics.map(function(tp){return '<option value="'+tp.id+'">'+esc(tp.name)+'</option>';}).join('');filterEl.value=cur;}
+  const setFilterEl=document.getElementById('qz-filter-set');
+  if(setFilterEl){
+    const cur=setFilterEl.value;
+    const setNos=Array.from(new Set(d.quizQuestions.map(function(q){return q.setNo;}).filter(function(n){return n!=null;}))).sort(function(a,b){return a-b;});
+    setFilterEl.innerHTML='<option value="">All Sets</option>'+setNos.map(function(n){return '<option value="'+n+'">Set '+n+'</option>';}).join('');
+    setFilterEl.value=cur;
+  }
+}
+
+// ---------- BULK AI PARSER ----------
+async function parseQuizBulk(){
+  const raw=document.getElementById('qz-bulk-raw').value.trim();
+  const statusEl=document.getElementById('qz-parse-status');
+  const btn=document.getElementById('qz-parse-btn');
+  if(!raw){statusEl.textContent='Paste some questions first.';statusEl.style.color='var(--red)';return;}
+  const d=qzD();
+  const ep=(d.siteSettings||{}).apiProxy||'';
+  if(!ep){statusEl.textContent='No AI proxy configured — set it under Settings first.';statusEl.style.color='var(--red)';return;}
+  btn.disabled=true;btn.textContent='Parsing…';
+  statusEl.textContent='';
+  const sys=`You extract multiple-choice quiz questions from raw, possibly messy pasted text (copied from a PDF, a Word doc, or typed loosely — formatting is inconsistent, labels vary: "Q:", "Ans:", "Answer:", numbered "1.", lettered "A)" or "a.", etc.).
+
+Extract EVERY question you can find. For each one, output exactly:
+- "question": the question text only, cleaned up (no leading numbering)
+- "options": array of exactly 4 option strings, in order, text only (no leading "A)"/"B)" labels)
+- "correctIndex": 0-based index (0,1,2,3) of the correct option, matched from whatever answer label the source used
+- "explanation": a short explanation if the source text includes one; if none is given, write ONE clear, factually correct sentence explaining the answer yourself — never leave this blank
+
+If a question has fewer or more than 4 options in the source, still normalize to exactly 4 by leaving clearly wrong/implausible distractors out or adding a plausible one — never invent a 5th real option.
+If you cannot confidently determine the correct answer for a question, exclude that question entirely rather than guessing.
+
+Respond ONLY with a valid JSON array, no markdown fences, no explanation outside the JSON. Example shape:
+[{"question":"...","options":["...","...","...","..."],"correctIndex":0,"explanation":"..."}]`;
+  try{
+    const res=await fetch(ep,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'gemini-2.5-flash-lite',max_tokens:8000,system:sys,messages:[{role:'user',content:raw}]})});
+    const data=await res.json();
+    if(data.error)throw new Error(data.error.message);
+    const text=data.content.map(function(i){return i.text||'';}).join('').replace(/```json|```/g,'').trim();
+    const parsed=JSON.parse(text);
+    if(!Array.isArray(parsed)||!parsed.length)throw new Error('No questions could be parsed from that text.');
+    _quizParsedPreview=parsed.map(function(q,i){
+      return {
+        _tmpId:'p'+i,
+        _include:true,
+        question:String(q.question||'').trim(),
+        options:Array.isArray(q.options)?q.options.slice(0,4).map(function(o){return String(o||'').trim();}):['','','',''],
+        correctIndex:Number.isInteger(q.correctIndex)?q.correctIndex:0,
+        explanation:String(q.explanation||'').trim()
+      };
+    }).filter(function(q){return q.question&&q.options.length===4&&q.options.every(function(o){return o;});});
+    if(!_quizParsedPreview.length)throw new Error('Parsed response had no valid, complete questions.');
+    statusEl.textContent='✓ Parsed '+_quizParsedPreview.length+' question(s) — review below before importing.';
+    statusEl.style.color='var(--green)';
+    renderQuizPreview();
+  }catch(e){
+    statusEl.textContent='Parsing failed: '+(e.message||'unknown error')+'. Try again, or simplify/shorten the pasted text.';
+    statusEl.style.color='var(--red)';
+  }
+  btn.disabled=false;btn.textContent='✨ Parse with AI';
+}
+function renderQuizPreview(){
+  const wrap=document.getElementById('qz-preview-wrap');
+  const list=document.getElementById('qz-preview-list');
+  if(!_quizParsedPreview.length){wrap.style.display='none';return;}
+  wrap.style.display='block';
+  const letters=['A','B','C','D'];
+  list.innerHTML=_quizParsedPreview.map(function(q,i){
+    return '<div style="background:var(--bg3);border:1px solid var(--b);border-radius:var(--rs);padding:12px 14px;'+(q._include?'':'opacity:.45')+'">'
+      +'<label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer">'
+      +'<input type="checkbox" '+(q._include?'checked':'')+' onchange="toggleQuizPreviewItem('+i+')" style="margin-top:3px"/>'
+      +'<div style="flex:1">'
+      +'<div style="font-size:.82rem;font-weight:600;color:var(--t);margin-bottom:6px">'+esc(q.question)+'</div>'
+      +q.options.map(function(o,oi){return '<div style="font-size:.76rem;color:'+(oi===q.correctIndex?'var(--green)':'var(--t2)')+';margin-bottom:2px">'+letters[oi]+') '+esc(o)+(oi===q.correctIndex?' ✓':'')+'</div>';}).join('')
+      +(q.explanation?'<div style="font-size:.72rem;color:var(--t2);margin-top:6px;font-style:italic">Explanation: '+esc(q.explanation)+'</div>':'')
+      +'</div></label></div>';
+  }).join('');
+}
+function toggleQuizPreviewItem(i){
+  _quizParsedPreview[i]._include=!_quizParsedPreview[i]._include;
+  renderQuizPreview();
+}
+function importQuizPreview(){
+  const toImport=_quizParsedPreview.filter(function(q){return q._include;});
+  if(!toImport.length){t('Nothing checked to import','err');return;}
+  const d=qzD();
+  const topicId=document.getElementById('qz-bulk-topic').value||null;
+  const setNoVal=document.getElementById('qz-bulk-setno').value;
+  const setNo=setNoVal?parseInt(setNoVal):null;
+  const difficulty=document.getElementById('qz-bulk-difficulty').value||'medium';
+  toImport.forEach(function(q,i){
+    d.quizQuestions.push({
+      id:'qq_'+Date.now()+'_'+i,
+      topicId:topicId,
+      text:q.question,
+      options:q.options,
+      correctIndex:q.correctIndex,
+      explanation:q.explanation,
+      difficulty:difficulty,
+      setNo:setNo,
+      active:true,
+      productIds:[]
+    });
+  });
+  SD(d);
+  t('Imported '+toImport.length+' question(s)','ok');
+  _quizParsedPreview=[];
+  document.getElementById('qz-preview-wrap').style.display='none';
+  document.getElementById('qz-bulk-raw').value='';
+  document.getElementById('qz-parse-status').textContent='';
+  renderQuizAdmin();
+}
+
+// ---------- MANUAL ADD/EDIT ----------
+function saveQuizQuestion(){
+  const text=document.getElementById('qz-q-text').value.trim();
+  const options=[0,1,2,3].map(function(i){return document.getElementById('qz-opt-'+i).value.trim();});
+  const correctIndex=parseInt(document.querySelector('input[name="qz-correct"]:checked').value);
+  const explanation=document.getElementById('qz-explanation').value.trim();
+  const topicId=document.getElementById('qz-q-topic').value||null;
+  const difficulty=document.getElementById('qz-q-difficulty').value;
+  const setNoVal=document.getElementById('qz-q-setno').value;
+  const setNo=setNoVal?parseInt(setNoVal):null;
+  const active=document.getElementById('qz-q-active').checked;
+  if(!text||options.some(function(o){return !o;})){t('Fill in the question and all 4 options','err');return;}
+  const d=qzD();
+  if(_quizEditingQId){
+    const q=d.quizQuestions.find(function(x){return x.id===_quizEditingQId;});
+    if(q){Object.assign(q,{text:text,options:options,correctIndex:correctIndex,explanation:explanation,topicId:topicId,difficulty:difficulty,setNo:setNo,active:active});}
+  }else{
+    d.quizQuestions.push({id:'qq_'+Date.now(),text:text,options:options,correctIndex:correctIndex,explanation:explanation,topicId:topicId,difficulty:difficulty,setNo:setNo,active:active,productIds:[]});
+  }
+  SD(d);
+  t(_quizEditingQId?'Question updated':'Question added','ok');
+  resetQuizQuestionForm();
+  renderQuizAdmin();
+}
+function editQuizQuestion(id){
+  const d=qzD();
+  const q=d.quizQuestions.find(function(x){return x.id===id;});
+  if(!q)return;
+  _quizEditingQId=id;
+  document.getElementById('qz-form-title').textContent='Editing Question';
+  document.getElementById('qz-q-text').value=q.text||'';
+  [0,1,2,3].forEach(function(i){document.getElementById('qz-opt-'+i).value=(q.options||[])[i]||'';});
+  const radio=document.querySelector('input[name="qz-correct"][value="'+(q.correctIndex||0)+'"]');
+  if(radio)radio.checked=true;
+  document.getElementById('qz-explanation').value=q.explanation||'';
+  document.getElementById('qz-q-topic').value=q.topicId||'';
+  document.getElementById('qz-q-difficulty').value=q.difficulty||'medium';
+  document.getElementById('qz-q-setno').value=q.setNo||'';
+  document.getElementById('qz-q-active').checked=q.active!==false;
+  document.getElementById('qz-q-cancel').style.display='inline-block';
+  document.getElementById('qz-q-text').scrollIntoView({behavior:'smooth',block:'center'});
+}
+function resetQuizQuestionForm(){
+  _quizEditingQId=null;
+  document.getElementById('qz-form-title').textContent='Add Question Manually';
+  document.getElementById('qz-q-text').value='';
+  [0,1,2,3].forEach(function(i){document.getElementById('qz-opt-'+i).value='';});
+  document.querySelector('input[name="qz-correct"][value="0"]').checked=true;
+  document.getElementById('qz-explanation').value='';
+  document.getElementById('qz-q-topic').value='';
+  document.getElementById('qz-q-difficulty').value='medium';
+  document.getElementById('qz-q-setno').value='';
+  document.getElementById('qz-q-active').checked=true;
+  document.getElementById('qz-q-cancel').style.display='none';
+}
+function deleteQuizQuestion(id){
+  if(!confirm('Delete this question permanently?'))return;
+  const d=qzD();
+  d.quizQuestions=d.quizQuestions.filter(function(q){return q.id!==id;});
+  SD(d);
+  renderQuizAdmin();
+}
+
+// ---------- QUESTIONS TABLE ----------
+function renderQuizQuestionsTable(){
+  const d=qzD();
+  const tm={};d.quizTopics.forEach(function(tp){tm[tp.id]=tp.name;});
+  const search=(document.getElementById('qz-filter-search')||{}).value?.toLowerCase()||'';
+  const filterTopic=(document.getElementById('qz-filter-topic')||{}).value||'';
+  const filterSet=(document.getElementById('qz-filter-set')||{}).value||'';
+  const qs=d.quizQuestions.filter(function(q){
+    if(search&&!(q.text||'').toLowerCase().includes(search))return false;
+    if(filterTopic&&q.topicId!==filterTopic)return false;
+    if(filterSet&&String(q.setNo)!==filterSet)return false;
+    return true;
+  });
+  const el=document.getElementById('qz-questions-table');
+  if(!qs.length){el.innerHTML='<div style="font-size:.78rem;color:var(--t2);padding:10px 0">No questions match.</div>';return;}
+  let html='<table style="width:100%;border-collapse:collapse;font-size:.78rem"><thead><tr style="text-align:left;border-bottom:1px solid var(--b);color:var(--t2)">'
+    +'<th style="padding:6px 8px 6px 0">Question</th><th style="padding:6px 8px">Topic</th><th style="padding:6px 8px">Set #</th><th style="padding:6px 8px">Difficulty</th><th style="padding:6px 8px">Status</th><th style="padding:6px 0;text-align:right">Actions</th>'
+    +'</tr></thead><tbody>';
+  qs.forEach(function(q){
+    html+='<tr style="border-bottom:1px solid var(--b)">'
+      +'<td style="padding:8px 8px 8px 0;max-width:320px">'+esc((q.text||'').slice(0,90))+((q.text||'').length>90?'…':'')+'</td>'
+      +'<td style="padding:8px">'+(q.topicId&&tm[q.topicId]?esc(tm[q.topicId]):'<span style="color:var(--t2)">—</span>')+'</td>'
+      +'<td style="padding:8px">'+(q.setNo!=null?q.setNo:'<span style="color:var(--t2)">—</span>')+'</td>'
+      +'<td style="padding:8px;text-transform:capitalize">'+esc(q.difficulty||'medium')+'</td>'
+      +'<td style="padding:8px">'+(q.active!==false?'<span class="bge bg-g">Active</span>':'<span class="bge bg-r">Hidden</span>')+'</td>'
+      +'<td style="padding:8px 0;text-align:right"><button class="btn bo sm" onclick="editQuizQuestion(\''+q.id+'\')">Edit</button> <button class="btn bd sm" onclick="deleteQuizQuestion(\''+q.id+'\')">Delete</button></td>'
+      +'</tr>';
+  });
+  html+='</tbody></table>';
+  el.innerHTML=html;
+}
+
+// ---------- QUIZ SETS ----------
+function loadQuizSetProductChecklist(){
+  // reuses the same _pcProducts cache the Paid Content / Mocks tabs already load
+  const el=document.getElementById('qzs-product-checklist');
+  if(!el)return;
+  if(!_pcProducts||!_pcProducts.length){el.innerHTML='<div style="font-size:.72rem;color:var(--t2)">No products yet — add one under Paid Mocks → Products &amp; Pricing first.</div>';return;}
+  el.innerHTML=_pcProducts.map(function(p){
+    return '<label style="display:flex;align-items:center;gap:6px;font-size:.76rem;background:var(--bg3);border:1px solid var(--b);border-radius:var(--rs);padding:5px 10px;cursor:pointer"><input type="checkbox" class="qzs-prod-cb" value="'+p.id+'" style="margin:0"/>'+esc(p.name||p.id)+'</label>';
+  }).join('');
+}
+function renderQuizSetsList(){
+  const d=qzD();
+  const el=document.getElementById('qz-sets-list');
+  if(!d.quizSets.length){el.innerHTML='<div style="font-size:.78rem;color:var(--t2);margin-bottom:10px">No quiz sets yet — add one below.</div>';return;}
+  el.innerHTML=d.quizSets.sort(function(a,b){return (a.setNo||0)-(b.setNo||0);}).map(function(s){
+    const qCount=d.quizQuestions.filter(function(q){return q.setNo===s.setNo;}).length;
+    return '<div class="card" style="margin-bottom:8px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">'
+      +'<div><span style="font-weight:700;font-size:.82rem">Set '+s.setNo+' — '+esc(s.title||'')+'</span> '
+      +'<span style="font-size:.7rem;color:var(--t2)">('+qCount+' question'+(qCount===1?'':'s')+((s.timeLimitMin)?' · '+s.timeLimitMin+' min':'')+(s.negMarkEnabled?' · -'+s.negMarkValue+'/wrong':'')+(s.productIds&&s.productIds.length?' · 🔒 Paid':' · Free')+')</span> '
+      +(s.active===false?'<span class="bge bg-r" style="margin-left:6px">Hidden</span>':'')
+      +'</div>'
+      +'<div style="display:flex;gap:6px"><button class="btn bo sm" onclick="editQuizSet(\''+s.id+'\')">Edit</button><button class="btn bd sm" onclick="deleteQuizSet(\''+s.id+'\')">Delete</button></div>'
+      +'</div>';
+  }).join('');
+}
+function saveQuizSet(){
+  const setNoVal=document.getElementById('qzs-setno').value;
+  const title=document.getElementById('qzs-title').value.trim();
+  if(!setNoVal||!title){t('Set # and Title are required','err');return;}
+  const setNo=parseInt(setNoVal);
+  const timeLimitMin=document.getElementById('qzs-timelimit').value?parseInt(document.getElementById('qzs-timelimit').value):null;
+  const negMarkEnabled=document.getElementById('qzs-negenabled').value==='1';
+  const negMarkValue=negMarkEnabled?parseFloat(document.getElementById('qzs-negval').value||'0'):0;
+  const active=document.getElementById('qzs-active').checked;
+  const productIds=Array.from(document.querySelectorAll('.qzs-prod-cb:checked')).map(function(cb){return cb.value;});
+  const d=qzD();
+  if(!_quizEditingSetId&&d.quizSets.some(function(s){return s.setNo===setNo;})){t('A set with that number already exists','err');return;}
+  if(_quizEditingSetId){
+    const s=d.quizSets.find(function(x){return x.id===_quizEditingSetId;});
+    if(s)Object.assign(s,{setNo:setNo,title:title,timeLimitMin:timeLimitMin,negMarkEnabled:negMarkEnabled,negMarkValue:negMarkValue,active:active,productIds:productIds});
+  }else{
+    d.quizSets.push({id:'qs_'+Date.now(),setNo:setNo,title:title,timeLimitMin:timeLimitMin,negMarkEnabled:negMarkEnabled,negMarkValue:negMarkValue,active:active,productIds:productIds});
+  }
+  SD(d);
+  t(_quizEditingSetId?'Quiz Set updated':'Quiz Set added','ok');
+  resetQuizSetForm();
+  renderQuizSetsList();
+  populateQuizTopicSelects();
+}
+function editQuizSet(id){
+  const d=qzD();
+  const s=d.quizSets.find(function(x){return x.id===id;});
+  if(!s)return;
+  _quizEditingSetId=id;
+  document.getElementById('qz-set-form-title').textContent='Editing Quiz Set';
+  document.getElementById('qzs-setno').value=s.setNo;
+  document.getElementById('qzs-title').value=s.title||'';
+  document.getElementById('qzs-timelimit').value=s.timeLimitMin||'';
+  document.getElementById('qzs-negenabled').value=s.negMarkEnabled?'1':'0';
+  document.getElementById('qzs-negval-wrap').style.display=s.negMarkEnabled?'block':'none';
+  document.getElementById('qzs-negval').value=s.negMarkValue||'';
+  document.getElementById('qzs-active').checked=s.active!==false;
+  document.querySelectorAll('.qzs-prod-cb').forEach(function(cb){cb.checked=(s.productIds||[]).includes(cb.value);});
+  document.getElementById('qzs-cancel').style.display='inline-block';
+  document.getElementById('qz-set-form-title').scrollIntoView({behavior:'smooth',block:'center'});
+}
+function resetQuizSetForm(){
+  _quizEditingSetId=null;
+  document.getElementById('qz-set-form-title').textContent='Add Quiz Set';
+  document.getElementById('qzs-setno').value='';
+  document.getElementById('qzs-title').value='';
+  document.getElementById('qzs-timelimit').value='';
+  document.getElementById('qzs-negenabled').value='0';
+  document.getElementById('qzs-negval-wrap').style.display='none';
+  document.getElementById('qzs-negval').value='';
+  document.getElementById('qzs-active').checked=true;
+  document.querySelectorAll('.qzs-prod-cb').forEach(function(cb){cb.checked=false;});
+  document.getElementById('qzs-cancel').style.display='none';
+}
+function deleteQuizSet(id){
+  if(!confirm('Delete this Quiz Set? Its questions stay in the bank but become unassigned from any set.'))return;
+  const d=qzD();
+  const s=d.quizSets.find(function(x){return x.id===id;});
+  if(s)d.quizQuestions.forEach(function(q){if(q.setNo===s.setNo)q.setNo=null;});
+  d.quizSets=d.quizSets.filter(function(x){return x.id!==id;});
+  SD(d);
+  renderQuizAdmin();
 }
 
 function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
