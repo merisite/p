@@ -1918,6 +1918,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1790064005613",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "Central Bank Digital Currency (CBDC) / Digital Rupee: Prospects, Adoption, and Security Challenges for Retail and Wholesale Banking",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -2956,6 +2972,42 @@
         }
       ],
       "practiceQuestionId": "q_1789725470847",
+      "active": true
+    },
+    {
+      "id": "essay_1790063933816",
+      "title": "Central Bank Digital Currency (CBDC) / Digital Rupee: Prospects, Adoption, and Security Challenges for Retail and Wholesale Banking",
+      "category": "Economy & Finance",
+      "tags": [
+        "CBDC",
+        "erupee",
+        "Digital rupee"
+      ],
+      "image": "https://i.postimg.cc/T3M1dxYM/c3c07f01-272b-4512-b374-fe74607606e9.png",
+      "body": "Central Bank Digital Currency (CBDC), or the Digital Rupee, is a digital form of India’s currency issued by the Reserve Bank of India (RBI). It aims to combine the convenience of digital payments with the trust and stability of central bank money. It can play an important role in the future of India’s banking system.\n\nThe Digital Rupee can make payments faster, safer, and more efficient. It can reduce the cost of printing and handling physical cash and support instant transactions. In retail banking, it can make digital payments more accessible to individuals and businesses. In wholesale banking, CBDC can improve large-value transactions and settlement between financial institutions. It may also support cross-border payments and reduce settlement time.\n\nDespite these benefits, widespread adoption may take time. People are already comfortable with UPI and other digital payment methods, so they may not immediately see a need for CBDC. Limited digital literacy and poor internet connectivity can also affect adoption, particularly in rural areas. Banks must therefore provide simple systems and create awareness about the uses of the Digital Rupee.\n\nSecurity is another major concern. Cyberattacks, fraud, data theft, and technical failures could reduce public trust. The RBI and banks must strengthen cybersecurity, protect user data, and regularly test their systems. Clear rules regarding privacy and transaction monitoring are also necessary.\n\nIn conclusion, the Digital Rupee has the potential to strengthen India’s digital financial system. However, its success will depend on wider adoption, strong security, user awareness, and public trust. A careful balance between innovation, privacy, and safety will be essential for its long-term growth.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "Central Bank Digital Currency (CBDC), or the Digital Rupee, is a digital form of India’s currency issued by the Reserve Bank of India (RBI). It aims to combine the convenience of digital payments with the trust and stability of central bank money. It can play an important role in the future of India’s banking system."
+        },
+        {
+          "heading": "Prospects and Benefits",
+          "content": "The Digital Rupee can make payments faster, safer, and more efficient. It can reduce the cost of printing and handling physical cash and support instant transactions. In retail banking, it can make digital payments more accessible to individuals and businesses. In wholesale banking, CBDC can improve large-value transactions and settlement between financial institutions. It may also support cross-border payments and reduce settlement time."
+        },
+        {
+          "heading": "Adoption and Challenges",
+          "content": "Despite these benefits, widespread adoption may take time. People are already comfortable with UPI and other digital payment methods, so they may not immediately see a need for CBDC. Limited digital literacy and poor internet connectivity can also affect adoption, particularly in rural areas. Banks must therefore provide simple systems and create awareness about the uses of the Digital Rupee."
+        },
+        {
+          "heading": "Security and Privacy Measures",
+          "content": "Security is another major concern. Cyberattacks, fraud, data theft, and technical failures could reduce public trust. The RBI and banks must strengthen cybersecurity, protect user data, and regularly test their systems. Clear rules regarding privacy and transaction monitoring are also necessary."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, the Digital Rupee has the potential to strengthen India’s digital financial system. However, its success will depend on wider adoption, strong security, user awareness, and public trust. A careful balance between innovation, privacy, and safety will be essential for its long-term growth."
+        }
+      ],
+      "practiceQuestionId": "q_1790064005613",
       "active": true
     }
   ],
