@@ -2126,6 +2126,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1790071872816",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "Startups and Deep-Tech Innovation: Driving Economic Transformation, Job Creation, and Global Competitiveness",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -3623,6 +3639,41 @@
         }
       ],
       "practiceQuestionId": "q_1790070447038",
+      "active": true
+    },
+    {
+      "id": "essay_1790071514500",
+      "title": "Startups and Deep-Tech Innovation: Driving Economic Transformation, Job Creation, and Global Competitiveness",
+      "category": "Government & Policy",
+      "tags": [
+        "Startups",
+        "Deep Tech"
+      ],
+      "image": "https://i.postimg.cc/TwjkNg2s/6c1162ae-bd27-4b5a-bcd9-65188ec341fa.png",
+      "body": "Startups have become an important part of India's economic growth. With new ideas, technology and young entrepreneurs, startups are changing traditional businesses and creating new markets. Deep-tech startups, which work with technologies such as artificial intelligence, robotics, biotechnology, space technology and advanced materials, can take this transformation further.\n\nDeep-tech innovation can improve productivity and solve complex problems in areas such as healthcare, agriculture, defence, banking and manufacturing. Startups can develop affordable solutions and reduce dependence on imported technologies. They can also encourage traditional industries to adopt modern technology. Government programmes, digital infrastructure and easier access to funding have created a better environment for innovation. However, deep-tech companies often require large investments and many years of research before becoming profitable.\n\nStartups create direct and indirect employment opportunities. Deep-tech companies require scientists, engineers, software developers, researchers and skilled technicians. Their growth can also create demand for supporting services and new businesses. At the same time, India needs to strengthen education, research and skill development so that young people can meet the demands of technology-driven industries.\n\nA strong deep-tech ecosystem can help Indian companies develop products for global markets and compete internationally. However, limited research funding, shortage of specialised talent, weak links between universities and industry, and difficulties in commercialising research remain major challenges. Stronger industry-academia partnerships, patient capital and better research infrastructure are therefore necessary.\n\nIn conclusion, startups and deep-tech innovation can contribute significantly to economic transformation, employment and India's global competitiveness. A supportive ecosystem that combines entrepreneurship, research, skilled talent and long-term investment can help India turn innovative ideas into globally competitive businesses.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "Startups have become an important part of India's economic growth. With new ideas, technology and young entrepreneurs, startups are changing traditional businesses and creating new markets. Deep-tech startups, which work with technologies such as artificial intelligence, robotics, biotechnology, space technology and advanced materials, can take this transformation further."
+        },
+        {
+          "heading": "Body – Economic Transformation and Innovation",
+          "content": "Deep-tech innovation can improve productivity and solve complex problems in areas such as healthcare, agriculture, defence, banking and manufacturing. Startups can develop affordable solutions and reduce dependence on imported technologies. They can also encourage traditional industries to adopt modern technology. Government programmes, digital infrastructure and easier access to funding have created a better environment for innovation. However, deep-tech companies often require large investments and many years of research before becoming profitable."
+        },
+        {
+          "heading": "Body – Job Creation and Skill Development",
+          "content": "Startups create direct and indirect employment opportunities. Deep-tech companies require scientists, engineers, software developers, researchers and skilled technicians. Their growth can also create demand for supporting services and new businesses. At the same time, India needs to strengthen education, research and skill development so that young people can meet the demands of technology-driven industries."
+        },
+        {
+          "heading": "Body – Global Competitiveness and Challenges",
+          "content": "A strong deep-tech ecosystem can help Indian companies develop products for global markets and compete internationally. However, limited research funding, shortage of specialised talent, weak links between universities and industry, and difficulties in commercialising research remain major challenges. Stronger industry-academia partnerships, patient capital and better research infrastructure are therefore necessary."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, startups and deep-tech innovation can contribute significantly to economic transformation, employment and India's global competitiveness. A supportive ecosystem that combines entrepreneurship, research, skilled talent and long-term investment can help India turn innovative ideas into globally competitive businesses."
+        }
+      ],
+      "practiceQuestionId": "q_1790071872816",
       "active": true
     }
   ],
