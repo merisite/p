@@ -2094,6 +2094,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1790070029061",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "Harnessing India’s Demographic Dividend: Youth Empowerment, Skill Development, and Realizing \"Viksit Bharat 2047\".",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -3523,6 +3539,40 @@
         }
       ],
       "practiceQuestionId": "q_1790069481725",
+      "active": true
+    },
+    {
+      "id": "essay_1790069965281",
+      "title": "Harnessing India’s Demographic Dividend: Youth Empowerment, Skill Development, and Realizing \"Viksit Bharat 2047\".",
+      "category": "Government & Policy",
+      "tags": [
+        "Youth Empowerment"
+      ],
+      "image": "https://i.postimg.cc/J4N0hh6g/9b5aa5f1-3072-46a8-a430-119a36662d38.png",
+      "body": "India has one of the world’s largest young populations, giving the country a valuable demographic advantage. A large working-age population can support economic growth, innovation and productivity. However, this advantage can become a challenge if young people do not have suitable education, skills and employment opportunities. Therefore, empowering youth is essential for achieving the vision of Viksit Bharat 2047.\n\nYoung people can contribute to India’s development through entrepreneurship, technology, research and social innovation. Better access to quality education, digital resources and financial support can help them turn ideas into useful businesses and services. Creating more jobs in manufacturing, services, agriculture and emerging sectors is also necessary to make economic growth more inclusive.\n\nEducation alone is not enough in a rapidly changing economy. Skill development programmes should focus on practical and industry-relevant skills such as artificial intelligence, digital technology, financial services, healthcare and green technologies. Vocational training and apprenticeships can help students gain practical experience. Stronger links between educational institutions and industries can also reduce the gap between education and employment.\n\nIndia must address unemployment, unequal access to education, regional disparities and the mismatch between available skills and industry requirements. Greater investment in education, skill training and infrastructure, along with support for women and rural youth, can help unlock the potential of the workforce.\n\nIndia’s demographic dividend is an opportunity that cannot be taken for granted. If young citizens receive the right education, skills and opportunities, they can become the driving force of economic and social progress. Harnessing their potential will be crucial to building a stronger, more inclusive and developed India by 2047.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "India has one of the world’s largest young populations, giving the country a valuable demographic advantage. A large working-age population can support economic growth, innovation and productivity. However, this advantage can become a challenge if young people do not have suitable education, skills and employment opportunities. Therefore, empowering youth is essential for achieving the vision of Viksit Bharat 2047."
+        },
+        {
+          "heading": "Body – Youth Empowerment and Opportunities",
+          "content": "Young people can contribute to India’s development through entrepreneurship, technology, research and social innovation. Better access to quality education, digital resources and financial support can help them turn ideas into useful businesses and services. Creating more jobs in manufacturing, services, agriculture and emerging sectors is also necessary to make economic growth more inclusive."
+        },
+        {
+          "heading": "Body – Skill Development and Employment",
+          "content": "Education alone is not enough in a rapidly changing economy. Skill development programmes should focus on practical and industry-relevant skills such as artificial intelligence, digital technology, financial services, healthcare and green technologies. Vocational training and apprenticeships can help students gain practical experience. Stronger links between educational institutions and industries can also reduce the gap between education and employment."
+        },
+        {
+          "heading": "Body – Challenges and Way Forward",
+          "content": "India must address unemployment, unequal access to education, regional disparities and the mismatch between available skills and industry requirements. Greater investment in education, skill training and infrastructure, along with support for women and rural youth, can help unlock the potential of the workforce."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "India’s demographic dividend is an opportunity that cannot be taken for granted. If young citizens receive the right education, skills and opportunities, they can become the driving force of economic and social progress. Harnessing their potential will be crucial to building a stronger, more inclusive and developed India by 2047."
+        }
+      ],
+      "practiceQuestionId": "q_1790070029061",
       "active": true
     }
   ],
