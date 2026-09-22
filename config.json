@@ -1934,6 +1934,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1790064682591",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "Financial Inclusion and Financial Literacy: Evaluating PMJDY, Small Finance Banks, and Payment Banks in Expanding Rural Reach.",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -3008,6 +3024,41 @@
         }
       ],
       "practiceQuestionId": "q_1790064005613",
+      "active": true
+    },
+    {
+      "id": "essay_1790064594730",
+      "title": "Financial Inclusion and Financial Literacy: Evaluating PMJDY, Small Finance Banks, and Payment Banks in Expanding Rural Reach.",
+      "category": "Economy & Finance",
+      "tags": [
+        "Financial Inclusion",
+        "Financial Literacy"
+      ],
+      "image": "https://i.postimg.cc/MKWMVqJd/103d2370-9071-45f5-85f5-72c156b88bd2.png",
+      "body": "Financial inclusion means ensuring that every person, especially those in rural and weaker sections, can access useful financial services. Financial literacy is equally important because people must understand how to use bank accounts, credit, insurance, and digital payments safely. India has taken several steps to improve both.\n\nThe Pradhan Mantri Jan-Dhan Yojana (PMJDY) has played an important role in bringing unbanked people into the formal banking system. It has helped households open basic bank accounts and access services such as RuPay cards, direct benefit transfers, and insurance. Banking correspondents have also helped take basic banking services closer to villages.\n\nSmall Finance Banks focus on providing credit and other banking services to small businesses, farmers, and low-income customers. Payment Banks, on the other hand, mainly support small deposits, payments, and remittances. Their digital and agent-based models can help reach customers who may find traditional branches difficult to access. However, limited awareness, connectivity problems, and concerns about digital fraud can reduce their effectiveness.\n\nOpening accounts alone does not guarantee meaningful financial inclusion. Rural customers need to understand interest rates, loans, insurance, digital payments, and fraud prevention. Banks, self-help groups, schools, and local institutions should conduct simple financial literacy programmes in regional languages. Better connectivity and stronger customer support are also necessary.\n\nIn conclusion, PMJDY, Small Finance Banks, and Payment Banks have expanded the reach of formal finance. However, lasting inclusion requires more than access to an account. Combining wider access with financial literacy, digital safety, affordable services, and customer awareness can help rural households participate confidently in India's financial system.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "Financial inclusion means ensuring that every person, especially those in rural and weaker sections, can access useful financial services. Financial literacy is equally important because people must understand how to use bank accounts, credit, insurance, and digital payments safely. India has taken several steps to improve both."
+        },
+        {
+          "heading": "Body – PMJDY and Rural Financial Access",
+          "content": "The Pradhan Mantri Jan-Dhan Yojana (PMJDY) has played an important role in bringing unbanked people into the formal banking system. It has helped households open basic bank accounts and access services such as RuPay cards, direct benefit transfers, and insurance. Banking correspondents have also helped take basic banking services closer to villages."
+        },
+        {
+          "heading": "Body – Small Finance Banks and Payment Banks",
+          "content": "Small Finance Banks focus on providing credit and other banking services to small businesses, farmers, and low-income customers. Payment Banks, on the other hand, mainly support small deposits, payments, and remittances. Their digital and agent-based models can help reach customers who may find traditional branches difficult to access. However, limited awareness, connectivity problems, and concerns about digital fraud can reduce their effectiveness."
+        },
+        {
+          "heading": "Body – Financial Literacy and Way Forward",
+          "content": "Opening accounts alone does not guarantee meaningful financial inclusion. Rural customers need to understand interest rates, loans, insurance, digital payments, and fraud prevention. Banks, self-help groups, schools, and local institutions should conduct simple financial literacy programmes in regional languages. Better connectivity and stronger customer support are also necessary."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, PMJDY, Small Finance Banks, and Payment Banks have expanded the reach of formal finance. However, lasting inclusion requires more than access to an account. Combining wider access with financial literacy, digital safety, affordable services, and customer awareness can help rural households participate confidently in India's financial system."
+        }
+      ],
+      "practiceQuestionId": "q_1790064682591",
       "active": true
     }
   ],
