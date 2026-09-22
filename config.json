@@ -1902,6 +1902,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1790062670392",
+      "examId": "ibps_po",
+      "type": "comprehension",
+      "text": "",
+      "modelAnswer": "",
+      "label": "13 Read the passage carefully and answer the questions based on your understanding of the passage",
+      "wordLimit": "150 words (30-40 words per answer)",
+      "marks": 10,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": 3,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
