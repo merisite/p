@@ -2014,6 +2014,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1790067293846",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "Impact of Artificial Intelligence on Employment: Workplace Automation, Job Displacement vs. Job Creation, and the Need for Reskilling.",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -3262,6 +3278,41 @@
         }
       ],
       "practiceQuestionId": "q_1790066841010",
+      "active": true
+    },
+    {
+      "id": "essay_1790067248337",
+      "title": "Impact of Artificial Intelligence on Employment: Workplace Automation, Job Displacement vs. Job Creation, and the Need for Reskilling.",
+      "category": "Technology",
+      "tags": [
+        "AI",
+        "Employment"
+      ],
+      "image": "https://i.postimg.cc/pVYSdYBJ/68a3dba3-e716-4d44-9436-3678022c7004.png",
+      "body": "Artificial Intelligence (AI) is rapidly changing the way people work. From customer service to banking, manufacturing, and healthcare, AI-powered tools are being used to perform tasks faster and more efficiently. This development has created both opportunities and concerns about the future of employment.\n\nAI can automate repetitive and routine tasks that were earlier performed by humans. Chatbots can handle basic customer queries, while AI systems can analyse data, prepare reports, and detect errors. This can improve productivity and reduce costs for businesses. However, workers whose jobs mainly involve repetitive tasks may face job displacement. Low-skilled workers could be particularly affected if they do not have opportunities to learn new skills.\n\nAt the same time, AI is likely to create new types of jobs. Organisations need AI developers, data analysts, cybersecurity experts, and professionals who can manage and monitor AI systems. AI can also support existing workers rather than completely replace them. By handling routine work, it can allow employees to focus on creativity, problem-solving, decision-making, and tasks that require human judgement.\n\nThe key challenge is to prepare workers for this changing job market. Governments, companies, and educational institutions should provide affordable training in digital skills, data analysis, communication, and other relevant areas. Regular reskilling can help workers adapt to changing workplace requirements and reduce the risk of unemployment.\n\nIn conclusion, AI will change employment, but its impact will depend on how society manages this transition. Instead of fearing technology, the focus should be on preparing people for new opportunities. A balance between technological progress, human skills, and continuous learning can make the AI-driven workplace more inclusive and productive.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "Artificial Intelligence (AI) is rapidly changing the way people work. From customer service to banking, manufacturing, and healthcare, AI-powered tools are being used to perform tasks faster and more efficiently. This development has created both opportunities and concerns about the future of employment."
+        },
+        {
+          "heading": "Body – Workplace Automation and Job Displacement",
+          "content": "AI can automate repetitive and routine tasks that were earlier performed by humans. Chatbots can handle basic customer queries, while AI systems can analyse data, prepare reports, and detect errors. This can improve productivity and reduce costs for businesses. However, workers whose jobs mainly involve repetitive tasks may face job displacement. Low-skilled workers could be particularly affected if they do not have opportunities to learn new skills."
+        },
+        {
+          "heading": "Body – Job Creation and New Opportunities",
+          "content": "At the same time, AI is likely to create new types of jobs. Organisations need AI developers, data analysts, cybersecurity experts, and professionals who can manage and monitor AI systems. AI can also support existing workers rather than completely replace them. By handling routine work, it can allow employees to focus on creativity, problem-solving, decision-making, and tasks that require human judgement."
+        },
+        {
+          "heading": "Body – Need for Reskilling",
+          "content": "The key challenge is to prepare workers for this changing job market. Governments, companies, and educational institutions should provide affordable training in digital skills, data analysis, communication, and other relevant areas. Regular reskilling can help workers adapt to changing workplace requirements and reduce the risk of unemployment."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, AI will change employment, but its impact will depend on how society manages this transition. Instead of fearing technology, the focus should be on preparing people for new opportunities. A balance between technological progress, human skills, and continuous learning can make the AI-driven workplace more inclusive and productive."
+        }
+      ],
+      "practiceQuestionId": "q_1790067293846",
       "active": true
     }
   ],
