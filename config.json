@@ -2030,6 +2030,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1790067698189",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "Deepfakes, Misinformation, and Digital Trust: Threats to Democratic Integrity, Financial Fraud, and Regulatory Solutions.",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -3313,6 +3329,41 @@
         }
       ],
       "practiceQuestionId": "q_1790067293846",
+      "active": true
+    },
+    {
+      "id": "essay_1790067650790",
+      "title": "Deepfakes, Misinformation, and Digital Trust: Threats to Democratic Integrity, Financial Fraud, and Regulatory Solutions.",
+      "category": "Technology",
+      "tags": [
+        "Deepfake",
+        "Misinformation"
+      ],
+      "image": "https://i.postimg.cc/Pf9CPYrF/8f0cda2e-b58d-4d0d-911e-fe6bf3b2fd47.png",
+      "body": "The rapid growth of artificial intelligence and digital platforms has made information easier to create and share. However, it has also created new risks in the form of deepfakes and misinformation. Deepfakes are digitally created or altered videos, images, or audio that can make people appear to say or do things they never did. These technologies can weaken public trust and create serious social and economic problems.\n\nDeepfakes can be used to spread false statements about political leaders, public institutions, or important events. During elections, such content may confuse voters and influence public opinion. Misinformation can spread rapidly through social media, making it difficult for people to separate facts from false claims. If citizens lose trust in genuine information, democratic discussion itself can suffer.\n\nDeepfakes also pose a growing threat to the financial sector. Criminals can use fake voices, videos, or identities to impersonate customers, senior executives, or officials. This can be used for fraudulent payments, identity theft, and other cybercrimes. Banks and financial institutions therefore need stronger verification systems to ensure that digital identities are genuine.\n\nGovernments, technology companies, banks, and citizens must work together to address these risks. Clear rules should require platforms to identify and label AI-generated content where appropriate. Banks should strengthen multi-factor authentication and fraud detection systems. Digital literacy should also be improved so that people learn to verify information before sharing it. Regulations must protect users while avoiding unnecessary restrictions on legitimate expression.\n\nDeepfakes and misinformation can weaken democratic trust and increase financial fraud. Technology itself is not the problem; its misuse is. Strong regulation, responsible technology, secure banking systems, and informed citizens are essential to protect digital trust.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "The rapid growth of artificial intelligence and digital platforms has made information easier to create and share. However, it has also created new risks in the form of deepfakes and misinformation. Deepfakes are digitally created or altered videos, images, or audio that can make people appear to say or do things they never did. These technologies can weaken public trust and create serious social and economic problems."
+        },
+        {
+          "heading": "Threats to Democratic Integrity",
+          "content": "Deepfakes can be used to spread false statements about political leaders, public institutions, or important events. During elections, such content may confuse voters and influence public opinion. Misinformation can spread rapidly through social media, making it difficult for people to separate facts from false claims. If citizens lose trust in genuine information, democratic discussion itself can suffer."
+        },
+        {
+          "heading": "Financial Fraud and Cyber Risks",
+          "content": "Deepfakes also pose a growing threat to the financial sector. Criminals can use fake voices, videos, or identities to impersonate customers, senior executives, or officials. This can be used for fraudulent payments, identity theft, and other cybercrimes. Banks and financial institutions therefore need stronger verification systems to ensure that digital identities are genuine."
+        },
+        {
+          "heading": "Regulatory Solutions and Way Forward",
+          "content": "Governments, technology companies, banks, and citizens must work together to address these risks. Clear rules should require platforms to identify and label AI-generated content where appropriate. Banks should strengthen multi-factor authentication and fraud detection systems. Digital literacy should also be improved so that people learn to verify information before sharing it. Regulations must protect users while avoiding unnecessary restrictions on legitimate expression."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "Deepfakes and misinformation can weaken democratic trust and increase financial fraud. Technology itself is not the problem; its misuse is. Strong regulation, responsible technology, secure banking systems, and informed citizens are essential to protect digital trust."
+        }
+      ],
+      "practiceQuestionId": "q_1790067698189",
       "active": true
     }
   ],
