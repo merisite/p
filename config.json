@@ -2110,6 +2110,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1790070447038",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "Inflation Management vs. Growth Target: Balancing RBI's Monetary Policy with Cost-of-Living Pressures.",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -3573,6 +3589,40 @@
         }
       ],
       "practiceQuestionId": "q_1790070029061",
+      "active": true
+    },
+    {
+      "id": "essay_1790070404222",
+      "title": "Inflation Management vs. Growth Target: Balancing RBI's Monetary Policy with Cost-of-Living Pressures.",
+      "category": "Economy & Finance",
+      "tags": [
+        "Inflation"
+      ],
+      "image": "https://i.postimg.cc/PJNbjwzQ/83aa4a45-679b-4798-9f87-a37b55997a0c.png",
+      "body": "Inflation and economic growth are two major concerns for any developing economy like India. The Reserve Bank of India (RBI) has to maintain price stability while also supporting economic growth. This balance becomes difficult when rising prices increase the cost of living for ordinary people.\n\nHigh inflation reduces the purchasing power of money. When prices of food, fuel, housing and other essential goods rise, households have less money available for savings and other needs. Persistent inflation also creates uncertainty for businesses and can affect investment. Therefore, controlling inflation is important for protecting household budgets and maintaining economic stability.\n\nAt the same time, very tight monetary policy can increase borrowing costs for businesses and consumers. Higher interest rates may reduce spending, investment and demand. This can slow economic activity and affect employment opportunities. Therefore, the RBI also needs to consider growth while deciding its monetary policy.\n\nThe RBI can use interest rates and other monetary tools according to economic conditions. During periods of high inflation, tighter policy can help control demand and price pressures. When inflation is under control and growth needs support, a more supportive policy approach can encourage borrowing and investment. However, monetary policy alone cannot solve supply-side problems such as food shortages or sudden increases in global commodity prices. Government measures are also needed to improve supply and reduce such pressures.\n\nIn conclusion, inflation control and economic growth should not be treated as completely separate goals. The RBI needs a balanced and flexible approach that protects purchasing power without unnecessarily weakening economic activity. Stable prices, sustainable growth and public confidence are essential for long-term economic development.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "Inflation and economic growth are two major concerns for any developing economy like India. The Reserve Bank of India (RBI) has to maintain price stability while also supporting economic growth. This balance becomes difficult when rising prices increase the cost of living for ordinary people."
+        },
+        {
+          "heading": "Body – Need for Inflation Management",
+          "content": "High inflation reduces the purchasing power of money. When prices of food, fuel, housing and other essential goods rise, households have less money available for savings and other needs. Persistent inflation also creates uncertainty for businesses and can affect investment. Therefore, controlling inflation is important for protecting household budgets and maintaining economic stability."
+        },
+        {
+          "heading": "Body – Need for Economic Growth",
+          "content": "At the same time, very tight monetary policy can increase borrowing costs for businesses and consumers. Higher interest rates may reduce spending, investment and demand. This can slow economic activity and affect employment opportunities. Therefore, the RBI also needs to consider growth while deciding its monetary policy."
+        },
+        {
+          "heading": "Body – Balancing the Two Goals",
+          "content": "The RBI can use interest rates and other monetary tools according to economic conditions. During periods of high inflation, tighter policy can help control demand and price pressures. When inflation is under control and growth needs support, a more supportive policy approach can encourage borrowing and investment. However, monetary policy alone cannot solve supply-side problems such as food shortages or sudden increases in global commodity prices. Government measures are also needed to improve supply and reduce such pressures."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, inflation control and economic growth should not be treated as completely separate goals. The RBI needs a balanced and flexible approach that protects purchasing power without unnecessarily weakening economic activity. Stable prices, sustainable growth and public confidence are essential for long-term economic development."
+        }
+      ],
+      "practiceQuestionId": "q_1790070447038",
       "active": true
     }
   ],
