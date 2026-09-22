@@ -1998,6 +1998,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1790066841010",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "Cryptocurrency vs. Sovereign Digital Currencies: Financial Stability Risks, Regulatory Frameworks, and Investor Protection.",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -3211,6 +3227,41 @@
         }
       ],
       "practiceQuestionId": "q_1790066329599",
+      "active": true
+    },
+    {
+      "id": "essay_1790066773166",
+      "title": "Cryptocurrency vs. Sovereign Digital Currencies: Financial Stability Risks, Regulatory Frameworks, and Investor Protection.",
+      "category": "Economy & Finance",
+      "tags": [
+        "Crypto",
+        "Digital Currencies"
+      ],
+      "image": "https://i.postimg.cc/vmFT3s6H/43ab6e42-7304-4785-9470-7a7902fbdf94.png",
+      "body": "Cryptocurrency and sovereign digital currencies are two different approaches to digital money. Cryptocurrencies such as Bitcoin operate mainly through decentralised networks, while sovereign digital currencies are issued and controlled by central banks. Their growing use has created new opportunities as well as concerns for the financial system.\n\nCryptocurrencies allow fast and borderless transactions without depending directly on traditional banks. However, their prices can change sharply, creating risks for investors and financial stability. Sovereign digital currencies, often called Central Bank Digital Currencies (CBDCs), are backed by the issuing central bank. They can make payments faster, improve financial inclusion and support more efficient digital transactions while remaining within the formal financial system.\n\nThe rapid growth of cryptocurrencies can create problems because their high price volatility may cause heavy losses for investors. Their use in fraud, money laundering and other illegal activities is also a concern. At the same time, regulators need to develop clear rules without blocking useful innovation. CBDCs also require careful regulation because issues related to privacy, cybersecurity, data protection and their effect on commercial banks must be considered.\n\nStrong regulatory frameworks are necessary to protect investors and maintain confidence. Cryptocurrency platforms should follow clear disclosure, taxation, anti-money-laundering and customer-protection rules. Investors should also understand the risks before putting their money into digital assets. For CBDCs, central banks need strong cybersecurity, privacy safeguards and clear rules for users and financial institutions.\n\nIn conclusion, cryptocurrencies and sovereign digital currencies represent different paths towards the future of digital money. The goal should not be to reject innovation but to ensure that digital finance develops with proper regulation, financial stability, transparency and investor protection.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "Cryptocurrency and sovereign digital currencies are two different approaches to digital money. Cryptocurrencies such as Bitcoin operate mainly through decentralised networks, while sovereign digital currencies are issued and controlled by central banks. Their growing use has created new opportunities as well as concerns for the financial system."
+        },
+        {
+          "heading": "Body – Key Differences and Opportunities",
+          "content": "Cryptocurrencies allow fast and borderless transactions without depending directly on traditional banks. However, their prices can change sharply, creating risks for investors and financial stability. Sovereign digital currencies, often called Central Bank Digital Currencies (CBDCs), are backed by the issuing central bank. They can make payments faster, improve financial inclusion and support more efficient digital transactions while remaining within the formal financial system."
+        },
+        {
+          "heading": "Body – Financial Stability Risks and Regulatory Challenges",
+          "content": "The rapid growth of cryptocurrencies can create problems because their high price volatility may cause heavy losses for investors. Their use in fraud, money laundering and other illegal activities is also a concern. At the same time, regulators need to develop clear rules without blocking useful innovation. CBDCs also require careful regulation because issues related to privacy, cybersecurity, data protection and their effect on commercial banks must be considered."
+        },
+        {
+          "heading": "Body – Investor Protection and Way Forward",
+          "content": "Strong regulatory frameworks are necessary to protect investors and maintain confidence. Cryptocurrency platforms should follow clear disclosure, taxation, anti-money-laundering and customer-protection rules. Investors should also understand the risks before putting their money into digital assets. For CBDCs, central banks need strong cybersecurity, privacy safeguards and clear rules for users and financial institutions."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, cryptocurrencies and sovereign digital currencies represent different paths towards the future of digital money. The goal should not be to reject innovation but to ensure that digital finance develops with proper regulation, financial stability, transparency and investor protection."
+        }
+      ],
+      "practiceQuestionId": "q_1790066841010",
       "active": true
     }
   ],
