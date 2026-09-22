@@ -1866,7 +1866,7 @@
       "marks": 15,
       "difficulty": "medium",
       "active": true,
-      "mockNo": null,
+      "mockNo": 3,
       "productIds": [
         "IBPSPO"
       ]
@@ -2021,7 +2021,7 @@
       "mockNo": 3,
       "title": "IBPS PO Mock 3",
       "active": true,
-      "status": "upcoming",
+      "status": "active",
       "productIds": [
         "IBPSPO"
       ]
