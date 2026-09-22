@@ -2046,6 +2046,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1790068373984",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "Data Privacy in the Digital Era: Implementation and Challenges of India's Digital Personal Data Protection (DPDP) Act.",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -3364,6 +3380,40 @@
         }
       ],
       "practiceQuestionId": "q_1790067698189",
+      "active": true
+    },
+    {
+      "id": "essay_1790068315430",
+      "title": "Data Privacy in the Digital Era: Implementation and Challenges of India's Digital Personal Data Protection (DPDP) Act.",
+      "category": "Technology",
+      "tags": [
+        "Data Privacy"
+      ],
+      "image": "https://i.postimg.cc/CxXBX2zv/a15390ce-42f9-42c9-a9a8-ee00530df3e3.png",
+      "body": "In today’s digital world, personal data is shared through banking apps, shopping websites, social media and government services. Data privacy is therefore important. India enacted the Digital Personal Data Protection (DPDP) Act in 2023 to protect personal data while allowing lawful use.\n\nThe Act gives individuals rights over their personal data and places responsibilities on organisations that collect or process it. They must provide clear information, obtain consent where required, protect data and respond to breaches. The government notified the DPDP Rules in November 2025, with provisions coming into force in phases. The framework also provides for a Data Protection Board for complaints and enforcement.\n\nImplementation, however, will not be easy. Many organisations will need to change their systems and practices. Small businesses may face higher costs and lack trained staff. Public awareness is another challenge because many people do not understand how their data is collected or used. Cyberattacks and data breaches can also threaten privacy despite legal safeguards. Balancing data protection with innovation and legitimate use of data will require careful implementation.\n\nEffective implementation needs guidance, strong cybersecurity and audits. Organisations should collect only necessary data and explain its use in simple language. The government should strengthen awareness campaigns and ensure efficient functioning of the Data Protection Board. Businesses should train employees and build privacy into digital services.\n\nThe DPDP Act is an important step towards trust in India’s digital economy. Its success, however, will depend on effective enforcement, responsible businesses and citizens.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "In today’s digital world, personal data is shared through banking apps, shopping websites, social media and government services. Data privacy is therefore important. India enacted the Digital Personal Data Protection (DPDP) Act in 2023 to protect personal data while allowing lawful use."
+        },
+        {
+          "heading": "Body – Key Provisions and Implementation",
+          "content": "The Act gives individuals rights over their personal data and places responsibilities on organisations that collect or process it. They must provide clear information, obtain consent where required, protect data and respond to breaches. The government notified the DPDP Rules in November 2025, with provisions coming into force in phases. The framework also provides for a Data Protection Board for complaints and enforcement."
+        },
+        {
+          "heading": "Body – Challenges",
+          "content": "Implementation, however, will not be easy. Many organisations will need to change their systems and practices. Small businesses may face higher costs and lack trained staff. Public awareness is another challenge because many people do not understand how their data is collected or used. Cyberattacks and data breaches can also threaten privacy despite legal safeguards. Balancing data protection with innovation and legitimate use of data will require careful implementation."
+        },
+        {
+          "heading": "Body – Way Forward",
+          "content": "Effective implementation needs guidance, strong cybersecurity and audits. Organisations should collect only necessary data and explain its use in simple language. The government should strengthen awareness campaigns and ensure efficient functioning of the Data Protection Board. Businesses should train employees and build privacy into digital services."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "The DPDP Act is an important step towards trust in India’s digital economy. Its success, however, will depend on effective enforcement, responsible businesses and citizens."
+        }
+      ],
+      "practiceQuestionId": "q_1790068373984",
       "active": true
     }
   ],
