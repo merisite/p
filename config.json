@@ -1982,6 +1982,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1790066329599",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "Ethical Banking vs. Commercial Profitability: Responsible Lending Practices, Credit Scoring, and Preventing NPA Resurgence.",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -3161,6 +3177,40 @@
         }
       ],
       "practiceQuestionId": "q_1790065704940",
+      "active": true
+    },
+    {
+      "id": "essay_1790066255005",
+      "title": "Ethical Banking vs. Commercial Profitability: Responsible Lending Practices, Credit Scoring, and Preventing NPA Resurgence.",
+      "category": "Economy & Finance",
+      "tags": [
+        "Ethical Banking"
+      ],
+      "image": "https://i.postimg.cc/fL7wHSQH/f291ed2a-403e-41b2-be08-32e7d0f21cc4.png",
+      "body": "Banking is not only about earning profits, it also involves protecting depositors’ money and supporting economic growth. Banks must balance commercial profitability with ethical responsibilities, especially while giving loans. Responsible lending is important because careless lending can increase bad loans and create financial stress.\n\nBanks should assess a borrower’s repayment capacity before approving a loan. Credit scoring can help banks study income, repayment history, existing debts, and other financial information. However, these systems should be transparent and free from unfair discrimination. Banks should not depend only on automated scores but should also consider genuine circumstances. Responsible lending means giving suitable loans to suitable borrowers rather than focusing only on increasing loan volumes.\n\nThe return of non-performing assets (NPAs) can weaken banks and reduce their ability to provide fresh credit. To prevent this, banks should monitor borrowers after lending, identify early warning signs, and take timely corrective action. Regular review of stressed accounts, proper documentation, and realistic assessment of projects can reduce the risk of loan defaults. Banks should also avoid excessive lending simply to meet short-term business targets.\n\nEthical banking does not mean ignoring profitability. A financially healthy bank is necessary for stable lending and economic growth. Banks can achieve both goals through strong risk management, responsible credit policies, transparent practices, and effective recovery systems. Technology can further improve monitoring and fraud detection.\n\nIn conclusion, profitability and ethical banking should support each other rather than remain in conflict. Responsible lending, fair credit scoring, and early action on stressed loans can help banks remain profitable while protecting customers and preventing another wave of NPAs.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "Banking is not only about earning profits; it also involves protecting depositors’ money and supporting economic growth. Banks must balance commercial profitability with ethical responsibilities, especially while giving loans. Responsible lending is important because careless lending can increase bad loans and create financial stress."
+        },
+        {
+          "heading": "Body – Responsible Lending and Credit Scoring",
+          "content": "Banks should assess a borrower’s repayment capacity before approving a loan. Credit scoring can help banks study income, repayment history, existing debts, and other financial information. However, these systems should be transparent and free from unfair discrimination. Banks should not depend only on automated scores but should also consider genuine circumstances. Responsible lending means giving suitable loans to suitable borrowers rather than focusing only on increasing loan volumes."
+        },
+        {
+          "heading": "Body – Preventing NPA Resurgence",
+          "content": "The return of non-performing assets (NPAs) can weaken banks and reduce their ability to provide fresh credit. To prevent this, banks should monitor borrowers after lending, identify early warning signs, and take timely corrective action. Regular review of stressed accounts, proper documentation, and realistic assessment of projects can reduce the risk of loan defaults. Banks should also avoid excessive lending simply to meet short-term business targets."
+        },
+        {
+          "heading": "Body – Balancing Ethics and Profitability",
+          "content": "Ethical banking does not mean ignoring profitability. A financially healthy bank is necessary for stable lending and economic growth. Banks can achieve both goals through strong risk management, responsible credit policies, transparent practices, and effective recovery systems. Technology can further improve monitoring and fraud detection."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, profitability and ethical banking should support each other rather than remain in conflict. Responsible lending, fair credit scoring, and early action on stressed loans can help banks remain profitable while protecting customers and preventing another wave of NPAs."
+        }
+      ],
+      "practiceQuestionId": "q_1790066329599",
       "active": true
     }
   ],
