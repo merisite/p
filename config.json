@@ -1966,6 +1966,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1790065704940",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "Green Banking & Sustainable Finance: Integrating ESG Criteria into Lending Portfolios and Climate Risk Mitigation.",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -3110,6 +3126,41 @@
         }
       ],
       "practiceQuestionId": "q_1790065213021",
+      "active": true
+    },
+    {
+      "id": "essay_1790065648218",
+      "title": "Green Banking & Sustainable Finance: Integrating ESG Criteria into Lending Portfolios and Climate Risk Mitigation.",
+      "category": "Economy & Finance",
+      "tags": [
+        "Green",
+        "Banking"
+      ],
+      "image": "https://i.postimg.cc/4yt3R2cS/54bdbad2-9fac-4baa-ad5a-daeab3eed754.png",
+      "body": "Green banking and sustainable finance are becoming important as climate change creates risks for economies and financial institutions. Banks do not only provide loans; their lending decisions also influence which industries receive funding. By considering environmental, social and governance (ESG) factors, banks can support sustainable growth while reducing financial and climate-related risks.\n\nGreen banking encourages banks to finance projects that have lower environmental impact, such as renewable energy, clean transport and energy-efficient infrastructure. When banks include ESG criteria in lending decisions, they can examine a company's environmental record, treatment of workers, and governance practices along with its financial strength. This can help direct capital towards responsible businesses and reduce support for activities that may create long-term environmental or social harm.\n\nClimate change can create both physical and financial risks. Floods, droughts and extreme weather events can damage businesses and reduce their ability to repay loans. Companies dependent on fossil fuels may also face risks as economies move towards cleaner technologies. However, assessing ESG performance is not always easy because reliable and standardised data may be limited. Banks also need skilled employees and suitable systems to evaluate these risks.\n\nBanks should develop clear ESG lending policies, improve climate-risk assessment, and regularly review their loan portfolios. They should encourage borrowers to adopt cleaner technologies and provide finance for sustainable projects. Strong disclosure standards, employee training and cooperation with regulators can further improve responsible lending.\n\nIn conclusion, green banking can connect financial growth with environmental responsibility. Integrating ESG factors into lending and managing climate risks can make banks more resilient while supporting a sustainable economy. The goal should be responsible finance that creates long-term value for businesses, society and the environment.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "Green banking and sustainable finance are becoming important as climate change creates risks for economies and financial institutions. Banks do not only provide loans; their lending decisions also influence which industries receive funding. By considering environmental, social and governance (ESG) factors, banks can support sustainable growth while reducing financial and climate-related risks."
+        },
+        {
+          "heading": "Body – Role of Green Banking and ESG in Lending",
+          "content": "Green banking encourages banks to finance projects that have lower environmental impact, such as renewable energy, clean transport and energy-efficient infrastructure. When banks include ESG criteria in lending decisions, they can examine a company's environmental record, treatment of workers, and governance practices along with its financial strength. This can help direct capital towards responsible businesses and reduce support for activities that may create long-term environmental or social harm."
+        },
+        {
+          "heading": "Body – Climate Risks and Challenges",
+          "content": "Climate change can create both physical and financial risks. Floods, droughts and extreme weather events can damage businesses and reduce their ability to repay loans. Companies dependent on fossil fuels may also face risks as economies move towards cleaner technologies. However, assessing ESG performance is not always easy because reliable and standardised data may be limited. Banks also need skilled employees and suitable systems to evaluate these risks."
+        },
+        {
+          "heading": "Body – Measures / Way Forward",
+          "content": "Banks should develop clear ESG lending policies, improve climate-risk assessment, and regularly review their loan portfolios. They should encourage borrowers to adopt cleaner technologies and provide finance for sustainable projects. Strong disclosure standards, employee training and cooperation with regulators can further improve responsible lending."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, green banking can connect financial growth with environmental responsibility. Integrating ESG factors into lending and managing climate risks can make banks more resilient while supporting a sustainable economy. The goal should be responsible finance that creates long-term value for businesses, society and the environment."
+        }
+      ],
+      "practiceQuestionId": "q_1790065704940",
       "active": true
     }
   ],
