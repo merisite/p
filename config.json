@@ -2078,6 +2078,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1790069481725",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "Cybersecurity in Critical Financial Infrastructure: Safeguard Protocols against Ransomware, Phishing, and Cyber Espionage.",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -3471,6 +3487,42 @@
         }
       ],
       "practiceQuestionId": "q_1790069056872",
+      "active": true
+    },
+    {
+      "id": "essay_1790069416590",
+      "title": "Cybersecurity in Critical Financial Infrastructure: Safeguard Protocols against Ransomware, Phishing, and Cyber Espionage.",
+      "category": "Technology",
+      "tags": [
+        "Cybersecurity in Critical Financial Infrastructure: Safeguard Protocols against Ransomware",
+        "Phishing",
+        "and Cyber Espionage."
+      ],
+      "image": "https://i.postimg.cc/bvMQpJrC/bae10744-d837-466e-a4f9-cd9e453b11dc.png",
+      "body": "The financial sector is one of the most important parts of a modern economy. Banks, payment systems, stock exchanges, and other financial institutions depend heavily on digital technology. As these systems become more connected, cyber threats such as ransomware, phishing, and cyber espionage have also increased. Strong cybersecurity is therefore essential to protect financial stability and public trust.\n\nRansomware can lock important systems and demand money for restoring access. Phishing attacks trick customers or employees into sharing passwords, OTPs, or other sensitive information. Cyber espionage involves secretly stealing valuable financial or strategic data. A successful attack on critical financial infrastructure can disrupt payments, expose customer information, cause financial losses, and damage confidence in the banking system.\n\nFinancial institutions should follow strong security protocols to reduce these risks. Multi-factor authentication, regular software updates, data encryption, secure backups, and continuous network monitoring can protect important systems. Banks should regularly test their systems through security audits and controlled cyberattack simulations. Employees and customers must also receive regular training to identify suspicious links, messages, and emails. Quick reporting and response systems are equally important to limit damage after an attack.\n\nCybersecurity cannot be handled by banks alone. Financial institutions, regulators, technology companies, and law-enforcement agencies need to share information about emerging threats and coordinate their responses. Clear cybersecurity standards and regular assessments can further strengthen the financial ecosystem.\n\nIn conclusion, cybersecurity is no longer only a technical issue but a core requirement for financial stability. A combination of strong technology, trained people, regular monitoring, and cooperation can help protect critical financial infrastructure from evolving cyber threats.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "The financial sector is one of the most important parts of a modern economy. Banks, payment systems, stock exchanges, and other financial institutions depend heavily on digital technology. As these systems become more connected, cyber threats such as ransomware, phishing, and cyber espionage have also increased. Strong cybersecurity is therefore essential to protect financial stability and public trust."
+        },
+        {
+          "heading": "Body – Major Cybersecurity Threats",
+          "content": "Ransomware can lock important systems and demand money for restoring access. Phishing attacks trick customers or employees into sharing passwords, OTPs, or other sensitive information. Cyber espionage involves secretly stealing valuable financial or strategic data. A successful attack on critical financial infrastructure can disrupt payments, expose customer information, cause financial losses, and damage confidence in the banking system."
+        },
+        {
+          "heading": "Body – Safeguard Protocols",
+          "content": "Financial institutions should follow strong security protocols to reduce these risks. Multi-factor authentication, regular software updates, data encryption, secure backups, and continuous network monitoring can protect important systems. Banks should regularly test their systems through security audits and controlled cyberattack simulations. Employees and customers must also receive regular training to identify suspicious links, messages, and emails. Quick reporting and response systems are equally important to limit damage after an attack."
+        },
+        {
+          "heading": "Body – Role of Institutions and Cooperation",
+          "content": "Cybersecurity cannot be handled by banks alone. Financial institutions, regulators, technology companies, and law-enforcement agencies need to share information about emerging threats and coordinate their responses. Clear cybersecurity standards and regular assessments can further strengthen the financial ecosystem."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, cybersecurity is no longer only a technical issue but a core requirement for financial stability. A combination of strong technology, trained people, regular monitoring, and cooperation can help protect critical financial infrastructure from evolving cyber threats."
+        }
+      ],
+      "practiceQuestionId": "q_1790069481725",
       "active": true
     }
   ],
