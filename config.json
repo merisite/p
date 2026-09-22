@@ -2062,6 +2062,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1790069056872",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "Digital Public Infrastructure (DPI): How Aadhaar, UPI, and DigiLocker are Transforming Citizen Services and Governance.",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -3414,6 +3430,47 @@
         }
       ],
       "practiceQuestionId": "q_1790068373984",
+      "active": true
+    },
+    {
+      "id": "essay_1790068969130",
+      "title": "Digital Public Infrastructure (DPI): How Aadhaar, UPI, and DigiLocker are Transforming Citizen Services and Governance.",
+      "category": "Technology",
+      "tags": [
+        "Digital Public Infrastructure (DPI)",
+        "How Aadhaar",
+        "UPI",
+        "and DigiLocker are Transforming Citizen Services and Governance"
+      ],
+      "image": "https://i.postimg.cc/gjgqZK4N/4e922d26-658e-412c-82d8-a47a5d48a51d.png",
+      "body": "Digital Public Infrastructure (DPI) has changed the way citizens access services in India. It refers to digital systems that provide a common foundation for delivering public and private services. Aadhaar, UPI, and DigiLocker are important examples. Together, they have made many services faster, more accessible, and more convenient.\n\nAadhaar has provided a widely used digital identity that helps people access various government services and benefits. It has made identity verification easier and supported the direct delivery of welfare payments. By reducing paperwork and duplication, digital identity can also improve the efficiency of public service delivery.\n\nUPI has transformed digital payments by allowing people to transfer money instantly using mobile phones. Small businesses, street vendors, and ordinary citizens can make and receive payments without depending heavily on cash. It has also supported greater financial inclusion and encouraged more people to participate in the formal digital economy.\n\nDigiLocker allows citizens to store and access important documents digitally. Educational certificates, driving licences, and other documents can be accessed without carrying physical copies. This reduces paperwork and makes verification easier for both citizens and government agencies.\n\nDespite these benefits, DPI faces challenges such as digital illiteracy, cyber fraud, privacy concerns, and unequal internet access. Strong data protection, better cybersecurity, simple interfaces, and digital literacy are therefore necessary to ensure that no section of society is left behind.\n\nDPI is making governance more efficient and citizen-friendly. Aadhaar, UPI, and DigiLocker show how digital systems can simplify everyday services. However, their long-term success will depend on security, privacy, accessibility, and responsible use.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "Digital Public Infrastructure (DPI) has changed the way citizens access services in India. It refers to digital systems that provide a common foundation for delivering public and private services. Aadhaar, UPI, and DigiLocker are important examples. Together, they have made many services faster, more accessible, and more convenient."
+        },
+        {
+          "heading": "Body – Aadhaar and Digital Identity",
+          "content": "Aadhaar has provided a widely used digital identity that helps people access various government services and benefits. It has made identity verification easier and supported the direct delivery of welfare payments. By reducing paperwork and duplication, digital identity can also improve the efficiency of public service delivery."
+        },
+        {
+          "heading": "Body – UPI and Digital Payments",
+          "content": "UPI has transformed digital payments by allowing people to transfer money instantly using mobile phones. Small businesses, street vendors, and ordinary citizens can make and receive payments without depending heavily on cash. It has also supported greater financial inclusion and encouraged more people to participate in the formal digital economy."
+        },
+        {
+          "heading": "Body – DigiLocker and Citizen Services",
+          "content": "DigiLocker allows citizens to store and access important documents digitally. Educational certificates, driving licences, and other documents can be accessed without carrying physical copies. This reduces paperwork and makes verification easier for both citizens and government agencies."
+        },
+        {
+          "heading": "Body – Challenges and the Way Forward",
+          "content": "Despite these benefits, DPI faces challenges such as digital illiteracy, cyber fraud, privacy concerns, and unequal internet access. Strong data protection, better cybersecurity, simple interfaces, and digital literacy are therefore necessary to ensure that no section of society is left behind."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "DPI is making governance more efficient and citizen-friendly. Aadhaar, UPI, and DigiLocker show how digital systems can simplify everyday services. However, their long-term success will depend on security, privacy, accessibility, and responsible use."
+        }
+      ],
+      "practiceQuestionId": "q_1790069056872",
       "active": true
     }
   ],
