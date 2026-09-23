@@ -2190,6 +2190,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1790142173210",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "Mental Health & Modern Work Culture: Managing Workplace Stress, Burnout, Work-Life Balance, and the 4-Day Workweek Debate.",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -3825,6 +3841,40 @@
         }
       ],
       "practiceQuestionId": "q_1790141760072",
+      "active": true
+    },
+    {
+      "id": "essay_1790142125721",
+      "title": "Mental Health & Modern Work Culture: Managing Workplace Stress, Burnout, Work-Life Balance, and the 4-Day Workweek Debate.",
+      "category": "Social Issues",
+      "tags": [
+        "Mental Health"
+      ],
+      "image": "https://i.postimg.cc/NFsv2Fnz/0da91296-7f5f-47dc-a7fa-54c7c2813496.png",
+      "body": "Modern work culture has changed rapidly with the growth of technology, competition, and demanding work schedules. While these changes have improved productivity and connectivity, they have also increased workplace stress. Long working hours, constant deadlines, and pressure to remain available can affect employees’ mental well-being and lead to burnout.\n\nWorkplace stress occurs when employees face more pressure than they can manage effectively. If this pressure continues for a long time, it may result in burnout, which is marked by exhaustion, reduced motivation, and lower performance. Employees may also struggle to maintain healthy relationships and personal routines. Therefore, mental health should be treated as an important part of workplace well-being rather than a personal issue.\n\nA healthy work-life balance allows employees to give sufficient time to their work, family, health, and personal interests. Employers can support this balance through reasonable working hours, flexible schedules, regular breaks, leave policies, and a supportive workplace environment. Employees should also learn to set boundaries and avoid unnecessary work-related communication outside working hours.\n\nThe idea of a four-day workweek has gained attention as a possible way to improve work-life balance. Supporters argue that fewer working days may reduce stress, improve employee satisfaction, and encourage better productivity. However, its success may depend on the nature of the job, industry requirements, and how working hours are arranged. It may not be equally suitable for every organisation.\n\nIn conclusion, modern workplaces need to balance productivity with employee well-being. Reducing unnecessary pressure, encouraging healthy work habits, and exploring flexible models such as the four-day workweek can help create healthier workplaces. A productive employee should not have to sacrifice mental well-being for professional success.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "Modern work culture has changed rapidly with the growth of technology, competition, and demanding work schedules. While these changes have improved productivity and connectivity, they have also increased workplace stress. Long working hours, constant deadlines, and pressure to remain available can affect employees’ mental well-being and lead to burnout."
+        },
+        {
+          "heading": "Workplace Stress and Burnout",
+          "content": "Workplace stress occurs when employees face more pressure than they can manage effectively. If this pressure continues for a long time, it may result in burnout, which is marked by exhaustion, reduced motivation, and lower performance. Employees may also struggle to maintain healthy relationships and personal routines. Therefore, mental health should be treated as an important part of workplace well-being rather than a personal issue."
+        },
+        {
+          "heading": "Work-Life Balance",
+          "content": "A healthy work-life balance allows employees to give sufficient time to their work, family, health, and personal interests. Employers can support this balance through reasonable working hours, flexible schedules, regular breaks, leave policies, and a supportive workplace environment. Employees should also learn to set boundaries and avoid unnecessary work-related communication outside working hours."
+        },
+        {
+          "heading": "4-Day Workweek Debate",
+          "content": "The idea of a four-day workweek has gained attention as a possible way to improve work-life balance. Supporters argue that fewer working days may reduce stress, improve employee satisfaction, and encourage better productivity. However, its success may depend on the nature of the job, industry requirements, and how working hours are arranged. It may not be equally suitable for every organisation."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, modern workplaces need to balance productivity with employee well-being. Reducing unnecessary pressure, encouraging healthy work habits, and exploring flexible models such as the four-day workweek can help create healthier workplaces. A productive employee should not have to sacrifice mental well-being for professional success."
+        }
+      ],
+      "practiceQuestionId": "q_1790142173210",
       "active": true
     }
   ],
