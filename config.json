@@ -32,7 +32,7 @@
     "maintenanceMode": false,
     "maintenanceMessage": "The website will be live at 8:00 PM today.",
     "offersMsg": "Offers & Discounts",
-    "quizCourseStatus": "live",
+    "quizCourseStatus": "upcoming",
     "quizCourseProductId": "Demoquiz"
   },
   "sectionTypes": [
