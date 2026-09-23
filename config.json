@@ -2206,6 +2206,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1790142820265",
+      "examId": "sbi_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "Universal Healthcare Infrastructure: Strengthening Public Health Delivery, Ayushman Bharat, and Preventive Care",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -3875,6 +3891,40 @@
         }
       ],
       "practiceQuestionId": "q_1790142173210",
+      "active": true
+    },
+    {
+      "id": "essay_1790142757664",
+      "title": "Universal Healthcare Infrastructure: Strengthening Public Health Delivery, Ayushman Bharat, and Preventive Care",
+      "category": "Social Issues",
+      "tags": [
+        "Universal Health"
+      ],
+      "image": "https://i.postimg.cc/TwWJjJzk/63e61fe6-2b68-4216-be52-254ffb5dea32.png",
+      "body": "Universal healthcare means ensuring that every person can access affordable and quality healthcare without facing financial hardship. India has made progress in healthcare through better facilities, digital health services, and government schemes. However, gaps in rural healthcare, shortage of medical staff, and unequal access still remain major concerns.\n\nStrong public healthcare infrastructure is essential for improving health outcomes. Primary Health Centres and district hospitals need better equipment, medicines, trained doctors, nurses, and support staff. Telemedicine can connect patients in remote areas with specialists in cities. Better emergency services and digital health records can also make treatment faster and more organised. Public-private partnerships can further help improve healthcare delivery where public resources are limited.\n\nAyushman Bharat has expanded access to health insurance and strengthened primary healthcare through Health and Wellness Centres. It aims to reduce the financial burden of medical treatment, especially for economically weaker families. However, effective implementation requires awareness among beneficiaries, timely payments to hospitals, and adequate healthcare facilities in underserved regions.\n\nIndia must give greater importance to preventive healthcare. Regular health check-ups, vaccination, nutrition programmes, sanitation, and awareness about lifestyle diseases can prevent many illnesses. Schools and local communities can play an important role in promoting healthy habits. More investment in public health, technology, medical education, and rural facilities is also necessary.\n\nIn conclusion, universal healthcare cannot be achieved through insurance schemes alone. India needs strong public infrastructure, effective implementation of Ayushman Bharat, and greater focus on prevention. A healthcare system based on access, affordability, quality, and prevention can create a healthier and more productive society.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "Universal healthcare means ensuring that every person can access affordable and quality healthcare without facing financial hardship. India has made progress in healthcare through better facilities, digital health services, and government schemes. However, gaps in rural healthcare, shortage of medical staff, and unequal access still remain major concerns."
+        },
+        {
+          "heading": "Body – Strengthening Public Health Delivery",
+          "content": "Strong public healthcare infrastructure is essential for improving health outcomes. Primary Health Centres and district hospitals need better equipment, medicines, trained doctors, nurses, and support staff. Telemedicine can connect patients in remote areas with specialists in cities. Better emergency services and digital health records can also make treatment faster and more organised. Public-private partnerships can further help improve healthcare delivery where public resources are limited."
+        },
+        {
+          "heading": "Body – Ayushman Bharat and Financial Protection",
+          "content": "Ayushman Bharat has expanded access to health insurance and strengthened primary healthcare through Health and Wellness Centres. It aims to reduce the financial burden of medical treatment, especially for economically weaker families. However, effective implementation requires awareness among beneficiaries, timely payments to hospitals, and adequate healthcare facilities in underserved regions."
+        },
+        {
+          "heading": "Body – Preventive Care and Way Forward",
+          "content": "India must give greater importance to preventive healthcare. Regular health check-ups, vaccination, nutrition programmes, sanitation, and awareness about lifestyle diseases can prevent many illnesses. Schools and local communities can play an important role in promoting healthy habits. More investment in public health, technology, medical education, and rural facilities is also necessary."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, universal healthcare cannot be achieved through insurance schemes alone. India needs strong public infrastructure, effective implementation of Ayushman Bharat, and greater focus on prevention. A healthcare system based on access, affordability, quality, and prevention can create a healthier and more productive society."
+        }
+      ],
+      "practiceQuestionId": "q_1790142820265",
       "active": true
     }
   ],
