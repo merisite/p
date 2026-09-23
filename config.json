@@ -2238,6 +2238,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1790143957476",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "Urban Air Pollution and Smog Crises: Tackling Vehicular Emissions, Stubble Burning, and Sustainable Solutions for Metros",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -3975,6 +3991,40 @@
         }
       ],
       "practiceQuestionId": "q_1790143492782",
+      "active": true
+    },
+    {
+      "id": "essay_1790143909921",
+      "title": "Urban Air Pollution and Smog Crises: Tackling Vehicular Emissions, Stubble Burning, and Sustainable Solutions for Metros",
+      "category": "Environment",
+      "tags": [
+        "Pollution"
+      ],
+      "image": "https://i.postimg.cc/j5sJ2QRG/fea3df1b-cd56-4c54-9059-6c9d096750a7.png",
+      "body": "Urban air pollution has become a serious problem in many Indian cities. Rapid urbanisation, growing vehicle numbers, construction activities, industrial emissions and seasonal stubble burning contribute to poor air quality. During winter, these factors combine with weather conditions to create severe smog, especially in major metropolitan areas.\n\nVehicular emissions are one of the major sources of urban air pollution. Cars, buses and trucks release harmful pollutants into the atmosphere, particularly when traffic congestion is high. Construction dust and industrial emissions further worsen air quality. During the post-harvest season, farmers in some regions burn crop residue to clear their fields quickly. The resulting smoke can travel to nearby cities and add to the pollution burden.\n\nPoor air quality affects public health, particularly children, elderly people and those with breathing problems. Prolonged exposure to polluted air can cause respiratory diseases and reduce the quality of life. Smog also reduces visibility and can disrupt road and air transport. Tackling the problem is difficult because pollution comes from multiple sources and crosses state and city boundaries.\n\nGovernments should improve public transport, promote electric vehicles and enforce strict emission standards. Construction sites must follow dust-control measures. Farmers should be supported with affordable machines and practical alternatives for managing crop residue instead of burning it. Cities should also increase green spaces and strengthen air-quality monitoring. Public awareness and cooperation between states are equally important.\n\nIn conclusion, urban air pollution cannot be solved through short-term measures alone. It requires coordinated action against vehicle emissions, crop burning, dust and industrial pollution. Sustainable transport, cleaner farming practices, stronger enforcement and public participation can help Indian cities achieve cleaner and healthier air.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "Urban air pollution has become a serious problem in many Indian cities. Rapid urbanisation, growing vehicle numbers, construction activities, industrial emissions and seasonal stubble burning contribute to poor air quality. During winter, these factors combine with weather conditions to create severe smog, especially in major metropolitan areas."
+        },
+        {
+          "heading": "Body – Major Causes",
+          "content": "Vehicular emissions are one of the major sources of urban air pollution. Cars, buses and trucks release harmful pollutants into the atmosphere, particularly when traffic congestion is high. Construction dust and industrial emissions further worsen air quality. During the post-harvest season, farmers in some regions burn crop residue to clear their fields quickly. The resulting smoke can travel to nearby cities and add to the pollution burden."
+        },
+        {
+          "heading": "Body – Impact and Challenges",
+          "content": "Poor air quality affects public health, particularly children, elderly people and those with breathing problems. Prolonged exposure to polluted air can cause respiratory diseases and reduce the quality of life. Smog also reduces visibility and can disrupt road and air transport. Tackling the problem is difficult because pollution comes from multiple sources and crosses state and city boundaries."
+        },
+        {
+          "heading": "Body – Sustainable Solutions",
+          "content": "Governments should improve public transport, promote electric vehicles and enforce strict emission standards. Construction sites must follow dust-control measures. Farmers should be supported with affordable machines and practical alternatives for managing crop residue instead of burning it. Cities should also increase green spaces and strengthen air-quality monitoring. Public awareness and cooperation between states are equally important."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, urban air pollution cannot be solved through short-term measures alone. It requires coordinated action against vehicle emissions, crop burning, dust and industrial pollution. Sustainable transport, cleaner farming practices, stronger enforcement and public participation can help Indian cities achieve cleaner and healthier air."
+        }
+      ],
+      "practiceQuestionId": "q_1790143957476",
       "active": true
     }
   ],
