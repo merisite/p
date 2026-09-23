@@ -335,6 +335,7 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .exam-layout{display:grid;grid-template-columns:1fr 230px;gap:11px;align-items:start}
 .exam-main{min-width:0}
 .exam-side{background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:12px;display:flex;flex-direction:column;gap:10px;position:sticky;top:64px}
+#quizrun .exam-side{max-height:calc(100vh - 84px);overflow-y:auto}
 .es-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
 .es-stat{display:flex;align-items:center;gap:7px;font-size:.66rem;color:var(--t2);line-height:1.3}
 .es-badge{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.68rem;font-weight:700;color:#fff;flex-shrink:0}
@@ -1359,14 +1360,14 @@ function ocCopy(code,uid){
    like yoursite.com/#typing or yoursite.com/#qselect-quant.
    "exam","fullmock","result" are deliberately left out of the shareable
    set below (a stale link shouldn't drop someone into a live/expired test). */
-const NON_LINKABLE_SCREENS=new Set(["exam","fullmock","result","typing","quizrun"]);
+const NON_LINKABLE_SCREENS=new Set(["exam","fullmock","result","typing","quizrun","quizinstr"]);
 function showS(id,opts){
   // Clear result snapshot when user deliberately navigates away
   if(id!=='result') sessionStorage.removeItem('dpt_result_html');
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   document.getElementById(id).classList.add("active");
   window.scrollTo(0,0);
-  const isExamScreen=(id==="fullmock"||id==="exam"||id==="instr");
+  const isExamScreen=(id==="fullmock"||id==="exam"||id==="instr"||id==="quizrun"||id==="quizinstr");
   document.body.classList.toggle("exam-mode",isExamScreen);
   updateLogo(localStorage.getItem("dpt_mode")||"light");
   const hec=document.getElementById("h-exam-ctl");
@@ -5037,6 +5038,7 @@ function renderQuizList(){
       +'</div>';
   }).join("");
 }
+let _pendingQuizSet=null,_pendingQuizQs=null;
 function startQuizSet(setId){
   if(quizCourseIsUpcoming()){alert("This course isn't open yet — check back soon!");return;}
   const data=qzGetData();
@@ -5050,16 +5052,50 @@ function startQuizSet(setId){
   }
   const qs=data.questions.filter(function(q){return q.setNo===s.setNo&&q.active!==false;});
   if(!qs.length){alert("This set has no questions yet — please check back soon.");return;}
-  const warnLines=["This quiz has "+qs.length+" question(s)."+(s.timeLimitMin?" Time limit: "+s.timeLimitMin+" minutes — it will auto-submit when time runs out.":" No time limit.")];
-  if(s.negMarkEnabled)warnLines.push("Negative marking is ON: "+s.negMarkValue+" mark deducted for every wrong answer.");
-  if(!confirm(warnLines.join("\n\n")+"\n\nStart now?"))return;
+  _pendingQuizSet=s;_pendingQuizQs=qs;
+  showQuizInstructions(s,qs);
+}
+function showQuizInstructions(s,qs){
+  _instrReturnTo=document.querySelector(".screen.active")?.id||"quizlist";
+  _instrReturnHash=location.hash||"#"+_instrReturnTo;
+  showS("quizinstr",{skipHash:true});
+  document.getElementById("qzi-title-lbl").textContent=s.title||("Quiz Set "+s.setNo);
+  const durationLine=s.timeLimitMin
+    ? "1. Total duration of this quiz is <strong>"+s.timeLimitMin+" minutes</strong>."
+    : "1. This quiz has <strong>no time limit</strong> — take as long as you need.";
+  const autoSubmitLine=s.timeLimitMin
+    ? "2. A countdown timer is shown on the right. When it reaches zero, the quiz will <strong>auto-submit itself</strong> — you will not need to submit manually."
+    : "";
+  const marksLine="3. This quiz has <strong>"+qs.length+" question(s)</strong>, each carrying <strong>+1 mark</strong> for a correct answer."
+    +(s.negMarkEnabled?" <strong style='color:var(--red)'>Negative marking is ON</strong> — "+s.negMarkValue+" mark will be deducted for every wrong answer. Unanswered questions are not penalized.":" There is no negative marking on this quiz.");
+  document.getElementById("qzi-body").innerHTML=
+    '<div style="margin-bottom:10px">'+durationLine+'</div>'
+    +(autoSubmitLine?'<div style="margin-bottom:10px">'+autoSubmitLine+'</div>':'')
+    +'<div style="margin-bottom:16px">'+marksLine+'</div>'
+    +'<div style="margin-bottom:8px">4. The Question Palette on the right shows the status of each question using these symbols:</div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;max-width:560px">'
+    +'<div style="display:flex;align-items:center;gap:10px"><button class="es-qbtn es-notvisited" style="pointer-events:none">1</button> You have not visited the question yet.</div>'
+    +'<div style="display:flex;align-items:center;gap:10px"><button class="es-qbtn es-marked" style="pointer-events:none">1</button> Not answered, but marked for review.</div>'
+    +'<div style="display:flex;align-items:center;gap:10px"><button class="es-qbtn es-notdone" style="pointer-events:none">1</button> You have not answered the question.</div>'
+    +'<div style="display:flex;align-items:center;gap:10px"><button class="es-qbtn es-marked es-marked-done" style="pointer-events:none">1</button> Answered and marked for review.</div>'
+    +'<div style="display:flex;align-items:center;gap:10px"><button class="es-qbtn es-done" style="pointer-events:none">1</button> You have answered the question.</div>'
+    +'</div>'
+    +'<div style="margin-bottom:8px">5. Procedure for answering a question:</div>'
+    +'<div style="padding-left:18px;margin-bottom:6px">a. Click an option to select your answer.</div>'
+    +'<div style="padding-left:18px;margin-bottom:6px">b. Click <strong>Clear Response</strong> to remove your selection for that question.</div>'
+    +'<div style="padding-left:18px;margin-bottom:6px">c. Click a different option any time to change your answer.</div>'
+    +'<div style="padding-left:18px;margin-bottom:6px">d. You must click <strong>Save &amp; Next</strong> (or <strong>Mark for Review &amp; Next</strong>) to save your answer before moving on.</div>';
+}
+function confirmQuizInstr(){
+  if(!_pendingQuizSet||!_pendingQuizQs)return;
+  const s=_pendingQuizSet,qs=_pendingQuizQs;
+  _pendingQuizSet=null;_pendingQuizQs=null;
   launchQuiz(s,qs);
 }
 function launchQuiz(set,qs){
-  // Same origin-tracking pattern used by showInstr() for practice questions/mocks, so
-  // Exit correctly returns to wherever the person actually launched the quiz from.
-  _instrReturnTo=document.querySelector(".screen.active")?.id||"quizlist";
-  _instrReturnHash=location.hash||"#"+_instrReturnTo;
+  // _instrReturnTo/_instrReturnHash were already captured in showQuizInstructions(),
+  // before navigating to the instructions screen — same pattern showInstr() uses for
+  // practice questions/mocks, so Exit correctly returns to the true origin, not "quizinstr".
   QZ={
     setId:set.id,setNo:set.setNo,title:set.title,
     questions:qs.map(function(q){return{id:q.id,text:q.text,options:q.options||[],correctIndex:q.correctIndex,explanation:q.explanation||"",topicId:q.topicId};}),
@@ -5069,7 +5105,7 @@ function launchQuiz(set,qs){
     submitted:false,reviewMode:false,startedAt:Date.now()
   };
   showS("quizrun",{skipHash:true});
-  document.getElementById("qzr-total-no").textContent=QZ.questions.length;
+  document.getElementById("qzr-title-lbl").textContent=set.title||("Quiz Set "+set.setNo);
   document.getElementById("qzr-exit-btn").innerHTML='<svg width="11" height="11" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Exit';
   document.getElementById("qzr-actionbar").style.display="flex";
   document.getElementById("qzr-review-actionbar").style.display="none";
@@ -5340,11 +5376,31 @@ const initPromise=init();
   </div>
 </div>
 
+<div id="quizinstr" class="screen">
+  <div style="max-width:1600px;margin:0 auto;padding:12px 24px 40px">
+    <div class="exam-bar" style="margin-bottom:16px">
+      <div class="bar-l"><div style="font-size:.9rem;font-weight:700;color:var(--t)" id="qzi-title-lbl">Quiz Instructions</div></div>
+      <div style="display:flex;gap:6px;flex-shrink:0">
+        <button class="btn bg bsm" onclick="showS('quizlist');renderQuizList()"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Cancel</button>
+      </div>
+    </div>
+    <div class="panel" style="width:100%;margin:0;overflow:visible">
+      <div class="ph"><span>Instructions</span></div>
+      <div class="pb" style="padding:26px 28px">
+        <div id="qzi-body" style="font-size:.85rem;line-height:1.9;color:var(--t2)"></div>
+        <div style="display:flex;gap:10px;margin-top:28px;flex-wrap:wrap">
+          <button class="btn bg" onclick="showS('quizlist');renderQuizList()">Cancel</button>
+          <button class="btn bp" onclick="confirmQuizInstr()">I'm Ready — Start Quiz</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="quizrun" class="screen">
   <div class="exam-bar">
     <div class="bar-l">
-      <div class="bstat"><div class="bval" id="qzr-current-no">1</div><div class="blbl">Question</div></div>
-      <div class="bstat"><div class="bval" id="qzr-total-no">0</div><div class="blbl">Total</div></div>
+      <div style="font-size:.9rem;font-weight:700;color:var(--t)" id="qzr-title-lbl">Quiz</div>
     </div>
     <div style="display:flex;gap:6px;flex-shrink:0">
       <button class="btn bg bsm fs-toggle-btn" onclick="toggleFullscreen()" title="Toggle full screen"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 00-2 2v3M16 3h3a2 2 0 012 2v3M21 16v3a2 2 0 01-2 2h-3M3 16v3a2 2 0 002 2h3"/></svg></button>
