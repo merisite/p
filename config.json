@@ -2270,6 +2270,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1790144936085",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "Water Crisis & Sustainable Groundwater Management: Addressing Water Scarcity through Rainwater Harvesting and the Jal Jeevan Mission",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -4075,6 +4091,40 @@
         }
       ],
       "practiceQuestionId": "q_1790144404228",
+      "active": true
+    },
+    {
+      "id": "essay_1790144889303",
+      "title": "Water Crisis & Sustainable Groundwater Management: Addressing Water Scarcity through Rainwater Harvesting and the Jal Jeevan Mission",
+      "category": "Environment",
+      "tags": [
+        "Water"
+      ],
+      "image": "https://i.postimg.cc/BvNwXpxD/4076d0b2-ec24-40a2-b83c-5eecab3acd55.png",
+      "body": "Water scarcity has become a serious challenge in India due to population growth, rapid urbanisation, climate change, and the overuse of groundwater. Many regions face falling groundwater levels and irregular rainfall. Ensuring adequate water for households, agriculture, and industries therefore requires better conservation and management of available water resources.\n\nGroundwater is an important source of drinking water and irrigation, but excessive extraction has reduced water levels in many areas. Poor water management, water-intensive farming, pollution, and the loss of natural water bodies have further increased the problem. Water scarcity affects agriculture, public health, livelihoods, and the overall development of communities.\n\nRainwater harvesting can help address this challenge by collecting and storing rainwater for later use or allowing it to recharge groundwater. Rooftop harvesting, recharge pits, ponds, and check dams can improve local water availability. Farmers can also adopt water-efficient irrigation methods such as drip irrigation. Community participation is essential for maintaining these systems and using groundwater responsibly.\n\nThe Jal Jeevan Mission aims to provide safe and adequate drinking water through household tap connections, especially in rural areas. Its success depends not only on providing connections but also on ensuring reliable water sources and long-term sustainability. Local communities can play an important role in monitoring and managing village water resources.\n\nIn conclusion, India needs a combined approach to tackle water scarcity. Rainwater harvesting, responsible groundwater use, efficient irrigation, and effective implementation of the Jal Jeevan Mission can improve water security. Sustainable water management requires government action as well as active participation from citizens and local communities.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "Water scarcity has become a serious challenge in India due to population growth, rapid urbanisation, climate change, and the overuse of groundwater. Many regions face falling groundwater levels and irregular rainfall. Ensuring adequate water for households, agriculture, and industries therefore requires better conservation and management of available water resources."
+        },
+        {
+          "heading": "Body – Causes and Impact of Water Scarcity",
+          "content": "Groundwater is an important source of drinking water and irrigation, but excessive extraction has reduced water levels in many areas. Poor water management, water-intensive farming, pollution, and the loss of natural water bodies have further increased the problem. Water scarcity affects agriculture, public health, livelihoods, and the overall development of communities."
+        },
+        {
+          "heading": "Body – Rainwater Harvesting and Groundwater Management",
+          "content": "Rainwater harvesting can help address this challenge by collecting and storing rainwater for later use or allowing it to recharge groundwater. Rooftop harvesting, recharge pits, ponds, and check dams can improve local water availability. Farmers can also adopt water-efficient irrigation methods such as drip irrigation. Community participation is essential for maintaining these systems and using groundwater responsibly."
+        },
+        {
+          "heading": "Body – Role of Jal Jeevan Mission",
+          "content": "The Jal Jeevan Mission aims to provide safe and adequate drinking water through household tap connections, especially in rural areas. Its success depends not only on providing connections but also on ensuring reliable water sources and long-term sustainability. Local communities can play an important role in monitoring and managing village water resources."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, India needs a combined approach to tackle water scarcity. Rainwater harvesting, responsible groundwater use, efficient irrigation, and effective implementation of the Jal Jeevan Mission can improve water security. Sustainable water management requires government action as well as active participation from citizens and local communities."
+        }
+      ],
+      "practiceQuestionId": "q_1790144936085",
       "active": true
     }
   ],
