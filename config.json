@@ -2222,6 +2222,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1790143492782",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "Cyber Safety for Senior Citizens: Vulnerabilities to Digital Fraud and Targeted Financial Literacy Programs.",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -3925,6 +3941,40 @@
         }
       ],
       "practiceQuestionId": "q_1790142820265",
+      "active": true
+    },
+    {
+      "id": "essay_1790143451480",
+      "title": "Cyber Safety for Senior Citizens: Vulnerabilities to Digital Fraud and Targeted Financial Literacy Programs.",
+      "category": "Social Issues",
+      "tags": [
+        "Cyber Security"
+      ],
+      "image": "https://i.postimg.cc/2SGYm4XT/b41ad070-5448-4f88-852c-731423d58e69.png",
+      "body": "Digital banking and online payments have made financial services faster and more convenient. However, senior citizens can face greater risks while using these services. Limited digital experience, lack of awareness about online threats, and trust in strangers can make them easy targets for cyber fraud. Therefore, improving cyber safety among senior citizens has become important.\n\nSenior citizens may become victims of phishing messages, fake customer-care calls, OTP scams, and fraudulent banking links. Fraudsters often pretend to be bank officials, government representatives, or relatives in trouble. Some elderly users may also share passwords, OTPs, or personal details without realising the risks. Difficulty in identifying fake websites and unfamiliar digital interfaces can further increase their vulnerability. Such fraud can cause both financial loss and emotional stress.\n\nBanks and government agencies should conduct simple and practical financial literacy programs specifically for senior citizens. These programs should teach them never to share OTPs, PINs, passwords, or banking details with anyone. Demonstrations can help them identify suspicious calls, messages, links, and payment requests. Training can be conducted through banks, community centres, senior citizen groups, and local organisations. Family members can also assist elderly users in learning safe digital practices.\n\nBanks should provide simple interfaces, stronger fraud alerts, easy complaint mechanisms, and quick support for suspicious transactions. Regional-language awareness campaigns can also improve understanding among elderly users.\n\nIn conclusion, digital banking can benefit senior citizens, but safety must accompany convenience. Targeted financial literacy, supportive technology, and timely assistance can help elderly users confidently participate in the digital economy while reducing their risk of financial fraud.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "Digital banking and online payments have made financial services faster and more convenient. However, senior citizens can face greater risks while using these services. Limited digital experience, lack of awareness about online threats, and trust in strangers can make them easy targets for cyber fraud. Therefore, improving cyber safety among senior citizens has become important."
+        },
+        {
+          "heading": "Body – Vulnerabilities to Digital Fraud",
+          "content": "Senior citizens may become victims of phishing messages, fake customer-care calls, OTP scams, and fraudulent banking links. Fraudsters often pretend to be bank officials, government representatives, or relatives in trouble. Some elderly users may also share passwords, OTPs, or personal details without realising the risks. Difficulty in identifying fake websites and unfamiliar digital interfaces can further increase their vulnerability. Such fraud can cause both financial loss and emotional stress."
+        },
+        {
+          "heading": "Body – Targeted Financial Literacy Programs",
+          "content": "Banks and government agencies should conduct simple and practical financial literacy programs specifically for senior citizens. These programs should teach them never to share OTPs, PINs, passwords, or banking details with anyone. Demonstrations can help them identify suspicious calls, messages, links, and payment requests. Training can be conducted through banks, community centres, senior citizen groups, and local organisations. Family members can also assist elderly users in learning safe digital practices."
+        },
+        {
+          "heading": "Body – Role of Banks and Technology",
+          "content": "Banks should provide simple interfaces, stronger fraud alerts, easy complaint mechanisms, and quick support for suspicious transactions. Regional-language awareness campaigns can also improve understanding among elderly users."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, digital banking can benefit senior citizens, but safety must accompany convenience. Targeted financial literacy, supportive technology, and timely assistance can help elderly users confidently participate in the digital economy while reducing their risk of financial fraud."
+        }
+      ],
+      "practiceQuestionId": "q_1790143492782",
       "active": true
     }
   ],
