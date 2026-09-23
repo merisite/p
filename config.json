@@ -2286,6 +2286,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1790145346308",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "Geopolitical Conflicts and Economic Vulnerabilities: Impact of Global Wars and Trade Route Disruptions on Crude Oil, Inflation, and Indian Trade",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -4125,6 +4141,40 @@
         }
       ],
       "practiceQuestionId": "q_1790144936085",
+      "active": true
+    },
+    {
+      "id": "essay_1790145303986",
+      "title": "Geopolitical Conflicts and Economic Vulnerabilities: Impact of Global Wars and Trade Route Disruptions on Crude Oil, Inflation, and Indian Trade",
+      "category": "International Relations",
+      "tags": [
+        "oil"
+      ],
+      "image": "https://i.postimg.cc/k4JGyJRM/352aaced-84d1-44de-b70c-3b3c9c798aa2.png",
+      "body": "Geopolitical conflicts and wars can affect economies far beyond the countries directly involved. In recent years, conflicts and disruptions to major trade routes have increased uncertainty in global markets. For India, which depends heavily on imported crude oil, such disruptions can affect fuel prices, inflation, trade and economic growth. India’s crude oil import dependency was about 88.2% in 2024-25.\n\nWars can reduce oil supply or create fears of future shortages, pushing crude oil prices higher. Disruptions in important shipping routes can also increase transportation and insurance costs. Higher crude prices raise the cost of fuel, transport and production, which can increase prices of goods and services. The Reserve Bank of India has noted that geopolitical tensions and supply shocks can create volatility in crude oil prices and affect inflation.\n\nTrade route disruptions can delay shipments and force businesses to use longer and more expensive routes. This raises costs for both importers and exporters. Such disruptions can also affect India's trade balance and put pressure on the rupee. RBI research has found that higher geopolitical risk can reduce trade and increase trading costs for India.\n\nIndia needs to diversify its sources of crude oil and strengthen strategic petroleum reserves. It should also improve port infrastructure, develop alternative trade routes and promote domestic renewable energy. Greater diversification of export markets can reduce dependence on a limited number of routes or countries.\n\nIn conclusion, global conflicts and trade disruptions can create serious economic risks for India. A balanced approach based on energy security, diversified trade, stronger infrastructure and renewable energy can help India remain resilient during future global shocks.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "Geopolitical conflicts and wars can affect economies far beyond the countries directly involved. In recent years, conflicts and disruptions to major trade routes have increased uncertainty in global markets. For India, which depends heavily on imported crude oil, such disruptions can affect fuel prices, inflation, trade and economic growth. India’s crude oil import dependency was about 88.2% in 2024-25."
+        },
+        {
+          "heading": "Impact on Crude Oil and Inflation",
+          "content": "Wars can reduce oil supply or create fears of future shortages, pushing crude oil prices higher. Disruptions in important shipping routes can also increase transportation and insurance costs. Higher crude prices raise the cost of fuel, transport and production, which can increase prices of goods and services. The Reserve Bank of India has noted that geopolitical tensions and supply shocks can create volatility in crude oil prices and affect inflation."
+        },
+        {
+          "heading": "Impact on Indian Trade and Economy",
+          "content": "Trade route disruptions can delay shipments and force businesses to use longer and more expensive routes. This raises costs for both importers and exporters. Such disruptions can also affect India's trade balance and put pressure on the rupee. RBI research has found that higher geopolitical risk can reduce trade and increase trading costs for India."
+        },
+        {
+          "heading": "Measures / Way Forward",
+          "content": "India needs to diversify its sources of crude oil and strengthen strategic petroleum reserves. It should also improve port infrastructure, develop alternative trade routes and promote domestic renewable energy. Greater diversification of export markets can reduce dependence on a limited number of routes or countries."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, global conflicts and trade disruptions can create serious economic risks for India. A balanced approach based on energy security, diversified trade, stronger infrastructure and renewable energy can help India remain resilient during future global shocks."
+        }
+      ],
+      "practiceQuestionId": "q_1790145346308",
       "active": true
     }
   ],
