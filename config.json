@@ -2254,6 +2254,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1790144404228",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "Plastic Waste Management & Circular Economy: Moving Beyond Single-Use Plastics and Enforcing Extended Producer Responsibility",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -4025,6 +4041,40 @@
         }
       ],
       "practiceQuestionId": "q_1790143957476",
+      "active": true
+    },
+    {
+      "id": "essay_1790144365884",
+      "title": "Plastic Waste Management & Circular Economy: Moving Beyond Single-Use Plastics and Enforcing Extended Producer Responsibility",
+      "category": "Environment",
+      "tags": [
+        "Plastic Waste"
+      ],
+      "image": "https://i.postimg.cc/26mX5Jbn/17c33899-8343-49d9-9ae5-dd241d5c1aae.png",
+      "body": "Plastic has become an essential part of modern life because it is cheap, light, and durable. However, excessive plastic use has created a serious environmental problem. Single-use plastics such as bags, cups, and packaging are often discarded after a few minutes of use but remain in the environment for years.\n\nPoor waste collection and improper disposal allow plastic to enter rivers, oceans, and soil. It harms animals, blocks drainage systems, and breaks down into tiny particles called microplastics. Although banning certain single-use plastics is important, bans alone cannot solve the problem. India needs a system that reduces waste throughout the life cycle of plastic products.\n\nA circular economy offers a better approach by keeping materials in use for as long as possible. Instead of the traditional “use and throw” model, plastic products should be reduced, reused, recycled, and redesigned. Extended Producer Responsibility (EPR) supports this approach by making producers responsible for collecting and managing the plastic waste created by their products.\n\nEffective implementation remains a major challenge. Waste segregation is still limited, recycling facilities are uneven, and informal waste workers often lack proper support. Governments must strictly monitor EPR targets and ensure that companies meet their responsibilities. Businesses should invest in recyclable packaging and reduce unnecessary plastic. Consumers must also separate waste and choose reusable alternatives whenever possible.\n\nIn conclusion, India must move beyond simply banning single-use plastics. A strong circular economy, effective EPR enforcement, better recycling systems, and responsible consumer behaviour can reduce plastic pollution while using resources more efficiently. Managing plastic waste requires shared responsibility from producers, governments, and citizens.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "Plastic has become an essential part of modern life because it is cheap, light, and durable. However, excessive plastic use has created a serious environmental problem. Single-use plastics such as bags, cups, and packaging are often discarded after a few minutes of use but remain in the environment for years."
+        },
+        {
+          "heading": "Problems with Plastic Waste",
+          "content": "Poor waste collection and improper disposal allow plastic to enter rivers, oceans, and soil. It harms animals, blocks drainage systems, and breaks down into tiny particles called microplastics. Although banning certain single-use plastics is important, bans alone cannot solve the problem. India needs a system that reduces waste throughout the life cycle of plastic products."
+        },
+        {
+          "heading": "Circular Economy and EPR",
+          "content": "A circular economy offers a better approach by keeping materials in use for as long as possible. Instead of the traditional “use and throw” model, plastic products should be reduced, reused, recycled, and redesigned. Extended Producer Responsibility (EPR) supports this approach by making producers responsible for collecting and managing the plastic waste created by their products."
+        },
+        {
+          "heading": "Challenges and Way Forward",
+          "content": "Effective implementation remains a major challenge. Waste segregation is still limited, recycling facilities are uneven, and informal waste workers often lack proper support. Governments must strictly monitor EPR targets and ensure that companies meet their responsibilities. Businesses should invest in recyclable packaging and reduce unnecessary plastic. Consumers must also separate waste and choose reusable alternatives whenever possible."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, India must move beyond simply banning single-use plastics. A strong circular economy, effective EPR enforcement, better recycling systems, and responsible consumer behaviour can reduce plastic pollution while using resources more efficiently. Managing plastic waste requires shared responsibility from producers, governments, and citizens."
+        }
+      ],
+      "practiceQuestionId": "q_1790144404228",
       "active": true
     }
   ],
