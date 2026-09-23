@@ -2234,7 +2234,7 @@
       "marks": 15,
       "difficulty": "medium",
       "active": true,
-      "mockNo": null,
+      "mockNo": 4,
       "productIds": [
         "IBPSPO"
       ]
@@ -2315,6 +2315,22 @@
       "difficulty": "medium",
       "active": true,
       "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
+    },
+    {
+      "id": "q_1790180094063",
+      "examId": "ibps_po",
+      "type": "comprehension",
+      "text": "",
+      "modelAnswer": "",
+      "label": "14 Read the passage and answer the questions that follow in your own words.",
+      "wordLimit": "150 words (30-40 words per answer)",
+      "marks": 10,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": 4,
       "productIds": [
         "IBPSPO"
       ]
@@ -2432,7 +2448,7 @@
       "mockNo": 4,
       "title": "IBPS PO Mock 4",
       "active": true,
-      "status": "upcoming",
+      "status": "active",
       "productIds": [
         "IBPSPO"
       ]
