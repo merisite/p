@@ -2302,6 +2302,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1790145868353",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "India’s Economic Diplomacy & Trade Corridors: The Strategic Value of the India-Middle East-Europe Economic Corridor (IMEC) and Bilateral FTAs",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -4175,6 +4191,38 @@
         }
       ],
       "practiceQuestionId": "q_1790145346308",
+      "active": true
+    },
+    {
+      "id": "essay_1790145833285",
+      "title": "India’s Economic Diplomacy & Trade Corridors: The Strategic Value of the India-Middle East-Europe Economic Corridor (IMEC) and Bilateral FTAs",
+      "category": "International Relations",
+      "tags": [],
+      "image": "https://i.postimg.cc/SKqCwpYH/5bbbc609-d043-44c1-aaad-0f6ac9d5d6c9.png",
+      "body": "India is increasingly using economic diplomacy to strengthen trade, investment, and strategic partnerships with other countries. Two important parts of this approach are the India-Middle East-Europe Economic Corridor (IMEC) and bilateral Free Trade Agreements (FTAs). Together, they can help India expand markets, improve connectivity, and strengthen its position in global trade.\n\nIMEC is designed to improve connectivity between India, the Middle East, and Europe through shipping, railways, and other infrastructure. It can reduce transportation time and costs and create smoother trade routes. Better connectivity can also support supply chains and encourage investment in logistics, manufacturing, and related industries. For India, the corridor can provide greater access to European and Middle Eastern markets while strengthening economic cooperation with partner countries.\n\nBilateral FTAs can further support India’s trade ambitions by reducing tariffs and making Indian goods more competitive in foreign markets. Agreements with major trading partners can create opportunities for exporters in sectors such as textiles, pharmaceuticals, engineering goods, agriculture, and services. FTAs can also attract foreign investment by making India a more attractive part of global supply chains.\n\nHowever, these opportunities also come with challenges. Large infrastructure projects require significant investment, coordination, and long-term political commitment. FTAs must also protect sensitive domestic sectors while providing meaningful market access. India needs to improve logistics, product quality, infrastructure, and trade skills to gain maximum benefits.\n\nIn conclusion, IMEC and bilateral FTAs can strengthen India’s economic diplomacy and global trade presence. Their success will depend on effective implementation, reliable connectivity, balanced agreements, and sustained cooperation among partner countries.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "India is increasingly using economic diplomacy to strengthen trade, investment, and strategic partnerships with other countries. Two important parts of this approach are the India-Middle East-Europe Economic Corridor (IMEC) and bilateral Free Trade Agreements (FTAs). Together, they can help India expand markets, improve connectivity, and strengthen its position in global trade."
+        },
+        {
+          "heading": "Body – Strategic Importance of IMEC",
+          "content": "IMEC is designed to improve connectivity between India, the Middle East, and Europe through shipping, railways, and other infrastructure. It can reduce transportation time and costs and create smoother trade routes. Better connectivity can also support supply chains and encourage investment in logistics, manufacturing, and related industries. For India, the corridor can provide greater access to European and Middle Eastern markets while strengthening economic cooperation with partner countries."
+        },
+        {
+          "heading": "Body – Role of Bilateral FTAs",
+          "content": "Bilateral FTAs can further support India’s trade ambitions by reducing tariffs and making Indian goods more competitive in foreign markets. Agreements with major trading partners can create opportunities for exporters in sectors such as textiles, pharmaceuticals, engineering goods, agriculture, and services. FTAs can also attract foreign investment by making India a more attractive part of global supply chains."
+        },
+        {
+          "heading": "Body – Challenges and Way Forward",
+          "content": "However, these opportunities also come with challenges. Large infrastructure projects require significant investment, coordination, and long-term political commitment. FTAs must also protect sensitive domestic sectors while providing meaningful market access. India needs to improve logistics, product quality, infrastructure, and trade skills to gain maximum benefits."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, IMEC and bilateral FTAs can strengthen India’s economic diplomacy and global trade presence. Their success will depend on effective implementation, reliable connectivity, balanced agreements, and sustained cooperation among partner countries."
+        }
+      ],
+      "practiceQuestionId": "q_1790145868353",
       "active": true
     }
   ],
