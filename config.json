@@ -2142,6 +2142,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1790140345944",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "Formalization of the Unorganized Sector: Labor Reforms, Social Security Coverage, and Tax Base Expansion",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -3674,6 +3690,40 @@
         }
       ],
       "practiceQuestionId": "q_1790071872816",
+      "active": true
+    },
+    {
+      "id": "essay_1790140281334",
+      "title": "Formalization of the Unorganized Sector: Labor Reforms, Social Security Coverage, and Tax Base Expansion",
+      "category": "Government & Policy",
+      "tags": [
+        "Labor"
+      ],
+      "image": "https://i.postimg.cc/mghXg3Pq/553f5544-b951-4367-ab5c-898178f9407d.png",
+      "body": "The unorganized sector plays an important role in India’s economy by providing employment to millions of workers. It includes small shops, street vendors, domestic workers, construction workers, and many small businesses. However, many workers in this sector lack formal contracts, social security, and stable incomes. Formalizing this sector is therefore important for inclusive economic growth.\n\nFormalization can provide workers with better job security, legal protection, and access to financial services. It can also help small businesses improve their access to formal credit and government schemes. For the government, formalization can improve records of economic activity and create a wider and more transparent tax base. Digital payments, online registration, and easier business procedures can support this transition.\n\nLabor reforms should focus on protecting workers while making compliance easier for small businesses. Workers should have access to minimum wages, safe working conditions, and timely payment. Social security coverage should also include health insurance, pensions, maternity benefits, and support during periods of unemployment. Simple registration systems can help more workers enter formal social security programmes without excessive paperwork.\n\nTax formalization should not become a burden on small businesses. The government should provide simple tax rules, digital filing systems, awareness programmes, and incentives for voluntary compliance. Linking formalization with affordable credit and government benefits can encourage businesses to register willingly.\n\nIn conclusion, formalizing the unorganized sector is not only about collecting more taxes. It is about creating better jobs, extending social protection, and bringing more businesses into the formal economy. A balanced approach based on simple rules, worker protection, digital systems, and incentives can make formalization beneficial for both workers and the economy.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "The unorganized sector plays an important role in India’s economy by providing employment to millions of workers. It includes small shops, street vendors, domestic workers, construction workers, and many small businesses. However, many workers in this sector lack formal contracts, social security, and stable incomes. Formalizing this sector is therefore important for inclusive economic growth."
+        },
+        {
+          "heading": "Body – Need for Formalization",
+          "content": "Formalization can provide workers with better job security, legal protection, and access to financial services. It can also help small businesses improve their access to formal credit and government schemes. For the government, formalization can improve records of economic activity and create a wider and more transparent tax base. Digital payments, online registration, and easier business procedures can support this transition."
+        },
+        {
+          "heading": "Body – Labor Reforms and Social Security",
+          "content": "Labor reforms should focus on protecting workers while making compliance easier for small businesses. Workers should have access to minimum wages, safe working conditions, and timely payment. Social security coverage should also include health insurance, pensions, maternity benefits, and support during periods of unemployment. Simple registration systems can help more workers enter formal social security programmes without excessive paperwork."
+        },
+        {
+          "heading": "Body – Tax Base Expansion and Way Forward",
+          "content": "Tax formalization should not become a burden on small businesses. The government should provide simple tax rules, digital filing systems, awareness programmes, and incentives for voluntary compliance. Linking formalization with affordable credit and government benefits can encourage businesses to register willingly."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, formalizing the unorganized sector is not only about collecting more taxes. It is about creating better jobs, extending social protection, and bringing more businesses into the formal economy. A balanced approach based on simple rules, worker protection, digital systems, and incentives can make formalization beneficial for both workers and the economy."
+        }
+      ],
+      "practiceQuestionId": "q_1790140345944",
       "active": true
     }
   ],
