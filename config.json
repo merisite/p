@@ -2158,6 +2158,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1790141175719",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "National Logistics Policy & PLI Schemes: Streamlining Supply Chains, Boosting Manufacturing, and Elevating Export Capability",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -3724,6 +3740,41 @@
         }
       ],
       "practiceQuestionId": "q_1790140345944",
+      "active": true
+    },
+    {
+      "id": "essay_1790141079982",
+      "title": "National Logistics Policy & PLI Schemes: Streamlining Supply Chains, Boosting Manufacturing, and Elevating Export Capability",
+      "category": "Government & Policy",
+      "tags": [
+        "NLP",
+        "PLI"
+      ],
+      "image": "https://i.postimg.cc/W4yhPvQm/c577e128-ea41-439b-96c2-afd2e2582f98.png",
+      "body": "India aims to become a stronger manufacturing and export hub. However, high logistics costs, delays, fragmented supply chains, and limited manufacturing capacity have often reduced the competitiveness of Indian businesses. The National Logistics Policy (NLP) and Production Linked Incentive (PLI) schemes seek to address these challenges and strengthen the country’s economic capabilities.\n\nThe National Logistics Policy focuses on making the movement of goods faster, cheaper, and more efficient. Better coordination among roads, railways, ports, warehouses, and digital systems can reduce delays and improve supply-chain management. Greater use of technology can also help businesses track goods and plan transportation more effectively. Efficient logistics can reduce costs for both producers and consumers.\n\nPLI schemes aim to encourage companies to increase domestic production by providing incentives linked to their output. They can attract investment, support the expansion of factories, create employment, and encourage companies to develop stronger local supply chains. By promoting manufacturing in areas such as electronics, pharmaceuticals, automobiles, and other sectors, these schemes can reduce dependence on imports and strengthen domestic production.\n\nTogether, better logistics and stronger manufacturing can improve India’s export competitiveness. Faster delivery, lower transportation costs, consistent production, and better-quality products can help Indian businesses compete in global markets. However, these policies must be implemented transparently, and their benefits should reach smaller businesses as well.\n\nIn conclusion, the National Logistics Policy and PLI schemes address two important parts of economic growth: efficient movement of goods and competitive production. Their long-term success will depend on effective implementation, infrastructure development, skill creation, and continuous policy improvement. Together, they can help build stronger supply chains, expand manufacturing, and improve India’s position in global trade.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "India aims to become a stronger manufacturing and export hub. However, high logistics costs, delays, fragmented supply chains, and limited manufacturing capacity have often reduced the competitiveness of Indian businesses. The National Logistics Policy (NLP) and Production Linked Incentive (PLI) schemes seek to address these challenges and strengthen the country’s economic capabilities."
+        },
+        {
+          "heading": "Body – Streamlining Supply Chains",
+          "content": "The National Logistics Policy focuses on making the movement of goods faster, cheaper, and more efficient. Better coordination among roads, railways, ports, warehouses, and digital systems can reduce delays and improve supply-chain management. Greater use of technology can also help businesses track goods and plan transportation more effectively. Efficient logistics can reduce costs for both producers and consumers."
+        },
+        {
+          "heading": "Body – Boosting Manufacturing",
+          "content": "PLI schemes aim to encourage companies to increase domestic production by providing incentives linked to their output. They can attract investment, support the expansion of factories, create employment, and encourage companies to develop stronger local supply chains. By promoting manufacturing in areas such as electronics, pharmaceuticals, automobiles, and other sectors, these schemes can reduce dependence on imports and strengthen domestic production."
+        },
+        {
+          "heading": "Body – Improving Export Capability",
+          "content": "Together, better logistics and stronger manufacturing can improve India’s export competitiveness. Faster delivery, lower transportation costs, consistent production, and better-quality products can help Indian businesses compete in global markets. However, these policies must be implemented transparently, and their benefits should reach smaller businesses as well."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, the National Logistics Policy and PLI schemes address two important parts of economic growth: efficient movement of goods and competitive production. Their long-term success will depend on effective implementation, infrastructure development, skill creation, and continuous policy improvement. Together, they can help build stronger supply chains, expand manufacturing, and improve India’s position in global trade."
+        }
+      ],
+      "practiceQuestionId": "q_1790141175719",
       "active": true
     }
   ],
