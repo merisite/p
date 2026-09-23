@@ -2174,6 +2174,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1790141760072",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "National Education Policy (NEP) & Digital Learning: Overcoming the Digital Divide in Tier-2, Tier-3, and Rural Schools.",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -3775,6 +3791,40 @@
         }
       ],
       "practiceQuestionId": "q_1790141175719",
+      "active": true
+    },
+    {
+      "id": "essay_1790141691560",
+      "title": "National Education Policy (NEP) & Digital Learning: Overcoming the Digital Divide in Tier-2, Tier-3, and Rural Schools.",
+      "category": "Social Issues",
+      "tags": [
+        "NEP"
+      ],
+      "image": "https://i.postimg.cc/qMKcbmC4/d8c5d526-d19c-469e-91bc-6d09225603f3.png",
+      "body": "The National Education Policy (NEP) 2020 aims to make education more inclusive, flexible, and technology-driven. Digital learning can improve access to quality education by connecting students with online classes, digital libraries, and educational resources. However, unequal access to devices, internet connectivity, and digital skills remains a major challenge, especially in Tier-2, Tier-3, and rural schools.\n\nDigital learning can help students access quality content beyond the limits of their classrooms. Online lectures, educational applications, virtual laboratories, and digital libraries can support both students and teachers. Technology can also provide learning material in regional languages and help students learn at their own pace. For schools with limited teaching resources, digital tools can supplement classroom education.\n\nHowever, many students still lack smartphones, computers, reliable electricity, or affordable internet connections. Rural schools may also face poor network coverage and limited technical support. Teachers may not have adequate training to use digital tools effectively. If these problems are ignored, digital education could increase existing inequalities instead of reducing them.\n\nThe government and educational institutions must focus on affordable internet, better digital infrastructure, and access to devices for disadvantaged students. Schools can create shared digital learning centres where students access computers and online resources. Teachers should receive regular training in digital teaching methods. Offline digital content and regional-language resources should also be developed for areas with weak connectivity.\n\nIn conclusion, digital learning can support the goals of NEP 2020, but technology alone cannot solve educational inequality. India needs a balanced approach combining digital infrastructure, trained teachers, affordable access, and strong classroom education. Only then can digital learning become a tool for equal educational opportunity.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "The National Education Policy (NEP) 2020 aims to make education more inclusive, flexible, and technology-driven. Digital learning can improve access to quality education by connecting students with online classes, digital libraries, and educational resources. However, unequal access to devices, internet connectivity, and digital skills remains a major challenge, especially in Tier-2, Tier-3, and rural schools."
+        },
+        {
+          "heading": "Body – Role of Digital Learning",
+          "content": "Digital learning can help students access quality content beyond the limits of their classrooms. Online lectures, educational applications, virtual laboratories, and digital libraries can support both students and teachers. Technology can also provide learning material in regional languages and help students learn at their own pace. For schools with limited teaching resources, digital tools can supplement classroom education."
+        },
+        {
+          "heading": "Body – Challenges of the Digital Divide",
+          "content": "However, many students still lack smartphones, computers, reliable electricity, or affordable internet connections. Rural schools may also face poor network coverage and limited technical support. Teachers may not have adequate training to use digital tools effectively. If these problems are ignored, digital education could increase existing inequalities instead of reducing them."
+        },
+        {
+          "heading": "Body – Measures / Way Forward",
+          "content": "The government and educational institutions must focus on affordable internet, better digital infrastructure, and access to devices for disadvantaged students. Schools can create shared digital learning centres where students access computers and online resources. Teachers should receive regular training in digital teaching methods. Offline digital content and regional-language resources should also be developed for areas with weak connectivity."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, digital learning can support the goals of NEP 2020, but technology alone cannot solve educational inequality. India needs a balanced approach combining digital infrastructure, trained teachers, affordable access, and strong classroom education. Only then can digital learning become a tool for equal educational opportunity."
+        }
+      ],
+      "practiceQuestionId": "q_1790141760072",
       "active": true
     }
   ],
