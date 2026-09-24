@@ -2334,7 +2334,7 @@ function launchExamReal(qidOrQ,resume){
   // Replace the #qselect entry so back button skips it, then push exam sentinel
   history.replaceState(null,"",location.pathname+location.search);
   history.pushState({exam:true},"",location.pathname+location.search+"#exam-guard");
-  showS("exam",{skipHash:true});setTimeout(()=>ta.focus(),300);
+  showS("exam",{skipHash:true});setTimeout(()=>ta.focus({preventScroll:true}),300);
 }
 let _timerPaused=false;
 function pauseTimer(){
@@ -2906,7 +2906,7 @@ function loadMSContent(idx){
     document.getElementById("mock-done").style.display="none";
     renderMTabs();
   };
-  setTimeout(()=>ta.focus(),100);
+  setTimeout(()=>ta.focus({preventScroll:true}),100);
 }
 
 function updMWC(){
@@ -5060,6 +5060,9 @@ function showQuizInstructions(s,qs){
   _instrReturnHash=location.hash||"#"+_instrReturnTo;
   showS("quizinstr",{skipHash:true});
   document.getElementById("qzi-title-lbl").textContent=s.title||("Quiz Set "+s.setNo);
+  document.getElementById("qzi-declaration").checked=false;
+  document.getElementById("qzi-next-btn").disabled=true;
+  showQuizInstrPage1();
   const durationLine=s.timeLimitMin
     ? "1. Total duration of this quiz is <strong>"+s.timeLimitMin+" minutes</strong>."
     : "1. This quiz has <strong>no time limit</strong> — take as long as you need.";
@@ -5085,6 +5088,14 @@ function showQuizInstructions(s,qs){
     +'<div style="padding-left:18px;margin-bottom:6px">b. Click <strong>Clear Response</strong> to remove your selection for that question.</div>'
     +'<div style="padding-left:18px;margin-bottom:6px">c. Click a different option any time to change your answer.</div>'
     +'<div style="padding-left:18px;margin-bottom:6px">d. You must click <strong>Save &amp; Next</strong> (or <strong>Mark for Review &amp; Next</strong>) to save your answer before moving on.</div>';
+}
+function showQuizInstrPage1(){
+  document.getElementById("qzi-page1").style.display="block";
+  document.getElementById("qzi-page2").style.display="none";
+}
+function showQuizInstrPage2(){
+  document.getElementById("qzi-page1").style.display="none";
+  document.getElementById("qzi-page2").style.display="block";
 }
 function confirmQuizInstr(){
   if(!_pendingQuizSet||!_pendingQuizQs)return;
@@ -5120,7 +5131,6 @@ function loadQuizQ(idx){
   QZ.visited[idx]=true;
   const q=QZ.questions[idx];
   const tm={};(D().quizTopics||[]).forEach(function(tp){tm[tp.id]=tp.name;});
-  document.getElementById("qzr-current-no").textContent=idx+1;
   document.getElementById("qzr-topic-lbl").textContent=(q.topicId&&tm[q.topicId])?tm[q.topicId]:(QZ.title||"Question");
   document.getElementById("qzr-q-no-lbl").textContent="Q"+(idx+1)+" of "+QZ.questions.length;
   document.getElementById("qzr-qtext").textContent=q.text;
@@ -5384,13 +5394,31 @@ const initPromise=init();
         <button class="btn bg bsm" onclick="showS('quizlist');renderQuizList()"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Cancel</button>
       </div>
     </div>
-    <div class="panel" style="width:100%;margin:0;overflow:visible">
+
+    <!-- PAGE 1 of 2 — brief disclaimer + declaration -->
+    <div class="panel" id="qzi-page1" style="width:100%;margin:0;overflow:visible">
+      <div class="ph"><span>Instructions</span></div>
+      <div class="pb" style="padding:26px 28px">
+        <div style="font-size:.85rem;color:var(--t2);margin-bottom:36px">This is a practice quiz. The questions shown are for practice purposes only.</div>
+        <label style="display:flex;align-items:flex-start;gap:10px;font-size:.82rem;color:var(--t);cursor:pointer;line-height:1.7">
+          <input type="checkbox" id="qzi-declaration" onchange="document.getElementById('qzi-next-btn').disabled=!this.checked" style="margin-top:3px"/>
+          I have read and understood the instructions. I agree to follow the rules of this quiz, including its time limit and marking scheme where applicable.
+        </label>
+        <div style="display:flex;gap:10px;margin-top:28px;flex-wrap:wrap">
+          <button class="btn bg" onclick="showS('quizlist');renderQuizList()">Cancel</button>
+          <button class="btn bp" id="qzi-next-btn" disabled onclick="showQuizInstrPage2()">I'm Ready to Begin →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 2 of 2 — detailed rules, palette legend, answering procedure -->
+    <div class="panel" id="qzi-page2" style="width:100%;margin:0;overflow:visible;display:none">
       <div class="ph"><span>Instructions</span></div>
       <div class="pb" style="padding:26px 28px">
         <div id="qzi-body" style="font-size:.85rem;line-height:1.9;color:var(--t2)"></div>
         <div style="display:flex;gap:10px;margin-top:28px;flex-wrap:wrap">
-          <button class="btn bg" onclick="showS('quizlist');renderQuizList()">Cancel</button>
-          <button class="btn bp" onclick="confirmQuizInstr()">I'm Ready — Start Quiz</button>
+          <button class="btn bg" onclick="showQuizInstrPage1()">← Previous</button>
+          <button class="btn bp" onclick="confirmQuizInstr()">Start Quiz →</button>
         </div>
       </div>
     </div>
