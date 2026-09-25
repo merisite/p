@@ -121,22 +121,6 @@
   ],
   "questions": [
     {
-      "id": "q1",
-      "examId": "sbi_po",
-      "type": "email",
-      "text": "",
-      "modelAnswer": "",
-      "label": "You are a PO at SBI. A customer Mr. Ramesh Gupta has complained that h…",
-      "wordLimit": "150-200 words",
-      "marks": 10,
-      "difficulty": "medium",
-      "active": true,
-      "mockNo": null,
-      "productIds": [
-        "Demo1"
-      ]
-    },
-    {
       "id": "q2",
       "examId": "sbi_po",
       "type": "situation",
