@@ -2200,9 +2200,9 @@
       "label": "Mental Health & Modern Work Culture: Managing Workplace Stress, Burnout, Work-Life Balance, and the 4-Day Workweek Debate.",
       "wordLimit": "250-300 words",
       "marks": 15,
-      "difficulty": "medium",
+      "difficulty": "hard",
       "active": true,
-      "mockNo": null,
+      "mockNo": 5,
       "productIds": [
         "IBPSPO"
       ]
