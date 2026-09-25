@@ -124,13 +124,17 @@
       "id": "q1",
       "examId": "sbi_po",
       "type": "email",
-      "text": "You are a PO at SBI. A customer Mr. Ramesh Gupta has complained that his net banking access has been blocked for 3 days. Write a formal email explaining the reason (scheduled maintenance) and the resolution timeline.",
-      "modelAnswer": "To:rameshgupta@email.com\nSubject: Temporary Unavailability of Net Banking Services\n\nDear Mr. Ramesh Gupta\nThank you for contacting us regarding your net banking issue. We regret the inconvenience caused due to the temporary blockage of your net banking access.\nYour account has been affected because of scheduled maintenance of our online banking system. This maintenance is being carried out to improve the security and performance of our services. As a result, some customers have been unable to access net banking during this period.\nOur technical team is working to complete the maintenance as quickly as possible. We expect your net banking access to be restored within the next 24 hours. You can then log in using your existing User ID and password.\nWe appreciate your patience and understanding. If the issue continues after the mentioned time, please reply to this email or contact our customer care for further assistance.\nRegards,\n\nPawan Sharma\nProbationary Officer (PO)\nState Bank of India",
+      "text": "",
+      "modelAnswer": "",
+      "label": "You are a PO at SBI. A customer Mr. Ramesh Gupta has complained that h…",
       "wordLimit": "150-200 words",
       "marks": 10,
       "difficulty": "medium",
       "active": true,
-      "mockNo": null
+      "mockNo": null,
+      "productIds": [
+        "Demo1"
+      ]
     },
     {
       "id": "q2",
@@ -213,17 +217,13 @@
       "id": "q_email_3",
       "examId": "sbi_po",
       "type": "email",
-      "text": "",
-      "modelAnswer": "",
-      "label": "You are a Customer Relationship Officer at State Bank of India. An eld…",
+      "text": "You are a Customer Relationship Officer at State Bank of India. An elderly customer’s monthly pension was not credited to their account on the scheduled date due to a technical glitch in the central server. Write a formal email to the customer explaining the reason for the delay, apologizing for the inconvenience, and stating when the funds will be available.",
+      "modelAnswer": "To: rk.mishra45@email.com\nSubject: Update Regarding Delay in Monthly Pension Credit\n\nDear Mr. Mishra,\nThis is with reference to your monthly pension account held with State Bank of India. We understand how crucial these funds are for your monthly expenses, and we sincerely apologize for the delay in crediting your pension for this month.\nThe delay was caused by a sudden technical glitch in our central processing server, which temporarily halted automated transfers. Our technical team has been working on this issue on high priority, and the system is now fully restored.\nWe want to reassure you that your safety and convenience are our highest priorities. Your complete pension amount will be credited directly to your account within the next 24 hours.\nWe deeply regret the inconvenience caused to you. For any immediate financial assistance, please visit our branch directly, and our staff will assist you on priority.\nThank you for your patience.\n\nYours faithfully,\nAnanya Sen\nCustomer Relationship Officer\nState Bank of India\nKolkata Main Branch",
       "wordLimit": "150-200 words",
       "marks": 10,
       "difficulty": "medium",
       "active": true,
-      "mockNo": null,
-      "productIds": [
-        "Demo1"
-      ]
+      "mockNo": null
     },
     {
       "id": "q_email_4",
