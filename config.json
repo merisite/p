@@ -2200,9 +2200,9 @@
       "label": "Mental Health & Modern Work Culture: Managing Workplace Stress, Burnout, Work-Life Balance, and the 4-Day Workweek Debate.",
       "wordLimit": "250-300 words",
       "marks": 15,
-      "difficulty": "hard",
+      "difficulty": "medium",
       "active": true,
-      "mockNo": 5,
+      "mockNo": null,
       "productIds": [
         "IBPSPO"
       ]
@@ -2334,22 +2334,6 @@
       "productIds": [
         "IBPSPO"
       ]
-    },
-    {
-      "id": "q_1790314222434",
-      "examId": "ibps_po",
-      "type": "comprehension",
-      "text": "",
-      "modelAnswer": "",
-      "label": "15 Read the passage and answer the questions that follow in your own word…",
-      "wordLimit": "150 words (30-40 words per answer)",
-      "marks": 10,
-      "difficulty": "hard",
-      "active": true,
-      "mockNo": 5,
-      "productIds": [
-        "IBPSPO"
-      ]
     }
   ],
   "typingParas": [
@@ -2475,7 +2459,7 @@
       "mockNo": 5,
       "title": "IBPS PO Mock 5",
       "active": true,
-      "status": "active",
+      "status": "upcoming",
       "productIds": [
         "IBPSPO"
       ]
