@@ -356,6 +356,13 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .es-qbtn.es-marked{background:#7c3aed;border-color:#7c3aed;color:#fff}
 .es-qbtn.es-marked-done::after{content:"";position:absolute;bottom:-2px;right:-2px;width:9px;height:9px;border-radius:50%;background:#16a34a;border:1.5px solid var(--bg2)}
 @media(max-width:900px){.exam-layout{grid-template-columns:1fr}.exam-side{max-height:none;flex-direction:row;flex-wrap:wrap;overflow-x:auto}.es-stat-grid{display:flex;gap:10px;flex:1 1 100%}.es-qgrid{grid-template-columns:repeat(8,1fr);flex:1 1 100%}}
+/* Quiz runner/instructions top bar: the title is dynamic-length text (unlike the short
+   numeric stat boxes .bar-l was originally built for), so it needs to shrink and truncate
+   instead of pushing the Exit/fullscreen buttons off-screen on narrow phones. */
+#quizrun .exam-bar .bar-l,#quizinstr .exam-bar .bar-l{flex-shrink:1;min-width:0;overflow:hidden}
+#qzr-title-lbl,#qzi-title-lbl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.oc-price-row{flex-wrap:wrap}
+@media(max-width:480px){.qzi-legend-grid{grid-template-columns:1fr!important}}
 #mock-mr-btn.mr-active{border-color:#7c3aed;color:#7c3aed;background:rgba(124,58,237,.1)}
 /* BUTTONS */
 .btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:var(--rs);font-size:.78rem;font-weight:600;cursor:pointer;border:none;font-family:var(--font);transition:all var(--tr);white-space:nowrap}
@@ -1539,7 +1546,9 @@ window.addEventListener("popstate",function(e){
 function closeBackExitCov(){document.getElementById("back-exit-cov").classList.remove("open");history.pushState({exam:true},"",location.pathname+location.search+"#exam-guard");}
 function doBackExit(){
   document.getElementById("back-exit-cov").classList.remove("open");
-  clearInterval(TI);clearInterval(WI);
+  clearInterval(TI);clearInterval(WI);clearInterval(_quizDraftTimer);clearInterval(_mockDraftTimer);
+  if(QZ&&!QZ.reviewMode)saveQuizDraft();
+  if(document.getElementById("fullmock").classList.contains("active"))saveMockDraft();
   const dest=_instrReturnTo||"home";
   showS(dest,{skipHash:true});
   const fallbackHash=_instrReturnHash&&_instrReturnHash!=="#exam-guard"&&_instrReturnHash!=="#result-guard"?_instrReturnHash:"#"+dest;
@@ -1568,7 +1577,9 @@ document.addEventListener("fullscreenchange",()=>{
 });
 function closeCov(){document.getElementById("exit-cov").classList.remove("open");exitDest=null;}
 function doExit(){
-  clearInterval(TI);clearInterval(WI);
+  clearInterval(TI);clearInterval(WI);clearInterval(_quizDraftTimer);clearInterval(_mockDraftTimer);
+  if(QZ&&!QZ.reviewMode)saveQuizDraft(); // one last save on the way out, in case the 8s interval hadn't fired recently
+  if(document.getElementById("fullmock").classList.contains("active"))saveMockDraft();
   document.getElementById("exit-cov").classList.remove("open");
   if(document.fullscreenElement){
     (document.exitFullscreen?.()||Promise.resolve()).catch(()=>{});
@@ -2042,7 +2053,7 @@ function renderQS(type){
       ctaHTML=`<button onclick="event.stopPropagation();launchExam('${q.id}')" style="font-size:.7rem;font-weight:700;color:var(--accent);border:1px solid var(--aborder);background:var(--adim);padding:5px 12px;border-radius:999px;white-space:nowrap;cursor:pointer;font-family:var(--font)">${cta}</button>`;
       viewResultBtn=lastAttempt?`<span onclick="event.stopPropagation();viewSavedResult('practice','${lastAttempt.id}')" style="font-size:.7rem;font-weight:700;color:var(--bg);background:var(--accent);padding:5px 12px;border-radius:999px;cursor:pointer;white-space:nowrap">View Result</span>`:"";
     }
-    return `<div class="q-item" style="cursor:default">${locked?'<div style="position:absolute;top:12px;right:12px;color:var(--accent)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>':''}<div style="font-size:.94rem;font-weight:700;color:var(--t);margin-bottom:12px">${shortLabel} Test ${i+1}</div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px"><span class="chip">${q.difficulty||"medium"}</span><button onclick="event.stopPropagation();copyShareLink('question-${q.id}',this)" title="Copy direct link to this question" style="flex-shrink:0;display:flex;align-items:center;gap:4px;font-size:.62rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>Copy Link</button></div><div style="margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:nowrap">${ctaHTML}${viewResultBtn}</div></div>`;
+    return `<div class="q-item" style="cursor:default">${locked?'<div style="position:absolute;top:12px;right:12px;color:var(--accent)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>':''}<div style="font-size:.94rem;font-weight:700;color:var(--t);margin-bottom:12px">${shortLabel} Test ${i+1}</div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px"><span class="chip">${q.difficulty||"medium"}</span><button onclick="event.stopPropagation();copyShareLink('question-${q.id}',this)" title="Copy direct link to this question" style="flex-shrink:0;display:flex;align-items:center;gap:4px;font-size:.62rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>Copy Link</button></div><div style="margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap">${ctaHTML}${viewResultBtn}</div></div>`;
   }).join("");
 }
 function setTO(btn,v){document.querySelectorAll(".tob").forEach(b=>b.classList.remove("on"));btn.classList.add("on");tMode=v;document.getElementById("cust-row").classList.toggle("show",v==="custom");}
@@ -2511,7 +2522,7 @@ function showMockList(examId,opts){
         <div class="hc-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
         <div class="hc-title">${m.title}</div>
         <div class="hc-sub" style="font-size:.7rem;color:var(--t2)">${qc} question${qc!==1?'s':''} · ${ex.duration||30} min</div>
-        <div style="margin-top:8px;display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:nowrap">${ctaHTML}${viewResultBtn}</div>
+        <div style="margin-top:8px;display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap">${ctaHTML}${viewResultBtn}</div>
       </div>`;
     }).join("");
     // Banner offering to unlock every locked mock in this list at once, using whichever
@@ -2539,6 +2550,28 @@ function showMockList(examId,opts){
 }
 // Ensure mocklist hash is handled correctly for deep-link and back-button
 // (mocklist is now a normal linkable screen, so routeFromHash can restore it)
+// Mock draft — same save/resume idea as single questions and quiz, but a mock only needs
+// to additionally remember which Report/Precis choice was made per section (if any); every
+// other section always resolves the same question deterministically, so nothing else needs
+// to be captured to reconstruct the exact same attempt.
+let _mockDraftTimer=null,_mockDraftSaveTimer=null;
+function saveMockDraft(){
+  if(!MS.s||!MS.s.length||!MS.examId)return;
+  try{
+    const chosenTypes={};
+    MS.s.forEach(function(s,i){if(s.isReportPrecis&&s.chosenType)chosenTypes[i]=s.chosenType;});
+    localStorage.setItem('dpt_mockdraft_'+MS.examId+'_'+(MS.mockNo==null?'full':MS.mockNo),JSON.stringify({
+      a:MS.a,mr:MS.mr,idx:MS.idx,chosenTypes:chosenTypes,
+      timeLeft:tLeft,savedAt:Date.now()
+    }));
+  }catch(e){}
+}
+function getMockDraft(examId,mockNo){
+  try{return JSON.parse(localStorage.getItem('dpt_mockdraft_'+examId+'_'+(mockNo==null?'full':mockNo)));}catch(e){return null;}
+}
+function clearMockDraft(examId,mockNo){
+  try{localStorage.removeItem('dpt_mockdraft_'+examId+'_'+(mockNo==null?'full':mockNo));}catch(e){}
+}
 function startMockByNo(examId,mockNo){
   const d=D();
   const mock=(d.mocks||[]).find(m=>m.examId===examId&&m.mockNo===mockNo);
@@ -2576,13 +2609,21 @@ function showMockInstr(ex,labelSuffix){
     rows.push({name:s.name,qCount:1,marks:s.marks||0});
   });
   const totalMarks=rows.reduce((a,r)=>a+(Number(r.marks)||0),0);
+  const draft=getMockDraft(_pendingMockExamId,_pendingMockNo);
+  const canResume=draft&&draft.timeLeft>0&&((draft.a&&Object.keys(draft.a).length)||(draft.mr&&Object.keys(draft.mr).length));
+  const rm=canResume?Math.floor(draft.timeLeft/60):0,rs=canResume?draft.timeLeft%60:0;
   showInstr({
     phLabel:"Mock Test",
     title:ex.name+" — "+labelSuffix+" Instructions",
     metaHTML:`<div class="bstat"><div class="bval">${ex.duration||30}</div><div class="blbl">Minutes</div></div><div class="bstat"><div class="bval">${secCount}</div><div class="blbl">Sections</div></div><div class="bstat"><div class="bval">2</div><div class="blbl">Qs / Section</div></div>`,
     bodyHTML:buildRulesBodyHTML(ex.duration||30,`The ${ex.name} Descriptive Writing Test consists of ${rows.length} question${rows.length!==1?"s":""}:`,rows,totalMarks),
     startLabel:"I Understand — Start Mock",
-    onStart:()=>startMockAfterInstr()
+    onStart:()=>{clearMockDraft(_pendingMockExamId,_pendingMockNo);startMockAfterInstr();},
+    resumeInfo:canResume?{
+      timeLabel:String(rm).padStart(2,"0")+":"+String(rs).padStart(2,"0"),
+      savedAgo:timeAgoLabel(draft.savedAt),
+      onResume:()=>startMockAfterInstr(draft)
+    }:null
   });
 }
 // Fetches real content for any paid+unlocked question that hasn't been loaded yet,
@@ -2619,7 +2660,7 @@ async function hydratePaidQuestions(qs){
     }
   }
 }
-async function startMockAfterInstr(){
+async function startMockAfterInstr(draft){
   const examId=_pendingMockExamId;const mockNo=_pendingMockNo;_pendingMockExamId=null;_pendingMockNo=null;
   const d=D();
   const ex=d.exams.find(e=>e.id===examId);
@@ -2646,6 +2687,21 @@ async function startMockAfterInstr(){
     }
   }
   if(!secs.length){alert("No questions available for this mock. Please add questions in the Admin panel.");return;}
+  // Resuming: re-apply whichever Report/Precis choice was already made last time, so the
+  // section resolves to the exact same question instead of prompting the choice again.
+  // Every other section always resolves deterministically (first usable question), so
+  // nothing else needs this treatment.
+  if(draft&&draft.chosenTypes){
+    Object.keys(draft.chosenTypes).forEach(function(i){
+      const sec=secs[i];const typeId=draft.chosenTypes[i];
+      if(sec&&sec.isReportPrecis&&sec.choices&&sec.choices[typeId]){
+        sec.chosenType=typeId;sec.typeId=typeId;
+        sec.meta=tmMeta(typeId)||{name:sec.choices[typeId].name};
+        sec.questions=sec.choices[typeId].questions;
+        sec.question=sec.questions[0]||null;
+      }
+    });
+  }
   // Fetch real content for any paid question before the exam actually starts.
   const allQs=[];
   secs.forEach(s=>{
@@ -2670,11 +2726,16 @@ async function startMockAfterInstr(){
   });
   secs=secs.filter(s=>s.isReportPrecis?Object.values(s.choices).some(c=>c.questions&&c.questions.length):(s.questions&&s.questions.length));
   if(!secs.length){alert("No usable questions are available for this mock right now — some may be missing content. Please contact support or check the Admin panel.");return;}
-  MS.s=secs;MS.a={};MS.idx=0;MS.st=Date.now();MS.mr={};
+  MS.s=secs;
+  MS.a=(draft&&draft.a)||{};
+  MS.mr=(draft&&draft.mr)||{};
+  MS.idx=(draft&&draft.idx)||0;
+  MS.st=Date.now();
   MS.examId=examId;MS.mockNo=mockNo;
   // Start timer immediately and go into fullmock — question picker fires on first section load
   const ex2=MS.currentExam;
-  clearInterval(TI);startTimer((ex2.duration||30)*60,"mock-timer",null,()=>submitMock());
+  const startSecs=(draft&&draft.timeLeft>0)?draft.timeLeft:(ex2.duration||30)*60;
+  clearInterval(TI);startTimer(startSecs,"mock-timer",null,()=>submitMock());
   document.getElementById("mock-total").textContent=MS.s.length;
   document.getElementById("mock-done").style.display="none";
   const nameLbl=document.getElementById("hei-exam-name");
@@ -2685,7 +2746,11 @@ async function startMockAfterInstr(){
   history.replaceState(null,"",location.pathname+location.search);
   history.pushState({exam:true},"",location.pathname+location.search+"#exam-guard");
   showS("fullmock",{skipHash:true});
-  loadMS(0);
+  if(draft)showToast("Resumed — picking up where you left off");
+  loadMS(MS.idx);
+  clearInterval(_mockDraftTimer);
+  _mockDraftTimer=setInterval(saveMockDraft,8000);
+  saveMockDraft();
 }
 
 // Type picker overlay — used ONLY for the SBI PO "choose Report OR Precis" case.
@@ -2734,6 +2799,7 @@ function pickType(secIdx,typeId){
   sec.question=sec.questions[0]||null;
   renderMTabs();
   if(sec.question) loadMSContent(secIdx);
+  saveMockDraft();
 }
 function chooseSection(typeId){
   document.getElementById("choice-cov").classList.remove("open");
@@ -2864,6 +2930,7 @@ function toggleMR(){
   else MS.mr[idx]=true;
   updateMRButton();
   renderExamSide();
+  saveMockDraft();
 }
 function updateMRButton(){
   const btn=document.getElementById("mock-mr-btn");
@@ -2905,6 +2972,8 @@ function loadMSContent(idx){
     const done=Object.values(MS.a).filter(a=>a.trim()).length;
     document.getElementById("mock-done").style.display="none";
     renderMTabs();
+    clearTimeout(_mockDraftSaveTimer);
+    _mockDraftSaveTimer=setTimeout(saveMockDraft,1200);
   };
   setTimeout(()=>ta.focus({preventScroll:true}),100);
 }
@@ -3580,10 +3649,14 @@ Return ONLY this JSON (one object per sub-question in "subQuestions" — ${numQ}
 {"isGibberish":false,"subQuestions":[{"num":1,"attempted":true,"scoreRecommendation":<0-${perQMax}>,"evidence":"<short 1-sentence note, no numbers>"}],"mistakes":[{"type":"<Spelling|Grammar|Word Choice|Punctuation>","original":"","corrected":"","reason":""}],"styleSuggestions":[],"strengths":["<no numbers>"],"improvements":["<no numbers>","<no numbers>"],"overallVerdict":"<2-3 honest sentences, ZERO numbers anywhere>"}`;
   try{
     const res=await fetch(ep,{method:"POST",headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({model:"gemini-2.5-flash-lite",max_tokens:1800,system:sys,messages:[{role:"user",content:p}]})});
+      body:JSON.stringify({model:"gemini-2.5-flash-lite",max_tokens:3000,system:sys,messages:[{role:"user",content:p}]})});
+    if(!res.ok){console.warn("AI eval HTTP error",res.status,await res.text().catch(()=>""));return null;}
     const data=await res.json();
     if(data.error)throw new Error(data.error.message);
-    const raw=JSON.parse(data.content.map(i=>i.text||"").join("").replace(/```json|```/g,"").trim());
+    const rawText=(data.content||[]).map(i=>i.text||"").join("");
+    let raw;
+    try{raw=parseAIJSON(rawText);}
+    catch(parseErr){console.warn("AI eval JSON parse failed (likely truncated/malformed response)",parseErr,rawText.slice(-300));return null;}
     if(!raw||!Array.isArray(raw.subQuestions))return null; // malformed core scoring data → fail safely, never fabricate
 
     // Deterministic enforcement, regardless of what the AI returned: an unattempted sub-question
@@ -3623,7 +3696,7 @@ Return ONLY this JSON (one object per sub-question in "subQuestions" — ${numQ}
     result.isGibberish=isGibberish;
 
     return result;
-  }catch(e){return null;}
+  }catch(e){console.warn("Comprehension AI eval failed",e);return null;}
 }
 
 async function evalWithAI(q,ans,wc,wpm){
@@ -3730,10 +3803,14 @@ Follow the steps in the system instructions in order: extract task requirements 
 
   try{
     const res=await fetch(ep,{method:"POST",headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({model:"gemini-2.5-flash-lite",max_tokens:1800,system:sys,messages:[{role:"user",content:p}]})});
+      body:JSON.stringify({model:"gemini-2.5-flash-lite",max_tokens:3000,system:sys,messages:[{role:"user",content:p}]})});
+    if(!res.ok){console.warn("AI eval HTTP error",res.status,await res.text().catch(()=>""));return null;}
     const data=await res.json();
     if(data.error)throw new Error(data.error.message);
-    const raw=JSON.parse(data.content.map(i=>i.text||"").join("").replace(/```json|```/g,"").trim());
+    const rawText=(data.content||[]).map(i=>i.text||"").join("");
+    let raw;
+    try{raw=parseAIJSON(rawText);}
+    catch(parseErr){console.warn("AI eval JSON parse failed (likely truncated/malformed response)",parseErr,rawText.slice(-300));return null;}
     if(!raw||!raw.analysis||!Array.isArray(raw.criterionEvaluation))return null; // malformed core scoring data → fail safely, never fabricate
 
     const analysis=raw.analysis||{};
@@ -3800,7 +3877,7 @@ Follow the steps in the system instructions in order: extract task requirements 
 
     result.isGibberish=isGibberish;
     return result;
-  }catch(e){return null;}
+  }catch(e){console.warn("AI eval failed",e);return null;}
 }
 
 // Public names requested alongside the internal pipeline — same functions, so there is exactly
@@ -3810,6 +3887,19 @@ const evaluateComprehension=evalComprehensionAI;
 
 function aiFailHTML(retryOnclick){
   return `<div class="ai-notice"><strong>AI evaluation failed.</strong> <button onclick="${retryOnclick}" style="margin-left:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--accent);cursor:pointer;font-size:.75rem;font-family:var(--font)">Retry</button></div>`;
+}
+// Parses the AI's JSON reply robustly: strips markdown code fences, then — in case the model
+// added any stray prose before/after the object despite being told not to — trims to the outer
+// {...} braces before parsing, rather than assuming the whole trimmed string is valid JSON.
+// This does NOT fix a genuinely truncated/cut-off response (that still throws, correctly, since
+// the data would otherwise be silently incomplete) — only a real fetch/parse failure or
+// truncation should ever reach here; both are still treated as a controlled failure by the caller.
+function parseAIJSON(text){
+  let t=String(text||"").replace(/```json|```/g,"").trim();
+  const start=t.indexOf("{");
+  const end=t.lastIndexOf("}");
+  if(start!==-1&&end!==-1&&end>start)t=t.substring(start,end+1);
+  return JSON.parse(t);
 }
 function escapeHTML(s){
   return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
@@ -4222,8 +4312,14 @@ function viewSavedResult(kind,id){
       aiEl.innerHTML=renderAIBlock(entry.aiResult,entry.marks||1);
       renderCorrectedAnswer(entry.aiResult,entry.answerFull||entry.answer);
     }else{
-      aiEl.innerHTML='<div class="ai-notice">Full AI feedback wasn\'t saved for this older attempt — only the score is available: <strong>'+escapeHTML(entry.score||'—')+'</strong></div>';
       const card=document.getElementById('r-corrected-card');if(card)card.style.display='none';
+      const hasAnswer=!!(entry.answerFull||entry.answer||'').trim();
+      if(hasAnswer){
+        aiEl.innerHTML='<div class="ai-notice">Marks weren\'t saved for this attempt — this can happen if the AI evaluation didn\'t finish. '
+          +'<button onclick="retrySavedPracticeAI(\''+entry.id+'\')" style="margin-left:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--accent);cursor:pointer;font-size:.75rem;font-family:var(--font)">Retry AI Evaluation</button></div>';
+      }else{
+        aiEl.innerHTML='<div class="ai-notice">No answer was saved for this attempt, so it can\'t be evaluated.</div>';
+      }
     }
     renderQuestionHistory(entry.questionId);
     showS('result');
@@ -4242,20 +4338,21 @@ function viewSavedResult(kind,id){
       '<div class="stile"><div class="stile-v">'+mm+'m '+ss+'s</div><div class="stile-l">Time Taken</div></div>';
     const sections=entry.sectionsFull;
     if(sections&&sections.length){
-      document.getElementById('r-mock-sections').innerHTML=sections.map(function(s){
+      document.getElementById('r-mock-sections').innerHTML=sections.map(function(s,idx){
         const attempted=(s.answer||'').trim().length>0;
         let aiHTML;
         if(s.aiResult){
           aiHTML='<div style="padding:12px 14px">'+renderAIBlock(s.aiResult,s.marks||1)+'</div>';
         }else if(attempted){
-          aiHTML='<div style="padding:12px 14px"><div class="ai-notice">Full AI feedback wasn\'t saved for this attempt.</div></div>';
+          aiHTML='<div style="padding:12px 14px" id="saved-mai-'+idx+'"><div class="ai-notice">Marks weren\'t saved for this section. '
+            +'<button onclick="retrySavedMockSectionAI(\''+entry.id+'\','+idx+')" style="margin-left:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--accent);cursor:pointer;font-size:.75rem;font-family:var(--font)">Retry AI Evaluation</button></div></div>';
         }else{
           aiHTML='';
         }
         return '<div class="rcard" style="margin-bottom:14px">'
           +'<div class="rcard-h" style="display:flex;align-items:center;justify-content:space-between">'
             +'<span>'+escapeHTML((s.name||'Section').toUpperCase())+'</span>'
-            +'<span style="font-size:.72rem;font-family:var(--mono);color:var(--t2)">'+(s.aiResult?escapeHTML(s.aiResult.totalScore+'/'+(s.marks||0)):(attempted?'Not scored':'Not attempted'))+'</span>'
+            +'<span id="saved-mscore-'+idx+'" style="font-size:.72rem;font-family:var(--mono);color:var(--t2)">'+(s.aiResult?escapeHTML(s.aiResult.totalScore+'/'+(s.marks||0)):(attempted?'Not scored':'Not attempted'))+'</span>'
           +'</div>'
           +'<div class="rcard-b" style="padding:0">'
             +'<div style="padding:12px 14px;border-bottom:1px solid var(--b)">'
@@ -4287,6 +4384,90 @@ function viewSavedResult(kind,id){
     }
     showS('result');
   }
+}
+// ── Retry AI evaluation for a previously-saved result that never got marks
+//    (e.g. the AI call failed or was interrupted at submit time). Rebuilds the
+//    question object from the live question bank when possible (so wordLimit/
+//    type are accurate), falling back to whatever was saved on the entry. ──
+let _savedRetryInFlight={};
+function _questionForPracticeEntry(entry){
+  try{
+    const d=D();
+    const live=entry.questionId?d.questions.find(function(x){return x.id===entry.questionId;}):null;
+    if(live)return live;
+  }catch(e){}
+  return {
+    type: entry.type||'',
+    marks: entry.marks||0,
+    wordLimit: entry.wordLimit||'',
+    text: entry.questionFull||entry.question||'',
+    modelAnswer: entry.modelAnswer||''
+  };
+}
+async function retrySavedPracticeAI(id){
+  if(_savedRetryInFlight[id])return;
+  const entry=(getProgress()||[]).find(function(e){return e.id===id;});
+  if(!entry){alert('This saved result could not be found.');return;}
+  const ans=entry.answerFull||entry.answer||'';
+  if(!ans.trim())return;
+  _savedRetryInFlight[id]=true;
+  const aiEl=document.getElementById('r-ai');
+  if(aiEl)aiEl.innerHTML='<div class="ai-notice">Retrying AI evaluation…</div>';
+  const q=_questionForPracticeEntry(entry);
+  const wc=entry.wc||cw(ans),wpm=entry.wpm||0;
+  const result=await evalWithAI(q,ans,wc,wpm);
+  if(result){
+    const marks=q.marks||entry.marks||1;
+    const scoreEl=document.getElementById('r-score');
+    if(scoreEl)scoreEl.textContent=result.totalScore+'/'+marks;
+    if(aiEl){
+      aiEl.innerHTML=renderAIBlock(result,marks);
+      renderCorrectedAnswer(result,ans);
+    }
+    updateProgressEntry(id,{score:result.totalScore+'/'+marks,parameters:result.parameters,aiResult:result});
+  }else if(aiEl){
+    aiEl.innerHTML='<div class="ai-notice"><strong>AI evaluation failed again.</strong> '
+      +'<button onclick="retrySavedPracticeAI(\''+id+'\')" style="margin-left:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--accent);cursor:pointer;font-size:.75rem;font-family:var(--font)">Retry</button></div>';
+  }
+  _savedRetryInFlight[id]=false;
+}
+function _questionForMockSection(s){
+  let type=s.type||'';
+  if(!type){
+    try{
+      const d=D();
+      const match=(d.sectionTypes||[]).find(function(st){return st.name===s.name;});
+      if(match)type=match.id;
+    }catch(e){}
+  }
+  return {type:type,marks:s.marks||0,wordLimit:s.wordLimit||'',text:s.question||'',modelAnswer:s.modelAnswer||''};
+}
+async function retrySavedMockSectionAI(entryId,idx){
+  const flightKey=entryId+'_'+idx;
+  if(_savedRetryInFlight[flightKey])return;
+  const entry=(getProgress()||[]).find(function(e){return e.id===entryId;});
+  if(!entry||!Array.isArray(entry.sectionsFull)){alert('This saved result could not be found.');return;}
+  const s=entry.sectionsFull[idx];
+  const ans=s&&s.answer||'';
+  if(!s||!ans.trim())return;
+  _savedRetryInFlight[flightKey]=true;
+  const aiWrap=document.getElementById('saved-mai-'+idx);
+  const scoreEl=document.getElementById('saved-mscore-'+idx);
+  if(aiWrap)aiWrap.innerHTML='<div class="ai-notice">Retrying AI evaluation…</div>';
+  const q=_questionForMockSection(s);
+  const wc=cw(ans);
+  const result=await evalWithAI(q,ans,wc,0);
+  if(result){
+    const marks=q.marks||s.marks||1;
+    if(scoreEl)scoreEl.innerHTML='<span style="color:var(--accent)">'+result.totalScore+'/'+marks+'</span>';
+    if(aiWrap)aiWrap.innerHTML=renderAIBlock(result,marks);
+    entry.sectionsFull[idx].aiResult=result;
+    updateProgressEntry(entryId,{sectionsFull:entry.sectionsFull});
+  }else if(aiWrap){
+    aiWrap.innerHTML='<div class="ai-notice"><strong>AI evaluation failed again.</strong> '
+      +'<button onclick="retrySavedMockSectionAI(\''+entryId+'\','+idx+')" style="margin-left:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--accent);cursor:pointer;font-size:.75rem;font-family:var(--font)">Retry</button></div>';
+  }
+  _savedRetryInFlight[flightKey]=false;
 }
 // ── Reattempt helpers: find the most recent attempt for a given practice
 //    question or mock, so cards can show an "Attempted" badge + last score. ──
@@ -4818,6 +4999,8 @@ async function submitMock(){
     return;
   }
   clearInterval(TI);
+  clearInterval(_mockDraftTimer);
+  clearMockDraft(MS.examId,MS.mockNo);
   const taken = (EX()&&EX().duration||30)*60 - tLeft;
   showMockResult(taken); pushResultBackHistory(); showS('result',{skipHash:true});
   // Save result snapshot to sessionStorage so refresh works (HTML + underlying MS state for Retry)
@@ -4848,6 +5031,7 @@ async function submitMock(){
       const q=s.question;
       return {
         name: q?(function(){try{const d=D(),tm={};d.sectionTypes.forEach(function(st){tm[st.id]=st;});return tm[q.type]&&tm[q.type].name||s.meta&&s.meta.name||s.typeId;}catch(e){return s.meta&&s.meta.name||s.typeId;}})():(s.meta&&s.meta.name||s.typeId||'Section'),
+        type: q?q.type||'':(s.typeId||''),
         question: q?q.text||'':'',
         modelAnswer: q?q.modelAnswer||'':'',
         wordLimit: q?q.wordLimit||'':'',
@@ -4980,7 +5164,25 @@ function clearAllProgress(){
 // behaves consistently with the rest of the site rather than introducing
 // a second, separate UI language.
 // ============================================================
-let QZ=null;
+let QZ=null,_quizDraftTimer=null;
+// Same pattern as saveDraft/getDraft/clearDraft for single practice questions — lets someone
+// leave a quiz mid-attempt (close tab, exit) and pick up exactly where they left off later.
+function saveQuizDraft(){
+  if(!QZ||QZ.reviewMode||!QZ.setId)return;
+  try{
+    localStorage.setItem('dpt_quizdraft_'+QZ.setId,JSON.stringify({
+      a:QZ.a,mr:QZ.mr,visited:QZ.visited,idx:QZ.idx,
+      timeLeft:QZ.timeLimitMin?tLeft:null,
+      savedAt:Date.now()
+    }));
+  }catch(e){}
+}
+function getQuizDraft(setId){
+  try{return JSON.parse(localStorage.getItem('dpt_quizdraft_'+setId));}catch(e){return null;}
+}
+function clearQuizDraft(setId){
+  try{localStorage.removeItem('dpt_quizdraft_'+setId);}catch(e){}
+}
 function qzGetData(){
   const d=D();
   return {sets:(d.quizSets||[]).filter(function(s){return s.active!==false;}),questions:d.quizQuestions||[],topics:d.quizTopics||[]};
@@ -5038,7 +5240,7 @@ function renderQuizList(){
       +'</div>';
   }).join("");
 }
-let _pendingQuizSet=null,_pendingQuizQs=null;
+let _pendingQuizSet=null,_pendingQuizQs=null,_pendingQuizDraft=null;
 function startQuizSet(setId){
   if(quizCourseIsUpcoming()){alert("This course isn't open yet — check back soon!");return;}
   const data=qzGetData();
@@ -5063,6 +5265,21 @@ function showQuizInstructions(s,qs){
   document.getElementById("qzi-declaration").checked=false;
   document.getElementById("qzi-next-btn").disabled=true;
   showQuizInstrPage1();
+  // Offer to resume an unfinished attempt, same idea as the "Resume" option single
+  // practice questions already have — only if the draft actually has some progress
+  // in it worth restoring (not just a freshly-created, untouched one).
+  const draft=getQuizDraft(s.id);
+  const resumeBlock=document.getElementById("qzi-resume-block");
+  const answeredCount=draft?Object.keys(draft.a||{}).length:0;
+  const visitedCount=draft?Object.keys(draft.visited||{}).length:0;
+  if(draft&&(answeredCount>0||visitedCount>0)&&(draft.timeLeft==null||draft.timeLeft>0)){
+    _pendingQuizDraft=draft;
+    document.getElementById("qzi-resume-note").textContent=answeredCount+" of "+qs.length+" answered, saved "+timeAgoLabel(draft.savedAt)+".";
+    resumeBlock.style.display="block";
+  }else{
+    _pendingQuizDraft=null;
+    resumeBlock.style.display="none";
+  }
   const durationLine=s.timeLimitMin
     ? "1. Total duration of this quiz is <strong>"+s.timeLimitMin+" minutes</strong>."
     : "1. This quiz has <strong>no time limit</strong> — take as long as you need.";
@@ -5076,7 +5293,7 @@ function showQuizInstructions(s,qs){
     +(autoSubmitLine?'<div style="margin-bottom:10px">'+autoSubmitLine+'</div>':'')
     +'<div style="margin-bottom:16px">'+marksLine+'</div>'
     +'<div style="margin-bottom:8px">4. The Question Palette on the right shows the status of each question using these symbols:</div>'
-    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;max-width:560px">'
+    +'<div class="qzi-legend-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;max-width:560px">'
     +'<div style="display:flex;align-items:center;gap:10px"><button class="es-qbtn es-notvisited" style="pointer-events:none">1</button> You have not visited the question yet.</div>'
     +'<div style="display:flex;align-items:center;gap:10px"><button class="es-qbtn es-marked" style="pointer-events:none">1</button> Not answered, but marked for review.</div>'
     +'<div style="display:flex;align-items:center;gap:10px"><button class="es-qbtn es-notdone" style="pointer-events:none">1</button> You have not answered the question.</div>'
@@ -5100,17 +5317,27 @@ function showQuizInstrPage2(){
 function confirmQuizInstr(){
   if(!_pendingQuizSet||!_pendingQuizQs)return;
   const s=_pendingQuizSet,qs=_pendingQuizQs;
-  _pendingQuizSet=null;_pendingQuizQs=null;
+  _pendingQuizSet=null;_pendingQuizQs=null;_pendingQuizDraft=null;
+  clearQuizDraft(s.id); // fresh start explicitly discards any unfinished attempt
   launchQuiz(s,qs);
 }
-function launchQuiz(set,qs){
+function confirmQuizResume(){
+  if(!_pendingQuizSet||!_pendingQuizQs||!_pendingQuizDraft)return;
+  const s=_pendingQuizSet,qs=_pendingQuizQs,draft=_pendingQuizDraft;
+  _pendingQuizSet=null;_pendingQuizQs=null;_pendingQuizDraft=null;
+  launchQuiz(s,qs,draft);
+}
+function launchQuiz(set,qs,resumeState){
   // _instrReturnTo/_instrReturnHash were already captured in showQuizInstructions(),
   // before navigating to the instructions screen — same pattern showInstr() uses for
   // practice questions/mocks, so Exit correctly returns to the true origin, not "quizinstr".
   QZ={
     setId:set.id,setNo:set.setNo,title:set.title,
     questions:qs.map(function(q){return{id:q.id,text:q.text,options:q.options||[],correctIndex:q.correctIndex,explanation:q.explanation||"",topicId:q.topicId};}),
-    a:{},visited:{},mr:{},idx:0,
+    a:(resumeState&&resumeState.a)||{},
+    visited:(resumeState&&resumeState.visited)||{},
+    mr:(resumeState&&resumeState.mr)||{},
+    idx:(resumeState&&resumeState.idx)||0,
     negMarkEnabled:!!set.negMarkEnabled,negMarkValue:set.negMarkValue||0,
     timeLimitMin:set.timeLimitMin||null,
     submitted:false,reviewMode:false,startedAt:Date.now()
@@ -5120,10 +5347,15 @@ function launchQuiz(set,qs){
   document.getElementById("qzr-exit-btn").innerHTML='<svg width="11" height="11" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Exit';
   document.getElementById("qzr-actionbar").style.display="flex";
   document.getElementById("qzr-review-actionbar").style.display="none";
-  loadQuizQ(0);
+  loadQuizQ(QZ.idx);
+  if(resumeState)showToast("Resumed — picking up where you left off");
   if(QZ.timeLimitMin){
-    startTimer(QZ.timeLimitMin*60,"qzr-timer-val",null,function(){submitQuiz(true);});
+    const startSecs=(resumeState&&resumeState.timeLeft>0)?resumeState.timeLeft:QZ.timeLimitMin*60;
+    startTimer(startSecs,"qzr-timer-val",null,function(){submitQuiz(true);});
   }
+  clearInterval(_quizDraftTimer);
+  _quizDraftTimer=setInterval(saveQuizDraft,8000);
+  saveQuizDraft(); // persist immediately so even a very early exit has something to resume from
 }
 function loadQuizQ(idx){
   if(!QZ||!QZ.questions[idx])return;
@@ -5166,10 +5398,12 @@ function selectQuizOption(oi){
   if(!QZ||QZ.reviewMode)return;
   QZ.a[QZ.idx]=oi;
   renderQuizPalette();
+  saveQuizDraft();
 }
 function saveQuizAndNext(){
   if(!QZ||QZ.reviewMode)return;
   renderQuizPalette();
+  saveQuizDraft();
   if(QZ.idx<QZ.questions.length-1)loadQuizQ(QZ.idx+1);
   else renderQuizPalette();
 }
@@ -5177,10 +5411,12 @@ function clearQuizResponse(){
   if(!QZ||QZ.reviewMode)return;
   delete QZ.a[QZ.idx];
   loadQuizQ(QZ.idx);
+  saveQuizDraft();
 }
 function markQuizForReview(){
   if(!QZ||QZ.reviewMode)return;
   QZ.mr[QZ.idx]=true;
+  saveQuizDraft();
   if(QZ.idx<QZ.questions.length-1)loadQuizQ(QZ.idx+1);
   else renderQuizPalette();
 }
@@ -5258,6 +5494,8 @@ function submitQuiz(auto){
     if(!confirm(msg))return;
   }
   clearInterval(TI);
+  clearInterval(_quizDraftTimer);
+  clearQuizDraft(QZ.setId);
   QZ.submitted=true;
   QZ.reviewMode=true;
   let correct=0,wrong=0;
@@ -5399,6 +5637,11 @@ const initPromise=init();
     <div class="panel" id="qzi-page1" style="width:100%;margin:0;overflow:visible">
       <div class="ph"><span>Instructions</span></div>
       <div class="pb" style="padding:26px 28px">
+        <div id="qzi-resume-block" style="display:none;margin-bottom:20px;padding:14px 16px;border-radius:var(--rs);background:var(--adim);border:1px solid var(--aborder)">
+          <div style="font-size:.8rem;font-weight:700;color:var(--accent);margin-bottom:4px">Unfinished Attempt Found</div>
+          <div id="qzi-resume-note" style="font-size:.76rem;color:var(--t2);margin-bottom:10px"></div>
+          <button class="btn bp" style="padding:6px 14px;font-size:.76rem" onclick="confirmQuizResume()">Resume Where You Left Off</button>
+        </div>
         <div style="font-size:.85rem;color:var(--t2);margin-bottom:36px">This is a practice quiz. The questions shown are for practice purposes only.</div>
         <label style="display:flex;align-items:flex-start;gap:10px;font-size:.82rem;color:var(--t);cursor:pointer;line-height:1.7">
           <input type="checkbox" id="qzi-declaration" onchange="document.getElementById('qzi-next-btn').disabled=!this.checked" style="margin-top:3px"/>
