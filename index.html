@@ -4274,9 +4274,22 @@ function resetTyping(){
 const PROG_KEY = 'dpt_progress';
 let _progFilter = 'all';
 
+// Resolves a progress entry's real timestamp for sorting: entry.date (an ISO string) normally,
+// falling back to the timestamp embedded in entry.id (Date.now()+'_'+random) for any older/odd
+// entry that's missing a usable date, so ordering never silently breaks.
+function _progEntryTime(e){
+  const t = Date.parse(e && e.date);
+  if(!isNaN(t)) return t;
+  const m = e && e.id && /^(\d+)_/.exec(e.id);
+  return m ? parseInt(m[1],10) : 0;
+}
 function getProgress(){
-  try{ return JSON.parse(localStorage.getItem(PROG_KEY)) || []; }
-  catch(e){ return []; }
+  try{
+    const list = JSON.parse(localStorage.getItem(PROG_KEY)) || [];
+    // Always hand back most-recent-first, regardless of how entries were inserted into storage
+    // (e.g. a cloud-sync merge can otherwise leave them out of order).
+    return list.slice().sort(function(a,b){ return _progEntryTime(b)-_progEntryTime(a); });
+  }catch(e){ return []; }
 }
 // Opens the #result screen populated entirely from a previously-saved
 // progress entry — no AI call, no re-evaluation. Used by the "View Result"
@@ -4390,6 +4403,29 @@ function viewSavedResult(kind,id){
 //    question object from the live question bank when possible (so wordLimit/
 //    type are accurate), falling back to whatever was saved on the entry. ──
 let _savedRetryInFlight={};
+// After a failed retry, disables the Retry button for a short cooldown instead of letting it be
+// clicked again instantly — repeated instant retries add load right when the AI service may
+// already be struggling (e.g. rate-limited), which only makes things worse.
+const RETRY_COOLDOWN_SECONDS=5;
+function _renderRetryCooldown(el,retryCallStr,flightKey,seconds){
+  let remaining=seconds;
+  function paint(){
+    el.innerHTML='<div class="ai-notice"><strong>AI evaluation failed again.</strong> '
+      +'<button disabled style="margin-left:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--t2);cursor:not-allowed;font-size:.75rem;font-family:var(--font);opacity:.6">Retry ('+remaining+'s)</button></div>';
+  }
+  paint();
+  const iv=setInterval(function(){
+    remaining--;
+    if(remaining<=0){
+      clearInterval(iv);
+      _savedRetryInFlight[flightKey]=false;
+      el.innerHTML='<div class="ai-notice"><strong>AI evaluation failed again.</strong> '
+        +'<button onclick="'+retryCallStr+'" style="margin-left:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--accent);cursor:pointer;font-size:.75rem;font-family:var(--font)">Retry</button></div>';
+    }else{
+      paint();
+    }
+  },1000);
+}
 function _questionForPracticeEntry(entry){
   try{
     const d=D();
@@ -4425,9 +4461,11 @@ async function retrySavedPracticeAI(id){
       renderCorrectedAnswer(result,ans);
     }
     updateProgressEntry(id,{score:result.totalScore+'/'+marks,parameters:result.parameters,aiResult:result});
+    _savedRetryInFlight[id]=false;
+    return;
   }else if(aiEl){
-    aiEl.innerHTML='<div class="ai-notice"><strong>AI evaluation failed again.</strong> '
-      +'<button onclick="retrySavedPracticeAI(\''+id+'\')" style="margin-left:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--accent);cursor:pointer;font-size:.75rem;font-family:var(--font)">Retry</button></div>';
+    _renderRetryCooldown(aiEl,"retrySavedPracticeAI('"+id+"')",id,RETRY_COOLDOWN_SECONDS);
+    return; // _savedRetryInFlight[id] is cleared by the cooldown once it elapses
   }
   _savedRetryInFlight[id]=false;
 }
@@ -4463,9 +4501,11 @@ async function retrySavedMockSectionAI(entryId,idx){
     if(aiWrap)aiWrap.innerHTML=renderAIBlock(result,marks);
     entry.sectionsFull[idx].aiResult=result;
     updateProgressEntry(entryId,{sectionsFull:entry.sectionsFull});
+    _savedRetryInFlight[flightKey]=false;
+    return;
   }else if(aiWrap){
-    aiWrap.innerHTML='<div class="ai-notice"><strong>AI evaluation failed again.</strong> '
-      +'<button onclick="retrySavedMockSectionAI(\''+entryId+'\','+idx+')" style="margin-left:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--accent);cursor:pointer;font-size:.75rem;font-family:var(--font)">Retry</button></div>';
+    _renderRetryCooldown(aiWrap,"retrySavedMockSectionAI('"+entryId+"',"+idx+")",flightKey,RETRY_COOLDOWN_SECONDS);
+    return; // _savedRetryInFlight[flightKey] is cleared by the cooldown once it elapses
   }
   _savedRetryInFlight[flightKey]=false;
 }
@@ -4560,7 +4600,7 @@ async function mergeLocalAndCloud(uid, priorAnonUid){
     return e.ownerUid === priorAnonUid || e.ownerUid === uid;
   });
   claimable.forEach(function(e){ if(!byId[e.id]) byId[e.id]=e; });
-  const merged = Object.values(byId).sort(function(a,b){ return (b.date||0)-(a.date||0); });
+  const merged = Object.values(byId).sort(function(a,b){ return _progEntryTime(b)-_progEntryTime(a); });
   if(merged.length>200) merged.length=200;
   // Re-tag everything kept as belonging to this account, and replace
   // localStorage entirely — entries from a different prior session on this
