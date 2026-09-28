@@ -184,6 +184,8 @@ header{position:relative}
 .es-timer-val{font-family:var(--mono);font-size:1.3rem;font-weight:700;color:var(--accent);line-height:1}
 .es-timer-lbl{font-size:.58rem;color:var(--t2);text-transform:uppercase;letter-spacing:.07em;margin-top:3px}
 .es-timer-actions{display:flex;gap:6px;justify-content:center;margin-top:9px}
+.ta-hint{display:none;margin-top:6px;padding:6px 10px;font-size:.72rem;color:var(--accent);background:var(--adim);border:1px solid var(--aborder);border-radius:var(--rs)}
+.ta-hint.on{display:block}
 /* Question + answer area scrolls on its own (desktop); the timer / question-number card stays put.
    The scrollbar sits between the writing area and the side card and is always visible. */
 @media(min-width:901px){
@@ -2325,6 +2327,7 @@ function launchExamReal(qidOrQ,resume){
   if(_sb){_sb.disabled=true;}
   if(_sh){_sh.textContent="Write at least the minimum required word count to unlock";_sh.className="submit-guard-hint";}
   restrictTA(ta);
+  ta._dblMsgs=0;if(ta._dblHint)ta._dblHint.classList.remove("on");
   updWC("exam-ta","exam-wc","exam-wc-top","exam-pwc");
   clearInterval(TI);clearInterval(WI);
   startTimer(startSecs,"exam-timer",null,()=>submitSingle());
@@ -2400,6 +2403,27 @@ function autoGrow(ta){
 }
 // Locks a textarea: no paste/drop, no double-space, no blank-line skipping, no space↔enter mixing
 // Also blocks mouse-click cursor repositioning — navigation only via arrow keys
+// Set to false to allow a blank line between paragraphs again.
+const BLOCK_DOUBLE_ENTER=true;
+// Shows a short explanation under the answer box when a blank-line Enter is blocked
+// (only the first few times per test, so it never nags).
+const DOUBLE_ENTER_MSG_LIMIT=3;
+function notifyDoubleEnter(ta){
+  flashLock(ta);
+  if((ta._dblMsgs||0)>=DOUBLE_ENTER_MSG_LIMIT)return;
+  ta._dblMsgs=(ta._dblMsgs||0)+1;
+  let h=ta._dblHint;
+  if(!h){
+    h=document.createElement("div");
+    h.className="ta-hint";h.setAttribute("role","status");
+    ta.insertAdjacentElement("afterend",h);
+    ta._dblHint=h;
+  }
+  h.textContent="Blank lines aren't allowed here, just like in the exam. Press Enter once to start a new paragraph.";
+  h.classList.add("on");
+  clearTimeout(ta._dblHintT);
+  ta._dblHintT=setTimeout(()=>h.classList.remove("on"),2500);
+}
 function restrictTA(ta){
   if(!ta||ta._restricted)return;ta._restricted=true;
   autoGrow(ta);
@@ -2412,7 +2436,16 @@ function restrictTA(ta){
     const v=ta.value,pos=ta.selectionStart,prev=v.slice(0,pos).slice(-1);
     if(e.key===" "&&(prev===" "||prev==="\n")){e.preventDefault();flashLock(ta);return;}
     if(e.key==="Enter"&&prev===" "){e.preventDefault();flashLock(ta);return;}
+    // IBPS-style: Enter moves to the next line once, but a second Enter (blank-line gap) is not registered.
+    if(BLOCK_DOUBLE_ENTER&&e.key==="Enter"&&prev==="\n"){e.preventDefault();notifyDoubleEnter(ta);return;}
     if(e.key==="Enter"&&v.slice(0,pos).slice(-2)==="\n\n"){e.preventDefault();flashLock(ta);return;}
+  });
+  // Same rule for on-screen keyboards, where keydown may not report "Enter" reliably.
+  ta.addEventListener("beforeinput",e=>{
+    if(!BLOCK_DOUBLE_ENTER)return;
+    if(e.inputType!=="insertLineBreak"&&e.inputType!=="insertParagraph")return;
+    const pos=ta.selectionStart,prev=ta.value.slice(0,pos).slice(-1);
+    if(prev==="\n"){e.preventDefault();notifyDoubleEnter(ta);}
   });
   // Block mouse clicks from repositioning cursor — use mousedown WITHOUT preventDefault
   // so the scrollbar inside the textarea still works (scrollbar drag also fires mousedown).
@@ -2974,6 +3007,7 @@ function loadMSContent(idx){
   document.getElementById("mock-qmeta").innerHTML=`<span class="chip">${s.question.wordLimit}</span><span class="chip">${s.question.marks} marks</span>`;
   const ta=document.getElementById("mock-ta");ta.value=MS.a[idx]||"";updMWC();autoGrow(ta);
   restrictTA(ta);
+  ta._dblMsgs=0;if(ta._dblHint)ta._dblHint.classList.remove("on");
   updateMRButton();
   ta.oninput=()=>{
     MS.a[idx]=ta.value;updMWC();
@@ -3734,7 +3768,7 @@ async function evalWithAI(q,ans,wc,wpm){
       (missing.length?`. Missing required elements: ${missing.join(", ")}.`:". All required elements present.");
     structCapPct=structCheck.count/structCheck.total;
   }else{
-    structPromptNote=`STRUCTURAL CHECK (already verified by code): the answer has ${structCheck.paraCount} paragraph break(s) — `+(structCheck.hasParagraphs?"multiple paragraphs, acceptable separation.":"written as a single unbroken block with no paragraph breaks at all.");
+    structPromptNote=`STRUCTURAL CHECK (already verified by code): the answer has ${structCheck.paraCount} paragraph(s) — `+(structCheck.hasParagraphs?"multiple paragraphs, acceptable separation.":"written as a single unbroken block with no paragraph breaks at all.")+` NOTE: the exam interface allows only ONE line break at a time — a blank-line gap between paragraphs cannot be typed. A single line break therefore counts as a full paragraph break. Never criticise or suggest adding blank lines, line gaps or extra spacing between paragraphs anywhere in your feedback, corrections or suggestions.`;
     structCapPct=structCheck.hasParagraphs?1:0.5;
   }
 
