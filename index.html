@@ -85,6 +85,8 @@
 [data-theme="light-default"] body.exam-mode .es-sec-title.on{background:#1d4ed8;color:#fff;}
 [data-theme="light-default"] body.exam-mode .es-timer{background:#f0f5ff;border-color:#cfd9ee;}
 [data-theme="light-default"] body.exam-mode .es-timer-val{color:#2563eb;}
+[data-theme="light-default"] body.exam-mode .es-timer .btn.bg{border-color:#cfd9ee;color:#526080;background:#fff;}
+[data-theme="light-default"] body.exam-mode .es-timer .btn.bg:hover{border-color:#2563eb;color:#2563eb;background:#f0f5ff;}
 [data-theme="light-default"] body.exam-mode .chip{background:#f0f5ff;border-color:#cfd9ee;color:#526080;}
 /* Teal accent for teal-able elements */
 .hi-badge.mock{background:var(--tealdim);border-color:var(--tealborder);color:var(--teal);}
@@ -181,6 +183,18 @@ header{position:relative}
 .es-timer{background:var(--adim);border:1px solid var(--aborder);border-radius:var(--rs);padding:9px 10px;text-align:center}
 .es-timer-val{font-family:var(--mono);font-size:1.3rem;font-weight:700;color:var(--accent);line-height:1}
 .es-timer-lbl{font-size:.58rem;color:var(--t2);text-transform:uppercase;letter-spacing:.07em;margin-top:3px}
+.es-timer-actions{display:flex;gap:6px;justify-content:center;margin-top:9px}
+/* Question + answer area scrolls on its own (desktop); the timer / question-number card stays put.
+   The scrollbar sits between the writing area and the side card and is always visible. */
+@media(min-width:901px){
+  #exam .exam-main,#fullmock .exam-main{overflow-y:scroll;padding-right:8px;scrollbar-width:auto;scrollbar-color:#93b4da #e6edf8}
+  #exam .exam-main{max-height:calc(100vh - 84px)}
+  #fullmock .exam-main{max-height:calc(100vh - 138px)}
+  #exam .exam-main::-webkit-scrollbar,#fullmock .exam-main::-webkit-scrollbar{width:12px}
+  #exam .exam-main::-webkit-scrollbar-track,#fullmock .exam-main::-webkit-scrollbar-track{background:#e6edf8;border-radius:6px}
+  #exam .exam-main::-webkit-scrollbar-thumb,#fullmock .exam-main::-webkit-scrollbar-thumb{background:#93b4da;border-radius:6px;border:2px solid #e6edf8}
+  #exam .exam-main::-webkit-scrollbar-thumb:hover,#fullmock .exam-main::-webkit-scrollbar-thumb:hover{background:#2563eb}
+}
 .h-brand{display:flex;align-items:center;gap:9px;cursor:pointer;text-decoration:none;color:inherit;border-radius:var(--rs);padding:4px 8px;margin:-4px -8px;transition:background var(--tr);flex-shrink:1;min-width:0;overflow:hidden}
 .h-brand:hover{background:var(--bg3)}
 .site-logo{height:29px;width:auto;display:none;border-radius:4px;flex-shrink:0;background:transparent;padding:2px 4px;}
@@ -1055,16 +1069,6 @@ header .h-brand:hover{background:var(--brut-tint);}
   </div>
 </div>
 <div id="exam" class="screen">
-  <div class="exam-bar">
-    <div class="bar-l">
-      <div class="bstat"><div class="bval" id="exam-wpm">0</div><div class="blbl">WPM</div></div>
-      <div class="bstat"><div class="bval" id="exam-wc-top">0</div><div class="blbl">Words</div></div>
-    </div>
-    <div style="display:flex;gap:6px;flex-shrink:0">
-      <button class="btn bg bsm fs-toggle-btn" onclick="toggleFullscreen()" title="Toggle full screen"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 00-2 2v3M16 3h3a2 2 0 012 2v3M21 16v3a2 2 0 01-2 2h-3M3 16v3a2 2 0 002 2h3"/></svg></button>
-      <button class="btn bg bsm" onclick="askExit(_instrReturnTo)"><svg width="11" height="11" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Exit</button>
-    </div>
-  </div>
   <div class="exam-layout">
     <div class="exam-main">
       <div class="exam-grid">
@@ -1085,6 +1089,10 @@ header .h-brand:hover{background:var(--brut-tint);}
       <div class="es-timer">
         <div class="es-timer-val" id="exam-timer">--:--</div>
         <div class="es-timer-lbl">Time Remaining</div>
+        <div class="es-timer-actions">
+          <button class="btn bg bsm fs-toggle-btn" onclick="toggleFullscreen()" title="Toggle full screen"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 00-2 2v3M16 3h3a2 2 0 012 2v3M21 16v3a2 2 0 01-2 2h-3M3 16v3a2 2 0 002 2h3"/></svg></button>
+          <button class="btn bg bsm" onclick="askExit(_instrReturnTo)"><svg width="11" height="11" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Exit</button>
+        </div>
       </div>
       <div class="es-stat-grid">
         <div class="es-stat"><div class="es-badge orange" id="ps-status-badge">1</div><span id="ps-status-lbl">Not<br>Answered</span></div>
@@ -2320,11 +2328,9 @@ function launchExamReal(qidOrQ,resume){
   updWC("exam-ta","exam-wc","exam-wc-top","exam-pwc");
   clearInterval(TI);clearInterval(WI);
   startTimer(startSecs,"exam-timer",null,()=>submitSingle());
-  WI=setInterval(()=>calcWPM("exam-ta","exam-wpm"),2000);
   ta.oninput=()=>{
     if(!tyStarted){tyStarted=true;tStart=Date.now();}
     updWC("exam-ta","exam-wc","exam-wc-top","exam-pwc");
-    calcWPM("exam-ta","exam-wpm");
     clearTimeout(_draftSaveTimer);
     _draftSaveTimer=setTimeout(()=>saveDraft(qid,ta.value,tLeft,tTotal),1200);
     // Update practice side badge
@@ -2831,9 +2837,7 @@ function renderMTabs(){
     return `<button class="mtab ${active} ${done}" onclick="loadMS(${i})">${name}${pending}</button>`;
   }).join("");
   document.getElementById("mock-tabs").innerHTML=
-    `<div class="mock-tabs-inner">${tabs}</div>`+
-    `<button class="btn bg bsm fs-toggle-btn" style="flex-shrink:0;margin-left:4px" onclick="toggleFullscreen()" title="${document.fullscreenElement?'Exit full screen':'Toggle full screen'}">${document.fullscreenElement?FS_COMPRESS_ICON:FS_EXPAND_ICON}</button>`+
-    `<button class="btn bg bsm" style="flex-shrink:0;margin-left:4px" onclick="askExit(_instrReturnTo)"><svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Exit</button>`;
+    `<div class="mock-tabs-inner">${tabs}</div>`;
   renderExamSide();
 }
 
@@ -2893,6 +2897,10 @@ function renderExamSide(){
     <div class="es-timer">
       <div class="es-timer-val" id="mock-timer" style="opacity:${_curTimerPaused||''}">${_curTimerText}</div>
       <div class="es-timer-lbl">Time Remaining</div>
+      <div class="es-timer-actions">
+        <button class="btn bg bsm fs-toggle-btn" onclick="toggleFullscreen()" title="${document.fullscreenElement?'Exit full screen':'Toggle full screen'}">${document.fullscreenElement?FS_COMPRESS_ICON:FS_EXPAND_ICON}</button>
+        <button class="btn bg bsm" onclick="askExit(_instrReturnTo)"><svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Exit</button>
+      </div>
     </div>
     <div class="es-stat-grid">
       <div class="es-stat"><div class="es-badge green">${answered}</div>Answered</div>
