@@ -2419,10 +2419,10 @@ function notifyDoubleEnter(ta){
     ta.insertAdjacentElement("afterend",h);
     ta._dblHint=h;
   }
-  h.textContent="Blank lines aren't allowed here, just like in the exam. Press Enter once to start a new paragraph.";
+  h.textContent="Multiple consecutive \u2018Enter\u2019 presses are not permitted, as per the real examination interface. Only single line breaks are allowed between paragraphs.";
   h.classList.add("on");
   clearTimeout(ta._dblHintT);
-  ta._dblHintT=setTimeout(()=>h.classList.remove("on"),2500);
+  ta._dblHintT=setTimeout(()=>h.classList.remove("on"),4000);
 }
 function restrictTA(ta){
   if(!ta||ta._restricted)return;ta._restricted=true;
@@ -5008,27 +5008,10 @@ function renderQuestionHistory(qid){
   }).join('');
 }
 async function submitSingle(){
-  // ── Guard: minimum word check before ANY API call fires ──
-  const _ans_raw = document.getElementById('exam-ta').value.trim();
-  const _wc_check = cw(_ans_raw);
-  const _wlStr = CQ&&CQ.wordLimit?CQ.wordLimit:'';
-  const _nums = _wlStr.match(/\d+/g);
-  const _lowerBound = _nums&&_nums.length>0?parseInt(_nums[0]):0;
-  const _threshold = _lowerBound>0?Math.ceil(_lowerBound/2):15;
-  if(_wc_check < _threshold){
-    // Timer-triggered auto-submit with empty/near-empty answer — cancel silently
-    const btn=document.getElementById('exam-submit-btn');
-    if(!btn||btn.disabled){
-      // Auto-submit path: show banner, block API
-      const banner=document.createElement('div');
-      banner.style.cssText='position:fixed;top:0;left:0;right:0;z-index:9999;background:#c0392b;color:#fff;font-size:.82rem;font-family:var(--font,Inter),sans-serif;padding:12px 16px;text-align:center;font-weight:600;';
-      banner.textContent='⏱ Time is up — but no answer was recorded. The submission has been cancelled.';
-      document.body.appendChild(banner);
-      setTimeout(()=>banner.remove(),6000);
-      return; // ← HARD BLOCK: API call never fires
-    }
-    return; // Manual attempt blocked by disabled button — shouldn't reach here
-  }
+  // Manual clicks are already impossible below the full lower word-limit bound (the Submit
+  // button stays disabled until then — see updWC). So whenever this runs with a short/empty
+  // answer, it can only be the timer hitting zero — and that should always be submitted and
+  // scored as-is, never discarded, however few words were written.
   clearInterval(TI);clearInterval(WI);
   const ans = document.getElementById('exam-ta').value.trim();
   clearDraft(CQ?.id);
@@ -5067,19 +5050,9 @@ async function submitSingle(){
 
 /* ---- Hook: Mock submit ---- */
 async function submitMock(){
-  // ── Guard: block API if total written < 15 words across all sections ──
-  const _mockTotalWC=Object.values(MS.a||{}).reduce(function(s,a){return s+cw(a||"");},0);
-  if(_mockTotalWC<150){
-    const _btn=document.getElementById("exam-side-submit");
-    if(!_btn||_btn.disabled){
-      const banner=document.createElement("div");
-      banner.style.cssText="position:fixed;top:0;left:0;right:0;z-index:9999;background:#c0392b;color:#fff;font-size:.82rem;font-family:var(--font,Inter),sans-serif;padding:12px 16px;text-align:center;font-weight:600;";
-      banner.textContent="⏱ Time is up — but no answer was recorded. The submission has been cancelled.";
-      document.body.appendChild(banner);
-      setTimeout(function(){banner.remove();},6000);
-    }
-    return;
-  }
+  // Manual clicks are already impossible below the section-level word-count guard. So whenever
+  // this runs with a low total word count, it can only be the timer hitting zero — and that
+  // should always be submitted and scored as-is, never discarded.
   clearInterval(TI);
   clearInterval(_mockDraftTimer);
   clearMockDraft(MS.examId,MS.mockNo);
