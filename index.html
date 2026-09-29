@@ -3640,6 +3640,60 @@ const TYPE_GUIDANCE={
   precis:`PRECIS-SPECIFIC RULES: Judge whether the student retains the central argument and major supporting ideas, removes unnecessary detail, avoids personal opinion, avoids copying large portions verbatim, maintains logical flow, and preserves the original meaning. A shorter answer is not automatically better — a precis that strips out essential meaning must lose Core Ideas marks even if it is short and grammatically clean.`
 };
 
+// ---- Comprehension answer splitting (per-question numbered markers) ----
+// Detects a question-number marker at the START of a line — the exam interface only allows a
+// single line break (no blank-line paragraph gaps), so a marker at the start of a line reliably
+// signals "answer N begins here." Matched by the ACTUAL NUMBER WRITTEN, never by the order the
+// markers appear in, so answers typed out of order still land on the right question. Recognises:
+// "1." "1)" "(1)" "1:" "1-", "Ans 1"/"Answer 1"/"Ans. 1", "Q1"/"Q.1"/"Question 1", or a bare
+// "1 " at the very start of a line.
+const _COMP_MARKER_PATTERNS=[
+  /^\(?\s*(\d{1,2})\s*[).:\-]\)?\s+/,
+  /^\((\d{1,2})\)\s*/,
+  /^(?:ans(?:wer)?)\.?\s*:?\s*(\d{1,2})\b[.):\-]?\s*/i,
+  /^q(?:uestion)?\.?\s*:?\s*(\d{1,2})\b[.):\-]?\s*/i,
+  /^(\d{1,2})\s+(?=[A-Za-z])/
+];
+function parseComprehensionMarkers(ans,numQ){
+  const lines=(ans||"").split(/\r?\n/);
+  const markers=[];
+  for(let i=0;i<lines.length;i++){
+    const trimmed=lines[i].replace(/^\s+/,"");
+    for(const re of _COMP_MARKER_PATTERNS){
+      const m=trimmed.match(re);
+      if(m){
+        const num=parseInt(m[1],10);
+        if(num>=1&&num<=numQ)markers.push({num,lineIdx:i,markerLen:m[0].length});
+        break;
+      }
+    }
+  }
+  if(!markers.length)return{found:false,map:{}};
+  const map={};
+  for(let k=0;k<markers.length;k++){
+    const mk=markers[k];
+    if(map[mk.num]!==undefined)continue; // duplicate marker for the same number — keep the first
+    const endLine=(k+1<markers.length)?markers[k+1].lineIdx:lines.length;
+    const firstLineText=lines[mk.lineIdx].replace(/^\s+/,"").slice(mk.markerLen);
+    const text=[firstLineText,...lines.slice(mk.lineIdx+1,endLine)].join("\n").trim();
+    map[mk.num]=text;
+  }
+  return{found:true,map};
+}
+// Word Limit (0.5 marks) is always decided by CODE from an exact-or-best-effort word count, never
+// scored directly by the AI: unanswered = 0, under 30 words = 0.25, 30+ words = 0.5 — no upper
+// cap, so a thorough answer is never penalised for length.
+function compWordLimitTier(wordCount){
+  if(!wordCount||wordCount<=0)return 0;
+  if(wordCount<30)return 0.25;
+  return 0.5;
+}
+function roundToStep(v,step,max){
+  if(!isFinite(v))return 0;
+  const r=Math.round(v/step)*step;
+  return Math.max(0,Math.min(r,max));
+}
+
 async function evalComprehensionAI(q,ans,wc,ep){
   const numQ=countCompQuestions(q.text);
   const perQMax=2;
@@ -3664,33 +3718,82 @@ async function evalComprehensionAI(q,ans,wc,ep){
   const _wlRange0=parseWordLimitRange(q.wordLimit);
   const correctionThreshold=_wlRange0&&_wlRange0.min>0?Math.ceil(_wlRange0.min*2/3):15;
   const eligibleForCorrection=wc>=correctionThreshold;
-  const sys=`You are a strict, senior examiner grading a Comprehension section for SBI PO / IBPS PO Mains (2026 pattern). This section has ${numQ} sub-questions, each worth EXACTLY ${perQMax} marks — no other distribution is allowed, and comprehension NEVER uses generic Content/Structure/Language/Word-Limit criteria. Total for this answer: ${totalPossible} marks.
 
-CRITICAL: you generate text in order and cannot revise something already written — analyze BEFORE you score, never the reverse. You are the examiner's eyes only: report a scoreRecommendation per sub-question; the code independently clamps and rounds every score before it counts.
+  // STEP 0 — try to split the answer into its real, numbered sub-answers using only code (no AI
+  // involved). If every marker is missing, fall back to letting the AI guess the boundaries.
+  const split=parseComprehensionMarkers(ans,numQ);
+  const attemptedNums=split.found?Object.keys(split.map).map(Number).filter(n=>split.map[n]&&split.map[n].trim()).sort((a,b)=>a-b):[];
 
-FIRST — VALIDITY CHECK: set top-level "isGibberish" to true if the ENTIRE answer is blank, random characters, keyboard mashing, or completely unrelated to the passage/questions (not a genuine attempt at all). If true, every sub-question's scoreRecommendation must be 0.
+  // Markers exist but every one is blank (or none at all) — nothing to grade, skip the API call.
+  if(split.found&&attemptedNums.length===0){
+    const subQuestions=Array.from({length:numQ},(_,i)=>({name:"Question "+(i+1),score:0,max:perQMax,comment:"Not attempted."}));
+    let result={parameters:subQuestions,totalScore:0};
+    result=validateEvaluation(result,totalPossible);
+    result.mistakes=[];result.styleSuggestions=[];
+    result.overallVerdict="No questions were attempted, so no credit can be given.";
+    result.strengths=[];
+    result.improvements=["Attempt each question, numbering your answers (1, 2, 3…) at the start of a new line as the exam requires."];
+    result.wordsWritten=wc;result.wordLimitDisplay=q.wordLimit||"";result.isGibberish=false;
+    return result;
+  }
 
-HARD RULES:
-1. For each sub-question, judge it against the distinct acceptable ideas a correct answer needs, drawn from the passage and question (do not invent points the passage doesn't support).
-2. Score each sub-question 0 to ${perQMax}. Prefer whole numbers (0, 1, 2); use a half mark (0.5 or 1.5) only when genuinely in between. No other increment is allowed.
-3. attempted=false (no attempt at all) → scoreRecommendation MUST be 0. Do not give partial credit "for effort."
-4. Attempted but factually wrong, contradictory, or completely off-topic → 0.
-5. Attempted, on-topic, substantively correct → full ${perQMax}, even if brief — comprehension answers are meant to be short (around 30-40 words each). Reusing the passage's own vocabulary/key terms is completely normal and never a penalty by itself — judge only whether the question was actually answered correctly.
-6. Attempted, on-topic, but incomplete/vague/only one of several required points present → 1 (or 1.5 if nearly complete, or 0.5 if only a very weak fragment is present).
-7. VOCABULARY sub-questions ("Find one word from the passage that means…"): identify the one specific word the passage supports. Correct word = ${perQMax}. A close-but-inadequate word (right idea, wrong/imprecise word, or a related-but-not-matching word from the passage) = 1. Wrong word = 0. Do not accept merely related words as fully correct.
-8. Genuine grammar/spelling errors within an answer can cost at most 0.5 off that sub-question's score, never more — content accuracy matters far more than polish for a 30-40 word answer. Grammar alone must never zero out an otherwise substantively correct answer.
-9. NUMBERS MUST NEVER APPEAR in overallVerdict, strengths, or improvements — describe performance in words only, never restate a score/fraction/percentage there.
-10. Respond ONLY with valid JSON, no markdown, no explanation outside JSON.`;
-  const p=`PASSAGE + QUESTIONS: ${q.text}
-STUDENT'S FULL ANSWER: ${ans||"(blank)"}
-WORD COUNT: ${wc} words (guideline: roughly ${numQ*30}-${numQ*40} words total is expected, about 30-40 per sub-question)
+  let sys,p;
+  if(split.found){
+    // Code has already split the answer into its real, numbered sub-answers — the AI is never
+    // asked to guess where one answer ends and the next begins, and never asked to count words;
+    // it only judges the content and grammar of exactly the text it's given per question.
+    const labeled=attemptedNums.map(n=>`Q${n} STUDENT ANSWER: ${split.map[n]}`).join("\n\n");
+    const missing=Array.from({length:numQ},(_,i)=>i+1).filter(n=>attemptedNums.indexOf(n)===-1);
+    sys=`You are a strict, senior examiner grading a Comprehension section for SBI PO / IBPS PO Mains (2026 pattern). There are ${numQ} sub-questions. The exam interface has already separated the student's numbered answers for you — you are given EXACTLY the text the student wrote for each numbered question, nothing more, nothing less. Do not guess at boundaries; grade only the text provided for each number.
 
-STEP 1 — For each of the ${numQ} sub-questions in order, determine: was it attempted at all, and does it satisfy the required ideas? If the student used different numbering/lettering than the passage, match by content/position, not by label text.
-STEP 2 — Score each sub-question 0-${perQMax} using the hard rules above, derived directly from Step 1.
-STEP 3 — ${eligibleForCorrection?`Split language feedback into "mistakes" (genuine objective errors only) and "styleSuggestions" (optional, non-scoring improvements). Never "correct" something merely because another phrasing is more natural — only objective errors belong in "mistakes".`:`The student wrote only ${wc} words, below the ${correctionThreshold}-word minimum for this feature to be useful — return mistakes as [], styleSuggestions as [].`}
+Each question is worth ${perQMax} marks total, split into two parts YOU score:
+- CONTENT (0, 0.5, or 1): 1 = directly answers the question, supported by the passage, essential point(s) present, clear understanding. 0.5 = partially correct, an important point missing, vague/incomplete, or a minor factual slip that doesn't fully invalidate it. 0 = incorrect, irrelevant, contradicts the passage, or doesn't answer the question. Judge MEANING, not wording — never require matching any reference answer's exact phrasing; accept valid paraphrases and synonyms. Reusing the passage's own vocabulary is completely normal and never a penalty. Minor grammar/spelling must NOT reduce this score.
+- GRAMMAR (0, 0.25, or 0.5): 0.5 = grammatically clear and acceptable; minor typos/punctuation ignored. 0.25 = noticeable grammar/spelling/vocabulary/sentence-structure errors present, but meaning stays clear. 0 = frequent or serious errors that substantially obscure the meaning. Judge this completely independently of content — never let one influence the other.
 
-Return ONLY this JSON (one object per sub-question in "subQuestions" — ${numQ} objects, numbered 1 to ${numQ}):
-{"isGibberish":false,"subQuestions":[{"num":1,"attempted":true,"scoreRecommendation":<0-${perQMax}>,"evidence":"<short 1-sentence note, no numbers>"}],"mistakes":[{"type":"<Spelling|Grammar|Word Choice|Punctuation>","original":"","corrected":"","reason":""}],"styleSuggestions":[],"strengths":["<no numbers>"],"improvements":["<no numbers>","<no numbers>"],"overallVerdict":"<2-3 honest sentences, ZERO numbers anywhere>"}`;
+(A separate Word Limit component worth 0.5 is added afterward by the system from an exact word count — you do not need to think about length at all.)
+
+${missing.length?`The following question numbers were NOT attempted at all (no numbered answer found): ${missing.join(", ")}. Do not include them in your response — they are automatically scored 0.`:""}
+
+FIRST — VALIDITY CHECK: set top-level "isGibberish" to true only if EVERY attempted answer is random characters/keyboard mashing/completely unrelated to the passage (not a genuine attempt at all, not just wrong). If true, every score below must be 0.
+
+Respond ONLY with valid JSON, no markdown, no explanation outside JSON.`;
+    p=`PASSAGE + QUESTIONS: ${q.text}
+
+${labeled}
+
+Score CONTENT and GRAMMAR for each of these ${attemptedNums.length} question(s) using the rules above. ${eligibleForCorrection?`Also split language feedback into "mistakes" (genuine objective errors only, across the whole answer) and "styleSuggestions" (optional, non-scoring improvements). Never "correct" something merely because another phrasing is more natural — only objective errors belong in "mistakes".`:`The student wrote very little overall — return mistakes as [], styleSuggestions as [].`}
+
+Return ONLY this JSON:
+{"isGibberish":false,"subQuestions":[{"num":<question number>,"content":<0|0.5|1>,"grammar":<0|0.25|0.5>,"evidence":"<short 1-sentence note, no numbers>"}],"mistakes":[{"type":"<Spelling|Grammar|Word Choice|Punctuation>","original":"","corrected":"","reason":""}],"styleSuggestions":[],"strengths":["<no numbers>"],"improvements":["<no numbers>","<no numbers>"],"overallVerdict":"<2-3 honest sentences, ZERO numbers anywhere>"}`;
+  }else{
+    // No numbered markers anywhere — code cannot reliably split the answer, so as a fallback the
+    // AI estimates the boundaries itself (positionally, in question order) AND estimates each
+    // guessed answer's word count, which the system then converts into the Word Limit score
+    // exactly the same way it would an exact, code-counted number.
+    sys=`You are a strict, senior examiner grading a Comprehension section for SBI PO / IBPS PO Mains (2026 pattern). This section has ${numQ} sub-questions. The student did NOT number their answers, so you must carefully identify where each answer begins and ends, in question order, using the content itself as your guide.
+
+Each question is worth ${perQMax} marks total, split into three parts:
+- CONTENT (0, 0.5, or 1): 1 = directly answers the question, supported by the passage, essential point(s) present. 0.5 = partially correct/vague/incomplete/a minor factual slip. 0 = incorrect, irrelevant, or doesn't answer the question. Judge MEANING, not wording.
+- GRAMMAR (0, 0.25, or 0.5): 0.5 = clear and acceptable. 0.25 = noticeable errors but meaning stays clear. 0 = frequent/serious errors that obscure meaning. Judge independently of content.
+- An estimated WORD COUNT for exactly the text you judge to be that answer (an integer). Be as accurate as you can — the system uses this number directly to award the Word Limit component (30+ words = full, under 30 = partial, unanswered = 0), so do not round generously.
+
+attempted=false (no genuine attempt at that question at all) → content, grammar, and wordCount must all be 0.
+
+FIRST — VALIDITY CHECK: set top-level "isGibberish" to true if the ENTIRE answer is blank, random characters, or completely unrelated to the passage/questions. If true, every score below must be 0.
+
+Respond ONLY with valid JSON, no markdown, no explanation outside JSON.`;
+    p=`PASSAGE + QUESTIONS: ${q.text}
+STUDENT'S FULL (UNNUMBERED) ANSWER: ${ans||"(blank)"}
+TOTAL WORD COUNT (whole answer): ${wc} words
+
+STEP 1 — Split the answer into ${numQ} answers, in question order, using the content to judge where each one ends.
+STEP 2 — Score CONTENT and GRAMMAR for each using the rules above, and estimate each one's WORD COUNT.
+STEP 3 — ${eligibleForCorrection?`Split language feedback into "mistakes" and "styleSuggestions" as usual.`:`The student wrote very little overall — return mistakes as [], styleSuggestions as [].`}
+
+Return ONLY this JSON (${numQ} objects in "subQuestions", numbered 1 to ${numQ}):
+{"isGibberish":false,"subQuestions":[{"num":1,"attempted":true,"content":<0|0.5|1>,"grammar":<0|0.25|0.5>,"wordCount":<integer>,"evidence":"<short 1-sentence note, no numbers>"}],"mistakes":[{"type":"<Spelling|Grammar|Word Choice|Punctuation>","original":"","corrected":"","reason":""}],"styleSuggestions":[],"strengths":["<no numbers>"],"improvements":["<no numbers>","<no numbers>"],"overallVerdict":"<2-3 honest sentences, ZERO numbers anywhere>"}`;
+  }
+
   try{
     const res=await fetch(ep,{method:"POST",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({model:"gemini-2.5-flash-lite",max_tokens:3000,system:sys,messages:[{role:"user",content:p}]})});
@@ -3704,18 +3807,30 @@ Return ONLY this JSON (one object per sub-question in "subQuestions" — ${numQ}
     if(!raw||!Array.isArray(raw.subQuestions))return null; // malformed core scoring data → fail safely, never fabricate
 
     // Deterministic enforcement, regardless of what the AI returned: an unattempted sub-question
-    // is forced to 0, scores are clamped to [0,2] and rounded to the nearest half-mark, and a
-    // copied-passage or gibberish answer is forced to 0 across the board.
+    // is forced to 0 across all three components, scores are clamped to their own valid steps,
+    // and a copied-passage or gibberish answer is forced to 0 across the board. Word Limit is
+    // NEVER taken from the AI's own subScore — only from an exact (marker-split) or best-effort
+    // (fallback) word count, run through compWordLimitTier() by code.
     const isGibberish=!!raw.isGibberish;
     const subQuestions=[];
-    for(let i=0;i<numQ;i++){
-      const sq=raw.subQuestions.find(x=>Number(x.num)===i+1)||raw.subQuestions[i]||{};
-      let score=Number(sq.scoreRecommendation);
-      if(!isFinite(score))score=0;
-      score=Math.max(0,Math.min(score,perQMax));
-      score=Math.round(score*2)/2;
-      if(!sq.attempted||copyCheck.copied||isGibberish)score=0;
-      subQuestions.push({name:"Question "+(i+1),score,max:perQMax,comment:typeof sq.evidence==="string"?sq.evidence:""});
+    for(let i=1;i<=numQ;i++){
+      const attempted=split.found?attemptedNums.indexOf(i)!==-1:true;
+      const sq=raw.subQuestions.find(x=>Number(x.num)===i)||(!split.found?raw.subQuestions[i-1]:undefined)||{};
+      let contentScore=roundToStep(Number(sq.content),0.5,1);
+      let grammarScore=roundToStep(Number(sq.grammar),0.25,0.5);
+      let wordCount;
+      if(split.found){
+        wordCount=attempted?cw(split.map[i]):0; // exact, code-computed
+      }else{
+        wordCount=isFinite(Number(sq.wordCount))?Number(sq.wordCount):0; // AI best-effort estimate
+      }
+      let wordScore=compWordLimitTier(wordCount);
+      const reallyAttempted=attempted&&(split.found?true:!!sq.attempted);
+      if(!reallyAttempted||copyCheck.copied||isGibberish){contentScore=0;grammarScore=0;wordScore=0;}
+      const total=Math.round((contentScore+grammarScore+wordScore)*100)/100;
+      const breakdown=`Content ${contentScore}/1 · Grammar ${grammarScore}/0.5 · Word Limit ${wordScore}/0.5`;
+      const evidence=typeof sq.evidence==="string"&&sq.evidence.trim()?sq.evidence.trim():"";
+      subQuestions.push({name:"Question "+i,score:total,max:perQMax,comment:reallyAttempted?(evidence?`${breakdown} — ${evidence}`:breakdown):"Not attempted."});
     }
     let result={parameters:subQuestions,totalScore:0};
     result=validateEvaluation(result,totalPossible);
@@ -3742,7 +3857,6 @@ Return ONLY this JSON (one object per sub-question in "subQuestions" — ${numQ}
     return result;
   }catch(e){console.warn("Comprehension AI eval failed",e);return null;}
 }
-
 async function evalWithAI(q,ans,wc,wpm){
   const d=D(),cfg=d.siteSettings||{};
   let ep="";
