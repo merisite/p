@@ -1646,7 +1646,7 @@
       "marks": 15,
       "difficulty": "medium",
       "active": true,
-      "mockNo": null,
+      "mockNo": 7,
       "productIds": [
         "IBPSPO"
       ]
@@ -2335,6 +2335,22 @@
       "difficulty": "hard",
       "active": true,
       "mockNo": 5,
+      "productIds": [
+        "IBPSPO"
+      ]
+    },
+    {
+      "id": "q_1790683940661",
+      "examId": "sbi_po",
+      "type": "comprehension",
+      "text": "",
+      "modelAnswer": "",
+      "label": "16 Read the passage and answer the questions that follow in your own word",
+      "wordLimit": "150 words (30-40 words per answer)",
+      "marks": 20,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": 7,
       "productIds": [
         "IBPSPO"
       ]
