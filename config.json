@@ -2341,13 +2341,13 @@
     },
     {
       "id": "q_1790683940661",
-      "examId": "sbi_po",
+      "examId": "ibps_po",
       "type": "comprehension",
       "text": "",
       "modelAnswer": "",
       "label": "16 Read the passage and answer the questions that follow in your own word",
       "wordLimit": "150 words (30-40 words per answer)",
-      "marks": 20,
+      "marks": 10,
       "difficulty": "medium",
       "active": true,
       "mockNo": 7,
@@ -2501,7 +2501,7 @@
       "mockNo": 7,
       "title": "IBPS PO Mock 7",
       "active": true,
-      "status": "upcoming",
+      "status": "active",
       "productIds": [
         "IBPSPO"
       ]
