@@ -422,6 +422,8 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .loading-row{display:flex;align-items:center;gap:8px;color:var(--t2);font-size:.8rem;padding:12px 0}
 .spin{width:15px;height:15px;border:2px solid var(--b);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
 @keyframes spin{to{transform:rotate(360deg)}}
+.spin-sm{width:11px;height:11px;border:2px solid var(--b);border-top-color:var(--accent);border-radius:50%;display:inline-block;vertical-align:middle;animation:spin .7s linear infinite}
+.score-pending{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:.62rem;font-weight:600;color:var(--t2);letter-spacing:.02em}
 .sbar{margin-bottom:11px}
 .sbar-top{display:flex;justify-content:space-between;font-size:.72rem;margin-bottom:4px;color:var(--t2)}
 .sbar-top span:last-child{font-family:var(--mono);color:var(--t)}
@@ -3073,7 +3075,7 @@ function showResult(ans,wc,wpm,taken){
   document.getElementById("r-sub").textContent=(tm[CQ?.type]?.name||"")+" · "+(CQ?.wordLimit||"");
   document.getElementById("r-words").textContent=wc;document.getElementById("r-wpm").textContent=wpm;
   const mm=Math.floor(taken/60),ss=taken%60;document.getElementById("r-time").textContent=mm+"m "+ss+"s";
-  document.getElementById("r-score").textContent="...";
+  document.getElementById("r-score").innerHTML='<span class="score-pending"><span class="spin-sm"></span>Scoring…</span>';
   document.getElementById("r-question").textContent=CQ?.text||"";
   document.getElementById("r-ans").textContent=ans||"(No answer submitted)";
   document.getElementById("r-model").textContent=CQ?.modelAnswer||"";
@@ -3095,7 +3097,7 @@ function showMockResult(taken){
   document.getElementById("r-mock-stats").innerHTML=`
     <div class="stile"><div class="stile-v">${attempted}/${MS.s.length}</div><div class="stile-l">Sections Done</div></div>
     <div class="stile"><div class="stile-v">${totalWC}</div><div class="stile-l">Total Words</div></div>
-    <div class="stile"><div class="stile-v" id="r-total-score">—</div><div class="stile-l">Total Score</div></div>
+    <div class="stile"><div class="stile-v" id="r-total-score">${attempted>0?'<span class=\'score-pending\'><span class=\'spin-sm\'></span>Scoring…</span>':'0/0'}</div><div class="stile-l">Total Score</div></div>
     <div class="stile"><div class="stile-v">${mm}m ${ss}s</div><div class="stile-l">Time Taken</div></div>`;
   const d=D(),tm={};d.sectionTypes.forEach(st=>tm[st.id]=st);
   document.getElementById("r-mock-sections").innerHTML=MS.s.map((s,i)=>{
@@ -3107,7 +3109,7 @@ function showMockResult(taken){
     return`<div class="rcard" style="margin-bottom:14px">
       <div class="rcard-h" style="display:flex;align-items:center;justify-content:space-between">
         <span>${sname}</span>
-        <span id="mscore-${i}" style="font-size:.72rem;font-family:var(--mono);color:var(--t2)">${attempted?"Evaluating…":"Not attempted"}</span>
+        <span id="mscore-${i}" style="font-size:.72rem;font-family:var(--mono);color:var(--t2)">${attempted?'<span class="score-pending"><span class="spin-sm"></span>Evaluating…</span>':"Not attempted"}</span>
       </div>
       <div class="rcard-b" style="padding:0">
         <div style="padding:12px 14px;border-bottom:1px solid var(--b)">
