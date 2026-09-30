@@ -3188,7 +3188,7 @@ async function runAIMock(){
       } else {
         if(scoreEl)scoreEl.innerHTML=scoreRetryHTML("retryMockAI("+i+")");
         MS.aiFails=MS.aiFails||{};MS.aiFails[i]=1;
-        if(aiEl)aiEl.innerHTML=aiFailHTML("retryMockAI("+i+")",MS.aiFails[i]);
+        if(aiEl)aiEl.innerHTML=aiFailHTML("retryMockAI("+i+")");
       }
     }
   }
@@ -3243,7 +3243,7 @@ async function retryMockAI(idx){
   } else {
     if(scoreEl)scoreEl.innerHTML=scoreRetryHTML("retryMockAI("+idx+")");
     MS.aiFails=MS.aiFails||{};MS.aiFails[idx]=(MS.aiFails[idx]||1)+1;
-    if(aiEl)aiEl.innerHTML=aiFailHTML("retryMockAI("+idx+")",MS.aiFails[idx]);
+    if(aiEl)aiEl.innerHTML=aiFailHTML("retryMockAI("+idx+")");
   }
   _mockRetryInFlight[idx]=false; // re-enabled only now — either the new score rendered, or a fresh Retry button just appeared
   try{
@@ -3586,21 +3586,11 @@ function validateEvaluation(result,maxMarks){
   return result;
 }
 
-// ---- Correction validation ----
-// Genuine-error entries only carry {type, original, corrected} — no "reason"/explanation is
-// requested from the AI or required here. Rejects: original===corrected (nothing changed), an
-// empty correction, or internal template markers leaking through. "type" is normalized to the
-// five allowed genuine-error categories; anything else (e.g. a legacy "Word Choice"/"Style"
-// label) falls back to a sensible default rather than breaking the type badge rendering.
-const GENUINE_ERROR_TYPES=["Grammar","Spelling","Punctuation","Usage","Sentence Structure"];
-function normalizeErrorType(t){
-  const s=String(t||"").trim();
-  const hit=GENUINE_ERROR_TYPES.find(x=>x.toLowerCase()===s.toLowerCase());
-  if(hit)return hit;
-  if(/^word\s*choice$/i.test(s))return"Usage";
-  if(/^style$/i.test(s))return"Grammar";
-  return"Grammar";
-}
+// ---- Correction validation (spec §18) ----
+// Rejects: original===corrected (nothing changed), an empty correction, internal template
+// markers leaking through, or a missing reason. Keeps a malformed corrections list from ever
+// destroying an otherwise-valid score — mistakes/styleSuggestions are discarded independently
+// of the numeric evaluation.
 function validateCorrections(list){
   if(!Array.isArray(list))return[];
   const badMarker=/\{\{|\}\}|<error>|\[\[fix\]\]/i;
@@ -3610,8 +3600,9 @@ function validateCorrections(list){
     if(!orig||!corr)return false;
     if(orig===corr)return false;
     if(badMarker.test(orig)||badMarker.test(corr))return false;
+    if(!m.reason||!String(m.reason).trim())return false;
     return true;
-  }).map(m=>({type:normalizeErrorType(m.type),original:String(m.original).trim(),corrected:String(m.corrected).trim()}));
+  });
 }
 
 // ---- Score bands (spec §25) — code decides the band from percentage, AI only ever explains. ----
@@ -3663,14 +3654,6 @@ function applyLanguageConsistencyCap(qualityById,aiSeverityRaw,genuineMistakes){
 }
 
 // Type-specific grading guidance injected into the AI prompt (spec §29-33).
-const GENUINE_ERROR_RULES=`GENUINE LANGUAGE ERRORS — read carefully before flagging anything:
-Only flag an expression when the original is OBJECTIVELY INCORRECT — a real grammar, spelling, punctuation, usage, or sentence-structure error. Never flag a sentence merely because another version would sound more polished, formal, sophisticated, natural, native-like, or concise.
-GENUINE ERROR TEST: "If this were not changed, would a competent English examiner consider the original objectively wrong?" If the honest answer is no — the original is correct but another version is merely more elegant — do NOT flag it, however inelegant it reads. Example: "complied politely" -> "complied silently" is NOT an error. "important issue" -> "significant issue" is NOT an error.
-Use ONLY these five types: Grammar, Spelling, Punctuation, Usage, Sentence Structure. There is no "Word Choice" category, and there is no separate style-suggestions list — a merely-preferred synonym or rephrasing is never reported at all, in any form.
-Scan the ENTIRE answer, sentence by sentence, before returning the list — check subject-verb agreement, tense errors, incorrect verb forms, article errors, preposition errors, pronoun errors, singular/plural errors, auxiliary/modal errors, incorrect usage, sentence fragments, run-on sentences, punctuation errors, spelling errors, and incorrect sentence structures. Do not stop scanning after the first error found.
-Prefer returning NO error over incorrectly flagging a correct sentence as wrong — but do not become so cautious that obvious errors are missed. The goal is HIGH PRECISION and GOOD COVERAGE together.
-If there are more than 8 genuine errors in the whole answer, scan it completely first, then return only the 8 most important for the displayed result, prioritized: (1) clear grammatical errors, (2) repeated errors, (3) errors affecting clarity, (4) errors likely to matter in an exam.
-Each entry: {"type":"Grammar|Spelling|Punctuation|Usage|Sentence Structure","original":"<exact text from the answer>","corrected":"<corrected version>"}. Return ONLY type, original, and corrected — no "reason", no explanation, no rule name, no severity note. Never include an entry where original and corrected are identical.`;
 const TYPE_GUIDANCE={
   essay:`ESSAY-SPECIFIC RULES: Do not require exact factual points unless the question itself demands them. Judge relevance, depth, development, balance, argument quality, use of examples, logical progression, and conclusion. Generic filler or buzzwords mentioned without explanation must NOT earn high content marks.
 
@@ -3754,6 +3737,7 @@ async function evalComprehensionAI(q,ans,wc,ep){
       parameters:subQuestions,
       totalScore:0,
       mistakes:[],
+      styleSuggestions:[],
       strengths:[],
       improvements:["Answer the questions in your own words instead of copying from the passage.","Focus on directly addressing what each question asks, using the passage only as a reference."],
       overallVerdict:"This response largely repeats the passage itself rather than answering the questions asked, so no credit can be given. Please write the answers in your own words.",
@@ -3775,7 +3759,7 @@ async function evalComprehensionAI(q,ans,wc,ep){
     const subQuestions=Array.from({length:numQ},(_,i)=>({name:"Question "+(i+1),score:0,max:perQMax,comment:"Not attempted."}));
     let result={parameters:subQuestions,totalScore:0};
     result=validateEvaluation(result,totalPossible);
-    result.mistakes=[];
+    result.mistakes=[];result.styleSuggestions=[];
     result.overallVerdict="No questions were attempted, so no credit can be given.";
     result.strengths=[];
     result.improvements=["Attempt each question, numbering your answers (1, 2, 3…) at the start of a new line as the exam requires."];
@@ -3800,8 +3784,6 @@ Each question is worth ${perQMax} marks total, split into two parts YOU score:
 
 ${missing.length?`The following question numbers were NOT attempted at all (no numbered answer found): ${missing.join(", ")}. Do not include them in your response — they are automatically scored 0.`:""}
 
-${GENUINE_ERROR_RULES}
-
 FIRST — VALIDITY CHECK: set top-level "isGibberish" to true only if EVERY attempted answer is random characters/keyboard mashing/completely unrelated to the passage (not a genuine attempt at all, not just wrong). If true, every score below must be 0.
 
 Respond ONLY with valid JSON, no markdown, no explanation outside JSON.`;
@@ -3809,10 +3791,10 @@ Respond ONLY with valid JSON, no markdown, no explanation outside JSON.`;
 
 ${labeled}
 
-Score CONTENT and GRAMMAR for each of these ${attemptedNums.length} question(s) using the rules above. ${eligibleForCorrection?`Also find genuine, objective language errors across the whole answer for "mistakes" — see the GENUINE LANGUAGE ERRORS rules above. Do NOT flag a correct sentence just because another phrasing would sound better.`:`The student wrote very little overall — return mistakes as [].`}
+Score CONTENT and GRAMMAR for each of these ${attemptedNums.length} question(s) using the rules above. ${eligibleForCorrection?`Also split language feedback into "mistakes" (genuine objective errors only, across the whole answer) and "styleSuggestions" (optional, non-scoring improvements). Never "correct" something merely because another phrasing is more natural — only objective errors belong in "mistakes".`:`The student wrote very little overall — return mistakes as [], styleSuggestions as [].`}
 
 Return ONLY this JSON:
-{"isGibberish":false,"subQuestions":[{"num":<question number>,"content":<0|0.5|1>,"grammar":<0|0.25|0.5>,"evidence":"<short 1-sentence note, no numbers>"}],"mistakes":[{"type":"Grammar|Spelling|Punctuation|Usage|Sentence Structure","original":"","corrected":""}],"strengths":["<no numbers>"],"improvements":["<no numbers>","<no numbers>"],"overallVerdict":"<2-3 honest sentences, ZERO numbers anywhere>"}`;
+{"isGibberish":false,"subQuestions":[{"num":<question number>,"content":<0|0.5|1>,"grammar":<0|0.25|0.5>,"evidence":"<short 1-sentence note, no numbers>"}],"mistakes":[{"type":"<Spelling|Grammar|Word Choice|Punctuation>","original":"","corrected":"","reason":""}],"styleSuggestions":[],"strengths":["<no numbers>"],"improvements":["<no numbers>","<no numbers>"],"overallVerdict":"<2-3 honest sentences, ZERO numbers anywhere>"}`;
   }else{
     // No numbered markers anywhere — code cannot reliably split the answer, so as a fallback the
     // AI estimates the boundaries itself (positionally, in question order) AND estimates each
@@ -3827,8 +3809,6 @@ Each question is worth ${perQMax} marks total, split into three parts:
 
 attempted=false (no genuine attempt at that question at all) → content, grammar, and wordCount must all be 0.
 
-${GENUINE_ERROR_RULES}
-
 FIRST — VALIDITY CHECK: set top-level "isGibberish" to true if the ENTIRE answer is blank, random characters, or completely unrelated to the passage/questions. If true, every score below must be 0.
 
 Respond ONLY with valid JSON, no markdown, no explanation outside JSON.`;
@@ -3838,10 +3818,10 @@ TOTAL WORD COUNT (whole answer): ${wc} words
 
 STEP 1 — Split the answer into ${numQ} answers, in question order, using the content to judge where each one ends.
 STEP 2 — Score CONTENT and GRAMMAR for each using the rules above, and estimate each one's WORD COUNT.
-STEP 3 — ${eligibleForCorrection?`Find genuine, objective language errors for "mistakes" as usual.`:`The student wrote very little overall — return mistakes as [].`}
+STEP 3 — ${eligibleForCorrection?`Split language feedback into "mistakes" and "styleSuggestions" as usual.`:`The student wrote very little overall — return mistakes as [], styleSuggestions as [].`}
 
 Return ONLY this JSON (${numQ} objects in "subQuestions", numbered 1 to ${numQ}):
-{"isGibberish":false,"subQuestions":[{"num":1,"attempted":true,"content":<0|0.5|1>,"grammar":<0|0.25|0.5>,"wordCount":<integer>,"evidence":"<short 1-sentence note, no numbers>"}],"mistakes":[{"type":"Grammar|Spelling|Punctuation|Usage|Sentence Structure","original":"","corrected":""}],"strengths":["<no numbers>"],"improvements":["<no numbers>","<no numbers>"],"overallVerdict":"<2-3 honest sentences, ZERO numbers anywhere>"}`;
+{"isGibberish":false,"subQuestions":[{"num":1,"attempted":true,"content":<0|0.5|1>,"grammar":<0|0.25|0.5>,"wordCount":<integer>,"evidence":"<short 1-sentence note, no numbers>"}],"mistakes":[{"type":"<Spelling|Grammar|Word Choice|Punctuation>","original":"","corrected":"","reason":""}],"styleSuggestions":[],"strengths":["<no numbers>"],"improvements":["<no numbers>","<no numbers>"],"overallVerdict":"<2-3 honest sentences, ZERO numbers anywhere>"}`;
   }
 
   try{
@@ -3886,9 +3866,11 @@ Return ONLY this JSON (${numQ} objects in "subQuestions", numbered 1 to ${numQ})
     result=validateEvaluation(result,totalPossible);
     if(!result)return null;
 
+    // §16/§22: GENUINE errors and STYLE suggestions stay in two separate lists — never merged.
     result.mistakes=validateCorrections(raw.mistakes).slice(0,8);
+    result.styleSuggestions=validateCorrections(raw.styleSuggestions).slice(0,8);
 
-    if(copyCheck.copied||isGibberish||!eligibleForCorrection){result.mistakes=[];}
+    if(copyCheck.copied||isGibberish||!eligibleForCorrection){result.mistakes=[];result.styleSuggestions=[];}
 
     const pct=totalPossible>0?Math.round((result.totalScore/totalPossible)*100):0;
     result.overallVerdict=(typeof raw.overallVerdict==="string"&&raw.overallVerdict.trim()&&!_NUMBER_PATTERN.test(raw.overallVerdict))
@@ -3973,7 +3955,7 @@ ${structPromptNote}${lengthPromptNote}
 
 STEP 3 — LANGUAGE: judge quality by frequency, severity, clarity impact, and recurrence — not a rigid errors-per-word formula. None = no significant genuine errors. Minor = small errors that don't affect meaning. Moderate = repeated issues reducing correctness/professionalism. Severe = frequent errors materially affecting clarity. Report "languageSeverity" as "none"|"minor"|"moderate"|"severe". IMPORTANT — your qualitative severity and your numeric "language" quality MUST agree: the system will enforce this regardless (none→up to 100%, minor→capped at 95%, moderate→capped at 80%, severe→capped at 60%), so score consistently with the severity you report rather than fighting the cap.
 
-${GENUINE_ERROR_RULES}
+GENUINE ERROR TEST (apply before labelling ANYTHING a Genuine Error rather than a Style Suggestion): "If this correction were not made, would a competent English examiner consider the original objectively wrong — ungrammatical, misspelled, mispunctuated, semantically incorrect, or structurally defective?" If the honest answer is no — the original is correct but another version is merely more elegant, more formal, more concise, or more native-sounding — it is a Style Suggestion, never a Genuine Error, however inelegant it reads. Do not invent a grammatical category to justify a stylistic preference (e.g. do not call something "article usage," "noun agreement," or "spelling" when the real, or only, issue is wordiness or word choice). Every "reason" must name the actual, specific linguistic problem, never a vague or inaccurate label.
 
 STEP 4 — CRITERION QUALITY (0.0 to 1.0 each, for EXACTLY these criteria — do not add, remove, or rename any):
 ${criteriaDescLine}
@@ -3981,9 +3963,12 @@ If an essential task requirement is missing, the criteria most related to conten
 
 ${typeGuidance}
 
-STEP 5 — LANGUAGE FEEDBACK (mistakes only — see GENUINE LANGUAGE ERRORS rules above):
-${eligibleForCorrection?`Find genuine, objective language errors across the whole answer for "mistakes", following the rules above exactly. Never "correct" something merely because another phrasing is more elegant, formal, concise, or native-like — e.g. "We request you to visit the branch", "at the earliest possible", or "it will be debited" are NOT errors merely because another construction is preferred. If there are no genuine errors, "mistakes" must be an empty array — never invent one to populate the section.`:
-`The student wrote only ${wc} words, below the ${correctionThreshold}-word minimum needed for this feature to be useful. Skip this step: return mistakes as [].`}
+STEP 5 — LANGUAGE FEEDBACK (mistakes + style suggestions):
+${eligibleForCorrection?`Split language feedback into TWO separate lists:
+- "mistakes": GENUINE, OBJECTIVE errors only (wrong tense/article/preposition/agreement, misspelling, run-on/fragment sentence, wrong punctuation). Each: {"type":"Spelling"|"Grammar"|"Word Choice"|"Punctuation","original":"<exact text>","corrected":"<exact fixed text>","reason":"<short reason, under 10 words>"}. NEVER include an entry where original and corrected are the same. Never "correct" something merely because another phrasing is more elegant, formal, concise, or native-like — e.g. "We request you to visit the branch", "at the earliest possible", or "it will be debited" are NOT grammar errors merely because another construction is preferred.
+- "styleSuggestions": OPTIONAL improvements only — a phrase that is already correct but where a more natural/idiomatic alternative exists in formal banking communication. Same object shape as mistakes. Nothing in this list may affect any quality score — it is feedback only.
+Cap each list at 8 entries. If there are no genuine errors, "mistakes" must be an empty array — never invent one to populate the section.`:
+`The student wrote only ${wc} words, below the ${correctionThreshold}-word minimum needed for this feature to be useful. Skip this step: return mistakes as [], styleSuggestions as [].`}
 
 HARD RULES:
 - NUMBERS MUST NEVER APPEAR in overallVerdict, strengths, or improvements — no score, fraction, or percentage anywhere in that text. Describe performance only in words.
@@ -3993,7 +3978,7 @@ HARD RULES:
 - Respond ONLY with valid JSON, no markdown, no explanation outside JSON.
 
 Return ONLY this JSON, every key present, in this order:
-{"analysis":{"attempted":true,"isGibberish":false,"majorlyOffTask":false,"taskRequirements":[{"id":"requirement_1","description":"","importance":"essential","satisfied":true,"quality":1,"evidence":""}],"languageSeverity":"none"},"criterionEvaluation":[${criteriaList.map(c=>`{"id":"${c.id}","quality":0.0,"evidence":""}`).join(",")}],"mistakes":[{"type":"Grammar|Spelling|Punctuation|Usage|Sentence Structure","original":"","corrected":""}],"strengths":["<no numbers>"],"improvements":["<no numbers>"],"overallVerdict":"<no numbers>"}`;
+{"analysis":{"attempted":true,"isGibberish":false,"majorlyOffTask":false,"taskRequirements":[{"id":"requirement_1","description":"","importance":"essential","satisfied":true,"quality":1,"evidence":""}],"languageSeverity":"none"},"criterionEvaluation":[${criteriaList.map(c=>`{"id":"${c.id}","quality":0.0,"evidence":""}`).join(",")}],"mistakes":[{"type":"Grammar","original":"","corrected":"","reason":""}],"styleSuggestions":[],"strengths":["<no numbers>"],"improvements":["<no numbers>"],"overallVerdict":"<no numbers>"}`;
 
   const p=`SECTION TYPE: ${typeName}
 WORD LIMIT: ${q.wordLimit}
@@ -4002,7 +3987,7 @@ QUESTION: ${q.text}
 STUDENT'S ANSWER: ${ans||"(blank)"}
 WORD COUNT: ${wc} words
 
-Follow the steps in the system instructions in order: extract task requirements from the question, run the validity check, judge language severity, then give criterion quality (0.0-1.0) for exactly: ${criteriaIdsLine}. Then produce the genuine-error mistakes list, strengths, improvements, and overallVerdict as instructed.`;
+Follow the steps in the system instructions in order: extract task requirements from the question, run the validity check, judge language severity, then give criterion quality (0.0-1.0) for exactly: ${criteriaIdsLine}. Then produce the corrected answer / mistakes / style suggestions, strengths, improvements, and overallVerdict as instructed.`;
 
   try{
     const res=await fetch(ep,{method:"POST",headers:{"Content-Type":"application/json"},
@@ -4045,10 +4030,14 @@ Follow the steps in the system instructions in order: extract task requirements 
       if(qualityById[structId].quality>cap)qualityById[structId].quality=cap;
     }
 
+    // §16/§22: keep GENUINE errors and STYLE suggestions as two separate, independently-
+    // validated lists — never merged into one array. Style suggestions must never influence any
+    // score (they're validated but excluded entirely from the language-severity computation).
     const genuineMistakes=validateCorrections(raw.mistakes);
+    const styleSuggestions=validateCorrections(raw.styleSuggestions);
 
-    // §12: CODE-enforced language cap, computed from the validated genuine mistakes list and the
-    // AI's reported severity — the stricter of the two always wins.
+    // §12: CODE-enforced language cap, computed from the validated genuine mistakes list (never
+    // styleSuggestions) and the AI's reported severity — the stricter of the two always wins.
     // Must run BEFORE calculateFinalScore, since that's the one place quality×max happens.
     applyLanguageConsistencyCap(qualityById,analysis.languageSeverity,genuineMistakes);
 
@@ -4061,8 +4050,9 @@ Follow the steps in the system instructions in order: extract task requirements 
     result.wordLimitDisplay=q.wordLimit||"";
 
     result.mistakes=genuineMistakes.slice(0,8);
+    result.styleSuggestions=styleSuggestions.slice(0,8);
 
-    if(isGibberish||!eligibleForCorrection){result.mistakes=[];}
+    if(isGibberish||!eligibleForCorrection){result.mistakes=[];result.styleSuggestions=[];}
 
     const pct=max>0?Math.round((result.totalScore/max)*100):0;
     result.overallVerdict=(typeof raw.overallVerdict==="string"&&raw.overallVerdict.trim()&&!_NUMBER_PATTERN.test(raw.overallVerdict))
@@ -4089,16 +4079,8 @@ const evaluateComprehension=evalComprehensionAI;
 function scoreRetryHTML(onclickStr){
   return '<button onclick="'+onclickStr+'" class="btn bg bsm" style="font-size:.68rem;font-weight:600;padding:3px 10px;border-radius:6px;line-height:1.3">Retry</button>';
 }
-function aiFailHTML(retryOnclick,failCount){
-  const btn=`<button onclick="${retryOnclick}" style="margin-left:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--accent);cursor:pointer;font-size:.75rem;font-family:var(--font)">Retry</button>`;
-  if((failCount||0)>=3){
-    // Repeated failures right after submit are usually load on the AI service itself, not
-    // something one more instant retry here is likely to fix — point the student to Progress,
-    // where the exact same Retry AI Evaluation action is always available later. The button
-    // above is kept either way, as requested — this is an additional note, not a replacement.
-    return `<div class="ai-notice"><strong>AI evaluation failed.</strong>${btn}<div style="margin-top:8px">AI evaluations are currently experiencing high traffic, which may cause temporary errors. To view your results, please go to "My Progress" from the home screen, select the test you completed, and tap "Retry AI Evaluation."</div></div>`;
-  }
-  return `<div class="ai-notice"><strong>AI evaluation failed.</strong>${btn}</div>`;
+function aiFailHTML(retryOnclick){
+  return `<div class="ai-notice"><strong>AI evaluation failed.</strong> <button onclick="${retryOnclick}" style="margin-left:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--accent);cursor:pointer;font-size:.75rem;font-family:var(--font)">Retry</button></div>`;
 }
 // Parses the AI's JSON reply robustly: strips markdown code fences, then — in case the model
 // added any stray prose before/after the object despite being told not to — trims to the outer
@@ -4129,7 +4111,7 @@ function renderCorrectedText(text){
 // Renders one labelled block of correction cards (shared by the Genuine Errors and Style
 // Suggestions sections below — spec §16/§22 requires these stay visually separate, never merged).
 function _renderMistakeCards(list){
-  const typeColor={Spelling:'var(--red)',Grammar:'var(--accent)',Usage:'var(--teal)',Punctuation:'var(--amber)',"Sentence Structure":'var(--purple,#8b5cf6)'};
+  const typeColor={Spelling:'var(--red)',Grammar:'var(--accent)',"Word Choice":'var(--teal)',Punctuation:'var(--amber)',Style:'var(--t2)'};
   return '<div style="display:flex;flex-direction:column;gap:8px;margin-top:6px">'+
     list.map(function(m){
       const col=typeColor[m.type]||'var(--t2)';
@@ -4138,6 +4120,7 @@ function _renderMistakeCards(list){
           '<span style="font-size:.62rem;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;color:'+col+';border:1px solid '+col+';border-radius:999px;padding:1px 8px;flex-shrink:0">'+escapeHTML(m.type)+'</span>'+
           '<span style="font-size:.8rem"><s style="color:var(--red);opacity:.8">'+escapeHTML(m.original)+'</s> → <strong style="color:var(--green)">'+escapeHTML(m.corrected)+'</strong></span>'+
         '</div>'+
+        (m.reason?'<div style="font-size:.72rem;color:var(--t2);margin-top:4px">'+escapeHTML(m.reason)+'</div>':'')+
       '</div>';
     }).join('')+
   '</div>';
@@ -4179,11 +4162,12 @@ function renderCorrectedAnswer(result,originalAnswer){
   const wrap=document.getElementById('r-corrected');
   if(!card||!wrap)return;
   const mistakes=Array.isArray(result.mistakes)?result.mistakes:[];
+  const styleSuggestions=Array.isArray(result.styleSuggestions)?result.styleSuggestions:[];
   // Nothing to show at all (e.g. answer too short for the correction feature) — hide the card.
-  if(!mistakes.length){card.style.display='none';return;}
+  if(!mistakes.length&&!styleSuggestions.length){card.style.display='none';return;}
   card.style.display='';
   let html='';
-  if(typeof originalAnswer==="string"&&originalAnswer.trim()){
+  if(typeof originalAnswer==="string"&&originalAnswer.trim()&&mistakes.length){
     html+='<div style="font-size:.6rem;font-family:var(--mono);color:var(--t2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">Your Answer — Errors Marked Inline</div>'
       +'<div class="model-box" style="white-space:pre-wrap;line-height:1.85;margin-bottom:14px">'+renderInlineHighlightedAnswer(originalAnswer,mistakes)+'</div>'
       +'<div style="display:flex;gap:16px;flex-wrap:wrap;font-size:.68rem;color:var(--t2);margin:-6px 0 14px">'
@@ -4191,10 +4175,15 @@ function renderCorrectedAnswer(result,originalAnswer){
         +'<span style="display:inline-flex;align-items:center;gap:5px"><span style="width:9px;height:9px;border-radius:2px;background:var(--gdim);border:1px solid var(--green);display:inline-block"></span>Corrected</span>'
       +'</div>';
   }
-  // Only ever one section now — genuine errors. There is no Style Suggestions list anymore.
+  // §16/§22: two clearly separate sections — GENUINE LANGUAGE ERRORS vs STYLE SUGGESTIONS.
+  // If there are no genuine errors at all, say so explicitly rather than showing nothing.
   html+='<div style="margin-top:14px"><div class="blbl-s">Genuine Language Errors</div>'+
-    _renderMistakeCards(mistakes)+
+    (mistakes.length?_renderMistakeCards(mistakes):
+      '<div style="font-size:.78rem;color:var(--t2);margin-top:6px">No significant language errors found.</div>')+
   '</div>';
+  if(styleSuggestions.length){
+    html+='<div style="margin-top:14px"><div class="blbl-s">Style Suggestions</div>'+_renderMistakeCards(styleSuggestions)+'</div>';
+  }
   wrap.innerHTML=html;
 }
 function renderAIBlock(result,max){
@@ -4289,7 +4278,7 @@ async function runAI(ans,wc,wpm){
     } else {
       _lastAIArgs.fails=1;
       document.getElementById("r-score").innerHTML=scoreRetryHTML("retryRunAI()");
-      document.getElementById("r-ai").innerHTML=aiFailHTML("retryRunAI()",_lastAIArgs.fails);
+      document.getElementById("r-ai").innerHTML=aiFailHTML("retryRunAI()");
     }
   }
 }
@@ -4311,7 +4300,7 @@ async function retryRunAI(){
   } else {
     _lastAIArgs.fails=(_lastAIArgs.fails||1)+1;
     document.getElementById("r-score").innerHTML=scoreRetryHTML("retryRunAI()");
-    aiEl.innerHTML=aiFailHTML("retryRunAI()",_lastAIArgs.fails);
+    aiEl.innerHTML=aiFailHTML("retryRunAI()");
   }
   _practiceRetryInFlight=false; // re-enabled only now — either the new score rendered, or a fresh Retry button just appeared
   try{
