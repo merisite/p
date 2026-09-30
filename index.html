@@ -3655,7 +3655,15 @@ function applyLanguageConsistencyCap(qualityById,aiSeverityRaw,genuineMistakes){
 
 // Type-specific grading guidance injected into the AI prompt (spec §29-33).
 const TYPE_GUIDANCE={
-  essay:`ESSAY-SPECIFIC RULES: Do not require exact factual points unless the question itself demands them. Judge relevance, depth, development, balance, argument quality, use of examples, logical progression, and conclusion. Generic filler or buzzwords mentioned without explanation must NOT earn high content marks.`,
+  essay:`ESSAY-SPECIFIC RULES: Do not require exact factual points unless the question itself demands them. Judge relevance, depth, development, balance, argument quality, use of examples, logical progression, and conclusion. Generic filler or buzzwords mentioned without explanation must NOT earn high content marks.
+
+ESSAY QUALITY CALIBRATION (applies to the "content" quality number specifically): do not award a very high quality score merely because the essay is relevant, grammatical, well structured, and fluent — polish alone never justifies a high band. Use these bands:
+0.90-1.00: ONLY when the essay fully addresses the task, develops the major arguments clearly, demonstrates sufficient depth, uses relevant examples/evidence where appropriate, maintains logical progression, and reaches a meaningful conclusion. There should be no substantial content gap.
+0.75-0.89: Strong overall treatment with good task coverage and development, but with some limitations in depth, balance, specificity, examples, or argument development.
+0.60-0.74: Adequate and relevant response, but ideas are somewhat general, repetitive, underdeveloped, or insufficiently supported.
+0.40-0.59: Weak treatment. Some relevant points are present, but important aspects are underdeveloped, missing, repetitive, or superficial.
+0.01-0.39: Very weak content, major task gaps, serious irrelevance, or very limited development.
+Do not award 0.90 or above for an essay that merely sounds polished.`,
   situation:`SITUATION-ANALYSIS RULES: Reward understanding of the immediate problem, priority of actions, customer safety, correct banking procedure, practicality, professional judgement, escalation where appropriate, and prevention/follow-up. Penalise generic promises ("I will take necessary action" with no specifics), unrealistic actions, ignoring the central problem, unsafe recommendations, or actions that violate the scenario. Do not compare only against the model answer's exact wording — many different sound approaches can be equally correct.`,
   email:`EMAIL-SPECIFIC RULES: Check recipient/context, subject when appropriate, salutation, purpose, whether ALL requested information/actions were addressed, professional tone, a clear action/request, and closing. Do NOT invent missing details (e.g. a name or exact amount the question never gave) and do not penalise the student for not inventing them either.`,
   report:`REPORT-SPECIFIC RULES: Determine from the actual question who the report is for, what event/topic it covers, date/time, purpose, findings/activities/outcomes, and recommendations. Do not automatically demand every possible field for every report — only what this specific question calls for.`,
