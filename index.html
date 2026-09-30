@@ -3061,8 +3061,10 @@ function updateMockSubmitGuard(){
 }
 /* submitMock moved to progress system below */
 function showResult(ans,wc,wpm,taken){
-  document.getElementById("r-back-btn").style.display="none";
-  _savedResultReturnScreen=null; // a fresh result overrides any stale saved-result destination
+  document.getElementById("r-back-btn").style.display="";
+  _savedResultReturnScreen=null; // a fresh result overrides any stale saved-result destination — this
+  // makes closeSavedResult() fall back to _instrReturnTo, i.e. the exact practice list/tab this
+  // question was opened from (or Home if it wasn't reached from a list at all).
   if(document.fullscreenElement){
     (document.exitFullscreen?.()||Promise.resolve()).catch(()=>{});
   }
@@ -3083,8 +3085,9 @@ function showResult(ans,wc,wpm,taken){
   document.getElementById("r-ai").innerHTML='<div class="loading-row"><div class="spin"></div>Evaluating...</div>';
 }
 function showMockResult(taken){
-  document.getElementById("r-back-btn").style.display="none";
-  _savedResultReturnScreen=null; // a fresh result overrides any stale saved-result destination
+  document.getElementById("r-back-btn").style.display="";
+  _savedResultReturnScreen=null; // a fresh result overrides any stale saved-result destination — this
+  // makes closeSavedResult() fall back to _instrReturnTo, i.e. the mock list this attempt started from.
   document.getElementById("r-single").style.display="none";
   document.getElementById("r-mock").style.display="";
   document.getElementById("r-try-btn").style.display="none";
@@ -3183,12 +3186,31 @@ async function runAIMock(){
         if(scoreEl)scoreEl.textContent="AI unavailable";
         if(aiEl)aiEl.innerHTML='<div class="ai-notice">AI evaluation not available. Check Worker URL in Admin → Settings.</div>';
       } else {
-        if(scoreEl)scoreEl.textContent="AI failed";
+        if(scoreEl)scoreEl.innerHTML=scoreRetryHTML("retryMockAI("+i+")");
         MS.aiFails=MS.aiFails||{};MS.aiFails[i]=1;
         if(aiEl)aiEl.innerHTML=aiFailHTML("retryMockAI("+i+")");
       }
     }
   }
+  // If every attempted section failed, the Total Score tile never got a real value from
+  // recomputeMockTotal() above (it only writes when totMax>0) and was left stuck on its
+  // "Scoring…" placeholder forever. Give it its own Retry (re-runs every failed section).
+  {
+    const {totMax}=recomputeMockTotal();
+    const tot=document.getElementById("r-total-score");
+    if(tot&&totMax===0){
+      const anyFailed=MS.aiFails&&Object.keys(MS.aiFails).length>0;
+      tot.innerHTML=anyFailed?scoreRetryHTML("retryAllFailedMockAI()"):"0/0";
+    }
+  }
+}
+async function retryAllFailedMockAI(){
+  const tot=document.getElementById("r-total-score");
+  if(tot)tot.innerHTML='<span class="score-pending"><span class="spin-sm"></span>Scoring…</span>';
+  const failedIdx=Object.keys(MS.aiFails||{}).map(Number).filter(function(i){return !MS.aiResults||!MS.aiResults[i];});
+  for(const i of failedIdx){await retryMockAI(i);}
+  const {totMax}=recomputeMockTotal();
+  if(tot&&totMax===0)tot.innerHTML=scoreRetryHTML("retryAllFailedMockAI()");
 }
 let _mockRetryInFlight={};
 async function retryMockAI(idx){
@@ -3219,7 +3241,7 @@ async function retryMockAI(idx){
       updateProgressEntry(MS.progressId,patch);
     }
   } else {
-    if(scoreEl)scoreEl.textContent="AI failed";
+    if(scoreEl)scoreEl.innerHTML=scoreRetryHTML("retryMockAI("+idx+")");
     MS.aiFails=MS.aiFails||{};MS.aiFails[idx]=(MS.aiFails[idx]||1)+1;
     if(aiEl)aiEl.innerHTML=aiFailHTML("retryMockAI("+idx+")");
   }
@@ -4043,6 +4065,12 @@ Follow the steps in the system instructions in order: extract task requirements 
 const evaluateAnswer=evalWithAI;
 const evaluateComprehension=evalComprehensionAI;
 
+// Small "Retry" button for a score tile itself (as opposed to the larger AI-feedback card, which
+// already has its own retry via aiFailHTML) — so a score tile stuck on the "Scoring…" placeholder
+// after a failed evaluation always has its own way to try again, right where the number would be.
+function scoreRetryHTML(onclickStr){
+  return '<button onclick="'+onclickStr+'" class="btn bg bsm" style="font-size:.68rem;font-weight:600;padding:3px 10px;border-radius:6px;line-height:1.3">Retry</button>';
+}
 function aiFailHTML(retryOnclick){
   return `<div class="ai-notice"><strong>AI evaluation failed.</strong> <button onclick="${retryOnclick}" style="margin-left:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--accent);cursor:pointer;font-size:.75rem;font-family:var(--font)">Retry</button></div>`;
 }
@@ -4237,9 +4265,11 @@ async function runAI(ans,wc,wpm){
     try{const ls=localStorage.getItem("dpt_data");if(ls){ep=JSON.parse(ls)?.siteSettings?.apiProxy||"";}}catch(e){}
     ep=ep||cfg.apiProxy||"";
     if(!ep){
+      document.getElementById("r-score").textContent="—";
       document.getElementById("r-ai").innerHTML='<div class="ai-notice"><strong>AI evaluation not configured.</strong> Add your Cloudflare Worker URL in Admin → Settings → AI Evaluation Proxy.</div>';
     } else {
       _lastAIArgs.fails=1;
+      document.getElementById("r-score").innerHTML=scoreRetryHTML("retryRunAI()");
       document.getElementById("r-ai").innerHTML=aiFailHTML("retryRunAI()");
     }
   }
@@ -4261,6 +4291,7 @@ async function retryRunAI(){
     updateProgressEntry(_lastAIArgs.progressId,{score:result.totalScore+"/"+q.marks,parameters:result.parameters,aiResult:result});
   } else {
     _lastAIArgs.fails=(_lastAIArgs.fails||1)+1;
+    document.getElementById("r-score").innerHTML=scoreRetryHTML("retryRunAI()");
     aiEl.innerHTML=aiFailHTML("retryRunAI()");
   }
   _practiceRetryInFlight=false; // re-enabled only now — either the new score rendered, or a fresh Retry button just appeared
@@ -4455,7 +4486,11 @@ function getProgress(){
 let _savedResultReturnScreen=null;
 function closeSavedResult(){
   document.getElementById('r-back-btn').style.display='none';
-  showS(_savedResultReturnScreen||'home',{skipHash:true});
+  const dest=_savedResultReturnScreen||_instrReturnTo||'home';
+  showS(dest,{skipHash:true});
+  const fallbackHash=(dest===_instrReturnTo&&_instrReturnHash&&_instrReturnHash!=='#exam-guard'&&_instrReturnHash!=='#result-guard')?_instrReturnHash:'#'+dest;
+  history.replaceState(null,'',location.pathname+location.search+fallbackHash);
+  _savedResultReturnScreen=null;
 }
 function viewSavedResult(kind,id){
   const entry=(getProgress()||[]).find(function(e){return e.id===id;});
