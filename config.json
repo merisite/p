@@ -1950,7 +1950,7 @@
       "marks": 15,
       "difficulty": "medium",
       "active": true,
-      "mockNo": null,
+      "mockNo": 9,
       "productIds": [
         "IBPSPO"
       ]
