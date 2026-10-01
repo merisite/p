@@ -1150,6 +1150,7 @@ header .h-brand:hover{background:var(--brut-tint);}
         <div class="stile"><div class="stile-v" id="r-wpm">-</div><div class="stile-l">WPM</div></div>
         <div class="stile"><div class="stile-v" id="r-time">-</div><div class="stile-l">Time</div></div>
       </div>
+      <div id="r-score-note" class="ai-notice" style="display:none;margin:-4px 0 14px"></div>
       <div class="rcard"><div class="rcard-h">Question</div><div class="rcard-b"><div class="model-box" id="r-question" style="border-left-color:var(--accent)"></div></div></div>
       <div class="rcard"><div class="rcard-h">Your Answer</div><div class="rcard-b"><div class="ans-box" id="r-ans"></div></div></div>
       <div class="rcard"><div class="rcard-h">AI Feedback</div><div class="rcard-b"><div id="r-ai"><div class="loading-row"><div class="spin"></div>Evaluating...</div></div></div></div>
@@ -1160,6 +1161,7 @@ header .h-brand:hover{background:var(--brut-tint);}
     <!-- Full mock result -->
     <div id="r-mock" style="display:none">
       <div class="score-row" id="r-mock-stats"></div>
+      <div id="r-total-note" class="ai-notice" style="display:none;margin:-4px 0 14px"></div>
       <div id="r-mock-sections"></div>
     </div>
     <div class="ract">
@@ -3081,6 +3083,7 @@ function showResult(ans,wc,wpm,taken){
   document.getElementById("r-words").textContent=wc;document.getElementById("r-wpm").textContent=wpm;
   const mm=Math.floor(taken/60),ss=taken%60;document.getElementById("r-time").textContent=mm+"m "+ss+"s";
   document.getElementById("r-score").innerHTML='<span class="score-pending"><span class="spin-sm"></span>Scoring…</span>';
+  setAITrafficNote("r-score-note",false);
   document.getElementById("r-question").textContent=CQ?.text||"";
   document.getElementById("r-ans").textContent=ans||"(No answer submitted)";
   document.getElementById("r-model").textContent=CQ?.modelAnswer||"";
@@ -3100,6 +3103,7 @@ function showMockResult(taken){
   const attempted=Object.values(MS.a).filter(a=>a&&a.trim()).length;
   const totalWC=Object.values(MS.a).reduce((s,a)=>s+cw(a||""),0);
   document.getElementById("r-sub").textContent=`${attempted} of ${MS.s.length} sections attempted · ${mm}m ${ss}s`;
+  setAITrafficNote("r-total-note",false);
   document.getElementById("r-mock-stats").innerHTML=`
     <div class="stile"><div class="stile-v">${attempted}/${MS.s.length}</div><div class="stile-l">Sections Done</div></div>
     <div class="stile"><div class="stile-v">${totalWC}</div><div class="stile-l">Total Words</div></div>
@@ -3248,6 +3252,7 @@ async function retryMockAI(idx){
     MS.aiFails=MS.aiFails||{};MS.aiFails[idx]=(MS.aiFails[idx]||1)+1;
     if(aiEl)aiEl.innerHTML=aiFailHTML("retryMockAI("+idx+")",MS.aiFails[idx]);
   }
+  updateMockTrafficNote();
   _mockRetryInFlight[idx]=false; // re-enabled only now — either the new score rendered, or a fresh Retry button just appeared
   try{
     sessionStorage.setItem('dpt_result_html', document.getElementById('result').innerHTML);
@@ -4181,15 +4186,28 @@ const evaluateComprehension=evalComprehensionAI;
 function scoreRetryHTML(onclickStr){
   return '<button onclick="'+onclickStr+'" class="btn bg bsm" style="font-size:.68rem;font-weight:600;padding:3px 10px;border-radius:6px;line-height:1.3">Retry</button>';
 }
+// failCount counts TOTAL failures: the first failed evaluation is 1, each Retry that fails again
+// adds 1. So "retried 3 times and still failing" means failCount >= 4.
+const AI_RETRIES_BEFORE_NOTE=3;
+const AI_TRAFFIC_NOTE='AI evaluations are currently experiencing high traffic, which may cause temporary errors. To view your marks and results, please go to "My Progress" from the home screen, select the test you completed, and tap "Retry AI Evaluation".';
+function setAITrafficNote(elId,show){
+  const el=document.getElementById(elId);
+  if(!el)return;
+  if(show){el.textContent=AI_TRAFFIC_NOTE;el.style.display="";}
+  else{el.style.display="none";el.textContent="";}
+}
+// Mock: show the note under Total Score once ANY still-unscored section has failed after 3 retries.
+function updateMockTrafficNote(){
+  let show=false;
+  try{
+    const f=(MS&&MS.aiFails)||{},r=(MS&&MS.aiResults)||{};
+    show=Object.keys(f).some(function(i){return !r[i]&&((f[i]||1)-1)>=AI_RETRIES_BEFORE_NOTE;});
+  }catch(e){}
+  setAITrafficNote("r-total-note",show);
+}
 function aiFailHTML(retryOnclick,failCount){
+  // The Retry button is always shown, however many times it has failed.
   const btn=`<button onclick="${retryOnclick}" style="margin-left:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--accent);cursor:pointer;font-size:.75rem;font-family:var(--font)">Retry</button>`;
-  if((failCount||0)>=3){
-    // Repeated failures right after submit are usually load on the AI service itself, not
-    // something one more instant retry here is likely to fix — point the student to Progress,
-    // where the exact same Retry AI Evaluation action is always available later. The button
-    // above is kept either way, as requested — this is an additional note, not a replacement.
-    return `<div class="ai-notice"><strong>AI evaluation failed.</strong>${btn}<div style="margin-top:8px">AI evaluations are currently experiencing high traffic, which may cause temporary errors. To view your results, please go to "My Progress" from the home screen, select the test you completed, and tap "Retry AI Evaluation."</div></div>`;
-  }
   return `<div class="ai-notice"><strong>AI evaluation failed.</strong>${btn}</div>`;
 }
 // Parses the AI's JSON reply robustly: strips markdown code fences, then — in case the model
@@ -4397,6 +4415,7 @@ async function retryRunAI(){
   const result=await evalWithAI(q,ans,wc,wpm);
   if(result){
     document.getElementById("r-score").textContent=result.totalScore+"/"+q.marks;
+    setAITrafficNote("r-score-note",false);
     aiEl.innerHTML=renderAIBlock(result,q.marks);
     renderCorrectedAnswer(result,ans);
     _lastAIArgs.result=result;
@@ -4405,6 +4424,7 @@ async function retryRunAI(){
     _lastAIArgs.fails=(_lastAIArgs.fails||1)+1;
     document.getElementById("r-score").innerHTML=scoreRetryHTML("retryRunAI()");
     aiEl.innerHTML=aiFailHTML("retryRunAI()",_lastAIArgs.fails);
+    setAITrafficNote("r-score-note",(_lastAIArgs.fails-1)>=AI_RETRIES_BEFORE_NOTE);
   }
   _practiceRetryInFlight=false; // re-enabled only now — either the new score rendered, or a fresh Retry button just appeared
   try{
@@ -4622,6 +4642,7 @@ function viewSavedResult(kind,id){
     const taken=entry.timeSec||0,mm=Math.floor(taken/60),ss=taken%60;
     document.getElementById('r-time').textContent=mm+'m '+ss+'s';
     document.getElementById('r-score').textContent=entry.score||'—';
+    setAITrafficNote('r-score-note',false);
     document.getElementById('r-question').textContent=entry.questionFull||entry.question||'';
     document.getElementById('r-ans').textContent=entry.answerFull||entry.answer||'(No answer saved)';
     document.getElementById('r-model').textContent=entry.modelAnswer||'';
