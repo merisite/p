@@ -2370,6 +2370,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1790885164587",
+      "examId": "ibps_po",
+      "type": "comprehension",
+      "text": "",
+      "modelAnswer": "",
+      "label": "18 Read the passage and answer the questions that follow in your own words",
+      "wordLimit": "150 words (30-40 words per answer)",
+      "marks": 10,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": 9,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
