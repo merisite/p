@@ -1838,7 +1838,7 @@
       "marks": 15,
       "difficulty": "medium",
       "active": true,
-      "mockNo": null,
+      "mockNo": 8,
       "productIds": [
         "IBPSPO"
       ]
