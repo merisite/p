@@ -406,14 +406,17 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .tier-banner.strong{background:var(--gdim);border-color:var(--gborder)}
 .tier-banner.moderate{background:rgba(180,83,9,.08);border-color:rgba(180,83,9,.25)}
 .tier-banner.weak{background:var(--rdim);border-color:var(--rborder)}
+.tier-banner.good{background:var(--adim);border-color:var(--aborder)}
 .tier-icon{width:38px;height:38px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:800}
 .tier-banner.strong .tier-icon{background:var(--green);color:#fff}
 .tier-banner.moderate .tier-icon{background:var(--amber);color:#fff}
 .tier-banner.weak .tier-icon{background:var(--red);color:#fff}
+.tier-banner.good .tier-icon{background:var(--accent);color:#12151C}
 .tier-title{font-size:.96rem;font-weight:800;margin-bottom:2px}
 .tier-banner.strong .tier-title{color:var(--green)}
 .tier-banner.moderate .tier-title{color:var(--amber)}
 .tier-banner.weak .tier-title{color:var(--red)}
+.tier-banner.good .tier-title{color:var(--accent)}
 .tier-sub{font-size:.76rem;color:var(--t2)}
 .tier-score{margin-left:auto;text-align:right;flex-shrink:0}
 .tier-score-v{font-size:1.15rem;font-weight:800;font-family:var(--mono);color:var(--t)}
@@ -3649,14 +3652,75 @@ function stricterSeverity(a,b){
 // Applies the cap in place to a {quality,evidence} entry for the profile's "language" criterion.
 // Returns the effective severity actually applied so callers can keep verdict text consistent
 // with the number (e.g. deciding whether "No significant language errors found." is accurate).
-function applyLanguageConsistencyCap(qualityById,aiSeverityRaw,genuineMistakes){
+function applyLanguageConsistencyCap(qualityById,aiSeverityRaw,genuineMistakes,opts){
   const entry=qualityById&&qualityById.language;
   const countSeverity=languageSeverityFromMistakeCount((genuineMistakes||[]).length);
   const aiSeverity=LANGUAGE_SEVERITY_ORDER.includes(aiSeverityRaw)?aiSeverityRaw:countSeverity;
   const effectiveSeverity=stricterSeverity(aiSeverity,countSeverity);
-  const cap=LANGUAGE_SEVERITY_CAPS[effectiveSeverity];
+  let cap=LANGUAGE_SEVERITY_CAPS[effectiveSeverity];
+  if(opts&&opts.essay)cap=Math.min(ESSAY_LANGUAGE_SEVERITY_CAPS[effectiveSeverity],essayLanguageDensityCap((genuineMistakes||[]).length,opts.wc));
   if(entry&&typeof entry.quality==="number"&&entry.quality>cap)entry.quality=cap;
   return effectiveSeverity;
+}
+
+// ---- ESSAY CALIBRATION (top-end strictness; essay type only) ----
+// The AI still reports only 0.0-1.0 quality per criterion — it never states marks. These helpers
+// add CEILINGS on that quality (same pattern as the requirement/underlength/language caps), so
+// that a polished-but-shallow, list-like, loosely-relevant or error-ridden essay cannot drift into
+// the 0.90+ range. Missing/invalid diagnostics => no ceiling (old behaviour), so this is safe.
+const ESSAY_DIAG_CAPS={
+  relevance:{direct:1,mostly:0.85,partial:0.65,loose:0.45},
+  development:{developed:1,mostly:0.89,partial:0.75,listlike:0.60},
+  coverage:{full:1,most:0.89,limited:0.70,narrow:0.50}
+};
+function normalizeEssayDiagnostics(raw){
+  if(!raw||typeof raw!=="object")return null;
+  const out={};let any=false;
+  Object.keys(ESSAY_DIAG_CAPS).forEach(k=>{
+    const v=String(raw[k]||"").trim().toLowerCase();
+    if(Object.prototype.hasOwnProperty.call(ESSAY_DIAG_CAPS[k],v)){out[k]=v;any=true;}
+  });
+  return any?out:null;
+}
+function essayContentCeiling(diag){
+  if(!diag)return 1;
+  return Math.min(1,...Object.keys(diag).map(k=>ESSAY_DIAG_CAPS[k][diag[k]]));
+}
+// Essay language: stricter severity caps than the shared table, plus an error-DENSITY cap so
+// repeated basic errors cannot hide behind a lenient AI severity or a short list of flagged items.
+const ESSAY_LANGUAGE_SEVERITY_CAPS={none:1,minor:0.95,moderate:0.75,severe:0.55};
+function essayLanguageDensityCap(n,wc){
+  const dens=wc>0?n/wc*100:0; // genuine errors per 100 words
+  if(n>=12||dens>=6)return 0.45;
+  if(n>=6||dens>=3.5)return 0.55;
+  if(n>=3||dens>=2.5)return 0.75;
+  return 1;
+}
+// Attempt tier for the result banner. "Strong" is earned only when the numbers AND the quality
+// signals agree; otherwise it falls back to Good / Needs Improvement / Weak.
+function computeEssayTier(pct,sig){
+  const limits=[];
+  const d=sig.diag||{};
+  if(sig.majorlyOffTask)limits.push("task fulfilment");
+  if(d.relevance==="partial"||d.relevance==="loose")limits.push("relevance of the points to the exact topic");
+  if(d.development==="partial"||d.development==="listlike")limits.push("development of the points");
+  if(d.coverage==="limited"||d.coverage==="narrow")limits.push("coverage of the topic's main dimensions");
+  if(sig.langQ<0.75)limits.push("accuracy of the English");
+  if(typeof sig.wlCapPct==="number"&&sig.wlCapPct<0.85)limits.push("adherence to the word limit");
+  if(sig.contentQ<0.80&&!limits.some(x=>x!=="accuracy of the English"&&x!=="adherence to the word limit"))limits.push("depth and quality of the content");
+  let tier;
+  if(pct>=75&&!limits.length)tier="strong";
+  else if(pct>=60)tier="good";
+  else if(pct>=45)tier="moderate";
+  else tier="weak";
+  // Content is the heaviest criterion: format/language marks alone must not lift an essay whose
+  // content is below the "good/adequate" band into Good or Strong.
+  if(sig.contentQ<0.65&&(tier==="strong"||tier==="good"))tier="moderate";
+  return{tier,limits};
+}
+function essayNeutralVerdict(info){
+  const label={good:"reasonable, fairly good",moderate:"partial",weak:"weak"}[info.tier]||"reasonable";
+  return`This is a ${label} attempt.`+(info.limits.length?` It is held back mainly by the ${info.limits.join(", ")}.`:"")+` See the parameter breakdown above for specific strengths and gaps.`;
 }
 
 // Type-specific grading guidance injected into the AI prompt (spec §29-33).
@@ -3666,18 +3730,28 @@ GENUINE ERROR TEST: "If this were not changed, would a competent English examine
 Use ONLY these five types: Grammar, Spelling, Punctuation, Usage, Sentence Structure. There is no "Word Choice" category, and there is no separate style-suggestions list — a merely-preferred synonym or rephrasing is never reported at all, in any form.
 Scan the ENTIRE answer, sentence by sentence, before returning the list — check subject-verb agreement, tense errors, incorrect verb forms, article errors, preposition errors, pronoun errors, singular/plural errors, auxiliary/modal errors, incorrect usage, sentence fragments, run-on sentences, punctuation errors, spelling errors, and incorrect sentence structures. Do not stop scanning after the first error found.
 Prefer returning NO error over incorrectly flagging a correct sentence as wrong — but do not become so cautious that obvious errors are missed. The goal is HIGH PRECISION and GOOD COVERAGE together.
-If there are more than 8 genuine errors in the whole answer, scan it completely first, then return only the 8 most important for the displayed result, prioritized: (1) clear grammatical errors, (2) repeated errors, (3) errors affecting clarity, (4) errors likely to matter in an exam.
+Scan the whole answer completely and return EVERY genuine error you find — there is no limit on how many entries "mistakes" may contain. Do not stop early, and do not pick a "most important" subset; completeness matters more than brevity here.
 Each entry: {"type":"Grammar|Spelling|Punctuation|Usage|Sentence Structure","original":"<exact text from the answer>","corrected":"<corrected version>"}. Return ONLY type, original, and corrected — no "reason", no explanation, no rule name, no severity note. Never include an entry where original and corrected are identical.`;
 const TYPE_GUIDANCE={
-  essay:`ESSAY-SPECIFIC RULES: Do not require exact factual points unless the question itself demands them. Judge relevance, depth, development, balance, argument quality, use of examples, logical progression, and conclusion. Generic filler or buzzwords mentioned without explanation must NOT earn high content marks.
+  essay:`ESSAY-SPECIFIC RULES: Do not require exact factual points unless the question itself demands them. Judge the essay as an ACTUAL COMPETITIVE-EXAM ANSWER: "how good is this essay?" — NOT "does it contain some relevant points?". Judge the student's own response on its merits: never penalise legitimate alternative viewpoints, valid arguments that differ from a model answer, different-but-correct wording, simple-but-correct English, or the absence of unnecessary factual detail.
 
-ESSAY QUALITY CALIBRATION (applies to the "content" quality number specifically): do not award a very high quality score merely because the essay is relevant, grammatical, well structured, and fluent — polish alone never justifies a high band. Use these bands:
-0.90-1.00: ONLY when the essay fully addresses the task, develops the major arguments clearly, demonstrates sufficient depth, uses relevant examples/evidence where appropriate, maintains logical progression, and reaches a meaningful conclusion. There should be no substantial content gap.
-0.75-0.89: Strong overall treatment with good task coverage and development, but with some limitations in depth, balance, specificity, examples, or argument development.
-0.60-0.74: Adequate and relevant response, but ideas are somewhat general, repetitive, underdeveloped, or insufficiently supported.
-0.40-0.59: Weak treatment. Some relevant points are present, but important aspects are underdeveloped, missing, repetitive, or superficial.
-0.01-0.39: Very weak content, major task gaps, serious irrelevance, or very limited development.
-Do not award 0.90 or above for an essay that merely sounds polished.`,
+CONTENT — a high content quality needs ALL of: (1) direct task fulfilment, (2) strong relevance to the EXACT topic, (3) adequate coverage of the topic's major dimensions, (4) development and explanation of the important points, (5) logical connection between arguments, (6) practical, relevant solutions where applicable, (7) real depth rather than listing, (8) a conclusion that follows from the discussion. A high content quality is NEVER earned merely because the student mentions several topic-related points, uses topic keywords, gives many suggestions, has an introduction and conclusion, writes at length, or appears to address the general theme.
+- RELEVANCE IS SPECIFIC, NOT BROAD. A point is not relevant merely because it belongs to a broad category (society, economy, women, employment, technology, environment, development, government). It must have a clear, meaningful link to THIS essay topic. Example: for an essay on unpaid care work and women's formal workforce participation, childcare, parental leave, flexible work, recognising unpaid domestic labour, unequal household responsibilities and workplace support are directly relevant; pollution, TV serials, farm migration or social media are NOT, unless the student clearly explains the direct connection. Do not reward unrelated points just because they sound socially meaningful.
+- DEVELOPED vs MENTIONED. A list of points is not a developed argument. "Government should provide childcare, flexible work, equal pay and paid leave" shows awareness, not development. Development means explaining why a point matters, how it addresses the problem, what effect it could have and, where apt, what challenges or limits exist. Many one-line suggestions must not earn near-full content marks however long the list is.
+- GENERIC FILLER ("Government should take necessary steps", "We must create awareness", "Everyone should work together", "Technology can solve this", "Strict action should be taken") contributes little unless the student explains the specific action, mechanism or relevance.
+Content quality bands: 0.90-1.00 exceptional — fully addresses the task, covers the major dimensions, develops important arguments clearly, strongly relevant throughout, meaningful support/examples where apt, no substantial content gap. 0.80-0.89 strong — most important dimensions covered and developed well, only minor limits in depth, balance, specificity or development. 0.65-0.79 good/adequate — relevant overall but with some generalised, underdeveloped, repetitive, weakly connected or insufficiently explained points. 0.50-0.64 fair — some relevant ideas but limited development, important aspects weak or missing, or heavy reliance on generic statements. 0.30-0.49 weak — major task gaps, shallow development, significant irrelevance, repetition or poorly connected arguments. 0.00-0.29 very weak, largely off-task, or extremely limited. Never give 0.90+ merely because the essay is organised, fluent or keyword-rich.
+
+LANGUAGE — "the meaning is understandable" does NOT mean "the language is good". Judge frequency, recurrence of the same error, severity, basic vs advanced errors, effect on grammatical accuracy and professionalism, and consistency across the whole essay. Repeated basic errors (subject-verb agreement, wrong verb forms, articles, plurals, spelling, missing words, prepositions, broken sentences) must substantially lower language quality; one or two isolated minor slips must not. Language quality bands: 0.90-1.00 very accurate, only negligible/isolated errors. 0.80-0.89 generally strong, a small number of minor errors. 0.65-0.79 acceptable but with noticeable recurring errors. 0.50-0.64 frequent errors reduce accuracy and professionalism though meaning is generally clear. 0.30-0.49 numerous or serious errors significantly reduce accuracy. 0.00-0.29 extremely weak control. For "languageSeverity" on an essay: none = no significant errors; minor = one or two isolated slips; moderate = noticeable RECURRING errors (the same kind of basic mistake more than once, or several errors across the essay); severe = frequent basic errors throughout the essay. Do not report "minor" for an essay that has recurring basic errors.
+
+FORMAT — judge independently by the existing format rules. Do not lower format because the grammar or content is weak, and do not double-penalise one issue across criteria.
+
+ESSAY DIAGNOSTICS — inside "analysis", fill "essayDiagnostics" honestly BEFORE scoring the criteria, using only what is actually written:
+- "relevance": "direct" = essentially every substantive point is clearly tied to the exact topic (a trivial stray aside is fine); "mostly" = most points are direct but a few are only loosely or broadly related; "partial" = many points are broad-category points with no clear link to the exact topic; "loose" = most of the essay is generic or about neighbouring issues.
+- "development": "developed" = the important points are explained (why/how/effect/limits); "mostly" = most important points explained, a few merely stated; "partial" = about half the important points are merely stated; "listlike" = mostly one-line points, suggestions or lists with little explanation.
+- "coverage": "full" = all major dimensions of the topic addressed; "most" = most addressed, one minor dimension thin or missing; "limited" = at least one major dimension missing; "narrow" = only one aspect of the topic addressed.
+Your "content" quality must be consistent with these diagnostics (the system also enforces a ceiling from them).
+
+OVERALL VERDICT — do not describe an essay as strong, excellent or outstanding when language is materially weak, basic errors are frequent, several important points are underdeveloped, several points are weakly connected or irrelevant, or the essay is mostly a list rather than a developed discussion. A reasonable attempt is not automatically a strong one; use a neutral, accurate description instead. No numbers in the verdict.`,
   situation:`SITUATION-ANALYSIS RULES: Reward understanding of the immediate problem, priority of actions, customer safety, correct banking procedure, practicality, professional judgement, escalation where appropriate, and prevention/follow-up. Penalise generic promises ("I will take necessary action" with no specifics), unrealistic actions, ignoring the central problem, unsafe recommendations, or actions that violate the scenario. Do not compare only against the model answer's exact wording — many different sound approaches can be equally correct.`,
   email:`EMAIL-SPECIFIC RULES: Check recipient/context, subject when appropriate, salutation, purpose, whether ALL requested information/actions were addressed, professional tone, a clear action/request, and closing. Do NOT invent missing details (e.g. a name or exact amount the question never gave) and do not penalise the student for not inventing them either.`,
   report:`REPORT-SPECIFIC RULES: Determine from the actual question who the report is for, what event/topic it covers, date/time, purpose, findings/activities/outcomes, and recommendations. Do not automatically demand every possible field for every report — only what this specific question calls for.`,
@@ -3883,7 +3957,7 @@ Return ONLY this JSON (${numQ} objects in "subQuestions", numbered 1 to ${numQ})
     result=validateEvaluation(result,totalPossible);
     if(!result)return null;
 
-    result.mistakes=validateCorrections(raw.mistakes).slice(0,8);
+    result.mistakes=validateCorrections(raw.mistakes);
 
     if(copyCheck.copied||isGibberish||!eligibleForCorrection){result.mistakes=[];}
 
@@ -3953,6 +4027,7 @@ async function evalWithAI(q,ans,wc,wpm){
   const criteriaDescLine=criteriaList.map(c=>`- "${c.id}" = ${c.name}`).join("\n");
   const typeGuidance=TYPE_GUIDANCE[q.type]||"";
 
+  const essayDiagSchema=q.type==="essay"?`,"essayDiagnostics":{"relevance":"direct|mostly|partial|loose","development":"developed|mostly|partial|listlike","coverage":"full|most|limited|narrow"}`:"";
   const sys=`You are a strict, senior examiner for SBI PO / IBPS PO Mains Descriptive Paper (2026 pattern). Score realistically and rigorously, the way an actual banking-exam evaluator would — never inflate a score to be encouraging, and never over-penalise for harmless wording differences, legitimate synonyms, natural alternative phrasing, or information the question never asked for.
 
 CRITICAL: you generate text in order and cannot revise something already written, so analyze BEFORE you score, never the reverse. The JSON schema below puts "analysis" first for exactly this reason.
@@ -3990,7 +4065,7 @@ HARD RULES:
 - Respond ONLY with valid JSON, no markdown, no explanation outside JSON.
 
 Return ONLY this JSON, every key present, in this order:
-{"analysis":{"attempted":true,"isGibberish":false,"majorlyOffTask":false,"taskRequirements":[{"id":"requirement_1","description":"","importance":"essential","satisfied":true,"quality":1,"evidence":""}],"languageSeverity":"none"},"criterionEvaluation":[${criteriaList.map(c=>`{"id":"${c.id}","quality":0.0,"evidence":""}`).join(",")}],"mistakes":[{"type":"Grammar|Spelling|Punctuation|Usage|Sentence Structure","original":"","corrected":""}],"strengths":["<no numbers>"],"improvements":["<no numbers>"],"overallVerdict":"<no numbers>"}`;
+{"analysis":{"attempted":true,"isGibberish":false,"majorlyOffTask":false,"taskRequirements":[{"id":"requirement_1","description":"","importance":"essential","satisfied":true,"quality":1,"evidence":""}],"languageSeverity":"none"${essayDiagSchema}},"criterionEvaluation":[${criteriaList.map(c=>`{"id":"${c.id}","quality":0.0,"evidence":""}`).join(",")}],"mistakes":[{"type":"Grammar|Spelling|Punctuation|Usage|Sentence Structure","original":"","corrected":""}],"strengths":["<no numbers>"],"improvements":["<no numbers>"],"overallVerdict":"<no numbers>"}`;
 
   const p=`SECTION TYPE: ${typeName}
 WORD LIMIT: ${q.wordLimit}
@@ -4047,7 +4122,17 @@ Follow the steps in the system instructions in order: extract task requirements 
     // §12: CODE-enforced language cap, computed from the validated genuine mistakes list and the
     // AI's reported severity — the stricter of the two always wins.
     // Must run BEFORE calculateFinalScore, since that's the one place quality×max happens.
-    applyLanguageConsistencyCap(qualityById,analysis.languageSeverity,genuineMistakes);
+    // Essay-only calibration: ceiling on content quality from the AI's honest diagnostics, and
+    // stricter/density-aware language caps. Other question types are untouched.
+    let essayDiag=null;
+    const isEssay=q.type==="essay";
+    if(isEssay){
+      essayDiag=normalizeEssayDiagnostics(analysis.essayDiagnostics);
+      const cid=profile.contentCriterionId;
+      const ceil=essayContentCeiling(essayDiag);
+      if(qualityById[cid]&&qualityById[cid].quality>ceil)qualityById[cid].quality=ceil;
+    }
+    const effLangSeverity=applyLanguageConsistencyCap(qualityById,analysis.languageSeverity,genuineMistakes,isEssay?{essay:true,wc}:undefined);
 
     const scored=calculateFinalScore(q,profile,qualityById,contentCapPct,isGibberish);
     let result=validateEvaluation(scored,max);
@@ -4057,7 +4142,7 @@ Follow the steps in the system instructions in order: extract task requirements 
     result.wordsWritten=wlInfo.wordsWritten;
     result.wordLimitDisplay=q.wordLimit||"";
 
-    result.mistakes=genuineMistakes.slice(0,8);
+    result.mistakes=genuineMistakes;
 
     if(isGibberish||!eligibleForCorrection){result.mistakes=[];}
 
@@ -4070,6 +4155,16 @@ Follow the steps in the system instructions in order: extract task requirements 
     if(!result.strengths.length&&!isGibberish)result.strengths=["Attempted the question with a relevant response."];
     result.improvements=Array.isArray(raw.improvements)?raw.improvements.filter(s=>typeof s==="string"&&!_NUMBER_PATTERN.test(s)):[];
 
+    if(isEssay&&!isGibberish){
+      const cq=(qualityById[profile.contentCriterionId]||{}).quality||0;
+      const lq=(qualityById.language||{}).quality;
+      const tierInfo=computeEssayTier(pct,{diag:essayDiag,majorlyOffTask,contentQ:cq*contentCapPct,wlCapPct:wlInfo.formatCapPct,langQ:typeof lq==="number"?lq:1});
+      result.attemptTier=tierInfo.tier;
+      // Never leave a glowing verdict next to a non-"strong" tier — unless it is already balanced.
+      if(tierInfo.tier!=="strong"&&/\b(strong|excellent|outstanding|exceptional|impressive|comprehensive)\b/i.test(result.overallVerdict)&&!/\b(not|lack|lacks|lacking|without|limited|weak|but|however|although|though|yet)\b/i.test(result.overallVerdict)){
+        result.overallVerdict=essayNeutralVerdict(tierInfo);
+      }
+    }
     result.isGibberish=isGibberish;
     return result;
   }catch(e){console.warn("AI eval failed",e);return null;}
@@ -4206,9 +4301,10 @@ function renderAIBlock(result,max){
   const pctColor=pct>=70?"var(--green,#22c55e)":pct>=45?"var(--amber,#f59e0b)":"var(--red,#ef4444)";
   // Performance-tier banner — purely a friendlier presentation of the same % already used to
   // colour the score tiles below; no new marking data, just an at-a-glance summary up top.
-  const tier=pct>=70?"strong":pct>=45?"moderate":"weak";
+  const tier=(["strong","good","moderate","weak"].includes(result.attemptTier))?result.attemptTier:(pct>=70?"strong":pct>=45?"moderate":"weak");
   const tierMeta={
     strong:{icon:"✓",title:"Strong Attempt",sub:"Well-structured with clear relevance to the topic"},
+    good:{icon:"✓",title:"Good Attempt",sub:"Relevant and reasonably handled, but not yet at the standard of a strong answer"},
     moderate:{icon:"!",title:"Needs Improvement",sub:"Some good points, but there's room to strengthen this response"},
     weak:{icon:"✕",title:"Weak Attempt",sub:"Significant gaps — review the feedback below carefully"}
   }[tier];
