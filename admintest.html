@@ -269,6 +269,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
       <div class="ni" data-p="timing" onclick="nav('timing')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>Timing</div>
       <div class="ni" data-p="appear" onclick="nav('appear')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></span>Appearance</div>
       <div class="ni" data-p="content" onclick="nav('content')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><line x1="17" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="17" y1="18" x2="3" y2="18"/></svg></span>Page Text</div>
+      <div class="ni" data-p="notice" onclick="nav('notice')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>Home Notice</div>
       <div class="ni" data-p="cfg" onclick="nav('cfg')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></span>Settings</div>
     </div>
 
@@ -811,6 +812,36 @@ Q: Which of these is an input device?
       </div>
 
       <!-- SETTINGS -->
+      <!-- HOME NOTICE -->
+      <div id="pg-notice" class="pg">
+        <div class="ph"><div class="ph-ey">Settings</div><div class="ph-ti">Home Notice</div><div class="ph-su">Show a notice above the Practice Section cards on the home page. Turn it on or off whenever you like, then Publish to make the change live.</div></div>
+        <div class="card" style="margin-bottom:14px">
+          <div class="ch"><div class="cht">Notice status</div><span class="bge bg-r" id="nt-badge">OFF</span></div>
+          <div class="cb">
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:6px">
+              <button class="btn bp" id="nt-toggle" onclick="toggleNotice()">Show Notice</button>
+              <span class="hint" id="nt-state-hint" style="margin:0">The notice is currently hidden from students.</span>
+            </div>
+            <div class="hint">The button saves immediately in this admin panel. Click <strong>Publish</strong> (top bar or Config page) so students see the change.</div>
+          </div>
+        </div>
+        <div class="card" style="margin-bottom:14px">
+          <div class="ch"><div class="cht">Notice text</div><button class="btn bp sm" onclick="saveNotice()">Save Text</button></div>
+          <div class="cb">
+            <div class="fr c1"><div class="ff"><label>Heading</label><input type="text" id="nt-title" maxlength="60" placeholder="Notice" oninput="ntPreview()"/></div></div>
+            <div class="fr c1"><div class="ff"><label>Message</label><textarea id="nt-text" rows="4" maxlength="500" placeholder="Type the notice students should see…" oninput="ntPreview()"></textarea></div></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
+              <span class="hint" style="margin:0" id="nt-count">0 / 500</span>
+              <button class="btn bo sm" onclick="resetNoticeText()">Reset to default text</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="ch"><div class="cht">Preview (as students will see it)</div></div>
+          <div class="cb" id="nt-preview"></div>
+        </div>
+      </div>
+
       <div id="pg-cfg" class="pg">
         <div class="ph"><div class="ph-ey">Settings</div><div class="ph-ti">Site Settings</div></div>
         <div class="card" style="margin-bottom:14px;border-color:var(--gborder)">
@@ -1274,7 +1305,7 @@ function toggleTheme(){
 
 // ── NAV ──
 function nav(p){document.querySelectorAll('.pg').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.ni').forEach(x=>x.classList.remove('on'));document.getElementById('pg-'+p).classList.add('on');document.querySelector(`[data-p="${p}"]`).classList.add('on');rp(p);}
-function rp(p){if(p==='dash')rDash();if(p==='qs')rQP();if(p==='exams')rExams();if(p==='mocks')renderMocks();if(p==='secs')rSecs();if(p==='typing')rTypingParas();if(p==='timing')rTiming();if(p==='appear')rAppear();if(p==='content')rContent();if(p==='cfg')rCfg();if(p==='livetracker')rLiveTracker();if(p==='offers')rOffers();if(p==='platforms')rPlatforms();if(p==='essays')renderEssayList();if(p==='quizcourse')renderQuizAdmin();}
+function rp(p){if(p==='dash')rDash();if(p==='qs')rQP();if(p==='exams')rExams();if(p==='mocks')renderMocks();if(p==='secs')rSecs();if(p==='typing')rTypingParas();if(p==='timing')rTiming();if(p==='appear')rAppear();if(p==='content')rContent();if(p==='cfg')rCfg();if(p==='notice')rNotice();if(p==='livetracker')rLiveTracker();if(p==='offers')rOffers();if(p==='platforms')rPlatforms();if(p==='essays')renderEssayList();if(p==='quizcourse')renderQuizAdmin();}
 
 // ── LIVE TRACKER ──
 function rLiveTracker(){
@@ -1844,6 +1875,68 @@ function saveOffersMsg(){const d=D();d.siteSettings.offersMsg=document.getElemen
 function exportD(){const blob=new Blob([JSON.stringify(D(),null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='dpt-backup-'+new Date().toISOString().split('T')[0]+'.json';a.click();t('Exported','ok');}
 function importD(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);localStorage.setItem('dpt_data',JSON.stringify(d));t('Imported. Refreshing…','ok');setTimeout(()=>rp(document.querySelector('.ni.on').dataset.p),900);}catch{t('Invalid file','er');}};r.readAsText(f);}
 function resetD(){if(!confirm('Reset ALL data? Cannot be undone.'))return;localStorage.removeItem('dpt_data');t('Reset. Reloading…','ok');setTimeout(()=>location.reload(),1000);}
+
+
+// ── HOME NOTICE ──
+const NOTICE_DEFAULT_TITLE='Notice';
+const NOTICE_DEFAULT_TEXT='Due to high traffic, AI evaluation may sometimes show an error. Don\'t worry, your answer is saved. Go to "My Progress" on the home screen and tap "Retry AI Evaluation" to see your marks.';
+function getNotice(){
+  const n=(D().siteSettings||{}).notice||{};
+  return{enabled:!!n.enabled,title:(typeof n.title==='string'&&n.title.trim())?n.title:NOTICE_DEFAULT_TITLE,text:(typeof n.text==='string'&&n.text.trim())?n.text:NOTICE_DEFAULT_TEXT};
+}
+function rNotice(){
+  const n=getNotice();
+  document.getElementById('nt-title').value=n.title;
+  document.getElementById('nt-text').value=n.text;
+  ntRefreshStatus(n.enabled);
+  ntPreview();
+}
+function ntRefreshStatus(on){
+  const b=document.getElementById('nt-badge'),btn=document.getElementById('nt-toggle'),h=document.getElementById('nt-state-hint');
+  b.textContent=on?'ON':'OFF';b.className='bge '+(on?'bg-g':'bg-r');
+  btn.textContent=on?'Hide Notice':'Show Notice';
+  btn.className='btn '+(on?'bo':'bp');
+  h.textContent=on?'The notice is currently shown on the home page (after you Publish).':'The notice is currently hidden from students.';
+}
+function ntPreview(){
+  const title=(document.getElementById('nt-title').value||'').trim()||NOTICE_DEFAULT_TITLE;
+  const text=document.getElementById('nt-text').value||'';
+  document.getElementById('nt-count').textContent=text.length+' / 500';
+  const box=document.getElementById('nt-preview');
+  box.innerHTML='<div style="display:flex;gap:11px;align-items:flex-start;background:rgba(250,204,21,.10);border:1px solid rgba(250,204,21,.45);border-radius:10px;padding:12px 14px">'
+    +'<svg width="22" height="22" viewBox="0 0 24 24" style="flex-shrink:0;margin-top:1px"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" fill="#FACC15" stroke="#CA8A04" stroke-width="1.4" stroke-linejoin="round"/><line x1="12" y1="9" x2="12" y2="13.2" stroke="#1F2937" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="16.8" r="1.15" fill="#1F2937"/></svg>'
+    +'<div><div style="font-weight:700;font-size:.85rem;margin-bottom:3px" id="nt-pv-title"></div><div style="font-size:.8rem;line-height:1.6;white-space:pre-line" id="nt-pv-text"></div></div></div>';
+  document.getElementById('nt-pv-title').textContent=title;
+  document.getElementById('nt-pv-text').textContent=text||'(empty — nothing to show)';
+}
+function ntWrite(enabled){
+  const d=D();
+  if(!d.siteSettings)d.siteSettings={};
+  const title=(document.getElementById('nt-title').value||'').trim()||NOTICE_DEFAULT_TITLE;
+  const text=(document.getElementById('nt-text').value||'').trim();
+  d.siteSettings.notice={enabled:enabled,title:title,text:text};
+  SD(d);
+}
+function toggleNotice(){
+  const on=!getNotice().enabled;
+  const text=(document.getElementById('nt-text').value||'').trim();
+  if(on&&!text){t('Write the notice text first','er');return;}
+  ntWrite(on);
+  ntRefreshStatus(on);
+  t(on?'Notice is ON — click Publish to make it live':'Notice is OFF — click Publish to remove it from the site','ok');
+}
+function saveNotice(){
+  const text=(document.getElementById('nt-text').value||'').trim();
+  const cur=getNotice().enabled;
+  if(cur&&!text){t('Write the notice text, or hide the notice first','er');return;}
+  ntWrite(cur);
+  t('Notice text saved'+(cur?' — click Publish to update the live site':''),'ok');
+}
+function resetNoticeText(){
+  document.getElementById('nt-title').value=NOTICE_DEFAULT_TITLE;
+  document.getElementById('nt-text').value=NOTICE_DEFAULT_TEXT;
+  ntPreview();
+}
 
 // ── GITHUB PUBLISH ──
 function getGHConfig(){
