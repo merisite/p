@@ -33,7 +33,12 @@
     "maintenanceMessage": "The website will be live at 8:00 PM today.",
     "offersMsg": "Offers & Discounts",
     "quizCourseStatus": "upcoming",
-    "quizCourseProductId": "Demoquiz"
+    "quizCourseProductId": "Demoquiz",
+    "notice": {
+      "enabled": true,
+      "title": "Notice",
+      "text": "Due to high traffic, AI evaluation may sometimes show an error. Don't worry, your answer is saved. Go to \"My Progress\" on the home screen and tap \"Retry AI Evaluation\" to see your marks."
+    }
   },
   "sectionTypes": [
     {
