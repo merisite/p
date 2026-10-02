@@ -407,6 +407,10 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .tier-banner.moderate{background:rgba(180,83,9,.08);border-color:rgba(180,83,9,.25)}
 .tier-banner.weak{background:var(--rdim);border-color:var(--rborder)}
 .tier-banner.good{background:var(--adim);border-color:var(--aborder)}
+.home-notice{display:flex;gap:11px;align-items:flex-start;background:rgba(250,204,21,.10);border:1px solid rgba(250,204,21,.5);border-radius:12px;padding:13px 15px;margin:0 0 18px}
+.home-notice svg{flex-shrink:0;margin-top:1px}
+.home-notice-t{font-weight:700;font-size:.9rem;color:var(--t);margin-bottom:3px}
+.home-notice-b{font-size:.82rem;line-height:1.65;color:var(--t);white-space:pre-line}
 .tier-icon{width:38px;height:38px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:800}
 .tier-banner.strong .tier-icon{background:var(--green);color:#fff}
 .tier-banner.moderate .tier-icon{background:var(--amber);color:#fff}
@@ -975,6 +979,7 @@ header .h-brand:hover{background:var(--brut-tint);}
       <span id="nb-marquee-span2">★ Descriptive Practice ★ AI Evaluation ★ Model Answers ★ Typing Speed Test ★ Exam-Pattern Interface ★</span>
     </div>
   </div>
+  <div id="home-notice" style="display:none"></div>
   <div class="sec-lbl" id="h-plbl">Practice Section</div>
   <div class="card-grid" id="sec-practice-cards" style="margin-bottom:26px"></div>
   <div class="sec-divider"></div>
@@ -1311,6 +1316,7 @@ async function init(){
         marqueeSpeed: parseInt(es.marqueeSpeed || bs.marqueeSpeed || 26),
         festiveTheme: es.festiveTheme || bs.festiveTheme || "none",
         offersMsg:    es.offersMsg    || bs.offersMsg    || "",
+        notice:       es.notice       || bs.notice       || null,
       }
     };
     localStorage.setItem("dpt_data",JSON.stringify(merged));
@@ -1781,8 +1787,20 @@ function renderFestiveTheme(theme){
     particles.innerHTML=mkParticle(cfgT.colors,cfgT.size,cfgT.count,true);
   }
 }
+function renderHomeNotice(n){
+  const el=document.getElementById("home-notice");
+  if(!el)return;
+  const text=n&&typeof n.text==="string"?n.text.trim():"";
+  if(!n||!n.enabled||!text){el.style.display="none";el.innerHTML="";return;}
+  const title=(typeof n.title==="string"&&n.title.trim())||"Notice";
+  el.innerHTML='<div class="home-notice" role="status"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" fill="#FACC15" stroke="#CA8A04" stroke-width="1.4" stroke-linejoin="round"/><line x1="12" y1="9" x2="12" y2="13.2" stroke="#1F2937" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="16.8" r="1.15" fill="#1F2937"/></svg><div><div class="home-notice-t"></div><div class="home-notice-b"></div></div></div>';
+  el.querySelector(".home-notice-t").textContent=title;
+  el.querySelector(".home-notice-b").textContent=text;
+  el.style.display="";
+}
 function renderHome(){
   const d=D(),cfg=d.siteSettings||{};
+  renderHomeNotice(cfg.notice);
   renderFeaturedEssays();
   if(cfg.name)updateSiteName(cfg.name);
   updateLogo(localStorage.getItem("dpt_mode")||"light");
@@ -3217,19 +3235,34 @@ async function retryAllFailedMockAI(){
   const failedIdx=Object.keys(MS.aiFails||{}).map(Number).filter(function(i){return !MS.aiResults||!MS.aiResults[i];});
   for(const i of failedIdx){await retryMockAI(i);}
   const {totMax}=recomputeMockTotal();
-  if(tot&&totMax===0)tot.innerHTML=scoreRetryHTML("retryAllFailedMockAI()");
+  if(tot&&totMax===0){
+    tot.innerHTML=scoreRetryHTML("retryAllFailedMockAI()");
+    try{
+      sessionStorage.setItem('dpt_result_html', document.getElementById('result').innerHTML);
+      sessionStorage.setItem('dpt_result_data', JSON.stringify({kind:'mock',MS:MS}));
+    }catch(e){}
+    _tileCountdown(tot,"retryAllFailedMockAI()",RETRY_COOLDOWN_SECONDS);
+  }
 }
 let _mockRetryInFlight={};
 async function retryMockAI(idx){
-  if(_mockRetryInFlight[idx])return; // already retrying this section — ignore extra clicks
+  if(_mockRetryInFlight[idx])return; // already retrying (or cooling down) this section — ignore extra clicks
   const s=MS.s[idx];const ans=MS.a[idx]||"";
   if(!s||!s.question||!ans.trim())return;
   _mockRetryInFlight[idx]=true;
   const aiEl=document.getElementById("mai-"+idx);
   const scoreEl=document.getElementById("mscore-"+idx);
-  if(aiEl)aiEl.innerHTML='<div class="ai-notice">Retrying AI evaluation…</div>';
+  if(scoreEl)scoreEl.innerHTML=AI_SECTION_PENDING;
+  if(aiEl)aiEl.innerHTML=AI_CARD_PENDING;
+  const persist=function(){
+    try{
+      sessionStorage.setItem('dpt_result_html', document.getElementById('result').innerHTML);
+      sessionStorage.setItem('dpt_result_data', JSON.stringify({kind:'mock',MS:MS}));
+    }catch(e){}
+  };
   const wc=cw(ans),elapsed=(Date.now()-MS.st)/60000,wpm=elapsed>0?Math.round(wc/elapsed):0;
   const result=await evalWithAI(s.question,ans,wc,wpm);
+  let cooling=false;
   if(result){
     MS.aiResults=MS.aiResults||{};
     MS.aiResults[idx]=result;
@@ -3251,13 +3284,19 @@ async function retryMockAI(idx){
     if(scoreEl)scoreEl.innerHTML=scoreRetryHTML("retryMockAI("+idx+")");
     MS.aiFails=MS.aiFails||{};MS.aiFails[idx]=(MS.aiFails[idx]||1)+1;
     if(aiEl)aiEl.innerHTML=aiFailHTML("retryMockAI("+idx+")",MS.aiFails[idx]);
+    cooling=!!aiEl;
   }
   updateMockTrafficNote();
-  _mockRetryInFlight[idx]=false; // re-enabled only now — either the new score rendered, or a fresh Retry button just appeared
-  try{
-    sessionStorage.setItem('dpt_result_html', document.getElementById('result').innerHTML);
-    sessionStorage.setItem('dpt_result_data', JSON.stringify({kind:'mock',MS:MS}));
-  }catch(e){}
+  persist(); // snapshot holds the ACTIVE buttons (countdown starts after this)
+  if(cooling){
+    // 5-second cooldown with a visible countdown in BOTH the section score and the AI feedback card
+    _renderRetryCooldown(aiEl,"retryMockAI("+idx+")",null,RETRY_COOLDOWN_SECONDS,{el:scoreEl,retry:"retryMockAI("+idx+")"},function(){
+      _mockRetryInFlight[idx]=false;
+      persist();
+    });
+  }else{
+    _mockRetryInFlight[idx]=false;
+  }
 }
 function parseWordLimitRange(wlStr){
   const nums=(String(wlStr||"").match(/\d+/g)||[]).map(Number);
@@ -4242,6 +4281,10 @@ const evaluateComprehension=evalComprehensionAI;
 function validScoreText(x){
   return /^\d+(\.\d+)?\s*\/\s*\d+(\.\d+)?$/.test(String(x==null?'':x).trim())?String(x).trim():'';
 }
+// Shared "processing" markup used by every Retry flow (result page + My Progress saved results).
+const AI_TILE_PENDING='<span class="score-pending"><span class="spin-sm"></span>Scoring…</span>';
+const AI_SECTION_PENDING='<span class="score-pending"><span class="spin-sm"></span>Evaluating…</span>';
+const AI_CARD_PENDING='<div class="ai-notice" style="display:flex;align-items:center;gap:9px"><span class="spin-sm"></span><span>Retrying AI evaluation…</span></div>';
 function scoreRetryHTML(onclickStr){
   return '<button onclick="'+onclickStr+'" class="btn bg bsm" style="font-size:.68rem;font-weight:600;padding:3px 10px;border-radius:6px;line-height:1.3">Retry</button>';
 }
@@ -4465,31 +4508,42 @@ async function runAI(ans,wc,wpm){
 }
 let _practiceRetryInFlight=false;
 async function retryRunAI(){
-  if(_practiceRetryInFlight)return; // already retrying — ignore extra clicks
+  if(_practiceRetryInFlight)return; // already retrying (or cooling down) — ignore extra clicks
   if(!_lastAIArgs)return;
   _practiceRetryInFlight=true;
   const{ans,wc,wpm,q}=_lastAIArgs;
   const aiEl=document.getElementById("r-ai");
-  aiEl.innerHTML='<div class="ai-notice">Retrying AI evaluation…</div>';
+  const tileEl=document.getElementById("r-score");
+  tileEl.innerHTML=AI_TILE_PENDING;
+  aiEl.innerHTML=AI_CARD_PENDING;
+  const persist=function(){
+    try{
+      sessionStorage.setItem('dpt_result_html', document.getElementById('result').innerHTML);
+      sessionStorage.setItem('dpt_result_data', JSON.stringify({kind:'practice',CQ:q,ans:ans,wc:wc,wpm:wpm,fails:_lastAIArgs.fails||0}));
+    }catch(e){}
+  };
   const result=await evalWithAI(q,ans,wc,wpm);
   if(result){
-    document.getElementById("r-score").textContent=result.totalScore+"/"+q.marks;
+    tileEl.textContent=result.totalScore+"/"+q.marks;
     setAITrafficNote("r-score-note",false);
     aiEl.innerHTML=renderAIBlock(result,q.marks);
     renderCorrectedAnswer(result,ans);
     _lastAIArgs.result=result;
     updateProgressEntry(_lastAIArgs.progressId,{score:result.totalScore+"/"+q.marks,parameters:result.parameters,aiResult:result});
+    _practiceRetryInFlight=false;
+    persist();
   } else {
     _lastAIArgs.fails=(_lastAIArgs.fails||1)+1;
-    document.getElementById("r-score").innerHTML=scoreRetryHTML("retryRunAI()");
+    tileEl.innerHTML=scoreRetryHTML("retryRunAI()");
     aiEl.innerHTML=aiFailHTML("retryRunAI()",_lastAIArgs.fails);
     setAITrafficNote("r-score-note",(_lastAIArgs.fails-1)>=AI_RETRIES_BEFORE_NOTE);
+    persist(); // snapshot holds the ACTIVE buttons, so a refresh mid-countdown never leaves a dead button
+    // 5-second cooldown with a visible countdown in BOTH the score tile and the AI feedback card
+    _renderRetryCooldown(aiEl,"retryRunAI()",null,RETRY_COOLDOWN_SECONDS,{el:tileEl,retry:"retryRunAI()"},function(){
+      _practiceRetryInFlight=false;
+      persist();
+    });
   }
-  _practiceRetryInFlight=false; // re-enabled only now — either the new score rendered, or a fresh Retry button just appeared
-  try{
-    sessionStorage.setItem('dpt_result_html', document.getElementById('result').innerHTML);
-    sessionStorage.setItem('dpt_result_data', JSON.stringify({kind:'practice',CQ:q,ans:ans,wc:wc,wpm:wpm,fails:_lastAIArgs.fails||0}));
-  }catch(e){}
 }
 let tlSec=120;
 function selMode(m){tyMode=m;document.getElementById("tm-given").classList.toggle("on",m==="given");document.getElementById("tm-custom").classList.toggle("on",m==="custom");document.getElementById("paste-sec").style.display=m==="custom"?"block":"none";}
@@ -4802,9 +4856,20 @@ let _savedRetryInFlight={};
 // clicked again instantly — repeated instant retries add load right when the AI service may
 // already be struggling (e.g. rate-limited), which only makes things worse.
 const RETRY_COOLDOWN_SECONDS=5;
-function _renderRetryCooldown(el,retryCallStr,flightKey,seconds){
+function _tileBtn(disabledLabel,retryCallStr){
+  const st='font-size:.68rem;font-weight:600;padding:3px 10px;border-radius:6px;line-height:1.3';
+  return disabledLabel
+    ?'<button disabled class="btn bg bsm" style="'+st+';opacity:.6;cursor:not-allowed">'+disabledLabel+'</button>'
+    :'<button onclick="'+retryCallStr+'" class="btn bg bsm" style="'+st+'">Retry</button>';
+}
+function _renderRetryCooldown(el,retryCallStr,flightKey,seconds,tile,onDone){
   let remaining=seconds;
+  function paintTile(done){
+    if(!tile||!tile.el)return;
+    tile.el.innerHTML=done?_tileBtn('',tile.retry):_tileBtn('Retry ('+remaining+'s)');
+  }
   function paint(){
+    paintTile(false);
     el.innerHTML='<div class="ai-notice"><strong>AI evaluation failed again.</strong> '
       +'<button disabled style="margin-left:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--t2);cursor:not-allowed;font-size:.75rem;font-family:var(--font);opacity:.6">Retry ('+remaining+'s)</button></div>';
   }
@@ -4813,12 +4878,25 @@ function _renderRetryCooldown(el,retryCallStr,flightKey,seconds){
     remaining--;
     if(remaining<=0){
       clearInterval(iv);
-      _savedRetryInFlight[flightKey]=false;
+      if(flightKey!=null)_savedRetryInFlight[flightKey]=false;
+      paintTile(true);
       el.innerHTML='<div class="ai-notice"><strong>AI evaluation failed again.</strong> '
         +'<button onclick="'+retryCallStr+'" style="margin-left:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--aborder);background:var(--adim);color:var(--accent);cursor:pointer;font-size:.75rem;font-family:var(--font)">Retry</button></div>';
+      if(onDone)onDone();
     }else{
       paint();
     }
+  },1000);
+}
+// Countdown on a score tile only (used where there is no separate AI-feedback card to update).
+function _tileCountdown(tileEl,retryCallStr,seconds,onDone){
+  if(!tileEl){if(onDone)onDone();return;}
+  let rem=seconds;
+  tileEl.innerHTML=_tileBtn('Retry ('+rem+'s)');
+  const iv=setInterval(function(){
+    rem--;
+    if(rem<=0){clearInterval(iv);tileEl.innerHTML=_tileBtn('',retryCallStr);if(onDone)onDone();}
+    else tileEl.innerHTML=_tileBtn('Retry ('+rem+'s)');
   },1000);
 }
 function _questionForPracticeEntry(entry){
@@ -4851,7 +4929,9 @@ async function retrySavedPracticeAI(id){
   if(!ans.trim())return;
   _savedRetryInFlight[id]=true;
   const aiEl=document.getElementById('r-ai');
-  if(aiEl)aiEl.innerHTML='<div class="ai-notice">Retrying AI evaluation…</div>';
+  const tileEl=document.getElementById('r-score');
+  if(tileEl)tileEl.innerHTML=AI_TILE_PENDING;
+  if(aiEl)aiEl.innerHTML=AI_CARD_PENDING;
   const q=_questionForPracticeEntry(entry);
   const wc=entry.wc||cw(ans),wpm=entry.wpm||0;
   const result=await evalWithAI(q,ans,wc,wpm);
@@ -4867,9 +4947,10 @@ async function retrySavedPracticeAI(id){
     _savedRetryInFlight[id]=false;
     return;
   }else if(aiEl){
-    _renderRetryCooldown(aiEl,"retrySavedPracticeAI('"+id+"')",id,RETRY_COOLDOWN_SECONDS);
+    _renderRetryCooldown(aiEl,"retrySavedPracticeAI('"+id+"')",id,RETRY_COOLDOWN_SECONDS,{el:tileEl,retry:"retrySavedPracticeAI('"+id+"')"});
     return; // _savedRetryInFlight[id] is cleared by the cooldown once it elapses
   }
+  if(tileEl)tileEl.innerHTML=_tileBtn('',"retrySavedPracticeAI('"+id+"')");
   _savedRetryInFlight[id]=false;
 }
 function _questionForMockSection(s){
@@ -4894,7 +4975,8 @@ async function retrySavedMockSectionAI(entryId,idx){
   _savedRetryInFlight[flightKey]=true;
   const aiWrap=document.getElementById('saved-mai-'+idx);
   const scoreEl=document.getElementById('saved-mscore-'+idx);
-  if(aiWrap)aiWrap.innerHTML='<div class="ai-notice">Retrying AI evaluation…</div>';
+  if(scoreEl)scoreEl.innerHTML=AI_SECTION_PENDING;
+  if(aiWrap)aiWrap.innerHTML=AI_CARD_PENDING;
   const q=_questionForMockSection(s);
   const wc=cw(ans);
   const result=await evalWithAI(q,ans,wc,0);
@@ -4907,7 +4989,7 @@ async function retrySavedMockSectionAI(entryId,idx){
     _savedRetryInFlight[flightKey]=false;
     return;
   }else if(aiWrap){
-    _renderRetryCooldown(aiWrap,"retrySavedMockSectionAI('"+entryId+"',"+idx+")",flightKey,RETRY_COOLDOWN_SECONDS);
+    _renderRetryCooldown(aiWrap,"retrySavedMockSectionAI('"+entryId+"',"+idx+")",flightKey,RETRY_COOLDOWN_SECONDS,{el:scoreEl,retry:"retrySavedMockSectionAI('"+entryId+"',"+idx+")"});
     return; // _savedRetryInFlight[flightKey] is cleared by the cooldown once it elapses
   }
   _savedRetryInFlight[flightKey]=false;
@@ -4933,7 +5015,7 @@ async function retryAllFailedSavedMockAI(entryId){
   const t=computeSavedMockTotal(fresh&&fresh.sectionsFull);
   if(tot){
     if(t.totMax>0)tot.textContent=t.totScore+'/'+t.totMax;
-    else if(t.anyUnscored)tot.innerHTML=scoreRetryHTML("retryAllFailedSavedMockAI('"+entryId+"')");
+    else if(t.anyUnscored)_tileCountdown(tot,"retryAllFailedSavedMockAI('"+entryId+"')",RETRY_COOLDOWN_SECONDS);
     else tot.textContent='0/0';
   }
   _savedTotalRetryInFlight[entryId]=false;
