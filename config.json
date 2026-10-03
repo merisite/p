@@ -2441,6 +2441,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1791015632741",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "India @2047 : Vision for a developed India",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -4414,6 +4430,40 @@
         }
       ],
       "practiceQuestionId": "q_1791015023696",
+      "active": true
+    },
+    {
+      "id": "essay_1791015565807",
+      "title": "India @2047 : Vision for a developed India",
+      "category": "Governance, Policy & Infrastructure",
+      "tags": [
+        "India"
+      ],
+      "image": "https://i.postimg.cc/cJjLszJ3/7d79c4ff-5f04-4c27-a148-94ef12025a93.png",
+      "body": "India @2047 represents the vision of transforming India into a developed nation by the time it completes 100 years of independence. A developed India should not only have a strong economy but also provide better living standards, quality education, healthcare, employment opportunities, and equal opportunities for all citizens.\n\nA strong economy will be the foundation of this vision. India needs higher productivity, modern industries, strong infrastructure, and greater support for small businesses and startups. Better roads, railways, ports, digital networks, and reliable energy can improve connectivity and create new economic opportunities. Manufacturing and exports should also be strengthened to make India more competitive globally.\n\nEconomic growth must benefit all sections of society. Quality education and affordable healthcare are essential for building a skilled and healthy population. Special attention should be given to women, rural communities, farmers, and weaker sections. Creating more jobs and improving skill development will help young people become productive participants in the economy.\n\nTechnology can play a major role in achieving the 2047 vision. Artificial intelligence, digital services, renewable energy, and modern agriculture can improve productivity and public services. At the same time, India must protect its environment and reduce pollution. Transparent, efficient, and accountable governance will be necessary to ensure that development reaches every citizen.\n\nIn conclusion, a developed India by 2047 requires more than economic growth. It requires strong institutions, skilled citizens, modern infrastructure, social inclusion, and sustainable development. With long-term planning and collective effort, India can build a prosperous and inclusive future for its people.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "India @2047 represents the vision of transforming India into a developed nation by the time it completes 100 years of independence. A developed India should not only have a strong economy but also provide better living standards, quality education, healthcare, employment opportunities, and equal opportunities for all citizens."
+        },
+        {
+          "heading": "Body – Economic Growth and Infrastructure",
+          "content": "A strong economy will be the foundation of this vision. India needs higher productivity, modern industries, strong infrastructure, and greater support for small businesses and startups. Better roads, railways, ports, digital networks, and reliable energy can improve connectivity and create new economic opportunities. Manufacturing and exports should also be strengthened to make India more competitive globally."
+        },
+        {
+          "heading": "Body – Human Development and Social Inclusion",
+          "content": "Economic growth must benefit all sections of society. Quality education and affordable healthcare are essential for building a skilled and healthy population. Special attention should be given to women, rural communities, farmers, and weaker sections. Creating more jobs and improving skill development will help young people become productive participants in the economy."
+        },
+        {
+          "heading": "Body – Technology, Sustainability and Governance",
+          "content": "Technology can play a major role in achieving the 2047 vision. Artificial intelligence, digital services, renewable energy, and modern agriculture can improve productivity and public services. At the same time, India must protect its environment and reduce pollution. Transparent, efficient, and accountable governance will be necessary to ensure that development reaches every citizen."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, a developed India by 2047 requires more than economic growth. It requires strong institutions, skilled citizens, modern infrastructure, social inclusion, and sustainable development. With long-term planning and collective effort, India can build a prosperous and inclusive future for its people."
+        }
+      ],
+      "practiceQuestionId": "q_1791015632741",
       "active": true
     }
   ],
