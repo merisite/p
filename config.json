@@ -1374,15 +1374,17 @@
       "id": "q_1789466342083",
       "examId": "ibps_po",
       "type": "essay",
-      "text": "Social Media: Empowering the People or Polarising the Polity?",
-      "modelAnswer": "Social media has become an important part of modern life. Platforms such as Facebook, Instagram, X, and YouTube allow people to share opinions, access information, and communicate instantly. It has given ordinary citizens a stronger voice, but it has also created new challenges for society and democracy.\nSocial media has made communication faster and more accessible. Citizens can raise their concerns, support social causes, and hold governments and institutions accountable. It also helps people during emergencies by spreading important information quickly. Small businesses, students, and content creators can reach large audiences without depending on traditional media. During elections, social media can also help voters learn about issues and candidates.\nHowever, social media can also divide society. False information, hate speech, and edited content can spread rapidly, influencing public opinion. People often follow accounts that support their existing views and avoid opposing opinions. This creates echo chambers and increases political and social divisions. Political groups may also use social media to spread propaganda or manipulate public emotions. Excessive use of social media can further reduce meaningful public discussion.\nTo reduce these risks, social media platforms must improve content moderation and act against fake accounts and harmful misinformation. Users should also verify information before sharing it. Schools and institutions should promote digital literacy and critical thinking. At the same time, freedom of expression must be protected while preventing the misuse of these platforms.\nIn conclusion, social media is neither completely empowering nor completely divisive. Its impact depends on how it is used. Responsible users, transparent platforms, and informed citizens can ensure that social media strengthens democracy rather than weakening social unity.",
+      "text": "",
+      "modelAnswer": "",
       "label": "Social Media: Empowering the People or Polarising the Polity?",
       "wordLimit": "250-300 words",
       "marks": 15,
       "difficulty": "medium",
       "active": true,
-      "mockNo": null,
-      "productIds": []
+      "mockNo": 10,
+      "productIds": [
+        "IBPSPO"
+      ]
     },
     {
       "id": "q_1789466468350",
@@ -2391,6 +2393,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1791001448490",
+      "examId": "ibps_po",
+      "type": "comprehension",
+      "text": "",
+      "modelAnswer": "",
+      "label": "19 Read the passage and answer the questions that follow in your own words",
+      "wordLimit": "150 words (30-40 words per answer)",
+      "marks": 10,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": 10,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -2571,7 +2589,7 @@
       "mockNo": 10,
       "title": "IBPS PO Mock 10",
       "active": true,
-      "status": "upcoming",
+      "status": "active",
       "productIds": [
         "IBPSPO"
       ]
