@@ -2457,6 +2457,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1791016167275",
+      "examId": "ibps_po",
+      "type": "essay",
+      "text": "",
+      "modelAnswer": "",
+      "label": "India's digital public infrastructure: a role model for the world",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ],
   "typingParas": [
@@ -4464,6 +4480,40 @@
         }
       ],
       "practiceQuestionId": "q_1791015632741",
+      "active": true
+    },
+    {
+      "id": "essay_1791016113476",
+      "title": "India's digital public infrastructure: a role model for the world",
+      "category": "Governance, Policy & Infrastructure",
+      "tags": [
+        "India"
+      ],
+      "image": "https://i.postimg.cc/7hj309X7/ba02c918-fb16-4522-bef2-546c4092e34b.png",
+      "body": "India has made remarkable progress in building a digital public infrastructure (DPI) that connects citizens with essential services. Platforms such as Aadhaar, Unified Payments Interface (UPI), and DigiLocker have made identity verification, digital payments, and access to documents faster and easier. This digital transformation has also shown how technology can support inclusive growth.\n\nAadhaar has provided a digital identity to a large number of residents, making it easier to access government schemes and financial services. UPI has transformed digital payments by allowing people to transfer money instantly using mobile phones. DigiLocker enables citizens to store and access important documents digitally. These systems have reduced paperwork, improved convenience, and helped bring more people into the formal financial system. They have also supported small businesses and encouraged digital transactions.\n\nDespite its success, India's digital infrastructure faces several challenges. Digital literacy is still limited among some sections of society, especially in rural areas. Concerns about data privacy, cybersecurity, online fraud, and misuse of personal information also need attention. Poor internet connectivity in remote areas can further limit access to digital services.\n\nIndia needs to strengthen data protection, cybersecurity, digital literacy, and internet connectivity. The country's experience can also provide useful lessons to other developing nations. However, each country must adapt digital systems according to its own needs, laws, and social conditions.\n\nIn conclusion, India's digital public infrastructure demonstrates how technology can make public and financial services more accessible, efficient, and affordable. With stronger safeguards and wider digital access, India's experience can continue to offer valuable lessons to the world.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "India has made remarkable progress in building a digital public infrastructure (DPI) that connects citizens with essential services. Platforms such as Aadhaar, Unified Payments Interface (UPI), and DigiLocker have made identity verification, digital payments, and access to documents faster and easier. This digital transformation has also shown how technology can support inclusive growth."
+        },
+        {
+          "heading": "Body – Major Components and Benefits",
+          "content": "Aadhaar has provided a digital identity to a large number of residents, making it easier to access government schemes and financial services. UPI has transformed digital payments by allowing people to transfer money instantly using mobile phones. DigiLocker enables citizens to store and access important documents digitally. These systems have reduced paperwork, improved convenience, and helped bring more people into the formal financial system. They have also supported small businesses and encouraged digital transactions."
+        },
+        {
+          "heading": "Body – Challenges and Concerns",
+          "content": "Despite its success, India's digital infrastructure faces several challenges. Digital literacy is still limited among some sections of society, especially in rural areas. Concerns about data privacy, cybersecurity, online fraud, and misuse of personal information also need attention. Poor internet connectivity in remote areas can further limit access to digital services."
+        },
+        {
+          "heading": "Body – Way Forward and Global Lessons",
+          "content": "India needs to strengthen data protection, cybersecurity, digital literacy, and internet connectivity. The country's experience can also provide useful lessons to other developing nations. However, each country must adapt digital systems according to its own needs, laws, and social conditions."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, India's digital public infrastructure demonstrates how technology can make public and financial services more accessible, efficient, and affordable. With stronger safeguards and wider digital access, India's experience can continue to offer valuable lessons to the world."
+        }
+      ],
+      "practiceQuestionId": "q_1791016167275",
       "active": true
     }
   ],
