@@ -4315,6 +4315,40 @@
       ],
       "practiceQuestionId": "q_1790145868353",
       "active": true
+    },
+    {
+      "id": "essay_1791014364493",
+      "title": "MSMEs and their contribution to Indian economic growth",
+      "category": "Economy, Banking & Finance",
+      "tags": [
+        "MSME"
+      ],
+      "image": "https://i.postimg.cc/5NqdPrdP/download.png",
+      "body": "Micro, Small and Medium Enterprises (MSMEs) are an important part of the Indian economy. They include small manufacturers, service providers, traders, and other businesses. With their presence across both urban and rural areas, MSMEs contribute significantly to employment, production, entrepreneurship, and regional development.\n\nMSMEs create large-scale employment with relatively low investment. They provide income opportunities to skilled and semi-skilled workers, especially in smaller towns and villages. They also support exports by producing textiles, handicrafts, engineering goods, food products, and other items. Many large industries depend on MSMEs for raw materials, components, and other services. In this way, MSMEs strengthen supply chains and support the growth of other businesses.\n\nDespite their importance, MSMEs face several challenges. Limited access to affordable credit remains a major problem. Many small businesses also struggle with outdated technology, limited market access, rising costs, and delayed payments from larger buyers. Lack of skilled workers and difficulties in adopting digital tools can further affect their growth and competitiveness.\n\nThe government and financial institutions should make credit easier and faster for genuine small businesses. MSMEs also need better access to technology, digital platforms, skilled workers, and wider markets. Faster payment systems and awareness of government schemes can further improve their financial stability. Encouraging innovation can help them become more productive and competitive.\n\nIn conclusion, MSMEs are not merely small businesses but an important foundation of India's economic growth. Supporting them through finance, technology, skills, and better market opportunities can create jobs, strengthen industries, and promote balanced development across the country.",
+      "structure": [
+        {
+          "heading": "Introduction",
+          "content": "Micro, Small and Medium Enterprises (MSMEs) are an important part of the Indian economy. They include small manufacturers, service providers, traders, and other businesses. With their presence across both urban and rural areas, MSMEs contribute significantly to employment, production, entrepreneurship, and regional development."
+        },
+        {
+          "heading": "Body – Contribution to Economic Growth",
+          "content": "MSMEs create large-scale employment with relatively low investment. They provide income opportunities to skilled and semi-skilled workers, especially in smaller towns and villages. They also support exports by producing textiles, handicrafts, engineering goods, food products, and other items. Many large industries depend on MSMEs for raw materials, components, and other services. In this way, MSMEs strengthen supply chains and support the growth of other businesses."
+        },
+        {
+          "heading": "Body – Challenges Faced by MSMEs",
+          "content": "Despite their importance, MSMEs face several challenges. Limited access to affordable credit remains a major problem. Many small businesses also struggle with outdated technology, limited market access, rising costs, and delayed payments from larger buyers. Lack of skilled workers and difficulties in adopting digital tools can further affect their growth and competitiveness."
+        },
+        {
+          "heading": "Body – Measures / Way Forward",
+          "content": "The government and financial institutions should make credit easier and faster for genuine small businesses. MSMEs also need better access to technology, digital platforms, skilled workers, and wider markets. Faster payment systems and awareness of government schemes can further improve their financial stability. Encouraging innovation can help them become more productive and competitive."
+        },
+        {
+          "heading": "Conclusion",
+          "content": "In conclusion, MSMEs are not merely small businesses but an important foundation of India's economic growth. Supporting them through finance, technology, skills, and better market opportunities can create jobs, strengthen industries, and promote balanced development across the country."
+        }
+      ],
+      "practiceQuestionId": null,
+      "active": true
     }
   ],
   "quizTopics": [
