@@ -35,7 +35,7 @@
     "quizCourseStatus": "upcoming",
     "quizCourseProductId": "Demoquiz",
     "notice": {
-      "enabled": true,
+      "enabled": false,
       "title": "Notice",
       "text": "Due to high traffic, AI evaluation may sometimes show an error. Don't worry, your answer is saved. Go to \"My Progress\" on the home screen and tap \"Retry AI Evaluation\" to see your marks."
     }
