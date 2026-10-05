@@ -6945,5 +6945,16 @@
       "productIds": []
     }
   ],
-  "quizSets": []
+  "quizSets": [
+    {
+      "id": "qs_1791226717941",
+      "setNo": 1,
+      "title": "q",
+      "timeLimitMin": 22,
+      "negMarkEnabled": true,
+      "negMarkValue": 2,
+      "active": true,
+      "productIds": []
+    }
+  ]
 }
