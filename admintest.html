@@ -520,13 +520,31 @@ Q: Which of these is an input device?
           <div id="qz-form-title" style="font-size:.85rem;font-weight:700;margin-bottom:12px">Add Question Manually</div>
           <textarea id="qz-q-text" rows="2" placeholder="Question text" style="width:100%;margin-bottom:10px;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.82rem;font-family:inherit;resize:vertical"></textarea>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
-            <div style="display:flex;align-items:center;gap:8px"><input type="radio" name="qz-correct" value="0" checked/><input id="qz-opt-0" placeholder="Option A" style="flex:1;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/></div>
-            <div style="display:flex;align-items:center;gap:8px"><input type="radio" name="qz-correct" value="1"/><input id="qz-opt-1" placeholder="Option B" style="flex:1;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/></div>
-            <div style="display:flex;align-items:center;gap:8px"><input type="radio" name="qz-correct" value="2"/><input id="qz-opt-2" placeholder="Option C" style="flex:1;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/></div>
-            <div style="display:flex;align-items:center;gap:8px"><input type="radio" name="qz-correct" value="3"/><input id="qz-opt-3" placeholder="Option D" style="flex:1;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/></div>
+            <div style="display:flex;align-items:center;gap:8px"><input type="radio" name="qz-correct" value="0" checked/><input id="qz-opt-0" placeholder="Option 1" style="flex:1;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/></div>
+            <div style="display:flex;align-items:center;gap:8px"><input type="radio" name="qz-correct" value="1"/><input id="qz-opt-1" placeholder="Option 2" style="flex:1;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/></div>
+            <div style="display:flex;align-items:center;gap:8px"><input type="radio" name="qz-correct" value="2"/><input id="qz-opt-2" placeholder="Option 3" style="flex:1;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/></div>
+            <div style="display:flex;align-items:center;gap:8px"><input type="radio" name="qz-correct" value="3"/><input id="qz-opt-3" placeholder="Option 4" style="flex:1;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/></div>
+            <div style="display:flex;align-items:center;gap:8px"><input type="radio" name="qz-correct" value="4"/><input id="qz-opt-4" placeholder="Option 5" style="flex:1;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/></div>
           </div>
           <div style="font-size:.68rem;color:var(--t2);margin-bottom:10px">Select the radio button next to the correct option.</div>
           <textarea id="qz-explanation" rows="2" placeholder="Explanation (shown below the question in the solution review)" style="width:100%;margin-bottom:10px;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.82rem;font-family:inherit;resize:vertical"></textarea>
+          <details style="margin-bottom:10px;border:1px solid var(--b);border-radius:var(--rs);padding:8px 10px">
+            <summary style="cursor:pointer;font-size:.74rem;font-weight:700;color:var(--t2)">Optional: Hindi version &amp; time stats (leave blank to skip)</summary>
+            <div style="margin-top:10px;display:grid;gap:8px">
+              <textarea id="qz-q-text-hi" rows="2" placeholder="Question text in Hindi" style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem;font-family:inherit"></textarea>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                <input id="qz-opt-hi-0" placeholder="Option 1 (Hindi)" style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem;font-family:inherit"/><input id="qz-opt-hi-1" placeholder="Option 2 (Hindi)" style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem;font-family:inherit"/>
+                <input id="qz-opt-hi-2" placeholder="Option 3 (Hindi)" style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem;font-family:inherit"/><input id="qz-opt-hi-3" placeholder="Option 4 (Hindi)" style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem;font-family:inherit"/>
+                <input id="qz-opt-hi-4" placeholder="Option 5 (Hindi)" style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem;font-family:inherit"/>
+              </div>
+              <textarea id="qz-explanation-hi" rows="2" placeholder="Explanation in Hindi" style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem;font-family:inherit"></textarea>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                <input id="qz-q-topper" type="number" min="0" placeholder="Topper time (seconds)" style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem;font-family:inherit"/>
+                <input id="qz-q-cavg" type="number" min="0" placeholder="Correct-answer avg time (seconds)" style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem;font-family:inherit"/>
+              </div>
+              <div style="font-size:.66rem;color:var(--t2)">The English/Hindi switch appears in the quiz only when a set's questions have a full Hindi version (question + all 5 options). Topper / average times appear in the solution review when filled in.</div>
+            </div>
+          </details>
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px">
             <div>
               <label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:5px">Topic</label>
@@ -2647,15 +2665,15 @@ async function parseQuizBulk(){
 
 Extract EVERY question you can find. For each one, output exactly:
 - "question": the question text only, cleaned up (no leading numbering)
-- "options": array of exactly 4 option strings, in order, text only (no leading "A)"/"B)" labels)
-- "correctIndex": 0-based index (0,1,2,3) of the correct option, matched from whatever answer label the source used
+- "options": array of exactly 5 option strings, in order, text only (no leading "A)"/"B)" labels)
+- "correctIndex": 0-based index (0,1,2,3,4) of the correct option, matched from whatever answer label the source used
 - "explanation": a short explanation if the source text includes one; if none is given, write ONE clear, factually correct sentence explaining the answer yourself — never leave this blank
 
-If a question has fewer or more than 4 options in the source, still normalize to exactly 4 by leaving clearly wrong/implausible distractors out or adding a plausible one — never invent a 5th real option.
+Keep every option the source gives, up to 5. If the source question has only 4 options, output just those 4 — never invent an extra option.
 If you cannot confidently determine the correct answer for a question, exclude that question entirely rather than guessing.
 
 Respond ONLY with a valid JSON array, no markdown fences, no explanation outside the JSON. Example shape:
-[{"question":"...","options":["...","...","...","..."],"correctIndex":0,"explanation":"..."}]`;
+[{"question":"...","options":["...","...","...","...","..."],"correctIndex":0,"explanation":"..."}]`;
   try{
     const res=await fetch(ep,{method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({model:'gemini-2.5-flash-lite',max_tokens:8000,system:sys,messages:[{role:'user',content:raw}]})});
@@ -2669,11 +2687,11 @@ Respond ONLY with a valid JSON array, no markdown fences, no explanation outside
         _tmpId:'p'+i,
         _include:true,
         question:String(q.question||'').trim(),
-        options:Array.isArray(q.options)?q.options.slice(0,4).map(function(o){return String(o||'').trim();}):['','','',''],
+        options:Array.isArray(q.options)?q.options.slice(0,5).map(function(o){return String(o||'').trim();}):['','','','',''],
         correctIndex:Number.isInteger(q.correctIndex)?q.correctIndex:0,
         explanation:String(q.explanation||'').trim()
       };
-    }).filter(function(q){return q.question&&q.options.length===4&&q.options.every(function(o){return o;});});
+    }).filter(function(q){return q.question&&q.options.length>=4&&q.options.every(function(o){return o;});});
     if(!_quizParsedPreview.length)throw new Error('Parsed response had no valid, complete questions.');
     statusEl.textContent='✓ Parsed '+_quizParsedPreview.length+' question(s) — review below before importing.';
     statusEl.style.color='var(--green)';
@@ -2689,14 +2707,13 @@ function renderQuizPreview(){
   const list=document.getElementById('qz-preview-list');
   if(!_quizParsedPreview.length){wrap.style.display='none';return;}
   wrap.style.display='block';
-  const letters=['A','B','C','D'];
   list.innerHTML=_quizParsedPreview.map(function(q,i){
     return '<div style="background:var(--bg3);border:1px solid var(--b);border-radius:var(--rs);padding:12px 14px;'+(q._include?'':'opacity:.45')+'">'
       +'<label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer">'
       +'<input type="checkbox" '+(q._include?'checked':'')+' onchange="toggleQuizPreviewItem('+i+')" style="margin-top:3px"/>'
       +'<div style="flex:1">'
       +'<div style="font-size:.82rem;font-weight:600;color:var(--t);margin-bottom:6px">'+esc(q.question)+'</div>'
-      +q.options.map(function(o,oi){return '<div style="font-size:.76rem;color:'+(oi===q.correctIndex?'var(--green)':'var(--t2)')+';margin-bottom:2px">'+letters[oi]+') '+esc(o)+(oi===q.correctIndex?' ✓':'')+'</div>';}).join('')
+      +q.options.map(function(o,oi){return '<div style="font-size:.76rem;color:'+(oi===q.correctIndex?'var(--green)':'var(--t2)')+';margin-bottom:2px">'+esc(o)+(oi===q.correctIndex?' ✓':'')+'</div>';}).join('')
       +(q.explanation?'<div style="font-size:.72rem;color:var(--t2);margin-top:6px;font-style:italic">Explanation: '+esc(q.explanation)+'</div>':'')
       +'</div></label></div>';
   }).join('');
@@ -2739,21 +2756,27 @@ function importQuizPreview(){
 // ---------- MANUAL ADD/EDIT ----------
 function saveQuizQuestion(){
   const text=document.getElementById('qz-q-text').value.trim();
-  const options=[0,1,2,3].map(function(i){return document.getElementById('qz-opt-'+i).value.trim();});
+  const options=[0,1,2,3,4].map(function(i){return document.getElementById('qz-opt-'+i).value.trim();});
   const correctIndex=parseInt(document.querySelector('input[name="qz-correct"]:checked').value);
   const explanation=document.getElementById('qz-explanation').value.trim();
+  const gv=function(id){return document.getElementById(id).value.trim();};
+  const textHi=gv('qz-q-text-hi'),optionsHi=[0,1,2,3,4].map(function(i){return gv('qz-opt-hi-'+i);}),explanationHi=gv('qz-explanation-hi');
+  const anyHi=!!textHi||optionsHi.some(Boolean);
+  if(anyHi&&(!textHi||optionsHi.some(function(o){return !o;}))){t('Hindi version: fill the question and all 5 options, or clear them all','err');return;}
+  const numOrNull=function(id){const v=gv(id);return v===''?null:Math.max(0,Math.round(parseFloat(v)||0));};
+  const extra={textHi:anyHi?textHi:'',optionsHi:anyHi?optionsHi:[],explanationHi:explanationHi,topperTime:numOrNull('qz-q-topper'),correctAvgTime:numOrNull('qz-q-cavg')};
   const topicId=document.getElementById('qz-q-topic').value||null;
   const difficulty=document.getElementById('qz-q-difficulty').value;
   const setNoVal=document.getElementById('qz-q-setno').value;
   const setNo=setNoVal?parseInt(setNoVal):null;
   const active=document.getElementById('qz-q-active').checked;
-  if(!text||options.some(function(o){return !o;})){t('Fill in the question and all 4 options','err');return;}
+  if(!text||options.some(function(o){return !o;})){t('Fill in the question and all 5 options','err');return;}
   const d=qzD();
   if(_quizEditingQId){
     const q=d.quizQuestions.find(function(x){return x.id===_quizEditingQId;});
-    if(q){Object.assign(q,{text:text,options:options,correctIndex:correctIndex,explanation:explanation,topicId:topicId,difficulty:difficulty,setNo:setNo,active:active});}
+    if(q){Object.assign(q,{text:text,options:options,correctIndex:correctIndex,explanation:explanation,topicId:topicId,difficulty:difficulty,setNo:setNo,active:active},extra);}
   }else{
-    d.quizQuestions.push({id:'qq_'+Date.now(),text:text,options:options,correctIndex:correctIndex,explanation:explanation,topicId:topicId,difficulty:difficulty,setNo:setNo,active:active,productIds:[]});
+    d.quizQuestions.push(Object.assign({id:'qq_'+Date.now(),text:text,options:options,correctIndex:correctIndex,explanation:explanation,topicId:topicId,difficulty:difficulty,setNo:setNo,active:active,productIds:[]},extra));
   }
   SD(d);
   t(_quizEditingQId?'Question updated':'Question added','ok');
@@ -2767,10 +2790,15 @@ function editQuizQuestion(id){
   _quizEditingQId=id;
   document.getElementById('qz-form-title').textContent='Editing Question';
   document.getElementById('qz-q-text').value=q.text||'';
-  [0,1,2,3].forEach(function(i){document.getElementById('qz-opt-'+i).value=(q.options||[])[i]||'';});
+  [0,1,2,3,4].forEach(function(i){document.getElementById('qz-opt-'+i).value=(q.options||[])[i]||'';});
   const radio=document.querySelector('input[name="qz-correct"][value="'+(q.correctIndex||0)+'"]');
   if(radio)radio.checked=true;
   document.getElementById('qz-explanation').value=q.explanation||'';
+  document.getElementById('qz-q-text-hi').value=q.textHi||'';
+  [0,1,2,3,4].forEach(function(i){document.getElementById('qz-opt-hi-'+i).value=(q.optionsHi||[])[i]||'';});
+  document.getElementById('qz-explanation-hi').value=q.explanationHi||'';
+  document.getElementById('qz-q-topper').value=(q.topperTime==null?'':q.topperTime);
+  document.getElementById('qz-q-cavg').value=(q.correctAvgTime==null?'':q.correctAvgTime);
   document.getElementById('qz-q-topic').value=q.topicId||'';
   document.getElementById('qz-q-difficulty').value=q.difficulty||'medium';
   document.getElementById('qz-q-setno').value=q.setNo||'';
@@ -2782,9 +2810,10 @@ function resetQuizQuestionForm(){
   _quizEditingQId=null;
   document.getElementById('qz-form-title').textContent='Add Question Manually';
   document.getElementById('qz-q-text').value='';
-  [0,1,2,3].forEach(function(i){document.getElementById('qz-opt-'+i).value='';});
+  [0,1,2,3,4].forEach(function(i){document.getElementById('qz-opt-'+i).value='';});
   document.querySelector('input[name="qz-correct"][value="0"]').checked=true;
   document.getElementById('qz-explanation').value='';
+  ['qz-q-text-hi','qz-opt-hi-0','qz-opt-hi-1','qz-opt-hi-2','qz-opt-hi-3','qz-explanation-hi','qz-q-topper','qz-q-cavg'].forEach(function(id){document.getElementById(id).value='';});
   document.getElementById('qz-q-topic').value='';
   document.getElementById('qz-q-difficulty').value='medium';
   document.getElementById('qz-q-setno').value='';
