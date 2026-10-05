@@ -6947,14 +6947,16 @@
   ],
   "quizSets": [
     {
-      "id": "qs_1791226717941",
+      "id": "qs_1791226855983",
       "setNo": 1,
-      "title": "q",
-      "timeLimitMin": 22,
+      "title": "1",
+      "timeLimitMin": 1,
       "negMarkEnabled": true,
-      "negMarkValue": 2,
+      "negMarkValue": 5,
       "active": true,
-      "productIds": []
+      "productIds": [
+        "IBPSPO"
+      ]
     }
   ]
 }
