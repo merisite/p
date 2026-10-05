@@ -412,6 +412,39 @@ body #quizrun .exam-bar .btn.bg:hover{background:rgba(255,255,255,.14)!important
   .qzr-drawer-close{display:block;width:100%;padding:11px;border:none;border-radius:6px;background:#e74c3c;color:#fff;font-weight:700;cursor:pointer;flex-shrink:0}
   .qzr-backdrop.open{display:block;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:399}
 }
+/* ---- Quiz runner: bank-exam CBT look (light exam paper, sub-bar, shaped palette) ---- */
+#quizrun{--bg:#eef2f7;--bg2:#fff;--bg3:#f1f5f9;--b:#cfd8e3;--t:#1f2937;--t2:#5b6676;--accent:#1a4da0;--adim:#e8f0fe;--aborder:#9db8e8;--gdim:#e8f5e9;--gborder:#27ae60;--green:#1e8e3e;--rdim:#fdecea;--rborder:#e74c3c;--red:#c0392b;background:var(--bg);color:var(--t);border-radius:10px;padding:10px}
+#quizrun .exam-bar{margin-bottom:0;border-radius:8px 8px 0 0}
+#qzr-subbar{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;background:#fff;border:1px solid var(--b);border-top:none;padding:7px 14px;font-size:.74rem;color:var(--t2);margin-bottom:10px}
+#qzr-subbar b{color:var(--t)}
+.qzr-tl{color:#fff;font-size:.72rem;font-weight:600}
+#quizrun .panel{border:1px solid var(--b);border-radius:6px;background:#fff;overflow:hidden}
+#quizrun .panel>.ph{background:#f1f5f9;border-bottom:1px solid var(--b);padding:9px 14px;font-size:.82rem;font-weight:700;color:var(--t)}
+#quizrun .q-text{font-size:1rem;line-height:1.65;color:var(--t)}
+#quizrun #qzr-options label:hover{background:var(--adim)!important}
+#qzr-actionbar{background:#fff;border:1px solid var(--b);border-radius:6px;padding:10px 12px;margin-top:10px!important;position:sticky;bottom:6px;z-index:5}
+#qzr-actionbar .btn{border-radius:4px;font-weight:700}
+#qzr-actionbar .btn.mk{background:#fff;border:1.5px solid #7c3aed;color:#7c3aed}
+#qzr-actionbar .btn.mk:hover{background:#f3ecff}
+#qzr-actionbar .btn.sv{background:#1a4da0;color:#fff;border:none;padding:9px 26px}
+#quizrun .exam-side{background:#fff;border:1px solid var(--b);border-radius:6px;padding:0;gap:0}
+.qzr-prof{display:flex;align-items:center;gap:10px;padding:11px 12px;border-bottom:1px solid var(--b);background:#f8fafc;font-size:.78rem;line-height:1.35}
+.qzr-prof span{color:var(--t2);font-size:.68rem}
+.qzr-av{width:38px;height:38px;border-radius:50%;background:#1a4da0;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}
+#quizrun .exam-side>*:not(.qzr-prof):not(.qzr-drawer-close){margin:0 12px}
+#quizrun .exam-side .es-stat-grid{margin-top:12px;margin-bottom:10px}
+#quizrun .exam-side .es-sec-title{background:#1a4da0;color:#fff;margin:6px 0 10px;padding:6px 12px;border-radius:0;font-size:.72rem}
+#quizrun .exam-side .es-qgrid{grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px}
+#quizrun .exam-side>.btn{margin-bottom:12px;background:#1a4da0;border-radius:4px}
+#quizrun .es-qbtn{aspect-ratio:auto;height:34px;border-radius:4px;font-size:.78rem;background:#fff;color:#1f2937;border:1px solid #b7c2d0}
+#quizrun .es-qbtn.es-done,#quizrun .es-badge.green{background:#27ae60;border-color:#27ae60;color:#fff;clip-path:polygon(0 0,100% 0,100% 72%,50% 100%,0 72%);border-radius:0}
+#quizrun .es-qbtn.es-notdone,#quizrun .es-badge.orange{background:#e74c3c;border-color:#e74c3c;color:#fff;clip-path:polygon(0 28%,50% 0,100% 28%,100% 100%,0 100%);border-radius:0}
+#quizrun .es-qbtn.es-marked,#quizrun .es-badge.purple{background:#8e44ad;border-color:#8e44ad;color:#fff;border-radius:50%;clip-path:none}
+#quizrun .es-qbtn.es-notvisited,#quizrun .es-badge.grey{background:#fff;color:#1f2937;border:1px solid #b7c2d0;clip-path:none;border-radius:3px}
+#quizrun .es-qbtn.es-current{outline:2px solid #1a4da0;outline-offset:1px}
+#quizrun .es-badge.dot::after,#quizrun .es-marked-done::after{background:#27ae60;width:9px;height:9px;right:-3px;bottom:-3px}
+#quizrun .es-review .es-qbtn,#quizrun .es-side.es-review .es-qbtn{clip-path:none;border-radius:50%}
+#quizrun .es-side.es-review .es-qbtn.es-done{border-radius:50%}
 @media(max-width:480px){.qzi-legend-grid{grid-template-columns:1fr!important}}
 #mock-mr-btn.mr-active{border-color:#7c3aed;color:#7c3aed;background:rgba(124,58,237,.1)}
 /* BUTTONS */
@@ -5912,6 +5945,8 @@ function launchQuiz(set,qs,resumeState){
   { const ls=document.getElementById("qzr-lang");ls.style.display=QZ.hasHindi?"":"none";ls.value=QZ.lang;
     const tv=document.getElementById("qzr-timer-val");tv.style.display="";tv.className="qzr-timer"+(QZ.timeLimitMin?"":" nolimit");tv.textContent=QZ.timeLimitMin?"--:--":"No time limit";
     document.getElementById("qzr-scorecard").style.display="none";
+    document.getElementById("qzr-tl").style.display=QZ.timeLimitMin?"":"none";
+    document.getElementById("qzr-subbar").innerHTML='<span>Section: <b>'+escapeHTML(set.title||("Quiz Set "+set.setNo))+'</b></span><span>Question Type: <b>MCQ</b></span><span>Total Questions: <b>'+QZ.questions.length+'</b></span><span>Duration: <b>'+(QZ.timeLimitMin?QZ.timeLimitMin+" min":"No limit")+'</b></span>';
     document.querySelector("#quizrun .exam-layout").style.display=""; }
   showS("quizrun",{skipHash:true});
   document.getElementById("qzr-title-lbl").textContent=set.title||("Quiz Set "+set.setNo);
@@ -5961,8 +5996,8 @@ function loadQuizQ(idx){
   toggleQuizDrawer(false);
   const q=QZ.questions[idx],v=qzText(q);
   const tm={};(D().quizTopics||[]).forEach(function(tp){tm[tp.id]=tp.name;});
-  document.getElementById("qzr-topic-lbl").textContent=(q.topicId&&tm[q.topicId])?tm[q.topicId]:(QZ.title||"Question");
-  document.getElementById("qzr-q-no-lbl").textContent="Q"+(idx+1)+" of "+QZ.questions.length;
+  document.getElementById("qzr-topic-lbl").textContent="Question No. "+(idx+1)+((QZ.reviewMode&&q.topicId&&tm[q.topicId])?"  ·  "+tm[q.topicId]:"");
+  document.getElementById("qzr-q-no-lbl").innerHTML='<span style="font-weight:600;font-size:.72rem;color:#5b6676">Marks for correct answer <b style="color:#1e8e3e">1</b> &nbsp;|&nbsp; Negative marks <b style="color:#c0392b">'+(QZ.negMarkEnabled?QZ.negMarkValue:0)+'</b></span>';
   document.getElementById("qzr-qtext").textContent=v.text;
   const selected=QZ.a[idx];
   const optsEl=document.getElementById("qzr-options");
@@ -6040,7 +6075,8 @@ function renderQuizPalette(){
   if(!QZ)return;
   const el=document.getElementById("qzr-side");
   if(!el)return;
-  const closeBtn='<button class="qzr-drawer-close" onclick="toggleQuizDrawer(false)">✖ Close Palette</button>';
+  el.classList.toggle("es-review",!!QZ.reviewMode);
+  const closeBtn='<button class="qzr-drawer-close" onclick="toggleQuizDrawer(false)">✖ Close Palette</button><div class="qzr-prof"><div class="qzr-av">C</div><div><b>Candidate</b><br><span>Mock Test</span></div></div>';
   if(QZ.reviewMode){
     el.innerHTML=closeBtn+'<div class="es-sec-title">Your Result</div>'
       +'<div style="text-align:center;padding:10px 0">'
@@ -6081,7 +6117,7 @@ function renderQuizPalette(){
     +'<div class="es-stat"><div class="es-badge purple dot">'+c.ansRev+'</div>Answered &amp;<br>Marked</div>'
     +'<div class="es-stat" style="grid-column:1/-1"><div class="es-badge grey">'+c.notVis+'</div>Not Visited</div>'
     +'</div>'
-    +'<div class="es-sec-title">'+escapeHTML(QZ.title||"Questions")+'</div>'
+    +'<div class="es-sec-title">Question Palette</div>'
     +'<div class="es-qgrid">'+qgrid+'</div>'
     +'<button class="btn bp" style="width:100%;margin-top:8px" onclick="submitQuiz(false)">Submit Quiz</button>';
 }
@@ -6125,6 +6161,7 @@ function finalizeQuiz(){
   document.getElementById("qzr-actionbar").style.display="none";
   document.getElementById("qzr-review-actionbar").style.display="block";
   document.getElementById("qzr-timer-val").style.display="none";
+  document.getElementById("qzr-tl").style.display="none";
   document.getElementById("qzr-exit-btn").innerHTML='<svg width="11" height="11" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back';
   showQuizScorecard();
 }
@@ -6322,13 +6359,14 @@ const initPromise=init();
       <div style="font-size:.9rem;font-weight:700;color:var(--t)" id="qzr-title-lbl">Quiz</div>
     </div>
     <div style="display:flex;gap:6px;flex-shrink:0;align-items:center">
-      <span class="qzr-timer" id="qzr-timer-val">--:--</span>
+      <span class="qzr-tl" id="qzr-tl">Time Left:</span><span class="qzr-timer" id="qzr-timer-val">--:--</span>
       <select class="qzr-lang" id="qzr-lang" style="display:none" onchange="changeQuizLang(this.value)"><option value="en">English</option><option value="hi">हिन्दी</option></select>
       <button class="btn bg bsm qzr-grid-btn" onclick="toggleQuizDrawer()">Grid ☰</button>
       <button class="btn bg bsm fs-toggle-btn" onclick="toggleFullscreen()" title="Toggle full screen"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 00-2 2v3M16 3h3a2 2 0 012 2v3M21 16v3a2 2 0 01-2 2h-3M3 16v3a2 2 0 002 2h3"/></svg></button>
       <button class="btn bg bsm" id="qzr-exit-btn" onclick="askExit(_instrReturnTo)"><svg width="11" height="11" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Exit</button>
     </div>
   </div>
+  <div id="qzr-subbar"></div>
   <div id="qzr-scorecard" style="display:none"></div>
   <div class="exam-layout">
     <div class="exam-main">
@@ -6344,9 +6382,9 @@ const initPromise=init();
         </div>
       </div>
       <div id="qzr-actionbar" style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+        <button class="btn mk" onclick="markQuizForReview()">Mark for Review &amp; Next</button>
         <button class="btn bg" onclick="clearQuizResponse()">Clear Response</button>
-        <button class="btn bg" onclick="markQuizForReview()">Mark for Review &amp; Next</button>
-        <button class="btn bp" style="margin-left:auto" onclick="saveQuizAndNext()">Save &amp; Next →</button>
+        <button class="btn sv" style="margin-left:auto" onclick="saveQuizAndNext()">Save &amp; Next</button>
       </div>
       <div id="qzr-review-actionbar" style="display:none;margin-top:12px">
         <div style="display:flex;gap:8px;flex-wrap:wrap">
