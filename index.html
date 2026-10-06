@@ -421,7 +421,7 @@ body #quizrun .exam-bar .btn.bg:hover{background:rgba(255,255,255,.14)!important
 #quizrun .panel{border:1px solid var(--b);border-radius:6px;background:#fff;overflow:hidden}
 #quizrun .panel>.ph{background:#f1f5f9;border-bottom:1px solid var(--b);padding:9px 14px;font-size:.82rem;font-weight:700;color:var(--t)}
 #quizrun .q-text{font-size:1rem;line-height:1.65;color:var(--t)}
-#quizrun #qzr-options label:hover{background:var(--adim)!important}
+
 #qzr-actionbar{background:#fff;border:1px solid var(--b);border-radius:6px;padding:10px 12px;margin-top:10px!important;position:sticky;bottom:6px;z-index:5}
 #qzr-actionbar .btn{border-radius:4px;font-weight:700}
 #qzr-actionbar .btn.mk{background:#fff;border:1.5px solid #7c3aed;color:#7c3aed}
@@ -468,6 +468,12 @@ body #quizrun .exam-bar .btn.bg:hover{background:rgba(255,255,255,.14)!important
 .qzr-pc{text-align:center}.qzr-pc small{display:block;font-size:.6rem;color:#5b6676;margin-top:2px}
 img.qzr-av{object-fit:cover}
 #quizrun .exam-side.es-review .es-qgrid{gap:6px 8px}
+/* squares with soft corners everywhere in the quiz palette; option rows without boxes */
+#quizrun .es-qbtn,#quizrun .es-badge{clip-path:none!important;border-radius:6px!important}
+#quizrun .es-qbtn{aspect-ratio:1;height:auto;min-height:34px}
+#quizrun #qzr-options label:hover{color:#1a4da0;background:transparent!important}
+.qzr-qb svg,.btn svg{vertical-align:-2px}
+@media(max-width:900px){.qzr-handle{display:flex;position:fixed;top:45%;right:0;width:20px;height:54px;background:#2c3e50;color:#fff;border:none;border-radius:6px 0 0 6px;z-index:390;align-items:center;justify-content:center;cursor:pointer}}
 @media(max-width:480px){.qzi-legend-grid{grid-template-columns:1fr!important}}
 #mock-mr-btn.mr-active{border-color:#7c3aed;color:#7c3aed;background:rgba(124,58,237,.1)}
 /* BUTTONS */
@@ -5847,7 +5853,7 @@ function renderQuizList(){
     const unlockIds=(s.productIds&&s.productIds.length)?s.productIds:(courseProductId?[courseProductId]:[]);
     const cta=locked
       ? '<button onclick="event.stopPropagation();showUnlockOptions('+jsArrayAttr(unlockIds)+')" style="font-size:.7rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:6px 14px;border-radius:999px;cursor:pointer;font-family:var(--font)">Unlock</button>'
-      : '<button onclick="startQuizSet(\''+s.id+'\')" style="font-size:.7rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:6px 14px;border-radius:999px;cursor:pointer;font-family:var(--font)">→ Start</button>';
+      : '<button onclick="startQuizSet(\''+s.id+'\')" style="font-size:.7rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:6px 14px;border-radius:999px;cursor:pointer;font-family:var(--font)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> Start</button>';
     return '<div class="q-item" style="cursor:default">'
       +(locked?'<div style="position:absolute;top:12px;right:12px;color:var(--accent)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>':'')
       +'<div style="font-size:.94rem;font-weight:700;color:var(--t);margin-bottom:8px">'+escapeHTML(s.title||('Set '+s.setNo))+'</div>'
@@ -5972,11 +5978,11 @@ function launchQuiz(set,qs,resumeState){
     document.getElementById("qzr-subbar").innerHTML='<span>Section: <b>'+escapeHTML(set.title||("Quiz Set "+set.setNo))+'</b></span><span>Question Type: <b>MCQ</b></span><span>Total Questions: <b>'+QZ.questions.length+'</b></span><span>Duration: <b>'+(QZ.timeLimitMin?QZ.timeLimitMin+" min":"No limit")+'</b></span>';
     document.querySelector("#quizrun .exam-layout").style.display="";
     _timerPaused=false;
+    if(!document.fullscreenElement){try{(document.documentElement.requestFullscreen?.()||Promise.resolve()).catch(function(){});}catch(e){}}
     document.getElementById("qzr-pause").style.display="";document.getElementById("qzr-pause").textContent="Pause";
     document.getElementById("qzr-an-btn").style.display="none";document.getElementById("qzr-rvbar").style.display="none";
     document.getElementById("qzr-pause-ov").style.display="none";
-    document.querySelector("#quizrun .exam-layout").classList.remove("qzr-collapsed");document.getElementById("qzr-handle").textContent="›";
-    clearInterval(QZ_QTI);QZ_QTI=setInterval(qzQtTick,1000); }
+    document.querySelector("#quizrun .exam-layout").classList.remove("qzr-collapsed");document.getElementById("qzr-handle").innerHTML=QI.chR; }
   showS("quizrun",{skipHash:true});
   document.getElementById("qzr-title-lbl").textContent=set.title||("Quiz Set "+set.setNo);
   document.getElementById("qzr-exit-btn").innerHTML='<svg width="11" height="11" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Exit';
@@ -6002,7 +6008,7 @@ function qzLap(){ // bank the time spent on the current question
   QZ.tt[QZ.idx]=(QZ.tt[QZ.idx]||0)+(now-QZ.qStart);
   QZ.qStart=now;
 }
-var QZ_QTI=null;
+var QI={check:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>',cross:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',chR:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>',chL:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>'};
 function qzProfileHTML(){
   const u=(window.FB&&window.FB.auth&&window.FB.auth.currentUser)||null;
   const name=(u&&(u.displayName||u.email))||"Candidate";
@@ -6013,16 +6019,8 @@ function qzHeadRight(q){
   const neg=QZ.negMarkEnabled?QZ.negMarkValue:0;
   const marks='<span style="font-weight:600;font-size:.72rem;color:#5b6676">Marks : <b style="color:#1e8e3e">+1</b> | <b style="color:#c0392b">-'+neg+'</b></span>';
   if(QZ.reviewMode){return (q.difficulty?'<span class="qzr-pill" style="margin:0 10px 0 0">Level: <b style="text-transform:capitalize">'+escapeHTML(q.difficulty)+'</b></span>':'')+marks;}
-  return '<button class="qzr-qt" onclick="toggleQnTime()">Qn. Time : <span id="qzr-qt-v">👁</span></button>'+marks;
+  return marks;
 }
-function qzQtTick(){
-  if(!QZ||QZ.reviewMode||QZ.paused)return;
-  const el=document.getElementById("qzr-qt-v");if(!el)return;
-  if(!QZ.showQT){el.textContent="👁";return;}
-  const sec=Math.round(((QZ.tt[QZ.idx]||0)+(Date.now()-QZ.qStart))/1000);
-  el.textContent=Math.floor(sec/60)+":"+String(sec%60).padStart(2,"0");
-}
-function toggleQnTime(){if(!QZ)return;QZ.showQT=!QZ.showQT;qzQtTick();}
 function toggleQuizPause(){
   if(!QZ||QZ.reviewMode)return;
   const ov=document.getElementById("qzr-pause-ov"),btn=document.getElementById("qzr-pause");
@@ -6030,9 +6028,10 @@ function toggleQuizPause(){
   else{QZ.paused=false;_timerPaused=false;QZ.qStart=Date.now();ov.style.display="none";btn.textContent="Pause";}
 }
 function toggleQuizSide(){
+  if(window.innerWidth<=900){toggleQuizDrawer();return;}
   const l=document.querySelector("#quizrun .exam-layout");
   l.classList.toggle("qzr-collapsed");
-  document.getElementById("qzr-handle").textContent=l.classList.contains("qzr-collapsed")?"‹":"›";
+  document.getElementById("qzr-handle").innerHTML=l.classList.contains("qzr-collapsed")?QI.chL:QI.chR;
 }
 function quizPrev(){if(QZ&&QZ.idx>0)loadQuizQ(QZ.idx-1);}
 function toggleReattempt(on){if(!QZ)return;QZ.reattempt=!!on;QZ.ra={};loadQuizQ(QZ.idx);}
@@ -6040,7 +6039,7 @@ function pickReattempt(oi){if(!QZ)return;QZ.ra[QZ.idx]=oi;loadQuizQ(QZ.idx);}
 function qzUpdateRv(){
   const bar=document.getElementById("qzr-rvbar");if(!bar)return;
   const sec=Math.round((QZ.tt[QZ.idx]||0)/1000);
-  bar.innerHTML='<span>Re-Attempt</span><label class="qzr-sw"><input type="checkbox" '+(QZ.reattempt?"checked":"")+' onchange="toggleReattempt(this.checked)"><span></span></label><span class="qzr-pill" style="margin:0">Time: <b>'+(QZ.visited[QZ.idx]?qzFmtSecs(sec):"0s")+'</b></span>';
+  bar.innerHTML='<span>Re-Attempt</span><label class="qzr-sw"><input type="checkbox" '+(QZ.reattempt?"checked":"")+' onchange="toggleReattempt(this.checked)"><span></span></label>';
   bar.style.display="flex";
 }
 function qzFmtSecs(sec){return sec>=60?Math.floor(sec/60)+"m "+String(sec%60).padStart(2,"0")+"s":sec+"s";}
@@ -6073,41 +6072,29 @@ function loadQuizQ(idx){
   const optsEl=document.getElementById("qzr-options");
   const anEl=document.getElementById("qzr-analytics");
   if(QZ.reviewMode&&QZ.reattempt&&QZ.ra[idx]===undefined){
-    optsEl.innerHTML=v.options.map(function(o,oi){return '<label style="display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg2);cursor:pointer;font-size:.85rem"><input type="radio" name="qzr-ra" onchange="pickReattempt('+oi+')" style="margin:0"/>'+escapeHTML(o)+'</label>';}).join("");
+    optsEl.innerHTML=v.options.map(function(o,oi){return '<label style="display:flex;align-items:center;gap:10px;padding:9px 6px;cursor:pointer;font-size:.92rem"><input type="radio" name="qzr-ra" onchange="pickReattempt('+oi+')" style="margin:0"/>'+escapeHTML(o)+'</label>';}).join("");
     document.getElementById("qzr-explanation").style.display="none";anEl.style.display="none";
     qzUpdateRv();renderQuizPalette();return;
   }
   if(QZ.reviewMode){
     const pick=QZ.reattempt?QZ.ra[idx]:selected;
     optsEl.innerHTML=v.options.map(function(o,oi){
-      const isCorrect=oi===q.correctIndex;
-      const isPicked=oi===pick;
-      let style="border:1px solid var(--b);background:var(--bg2)";
-      if(isCorrect)style="border:1px solid var(--gborder);background:var(--gdim);color:var(--green)";
-      else if(isPicked&&!isCorrect)style="border:1px solid var(--rborder);background:var(--rdim);color:var(--red)";
-      const tag=isCorrect?' ✓ Correct answer':(isPicked?' ✕ '+(QZ.reattempt?'Your re-attempt':'Your answer'):'');
-      return '<div style="padding:11px 14px;border-radius:var(--rs);font-size:.85rem;'+style+'">'+escapeHTML(o)+'<strong>'+tag+'</strong></div>';
+      const isCorrect=oi===q.correctIndex,isPicked=oi===pick;
+      const color=isCorrect?'color:var(--green);font-weight:600':(isPicked?'color:var(--red);font-weight:600':'');
+      const tag=isCorrect?QI.check+' Correct answer':(isPicked?QI.cross+' '+(QZ.reattempt?'Your re-attempt':'Your answer'):'');
+      return '<div style="display:flex;align-items:center;gap:10px;padding:9px 6px;font-size:.92rem;line-height:1.5;'+color+'"><span style="flex:1">'+escapeHTML(o)+'</span>'+(tag?'<span style="display:inline-flex;align-items:center;gap:5px;font-size:.76rem;flex-shrink:0">'+tag+'</span>':'')+'</div>';
     }).join("");
     const expEl=document.getElementById("qzr-explanation");
     if(v.explanation){expEl.style.display="block";expEl.innerHTML="<strong>Explanation:</strong> "+escapeHTML(v.explanation);}
     else{expEl.style.display="none";}
-    // Per-question time analytics
-    const pills=[];
-    const secs=Math.round((QZ.tt[idx]||0)/1000);
-    pills.push('⏱️ Your time: <b>'+(QZ.visited[idx]?qzFmtSecs(secs):"—")+'</b>');
-    if(q.topperTime!=null)pills.push('🏆 Topper: <b>'+qzFmtSecs(q.topperTime)+'</b>');
-    if(q.correctAvgTime!=null)pills.push('🥇 Correct avg: <b>'+qzFmtSecs(q.correctAvgTime)+'</b>');
-    if(QZ._avgCorrectSecs!=null)pills.push('📈 Your avg on correct answers: <b>'+qzFmtSecs(QZ._avgCorrectSecs)+'</b>');
-    anEl.innerHTML='<div style="font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--t2);margin-bottom:7px">📊 Question Analytics</div>'+pills.map(function(p){return '<span class="qzr-pill">'+p+'</span>';}).join("");
-    anEl.style.display="block";
+    anEl.style.display="none";
     qzUpdateRv();
   }else{
     optsEl.innerHTML=v.options.map(function(o,oi){
       const isSelected=oi===selected;
-      return '<label style="display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:var(--rs);border:1px solid '+(isSelected?'var(--aborder)':'var(--b)')+';background:'+(isSelected?'var(--adim)':'var(--bg2)')+';cursor:pointer;font-size:.85rem">'
-        +'<input type="radio" name="qzr-opt" value="'+oi+'" '+(isSelected?'checked':'')+' onchange="selectQuizOption('+oi+')" style="margin:0"/>'
-        +escapeHTML(o)
-        +'</label>';
+      return '<label style="display:flex;align-items:center;gap:12px;padding:9px 6px;cursor:pointer;font-size:.92rem;line-height:1.5;'+(isSelected?'font-weight:600;color:#1a4da0':'')+'">'
+        +'<input type="radio" name="qzr-opt" value="'+oi+'" '+(isSelected?'checked':'')+' onchange="selectQuizOption('+oi+')" style="margin:0;width:16px;height:16px;flex-shrink:0"/>'
+        +'<span>'+escapeHTML(o)+'</span></label>';
     }).join("");
     document.getElementById("qzr-explanation").style.display="none";
     anEl.style.display="none";
@@ -6153,7 +6140,7 @@ function renderQuizPalette(){
   const el=document.getElementById("qzr-side");
   if(!el)return;
   el.classList.toggle("es-review",!!QZ.reviewMode);
-  const closeBtn='<button class="qzr-drawer-close" onclick="toggleQuizDrawer(false)">✖ Close Palette</button>'+qzProfileHTML();
+  const closeBtn='<button class="qzr-drawer-close" onclick="toggleQuizDrawer(false)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Close Palette</button>'+qzProfileHTML();
   if(QZ.reviewMode){
     const rows=[["Mark",QZ._resultScore+"/"+QZ._resultMax],["Attempted",QZ._attempted],["Correct",QZ._correctCount],["Incorrect",QZ._wrongCount],["You",qzFmtSecs(QZ._totalSecs||0)]];
     el.innerHTML=closeBtn+'<div class="qzr-sum-t">'+escapeHTML(QZ.title||"Section")+'</div><div class="qzr-sum-h">Section summary</div>'
@@ -6163,7 +6150,7 @@ function renderQuizPalette(){
         let cls=hasAns?(isCorrect?"es-done":"es-notdone"):"es-notvisited";
         if(i===QZ.idx)cls+=" es-current";
         const t=QZ.visited[i]?Math.round((QZ.tt[i]||0)/1000)+"s":"-";
-        return '<div class="qzr-pc"><button class="es-qbtn '+cls+'" onclick="loadQuizQ('+i+')">'+(i+1)+'</button><small>'+t+'</small></div>';
+        return '<div class="qzr-pc"><button class="es-qbtn '+cls+'" onclick="loadQuizQ('+i+')">'+(i+1)+'</button></div>';
       }).join("")+'</div>';
     return;
   }
@@ -6232,7 +6219,7 @@ function finalizeQuiz(){
   document.getElementById("qzr-timer-val").style.display="none";
   document.getElementById("qzr-tl").style.display="none";
   document.getElementById("qzr-pause").style.display="none";document.getElementById("qzr-an-btn").style.display="";
-  clearInterval(QZ_QTI);_timerPaused=false;QZ.paused=false;
+  _timerPaused=false;QZ.paused=false;
   document.getElementById("qzr-exit-btn").innerHTML='<svg width="11" height="11" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back';
   showQuizScorecard();
 }
@@ -6255,7 +6242,7 @@ function showQuizScorecard(){
     +'</div>'
     +'<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">'
     +'<button class="btn bp" onclick="enterQuizReview()">View Detailed Solutions &amp; Stats</button>'
-    +'<button class="btn bg" onclick="showS(\'quizlist\');renderQuizList()">← Quiz List</button>'
+    +'<button class="btn bg" onclick="showS(\'quizlist\');renderQuizList()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Quiz List</button>'
     +'</div></div></div>';
   sc.style.display="block";
 }
@@ -6405,7 +6392,7 @@ const initPromise=init();
         </label>
         <div style="display:flex;gap:10px;margin-top:28px;flex-wrap:wrap">
           <button class="btn bg" onclick="showS('quizlist');renderQuizList()">Cancel</button>
-          <button class="btn bp" id="qzi-next-btn" disabled onclick="showQuizInstrPage2()">I'm Ready to Begin →</button>
+          <button class="btn bp" id="qzi-next-btn" disabled onclick="showQuizInstrPage2()">I'm Ready to Begin <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
         </div>
       </div>
     </div>
@@ -6416,8 +6403,8 @@ const initPromise=init();
       <div class="pb" style="padding:26px 28px">
         <div id="qzi-body" style="font-size:.85rem;line-height:1.9;color:var(--t2)"></div>
         <div style="display:flex;gap:10px;margin-top:28px;flex-wrap:wrap">
-          <button class="btn bg" onclick="showQuizInstrPage1()">← Previous</button>
-          <button class="btn bp" onclick="confirmQuizInstr()">Start Quiz →</button>
+          <button class="btn bg" onclick="showQuizInstrPage1()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Previous</button>
+          <button class="btn bp" onclick="confirmQuizInstr()">Start Quiz <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
         </div>
       </div>
     </div>
@@ -6433,8 +6420,7 @@ const initPromise=init();
       <span class="qzr-tl" id="qzr-tl">Time Left:</span><span class="qzr-timer" id="qzr-timer-val">--:--</span>
       <select class="qzr-lang" id="qzr-lang" style="display:none" onchange="changeQuizLang(this.value)"><option value="en">English</option><option value="hi">हिन्दी</option></select>
       <button class="btn bg bsm" id="qzr-pause" onclick="toggleQuizPause()">Pause</button>
-      <button class="btn bg bsm" id="qzr-an-btn" style="display:none" onclick="showQuizScorecard()">📊 Analytics</button>
-      <button class="btn bg bsm qzr-grid-btn" onclick="toggleQuizDrawer()">Grid ☰</button>
+      <button class="btn bg bsm" id="qzr-an-btn" style="display:none" onclick="showQuizScorecard()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> Analytics</button>
       <button class="btn bg bsm fs-toggle-btn" onclick="toggleFullscreen()" title="Toggle full screen"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 00-2 2v3M16 3h3a2 2 0 012 2v3M21 16v3a2 2 0 01-2 2h-3M3 16v3a2 2 0 002 2h3"/></svg></button>
       <button class="btn bg bsm" id="qzr-exit-btn" onclick="askExit(_instrReturnTo)"><svg width="11" height="11" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Exit</button>
     </div>
@@ -6442,8 +6428,8 @@ const initPromise=init();
   <div id="qzr-subbar"></div>
   <div id="qzr-scorecard" style="display:none"></div>
   <div class="exam-layout">
-    <button class="qzr-handle" id="qzr-handle" onclick="toggleQuizSide()" title="Show / hide question palette">›</button>
-    <div id="qzr-pause-ov"><div style="font-size:1.3rem">⏸ Test paused</div><div style="font-size:.78rem;font-weight:500;color:#5b6676">Your timer is stopped. Questions are hidden while paused.</div><button class="btn bp" onclick="toggleQuizPause()">Resume</button></div>
+    <button class="qzr-handle" id="qzr-handle" onclick="toggleQuizSide()" title="Show / hide question palette"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
+    <div id="qzr-pause-ov"><div style="display:flex;align-items:center;gap:10px;font-size:1.3rem"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg> Test paused</div><div style="font-size:.78rem;font-weight:500;color:#5b6676">Your timer is stopped. Questions are hidden while paused.</div><button class="btn bp" onclick="toggleQuizPause()">Resume</button></div>
     <div class="exam-main">
       <div id="qzr-rvbar"></div>
       <div class="exam-grid">
