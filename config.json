@@ -6950,9 +6950,9 @@
       "id": "qs_1791226855983",
       "setNo": 1,
       "title": "RRB PO PYQ (Beta Testing)",
-      "timeLimitMin": 10,
+      "timeLimitMin": 1,
       "negMarkEnabled": true,
-      "negMarkValue": 0.25,
+      "negMarkValue": 5,
       "active": true,
       "productIds": []
     }
