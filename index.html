@@ -379,7 +379,7 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 #qzr-title-lbl,#qzi-title-lbl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
 .oc-price-row{flex-wrap:wrap}
 /* ---- Quiz runner: CBT-style navy header, slide-in palette, scorecard ---- */
-body #quizrun .exam-bar{background:#2c3e50!important;border:1px solid #2c3e50!important;border-radius:8px;padding:9px 14px}
+body #quizrun .exam-bar{background:#123d8f!important;border:1px solid #123d8f!important;border-radius:8px;padding:9px 14px}
 body #quizrun .exam-bar #qzr-title-lbl{color:#fff!important}
 body #quizrun .exam-bar .btn.bg{background:transparent!important;color:#fff!important;border-color:rgba(255,255,255,.55)!important}
 body #quizrun .exam-bar .btn.bg:hover{background:rgba(255,255,255,.14)!important}
@@ -449,7 +449,7 @@ body #quizrun .exam-bar .btn.bg:hover{background:rgba(255,255,255,.14)!important
 .qzr-handle{display:none}
 @media(min-width:901px){
   #quizrun .exam-layout{position:relative}
-  .qzr-handle{display:flex;align-items:center;justify-content:center;position:absolute;top:42%;right:222px;width:18px;height:54px;background:#2c3e50;color:#fff;border:none;border-radius:6px 0 0 6px;cursor:pointer;z-index:6;font-size:1rem}
+  .qzr-handle{display:flex;align-items:center;justify-content:center;position:absolute;top:42%;right:222px;width:18px;height:54px;background:#123d8f;color:#fff;border:none;border-radius:6px 0 0 6px;cursor:pointer;z-index:6;font-size:1rem}
   #quizrun .exam-layout.qzr-collapsed{grid-template-columns:1fr!important}
   #quizrun .exam-layout.qzr-collapsed .exam-side{display:none}
   #quizrun .exam-layout.qzr-collapsed .qzr-handle{right:0}
@@ -473,7 +473,20 @@ img.qzr-av{object-fit:cover}
 #quizrun .es-qbtn{aspect-ratio:1;height:auto;min-height:34px}
 #quizrun #qzr-options label:hover{color:#1a4da0;background:transparent!important}
 .qzr-qb svg,.btn svg{vertical-align:-2px}
-@media(max-width:900px){.qzr-handle{display:flex;position:fixed;top:45%;right:0;width:20px;height:54px;background:#2c3e50;color:#fff;border:none;border-radius:6px 0 0 6px;z-index:390;align-items:center;justify-content:center;cursor:pointer}}
+@media(max-width:900px){.qzr-handle{display:flex;position:fixed;top:45%;right:0;width:20px;height:54px;background:#123d8f;color:#fff;border:none;border-radius:6px 0 0 6px;z-index:390;align-items:center;justify-content:center;cursor:pointer}}
+/* fixed bottom bar, visible vertical-only scrollbar, review radio circles */
+#quizrun{padding-bottom:84px}
+#qzr-actionbar,#qzr-review-actionbar{position:fixed!important;left:0;right:0;bottom:0;margin:0!important;border-radius:0!important;border:none!important;border-top:1px solid #b7c2d0!important;background:#fff;z-index:60;padding:11px 18px!important;box-shadow:0 -2px 8px rgba(0,0,0,.08)}
+#qzr-actionbar .btn.sub{background:#0f7aa8;color:#fff;border:none;padding:9px 24px;margin-left:8px}
+#quizrun .exam-side{overflow-y:scroll!important;overflow-x:hidden!important;scrollbar-width:auto;scrollbar-color:#1a4da0 #dde6f3;max-height:calc(100vh - 215px)}
+#quizrun .exam-side::-webkit-scrollbar{width:13px}
+#quizrun .exam-side::-webkit-scrollbar-track{background:#dde6f3;border-left:1px solid #c3d0e6}
+#quizrun .exam-side::-webkit-scrollbar-thumb{background:#1a4da0;border-radius:8px;border:2px solid #dde6f3}
+@media(max-width:700px){#qzr-actionbar{gap:6px;flex-wrap:wrap;justify-content:center;padding:8px 8px!important}#qzr-actionbar .btn{padding:8px 10px;font-size:.74rem}#qzr-actionbar>div{margin-left:0!important}}
+.qzr-rd{width:16px;height:16px;border-radius:50%;border:1.5px solid #b7c2d0;background:#fff;flex-shrink:0;position:relative;box-sizing:border-box}
+.qzr-rd.ok{border-color:#1e8e3e}.qzr-rd.bad{border-color:#d62828}
+.qzr-rd.ok::after,.qzr-rd.bad::after{content:"";position:absolute;inset:2.5px;border-radius:50%}
+.qzr-rd.ok::after{background:#1e8e3e}.qzr-rd.bad::after{background:#d62828}
 @media(max-width:480px){.qzi-legend-grid{grid-template-columns:1fr!important}}
 #mock-mr-btn.mr-active{border-color:#7c3aed;color:#7c3aed;background:rgba(124,58,237,.1)}
 /* BUTTONS */
@@ -1500,6 +1513,7 @@ function showS(id,opts){
   if(hec) hec.style.display=(id==="fullmock")?"flex":"none";
   const brand=document.getElementById("h-brand");
   if(brand) brand.classList.toggle("center-mode",id==="fullmock");
+  if(brand) brand.style.cursor=(id==="fullmock"||id==="quizrun")?"default":"";
   const heinfo=document.getElementById("h-exam-info");
   if(heinfo) heinfo.classList.toggle("show",id==="fullmock");
   const tg=document.getElementById("tg-hbtn");
@@ -1676,7 +1690,7 @@ function doBackExit(){
 function doTypingExit(){document.getElementById("typing-exit-cov").classList.remove("open");showS("home");}
 function keepGoingTyping(){document.getElementById("typing-exit-cov").classList.remove("open");history.pushState({typing:true},"",location.pathname+location.search+"#typing-guard");}
 function typingBackBtn(){if(isInActiveTyping()){document.getElementById("typing-exit-cov").classList.add("open");}else{showS("home");}}
-function handleBrand(e){e.preventDefault();if(isInActiveExam())askExit("home");else if(isInActiveTyping()){document.getElementById("typing-exit-cov").classList.add("open");}else if(document.getElementById("home").classList.contains("active"))location.reload();else showS("home");}
+function handleBrand(e){e.preventDefault();{const cur=document.querySelector(".screen.active");if(cur&&(cur.id==="fullmock"||cur.id==="quizrun"))return;}if(isInActiveExam())askExit("home");else if(isInActiveTyping()){document.getElementById("typing-exit-cov").classList.add("open");}else if(document.getElementById("home").classList.contains("active"))location.reload();else showS("home");}
 function askExit(dest){exitDest=dest;document.getElementById("exit-cov").classList.add("open");}
 const FS_EXPAND_ICON='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 00-2 2v3M16 3h3a2 2 0 012 2v3M21 16v3a2 2 0 01-2 2h-3M3 16v3a2 2 0 002 2h3"/></svg>';
 const FS_COMPRESS_ICON='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3a2 2 0 01-2 2H3M16 3v3a2 2 0 002 2h3M21 16h-3a2 2 0 00-2 2v3M3 16h3a2 2 0 012 2v3"/></svg>';
@@ -6024,8 +6038,8 @@ function qzHeadRight(q){
 function toggleQuizPause(){
   if(!QZ||QZ.reviewMode)return;
   const ov=document.getElementById("qzr-pause-ov"),btn=document.getElementById("qzr-pause");
-  if(!QZ.paused){qzLap();QZ.paused=true;_timerPaused=true;ov.style.display="flex";btn.textContent="Resume";}
-  else{QZ.paused=false;_timerPaused=false;QZ.qStart=Date.now();ov.style.display="none";btn.textContent="Pause";}
+  if(!QZ.paused){qzLap();QZ.paused=true;_timerPaused=true;ov.style.display="flex";btn.textContent="Resume";const ab=document.getElementById("qzr-actionbar");ab.style.pointerEvents="none";ab.style.opacity=".5";}
+  else{QZ.paused=false;_timerPaused=false;QZ.qStart=Date.now();ov.style.display="none";btn.textContent="Pause";const ab=document.getElementById("qzr-actionbar");ab.style.pointerEvents="";ab.style.opacity="";}
 }
 function toggleQuizSide(){
   if(window.innerWidth<=900){toggleQuizDrawer();return;}
@@ -6080,9 +6094,9 @@ function loadQuizQ(idx){
     const pick=QZ.reattempt?QZ.ra[idx]:selected;
     optsEl.innerHTML=v.options.map(function(o,oi){
       const isCorrect=oi===q.correctIndex,isPicked=oi===pick;
-      const color=isCorrect?'color:var(--green);font-weight:600':(isPicked?'color:var(--red);font-weight:600':'');
-      const tag=isCorrect?QI.check+' Correct answer':(isPicked?QI.cross+' '+(QZ.reattempt?'Your re-attempt':'Your answer'):'');
-      return '<div style="display:flex;align-items:center;gap:10px;padding:9px 6px;font-size:.92rem;line-height:1.5;'+color+'"><span style="flex:1">'+escapeHTML(o)+'</span>'+(tag?'<span style="display:inline-flex;align-items:center;gap:5px;font-size:.76rem;flex-shrink:0">'+tag+'</span>':'')+'</div>';
+      const cls=isCorrect?'ok':(isPicked?'bad':'');
+      const color=isCorrect?'color:var(--green)':(isPicked?'color:var(--red)':'');
+      return '<div style="display:flex;align-items:center;gap:12px;padding:9px 6px;font-size:.92rem;line-height:1.5;'+color+'"><span class="qzr-rd '+cls+'"></span><span style="flex:1">'+escapeHTML(o)+'</span></div>';
     }).join("");
     const expEl=document.getElementById("qzr-explanation");
     if(v.explanation){expEl.style.display="block";expEl.innerHTML="<strong>Explanation:</strong> "+escapeHTML(v.explanation);}
@@ -6174,8 +6188,7 @@ function renderQuizPalette(){
     +'<div class="es-stat" style="grid-column:1/-1"><div class="es-badge grey">'+c.notVis+'</div>Not Visited</div>'
     +'</div>'
     +'<div class="es-sec-title">Question Palette</div>'
-    +'<div class="es-qgrid">'+qgrid+'</div>'
-    +'<button class="btn bp" style="width:100%;margin-top:8px" onclick="submitQuiz(false)">Submit Quiz</button>';
+    +'<div class="es-qgrid">'+qgrid+'</div>';
 }
 function submitQuiz(auto){
   if(!QZ||QZ.submitted)return;
@@ -6188,6 +6201,9 @@ function submitQuiz(auto){
     +'</tr></thead><tbody><tr>'
     +td(QZ.questions.length,'var(--t)')+td(c.ans,'var(--green)')+td(c.notAns,'var(--red)')+td(c.rev,'#7c3aed')+td(c.ansRev,'var(--t)')+td(c.notVis,'var(--t2)')
     +'</tr></tbody></table>';
+  const ask=document.getElementById("qz-sum-ask");
+  if(QZ.timeLimitMin&&typeof tLeft==="number"&&tLeft>0){ask.innerHTML='You still have <b>'+Math.floor(tLeft/60)+'m '+String(tLeft%60).padStart(2,"0")+'s</b> left. Are you sure you want to submit the quiz?';}
+  else{ask.textContent="Are you sure you want to submit the quiz?";}
   document.getElementById("qz-submit-cov").classList.add("open");
 }
 function closeQuizSummary(){document.getElementById("qz-submit-cov").classList.remove("open");}
@@ -6446,7 +6462,7 @@ const initPromise=init();
       <div id="qzr-actionbar" style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
         <button class="btn mk" onclick="markQuizForReview()">Mark for Review &amp; Next</button>
         <button class="btn bg" onclick="clearQuizResponse()">Clear Response</button>
-        <div style="margin-left:auto;display:flex;gap:8px"><button class="btn bg" onclick="quizPrev()">Previous</button><button class="btn sv" onclick="saveQuizAndNext()">Save &amp; Next</button></div>
+        <div style="margin-left:auto;display:flex;gap:8px"><button class="btn bg" onclick="quizPrev()">Previous</button><button class="btn sv" onclick="saveQuizAndNext()">Save &amp; Next</button><button class="btn sub" onclick="submitQuiz(false)">Submit</button></div>
       </div>
       <div id="qzr-review-actionbar" style="display:none;margin-top:12px">
         <div style="display:flex;gap:10px;justify-content:center">
@@ -6465,7 +6481,7 @@ const initPromise=init();
   <div class="cbox" style="max-width:640px;width:100%;text-align:center">
     <div class="cbox-t">Quiz Summary</div>
     <div id="qz-sum-body" style="overflow-x:auto;margin:10px 0"></div>
-    <div class="cbox-s" style="font-weight:700;color:var(--t)">Are you sure you want to submit the quiz?</div>
+    <div class="cbox-s" id="qz-sum-ask" style="font-weight:700;color:var(--t)">Are you sure you want to submit the quiz?</div>
     <div style="display:flex;gap:8px;justify-content:center;margin-top:6px">
       <button class="btn bg" onclick="closeQuizSummary()">Resume</button>
       <button class="btn bp" onclick="finalizeQuiz()">Submit</button>
