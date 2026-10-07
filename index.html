@@ -5977,6 +5977,7 @@ function renderQuizList(){
       +(s.timeLimitMin?'<span class="chip">'+s.timeLimitMin+' min</span>':'<span class="chip">No timer</span>')
       +(expiredV?'<span class="chip" style="color:var(--red)">Validity ended '+fmtValidDate(expiredV.until)+'</span>':'')
       +(draftInfo?'<span class="chip" style="color:var(--accent)">In progress · '+draftInfo.answered+' answered</span>':'')
+      +((Number(s.marksPerQuestion)>0&&Number(s.marksPerQuestion)!==1)?'<span class="chip">+'+s.marksPerQuestion+'/correct</span>':'')
       +(s.negMarkEnabled?'<span class="chip" style="color:var(--red)">-'+s.negMarkValue+'/wrong</span>':'')
       +'</div>'
       +'<div style="margin-top:auto;display:flex;gap:8px;flex-wrap:wrap;align-items:center">'+(draftInfo?('<button onclick="resumeQuizSet(\''+s.id+'\')" style="font-size:.7rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:6px 14px;border-radius:999px;cursor:pointer;font-family:var(--font)">Resume</button><button onclick="startQuizSet(\''+s.id+'\')" style="font-size:.7rem;font-weight:700;color:var(--t2);background:transparent;border:1px solid var(--b);padding:5px 12px;border-radius:999px;cursor:pointer;font-family:var(--font)">Start Over</button>'):cta)+'</div>'
@@ -6055,7 +6056,8 @@ function showQuizInstructions(s,qs){
   const autoSubmitLine=s.timeLimitMin
     ? "2. A countdown timer is shown on the right. When it reaches zero, the quiz will <strong>auto-submit itself</strong> — you will not need to submit manually."
     : "";
-  const marksLine="3. This quiz has <strong>"+qs.length+" question(s)</strong>, each carrying <strong>+1 mark</strong> for a correct answer."
+  const mpqI=(Number(s.marksPerQuestion)>0?Number(s.marksPerQuestion):1);
+  const marksLine="3. This quiz has <strong>"+qs.length+" question(s)</strong>, each carrying <strong>+"+mpqI+" mark"+(mpqI===1?"":"s")+"</strong> for a correct answer."
     +(s.negMarkEnabled?" <strong style='color:var(--red)'>Negative marking is ON</strong> — "+s.negMarkValue+" mark will be deducted for every wrong answer. Unanswered questions are not penalized.":" There is no negative marking on this quiz.");
   document.getElementById("qzi-body").innerHTML=
     '<div style="margin-bottom:10px">'+durationLine+'</div>'
@@ -6107,7 +6109,7 @@ function launchQuiz(set,qs,resumeState){
     visited:(resumeState&&resumeState.visited)||{},
     mr:(resumeState&&resumeState.mr)||{},
     idx:(resumeState&&resumeState.idx)||0,
-    negMarkEnabled:!!set.negMarkEnabled,negMarkValue:set.negMarkValue||0,
+    negMarkEnabled:!!set.negMarkEnabled,negMarkValue:set.negMarkValue||0,marksPerQ:(Number(set.marksPerQuestion)>0?Number(set.marksPerQuestion):1),
     timeLimitMin:set.timeLimitMin||null,
     submitted:false,reviewMode:false,startedAt:Date.now(),
     lang:(resumeState&&resumeState.lang)||"en",tt:(resumeState&&resumeState.tt)||{},qStart:Date.now(),ra:{},reattempt:false,showQT:false,paused:false
@@ -6161,7 +6163,7 @@ function qzProfileHTML(){
 }
 function qzHeadRight(q){
   const neg=QZ.negMarkEnabled?QZ.negMarkValue:0;
-  const marks='<span style="font-weight:600;font-size:.72rem;color:var(--qz-m)">Marks : <b style="color:#1e8e3e">+1</b> | <b style="color:#c0392b">-'+neg+'</b></span>';
+  const marks='<span style="font-weight:600;font-size:.72rem;color:var(--qz-m)">Marks : <b style="color:#1e8e3e">+'+(QZ.marksPerQ||1)+'</b> | <b style="color:#c0392b">-'+neg+'</b></span>';
   if(QZ.reviewMode){return (q.difficulty?'<span class="qzr-pill" style="margin:0 10px 0 0">Level: <b style="text-transform:capitalize">'+escapeHTML(q.difficulty)+'</b></span>':'')+marks;}
   return marks;
 }
@@ -6369,13 +6371,14 @@ function finalizeQuiz(){
     if(QZ.a[i]===undefined)return;
     if(QZ.a[i]===q.correctIndex){correct++;corMs+=(QZ.tt[i]||0);}else wrong++;
   });
+  const mpq=QZ.marksPerQ||1;
   const neg=QZ.negMarkEnabled?wrong*QZ.negMarkValue:0;
   QZ._correctCount=correct;
   QZ._wrongCount=wrong;
   QZ._attempted=correct+wrong;
   QZ._neg=Math.round(neg*100)/100;
-  QZ._resultScore=Math.round((correct-neg)*100)/100;
-  QZ._resultMax=QZ.questions.length;
+  QZ._resultScore=Math.round((correct*mpq-neg)*100)/100;
+  QZ._resultMax=Math.round(QZ.questions.length*mpq*100)/100;
   QZ._avgCorrectSecs=correct>0?Math.round(corMs/correct/1000):null;
   QZ._totalSecs=Math.round(Object.keys(QZ.tt).reduce(function(a,k){return a+QZ.tt[k];},0)/1000);
   if(QZ._attempted>0){
