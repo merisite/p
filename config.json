@@ -4521,6 +4521,10 @@
     {
       "id": "qt_1791226413173",
       "name": "RRB PO PYQ Quiz"
+    },
+    {
+      "id": "qt_1791364637685",
+      "name": "Computer Introduction"
     }
   ],
   "quizQuestions": [
@@ -6943,6 +6947,882 @@
       "setNo": 1,
       "active": true,
       "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_0",
+      "topicId": "qt_1791364637685",
+      "text": "Desktop and personal computers are also known by which term?",
+      "options": [
+        "Supercomputers",
+        "Servers",
+        "Mainframes",
+        "Peripheral equipment",
+        "Microcomputers"
+      ],
+      "correctIndex": 4,
+      "explanation": "Desktop and personal computers are small computers intended for individual use, so they are classified as microcomputers.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_1",
+      "topicId": "qt_1791364637685",
+      "text": "In which generation did time-sharing become possible?",
+      "options": [
+        "First",
+        "Second",
+        "Third",
+        "Fourth"
+      ],
+      "correctIndex": 1,
+      "explanation": "Time-sharing allows multiple users or tasks to share computer resources by rapidly allocating processor time and became possible in the second generation of computers.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_2",
+      "topicId": "qt_1791364637685",
+      "text": "What was the approximate speed of first-generation computers?",
+      "options": [
+        "Nanoseconds",
+        "Milliseconds",
+        "Nano-milliseconds",
+        "Microseconds",
+        "None of these"
+      ],
+      "correctIndex": 3,
+      "explanation": "First-generation computers were extremely slow compared with modern processors, with operation times commonly discussed in microsecond ranges.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_3",
+      "topicId": "qt_1791364637685",
+      "text": "Which is identified as India’s first multi-petaflops (PF) supercomputer?",
+      "options": [
+        "PARAM",
+        "Pratyush",
+        "PARAM Ishan",
+        "Tianhe-2"
+      ],
+      "correctIndex": 1,
+      "explanation": "Pratyush is identified as India's first multi-petaflops supercomputer.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_4",
+      "topicId": "qt_1791364637685",
+      "text": "Which of the following is a benefit of computers?",
+      "options": [
+        "They work very fast and can store huge amounts of data",
+        "They provide accurate output when the input is correct",
+        "They think about the processing",
+        "All of the above"
+      ],
+      "correctIndex": 0,
+      "explanation": "Computers are fast and have large storage capacity, and they provide accurate output when the input is correct, but they do not think independently.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_5",
+      "topicId": "qt_1791364637685",
+      "text": "Which of the following is generally the costliest?",
+      "options": [
+        "Server",
+        "Notebook computer",
+        "Personal computer",
+        "Laptop computer",
+        "Mainframe"
+      ],
+      "correctIndex": 4,
+      "explanation": "Mainframe computers are large, powerful systems designed to handle massive workloads and many users, making them substantially more expensive than ordinary PCs and laptops.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_6",
+      "topicId": "qt_1791364637685",
+      "text": "Computers built before the first generation were mainly of which type?",
+      "options": [
+        "Mechanical",
+        "Electromechanical",
+        "Electrical",
+        "Electronics"
+      ],
+      "correctIndex": 1,
+      "explanation": "Before fully electronic first-generation computers, important machines such as electromechanical computers used both mechanical parts and electrical components.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_7",
+      "topicId": "qt_1791364637685",
+      "text": "In the latest generation computers, instructions can be executed in which manner?",
+      "options": [
+        "Only parallel",
+        "Only sequentially",
+        "Both 1 and 2",
+        "Either 1 or 2"
+      ],
+      "correctIndex": 2,
+      "explanation": "Modern computing systems can execute instructions sequentially as well as in parallel, depending on the architecture and task.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_8",
+      "topicId": "qt_1791364637685",
+      "text": "What is data that has been organised and presented meaningfully called?",
+      "options": [
+        "A process",
+        "Software",
+        "Storage",
+        "Information",
+        "Data"
+      ],
+      "correctIndex": 3,
+      "explanation": "Raw data by itself may not be meaningful. After it is organised and processed so that it conveys meaning, it is called information.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_9",
+      "topicId": "qt_1791364637685",
+      "text": "What was the name of Napier’s calculating technology?",
+      "options": [
+        "Naptologia",
+        "Vibologia",
+        "Semiconductor",
+        "Rabdologia"
+      ],
+      "correctIndex": 3,
+      "explanation": "John Napier developed a calculating method involving numbered rods, commonly associated with Napier’s Bones, known as Rabdologia.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_10",
+      "topicId": "qt_1791364637685",
+      "text": "What is a complete electronic circuit containing transistors and other components on a small silicon chip called?",
+      "options": [
+        "Workstation",
+        "CPU",
+        "Magnetic disc",
+        "Integrated circuit",
+        "Complex circuit"
+      ],
+      "correctIndex": 3,
+      "explanation": "An integrated circuit combines many electronic components, such as transistors, on a small semiconductor chip.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_11",
+      "topicId": "qt_1791364637685",
+      "text": "Which function is beyond the capability of a computer?",
+      "options": [
+        "Addition",
+        "Subtraction",
+        "Bake a cake",
+        "Division",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "Computers can perform arithmetic operations such as addition, subtraction and division, but physically baking a cake is not a normal computational function.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_12",
+      "topicId": "qt_1791364637685",
+      "text": "What is a collection of unprocessed items called?",
+      "options": [
+        "Information",
+        "Data",
+        "Memory",
+        "Reports",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "Data refers to raw, unprocessed facts, figures or observations.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_13",
+      "topicId": "qt_1791364637685",
+      "text": "Who developed the integrated chip?",
+      "options": [
+        "Robert Nayak",
+        "C. Babbage",
+        "J. S. Kilby",
+        "C. V. Raman"
+      ],
+      "correctIndex": 2,
+      "explanation": "Jack Kilby is credited with developing the first working integrated circuit.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_14",
+      "topicId": "qt_1791364637685",
+      "text": "Which of the following uses a handheld operating system?",
+      "options": [
+        "A supercomputer",
+        "A personal computer",
+        "A laptop",
+        "A mainframe",
+        "A PDA"
+      ],
+      "correctIndex": 4,
+      "explanation": "A PDA (Personal Digital Assistant) is a handheld computing device designed for portable personal tasks, so it uses a handheld-oriented operating system.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_15",
+      "topicId": "qt_1791364637685",
+      "text": "Fourth-generation PCs generally contain what key technology?",
+      "options": [
+        "Information",
+        "Data",
+        "Vacuum tubes",
+        "Microprocessors",
+        "Transistors"
+      ],
+      "correctIndex": 3,
+      "explanation": "Fourth-generation computers are associated with microprocessors, where the central processing functions are integrated into a single chip.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_16",
+      "topicId": "qt_1791364637685",
+      "text": "Which term describes the cycle containing input, processing, output and storage?",
+      "options": [
+        "Processing",
+        "Output",
+        "Input",
+        "Storage",
+        "Data"
+      ],
+      "correctIndex": 4,
+      "explanation": "The term that describes the cycle containing input, processing, output, and storage is data processing, and in the context of the given options, 'Data' is the closest fit as the entire cycle operates on data.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_17",
+      "topicId": "qt_1791364637685",
+      "text": "What does a user generally use to access a mainframe or supercomputer?",
+      "options": [
+        "Terminal",
+        "Node",
+        "Desktop",
+        "Handheld"
+      ],
+      "correctIndex": 1,
+      "explanation": "A node is a connected device or point in a network that can be used to access a mainframe or supercomputer.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_18",
+      "topicId": "qt_1791364637685",
+      "text": "What is the correct sequence of the four major functions performed by a computer?",
+      "options": [
+        "Process, Output, Input, Storage",
+        "Input, Output, Process, Storage",
+        "Process, Storage, Input, Output",
+        "Input, Process, Output, Storage"
+      ],
+      "correctIndex": 3,
+      "explanation": "A computer first receives data as input, processes it, produces output, and may store the result.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_19",
+      "topicId": "qt_1791364637685",
+      "text": "Who developed the first electromechanical tabulating machine?",
+      "options": [
+        "Herman Hollerith",
+        "Howard Aiken",
+        "Blaise Pascal",
+        "John Napier"
+      ],
+      "correctIndex": 0,
+      "explanation": "Herman Hollerith developed a punched-card tabulating machine for processing large amounts of data.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_20",
+      "topicId": "qt_1791364637685",
+      "text": "Who developed the basic architecture of computers?",
+      "options": [
+        "John Von Neumann",
+        "Charles Babbage",
+        "Blaise Pascal",
+        "Jordan Murn"
+      ],
+      "correctIndex": 0,
+      "explanation": "The Von Neumann architecture describes a stored-program computer, which forms the basic architecture of most modern computers.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_21",
+      "topicId": "qt_1791364637685",
+      "text": "What is the process of collecting data and converting it into useful information called?",
+      "options": [
+        "Processing",
+        "Compiling",
+        "Importing",
+        "Exporting",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "Processing means manipulating raw data so that it becomes meaningful information.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_22",
+      "topicId": "qt_1791364637685",
+      "text": "Which is NOT an example of a special-purpose computer?",
+      "options": [
+        "Automatic aircraft landing",
+        "Word processor",
+        "Multimedia computer",
+        "All of the above"
+      ],
+      "correctIndex": 1,
+      "explanation": "A word processor is software or an application functionality rather than a special-purpose computer.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_23",
+      "topicId": "qt_1791364637685",
+      "text": "Which of the following is described as the smallest and fastest computer that imitates the working of the human brain?",
+      "options": [
+        "Supercomputer",
+        "Quantum computer",
+        "Param-10000",
+        "IBM chips",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "Quantum computers are described as small, fast, and capable of imitating the working of the human brain.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_24",
+      "topicId": "qt_1791364637685",
+      "text": "What material is commonly used to make integrated circuits/chips?",
+      "options": [
+        "Copper",
+        "Aluminium",
+        "Gold",
+        "Silicon",
+        "Silver"
+      ],
+      "correctIndex": 3,
+      "explanation": "Silicon is the most widely used semiconductor material for manufacturing integrated circuits because its electrical properties can be controlled effectively.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_25",
+      "topicId": "qt_1791364637685",
+      "text": "What did the Analytical Engine use as its memory unit?",
+      "options": [
+        "RAM",
+        "Floppies",
+        "Cards",
+        "Counter wheels",
+        "None of these"
+      ],
+      "correctIndex": 3,
+      "explanation": "The Analytical Engine's memory was based on mechanical counter wheels rather than modern electronic storage.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_26",
+      "topicId": "qt_1791364637685",
+      "text": "Who designed the ENIAC, one of the first electronic general-purpose computers?",
+      "options": [
+        "Von Neumann",
+        "Joseph M. Jacquard",
+        "Presper Eckert and John W. Mauchly",
+        "All of the above"
+      ],
+      "correctIndex": 2,
+      "explanation": "ENIAC was designed by J. Presper Eckert and John W. Mauchly.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_27",
+      "topicId": "qt_1791364637685",
+      "text": "When input, output and processing devices are considered together, what do they represent?",
+      "options": [
+        "Mobile device",
+        "Information processing cycle",
+        "Circuit board",
+        "Computer system"
+      ],
+      "correctIndex": 3,
+      "explanation": "Input, output, and processing devices, when considered together, represent a computer system.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_28",
+      "topicId": "qt_1791364637685",
+      "text": "Pratyush was ranked as the ______ fastest supercomputer in the world in the source.",
+      "options": [
+        "First",
+        "Second",
+        "Third",
+        "Fourth"
+      ],
+      "correctIndex": 3,
+      "explanation": "Pratyush was ranked as the fourth fastest supercomputer in the world in the context of the source material.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_29",
+      "topicId": "qt_1791364637685",
+      "text": "In which areas are computers commonly used?",
+      "options": [
+        "Banking",
+        "Education",
+        "Offices",
+        "All of these"
+      ],
+      "correctIndex": 3,
+      "explanation": "Computers are widely used across banking, education, and office work for various tasks.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_30",
+      "topicId": "qt_1791364637685",
+      "text": "Part number, description and number of parts ordered are examples of what?",
+      "options": [
+        "Control",
+        "Output",
+        "Processing",
+        "Feedback",
+        "Input"
+      ],
+      "correctIndex": 4,
+      "explanation": "These details are data supplied to a system so that it can process an order, therefore they are examples of input.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_31",
+      "topicId": "qt_1791364637685",
+      "text": "Which is a small microprocessor-based computer designed for use by one person at a time?",
+      "options": [
+        "Netbook",
+        "Supercomputer",
+        "All-in-one",
+        "Notebook",
+        "Personal computer"
+      ],
+      "correctIndex": 4,
+      "explanation": "A personal computer is designed for individual use and is based on microprocessor technology.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_32",
+      "topicId": "qt_1791364637685",
+      "text": "Which is identified as the first general-purpose electronic computer?",
+      "options": [
+        "ADVAC",
+        "ADSAC",
+        "UNIVAC",
+        "EDVAC",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "UNIVAC was a major early general-purpose electronic computer designed for practical data processing.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_33",
+      "topicId": "qt_1791364637685",
+      "text": "What are the steps and tasks required to process data, such as responding to a question or clicking an icon, called?",
+      "options": [
+        "Instructions",
+        "The operating system",
+        "Application software",
+        "The system unit",
+        "The hardware unit"
+      ],
+      "correctIndex": 0,
+      "explanation": "Instructions are commands or directions that tell a computer what action to perform.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_34",
+      "topicId": "qt_1791364637685",
+      "text": "Which language was used by first-generation computers?",
+      "options": [
+        "Machine",
+        "Assembly",
+        "Both 1 and 2",
+        "High level",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "First-generation computers were programmed mainly in machine language, using binary instructions directly understood by the hardware.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_35",
+      "topicId": "qt_1791364637685",
+      "text": "Which three categories correctly describe the basic physical equipment of a microcomputer?",
+      "options": [
+        "Keyboard, monitor, hard drive",
+        "System unit, input/output, memory",
+        "System unit, input/output, secondary storage",
+        "System unit, primary storage, secondary storage"
+      ],
+      "correctIndex": 1,
+      "explanation": "The basic physical equipment of a microcomputer can be described as the system unit, input/output devices, and memory.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_36",
+      "topicId": "qt_1791364637685",
+      "text": "A seismograph is an example of which type of computer?",
+      "options": [
+        "Analog computer",
+        "Digital computer",
+        "Hybrid computer",
+        "All of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "A seismograph records continuously varying physical vibrations, classifying it as an analog computer.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_37",
+      "topicId": "qt_1791364637685",
+      "text": "What is a central computer that stores data and programs for many PCs and workstations called?",
+      "options": [
+        "Supercomputer",
+        "Minicomputer",
+        "Laptop",
+        "Server"
+      ],
+      "correctIndex": 3,
+      "explanation": "A server is a central computer that stores data and programs for many other computers on a network.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_38",
+      "topicId": "qt_1791364637685",
+      "text": "Who first introduced punched cards?",
+      "options": [
+        "Powers",
+        "Pascal",
+        "Jacquard",
+        "Herman Hollerith",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "Joseph-Marie Jacquard used punched cards to control patterns in a loom, thus introducing them.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_39",
+      "topicId": "qt_1791364637685",
+      "text": "Which of the following cannot be performed by a computer?",
+      "options": [
+        "Input",
+        "Output",
+        "Thinking",
+        "Processing"
+      ],
+      "correctIndex": 2,
+      "explanation": "A computer can perform input, output, and processing, but it cannot independently think.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_40",
+      "topicId": "qt_1791364637685",
+      "text": "Which was the first computer among the following to provide storage?",
+      "options": [
+        "EDSAC",
+        "EDVAC",
+        "MARK-I",
+        "ACE"
+      ],
+      "correctIndex": 0,
+      "explanation": "EDSAC was an early stored-program electronic computer and is recognized for providing storage.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_41",
+      "topicId": "qt_1791364637685",
+      "text": "A hybrid computer combines which two types of computing?",
+      "options": [
+        "Super and microcomputers",
+        "Mini and microcomputers",
+        "Analog and digital computers",
+        "Super and minicomputers",
+        "None of the above"
+      ],
+      "correctIndex": 2,
+      "explanation": "A hybrid computer combines the characteristics of analog and digital computers.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_42",
+      "topicId": "qt_1791364637685",
+      "text": "What is the term for data or information used to run a computer?",
+      "options": [
+        "Hardware",
+        "CPU",
+        "Peripheral",
+        "Software",
+        "None of these"
+      ],
+      "correctIndex": 4,
+      "explanation": "The term for data or information used to run a computer, encompassing instructions and programs, is software, but this option was not provided as a correct choice in the original question's answer key.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_43",
+      "topicId": "qt_1791364637685",
+      "text": "Which was the first supercomputer developed in India?",
+      "options": [
+        "PARAM",
+        "CRAY-1",
+        "PARAM ISHAN",
+        "EPRAM"
+      ],
+      "correctIndex": 0,
+      "explanation": "PARAM is the series associated with India’s early indigenous supercomputing programme and is considered the first Indian supercomputer.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_44",
+      "topicId": "qt_1791364637685",
+      "text": "Which type is a large and expensive computer capable of handling scientific and business applications?",
+      "options": [
+        "Supercomputer",
+        "Mainframe computer",
+        "Minicomputer",
+        "Handheld computer"
+      ],
+      "correctIndex": 1,
+      "explanation": "Mainframes are large, powerful, and expensive computers designed to handle complex scientific and business applications.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_45",
+      "topicId": "qt_1791364637685",
+      "text": "An analog computer works using what kind of signal?",
+      "options": [
+        "Continuous electrical pulses",
+        "Electrical pulses but not continuous",
+        "Magnetic strength",
+        "Physical strength"
+      ],
+      "correctIndex": 0,
+      "explanation": "Analog computers represent information using continuously varying physical quantities, such as continuous electrical pulses.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_46",
+      "topicId": "qt_1791364637685",
+      "text": "What technology formed the basis of third-generation computers?",
+      "options": [
+        "Bio chips",
+        "Transistors",
+        "Integrated circuits",
+        "Vacuum tubes",
+        "Discrete components"
+      ],
+      "correctIndex": 2,
+      "explanation": "Third-generation computers used integrated circuits, which placed many electronic components on a small chip.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_47",
+      "topicId": "qt_1791364637685",
+      "text": "A ‘chip’ is commonly used as another name for what?",
+      "options": [
+        "Transistor",
+        "Resistor",
+        "Integrated circuit",
+        "Semiconductor",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "A chip generally refers to an integrated circuit containing electronic components fabricated on a semiconductor material.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_48",
+      "topicId": "qt_1791364637685",
+      "text": "Integrated Circuits (ICs) were introduced from which generation?",
+      "options": [
+        "1st Generation",
+        "2nd Generation",
+        "3rd Generation",
+        "4th Generation",
+        "5th Generation"
+      ],
+      "correctIndex": 2,
+      "explanation": "Third-generation computers were the first to use integrated circuits.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791364706778_49",
+      "topicId": "qt_1791364637685",
+      "text": "What does the abbreviation ‘PCs’ mean in the context of computers?",
+      "options": [
+        "Independent computers for all working staff",
+        "Personal computers widely available to individual workers with which they can access information and increase productivity",
+        "Packed computer system formed by joining computer terminals",
+        "Computer manufactured by the Pentium Company",
+        "None of the above"
+      ],
+      "correctIndex": 1,
+      "explanation": "PC stands for Personal Computer, designed for individual use to access information and increase productivity.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
     }
   ],
   "quizSets": [
@@ -6953,6 +7833,17 @@
       "timeLimitMin": 15,
       "negMarkEnabled": true,
       "negMarkValue": 0.125,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qs_1791364706755_2",
+      "setNo": 2,
+      "title": "Quiz Set 2",
+      "timeLimitMin": null,
+      "negMarkEnabled": false,
+      "negMarkValue": 0,
+      "marksPerQuestion": 1,
       "active": true,
       "productIds": []
     }
