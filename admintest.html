@@ -168,6 +168,14 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
 .ter-input{width:100%;background:transparent;border:none;color:var(--t);font-size:.82rem;outline:none;font-family:'Inter',sans-serif;line-height:1.5;resize:none}
 
 @media(max-width:720px){.sb{display:none}.sg{grid-template-columns:repeat(2,1fr)}.fr.c2,.fr.c3{grid-template-columns:1fr}}
+.qzt-bar{display:flex;gap:4px;flex-wrap:wrap;border-bottom:1px solid var(--b);margin:4px 0 16px;position:sticky;top:0;background:var(--bg);z-index:5}
+.qzt{padding:10px 16px;border:none;background:transparent;color:var(--t2);font-weight:700;font-size:.8rem;border-bottom:3px solid transparent;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:7px}
+.qzt:hover{color:var(--t)}
+.qzt.on{color:var(--accent);border-bottom-color:var(--accent)}
+.qzseg{display:inline-flex;border:1px solid var(--b);border-radius:var(--rs);overflow:hidden;margin-bottom:14px}
+.qzs{padding:8px 16px;border:none;background:var(--bg2);color:var(--t2);font-weight:700;font-size:.76rem;cursor:pointer;font-family:inherit}
+.qzs.on{background:var(--accent);color:var(--bg)}
+.qz-opt-n{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--bg3);color:var(--t2);font-size:.68rem;font-weight:700;flex-shrink:0}
 </style>
 </head>
 <body>
@@ -341,7 +349,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
             <div style="font-size:.85rem;font-weight:700;margin-bottom:12px">Products &amp; Pricing</div>
             <div id="pm-products-list" style="margin-bottom:14px;font-size:.8rem;color:var(--t2)">Loading…</div>
             <div id="pp-form-title" style="font-size:.76rem;color:var(--accent);font-weight:700;margin-bottom:8px;display:none">Editing existing product — Product ID can't be changed once created.</div>
-            <div style="display:grid;grid-template-columns:1fr 1.4fr 0.8fr auto;gap:10px;align-items:end">
+            <div style="display:grid;grid-template-columns:1fr 1.4fr 0.8fr 0.8fr auto;gap:10px;align-items:end">
               <div>
                 <label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:5px">Product ID</label>
                 <input id="pp-id" placeholder="e.g. ibps_po_pack" style="width:100%;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/>
@@ -354,7 +362,16 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
                 <label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:5px">Price (₹)</label>
                 <input id="pp-price" type="number" placeholder="299" style="width:100%;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/>
               </div>
+              <div>
+                <label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:5px">Validity (days)</label>
+                <input id="pp-validity" type="number" min="0" placeholder="180" value="180" style="width:100%;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/>
+              </div>
               <button class="btn bp" style="padding:8px 14px;font-size:.78rem" onclick="saveProduct()">Save Product</button>
+            </div>
+            <div style="margin-top:12px;max-width:380px">
+              <label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:5px">Existing buyers: count validity from this date</label>
+              <input id="pp-legacy" type="date" style="width:100%;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/>
+              <div style="font-size:.66rem;color:var(--t2);margin-top:4px;line-height:1.5">Only used for buyers who have no purchase date saved on their account. Leave blank to keep them lifetime.</div>
             </div>
 
             <label style="font-size:.7rem;color:var(--t2);display:block;margin:14px 0 5px">What's included (shown to buyers) — one line per feature, e.g. "10 Full Mocks"</label>
@@ -441,9 +458,16 @@ In conclusion, while digital banking has significantly advanced financial inclus
       <!-- QUIZ COURSE -->
       <div id="pg-quizcourse" class="pg">
         <div class="ph"><div class="ph-ey">Content</div><div class="ph-ti">Quiz Course</div><div class="ph-su">MCQ question bank for Computer Awareness (or any quiz-style course) — bulk-paste and parse with AI, or add/edit questions one at a time. Organize into topics and timed Quiz Sets.</div></div>
+      <div class="qzt-bar" id="qzt-bar">
+        <button class="qzt on" data-t="questions" onclick="qzTab('questions')">Questions <span class="bge bg-g" id="qzt-cq">0</span></button>
+        <button class="qzt" data-t="add" onclick="qzTab('add')">Add Questions</button>
+        <button class="qzt" data-t="sets" onclick="qzTab('sets')">Quiz Sets <span class="bge bg-g" id="qzt-cs">0</span></button>
+        <button class="qzt" data-t="topics" onclick="qzTab('topics')">Topics</button>
+        <button class="qzt" data-t="course" onclick="qzTab('course')">Course Settings</button>
+      </div>
 
         <!-- COURSE SETTINGS -->
-        <div style="background:var(--bg2);border:2px solid var(--aborder);border-radius:var(--rl);padding:18px;margin-bottom:18px">
+        <div data-qztab="course" style="background:var(--bg2);border:2px solid var(--aborder);border-radius:var(--rl);padding:18px;margin-bottom:18px">
           <div style="font-size:.85rem;font-weight:700;margin-bottom:4px">Course Settings</div>
           <div style="font-size:.74rem;color:var(--t2);margin-bottom:14px">Controls the whole course at once — whether it's live or shown as "Upcoming" on the site, and (optionally) a single price covering every Quiz Set, so you don't have to price each set separately.</div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
@@ -465,7 +489,7 @@ In conclusion, while digital banking has significantly advanced financial inclus
         </div>
 
         <!-- TOPICS -->
-        <div style="background:var(--bg2);border:1px solid var(--b);border-radius:var(--rl);padding:18px;margin-bottom:18px">
+        <div data-qztab="topics" style="background:var(--bg2);border:1px solid var(--b);border-radius:var(--rl);padding:18px;margin-bottom:18px">
           <div style="font-size:.85rem;font-weight:700;margin-bottom:10px">Topics</div>
           <div id="qz-topics-list" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">Loading…</div>
           <div style="display:flex;gap:8px">
@@ -474,8 +498,9 @@ In conclusion, while digital banking has significantly advanced financial inclus
           </div>
         </div>
 
+        <div data-qztab="add" class="qzseg"><button class="qzs on" data-s="bulk" onclick="qzTab('add','bulk')">Paste &amp; Parse with AI</button><button class="qzs" data-s="manual" onclick="qzTab('add','manual')">Add One Question</button></div>
         <!-- BULK AI PARSER -->
-        <div style="background:var(--bg2);border:1px solid var(--b);border-radius:var(--rl);padding:18px;margin-bottom:18px">
+        <div data-qztab="add" data-qzadd="bulk" style="background:var(--bg2);border:1px solid var(--b);border-radius:var(--rl);padding:18px;margin-bottom:18px">
           <div style="font-size:.85rem;font-weight:700;margin-bottom:4px">Bulk Add — Paste &amp; Parse with AI</div>
           <div style="font-size:.74rem;color:var(--t2);margin-bottom:12px">Paste raw questions in any reasonable format (Q/A/Answer/Explanation labels, numbered lists, copied straight from a PDF — the parser is forgiving). Nothing is saved until you review the preview below and click Import.</div>
           <textarea id="qz-bulk-raw" rows="9" placeholder="Q: What does CPU stand for?
@@ -516,15 +541,15 @@ Q: Which of these is an input device?
         </div>
 
         <!-- MANUAL ADD -->
-        <div style="background:var(--bg2);border:1px solid var(--b);border-radius:var(--rl);padding:18px;margin-bottom:18px">
+        <div data-qztab="add" data-qzadd="manual" style="background:var(--bg2);border:1px solid var(--b);border-radius:var(--rl);padding:18px;margin-bottom:18px">
           <div id="qz-form-title" style="font-size:.85rem;font-weight:700;margin-bottom:12px">Add Question Manually</div>
           <textarea id="qz-q-text" rows="2" placeholder="Question text" style="width:100%;margin-bottom:10px;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.82rem;font-family:inherit;resize:vertical"></textarea>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
-            <div style="display:flex;align-items:center;gap:8px"><input type="radio" name="qz-correct" value="0" checked/><input id="qz-opt-0" placeholder="Option 1" style="flex:1;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/></div>
-            <div style="display:flex;align-items:center;gap:8px"><input type="radio" name="qz-correct" value="1"/><input id="qz-opt-1" placeholder="Option 2" style="flex:1;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/></div>
-            <div style="display:flex;align-items:center;gap:8px"><input type="radio" name="qz-correct" value="2"/><input id="qz-opt-2" placeholder="Option 3" style="flex:1;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/></div>
-            <div style="display:flex;align-items:center;gap:8px"><input type="radio" name="qz-correct" value="3"/><input id="qz-opt-3" placeholder="Option 4" style="flex:1;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/></div>
-            <div style="display:flex;align-items:center;gap:8px"><input type="radio" name="qz-correct" value="4"/><input id="qz-opt-4" placeholder="Option 5" style="flex:1;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/></div>
+            <div style="display:flex;align-items:center;gap:8px"><input type="radio" name="qz-correct" value="0" checked/><span class="qz-opt-n">1</span><input id="qz-opt-0" placeholder="Option 1" style="flex:1;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/></div>
+            <div style="display:flex;align-items:center;gap:8px"><input type="radio" name="qz-correct" value="1"/><span class="qz-opt-n">2</span><input id="qz-opt-1" placeholder="Option 2" style="flex:1;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/></div>
+            <div style="display:flex;align-items:center;gap:8px"><input type="radio" name="qz-correct" value="2"/><span class="qz-opt-n">3</span><input id="qz-opt-2" placeholder="Option 3" style="flex:1;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/></div>
+            <div style="display:flex;align-items:center;gap:8px"><input type="radio" name="qz-correct" value="3"/><span class="qz-opt-n">4</span><input id="qz-opt-3" placeholder="Option 4" style="flex:1;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/></div>
+            <div style="display:flex;align-items:center;gap:8px"><input type="radio" name="qz-correct" value="4"/><span class="qz-opt-n">5</span><input id="qz-opt-4" placeholder="Option 5" style="flex:1;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/></div>
           </div>
           <div style="font-size:.68rem;color:var(--t2);margin-bottom:10px">Select the radio button next to the correct option.</div>
           <textarea id="qz-explanation" rows="2" placeholder="Explanation (shown below the question in the solution review)" style="width:100%;margin-bottom:10px;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.82rem;font-family:inherit;resize:vertical"></textarea>
@@ -562,14 +587,14 @@ Q: Which of these is an input device?
           <label style="display:flex;align-items:center;gap:7px;font-size:.78rem;margin-bottom:14px;cursor:pointer"><input type="checkbox" id="qz-q-active" checked style="margin:0"/> Active (visible to students)</label>
           <div style="display:flex;gap:8px">
             <button class="btn bp" style="padding:8px 16px;font-size:.8rem" onclick="saveQuizQuestion()">Save Question</button>
-            <button class="btn" id="qz-q-cancel" style="padding:6px 14px;font-size:.76rem;display:none" onclick="resetQuizQuestionForm()">Cancel Edit</button>
+            <button class="btn" id="qz-q-cancel" style="padding:6px 14px;font-size:.76rem;display:none" onclick="resetQuizQuestionForm();qzTab('questions')">Cancel</button>
           </div>
         </div>
 
         <!-- QUESTIONS TABLE -->
-        <div style="background:var(--bg2);border:1px solid var(--b);border-radius:var(--rl);padding:18px;margin-bottom:18px">
+        <div data-qztab="questions" style="background:var(--bg2);border:1px solid var(--b);border-radius:var(--rl);padding:18px;margin-bottom:18px">
           <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;flex-wrap:wrap">
-            <div style="font-size:.85rem;font-weight:700">All Quiz Questions</div>
+            <div style="font-size:.85rem;font-weight:700">All Quiz Questions</div><button class="btn bp sm" onclick="qzTab('add','manual')">+ Add Question</button>
             <div style="display:flex;gap:8px;flex-wrap:wrap">
               <input id="qz-filter-search" placeholder="Search question text…" oninput="renderQuizQuestionsTable()" style="padding:6px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.76rem"/>
               <select id="qz-filter-topic" onchange="renderQuizQuestionsTable()" style="padding:6px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.76rem"><option value="">All Topics</option></select>
@@ -580,7 +605,7 @@ Q: Which of these is an input device?
         </div>
 
         <!-- QUIZ SETS -->
-        <div style="background:var(--bg2);border:1px solid var(--b);border-radius:var(--rl);padding:18px">
+        <div data-qztab="sets" style="background:var(--bg2);border:1px solid var(--b);border-radius:var(--rl);padding:18px">
           <div style="font-size:.85rem;font-weight:700;margin-bottom:4px">Quiz Sets</div>
           <div style="font-size:.74rem;color:var(--t2);margin-bottom:12px">A Quiz Set groups every question with a matching Set # above into one timed attempt, same pattern as your Mocks. Negative marking, time limit and paid access are all configured per set here.</div>
           <div id="qz-sets-list" style="margin-bottom:14px"></div>
@@ -1323,7 +1348,7 @@ function toggleTheme(){
 
 // ── NAV ──
 function nav(p){document.querySelectorAll('.pg').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.ni').forEach(x=>x.classList.remove('on'));document.getElementById('pg-'+p).classList.add('on');document.querySelector(`[data-p="${p}"]`).classList.add('on');rp(p);}
-function rp(p){if(p==='dash')rDash();if(p==='qs')rQP();if(p==='exams')rExams();if(p==='mocks')renderMocks();if(p==='secs')rSecs();if(p==='typing')rTypingParas();if(p==='timing')rTiming();if(p==='appear')rAppear();if(p==='content')rContent();if(p==='cfg')rCfg();if(p==='notice')rNotice();if(p==='livetracker')rLiveTracker();if(p==='offers')rOffers();if(p==='platforms')rPlatforms();if(p==='essays')renderEssayList();if(p==='quizcourse')renderQuizAdmin();}
+function rp(p){if(p==='dash')rDash();if(p==='qs')rQP();if(p==='exams')rExams();if(p==='mocks')renderMocks();if(p==='secs')rSecs();if(p==='typing')rTypingParas();if(p==='timing')rTiming();if(p==='appear')rAppear();if(p==='content')rContent();if(p==='cfg')rCfg();if(p==='notice')rNotice();if(p==='livetracker')rLiveTracker();if(p==='offers')rOffers();if(p==='platforms')rPlatforms();if(p==='essays')renderEssayList();if(p==='quizcourse'){renderQuizAdmin();qzTab(_qzTab,_qzAdd);}}
 
 // ── LIVE TRACKER ──
 function rLiveTracker(){
@@ -2390,6 +2415,8 @@ function editProduct(id){
   document.getElementById('pp-name').value = p.name || '';
   document.getElementById('pp-price').value = ((p.amount||0)/100);
   document.getElementById('pp-features').value = (p.features||[]).join('\n');
+  document.getElementById('pp-validity').value = (p.validityDays>0 ? p.validityDays : '');
+  document.getElementById('pp-legacy').value = p.legacyStartDate || '';
   document.getElementById('pp-form-title').style.display = '';
   document.getElementById('pp-cancel-edit').style.display = '';
   renderExamChecklist(p.unlocksExamPractice || []);
@@ -2402,6 +2429,8 @@ function resetProductForm(){
   document.getElementById('pp-name').value = '';
   document.getElementById('pp-price').value = '';
   document.getElementById('pp-features').value = '';
+  document.getElementById('pp-validity').value = '180';
+  document.getElementById('pp-legacy').value = '';
   document.getElementById('pp-form-title').style.display = 'none';
   document.getElementById('pp-cancel-edit').style.display = 'none';
   renderExamChecklist([]);
@@ -2426,6 +2455,8 @@ async function saveProduct(){
   const name = document.getElementById('pp-name').value.trim();
   const priceRupees = Number(document.getElementById('pp-price').value);
   const features = document.getElementById('pp-features').value.split('\n').map(function(s){ return s.trim(); }).filter(Boolean);
+  const legacyStartDate = document.getElementById('pp-legacy').value || '';
+  const validityDays = Math.max(0, Math.round(Number(document.getElementById('pp-validity').value) || 0)); // days from purchase; 0 = lifetime
   const unlocksExamPractice = Array.from(document.querySelectorAll('.pp-exam-check:checked')).map(function(el){ return el.value; });
   statusEl.textContent = '';
   if(!id || !name || !priceRupees){ statusEl.style.color='#e5484d'; statusEl.textContent='Fill in Product ID, Name, and Price.'; return; }
@@ -2433,9 +2464,9 @@ async function saveProduct(){
   statusEl.textContent = 'Saving…';
   try{
     const ref = window.FB.doc(window.FB.db, 'products', id);
-    await window.FB.setDoc(ref, { name: name, amount: Math.round(priceRupees * 100), features: features, unlocksExamPractice: unlocksExamPractice }); // amount stored in paise
+    await window.FB.setDoc(ref, { name: name, amount: Math.round(priceRupees * 100), features: features, unlocksExamPractice: unlocksExamPractice, validityDays: validityDays, legacyStartDate: legacyStartDate }); // amount stored in paise
     statusEl.style.color = '#22c55e';
-    statusEl.textContent = 'Saved "'+name+'" at ₹'+priceRupees+(unlocksExamPractice.length?' — also unlocks all practice for '+unlocksExamPractice.length+' exam(s).':'.');
+    statusEl.textContent = 'Saved "'+name+'" at ₹'+priceRupees+(validityDays?' — valid '+validityDays+' days from purchase':' — lifetime access')+(unlocksExamPractice.length?' — also unlocks all practice for '+unlocksExamPractice.length+' exam(s).':'.');
     resetProductForm();
     loadProducts();
   }catch(e){
@@ -2751,6 +2782,7 @@ function importQuizPreview(){
   document.getElementById('qz-bulk-raw').value='';
   document.getElementById('qz-parse-status').textContent='';
   renderQuizAdmin();
+  qzTab('questions');
 }
 
 // ---------- MANUAL ADD/EDIT ----------
@@ -2782,8 +2814,10 @@ function saveQuizQuestion(){
   t(_quizEditingQId?'Question updated':'Question added','ok');
   resetQuizQuestionForm();
   renderQuizAdmin();
+  qzTab('questions');
 }
 function editQuizQuestion(id){
+  qzTab('add','manual');
   const d=qzD();
   const q=d.quizQuestions.find(function(x){return x.id===id;});
   if(!q)return;
@@ -2829,6 +2863,21 @@ function deleteQuizQuestion(id){
 }
 
 // ---------- QUESTIONS TABLE ----------
+var _qzTab='questions',_qzAdd='bulk';
+function qzTab(tab,sub){
+  _qzTab=tab;
+  if(tab==='add'&&sub)_qzAdd=sub;
+  document.querySelectorAll('#pg-quizcourse [data-qztab]').forEach(function(el){
+    let show=el.dataset.qztab===tab;
+    if(show&&tab==='add'&&el.dataset.qzadd)show=el.dataset.qzadd===_qzAdd;
+    el.style.display=show?'':'none';
+  });
+  document.querySelectorAll('#qzt-bar .qzt').forEach(function(b){b.classList.toggle('on',b.dataset.t===tab);});
+  document.querySelectorAll('.qzseg .qzs').forEach(function(b){b.classList.toggle('on',b.dataset.s===_qzAdd);});
+  const d=qzD();
+  document.getElementById('qzt-cq').textContent=d.quizQuestions.length;
+  document.getElementById('qzt-cs').textContent=d.quizSets.length;
+}
 function renderQuizQuestionsTable(){
   const d=qzD();
   const tm={};d.quizTopics.forEach(function(tp){tm[tp.id]=tp.name;});
