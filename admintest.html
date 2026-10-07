@@ -368,10 +368,16 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
               </div>
               <button class="btn bp" style="padding:8px 14px;font-size:.78rem" onclick="saveProduct()">Save Product</button>
             </div>
-            <div style="margin-top:12px;max-width:380px">
-              <label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:5px">Existing buyers: count validity from this date</label>
-              <input id="pp-legacy" type="date" style="width:100%;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/>
-              <div style="font-size:.66rem;color:var(--t2);margin-top:4px;line-height:1.5">Only used for buyers who have no purchase date saved on their account. Leave blank to keep them lifetime.</div>
+            <div style="margin-top:16px;padding:14px;border:1px solid var(--aborder);border-radius:var(--rs);background:var(--adim)">
+              <div style="font-size:.78rem;font-weight:700;margin-bottom:4px">Existing buyers: apply a validity start date</div>
+              <div style="font-size:.68rem;color:var(--t2);line-height:1.6;margin-bottom:10px">For buyers who have no purchase date saved, the product's validity (days) is counted from this date. Buyers with a saved purchase date keep their own. It takes effect right away for everyone.</div>
+              <div style="display:grid;grid-template-columns:1.4fr 1fr auto auto;gap:10px;align-items:end">
+                <div><label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:5px">Product</label><select id="pp-lg-product" onchange="legacyShow()" style="width:100%;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"></select></div>
+                <div><label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:5px">Start date</label><input id="pp-lg-date" type="date" style="width:100%;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/></div>
+                <button class="btn bp" style="padding:8px 14px;font-size:.78rem" onclick="applyLegacyDate()">Apply to existing users</button>
+                <button class="btn bo" style="padding:8px 14px;font-size:.78rem" onclick="removeLegacyDate()">Remove</button>
+              </div>
+              <div id="pp-lg-status" style="font-size:.72rem;margin-top:10px;color:var(--t2);line-height:1.6"></div>
             </div>
 
             <label style="font-size:.7rem;color:var(--t2);display:block;margin:14px 0 5px">What's included (shown to buyers) — one line per feature, e.g. "10 Full Mocks"</label>
@@ -2377,7 +2383,8 @@ async function loadProducts(){
     }else{
       listEl.innerHTML = '<table style="width:100%;border-collapse:collapse;font-size:.78rem">'
         + _pcProducts.map(function(p){
-            const examNote = (p.unlocksExamPractice||[]).length ? ' <span style="color:var(--t2);font-size:.7rem">+ all practice for '+p.unlocksExamPractice.length+' exam(s)</span>' : '';
+            const valNote = ' <span style="color:var(--t2);font-size:.7rem">· '+(p.validityDays>0 ? p.validityDays+' days validity' : 'lifetime')+'</span>';
+            const examNote = valNote + ((p.unlocksExamPractice||[]).length ? ' <span style="color:var(--t2);font-size:.7rem">+ all practice for '+p.unlocksExamPractice.length+' exam(s)</span>' : '');
             return '<tr>'
               + '<td style="padding:6px 0;color:var(--t)"><strong>'+esc(p.id)+'</strong></td>'
               + '<td style="padding:6px 10px;color:var(--t2)">'+esc(p.name||'')+examNote+'</td>'
@@ -2389,6 +2396,7 @@ async function loadProducts(){
     }
     renderExamChecklist();
     loadQuizSetProductChecklist();
+    renderLegacyBox();
   }catch(e){
     listEl.innerHTML = '<span style="color:#e5484d">Could not load products: '+esc(e.message||'')+'</span>';
   }
@@ -2416,7 +2424,6 @@ function editProduct(id){
   document.getElementById('pp-price').value = ((p.amount||0)/100);
   document.getElementById('pp-features').value = (p.features||[]).join('\n');
   document.getElementById('pp-validity').value = (p.validityDays>0 ? p.validityDays : '');
-  document.getElementById('pp-legacy').value = p.legacyStartDate || '';
   document.getElementById('pp-form-title').style.display = '';
   document.getElementById('pp-cancel-edit').style.display = '';
   renderExamChecklist(p.unlocksExamPractice || []);
@@ -2430,7 +2437,6 @@ function resetProductForm(){
   document.getElementById('pp-price').value = '';
   document.getElementById('pp-features').value = '';
   document.getElementById('pp-validity').value = '180';
-  document.getElementById('pp-legacy').value = '';
   document.getElementById('pp-form-title').style.display = 'none';
   document.getElementById('pp-cancel-edit').style.display = 'none';
   renderExamChecklist([]);
@@ -2449,13 +2455,67 @@ async function deleteProduct(id){
     statusEl.textContent = 'Delete failed: ' + (e && e.message ? e.message : 'please try again.');
   }
 }
+function renderLegacyBox(){
+  const sel=document.getElementById('pp-lg-product');
+  if(!sel)return;
+  const cur=sel.value;
+  sel.innerHTML=_pcProducts.map(function(p){return '<option value="'+esc(p.id)+'">'+esc(p.name||p.id)+(p.validityDays>0?' ('+p.validityDays+' days)':' (lifetime)')+'</option>';}).join('');
+  if(cur&&_pcProducts.some(function(p){return p.id===cur;}))sel.value=cur;
+  else if(_pcProducts.length)sel.value=_pcProducts[0].id;
+  legacyShow();
+}
+function _lgFmt(iso){return new Date(iso+'T00:00:00+05:30').toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric',timeZone:'Asia/Kolkata'});}
+function _lgEnd(iso,days){return new Date(Date.parse(iso+'T00:00:00+05:30')+days*86400000+19800000).toISOString().slice(0,10);} // IST calendar date
+function legacyShow(){
+  const sel=document.getElementById('pp-lg-product'),dt=document.getElementById('pp-lg-date'),st=document.getElementById('pp-lg-status');
+  if(!sel||!st)return;
+  const p=_pcProducts.find(function(x){return x.id===sel.value;});
+  if(!p){dt.value='';st.style.color='var(--t2)';st.textContent='Add a product first.';return;}
+  dt.value=p.legacyStartDate||'';
+  st.style.color='var(--t2)';
+  if(p.legacyStartDate){
+    const end=p.validityDays>0?_lgEnd(p.legacyStartDate,p.validityDays):null;
+    st.textContent='Currently applied: '+_lgFmt(p.legacyStartDate)+(end?' — existing buyers without a purchase date have access until '+_lgFmt(end)+'.':' — but this product has no validity days, so nothing expires.');
+  }else{
+    st.textContent='Not applied — existing buyers without a purchase date currently have lifetime access.';
+  }
+}
+async function _lgSave(id,value,okMsg){
+  const st=document.getElementById('pp-lg-status');
+  st.style.color='var(--t2)';st.textContent='Saving…';
+  try{
+    await window.FB.setDoc(window.FB.doc(window.FB.db,'products',id),{legacyStartDate:value},{merge:true});
+    const p=_pcProducts.find(function(x){return x.id===id;});
+    if(p)p.legacyStartDate=value;
+    legacyShow();
+    st.style.color='#22c55e';st.textContent=okMsg+' '+st.textContent;
+  }catch(e){
+    st.style.color='#e5484d';st.textContent='Could not save: '+(e&&e.message?e.message:'please try again.');
+  }
+}
+async function applyLegacyDate(){
+  const sel=document.getElementById('pp-lg-product'),dt=document.getElementById('pp-lg-date'),st=document.getElementById('pp-lg-status');
+  const p=_pcProducts.find(function(x){return x.id===sel.value;});
+  if(!p){st.style.color='#e5484d';st.textContent='Choose a product.';return;}
+  if(!dt.value){st.style.color='#e5484d';st.textContent='Pick a start date first.';return;}
+  if(!(p.validityDays>0)){st.style.color='#e5484d';st.textContent='This product has no validity days. Set "Validity (days)" on the product and save it first.';return;}
+  const end=_lgEnd(dt.value,p.validityDays);
+  if(!confirm('Apply '+_lgFmt(dt.value)+' as the start date for all existing buyers of "'+(p.name||p.id)+'" who have no purchase date?\n\nTheir access will end on '+_lgFmt(end)+'.'))return;
+  await _lgSave(p.id,dt.value,'Applied.');
+}
+async function removeLegacyDate(){
+  const sel=document.getElementById('pp-lg-product');
+  const p=_pcProducts.find(function(x){return x.id===sel.value;});
+  if(!p||!p.legacyStartDate){legacyShow();return;}
+  if(!confirm('Remove the start date? Existing buyers without a purchase date will go back to lifetime access.'))return;
+  await _lgSave(p.id,'','Removed.');
+}
 async function saveProduct(){
   const statusEl = document.getElementById('pp-status');
   const id = document.getElementById('pp-id').value.trim();
   const name = document.getElementById('pp-name').value.trim();
   const priceRupees = Number(document.getElementById('pp-price').value);
   const features = document.getElementById('pp-features').value.split('\n').map(function(s){ return s.trim(); }).filter(Boolean);
-  const legacyStartDate = document.getElementById('pp-legacy').value || '';
   const validityDays = Math.max(0, Math.round(Number(document.getElementById('pp-validity').value) || 0)); // days from purchase; 0 = lifetime
   const unlocksExamPractice = Array.from(document.querySelectorAll('.pp-exam-check:checked')).map(function(el){ return el.value; });
   statusEl.textContent = '';
@@ -2464,7 +2524,7 @@ async function saveProduct(){
   statusEl.textContent = 'Saving…';
   try{
     const ref = window.FB.doc(window.FB.db, 'products', id);
-    await window.FB.setDoc(ref, { name: name, amount: Math.round(priceRupees * 100), features: features, unlocksExamPractice: unlocksExamPractice, validityDays: validityDays, legacyStartDate: legacyStartDate }); // amount stored in paise
+    await window.FB.setDoc(ref, { name: name, amount: Math.round(priceRupees * 100), features: features, unlocksExamPractice: unlocksExamPractice, validityDays: validityDays }, { merge: true }); // amount stored in paise; merge keeps the existing-buyers start date
     statusEl.style.color = '#22c55e';
     statusEl.textContent = 'Saved "'+name+'" at ₹'+priceRupees+(validityDays?' — valid '+validityDays+' days from purchase':' — lifetime access')+(unlocksExamPractice.length?' — also unlocks all practice for '+unlocksExamPractice.length+' exam(s).':'.');
     resetProductForm();
