@@ -5342,7 +5342,7 @@ function renderAccountSubscription(){
     const p=getProduct(pid);
     const name=p?(p.name||pid):pid;
     return `<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:.76rem;padding:7px 9px;border-radius:var(--rs);background:var(--bg2);border:1px solid var(--b)">
-      <span style="color:var(--t);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHTML(name)}</span>
+      <span style="color:var(--t);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHTML(name)}</span>${(function(){const v=productValidity(pid);if(!v.until)return "";return v.expired?'<span style="font-size:.64rem;color:var(--red);white-space:nowrap">Expired '+fmtValidDate(v.until)+'</span>':'<span style="font-size:.64rem;color:var(--t2);white-space:nowrap">Valid till '+fmtValidDate(v.until)+'</span>';})()}
       <span style="color:var(--green);font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;flex-shrink:0">Active</span>
     </div>`;
   }).join('');
@@ -5393,10 +5393,37 @@ async function refreshPurchasedProducts(){
     const ref = window.FB.doc(window.FB.db,'users',window.FB.auth.currentUser.uid);
     const snap = await window.FB.getDoc(ref);
     _purchasedProducts = (snap.exists() && snap.data().purchasedProducts) || [];
+    _purchaseDates = (snap.exists() && snap.data().purchaseDates) || {};
   }catch(e){ console.warn('Could not load purchased products',e); }
 }
+// ---- Course validity: N days from the purchase date (product.validityDays, 0/blank = lifetime) ----
+// Purchase dates live on the user's own doc as purchaseDates.<productId>, written by the payment
+// Cloud Function. A purchase with no recorded date is treated as lifetime (nothing to count from).
+let _purchaseDates = {};
+function _toMs(v){
+  if(!v) return null;
+  if(typeof v==='number') return v;
+  if(typeof v==='string'){ const t=Date.parse(/^\d{4}-\d{2}-\d{2}$/.test(v)?v+'T00:00:00+05:30':v); return isNaN(t)?null:t; }
+  if(typeof v.toMillis==='function') return v.toMillis();
+  if(v.seconds!=null) return v.seconds*1000;
+  return null;
+}
+function productValidity(productId){
+  const owned = _purchasedProducts.indexOf(productId) !== -1;
+  const p = getProduct(productId);
+  const days = (p && Number(p.validityDays) > 0) ? Number(p.validityDays) : 0;
+  // Buyers with no saved purchase date fall back to the product's "existing buyers" start date (if set)
+  let at = _toMs(_purchaseDates[productId]);
+  if(!at && p && p.legacyStartDate) at = _toMs(p.legacyStartDate);
+  if(!owned || !days || !at) return { owned:owned, expired:false, until:null, days:days };
+  const until = at + days*86400000;
+  return { owned:owned, expired:Date.now() > until, until:until, days:days };
+}
+function fmtValidDate(ms){ return new Date(ms).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}); }
 function isProductUnlocked(productId){
-  return !productId || _purchasedProducts.indexOf(productId) !== -1;
+  if(!productId) return true;
+  const v = productValidity(productId);
+  return v.owned && !v.expired;
 }
 // Public product catalog — needed for price/name display and for the "buying this exam's
 // mocks also unlocks all its practice" rule. Public read, doesn't need login.
@@ -5748,12 +5775,56 @@ function renderProgressScreen(){
     '<div class="ph-tile"><div class="ph-v">'+(prac.length+mocks.length)+'</div><div class="ph-l">Sessions</div></div>'+
     '<div class="ph-tile"><div class="ph-v">'+typs.length+'</div><div class="ph-l">Typing Tests</div></div>'+
     '<div class="ph-tile"><div class="ph-v">'+(bestWPM||'--')+'</div><div class="ph-l">Best WPM</div></div>';
+  renderQuizProgress();
   renderHistList();
+}
+// Quiz Course block on My Progress: unfinished quizzes (with Resume) + per-set attempts / best / average.
+function renderQuizProgress(){
+  const el=document.getElementById('prog-quiz');
+  if(!el)return;
+  const attempts=getProgress().filter(function(x){return x.kind==='quiz';});
+  const sets={};
+  attempts.forEach(function(e){
+    const b=sets[e.setId]||(sets[e.setId]={title:e.title||'Quiz',n:0,sumPct:0,best:null});
+    const pct=e.max?(e.score/e.max*100):0;
+    b.n++;b.sumPct+=pct;b.title=e.title||b.title;
+    if(!b.best||pct>b.best.pct)b.best={score:e.score,max:e.max,pct:pct};
+  });
+  const data=qzGetData();
+  const drafts=[];
+  Object.keys(localStorage).forEach(function(k){
+    if(k.indexOf('dpt_quizdraft_')!==0)return;
+    const id=k.slice('dpt_quizdraft_'.length),info=quizDraftInfo(id);
+    const set=(data.sets||[]).find(function(x){return x.id===id;});
+    if(info&&set)drafts.push({id:id,set:set,info:info,total:data.questions.filter(function(q){return q.setNo===set.setNo&&q.active!==false;}).length,at:(getQuizDraft(id)||{}).savedAt,open:isQuizSetUnlocked(set)});
+  });
+  const ids=Object.keys(sets);
+  if(!ids.length&&!drafts.length){el.innerHTML='';return;}
+  const btn='font-size:.72rem;font-weight:700;color:var(--bg);background:var(--accent);padding:6px 16px;border:none;border-radius:999px;cursor:pointer;font-family:var(--font)';
+  let h='<div style="font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--t2);margin:4px 0 8px">Quiz Course</div>';
+  h+=drafts.map(function(d){
+    return '<div class="hist-item"><div class="hi-top"><span class="hi-badge practice">Unfinished</span><span style="font-size:.68rem;color:var(--t2)">'+(d.at?timeAgoLabel(d.at):'')+'</span></div>'
+      +'<div class="hi-title" style="margin-top:5px">'+escapeHTML(d.set.title||('Set '+d.set.setNo))+'</div>'
+      +'<div class="hi-stats"><div class="hi-stat">Answered <strong>'+d.info.answered+'/'+d.total+'</strong></div></div>'
+      +'<button onclick="'+(d.open?'resumeQuizSet(\''+d.id+'\')':'startQuizSet(\''+d.id+'\')')+'" style="margin-top:10px;'+btn+'">'+(d.open?'Resume':'Renew')+'</button></div>';
+  }).join('');
+  h+=ids.map(function(id){
+    const b=sets[id];
+    return '<div class="hist-item"><div class="hi-top"><span class="hi-badge mock">Quiz</span></div>'
+      +'<div class="hi-title" style="margin-top:5px">'+escapeHTML(b.title)+'</div>'
+      +'<div class="hi-stats">'
+      +'<div class="hi-stat">Attempts <strong>'+b.n+'</strong></div>'
+      +'<div class="hi-stat">Best <strong>'+b.best.score+'/'+b.best.max+'</strong></div>'
+      +'<div class="hi-stat">Average <strong>'+Math.round(b.sumPct/b.n)+'%</strong></div>'
+      +'</div></div>';
+  }).join('');
+  el.innerHTML=h;
 }
 
 function renderHistList(){
   const list = getProgress();
-  const filtered = _progFilter==='all' ? list : list.filter(function(x){return x.kind===_progFilter;});
+  const base = list.filter(function(x){return x.kind!=='quiz';});
+  const filtered = _progFilter==='all' ? base : base.filter(function(x){return x.kind===_progFilter;});
   const container = document.getElementById('hist-list');
   if(!filtered.length){
     container.innerHTML = '<div class="prog-empty"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:block;margin:0 auto 10px"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>'+(list.length?'No entries for this filter yet.':'No progress saved yet. Complete a practice or mock to start tracking!')+'</div>';
@@ -5881,9 +5952,10 @@ function renderQuizList(){
     const qCount=data.questions.filter(function(q){return q.setNo===s.setNo&&q.active!==false;}).length;
     const locked=!isQuizSetUnlocked(s);
     const draftInfo=locked?null:quizDraftInfo(s.id);
+    const expiredV=locked?quizSetExpiry(s):null;
     const unlockIds=(s.productIds&&s.productIds.length)?s.productIds:(courseProductId?[courseProductId]:[]);
     const cta=locked
-      ? '<button onclick="event.stopPropagation();showUnlockOptions('+jsArrayAttr(unlockIds)+')" style="font-size:.7rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:6px 14px;border-radius:999px;cursor:pointer;font-family:var(--font)">Unlock</button>'
+      ? '<button onclick="event.stopPropagation();showUnlockOptions('+jsArrayAttr(unlockIds)+')" style="font-size:.7rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:6px 14px;border-radius:999px;cursor:pointer;font-family:var(--font)">'+(expiredV?"Renew":"Unlock")+'</button>'
       : '<button onclick="startQuizSet(\''+s.id+'\')" style="font-size:.7rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:6px 14px;border-radius:999px;cursor:pointer;font-family:var(--font)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> Start</button>';
     return '<div class="q-item" style="cursor:default">'
       +(locked?'<div style="position:absolute;top:12px;right:12px;color:var(--accent)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>':'')
@@ -5891,6 +5963,7 @@ function renderQuizList(){
       +'<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">'
       +'<span class="chip">'+qCount+' question'+(qCount===1?'':'s')+'</span>'
       +(s.timeLimitMin?'<span class="chip">'+s.timeLimitMin+' min</span>':'<span class="chip">No timer</span>')
+      +(expiredV?'<span class="chip" style="color:var(--red)">Validity ended '+fmtValidDate(expiredV.until)+'</span>':'')
       +(draftInfo?'<span class="chip" style="color:var(--accent)">In progress · '+draftInfo.answered+' answered</span>':'')
       +(s.negMarkEnabled?'<span class="chip" style="color:var(--red)">-'+s.negMarkValue+'/wrong</span>':'')
       +'</div>'
@@ -5910,6 +5983,13 @@ function resumeQuizSet(setId){
   _pendingQuizSet=null;_pendingQuizQs=null;_pendingQuizDraft=null;
   _instrReturnTo="quizlist";
   launchQuiz(s,qs,draft);
+}
+function quizSetExpiry(s){
+  const ids=[];const cp=(D().siteSettings||{}).quizCourseProductId;
+  if(cp)ids.push(cp);
+  (s.productIds||[]).forEach(function(i){ids.push(i);});
+  for(let k=0;k<ids.length;k++){const v=productValidity(ids[k]);if(v.owned&&v.expired)return v;}
+  return null;
 }
 function quizDraftInfo(setId){
   const d=getQuizDraft(setId);
@@ -6286,6 +6366,9 @@ function finalizeQuiz(){
   QZ._resultMax=QZ.questions.length;
   QZ._avgCorrectSecs=correct>0?Math.round(corMs/correct/1000):null;
   QZ._totalSecs=Math.round(Object.keys(QZ.tt).reduce(function(a,k){return a+QZ.tt[k];},0)/1000);
+  if(QZ._attempted>0){
+    try{saveProgress({kind:'quiz',date:Date.now(),setId:QZ.setId,title:QZ.title||'Quiz',score:QZ._resultScore,max:QZ._resultMax,correct:QZ._correctCount,wrong:QZ._wrongCount,attempted:QZ._attempted,timeSec:QZ._totalSecs||0});}catch(e){}
+  }
   document.getElementById("qzr-actionbar").style.display="none";
   document.getElementById("qzr-review-actionbar").style.display="block";
   document.getElementById("qzr-timer-val").style.display="none";
@@ -6398,6 +6481,7 @@ const initPromise=init();
       <button class="clr-btn" onclick="clearAllProgress()">Clear All</button>
     </div>
     <div class="ph-row" id="prog-overview"></div>
+    <div id="prog-quiz"></div>
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
       <div class="prog-tabs">
         <button class="ptab on" onclick="filterProg('all',this)">All</button>
