@@ -7834,7 +7834,8 @@
       "negMarkEnabled": true,
       "negMarkValue": 0.125,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "marksPerQuestion": 0.5
     },
     {
       "id": "qs_1791364706755_2",
