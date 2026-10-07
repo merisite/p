@@ -176,6 +176,12 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
 .qzs{padding:8px 16px;border:none;background:var(--bg2);color:var(--t2);font-weight:700;font-size:.76rem;cursor:pointer;font-family:inherit}
 .qzs.on{background:var(--accent);color:var(--bg)}
 .qz-opt-n{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--bg3);color:var(--t2);font-size:.68rem;font-weight:700;flex-shrink:0}
+.qz-tgl{display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-size:.74rem;font-weight:700;color:var(--t2);user-select:none}
+.qz-tgl input{display:none}
+.qz-tg{position:relative;width:38px;height:21px;border-radius:21px;background:var(--b);transition:.2s;flex-shrink:0}
+.qz-tg::after{content:"";position:absolute;left:3px;top:3px;width:15px;height:15px;border-radius:50%;background:#fff;transition:.2s}
+.qz-tgl input:checked+.qz-tg{background:#22c55e}.qz-tgl input:checked+.qz-tg::after{transform:translateX(17px)}
+.qz-warn{background:rgba(250,204,21,.12);border:1px solid rgba(250,204,21,.5);border-radius:var(--rs);padding:11px 14px;font-size:.76rem;line-height:1.6;margin-bottom:12px;color:var(--t)}
 </style>
 </head>
 <body>
@@ -465,15 +471,14 @@ In conclusion, while digital banking has significantly advanced financial inclus
       <div id="pg-quizcourse" class="pg">
         <div class="ph"><div class="ph-ey">Content</div><div class="ph-ti">Quiz Course</div><div class="ph-su">MCQ question bank for Computer Awareness (or any quiz-style course) — bulk-paste and parse with AI, or add/edit questions one at a time. Organize into topics and timed Quiz Sets.</div></div>
       <div class="qzt-bar" id="qzt-bar">
-        <button class="qzt on" data-t="questions" onclick="qzTab('questions')">Questions <span class="bge bg-g" id="qzt-cq">0</span></button>
+        <button class="qzt on" data-t="sets" onclick="qzTab('sets')">Quiz Sets <span class="bge bg-g" id="qzt-cs">0</span></button>
+        <button class="qzt" data-t="questions" onclick="qzTab('questions')">Questions <span class="bge bg-g" id="qzt-cq">0</span></button>
         <button class="qzt" data-t="add" onclick="qzTab('add')">Add Questions</button>
-        <button class="qzt" data-t="sets" onclick="qzTab('sets')">Quiz Sets <span class="bge bg-g" id="qzt-cs">0</span></button>
-        <button class="qzt" data-t="topics" onclick="qzTab('topics')">Topics</button>
-        <button class="qzt" data-t="course" onclick="qzTab('course')">Course Settings</button>
+        <button class="qzt" data-t="settings" onclick="qzTab('settings')">Topics &amp; Course</button>
       </div>
 
         <!-- COURSE SETTINGS -->
-        <div data-qztab="course" style="background:var(--bg2);border:2px solid var(--aborder);border-radius:var(--rl);padding:18px;margin-bottom:18px">
+        <div data-qztab="settings" style="background:var(--bg2);border:2px solid var(--aborder);border-radius:var(--rl);padding:18px;margin-bottom:18px">
           <div style="font-size:.85rem;font-weight:700;margin-bottom:4px">Course Settings</div>
           <div style="font-size:.74rem;color:var(--t2);margin-bottom:14px">Controls the whole course at once — whether it's live or shown as "Upcoming" on the site, and (optionally) a single price covering every Quiz Set, so you don't have to price each set separately.</div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
@@ -495,7 +500,7 @@ In conclusion, while digital banking has significantly advanced financial inclus
         </div>
 
         <!-- TOPICS -->
-        <div data-qztab="topics" style="background:var(--bg2);border:1px solid var(--b);border-radius:var(--rl);padding:18px;margin-bottom:18px">
+        <div data-qztab="settings" style="background:var(--bg2);border:1px solid var(--b);border-radius:var(--rl);padding:18px;margin-bottom:18px">
           <div style="font-size:.85rem;font-weight:700;margin-bottom:10px">Topics</div>
           <div id="qz-topics-list" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">Loading…</div>
           <div style="display:flex;gap:8px">
@@ -526,7 +531,7 @@ Q: Which of these is an input device?
             </div>
             <div>
               <label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:5px">Assign to Set # (optional)</label>
-              <input id="qz-bulk-setno" type="number" min="1" placeholder="Leave blank to keep unassigned" style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/>
+              <select id="qz-bulk-setno" style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"><option value="">Not in any set</option></select>
             </div>
             <div>
               <label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:5px">Difficulty (optional — applies to all parsed)</label>
@@ -587,7 +592,7 @@ Q: Which of these is an input device?
             </div>
             <div>
               <label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:5px">Set # (optional)</label>
-              <input id="qz-q-setno" type="number" min="1" placeholder="Unassigned" style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/>
+              <select id="qz-q-setno" style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"><option value="">Not in any set</option></select>
             </div>
           </div>
           <label style="display:flex;align-items:center;gap:7px;font-size:.78rem;margin-bottom:14px;cursor:pointer"><input type="checkbox" id="qz-q-active" checked style="margin:0"/> Active (visible to students)</label>
@@ -613,7 +618,7 @@ Q: Which of these is an input device?
         <!-- QUIZ SETS -->
         <div data-qztab="sets" style="background:var(--bg2);border:1px solid var(--b);border-radius:var(--rl);padding:18px">
           <div style="font-size:.85rem;font-weight:700;margin-bottom:4px">Quiz Sets</div>
-          <div style="font-size:.74rem;color:var(--t2);margin-bottom:12px">A Quiz Set groups every question with a matching Set # above into one timed attempt, same pattern as your Mocks. Negative marking, time limit and paid access are all configured per set here.</div>
+          <div style="font-size:.78rem;color:var(--t2);line-height:1.7;margin-bottom:14px"><b style="color:var(--t)">How it works:</b> 1) Create a set (or pick “+ Create a new set” when you add questions). 2) Add questions to it. 3) Switch <b>Show to students</b> on. 4) Click <b>Publish</b>.</div>
           <div id="qz-sets-list" style="margin-bottom:14px"></div>
           <div id="qz-set-form-title" style="font-size:.8rem;font-weight:700;margin-bottom:10px">Add Quiz Set</div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
@@ -639,10 +644,9 @@ Q: Which of these is an input device?
               <label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:5px">Deduction per wrong answer</label>
               <input id="qzs-negval" type="number" min="0" step="0.05" placeholder="e.g. 0.25" style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/>
             </div>
-          </div>
-          <label style="font-size:.72rem;color:var(--t2);display:block;margin-bottom:6px">Paid access (leave unchecked = free for everyone):</label>
+          </div>\1<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px"><div><label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:5px">Marks per question</label><input id="qzs-marks" type="number" min="0.25" step="0.25" value="1" style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"/></div><div></div></div>\1\2
           <div id="qzs-product-checklist" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">Loading…</div>
-          <label style="display:flex;align-items:center;gap:7px;font-size:.78rem;margin-bottom:14px;cursor:pointer"><input type="checkbox" id="qzs-active" checked style="margin:0"/> Active (visible to students)</label>
+          <label style="display:flex;align-items:center;gap:7px;font-size:.78rem;margin-bottom:14px;cursor:pointer"><input type="checkbox" \1Show to students</label>
           <div style="display:flex;gap:8px">
             <button class="btn bp" style="padding:8px 16px;font-size:.8rem" onclick="saveQuizSet()">Save Set</button>
             <button class="btn" id="qzs-cancel" style="padding:6px 14px;font-size:.76rem;display:none" onclick="resetQuizSetForm()">Cancel Edit</button>
@@ -2725,6 +2729,13 @@ function deleteQuizTopic(id){
 }
 function populateQuizTopicSelects(){
   const d=qzD();
+  ['qz-bulk-setno','qz-q-setno'].forEach(function(id){
+    const el=document.getElementById(id);if(!el)return;
+    const cur=el.value;
+    const nos=Array.from(new Set(d.quizSets.map(function(x){return x.setNo;}).concat(d.quizQuestions.map(function(q){return q.setNo;}).filter(function(n){return n!=null;})))).sort(function(a,b){return a-b;});
+    el.innerHTML='<option value="">Not in any set</option>'+nos.map(function(n){const st=d.quizSets.find(function(x){return x.setNo===n;});return '<option value="'+n+'">Set '+n+(st&&st.title?' — '+esc(st.title):'')+'</option>';}).join('')+'<option value="__new">+ Create a new set</option>';
+    el.value=cur;
+  });
   const opts='<option value="">— No topic —</option>'+d.quizTopics.map(function(tp){return '<option value="'+tp.id+'">'+esc(tp.name)+'</option>';}).join('');
   ['qz-bulk-topic','qz-q-topic'].forEach(function(id){
     const el=document.getElementById(id);
@@ -2816,10 +2827,9 @@ function toggleQuizPreviewItem(i){
 function importQuizPreview(){
   const toImport=_quizParsedPreview.filter(function(q){return q._include;});
   if(!toImport.length){t('Nothing checked to import','err');return;}
+  const setNo=qzResolveSet(document.getElementById('qz-bulk-setno').value);
   const d=qzD();
   const topicId=document.getElementById('qz-bulk-topic').value||null;
-  const setNoVal=document.getElementById('qz-bulk-setno').value;
-  const setNo=setNoVal?parseInt(setNoVal):null;
   const difficulty=document.getElementById('qz-bulk-difficulty').value||'medium';
   toImport.forEach(function(q,i){
     d.quizQuestions.push({
@@ -2842,7 +2852,7 @@ function importQuizPreview(){
   document.getElementById('qz-bulk-raw').value='';
   document.getElementById('qz-parse-status').textContent='';
   renderQuizAdmin();
-  qzTab('questions');
+  renderQuizSetsList();populateQuizTopicSelects();qzTab('questions');
 }
 
 // ---------- MANUAL ADD/EDIT ----------
@@ -2859,10 +2869,9 @@ function saveQuizQuestion(){
   const extra={textHi:anyHi?textHi:'',optionsHi:anyHi?optionsHi:[],explanationHi:explanationHi,topperTime:numOrNull('qz-q-topper'),correctAvgTime:numOrNull('qz-q-cavg')};
   const topicId=document.getElementById('qz-q-topic').value||null;
   const difficulty=document.getElementById('qz-q-difficulty').value;
-  const setNoVal=document.getElementById('qz-q-setno').value;
-  const setNo=setNoVal?parseInt(setNoVal):null;
   const active=document.getElementById('qz-q-active').checked;
   if(!text||options.some(function(o){return !o;})){t('Fill in the question and all 5 options','err');return;}
+  const setNo=qzResolveSet(document.getElementById('qz-q-setno').value);
   const d=qzD();
   if(_quizEditingQId){
     const q=d.quizQuestions.find(function(x){return x.id===_quizEditingQId;});
@@ -2874,7 +2883,7 @@ function saveQuizQuestion(){
   t(_quizEditingQId?'Question updated':'Question added','ok');
   resetQuizQuestionForm();
   renderQuizAdmin();
-  qzTab('questions');
+  renderQuizSetsList();populateQuizTopicSelects();qzTab('questions');
 }
 function editQuizQuestion(id){
   qzTab('add','manual');
@@ -2923,7 +2932,7 @@ function deleteQuizQuestion(id){
 }
 
 // ---------- QUESTIONS TABLE ----------
-var _qzTab='questions',_qzAdd='bulk';
+var _qzTab='sets',_qzAdd='manual';
 function qzTab(tab,sub){
   _qzTab=tab;
   if(tab==='add'&&sub)_qzAdd=sub;
@@ -2979,20 +2988,52 @@ function loadQuizSetProductChecklist(){
     return '<label style="display:flex;align-items:center;gap:6px;font-size:.76rem;background:var(--bg3);border:1px solid var(--b);border-radius:var(--rs);padding:5px 10px;cursor:pointer"><input type="checkbox" class="qzs-prod-cb" value="'+p.id+'" style="margin:0"/>'+esc(p.name||p.id)+'</label>';
   }).join('');
 }
-function renderQuizSetsList(){
+function qzResolveSet(val){
+  if(!val)return null;
   const d=qzD();
-  const el=document.getElementById('qz-sets-list');
-  if(!d.quizSets.length){el.innerHTML='<div style="font-size:.78rem;color:var(--t2);margin-bottom:10px">No quiz sets yet — add one below.</div>';return;}
-  el.innerHTML=d.quizSets.sort(function(a,b){return (a.setNo||0)-(b.setNo||0);}).map(function(s){
-    const qCount=d.quizQuestions.filter(function(q){return q.setNo===s.setNo;}).length;
-    return '<div class="card" style="margin-bottom:8px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">'
-      +'<div><span style="font-weight:700;font-size:.82rem">Set '+s.setNo+' — '+esc(s.title||'')+'</span> '
-      +'<span style="font-size:.7rem;color:var(--t2)">('+qCount+' question'+(qCount===1?'':'s')+((s.timeLimitMin)?' · '+s.timeLimitMin+' min':'')+(s.negMarkEnabled?' · -'+s.negMarkValue+'/wrong':'')+(s.productIds&&s.productIds.length?' · 🔒 Paid':' · Free')+')</span> '
-      +(s.active===false?'<span class="bge bg-r" style="margin-left:6px">Hidden</span>':'')
+  let n;
+  if(val==='__new'){n=Math.max.apply(null,[0].concat(d.quizSets.map(function(x){return x.setNo||0;}),d.quizQuestions.map(function(q){return q.setNo||0;})))+1;}
+  else n=parseInt(val);
+  if(!d.quizSets.some(function(x){return x.setNo===n;})){
+    d.quizSets.push({id:'qs_'+Date.now()+'_'+n,setNo:n,title:'Quiz Set '+n,timeLimitMin:null,negMarkEnabled:false,negMarkValue:0,marksPerQuestion:1,active:true,productIds:[]});
+    SD(d);
+    t('Set '+n+' created and shown to students. Edit its title, timer and marks in Quiz Sets.','ok');
+  }
+  return n;
+}
+function qzCreateSet(n){qzResolveSet(String(n));renderQuizSetsList();populateQuizTopicSelects();qzTab(_qzTab,_qzAdd);}
+function toggleQuizSetActive(id,on){
+  const d=qzD();const st=d.quizSets.find(function(x){return x.id===id;});
+  if(!st)return;
+  st.active=!!on;SD(d);
+  t(on?'Set shown — click Publish to update the site':'Set hidden — click Publish to update the site','ok');
+  renderQuizSetsList();
+}
+function qzAddToSet(n){qzTab('add','manual');populateQuizTopicSelects();document.getElementById('qz-q-setno').value=String(n);}
+function renderQuizSetsList(){
+  const d=qzD(),el=document.getElementById('qz-sets-list');
+  const have=new Set(d.quizSets.map(function(x){return x.setNo;}));
+  const cnt=function(n){return d.quizQuestions.filter(function(q){return q.setNo===n;}).length;};
+  const orphans=Array.from(new Set(d.quizQuestions.map(function(q){return q.setNo;}).filter(function(n){return n!=null&&!have.has(n);}))).sort(function(a,b){return a-b;});
+  let h='';
+  if(orphans.length){
+    h+='<div class="qz-warn"><b>Students can’t see these yet.</b> You have questions in '+orphans.map(function(n){return 'Set '+n+' ('+cnt(n)+')';}).join(', ')+', but the set itself hasn’t been created. '
+      +orphans.map(function(n){return '<button class="btn bp sm" style="margin:6px 6px 0 0" onclick="qzCreateSet('+n+')">Create Set '+n+'</button>';}).join('')+'</div>';
+  }
+  if(!d.quizSets.length&&!orphans.length)h+='<div style="font-size:.78rem;color:var(--t2);margin-bottom:10px">No quiz sets yet — fill the form below, or add questions and choose “+ Create a new set”.</div>';
+  h+=d.quizSets.slice().sort(function(a,b){return (a.setNo||0)-(b.setNo||0);}).map(function(st){
+    const n=cnt(st.setNo),on=st.active!==false,mp=Number(st.marksPerQuestion)>0?Number(st.marksPerQuestion):1;
+    return '<div class="card" style="margin-bottom:10px;padding:14px 16px">'
+      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap">'
+      +'<div><div style="font-weight:700;font-size:.9rem">Set '+st.setNo+' — '+esc(st.title||'')+'</div>'
+      +'<div style="font-size:.72rem;color:var(--t2);margin-top:5px;line-height:1.6">'+n+' question'+(n===1?'':'s')+' · '+(st.timeLimitMin?st.timeLimitMin+' min':'No timer')+' · +'+mp+' per correct'+(st.negMarkEnabled?' / −'+st.negMarkValue+' per wrong':'')+' · '+(st.productIds&&st.productIds.length?'Paid':'Free')+'</div>'
+      +(n===0?'<div style="font-size:.7rem;color:#d97706;margin-top:3px">No questions yet — students will see an empty quiz.</div>':'')+'</div>'
+      +'<label class="qz-tgl"><span>'+(on?'Shown':'Hidden')+'</span><input type="checkbox" '+(on?'checked':'')+' onchange="toggleQuizSetActive(\''+st.id+'\',this.checked)"><span class="qz-tg"></span></label>'
       +'</div>'
-      +'<div style="display:flex;gap:6px"><button class="btn bo sm" onclick="editQuizSet(\''+s.id+'\')">Edit</button><button class="btn bd sm" onclick="deleteQuizSet(\''+s.id+'\')">Delete</button></div>'
+      +'<div style="display:flex;gap:6px;margin-top:11px;flex-wrap:wrap"><button class="btn bp sm" onclick="qzAddToSet('+st.setNo+')">+ Add questions</button><button class="btn bo sm" onclick="editQuizSet(\''+st.id+'\')">Edit</button><button class="btn bd sm" onclick="deleteQuizSet(\''+st.id+'\')">Delete</button></div>'
       +'</div>';
   }).join('');
+  el.innerHTML=h;
 }
 function saveQuizSet(){
   const setNoVal=document.getElementById('qzs-setno').value;
@@ -3003,14 +3044,15 @@ function saveQuizSet(){
   const negMarkEnabled=document.getElementById('qzs-negenabled').value==='1';
   const negMarkValue=negMarkEnabled?parseFloat(document.getElementById('qzs-negval').value||'0'):0;
   const active=document.getElementById('qzs-active').checked;
+  const marksPerQuestion=Math.max(0.25,parseFloat(document.getElementById('qzs-marks').value)||1);
   const productIds=Array.from(document.querySelectorAll('.qzs-prod-cb:checked')).map(function(cb){return cb.value;});
   const d=qzD();
   if(!_quizEditingSetId&&d.quizSets.some(function(s){return s.setNo===setNo;})){t('A set with that number already exists','err');return;}
   if(_quizEditingSetId){
     const s=d.quizSets.find(function(x){return x.id===_quizEditingSetId;});
-    if(s)Object.assign(s,{setNo:setNo,title:title,timeLimitMin:timeLimitMin,negMarkEnabled:negMarkEnabled,negMarkValue:negMarkValue,active:active,productIds:productIds});
+    if(s)Object.assign(s,{setNo:setNo,title:title,timeLimitMin:timeLimitMin,negMarkEnabled:negMarkEnabled,negMarkValue:negMarkValue,marksPerQuestion:marksPerQuestion,active:active,productIds:productIds});
   }else{
-    d.quizSets.push({id:'qs_'+Date.now(),setNo:setNo,title:title,timeLimitMin:timeLimitMin,negMarkEnabled:negMarkEnabled,negMarkValue:negMarkValue,active:active,productIds:productIds});
+    d.quizSets.push({id:'qs_'+Date.now(),setNo:setNo,title:title,timeLimitMin:timeLimitMin,negMarkEnabled:negMarkEnabled,negMarkValue:negMarkValue,marksPerQuestion:marksPerQuestion,active:active,productIds:productIds});
   }
   SD(d);
   t(_quizEditingSetId?'Quiz Set updated':'Quiz Set added','ok');
@@ -3031,6 +3073,7 @@ function editQuizSet(id){
   document.getElementById('qzs-negval-wrap').style.display=s.negMarkEnabled?'block':'none';
   document.getElementById('qzs-negval').value=s.negMarkValue||'';
   document.getElementById('qzs-active').checked=s.active!==false;
+  document.getElementById('qzs-marks').value=s.marksPerQuestion>0?s.marksPerQuestion:1;
   document.querySelectorAll('.qzs-prod-cb').forEach(function(cb){cb.checked=(s.productIds||[]).includes(cb.value);});
   document.getElementById('qzs-cancel').style.display='inline-block';
   document.getElementById('qz-set-form-title').scrollIntoView({behavior:'smooth',block:'center'});
@@ -3045,6 +3088,7 @@ function resetQuizSetForm(){
   document.getElementById('qzs-negval-wrap').style.display='none';
   document.getElementById('qzs-negval').value='';
   document.getElementById('qzs-active').checked=true;
+  document.getElementById('qzs-marks').value='1';
   document.querySelectorAll('.qzs-prod-cb').forEach(function(cb){cb.checked=false;});
   document.getElementById('qzs-cancel').style.display='none';
 }
