@@ -7840,10 +7840,10 @@
       "id": "qs_1791364706755_2",
       "setNo": 2,
       "title": "Quiz Set 2",
-      "timeLimitMin": 20,
-      "negMarkEnabled": true,
-      "negMarkValue": 0.125,
-      "marksPerQuestion": 0.5,
+      "timeLimitMin": null,
+      "negMarkEnabled": false,
+      "negMarkValue": 0,
+      "marksPerQuestion": 1,
       "active": true,
       "productIds": []
     }
