@@ -5247,6 +5247,1451 @@
       "setNo": 1,
       "active": true,
       "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_0",
+      "topicId": null,
+      "text": "Which type of memory loses its data when the computer is switched off?",
+      "options": [
+        "ROM",
+        "Hard Disk",
+        "RAM",
+        "Flash Drive",
+        "CD-ROM"
+      ],
+      "correctIndex": 2,
+      "explanation": "RAM is volatile memory, meaning its stored data is lost when power is removed.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
+    },
+    {
+      "id": "qq_1791478096045_1",
+      "topicId": null,
+      "text": "Which of the following is application software?",
+      "options": [
+        "Linux",
+        "Windows",
+        "MS PowerPoint",
+        "UNIX",
+        "DOS"
+      ],
+      "correctIndex": 2,
+      "explanation": "MS PowerPoint is application software used to create presentations. Linux, Windows, UNIX and DOS are operating systems.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_2",
+      "topicId": null,
+      "text": "Which protocol is mainly used for sending emails?",
+      "options": [
+        "HTTP",
+        "FTP",
+        "SMTP",
+        "TCP",
+        "IP"
+      ],
+      "correctIndex": 2,
+      "explanation": "SMTP stands for Simple Mail Transfer Protocol. It is the protocol primarily associated with sending email messages.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_3",
+      "topicId": null,
+      "text": "What is a set of rules governing data communication called?",
+      "options": [
+        "Protocol",
+        "Virus",
+        "Firewall",
+        "Antivirus",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "A protocol is a set of rules and conventions that determines how data is communicated between devices.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_4",
+      "topicId": null,
+      "text": "What is the full form of URL?",
+      "options": [
+        "Uniform Resource Locator",
+        "Universal Resource Locator",
+        "Uniform Resource Link",
+        "Universal Resource Link",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "URL stands for Uniform Resource Locator. It specifies the location or address of a resource on a network such as the Internet.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_5",
+      "topicId": null,
+      "text": "Which device is used for permanent storage of large amounts of data?",
+      "options": [
+        "RAM",
+        "Cache",
+        "Hard Disk",
+        "Registers",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "A hard disk provides persistent storage and can store large amounts of data even when the computer is powered off.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_6",
+      "topicId": null,
+      "text": "What is the full form of ALU?",
+      "options": [
+        "Arithmetic Logic Unit",
+        "Application Logic Unit",
+        "Array Logic Unit",
+        "Arithmetic Local Unit",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "ALU stands for Arithmetic Logic Unit. It performs arithmetic operations and logical operations within the CPU.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_7",
+      "topicId": null,
+      "text": "Which device is commonly used to connect multiple computers in a LAN?",
+      "options": [
+        "Router",
+        "Switch",
+        "Modem",
+        "Repeater",
+        "All of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "A network switch connects multiple devices within a LAN and forwards data to the appropriate connected device.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_8",
+      "topicId": null,
+      "text": "Processor speed is commonly measured in which unit?",
+      "options": [
+        "Mbps",
+        "GHz",
+        "GB",
+        "Pixel",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "Processor clock speed is commonly expressed in hertz, often gigahertz (GHz) for modern processors.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_9",
+      "topicId": null,
+      "text": "Which of the following is secondary storage?",
+      "options": [
+        "RAM",
+        "Cache",
+        "Hard Disk",
+        "Registers",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "Secondary storage provides non-volatile storage for data. A hard disk is a common example, whereas RAM, cache and registers are part of primary/internal memory systems.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_10",
+      "topicId": null,
+      "text": "Which web-based email service was founded in 1996?",
+      "options": [
+        "Gmail",
+        "Yahoo Mail",
+        "Hotmail",
+        "Outlook",
+        "Rediffmail"
+      ],
+      "correctIndex": 2,
+      "explanation": "Hotmail was founded in 1996 and became one of the early widely used web-based email services.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_11",
+      "topicId": null,
+      "text": "What does a red wavy underline below a word in MS Word indicate?",
+      "options": [
+        "Grammar error",
+        "Spelling error",
+        "Formatting error",
+        "Style error",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "A red wavy underline indicates that Word has identified a possible spelling error in the word.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_12",
+      "topicId": null,
+      "text": "At which OSI layer does a Hub operate?",
+      "options": [
+        "Data Link",
+        "Network",
+        "Physical",
+        "Transport",
+        "Application"
+      ],
+      "correctIndex": 2,
+      "explanation": "A Hub works at the Physical layer (Layer 1) of the OSI model. It simply receives signals and forwards them to connected devices without examining frames or addresses.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_13",
+      "topicId": null,
+      "text": "Which of the following is a wireless communication technology?",
+      "options": [
+        "Bluetooth",
+        "Ethernet",
+        "USB",
+        "HDMI",
+        "VGA"
+      ],
+      "correctIndex": 0,
+      "explanation": "Bluetooth is a short-range wireless communication technology used to exchange data between compatible devices.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_14",
+      "topicId": null,
+      "text": "Which of the following is an optical storage device?",
+      "options": [
+        "Hard Disk",
+        "Floppy Disk",
+        "CD / DVD",
+        "Pen Drive",
+        "RAM"
+      ],
+      "correctIndex": 2,
+      "explanation": "CDs and DVDs store data using optical technology, where information is read using a laser.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_15",
+      "topicId": null,
+      "text": "Which of the following is a popular search engine?",
+      "options": [
+        "Google",
+        "Facebook",
+        "WhatsApp",
+        "Instagram",
+        "LinkedIn"
+      ],
+      "correctIndex": 0,
+      "explanation": "Google is a widely used search engine that helps users find information and resources on the Internet.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_16",
+      "topicId": null,
+      "text": "Which software is commonly used to create presentations?",
+      "options": [
+        "MS Word",
+        "MS Excel",
+        "MS PowerPoint",
+        "MS Access",
+        "MS Outlook"
+      ],
+      "correctIndex": 2,
+      "explanation": "MS PowerPoint is presentation software designed for creating and displaying slide-based presentations.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_17",
+      "topicId": null,
+      "text": "What protects a computer or network from unauthorized access?",
+      "options": [
+        "Firewall",
+        "Scanner",
+        "Printer",
+        "Monitor",
+        "Keyboard"
+      ],
+      "correctIndex": 0,
+      "explanation": "A firewall is a hardware or software security mechanism that controls network traffic and helps prevent unauthorized access.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_18",
+      "topicId": null,
+      "text": "In MS Word, where is the Spelling and Grammar option found?",
+      "options": [
+        "Home",
+        "Insert",
+        "Review",
+        "View",
+        "Design"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Review tab in MS Word contains tools related to proofreading, including spelling and grammar checking.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_19",
+      "topicId": null,
+      "text": "Which of the following is a non-impact printer?",
+      "options": [
+        "Dot Matrix",
+        "Daisy Wheel",
+        "Inkjet Printer",
+        "Drum Printer",
+        "Line Printer"
+      ],
+      "correctIndex": 2,
+      "explanation": "An inkjet printer is a non-impact printer because it prints without mechanically striking the paper. Dot-matrix and similar printers use impact mechanisms.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_20",
+      "topicId": null,
+      "text": "Third-generation computers mainly used which technology?",
+      "options": [
+        "Vacuum tubes",
+        "Transistors",
+        "Integrated Circuits",
+        "Microprocessors",
+        "VLSI"
+      ],
+      "correctIndex": 2,
+      "explanation": "Third-generation computers mainly used Integrated Circuits (ICs). Vacuum tubes were associated with first-generation computers, while transistors were used in the second generation.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_21",
+      "topicId": null,
+      "text": "Which type of malware can spread without needing a host program?",
+      "options": [
+        "Virus",
+        "Worm",
+        "Trojan",
+        "Spyware",
+        "Adware"
+      ],
+      "correctIndex": 1,
+      "explanation": "A worm is a type of malware that can replicate and spread independently without attaching itself to a host program. A virus, in contrast, normally requires a host file or program to spread.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_22",
+      "topicId": null,
+      "text": "Which Excel formula adds the values from A1 through A10?",
+      "options": [
+        "=SUM(A1:A10)",
+        "=ADD(A1:A10)",
+        "=TOTAL(A1:A10)",
+        "=A1+A10",
+        "=PLUS(A1:A10)"
+      ],
+      "correctIndex": 0,
+      "explanation": "The SUM function is used to add a range of cells. Therefore, =SUM(A1:A10) adds all values from A1 through A10.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_23",
+      "topicId": null,
+      "text": "Which network topology connects every node to exactly two other nodes?",
+      "options": [
+        "Star",
+        "Bus",
+        "Ring",
+        "Mesh",
+        "Tree"
+      ],
+      "correctIndex": 2,
+      "explanation": "In a ring topology, each node is connected to two neighboring nodes, forming a circular arrangement.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_24",
+      "topicId": null,
+      "text": "What is the full form of HTTP?",
+      "options": [
+        "Hyper Text Transfer Protocol",
+        "High Text Transfer Protocol",
+        "Hyper Text Transmission Protocol",
+        "High Text Transmission Protocol",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "HTTP stands for Hyper Text Transfer Protocol. It is a protocol used for transferring web resources between clients and servers.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_25",
+      "topicId": null,
+      "text": "Which of the following is NOT a programming language?",
+      "options": [
+        "C",
+        "C++",
+        "Java",
+        "COBOL",
+        "A+"
+      ],
+      "correctIndex": 4,
+      "explanation": "The source identifies A+ as the option that is not a programming language. C, C++, Java and COBOL are programming languages.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_26",
+      "topicId": null,
+      "text": "Which malware encrypts files and demands money from the victim?",
+      "options": [
+        "Virus",
+        "Worm",
+        "Ransomware",
+        "Spyware",
+        "Adware"
+      ],
+      "correctIndex": 2,
+      "explanation": "Ransomware is malware that can encrypt or otherwise block access to files and demands payment, or ransom, from the victim.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_27",
+      "topicId": null,
+      "text": "Which port was traditionally used to connect printers and scanners?",
+      "options": [
+        "Serial Port",
+        "Parallel Port",
+        "USB Port",
+        "HDMI",
+        "VGA"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Parallel Port was traditionally used for connecting printers and some other peripherals. Modern devices commonly use USB instead.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_28",
+      "topicId": null,
+      "text": "Which device is used for permanent data storage?",
+      "options": [
+        "RAM",
+        "Cache",
+        "Hard Disk",
+        "Registers",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "A hard disk is a non-volatile storage device and can retain data even when the computer is switched off.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_29",
+      "topicId": null,
+      "text": "Which shortcut key is used to paste copied text?",
+      "options": [
+        "Ctrl + X",
+        "Ctrl + C",
+        "Ctrl + V",
+        "Ctrl + Z",
+        "Ctrl + A"
+      ],
+      "correctIndex": 2,
+      "explanation": "Ctrl + V is the standard keyboard shortcut for pasting copied or cut content.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_30",
+      "topicId": null,
+      "text": "Which component is commonly called the brain of the computer?",
+      "options": [
+        "RAM",
+        "Hard Disk",
+        "CPU",
+        "Monitor",
+        "Keyboard"
+      ],
+      "correctIndex": 2,
+      "explanation": "The CPU (Central Processing Unit) performs and controls the execution of instructions, so it is commonly referred to as the brain of the computer.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_31",
+      "topicId": null,
+      "text": "Which of the following is NOT an output device?",
+      "options": [
+        "Monitor",
+        "Printer",
+        "Speaker",
+        "Keyboard",
+        "Projector"
+      ],
+      "correctIndex": 3,
+      "explanation": "A keyboard is an input device because it is used to enter data into a computer. Monitor, printer, speaker and projector provide output.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_32",
+      "topicId": null,
+      "text": "According to the reported question, IFA was related to which term?",
+      "options": [
+        "Internet File Access",
+        "Interactive Financial Analysis / computer term",
+        "Input File Adapter",
+        "Internal File Allocation",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "The source reports the answer as 'Interactive Financial Analysis / computer term'. The PDF does not provide further clarification beyond this wording.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_33",
+      "topicId": null,
+      "text": "What is the name of malware that secretly monitors a user's activities?",
+      "options": [
+        "Virus",
+        "Worm",
+        "Spyware",
+        "Trojan",
+        "Ransomware"
+      ],
+      "correctIndex": 2,
+      "explanation": "Spyware is malware designed to secretly observe or collect information about a user's activities. It may monitor browsing or other user behavior.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_34",
+      "topicId": null,
+      "text": "Which device converts digital signals into analog signals?",
+      "options": [
+        "Router",
+        "Switch",
+        "Modem",
+        "Hub",
+        "Bridge"
+      ],
+      "correctIndex": 2,
+      "explanation": "A modem performs modulation and demodulation. It converts digital signals into a form suitable for transmission over certain communication media and converts received signals back.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_35",
+      "topicId": null,
+      "text": "In ASCII, what character is represented by decimal value 65?",
+      "options": [
+        "a",
+        "A",
+        "0",
+        "Space",
+        "Enter"
+      ],
+      "correctIndex": 1,
+      "explanation": "In the ASCII character set, decimal 65 represents the uppercase letter A.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_36",
+      "topicId": null,
+      "text": "Which of the following is system software?",
+      "options": [
+        "MS Word",
+        "MS Excel",
+        "Operating System",
+        "PowerPoint",
+        "Access"
+      ],
+      "correctIndex": 2,
+      "explanation": "An operating system is system software because it manages computer hardware and provides a platform for applications. Word, Excel and PowerPoint are application software.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_37",
+      "topicId": null,
+      "text": "What is the process of starting a computer called?",
+      "options": [
+        "Booting",
+        "Formatting",
+        "Debugging",
+        "Compiling",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "Booting is the process through which a computer starts and loads the operating system and necessary system components.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_38",
+      "topicId": null,
+      "text": "Which keyboard shortcut switches between currently open applications in Windows?",
+      "options": [
+        "Ctrl + Tab",
+        "Alt + Tab",
+        "Shift + Tab",
+        "Ctrl + Alt",
+        "Windows + Tab"
+      ],
+      "correctIndex": 1,
+      "explanation": "Alt + Tab is used to move between open applications or windows. Ctrl + Tab generally moves between tabs within an application.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478096045_39",
+      "topicId": null,
+      "text": "According to the source, which combination can uniquely identify a computer/device on a network?",
+      "options": [
+        "MAC Address only",
+        "IP Address only",
+        "Both MAC and IP Address",
+        "Port Number",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "The source marks both MAC and IP Address as the answer. A MAC address identifies a network interface, while an IP address identifies a device/interface for network communication.",
+      "difficulty": "medium",
+      "setNo": null,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_0",
+      "topicId": null,
+      "text": "Which type of memory loses its data when the computer is switched off?",
+      "options": [
+        "ROM",
+        "Hard Disk",
+        "RAM",
+        "Flash Drive",
+        "CD-ROM"
+      ],
+      "correctIndex": 2,
+      "explanation": "RAM is volatile memory, meaning its stored data is lost when power is removed.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_1",
+      "topicId": null,
+      "text": "Which of the following is application software?",
+      "options": [
+        "Linux",
+        "Windows",
+        "MS PowerPoint",
+        "UNIX",
+        "DOS"
+      ],
+      "correctIndex": 2,
+      "explanation": "MS PowerPoint is application software used to create presentations. Linux, Windows, UNIX and DOS are operating systems.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_2",
+      "topicId": null,
+      "text": "Which protocol is mainly used for sending emails?",
+      "options": [
+        "HTTP",
+        "FTP",
+        "SMTP",
+        "TCP",
+        "IP"
+      ],
+      "correctIndex": 2,
+      "explanation": "SMTP stands for Simple Mail Transfer Protocol. It is the protocol primarily associated with sending email messages.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_3",
+      "topicId": null,
+      "text": "What is a set of rules governing data communication called?",
+      "options": [
+        "Protocol",
+        "Virus",
+        "Firewall",
+        "Antivirus",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "A protocol is a set of rules and conventions that determines how data is communicated between devices.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_4",
+      "topicId": null,
+      "text": "What is the full form of URL?",
+      "options": [
+        "Uniform Resource Locator",
+        "Universal Resource Locator",
+        "Uniform Resource Link",
+        "Universal Resource Link",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "URL stands for Uniform Resource Locator. It specifies the location or address of a resource on a network such as the Internet.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_5",
+      "topicId": null,
+      "text": "Which device is used for permanent storage of large amounts of data?",
+      "options": [
+        "RAM",
+        "Cache",
+        "Hard Disk",
+        "Registers",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "A hard disk provides persistent storage and can store large amounts of data even when the computer is powered off.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_6",
+      "topicId": null,
+      "text": "What is the full form of ALU?",
+      "options": [
+        "Arithmetic Logic Unit",
+        "Application Logic Unit",
+        "Array Logic Unit",
+        "Arithmetic Local Unit",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "ALU stands for Arithmetic Logic Unit. It performs arithmetic operations and logical operations within the CPU.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_7",
+      "topicId": null,
+      "text": "Which device is commonly used to connect multiple computers in a LAN?",
+      "options": [
+        "Router",
+        "Switch",
+        "Modem",
+        "Repeater",
+        "All of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "A network switch connects multiple devices within a LAN and forwards data to the appropriate connected device.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_8",
+      "topicId": null,
+      "text": "Processor speed is commonly measured in which unit?",
+      "options": [
+        "Mbps",
+        "GHz",
+        "GB",
+        "Pixel",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "Processor clock speed is commonly expressed in hertz, often gigahertz (GHz) for modern processors.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_9",
+      "topicId": null,
+      "text": "Which of the following is secondary storage?",
+      "options": [
+        "RAM",
+        "Cache",
+        "Hard Disk",
+        "Registers",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "Secondary storage provides non-volatile storage for data. A hard disk is a common example, whereas RAM, cache and registers are part of primary/internal memory systems.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_10",
+      "topicId": null,
+      "text": "Which web-based email service was founded in 1996?",
+      "options": [
+        "Gmail",
+        "Yahoo Mail",
+        "Hotmail",
+        "Outlook",
+        "Rediffmail"
+      ],
+      "correctIndex": 2,
+      "explanation": "Hotmail was founded in 1996 and became one of the early widely used web-based email services.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_11",
+      "topicId": null,
+      "text": "What does a red wavy underline below a word in MS Word indicate?",
+      "options": [
+        "Grammar error",
+        "Spelling error",
+        "Formatting error",
+        "Style error",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "A red wavy underline indicates that Word has identified a possible spelling error in the word.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_12",
+      "topicId": null,
+      "text": "At which OSI layer does a Hub operate?",
+      "options": [
+        "Data Link",
+        "Network",
+        "Physical",
+        "Transport",
+        "Application"
+      ],
+      "correctIndex": 2,
+      "explanation": "A Hub works at the Physical layer (Layer 1) of the OSI model. It simply receives signals and forwards them to connected devices without examining frames or addresses.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_13",
+      "topicId": null,
+      "text": "Which of the following is a wireless communication technology?",
+      "options": [
+        "Bluetooth",
+        "Ethernet",
+        "USB",
+        "HDMI",
+        "VGA"
+      ],
+      "correctIndex": 0,
+      "explanation": "Bluetooth is a short-range wireless communication technology used to exchange data between compatible devices.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_14",
+      "topicId": null,
+      "text": "Which of the following is an optical storage device?",
+      "options": [
+        "Hard Disk",
+        "Floppy Disk",
+        "CD / DVD",
+        "Pen Drive",
+        "RAM"
+      ],
+      "correctIndex": 2,
+      "explanation": "CDs and DVDs store data using optical technology, where information is read using a laser.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_15",
+      "topicId": null,
+      "text": "Which of the following is a popular search engine?",
+      "options": [
+        "Google",
+        "Facebook",
+        "WhatsApp",
+        "Instagram",
+        "LinkedIn"
+      ],
+      "correctIndex": 0,
+      "explanation": "Google is a widely used search engine that helps users find information and resources on the Internet.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_16",
+      "topicId": null,
+      "text": "Which software is commonly used to create presentations?",
+      "options": [
+        "MS Word",
+        "MS Excel",
+        "MS PowerPoint",
+        "MS Access",
+        "MS Outlook"
+      ],
+      "correctIndex": 2,
+      "explanation": "MS PowerPoint is presentation software designed for creating and displaying slide-based presentations.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_17",
+      "topicId": null,
+      "text": "What protects a computer or network from unauthorized access?",
+      "options": [
+        "Firewall",
+        "Scanner",
+        "Printer",
+        "Monitor",
+        "Keyboard"
+      ],
+      "correctIndex": 0,
+      "explanation": "A firewall is a hardware or software security mechanism that controls network traffic and helps prevent unauthorized access.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_18",
+      "topicId": null,
+      "text": "In MS Word, where is the Spelling and Grammar option found?",
+      "options": [
+        "Home",
+        "Insert",
+        "Review",
+        "View",
+        "Design"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Review tab in MS Word contains tools related to proofreading, including spelling and grammar checking.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_19",
+      "topicId": null,
+      "text": "Which of the following is a non-impact printer?",
+      "options": [
+        "Dot Matrix",
+        "Daisy Wheel",
+        "Inkjet Printer",
+        "Drum Printer",
+        "Line Printer"
+      ],
+      "correctIndex": 2,
+      "explanation": "An inkjet printer is a non-impact printer because it prints without mechanically striking the paper. Dot-matrix and similar printers use impact mechanisms.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_20",
+      "topicId": null,
+      "text": "Third-generation computers mainly used which technology?",
+      "options": [
+        "Vacuum tubes",
+        "Transistors",
+        "Integrated Circuits",
+        "Microprocessors",
+        "VLSI"
+      ],
+      "correctIndex": 2,
+      "explanation": "Third-generation computers mainly used Integrated Circuits (ICs). Vacuum tubes were associated with first-generation computers, while transistors were used in the second generation.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_21",
+      "topicId": null,
+      "text": "Which type of malware can spread without needing a host program?",
+      "options": [
+        "Virus",
+        "Worm",
+        "Trojan",
+        "Spyware",
+        "Adware"
+      ],
+      "correctIndex": 1,
+      "explanation": "A worm is a type of malware that can replicate and spread independently without attaching itself to a host program. A virus, in contrast, normally requires a host file or program to spread.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_22",
+      "topicId": null,
+      "text": "Which Excel formula adds the values from A1 through A10?",
+      "options": [
+        "=SUM(A1:A10)",
+        "=ADD(A1:A10)",
+        "=TOTAL(A1:A10)",
+        "=A1+A10",
+        "=PLUS(A1:A10)"
+      ],
+      "correctIndex": 0,
+      "explanation": "The SUM function is used to add a range of cells. Therefore, =SUM(A1:A10) adds all values from A1 through A10.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_23",
+      "topicId": null,
+      "text": "Which network topology connects every node to exactly two other nodes?",
+      "options": [
+        "Star",
+        "Bus",
+        "Ring",
+        "Mesh",
+        "Tree"
+      ],
+      "correctIndex": 2,
+      "explanation": "In a ring topology, each node is connected to two neighboring nodes, forming a circular arrangement.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_24",
+      "topicId": null,
+      "text": "What is the full form of HTTP?",
+      "options": [
+        "Hyper Text Transfer Protocol",
+        "High Text Transfer Protocol",
+        "Hyper Text Transmission Protocol",
+        "High Text Transmission Protocol",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "HTTP stands for Hyper Text Transfer Protocol. It is a protocol used for transferring web resources between clients and servers.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_25",
+      "topicId": null,
+      "text": "Which of the following is NOT a programming language?",
+      "options": [
+        "C",
+        "C++",
+        "Java",
+        "COBOL",
+        "A+"
+      ],
+      "correctIndex": 4,
+      "explanation": "The source identifies A+ as the option that is not a programming language. C, C++, Java and COBOL are programming languages.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_26",
+      "topicId": null,
+      "text": "Which malware encrypts files and demands money from the victim?",
+      "options": [
+        "Virus",
+        "Worm",
+        "Ransomware",
+        "Spyware",
+        "Adware"
+      ],
+      "correctIndex": 2,
+      "explanation": "Ransomware is malware that can encrypt or otherwise block access to files and demands payment, or ransom, from the victim.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_27",
+      "topicId": null,
+      "text": "Which port was traditionally used to connect printers and scanners?",
+      "options": [
+        "Serial Port",
+        "Parallel Port",
+        "USB Port",
+        "HDMI",
+        "VGA"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Parallel Port was traditionally used for connecting printers and some other peripherals. Modern devices commonly use USB instead.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_28",
+      "topicId": null,
+      "text": "Which device is used for permanent data storage?",
+      "options": [
+        "RAM",
+        "Cache",
+        "Hard Disk",
+        "Registers",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "A hard disk is a non-volatile storage device and can retain data even when the computer is switched off.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_29",
+      "topicId": null,
+      "text": "Which shortcut key is used to paste copied text?",
+      "options": [
+        "Ctrl + X",
+        "Ctrl + C",
+        "Ctrl + V",
+        "Ctrl + Z",
+        "Ctrl + A"
+      ],
+      "correctIndex": 2,
+      "explanation": "Ctrl + V is the standard keyboard shortcut for pasting copied or cut content.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_30",
+      "topicId": null,
+      "text": "Which component is commonly called the brain of the computer?",
+      "options": [
+        "RAM",
+        "Hard Disk",
+        "CPU",
+        "Monitor",
+        "Keyboard"
+      ],
+      "correctIndex": 2,
+      "explanation": "The CPU (Central Processing Unit) performs and controls the execution of instructions, so it is commonly referred to as the brain of the computer.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_31",
+      "topicId": null,
+      "text": "Which of the following is NOT an output device?",
+      "options": [
+        "Monitor",
+        "Printer",
+        "Speaker",
+        "Keyboard",
+        "Projector"
+      ],
+      "correctIndex": 3,
+      "explanation": "A keyboard is an input device because it is used to enter data into a computer. Monitor, printer, speaker and projector provide output.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_32",
+      "topicId": null,
+      "text": "According to the reported question, IFA was related to which term?",
+      "options": [
+        "Internet File Access",
+        "Interactive Financial Analysis / computer term",
+        "Input File Adapter",
+        "Internal File Allocation",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "The source reports the answer as 'Interactive Financial Analysis / computer term'. The PDF does not provide further clarification beyond this wording.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_33",
+      "topicId": null,
+      "text": "What is the name of malware that secretly monitors a user's activities?",
+      "options": [
+        "Virus",
+        "Worm",
+        "Spyware",
+        "Trojan",
+        "Ransomware"
+      ],
+      "correctIndex": 2,
+      "explanation": "Spyware is malware designed to secretly observe or collect information about a user's activities. It may monitor browsing or other user behavior.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_34",
+      "topicId": null,
+      "text": "Which device converts digital signals into analog signals?",
+      "options": [
+        "Router",
+        "Switch",
+        "Modem",
+        "Hub",
+        "Bridge"
+      ],
+      "correctIndex": 2,
+      "explanation": "A modem performs modulation and demodulation. It converts digital signals into a form suitable for transmission over certain communication media and converts received signals back.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_35",
+      "topicId": null,
+      "text": "In ASCII, what character is represented by decimal value 65?",
+      "options": [
+        "a",
+        "A",
+        "0",
+        "Space",
+        "Enter"
+      ],
+      "correctIndex": 1,
+      "explanation": "In the ASCII character set, decimal 65 represents the uppercase letter A.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_36",
+      "topicId": null,
+      "text": "Which of the following is system software?",
+      "options": [
+        "MS Word",
+        "MS Excel",
+        "Operating System",
+        "PowerPoint",
+        "Access"
+      ],
+      "correctIndex": 2,
+      "explanation": "An operating system is system software because it manages computer hardware and provides a platform for applications. Word, Excel and PowerPoint are application software.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_37",
+      "topicId": null,
+      "text": "What is the process of starting a computer called?",
+      "options": [
+        "Booting",
+        "Formatting",
+        "Debugging",
+        "Compiling",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "Booting is the process through which a computer starts and loads the operating system and necessary system components.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_38",
+      "topicId": null,
+      "text": "Which keyboard shortcut switches between currently open applications in Windows?",
+      "options": [
+        "Ctrl + Tab",
+        "Alt + Tab",
+        "Shift + Tab",
+        "Ctrl + Alt",
+        "Windows + Tab"
+      ],
+      "correctIndex": 1,
+      "explanation": "Alt + Tab is used to move between open applications or windows. Ctrl + Tab generally moves between tabs within an application.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478272425_39",
+      "topicId": null,
+      "text": "According to the source, which combination can uniquely identify a computer/device on a network?",
+      "options": [
+        "MAC Address only",
+        "IP Address only",
+        "Both MAC and IP Address",
+        "Port Number",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "The source marks both MAC and IP Address as the answer. A MAC address identifies a network interface, while an IP address identifies a device/interface for network communication.",
+      "difficulty": "medium",
+      "setNo": 2,
+      "active": true,
+      "productIds": []
     }
   ],
   "quizSets": [
@@ -5254,6 +6699,17 @@
       "id": "qs_1791450928114_1",
       "setNo": 1,
       "title": "RRB PO 2021 Memory Based Questions",
+      "timeLimitMin": 15,
+      "negMarkEnabled": true,
+      "negMarkValue": 0.125,
+      "marksPerQuestion": 0.5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qs_1791478012260",
+      "setNo": 2,
+      "title": "RRB PO 2022 Memory Based Questions",
       "timeLimitMin": 15,
       "negMarkEnabled": true,
       "negMarkValue": 0.125,
