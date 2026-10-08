@@ -6008,12 +6008,8 @@ function renderQuizList(){
     const cta=locked
       ? '<button onclick="event.stopPropagation();showUnlockOptions('+jsArrayAttr(unlockIds)+')" style="font-size:.7rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:5px 12px;border-radius:999px;white-space:nowrap;cursor:pointer;font-family:var(--font);display:inline-flex;align-items:center;gap:4px">'+QZ_ICON_LOCK+(expiredV?"Renew":"Unlock")+'</button>'
       : '';
-    const chips='<span class="chip">'+qCount+' question'+(qCount===1?'':'s')+'</span>'
-      +(s.timeLimitMin?'<span class="chip">'+s.timeLimitMin+' min</span>':'<span class="chip">No timer</span>')
-      +((Number(s.marksPerQuestion)>0&&Number(s.marksPerQuestion)!==1)?'<span class="chip">+'+s.marksPerQuestion+'/correct</span>':'')
-      +(s.negMarkEnabled?'<span class="chip" style="color:var(--red)">-'+s.negMarkValue+'/wrong</span>':'')
-      +(last?'<span class="chip">Last: '+last.res.score+'/'+last.res.max+'</span>':'')
-      +(draftInfo?'<span class="chip" style="color:var(--accent)">In progress \u00b7 '+draftInfo.answered+' answered</span>':'')
+    // Only status chips stay on the card. Quiz details (questions, time, marks) now live in the instructions table.
+    const chips=(draftInfo?'<span class="chip" style="color:var(--accent)">In progress \u00b7 '+draftInfo.answered+' answered</span>':'')
       +(expiredV?'<span class="chip" style="color:var(--red)">Validity ended '+fmtValidDate(expiredV.until)+'</span>':'');
     return '<div class="q-item" style="cursor:default">'
       +(locked?'<div style="position:absolute;top:12px;right:12px;color:var(--accent)">'+QZ_ICON_LOCK.replace('width="10" height="10"','width="13" height="13"')+'</div>':'')
@@ -6211,32 +6207,39 @@ function showQuizInstructions(s,qs){
     _pendingQuizDraft=null;
     resumeBlock.style.display="none";
   }
-  const durationLine=s.timeLimitMin
-    ? "1. Total duration of this quiz is <strong>"+s.timeLimitMin+" minutes</strong>."
-    : "1. This quiz has <strong>no time limit</strong> — take as long as you need.";
-  const autoSubmitLine=s.timeLimitMin
-    ? "2. A countdown timer is shown on the right. When it reaches zero, the quiz will <strong>auto-submit itself</strong> — you will not need to submit manually."
-    : "";
   const mpqI=(Number(s.marksPerQuestion)>0?Number(s.marksPerQuestion):1);
-  const marksLine="3. This quiz has <strong>"+qs.length+" question(s)</strong>, each carrying <strong>+"+mpqI+" mark"+(mpqI===1?"":"s")+"</strong> for a correct answer."
-    +(s.negMarkEnabled?" <strong style='color:var(--red)'>Negative marking is ON</strong> — "+s.negMarkValue+" mark will be deducted for every wrong answer. Unanswered questions are not penalized.":" There is no negative marking on this quiz.");
-  document.getElementById("qzi-body").innerHTML=
-    '<div style="margin-bottom:10px">'+durationLine+'</div>'
-    +(autoSubmitLine?'<div style="margin-bottom:10px">'+autoSubmitLine+'</div>':'')
-    +'<div style="margin-bottom:16px">'+marksLine+'</div>'
-    +'<div style="margin-bottom:8px">4. The Question Palette on the right shows the status of each question using these symbols:</div>'
+  const fmt=function(x){return String(Number((+x).toFixed(3)));};
+  const cellL='border:1px solid var(--b);padding:10px 14px;background:var(--bg3);color:var(--t);width:48%';
+  const cellR='border:1px solid var(--b);padding:10px 14px;color:var(--t)';
+  const row=function(k,v){return '<tr><td style="'+cellL+'"><strong>'+k+'</strong></td><td style="'+cellR+'"><strong>'+v+'</strong></td></tr>';};
+  const detailsTable='<div style="font-weight:700;color:var(--t);margin-bottom:8px">Quiz Details</div>'
+    +'<table style="width:100%;max-width:560px;border-collapse:collapse;margin-bottom:22px;font-size:.88rem"><tbody>'
+    +row('Total Questions',qs.length)
+    +row('Duration',s.timeLimitMin?s.timeLimitMin+' minutes':'No time limit')
+    +row('Marks for each correct answer','+'+fmt(mpqI))
+    +row('Negative marking',s.negMarkEnabled?'<span style="color:var(--red)">\u2212'+fmt(s.negMarkValue)+' for each wrong answer</span>':'None')
+    +row('Total Marks',fmt(qs.length*mpqI))
+    +'</tbody></table>';
+  let n=0;
+  const rule=function(t){n++;return '<div style="margin-bottom:10px">'+n+'. '+t+'</div>';};
+  const rules=(s.timeLimitMin?rule('A countdown timer is shown at the top. When it reaches zero, the quiz will <strong>auto-submit itself</strong> — you will not need to submit manually.'):'')
+    +(s.negMarkEnabled?rule('Marks are deducted only for wrong answers. <strong>Unanswered questions are not penalized.</strong>'):'');
+  n++;
+  const legend='<div style="margin:6px 0 8px">'+n+'. The Question Palette on the right shows the status of each question using these symbols:</div>'
     +'<div class="qzi-legend-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;max-width:560px">'
     +'<div style="display:flex;align-items:center;gap:10px"><button class="es-qbtn es-notvisited" style="pointer-events:none">1</button> You have not visited the question yet.</div>'
     +'<div style="display:flex;align-items:center;gap:10px"><button class="es-qbtn es-marked" style="pointer-events:none">1</button> Not answered, but marked for review.</div>'
     +'<div style="display:flex;align-items:center;gap:10px"><button class="es-qbtn es-notdone" style="pointer-events:none">1</button> You have not answered the question.</div>'
     +'<div style="display:flex;align-items:center;gap:10px"><button class="es-qbtn es-marked es-marked-done" style="pointer-events:none">1</button> Answered and marked for review.</div>'
     +'<div style="display:flex;align-items:center;gap:10px"><button class="es-qbtn es-done" style="pointer-events:none">1</button> You have answered the question.</div>'
-    +'</div>'
-    +'<div style="margin-bottom:8px">5. Procedure for answering a question:</div>'
+    +'</div>';
+  n++;
+  const procedure='<div style="margin-bottom:8px">'+n+'. Procedure for answering a question:</div>'
     +'<div style="padding-left:18px;margin-bottom:6px">a. Click an option to select your answer.</div>'
     +'<div style="padding-left:18px;margin-bottom:6px">b. Click <strong>Clear Response</strong> to remove your selection for that question.</div>'
     +'<div style="padding-left:18px;margin-bottom:6px">c. Click a different option any time to change your answer.</div>'
     +'<div style="padding-left:18px;margin-bottom:6px">d. You must click <strong>Save &amp; Next</strong> (or <strong>Mark for Review &amp; Next</strong>) to save your answer before moving on.</div>';
+  document.getElementById("qzi-body").innerHTML=detailsTable+rules+legend+procedure;
 }
 function showQuizInstrPage1(){
   document.getElementById("qzi-page1").style.display="block";
@@ -6719,7 +6722,7 @@ const initPromise=init();
       </div>
     </div>
 
-    <!-- PAGE 1 of 2 — brief disclaimer + declaration -->
+    <!-- PAGE 1 of 2 — quiz details table + instructions -->
     <div class="panel" id="qzi-page1" style="width:100%;margin:0;overflow:visible">
       <div class="ph"><span>Instructions</span></div>
       <div class="pb" style="padding:26px 28px">
@@ -6728,26 +6731,26 @@ const initPromise=init();
           <div id="qzi-resume-note" style="font-size:.76rem;color:var(--t2);margin-bottom:10px"></div>
           <button class="btn bp" style="padding:6px 14px;font-size:.76rem" onclick="confirmQuizResume()">Resume Where You Left Off</button>
         </div>
-        <div style="font-size:.85rem;color:var(--t2);margin-bottom:36px">This is a practice quiz. The questions shown are for practice purposes only.</div>
-        <label style="display:flex;align-items:flex-start;gap:10px;font-size:.82rem;color:var(--t);cursor:pointer;line-height:1.7">
-          <input type="checkbox" id="qzi-declaration" onchange="document.getElementById('qzi-next-btn').disabled=!this.checked" style="margin-top:3px"/>
-          I have read and understood the instructions. I agree to follow the rules of this quiz, including its time limit and marking scheme where applicable.
-        </label>
+        <div style="font-size:.85rem;color:var(--t2);margin-bottom:18px">This is a practice quiz. The questions shown are for practice purposes only.</div>
+        <div id="qzi-body" style="font-size:.85rem;line-height:1.9;color:var(--t2)"></div>
         <div style="display:flex;gap:10px;margin-top:28px;flex-wrap:wrap">
           <button class="btn bg" onclick="showS('quizlist');renderQuizList()">Cancel</button>
-          <button class="btn bp" id="qzi-next-btn" disabled onclick="showQuizInstrPage2()">I'm Ready to Begin <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+          <button class="btn bp" onclick="showQuizInstrPage2()">Next <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
         </div>
       </div>
     </div>
 
-    <!-- PAGE 2 of 2 — detailed rules, palette legend, answering procedure -->
+    <!-- PAGE 2 of 2 — declaration, then Agree & Continue -->
     <div class="panel" id="qzi-page2" style="width:100%;margin:0;overflow:visible;display:none">
-      <div class="ph"><span>Instructions</span></div>
+      <div class="ph"><span>Declaration</span></div>
       <div class="pb" style="padding:26px 28px">
-        <div id="qzi-body" style="font-size:.85rem;line-height:1.9;color:var(--t2)"></div>
+        <label style="display:flex;align-items:flex-start;gap:10px;font-size:.85rem;color:var(--t);cursor:pointer;line-height:1.7">
+          <input type="checkbox" id="qzi-declaration" onchange="document.getElementById('qzi-next-btn').disabled=!this.checked" style="margin-top:4px"/>
+          I have read and understood the instructions. I agree to follow the rules of this quiz, including its time limit and marking scheme where applicable.
+        </label>
         <div style="display:flex;gap:10px;margin-top:28px;flex-wrap:wrap">
           <button class="btn bg" onclick="showQuizInstrPage1()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Previous</button>
-          <button class="btn bp" onclick="confirmQuizInstr()">Start Quiz <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+          <button class="btn bp" id="qzi-next-btn" disabled onclick="confirmQuizInstr()">Agree &amp; Continue <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
         </div>
       </div>
     </div>
