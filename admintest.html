@@ -2739,6 +2739,8 @@ function populateQuizTopicSelects(){
     const nos=Array.from(new Set(d.quizSets.map(function(x){return x.setNo;}).concat(d.quizQuestions.map(function(q){return q.setNo;}).filter(function(n){return n!=null;})))).sort(function(a,b){return a-b;});
     el.innerHTML='<option value="">Not in any set</option>'+nos.map(function(n){const st=d.quizSets.find(function(x){return x.setNo===n;});return '<option value="'+n+'">Set '+n+(st&&st.title?' — '+esc(st.title):'')+'</option>';}).join('')+'<option value="__new">+ Create a new set</option>';
     el.value=cur;
+    qzEnsureNewBox(id==='qz-bulk-setno'?'bulk':'q',id);
+    qzNewBox(id==='qz-bulk-setno'?'bulk':'q');
   });
   const opts='<option value="">— No topic —</option>'+d.quizTopics.map(function(tp){return '<option value="'+tp.id+'">'+esc(tp.name)+'</option>';}).join('');
   ['qz-bulk-topic','qz-q-topic'].forEach(function(id){
@@ -2831,7 +2833,8 @@ function toggleQuizPreviewItem(i){
 function importQuizPreview(){
   const toImport=_quizParsedPreview.filter(function(q){return q._include;});
   if(!toImport.length){t('Nothing checked to import','err');return;}
-  const setNo=qzResolveSet(document.getElementById('qz-bulk-setno').value);
+  const setNo=qzResolveSet(document.getElementById('qz-bulk-setno').value,'bulk');
+  if(setNo===false)return;
   const d=qzD();
   const topicId=document.getElementById('qz-bulk-topic').value||null;
   const difficulty=document.getElementById('qz-bulk-difficulty').value||'medium';
@@ -2875,7 +2878,8 @@ function saveQuizQuestion(){
   const difficulty=document.getElementById('qz-q-difficulty').value;
   const active=document.getElementById('qz-q-active').checked;
   if(!text||options.some(function(o){return !o;})){t('Fill in the question and all 5 options','err');return;}
-  const setNo=qzResolveSet(document.getElementById('qz-q-setno').value);
+  const setNo=qzResolveSet(document.getElementById('qz-q-setno').value,'q');
+  if(setNo===false)return;
   const d=qzD();
   if(_quizEditingQId){
     const q=d.quizQuestions.find(function(x){return x.id===_quizEditingQId;});
@@ -2992,20 +2996,62 @@ function loadQuizSetProductChecklist(){
     return '<label style="display:flex;align-items:center;gap:6px;font-size:.76rem;background:var(--bg3);border:1px solid var(--b);border-radius:var(--rs);padding:5px 10px;cursor:pointer"><input type="checkbox" class="qzs-prod-cb" value="'+p.id+'" style="margin:0"/>'+esc(p.name||p.id)+'</label>';
   }).join('');
 }
-function qzResolveSet(val){
+function qzNewBox(prefix){
+  const sel=document.getElementById(prefix==='bulk'?'qz-bulk-setno':'qz-q-setno'),box=document.getElementById('qzn-'+prefix);
+  if(!sel||!box)return;
+  const on=sel.value==='__new';
+  box.style.display=on?'block':'none';
+  if(on){
+    const prods=document.getElementById('qzn-'+prefix+'-prods');
+    prods.innerHTML=(_pcProducts&&_pcProducts.length)?_pcProducts.map(function(p){return '<label style="display:inline-flex;align-items:center;gap:6px;font-size:.76rem;background:var(--bg3);border:1px solid var(--b);border-radius:var(--rs);padding:5px 10px;margin:0 6px 6px 0;cursor:pointer"><input type="checkbox" class="qzn-cb-'+prefix+'" value="'+esc(p.id)+'"/> '+esc(p.name||p.id)+'</label>';}).join(''):'<span style="font-size:.72rem;color:var(--t2)">No packages yet — add one under Paid Mocks → Products &amp; Pricing first.</span>';
+  }
+}
+function qzNewAccess(prefix){
+  document.getElementById('qzn-'+prefix+'-prods').style.display=document.getElementById('qzn-'+prefix+'-access').value==='paid'?'block':'none';
+}
+function qzEnsureNewBox(prefix,selId){
+  if(document.getElementById('qzn-'+prefix))return;
+  const sel=document.getElementById(selId);if(!sel)return;
+  const f='style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"',l='style="font-size:.7rem;color:var(--t2);display:block;margin:8px 0 4px"';
+  sel.insertAdjacentHTML('afterend','<div id="qzn-'+prefix+'" style="display:none;margin-top:10px;padding:12px;border:1px solid var(--aborder);border-radius:var(--rs);background:var(--adim)"><div style="font-size:.76rem;font-weight:700">New quiz set</div>'
+    +'<label '+l+'>Title (optional)</label><input id="qzn-'+prefix+'-title" placeholder="e.g. Computer Awareness — Set 3" '+f+'/>'
+    +'<label '+l+'>Is this quiz paid?</label><select id="qzn-'+prefix+'-access" onchange="qzNewAccess(\''+prefix+'\')" '+f+'><option value="free">No — free for everyone</option><option value="paid">Yes — only buyers of a package</option></select>'
+    +'<div id="qzn-'+prefix+'-prods" style="display:none;margin-top:8px"></div></div>');
+  sel.onchange=function(){qzNewBox(prefix);};
+}
+function qzResolveSet(val,prefix){
   if(!val)return null;
   const d=qzD();
   let n;
   if(val==='__new'){n=Math.max.apply(null,[0].concat(d.quizSets.map(function(x){return x.setNo||0;}),d.quizQuestions.map(function(q){return q.setNo||0;})))+1;}
   else n=parseInt(val);
   if(!d.quizSets.some(function(x){return x.setNo===n;})){
-    d.quizSets.push({id:'qs_'+Date.now()+'_'+n,setNo:n,title:'Quiz Set '+n,timeLimitMin:null,negMarkEnabled:false,negMarkValue:0,marksPerQuestion:1,active:true,productIds:[]});
+    let title='Quiz Set '+n,productIds=[];
+    if(val==='__new'&&prefix&&document.getElementById('qzn-'+prefix)){
+      title=(document.getElementById('qzn-'+prefix+'-title').value||'').trim()||title;
+      if(document.getElementById('qzn-'+prefix+'-access').value==='paid'){
+        productIds=Array.from(document.querySelectorAll('.qzn-cb-'+prefix+':checked')).map(function(cb){return cb.value;});
+        if(!productIds.length){t('This quiz is paid — tick at least one package, or choose "No — free for everyone"','err');return false;}
+      }
+    }
+    d.quizSets.push({id:'qs_'+Date.now()+'_'+n,setNo:n,title:title,timeLimitMin:null,negMarkEnabled:false,negMarkValue:0,marksPerQuestion:1,active:true,productIds:productIds});
     SD(d);
-    t('Set '+n+' created and shown to students. Edit its title, timer and marks in Quiz Sets.','ok');
+    t('Set '+n+' created ('+(productIds.length?'paid':'free')+') and shown to students. Add its timer and marks in Quiz Sets.','ok');
+    populateQuizTopicSelects();
+    if(prefix){const sel=document.getElementById(prefix==='bulk'?'qz-bulk-setno':'qz-q-setno');if(sel){sel.value=String(n);qzNewBox(prefix);}}
   }
   return n;
 }
-function qzCreateSet(n){qzResolveSet(String(n));renderQuizSetsList();populateQuizTopicSelects();qzTab(_qzTab,_qzAdd);}
+function qzCreateSet(n){
+  // Open the set form pre-filled so you choose Free / Paid before the set is created
+  qzTab('sets');
+  resetQuizSetForm();
+  document.getElementById('qzs-setno').value=n;
+  document.getElementById('qzs-title').value='Quiz Set '+n;
+  const f=document.getElementById('qzs-access');
+  f.scrollIntoView({behavior:'smooth',block:'center'});
+  t('Choose Free or Paid below, then click Save Set','ok');
+}
 function toggleQuizSetActive(id,on){
   const d=qzD();const st=d.quizSets.find(function(x){return x.id===id;});
   if(!st)return;
@@ -3034,7 +3080,7 @@ function renderQuizSetsList(){
       +(n===0?'<div style="font-size:.7rem;color:#d97706;margin-top:3px">No questions yet — students will see an empty quiz.</div>':'')+'</div>'
       +'<label class="qz-tgl"><span>'+(on?'Shown':'Hidden')+'</span><input type="checkbox" '+(on?'checked':'')+' onchange="toggleQuizSetActive(\''+st.id+'\',this.checked)"><span class="qz-tg"></span></label>'
       +'</div>'
-      +'<div style="display:flex;gap:6px;margin-top:11px;flex-wrap:wrap"><button class="btn bp sm" onclick="qzAddToSet('+st.setNo+')">+ Add questions</button><button class="btn bo sm" onclick="editQuizSet(\''+st.id+'\')">Edit</button><button class="btn bd sm" onclick="deleteQuizSet(\''+st.id+'\')">Delete</button></div>'
+      +'<div style="display:flex;gap:6px;margin-top:11px;flex-wrap:wrap"><button class="btn bp sm" onclick="qzAddToSet('+st.setNo+')">+ Add questions</button><button class="btn bo sm" onclick="editQuizSet(\''+st.id+'\')">Edit</button><button class="btn bd sm" onclick="deleteQuizSet(\''+st.id+'\')">Delete set + questions</button></div>'
       +'</div>';
   }).join('');
   el.innerHTML=h;
@@ -3104,13 +3150,18 @@ function resetQuizSetForm(){
   document.getElementById('qzs-cancel').style.display='none';
 }
 function deleteQuizSet(id){
-  if(!confirm('Delete this Quiz Set? Its questions stay in the bank but become unassigned from any set.'))return;
   const d=qzD();
-  const s=d.quizSets.find(function(x){return x.id===id;});
-  if(s)d.quizQuestions.forEach(function(q){if(q.setNo===s.setNo)q.setNo=null;});
+  const st=d.quizSets.find(function(x){return x.id===id;});
+  if(!st)return;
+  const n=d.quizQuestions.filter(function(q){return q.setNo===st.setNo;}).length;
+  if(!confirm('Delete Set '+st.setNo+' ("'+(st.title||'')+'") and ALL '+n+' of its question'+(n===1?'':'s')+'?\n\nThis removes the whole set in one go and cannot be undone.'))return;
+  d.quizQuestions=d.quizQuestions.filter(function(q){return q.setNo!==st.setNo;});
   d.quizSets=d.quizSets.filter(function(x){return x.id!==id;});
   SD(d);
   renderQuizAdmin();
+  populateQuizTopicSelects();
+  qzTab(_qzTab,_qzAdd);
+  t('Set '+st.setNo+' and its '+n+' question'+(n===1?'':'s')+' deleted — click Publish to update the site','ok');
 }
 
 function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
