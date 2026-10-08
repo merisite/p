@@ -4517,16 +4517,7 @@
       "active": true
     }
   ],
-  "quizTopics": [
-    {
-      "id": "qt_1791226413173",
-      "name": "RRB PO PYQ Quiz"
-    },
-    {
-      "id": "qt_1791364637685",
-      "name": "Computer Introduction"
-    }
-  ],
+  "quizTopics": [],
   "quizQuestions": [
     {
       "id": "qq_1791450928138_0",
@@ -6710,6 +6701,39 @@
       "id": "qs_1791478012260",
       "setNo": 2,
       "title": "RRB PO 2022 Memory Based Questions",
+      "timeLimitMin": 15,
+      "negMarkEnabled": true,
+      "negMarkValue": 0.125,
+      "marksPerQuestion": 0.5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qs_1791479599006",
+      "setNo": 3,
+      "title": "RRB PO 2023 Memory Based Questions",
+      "timeLimitMin": 15,
+      "negMarkEnabled": true,
+      "negMarkValue": 0.125,
+      "marksPerQuestion": 0.5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qs_1791479637369",
+      "setNo": 4,
+      "title": "RRB PO 2024 Memory Based Questions",
+      "timeLimitMin": 15,
+      "negMarkEnabled": true,
+      "negMarkValue": 0.125,
+      "marksPerQuestion": 0.5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qs_1791479668763",
+      "setNo": 5,
+      "title": "RRB PO 2025 Memory Based Questions",
       "timeLimitMin": 15,
       "negMarkEnabled": true,
       "negMarkValue": 0.125,
