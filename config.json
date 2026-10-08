@@ -8123,6 +8123,726 @@
       "setNo": 4,
       "active": true,
       "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_0",
+      "topicId": null,
+      "text": "computer virus is type of:",
+      "options": [
+        "Hardware",
+        "Malware that can replicate itself",
+        "OS",
+        "Utility software",
+        "None"
+      ],
+      "correctIndex": 1,
+      "explanation": "A computer virus is malicious software that can replicate by attaching itself to files or programs and can spread when the infected item is executed or shared.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_1",
+      "topicId": null,
+      "text": "high-level programming language:",
+      "options": [
+        "Machine",
+        "Assembly",
+        "Python / Java / C++",
+        "Binary",
+        "None"
+      ],
+      "correctIndex": 2,
+      "explanation": "Python, Java and C++ are high-level programming languages. They use syntax that is relatively easier for humans to understand than machine-level instructions.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_2",
+      "topicId": null,
+      "text": "Excel Insert tab generally NOT available:",
+      "options": [
+        "Pivot Table",
+        "Charts",
+        "Shapes",
+        "Slide Show",
+        "Pictures"
+      ],
+      "correctIndex": 3,
+      "explanation": "The Insert tab in Excel contains features such as PivotTables, charts, shapes and pictures. Slide Show is primarily a presentation feature associated with PowerPoint.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_3",
+      "topicId": null,
+      "text": "used for creating presentations:",
+      "options": [
+        "Word",
+        "Excel",
+        "PowerPoint",
+        "Access",
+        "Outlook"
+      ],
+      "correctIndex": 2,
+      "explanation": "Microsoft PowerPoint is the MS Office application primarily designed for creating and delivering presentations.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_4",
+      "topicId": null,
+      "text": "process starting computer:",
+      "options": [
+        "Booting",
+        "Formatting",
+        "Debugging",
+        "Compiling",
+        "None"
+      ],
+      "correctIndex": 0,
+      "explanation": "Booting is the process of starting a computer and loading the operating system into memory so the system can begin operating.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_5",
+      "topicId": null,
+      "text": "brain computer:",
+      "options": [
+        "RAM",
+        "HDD",
+        "CPU",
+        "Monitor",
+        "Keyboard"
+      ],
+      "correctIndex": 2,
+      "explanation": "The CPU is commonly called the brain of the computer because it executes instructions and processes data.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_6",
+      "topicId": null,
+      "text": "1 Byte equals bits:",
+      "options": [
+        "4",
+        "8",
+        "16",
+        "32",
+        "64"
+      ],
+      "correctIndex": 1,
+      "explanation": "One byte consists of 8 bits. A byte is commonly used as a basic unit for representing and measuring digital data.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_7",
+      "topicId": null,
+      "text": "wireless technology:",
+      "options": [
+        "Bluetooth",
+        "Ethernet cable",
+        "USB cable",
+        "HDMI",
+        "VGA"
+      ],
+      "correctIndex": 0,
+      "explanation": "Bluetooth is a wireless communication technology used for short-range data exchange between compatible devices.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_8",
+      "topicId": null,
+      "text": "used to uniquely identify computer on network:",
+      "options": [
+        "IP Address",
+        "File Name",
+        "Folder Name",
+        "Document Name",
+        "None"
+      ],
+      "correctIndex": 0,
+      "explanation": "An IP address is used to identify a device on an IP network and enables network communication with that device.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_9",
+      "topicId": null,
+      "text": "used to connect computers in a network:",
+      "options": [
+        "Protocol",
+        "Virus",
+        "Firewall only",
+        "Antivirus",
+        "None"
+      ],
+      "correctIndex": 0,
+      "explanation": "A network protocol is a set of rules that allows devices to communicate and exchange data over a network.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_10",
+      "topicId": null,
+      "text": "core role CPU:",
+      "options": [
+        "Store data permanently",
+        "Process instructions and perform calculations",
+        "Display output",
+        "Connect internet",
+        "None"
+      ],
+      "correctIndex": 1,
+      "explanation": "The CPU executes instructions and performs calculations and logical operations. Permanent storage and display functions are handled by other components.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_11",
+      "topicId": null,
+      "text": "BIOS settings permanently stored in which type memory:",
+      "options": [
+        "RAM",
+        "ROM / CMOS",
+        "Cache",
+        "Hard Disk",
+        "Registers"
+      ],
+      "correctIndex": 1,
+      "explanation": "The source gives ROM / CMOS as the answer. BIOS-related settings have traditionally been associated with CMOS memory, while firmware storage and newer systems may use non-volatile memory.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_12",
+      "topicId": null,
+      "text": "In UNIX, the program that acts as a bridge between the user and the kernel is called:",
+      "options": [
+        "Shell",
+        "Kernel",
+        "Compiler",
+        "Interpreter",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "The Shell provides an interface between the user and the UNIX kernel. It accepts user commands and passes them to the operating system for execution.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_13",
+      "topicId": null,
+      "text": "device convert digital signals to analog and vice-versa:",
+      "options": [
+        "Router",
+        "Switch",
+        "Modem",
+        "Hub",
+        "Bridge"
+      ],
+      "correctIndex": 2,
+      "explanation": "A modem converts digital signals to analog signals and analog signals to digital signals, enabling communication over suitable communication channels.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_14",
+      "topicId": null,
+      "text": "HTTP full form:",
+      "options": [
+        "Hyper Text Transfer Protocol",
+        "Hyper Transfer Text Protocol",
+        "High Text Transfer Protocol",
+        "Hyperlink Text Transfer Protocol",
+        "None"
+      ],
+      "correctIndex": 0,
+      "explanation": "HTTP stands for Hyper Text Transfer Protocol. It is a protocol used for communication between web clients and servers.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_15",
+      "topicId": null,
+      "text": "ALU stands for:",
+      "options": [
+        "Arithmetic Logic Unit",
+        "Application Logic Unit",
+        "Array Logic Unit",
+        "Arithmetic Local Unit",
+        "None"
+      ],
+      "correctIndex": 0,
+      "explanation": "ALU stands for Arithmetic Logic Unit. It performs arithmetic calculations and logical operations within the CPU.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_16",
+      "topicId": null,
+      "text": "optical storage:",
+      "options": [
+        "HDD",
+        "Floppy",
+        "CD/DVD",
+        "Pen Drive",
+        "RAM"
+      ],
+      "correctIndex": 2,
+      "explanation": "CDs and DVDs are optical storage media. They store and retrieve information using laser-based optical technology.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_17",
+      "topicId": null,
+      "text": "system software:",
+      "options": [
+        "Word",
+        "Excel",
+        "Operating System",
+        "PowerPoint",
+        "Access"
+      ],
+      "correctIndex": 2,
+      "explanation": "An operating system is system software because it manages hardware resources and provides a platform for application software.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_18",
+      "topicId": null,
+      "text": "temporary storage area holds data/instructions waiting CPU processing:",
+      "options": [
+        "Hard Disk",
+        "RAM / Cache",
+        "CD-ROM",
+        "Magnetic Tape",
+        "Printer"
+      ],
+      "correctIndex": 1,
+      "explanation": "RAM and cache provide temporary storage for data and instructions used by the processor. They are much faster than long-term storage devices.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_19",
+      "topicId": null,
+      "text": "MS Office app primarily used for letters, resumes, journals:",
+      "options": [
+        "Excel",
+        "PowerPoint",
+        "Word",
+        "Access",
+        "Outlook"
+      ],
+      "correctIndex": 2,
+      "explanation": "Microsoft Word is a word-processing application commonly used to create letters, resumes, journals and other text documents.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_20",
+      "topicId": null,
+      "text": "primary memory:",
+      "options": [
+        "HDD",
+        "CD-ROM",
+        "RAM",
+        "Pen Drive",
+        "DVD"
+      ],
+      "correctIndex": 2,
+      "explanation": "RAM is a type of primary memory. It temporarily holds data and instructions that the CPU is actively using.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_21",
+      "topicId": null,
+      "text": "Which of the following is NOT a computer operating system?",
+      "options": [
+        "Windows",
+        "Linux",
+        "MS Word",
+        "macOS",
+        "UNIX"
+      ],
+      "correctIndex": 2,
+      "explanation": "MS Word is application software used for word processing. Windows, Linux, macOS and UNIX are operating systems that manage computer hardware and software resources.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_22",
+      "topicId": null,
+      "text": "OSI model layers:",
+      "options": [
+        "5",
+        "6",
+        "7",
+        "8",
+        "4"
+      ],
+      "correctIndex": 2,
+      "explanation": "The OSI model consists of seven layers: Physical, Data Link, Network, Transport, Session, Presentation and Application.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_23",
+      "topicId": null,
+      "text": "application software:",
+      "options": [
+        "Windows OS",
+        "Linux",
+        "MS Excel",
+        "UNIX",
+        "DOS"
+      ],
+      "correctIndex": 2,
+      "explanation": "MS Excel is application software used for tasks such as spreadsheets, calculations and data analysis. Windows, Linux, UNIX and DOS are operating systems.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_24",
+      "topicId": null,
+      "text": "popular search engine:",
+      "options": [
+        "Google",
+        "Facebook",
+        "WhatsApp",
+        "Instagram",
+        "LinkedIn"
+      ],
+      "correctIndex": 0,
+      "explanation": "Google is a widely used internet search engine for finding information and resources on the web.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_25",
+      "topicId": null,
+      "text": "The multi-user, time-sharing OS developed at Bell Labs that influenced modern computing is:",
+      "options": [
+        "Windows",
+        "UNIX",
+        "DOS",
+        "Linux only",
+        "macOS"
+      ],
+      "correctIndex": 1,
+      "explanation": "UNIX was developed at Bell Labs and became an important multi-user, time-sharing operating system. It strongly influenced later operating systems.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_26",
+      "topicId": null,
+      "text": "stores data permanently:",
+      "options": [
+        "RAM",
+        "Cache",
+        "Hard Disk",
+        "Registers",
+        "None"
+      ],
+      "correctIndex": 2,
+      "explanation": "A hard disk is used for permanent or non-volatile storage, retaining data even when the computer is powered off.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_27",
+      "topicId": null,
+      "text": "Unlike HDDs, SSDs typically do NOT have:",
+      "options": [
+        "High speed",
+        "Moving mechanical parts",
+        "Flash memory",
+        "Durability",
+        "Low power consumption"
+      ],
+      "correctIndex": 1,
+      "explanation": "SSDs use flash memory and have no moving mechanical parts. HDDs use mechanically moving components such as spinning platters and a read/write head.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_28",
+      "topicId": null,
+      "text": "shortcut paste text:",
+      "options": [
+        "Ctrl+X",
+        "Ctrl+C",
+        "Ctrl+V",
+        "Ctrl+Z",
+        "Ctrl+A"
+      ],
+      "correctIndex": 2,
+      "explanation": "Ctrl+V is the standard keyboard shortcut used to paste copied or cut content.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_29",
+      "topicId": null,
+      "text": "shortcut copy selected text:",
+      "options": [
+        "Ctrl+X",
+        "Ctrl+C",
+        "Ctrl+V",
+        "Ctrl+Z",
+        "Ctrl+A"
+      ],
+      "correctIndex": 1,
+      "explanation": "Ctrl+C is the standard keyboard shortcut used to copy selected text or other selected content.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_30",
+      "topicId": null,
+      "text": "smallest unit data:",
+      "options": [
+        "Byte",
+        "Bit",
+        "Nibble",
+        "Kilobyte",
+        "Word"
+      ],
+      "correctIndex": 1,
+      "explanation": "A bit is the smallest basic unit of digital data and can represent either 0 or 1.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_31",
+      "topicId": null,
+      "text": "generation introduced microprocessors:",
+      "options": [
+        "First",
+        "Second",
+        "Third",
+        "Fourth",
+        "Fifth"
+      ],
+      "correctIndex": 3,
+      "explanation": "Fourth-generation computers introduced microprocessors, placing the central processing unit on a single integrated circuit and enabling smaller, more powerful computers.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_32",
+      "topicId": null,
+      "text": "secondary storage:",
+      "options": [
+        "RAM",
+        "Cache",
+        "Hard Disk",
+        "Registers",
+        "None"
+      ],
+      "correctIndex": 2,
+      "explanation": "A hard disk is a secondary storage device used for storing data permanently. RAM and cache are forms of primary/temporary memory.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_33",
+      "topicId": null,
+      "text": "factors most affect computer speed and efficiency?",
+      "options": [
+        "only color case",
+        "CPU speed, RAM size and type of storage",
+        "only monitor",
+        "only keyboard",
+        "none"
+      ],
+      "correctIndex": 1,
+      "explanation": "CPU performance, available RAM and the type and speed of storage can significantly affect how quickly a computer processes and accesses data.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_34",
+      "topicId": null,
+      "text": "used to protect computer from viruses:",
+      "options": [
+        "Firewall only",
+        "Antivirus software",
+        "Browser",
+        "Compiler",
+        "None"
+      ],
+      "correctIndex": 1,
+      "explanation": "Antivirus software is designed to detect, prevent and remove computer viruses and other malicious software.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_35",
+      "topicId": null,
+      "text": "Excel shortcut commonly used to access Menu / Ribbon options:",
+      "options": [
+        "Alt key",
+        "Ctrl + Alt",
+        "Shift + F10",
+        "F5",
+        "Ctrl + M"
+      ],
+      "correctIndex": 0,
+      "explanation": "In Microsoft Excel, pressing the Alt key activates KeyTips for Ribbon and menu commands, allowing users to access them through keyboard shortcuts.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_36",
+      "topicId": null,
+      "text": "OSI layer responsible end-to-end communication:",
+      "options": [
+        "Physical",
+        "Data Link",
+        "Network",
+        "Transport",
+        "Application"
+      ],
+      "correctIndex": 3,
+      "explanation": "The Transport layer provides end-to-end communication services and manages reliable delivery and related transport functions between systems.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_37",
+      "topicId": null,
+      "text": "URL full form:",
+      "options": [
+        "Uniform Resource Locator",
+        "Universal Resource Locator",
+        "Uniform Resource Link",
+        "Universal Resource Link",
+        "None"
+      ],
+      "correctIndex": 0,
+      "explanation": "URL stands for Uniform Resource Locator. It specifies the location of a resource on the internet.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_38",
+      "topicId": null,
+      "text": "Which type of OS is used on servers to handle data and services for multiple devices?",
+      "options": [
+        "Single-user OS",
+        "Multi-user / Network OS",
+        "Real-time OS only",
+        "Embedded OS",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "A multi-user or network operating system allows multiple users or devices to access and use shared computing resources and services.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791480382367_39",
+      "topicId": null,
+      "text": "generation used vacuum tubes:",
+      "options": [
+        "First",
+        "Second",
+        "Third",
+        "Fourth",
+        "Fifth"
+      ],
+      "correctIndex": 0,
+      "explanation": "First-generation computers used vacuum tubes for electronic switching and processing. They were large and consumed significant power.",
+      "difficulty": "medium",
+      "setNo": 5,
+      "active": true,
+      "productIds": []
     }
   ],
   "quizSets": [
