@@ -4527,6 +4527,739 @@
       "name": "Computer Introduction"
     }
   ],
-  "quizQuestions": [],
-  "quizSets": []
+  "quizQuestions": [
+    {
+      "id": "qq_1791450928138_0",
+      "topicId": null,
+      "text": "Which of the following is an input device?",
+      "options": [
+        "Monitor",
+        "Printer",
+        "Keyboard",
+        "Speaker",
+        "Projector"
+      ],
+      "correctIndex": 2,
+      "explanation": "A keyboard is an input device because it sends data and commands from the user to the computer.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_1",
+      "topicId": null,
+      "text": "How many bits make up one byte?",
+      "options": [
+        "4",
+        "8",
+        "16",
+        "32",
+        "64"
+      ],
+      "correctIndex": 1,
+      "explanation": "One byte contains 8 bits.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_2",
+      "topicId": null,
+      "text": "Which shortcut starts a PowerPoint Slide Show from the first slide?",
+      "options": [
+        "F5",
+        "Shift + F5",
+        "Alt + F5",
+        "Ctrl + F5",
+        "F10"
+      ],
+      "correctIndex": 0,
+      "explanation": "F5 starts a PowerPoint Slide Show from the beginning.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_3",
+      "topicId": null,
+      "text": "What is the full form of SMTP?",
+      "options": [
+        "Simple Mail Transfer Protocol",
+        "Secure Mail Transfer Protocol",
+        "System Mail Transfer Protocol",
+        "Simple Message Transfer Protocol",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "SMTP means Simple Mail Transfer Protocol.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_4",
+      "topicId": null,
+      "text": "What is the primary purpose of application software?",
+      "options": [
+        "Controls the OS",
+        "Helps programmers",
+        "Performs specific tasks for users",
+        "Is used only for design",
+        "All of the above"
+      ],
+      "correctIndex": 2,
+      "explanation": "Application software is designed to help users perform specific tasks, such as preparing documents or managing data.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_5",
+      "topicId": null,
+      "text": "According to the source, what happens to data when a disk is formatted?",
+      "options": [
+        "Saved",
+        "Copied",
+        "Deleted",
+        "All of the above",
+        "None of the above"
+      ],
+      "correctIndex": 2,
+      "explanation": "Formatting prepares a storage medium with a file system and can remove or make existing data inaccessible.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_6",
+      "topicId": null,
+      "text": "What is the full form of WORM?",
+      "options": [
+        "Write Once Read Many",
+        "Write Often Read Many",
+        "Write Once Read Multiple",
+        "Write Only Read Memory",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "WORM means Write Once Read Many, a type of data storage.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_7",
+      "topicId": null,
+      "text": "Cache and main memory lose their contents when power is removed. What type of memory are they?",
+      "options": [
+        "Dynamic",
+        "Static",
+        "Volatile",
+        "Non-volatile",
+        "Faulty"
+      ],
+      "correctIndex": 2,
+      "explanation": "Memory that loses its contents when power is removed is called volatile memory.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_8",
+      "topicId": null,
+      "text": "Which process checks computer components as the computer starts?",
+      "options": [
+        "Booting",
+        "Processing",
+        "Saving",
+        "Editing",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "Booting is the process of starting a computer and preparing it for use, which includes checking components.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_9",
+      "topicId": null,
+      "text": "What is the full form of Modem?",
+      "options": [
+        "Modulator-Demodulator",
+        "Memory Device",
+        "Main Operating Device",
+        "Multiple Output Device",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "Modem is a portmanteau of Modulator-Demodulator.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_10",
+      "topicId": null,
+      "text": "What is the full form of FTP?",
+      "options": [
+        "File Transfer Protocol",
+        "File Transmission Protocol",
+        "Fast Transfer Protocol",
+        "File Transport Protocol",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "FTP stands for File Transfer Protocol.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_11",
+      "topicId": null,
+      "text": "Which protocol is commonly used for transferring files over the Internet?",
+      "options": [
+        "HTTP",
+        "SMTP",
+        "FTP",
+        "TCP",
+        "IP"
+      ],
+      "correctIndex": 2,
+      "explanation": "FTP (File Transfer Protocol) is specifically designed for transferring files between computers over a network.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_12",
+      "topicId": null,
+      "text": "In second-generation computers, what replaced vacuum tubes?",
+      "options": [
+        "Integrated circuits",
+        "Transistors",
+        "Microprocessors",
+        "VLSI",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "Second-generation computers used transistors, which were smaller and more reliable than vacuum tubes.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_13",
+      "topicId": null,
+      "text": "Which component controls access to resources on a network?",
+      "options": [
+        "Server",
+        "Client",
+        "Both (a) and (b)",
+        "Memory",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "A server manages and provides access to shared resources and services for clients on a network.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_14",
+      "topicId": null,
+      "text": "According to the source, where does the actual execution of instructions take place?",
+      "options": [
+        "ALU",
+        "Control Unit",
+        "Storage unit",
+        "Control bus",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "The Arithmetic Logic Unit (ALU) performs arithmetic and logical operations, which is where instruction execution largely occurs.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_15",
+      "topicId": null,
+      "text": "Which of the following provides permanent storage?",
+      "options": [
+        "DRAM",
+        "Monitor",
+        "RAM",
+        "Hard disk",
+        "None of these"
+      ],
+      "correctIndex": 3,
+      "explanation": "A hard disk provides permanent, non-volatile storage for data.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_16",
+      "topicId": null,
+      "text": "Java is classified as which type of programming language?",
+      "options": [
+        "Object-oriented",
+        "Relational",
+        "Sixth-generation",
+        "Database management",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "Java is an object-oriented programming language.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_17",
+      "topicId": null,
+      "text": "What is spyware primarily used for?",
+      "options": [
+        "Speed up computer",
+        "Secretly monitor user activities",
+        "Create documents",
+        "Print files",
+        "Format disk"
+      ],
+      "correctIndex": 1,
+      "explanation": "Spyware is designed to secretly monitor or collect information about a user’s activities without their consent.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_18",
+      "topicId": null,
+      "text": "A computer virus is best classified as what?",
+      "options": [
+        "Hardware",
+        "Malware that can replicate",
+        "Operating system",
+        "Utility software",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "A computer virus is a type of malware that can replicate itself and spread to other programs or files.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_19",
+      "topicId": null,
+      "text": "Which Excel function adds the values in a selected range of cells?",
+      "options": [
+        "=ADD()",
+        "=SUM()",
+        "=TOTAL()",
+        "=PLUS()",
+        "=COUNT()"
+      ],
+      "correctIndex": 1,
+      "explanation": "The SUM function in Excel is used to add the values in a specified range of cells.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_20",
+      "topicId": null,
+      "text": "Integrated Circuits were used in which generation of computers?",
+      "options": [
+        "First",
+        "Second",
+        "Third",
+        "Fourth",
+        "Fifth"
+      ],
+      "correctIndex": 2,
+      "explanation": "Integrated Circuits (ICs) were a key development of the third generation of computers.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_21",
+      "topicId": null,
+      "text": "Which technology formed the basis of first-generation computers?",
+      "options": [
+        "Transistors",
+        "Vacuum tubes",
+        "Integrated circuits",
+        "Microprocessors",
+        "VLSI"
+      ],
+      "correctIndex": 1,
+      "explanation": "First-generation computers relied on vacuum tubes for processing and switching.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_22",
+      "topicId": null,
+      "text": "RAM is classified as which type of memory?",
+      "options": [
+        "Permanent memory",
+        "Volatile memory",
+        "Secondary storage",
+        "Optical memory",
+        "Magnetic memory"
+      ],
+      "correctIndex": 1,
+      "explanation": "RAM (Random Access Memory) is volatile memory, meaning its contents are lost when power is removed.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_23",
+      "topicId": null,
+      "text": "Phishing is best described as what type of activity?",
+      "options": [
+        "Hardware failure",
+        "Cyber attack to steal information",
+        "Software update",
+        "Network device",
+        "Printer type"
+      ],
+      "correctIndex": 1,
+      "explanation": "Phishing is a type of cyber attack where attackers attempt to steal sensitive information by impersonating trustworthy entities.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_24",
+      "topicId": null,
+      "text": "Which of the following is NOT a programming language according to the source?",
+      "options": [
+        "C",
+        "C++",
+        "Java",
+        "COBOL",
+        "A+"
+      ],
+      "correctIndex": 4,
+      "explanation": "According to the source, A+ is not considered a programming language in this context, while C, C++, Java, and COBOL are.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_25",
+      "topicId": null,
+      "text": "Which shortcut creates a new slide in PowerPoint?",
+      "options": [
+        "Ctrl + M",
+        "Ctrl + N",
+        "Ctrl + S",
+        "Ctrl + P",
+        "F5"
+      ],
+      "correctIndex": 0,
+      "explanation": "The keyboard shortcut Ctrl + M is used to insert a new slide in Microsoft PowerPoint.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_26",
+      "topicId": null,
+      "text": "What is a set of instructions that tells a computer what to do called?",
+      "options": [
+        "Mentor",
+        "Instructor",
+        "Compiler",
+        "Program",
+        "Debugger"
+      ],
+      "correctIndex": 3,
+      "explanation": "A program is a set of instructions that a computer executes to perform a specific task.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_27",
+      "topicId": null,
+      "text": "Google Spreadsheet belongs to which category of software?",
+      "options": [
+        "Word processor",
+        "Spreadsheet application",
+        "Presentation software",
+        "Database",
+        "Operating system"
+      ],
+      "correctIndex": 1,
+      "explanation": "Google Sheets is an example of spreadsheet application software used for data organization and calculation.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_28",
+      "topicId": null,
+      "text": "An operating system acts as an interface between which two?",
+      "options": [
+        "Hardware and software",
+        "User and computer",
+        "Application and utility",
+        "Input and output",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "An operating system acts as an interface between the user and the computer hardware.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_29",
+      "topicId": null,
+      "text": "Which of the following is volatile memory?",
+      "options": [
+        "ROM",
+        "Hard disk",
+        "RAM",
+        "Flash drive",
+        "CD"
+      ],
+      "correctIndex": 2,
+      "explanation": "RAM (Random Access Memory) is volatile memory because it loses its data when the power is turned off.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_30",
+      "topicId": null,
+      "text": "What does ransomware typically do?",
+      "options": [
+        "Deletes all files",
+        "Encrypts files and demands payment",
+        "Speeds up the system",
+        "Creates backup",
+        "Updates the OS"
+      ],
+      "correctIndex": 1,
+      "explanation": "Ransomware typically encrypts a user's files and then demands payment for their decryption.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_31",
+      "topicId": null,
+      "text": "What is the smallest unit of data in a computer?",
+      "options": [
+        "Byte",
+        "Bit",
+        "Nibble",
+        "Kilobyte",
+        "Word"
+      ],
+      "correctIndex": 1,
+      "explanation": "A bit is the smallest unit of data in computing, representing a single binary value of 0 or 1.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_32",
+      "topicId": null,
+      "text": "Which of the following is an example of system software?",
+      "options": [
+        "MS Word",
+        "MS Excel",
+        "Operating System",
+        "PowerPoint",
+        "Access"
+      ],
+      "correctIndex": 2,
+      "explanation": "An operating system is system software that manages computer hardware and software resources.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_33",
+      "topicId": null,
+      "text": "Which of the following is primarily a professional or business social-networking platform?",
+      "options": [
+        "Facebook",
+        "Instagram",
+        "LinkedIn",
+        "Twitter",
+        "WhatsApp"
+      ],
+      "correctIndex": 2,
+      "explanation": "LinkedIn is a social networking platform focused on professional networking and career development.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_34",
+      "topicId": null,
+      "text": "Which of the following is an output device?",
+      "options": [
+        "Mouse",
+        "Scanner",
+        "Keyboard",
+        "Monitor",
+        "Microphone"
+      ],
+      "correctIndex": 3,
+      "explanation": "A monitor is an output device that displays visual information from the computer.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_35",
+      "topicId": null,
+      "text": "Which of the following is a web browser?",
+      "options": [
+        "MS Word",
+        "Google Chrome",
+        "MS Excel",
+        "PowerPoint",
+        "Access"
+      ],
+      "correctIndex": 1,
+      "explanation": "Google Chrome is a popular web browser used for accessing websites.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_36",
+      "topicId": null,
+      "text": "What does ROM stand for?",
+      "options": [
+        "Read Only Memory",
+        "Random Only Memory",
+        "Read Open Memory",
+        "Rapid Open Memory",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "ROM stands for Read Only Memory.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_37",
+      "topicId": null,
+      "text": "CD-ROM belongs to which type of storage?",
+      "options": [
+        "Magnetic memory",
+        "Semiconductor memory",
+        "Optical memory",
+        "Cache memory",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "CD-ROM (Compact Disc Read-Only Memory) is a type of optical storage media.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_38",
+      "topicId": null,
+      "text": "Which keyboard shortcut inserts a Page Break in MS Word?",
+      "options": [
+        "Ctrl + Enter",
+        "Ctrl + Shift + Enter",
+        "Alt + Enter",
+        "Shift + Enter",
+        "Ctrl + P"
+      ],
+      "correctIndex": 0,
+      "explanation": "Pressing Ctrl + Enter in Microsoft Word inserts a page break, moving subsequent content to the next page.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791450928138_39",
+      "topicId": null,
+      "text": "What is the full form of GUI?",
+      "options": [
+        "Graphical User Interface",
+        "General User Interface",
+        "Graphical Utility Interface",
+        "Global User Interface",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "GUI stands for Graphical User Interface.",
+      "difficulty": "medium",
+      "setNo": 1,
+      "active": true,
+      "productIds": []
+    }
+  ],
+  "quizSets": [
+    {
+      "id": "qs_1791450928114_1",
+      "setNo": 1,
+      "title": "RRB PO 2021 Memory Based Questions",
+      "timeLimitMin": 15,
+      "negMarkEnabled": true,
+      "negMarkValue": 0.125,
+      "marksPerQuestion": 0.5,
+      "active": true,
+      "productIds": []
+    }
+  ]
 }
