@@ -7403,6 +7403,726 @@
       "setNo": 3,
       "active": true,
       "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_0",
+      "topicId": null,
+      "text": "In MS Excel, the symbol used for combining (concatenating) text is:",
+      "options": [
+        "+",
+        "&",
+        "$",
+        "#",
+        "%"
+      ],
+      "correctIndex": 1,
+      "explanation": "The ampersand (&) operator is used to concatenate or join text strings in Excel.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_1",
+      "topicId": null,
+      "text": "Which of the following is an input device?",
+      "options": [
+        "Monitor",
+        "Printer",
+        "Scanner",
+        "Speaker",
+        "Projector"
+      ],
+      "correctIndex": 2,
+      "explanation": "A scanner is an input device because it captures physical information and sends the data to a computer.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_2",
+      "topicId": null,
+      "text": "Wireless USB is generally used in which type of network?",
+      "options": [
+        "WAN",
+        "MAN",
+        "PAN / Personal Area Network",
+        "LAN only",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "Wireless USB is generally associated with short-range personal connectivity, which falls under a Personal Area Network (PAN).",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_3",
+      "topicId": null,
+      "text": "Which of the following is used to uniquely identify a device on a network?",
+      "options": [
+        "IP Address",
+        "Port Number only",
+        "File Name",
+        "Folder Name",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "An IP address is used to identify a device/interface for communication on an IP network.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_4",
+      "topicId": null,
+      "text": "Which of the following is an example of optical storage?",
+      "options": [
+        "Hard Disk",
+        "Floppy Disk",
+        "CD / DVD",
+        "Pen Drive",
+        "RAM"
+      ],
+      "correctIndex": 2,
+      "explanation": "CDs and DVDs are optical storage media that use laser technology to read and write data.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_5",
+      "topicId": null,
+      "text": "Full form of URL is:",
+      "options": [
+        "Uniform Resource Locator",
+        "Universal Resource Locator",
+        "Uniform Resource Link",
+        "Universal Resource Link",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "URL stands for Uniform Resource Locator.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_6",
+      "topicId": null,
+      "text": "Which of the following is used to protect a network from unauthorized access?",
+      "options": [
+        "Firewall",
+        "Scanner",
+        "Printer",
+        "Monitor",
+        "Keyboard"
+      ],
+      "correctIndex": 0,
+      "explanation": "A firewall controls network traffic and helps protect a computer or network from unauthorized access.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_7",
+      "topicId": null,
+      "text": "Which of the following is a wireless technology?",
+      "options": [
+        "Bluetooth",
+        "Ethernet",
+        "USB Cable",
+        "HDMI",
+        "VGA"
+      ],
+      "correctIndex": 0,
+      "explanation": "Bluetooth is a wireless communication technology used for short-range communication between devices.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_8",
+      "topicId": null,
+      "text": "Which of the following is permanent storage?",
+      "options": [
+        "RAM",
+        "Cache",
+        "Hard Disk Drive",
+        "Registers",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "A Hard Disk Drive is non-volatile storage and retains data even after the computer is switched off.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_9",
+      "topicId": null,
+      "text": "Which of the following is application software?",
+      "options": [
+        "Windows OS",
+        "Linux",
+        "MS Excel",
+        "UNIX",
+        "DOS"
+      ],
+      "correctIndex": 2,
+      "explanation": "MS Excel is application software used for spreadsheet calculations, data management and analysis.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_10",
+      "topicId": null,
+      "text": "Malware that encrypts files and demands money for decryption is known as:",
+      "options": [
+        "Virus",
+        "Worm",
+        "Ransomware",
+        "Spyware",
+        "Adware"
+      ],
+      "correctIndex": 2,
+      "explanation": "Ransomware encrypts or blocks access to files and demands payment for restoring access.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_11",
+      "topicId": null,
+      "text": "Which of the following is NOT a non-volatile memory?",
+      "options": [
+        "ROM",
+        "Hard Disk",
+        "RAM",
+        "Flash Drive",
+        "CD-ROM"
+      ],
+      "correctIndex": 2,
+      "explanation": "RAM is volatile memory and loses its stored data when power is removed.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_12",
+      "topicId": null,
+      "text": "Which of the following is NOT a hardware component?",
+      "options": [
+        "Keyboard",
+        "Monitor",
+        "MS Word",
+        "Hard Disk",
+        "Printer"
+      ],
+      "correctIndex": 2,
+      "explanation": "MS Word is software, whereas a keyboard, monitor, hard disk and printer are hardware components.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_13",
+      "topicId": null,
+      "text": "Which of the following is used to transfer data between computers?",
+      "options": [
+        "Protocol",
+        "Virus",
+        "Firewall",
+        "Antivirus",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "A protocol is a set of rules governing communication and data transfer between computers or network devices.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_14",
+      "topicId": null,
+      "text": "Which of the following is the full form of CPU?",
+      "options": [
+        "Central Processing Unit",
+        "Central Program Unit",
+        "Control Processing Unit",
+        "Computer Processing Unit",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "CPU stands for Central Processing Unit.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_15",
+      "topicId": null,
+      "text": "Full form of HTTP is:",
+      "options": [
+        "Hyper Text Transfer Protocol",
+        "High Text Transfer Protocol",
+        "Hyper Text Transmission Protocol",
+        "High Text Transmission Protocol",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "HTTP stands for Hyper Text Transfer Protocol and is used for communication between web clients and servers.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_16",
+      "topicId": null,
+      "text": "Which of the following is a search engine?",
+      "options": [
+        "Google",
+        "Facebook",
+        "WhatsApp",
+        "Instagram",
+        "LinkedIn"
+      ],
+      "correctIndex": 0,
+      "explanation": "Google is a search engine used to find information and resources on the Internet.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_17",
+      "topicId": null,
+      "text": "Which of the following is a secondary storage device?",
+      "options": [
+        "RAM",
+        "Cache",
+        "Hard Disk",
+        "Registers",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "A hard disk is a secondary storage device used for persistent data storage.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_18",
+      "topicId": null,
+      "text": "WORM stands for:",
+      "options": [
+        "Write Once Read Many",
+        "Write Often Read Many",
+        "Write Once Read Multiple",
+        "Write Only Read Memory",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "WORM stands for Write Once Read Many. It describes storage media that can be written once and read multiple times.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_19",
+      "topicId": null,
+      "text": "Which component is primarily used to increase the processing speed of a computer?",
+      "options": [
+        "Hard Disk",
+        "Cache Memory / CPU",
+        "Monitor",
+        "Keyboard",
+        "Printer"
+      ],
+      "correctIndex": 1,
+      "explanation": "The source gives 'Cache Memory / CPU' as the answer. These components are associated with improving or supporting processing performance.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_20",
+      "topicId": null,
+      "text": "Which of the following is an example of system software?",
+      "options": [
+        "MS Word",
+        "MS Excel",
+        "Operating System",
+        "PowerPoint",
+        "Access"
+      ],
+      "correctIndex": 2,
+      "explanation": "An operating system is system software that manages hardware and provides a platform for application software.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_21",
+      "topicId": null,
+      "text": "First generation computers used which of the following?",
+      "options": [
+        "Transistors",
+        "Vacuum tubes",
+        "Integrated circuits",
+        "Microprocessors",
+        "VLSI"
+      ],
+      "correctIndex": 1,
+      "explanation": "First-generation computers used vacuum tubes as their main electronic components.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_22",
+      "topicId": null,
+      "text": "The part of CPU that performs arithmetic and logical operations is:",
+      "options": [
+        "Control Unit",
+        "ALU",
+        "Memory Unit",
+        "Register",
+        "Cache"
+      ],
+      "correctIndex": 1,
+      "explanation": "ALU stands for Arithmetic Logic Unit and performs arithmetic and logical operations.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_23",
+      "topicId": null,
+      "text": "Which of the following stores data temporarily while the computer is running?",
+      "options": [
+        "Hard Disk",
+        "ROM",
+        "RAM",
+        "CD-ROM",
+        "Magnetic Tape"
+      ],
+      "correctIndex": 2,
+      "explanation": "RAM temporarily stores data and instructions being actively used by the computer.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_24",
+      "topicId": null,
+      "text": "Which of the following is NOT a type of malware?",
+      "options": [
+        "Virus",
+        "Worm",
+        "Ransomware",
+        "Antivirus",
+        "Spyware"
+      ],
+      "correctIndex": 3,
+      "explanation": "Antivirus is security software used to detect and remove malware; it is not itself a type of malware.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_25",
+      "topicId": null,
+      "text": "Software that secretly collects user information without consent is called:",
+      "options": [
+        "Virus",
+        "Worm",
+        "Spyware",
+        "Trojan",
+        "Adware"
+      ],
+      "correctIndex": 2,
+      "explanation": "Spyware is software designed to secretly collect information about a user's activities or data.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_26",
+      "topicId": null,
+      "text": "Which of the following is used to measure processor speed?",
+      "options": [
+        "Mbps",
+        "GHz",
+        "GB",
+        "Pixel",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "Processor clock speed is commonly measured in hertz, with modern processors often specified in gigahertz (GHz).",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_27",
+      "topicId": null,
+      "text": "Which memory has the shortest access time?",
+      "options": [
+        "Hard Disk",
+        "RAM",
+        "Cache Memory",
+        "CD-ROM",
+        "Magnetic Tape"
+      ],
+      "correctIndex": 2,
+      "explanation": "Cache memory provides very fast access to frequently required data and has a shorter access time than the other listed options.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_28",
+      "topicId": null,
+      "text": "The brain of the computer is:",
+      "options": [
+        "RAM",
+        "Hard Disk",
+        "CPU",
+        "Monitor",
+        "Keyboard"
+      ],
+      "correctIndex": 2,
+      "explanation": "The CPU, or Central Processing Unit, executes instructions and controls processing, so it is commonly called the brain of the computer.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_29",
+      "topicId": null,
+      "text": "Which of the following is an output device?",
+      "options": [
+        "Keyboard",
+        "Mouse",
+        "Scanner",
+        "Printer",
+        "Microphone"
+      ],
+      "correctIndex": 3,
+      "explanation": "A printer is an output device because it produces information from the computer in physical form.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_30",
+      "topicId": null,
+      "text": "The process of starting a computer and loading the OS is called:",
+      "options": [
+        "Booting",
+        "Formatting",
+        "Debugging",
+        "Compiling",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "Booting is the process of starting a computer and loading the operating system.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_31",
+      "topicId": null,
+      "text": "Full form of SMTP is:",
+      "options": [
+        "Simple Mail Transfer Protocol",
+        "Secure Mail Transfer Protocol",
+        "System Mail Transfer Protocol",
+        "Simple Message Transfer Protocol",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "SMTP stands for Simple Mail Transfer Protocol.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_32",
+      "topicId": null,
+      "text": "Software designed to detect and remove malware is called:",
+      "options": [
+        "Firewall",
+        "Antivirus",
+        "Browser",
+        "Compiler",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "Antivirus software is designed to detect, prevent and remove malware.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_33",
+      "topicId": null,
+      "text": "SMTP protocol is mainly used for:",
+      "options": [
+        "File transfer",
+        "Sending emails",
+        "Web browsing",
+        "Video streaming",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "SMTP, or Simple Mail Transfer Protocol, is mainly used for sending email messages.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_34",
+      "topicId": null,
+      "text": "Which of the following is volatile memory?",
+      "options": [
+        "ROM",
+        "Hard Disk",
+        "RAM",
+        "Flash Drive",
+        "CD-ROM"
+      ],
+      "correctIndex": 2,
+      "explanation": "RAM is volatile memory because its contents are lost when the computer is switched off.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_35",
+      "topicId": null,
+      "text": "Magnetic Tape is an example of:",
+      "options": [
+        "Primary memory",
+        "Secondary storage",
+        "Cache memory",
+        "Register",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "Magnetic tape is a secondary storage medium commonly associated with sequential data access.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_36",
+      "topicId": null,
+      "text": "The main function of the Control Unit is to:",
+      "options": [
+        "Perform calculations",
+        "Control and coordinate all operations of the computer",
+        "Store data permanently",
+        "Display output",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Control Unit directs and coordinates the activities of the computer and controls the execution of instructions.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_37",
+      "topicId": null,
+      "text": "Which generation of computers used Integrated Circuits?",
+      "options": [
+        "First",
+        "Second",
+        "Third",
+        "Fourth",
+        "Fifth"
+      ],
+      "correctIndex": 2,
+      "explanation": "Third-generation computers primarily used Integrated Circuits (ICs).",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_38",
+      "topicId": null,
+      "text": "Attempt to obtain sensitive information by disguising as a trustworthy entity is called:",
+      "options": [
+        "Hacking",
+        "Phishing",
+        "Spoofing",
+        "Cracking",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "Phishing is an attempt to obtain sensitive information by pretending to be a trustworthy person, organization or service.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791479865856_39",
+      "topicId": null,
+      "text": "Which of the following is used for sequential access of data?",
+      "options": [
+        "Hard Disk",
+        "Magnetic Tape",
+        "RAM",
+        "Cache",
+        "SSD"
+      ],
+      "correctIndex": 1,
+      "explanation": "Magnetic tape stores and accesses data sequentially, meaning data is generally accessed in sequence rather than directly.",
+      "difficulty": "medium",
+      "setNo": 4,
+      "active": true,
+      "productIds": []
     }
   ],
   "quizSets": [
