@@ -503,6 +503,17 @@ img.qzr-av{object-fit:cover}
   #qzr-review-actionbar{padding-right:18px!important}
   #quizrun{padding-bottom:118px}
 }
+/* result page: score hero */
+.qzs-hero{display:flex;align-items:center;justify-content:center;gap:26px;flex-wrap:wrap;padding:28px 20px;background:linear-gradient(135deg,var(--adim),var(--bg2));border-bottom:1px solid var(--b)}
+.qzs-ring{position:relative;width:108px;height:108px;flex-shrink:0}
+.qzs-pct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:800;font-size:1.15rem;color:var(--t)}
+.qzs-herotxt{text-align:left}
+.qzs-herolbl{font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--t2)}
+.qzs-score{font-family:var(--mono);font-weight:800;font-size:clamp(2.9rem,9vw,4.3rem);line-height:1.05;color:var(--accent);margin-top:2px}
+.qzs-score span{font-size:.4em;font-weight:700;color:var(--t2)}
+.qzs-herosub{font-size:.76rem;color:var(--t2);margin-top:6px}
+.qzs-grid{grid-template-columns:repeat(auto-fit,minmax(130px,1fr))!important}
+@media(max-width:560px){.qzs-hero{flex-direction:column;gap:14px;padding:22px 14px}.qzs-herotxt{text-align:center}}
 @media(max-width:480px){.qzi-legend-grid{grid-template-columns:1fr!important}}
 #mock-mr-btn.mr-active{border-color:#7c3aed;color:#7c3aed;background:rgba(124,58,237,.1)}
 /* BUTTONS */
@@ -934,7 +945,7 @@ header .h-brand:hover{background:var(--brut-tint);}
   } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
   import {
     getFirestore, doc, setDoc, getDoc, collection,
-    getDocs, serverTimestamp
+    getDocs, serverTimestamp, deleteDoc
   } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
   import {
     getFunctions, httpsCallable
@@ -961,7 +972,7 @@ header .h-brand:hover{background:var(--brut-tint);}
     GoogleAuthProvider, signInWithPopup,
     signInAnonymously, signOut,
     linkWithCredential, EmailAuthProvider, updateProfile,
-    doc, setDoc, getDoc, collection, getDocs, serverTimestamp,
+    doc, setDoc, getDoc, collection, getDocs, serverTimestamp, deleteDoc,
     createRazorpayOrder: httpsCallable(functions, "createRazorpayOrder"),
     verifyRazorpayPayment: httpsCallable(functions, "verifyRazorpayPayment")
   };
@@ -1578,6 +1589,14 @@ function routeFromHash(){
   }
   if(screenId==="mock"&&sectionArg){
     initPromise.then(()=>openMockLink(sectionArg));
+    return;
+  }
+  if(screenId==="quizset"&&sectionArg){
+    Promise.all([initPromise,_productsCachePromise||Promise.resolve(),_entitlementsReadyPromise]).then(()=>{
+      showS("quizlist",{skipHash:true});
+      renderQuizList();
+      startQuizSet(sectionArg);
+    });
     return;
   }
   if(screenId==="quizlist"){
@@ -5810,10 +5829,12 @@ function renderQuizProgress(){
   const attempts=getProgress().filter(function(x){return x.kind==='quiz';});
   const sets={};
   attempts.forEach(function(e){
-    const b=sets[e.setId]||(sets[e.setId]={title:e.title||'Quiz',n:0,sumPct:0,best:null});
+    const b=sets[e.setId]||(sets[e.setId]={title:e.title||'Quiz',n:0,sumPct:0,best:null,last:null});
     const pct=e.max?(e.score/e.max*100):0;
-    b.n++;b.sumPct+=pct;b.title=e.title||b.title;
-    if(!b.best||pct>b.best.pct)b.best={score:e.score,max:e.max,pct:pct};
+    b.n+=(e.attempts||1);b.sumPct+=(e.sumPct!=null?e.sumPct:pct);b.title=e.title||b.title;
+    const bp=(e.bestPct!=null?e.bestPct:pct);
+    if(!b.best||bp>b.best.pct)b.best={score:(e.bestScore!=null?e.bestScore:e.score),max:(e.bestMax!=null?e.bestMax:e.max),pct:bp};
+    if(!b.last||(e.date||0)>(b.last.date||0))b.last=e;
   });
   const data=qzGetData();
   const drafts=[];
@@ -5838,10 +5859,13 @@ function renderQuizProgress(){
     return '<div class="hist-item"><div class="hi-top"><span class="hi-badge mock">Quiz</span></div>'
       +'<div class="hi-title" style="margin-top:5px">'+escapeHTML(b.title)+'</div>'
       +'<div class="hi-stats">'
-      +'<div class="hi-stat">Attempts <strong>'+b.n+'</strong></div>'
+      +'<div class="hi-stat">Last <strong>'+b.last.score+'/'+b.last.max+'</strong></div>'
       +'<div class="hi-stat">Best <strong>'+b.best.score+'/'+b.best.max+'</strong></div>'
+      +'<div class="hi-stat">Attempts <strong>'+b.n+'</strong></div>'
       +'<div class="hi-stat">Average <strong>'+Math.round(b.sumPct/b.n)+'%</strong></div>'
-      +'</div></div>';
+      +'</div>'
+      +(quizLastAttempt(id)?'<button onclick="showLastQuizResult(\''+id+'\')" style="margin-top:10px;'+btn+'">View Result</button>':'')
+      +'</div>';
   }).join('');
   el.innerHTML=h;
 }
@@ -5982,21 +6006,21 @@ function renderQuizList(){
     const last=quizLastAttempt(s.id);
     const unlockIds=(s.productIds&&s.productIds.length)?s.productIds:(courseProductId?[courseProductId]:[]);
     const cta=locked
-      ? '<button onclick="event.stopPropagation();showUnlockOptions('+jsArrayAttr(unlockIds)+')" style="font-size:.7rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:6px 14px;border-radius:999px;cursor:pointer;font-family:var(--font)">'+(expiredV?"Renew":"Unlock")+'</button>'
-      : '<button onclick="startQuizSet(\''+s.id+'\')" style="font-size:.7rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:6px 14px;border-radius:999px;cursor:pointer;font-family:var(--font)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> Start</button>';
-    return '<div class="q-item" style="cursor:default">'
-      +(locked?'<div style="position:absolute;top:12px;right:12px;color:var(--accent)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>':'')
-      +'<div style="font-size:.94rem;font-weight:700;color:var(--t);margin-bottom:8px">'+escapeHTML(s.title||('Set '+s.setNo))+'</div>'
-      +'<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">'
-      +'<span class="chip">'+qCount+' question'+(qCount===1?'':'s')+'</span>'
+      ? '<button onclick="event.stopPropagation();showUnlockOptions('+jsArrayAttr(unlockIds)+')" style="font-size:.7rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:5px 12px;border-radius:999px;white-space:nowrap;cursor:pointer;font-family:var(--font);display:inline-flex;align-items:center;gap:4px">'+QZ_ICON_LOCK+(expiredV?"Renew":"Unlock")+'</button>'
+      : '';
+    const chips='<span class="chip">'+qCount+' question'+(qCount===1?'':'s')+'</span>'
       +(s.timeLimitMin?'<span class="chip">'+s.timeLimitMin+' min</span>':'<span class="chip">No timer</span>')
-      +(expiredV?'<span class="chip" style="color:var(--red)">Validity ended '+fmtValidDate(expiredV.until)+'</span>':'')
-      +(last?'<span class="chip">Last: '+last.res.score+'/'+last.res.max+'</span>':'')
-      +(draftInfo?'<span class="chip" style="color:var(--accent)">In progress · '+draftInfo.answered+' answered</span>':'')
       +((Number(s.marksPerQuestion)>0&&Number(s.marksPerQuestion)!==1)?'<span class="chip">+'+s.marksPerQuestion+'/correct</span>':'')
       +(s.negMarkEnabled?'<span class="chip" style="color:var(--red)">-'+s.negMarkValue+'/wrong</span>':'')
-      +'</div>'
-      +'<div style="margin-top:auto;display:flex;gap:8px;flex-wrap:wrap;align-items:center">'+qzCardActions(s,{draftInfo:draftInfo,locked:locked,last:last,cta:cta})+'</div>'
+      +(last?'<span class="chip">Last: '+last.res.score+'/'+last.res.max+'</span>':'')
+      +(draftInfo?'<span class="chip" style="color:var(--accent)">In progress \u00b7 '+draftInfo.answered+' answered</span>':'')
+      +(expiredV?'<span class="chip" style="color:var(--red)">Validity ended '+fmtValidDate(expiredV.until)+'</span>':'');
+    return '<div class="q-item" style="cursor:default">'
+      +(locked?'<div style="position:absolute;top:12px;right:12px;color:var(--accent)">'+QZ_ICON_LOCK.replace('width="10" height="10"','width="13" height="13"')+'</div>':'')
+      +'<div style="font-size:.94rem;font-weight:700;color:var(--t);margin-bottom:12px">'+escapeHTML(s.title||('Set '+s.setNo))+'</div>'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px"><div style="display:flex;gap:6px;flex-wrap:wrap">'+chips+'</div>'
+      +'<button onclick="event.stopPropagation();copyShareLink(\'quizset-'+s.id+'\',this)" title="Copy direct link to this quiz" style="flex-shrink:0;display:flex;align-items:center;gap:4px;font-size:.62rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer">'+QZ_ICON_LINK+'Copy Link</button></div>'
+      +'<div style="margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap">'+qzCardActions(s,{draftInfo:draftInfo,locked:locked,last:last,cta:cta})+'</div>'
       +'</div>';
   }).join("");
 }
@@ -6090,17 +6114,49 @@ function showLastQuizResult(setId){
   document.querySelector("#quizrun .exam-layout").classList.remove("qzr-collapsed");
   showQuizScorecard();
 }
-function qzBtn(label,onclick,primary){
-  return '<button onclick="'+onclick+'" style="font-size:.7rem;font-weight:700;'+(primary?'color:var(--bg);background:var(--accent);border:none;padding:6px 14px':'color:var(--t);background:transparent;border:1px solid var(--b);padding:5px 12px')+';border-radius:999px;cursor:pointer;font-family:var(--font)">'+label+'</button>';
+var QZ_ICON_REDO='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.5 15a9 9 0 11-2.1-9.4L23 10"/></svg>';
+var QZ_ICON_GO='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+var QZ_ICON_LOCK='<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>';
+var QZ_ICON_LINK='<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.07 0l1.93-1.93a5 5 0 00-7.07-7.07L10.5 5.5"/><path d="M14 11a5 5 0 00-7.07 0l-1.93 1.93a5 5 0 007.07 7.07L13.5 18.5"/></svg>';
+// Same button styles as the practice-question cards (outlined "Reattempt", solid "View Result")
+function qzCta(label,onclick,icon){
+  return '<button onclick="event.stopPropagation();'+onclick+'" style="font-size:.7rem;font-weight:700;color:var(--accent);border:1px solid var(--aborder);background:var(--adim);padding:5px 12px;border-radius:999px;white-space:nowrap;cursor:pointer;font-family:var(--font);display:inline-flex;align-items:center;gap:5px">'+(icon||'')+label+'</button>';
 }
-// Buttons on a quiz card: Start / Resume + Start Over / Re-attempt, plus Show Result once there is a last attempt.
+function qzViewBtn(setId){
+  return '<button onclick="event.stopPropagation();showLastQuizResult(\''+setId+'\')" style="font-size:.7rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:5px 12px;border-radius:999px;cursor:pointer;white-space:nowrap;font-family:var(--font)">View Result</button>';
+}
 function qzCardActions(s,o){
   const id="'"+s.id+"'";
-  const show=o.last?qzBtn('Show Result','showLastQuizResult('+id+')',false):'';
-  if(o.draftInfo)return qzBtn('Resume','resumeQuizSet('+id+')',true)+qzBtn('Start Over','startQuizSet('+id+')',false)+show;
-  if(o.locked)return o.cta+show;
-  if(o.last)return qzBtn('Re-attempt','startQuizSet('+id+')',true)+show;
-  return o.cta;
+  const view=o.last?qzViewBtn(s.id):'';
+  if(o.locked)return o.cta+view;
+  if(o.draftInfo)return qzCta('Resume','resumeQuizSet('+id+')',QZ_ICON_GO)+qzCta('Start Over','startQuizSet('+id+')',QZ_ICON_REDO)+view;
+  if(o.last)return qzCta('Reattempt','startQuizSet('+id+')',QZ_ICON_REDO)+view;
+  return qzCta('Click to attempt','startQuizSet('+id+')',QZ_ICON_GO);
+}
+// Keeps exactly one My Progress entry per quiz set. Old per-attempt entries are removed (locally and
+// in the cloud) and only running totals (attempts / best / average) are carried forward.
+function saveQuizProgress(){
+  const id='quiz_'+QZ.setId;
+  const pct=QZ._resultMax?QZ._resultScore/QZ._resultMax*100:0;
+  const list=getProgress();
+  const old=list.filter(function(e){return e.kind==='quiz'&&e.setId===QZ.setId;});
+  const pctOf=function(e){return e.max?e.score/e.max*100:0;};
+  let n=0,sum=0,best={pct:-1,score:0,max:QZ._resultMax};
+  old.forEach(function(e){
+    n+=(e.attempts||1);sum+=(e.sumPct!=null?e.sumPct:pctOf(e));
+    const bp=(e.bestPct!=null?e.bestPct:pctOf(e));
+    if(bp>best.pct)best={pct:bp,score:(e.bestScore!=null?e.bestScore:e.score),max:(e.bestMax!=null?e.bestMax:e.max)};
+  });
+  n+=1;sum+=pct;
+  if(pct>=best.pct)best={pct:pct,score:QZ._resultScore,max:QZ._resultMax};
+  localStorage.setItem(PROG_KEY,JSON.stringify(list.filter(function(e){return !(e.kind==='quiz'&&e.setId===QZ.setId);})));
+  try{
+    const u=window.FB&&window.FB.auth.currentUser;
+    if(u&&!u.isAnonymous&&window.FB.deleteDoc){
+      old.forEach(function(e){if(e.id&&e.id!==id)window.FB.deleteDoc(window.FB.doc(window.FB.db,'users',u.uid,'progress',e.id)).catch(function(){});});
+    }
+  }catch(e){}
+  saveProgress({id:id,kind:'quiz',date:Date.now(),setId:QZ.setId,title:QZ.title||'Quiz',score:QZ._resultScore,max:QZ._resultMax,correct:QZ._correctCount,wrong:QZ._wrongCount,attempted:QZ._attempted,timeSec:QZ._totalSecs||0,attempts:n,sumPct:sum,bestPct:best.pct,bestScore:best.score,bestMax:best.max});
 }
 function quizSetExpiry(s){
   const ids=[];const cp=(D().siteSettings||{}).quizCourseProductId;
@@ -6488,7 +6544,7 @@ function finalizeQuiz(){
   QZ._totalSecs=Math.round(Object.keys(QZ.tt).reduce(function(a,k){return a+QZ.tt[k];},0)/1000);
   if(QZ._attempted>0){
     saveLastQuizAttempt();
-    try{saveProgress({kind:'quiz',date:Date.now(),setId:QZ.setId,title:QZ.title||'Quiz',score:QZ._resultScore,max:QZ._resultMax,correct:QZ._correctCount,wrong:QZ._wrongCount,attempted:QZ._attempted,timeSec:QZ._totalSecs||0});}catch(e){}
+    try{saveQuizProgress();}catch(e){console.warn('Quiz progress save failed',e);}
   }
   document.getElementById("qzr-actionbar").style.display="none";
   document.getElementById("qzr-review-actionbar").style.display="block";
@@ -6504,22 +6560,32 @@ function showQuizScorecard(){
   toggleQuizDrawer(false);
   document.querySelector("#quizrun .exam-layout").style.display="none";
   const tile=function(cls,h,v){return '<div class="qzs-tile '+cls+'"><h4>'+h+'</h4><div>'+v+'</div></div>';};
+  const num=function(x){return String(Number((+x).toFixed(2)));};
+  const max=QZ._resultMax||0,score=QZ._resultScore||0;
+  const pct=max>0?Math.max(0,Math.min(100,Math.round(score/max*100))):0;
+  const C=2*Math.PI*44;   // ring circumference (r=44)
   const sc=document.getElementById("qzr-scorecard");
-  sc.innerHTML='<div class="qzs-wrap"><div class="card" style="padding:22px 16px">'
-    +'<div style="font-size:1.05rem;font-weight:800;color:var(--t)">Performance &amp; Score Analysis</div>'
-    +'<div style="font-size:.74rem;color:var(--t2);margin-top:3px">'+escapeHTML(QZ.title||"Quiz")+(QZ._totalSecs?' · Time taken: '+qzFmtSecs(QZ._totalSecs):'')+'</div>'
+  sc.innerHTML='<div class="qzs-wrap"><div class="card" style="padding:0;overflow:hidden">'
+    // ---- hero: the score comes first and is the biggest thing on the page ----
+    +'<div class="qzs-hero">'
+    +'<div class="qzs-ring"><svg viewBox="0 0 100 100" width="108" height="108" aria-hidden="true"><circle cx="50" cy="50" r="44" fill="none" stroke="var(--b)" stroke-width="8"/><circle cx="50" cy="50" r="44" fill="none" stroke="var(--accent)" stroke-width="8" stroke-linecap="round" stroke-dasharray="'+(C*pct/100).toFixed(1)+' '+C.toFixed(1)+'" transform="rotate(-90 50 50)"/></svg><div class="qzs-pct">'+pct+'%</div></div>'
+    +'<div class="qzs-herotxt"><div class="qzs-herolbl">Your Score</div>'
+    +'<div class="qzs-score">'+num(score)+'<span> / '+num(max)+'</span></div>'
+    +'<div class="qzs-herosub">'+escapeHTML(QZ.title||"Quiz")+(QZ._totalSecs?' · Time taken '+qzFmtSecs(QZ._totalSecs):'')+'</div></div>'
+    +'</div>'
+    +'<div style="padding:18px 16px 22px">'
+    +'<div style="font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--t2)">Performance &amp; Score Analysis</div>'
     +'<div class="qzs-grid">'
     +tile('qzs-tot','Total Questions',QZ.questions.length)
     +tile('qzs-att','Total Attempted',QZ._attempted)
     +tile('qzs-cor','Correct Answers',QZ._correctCount)
     +tile('qzs-wrg','Wrong Answers',QZ._wrongCount)
-    +tile('qzs-neg','Negative Marks',QZ._neg?'-'+QZ._neg:'0')
-    +tile('qzs-fin','Final Score',QZ._resultScore+'<span style="font-size:.7rem;color:var(--t2)"> / '+QZ._resultMax+'</span>')
+    +tile('qzs-neg','Negative Marks',QZ._neg?'-'+num(QZ._neg):'0')
     +'</div>'
     +'<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">'
     +'<button class="btn bp" onclick="enterQuizReview()">View Detailed Solutions &amp; Stats</button>'
     +'<button class="btn bg" onclick="showS(\'quizlist\');renderQuizList()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Quiz List</button>'
-    +'</div></div></div>';
+    +'</div></div></div></div>';
   sc.style.display="block";
 }
 function enterQuizReview(){
