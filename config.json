@@ -6692,6 +6692,726 @@
       "setNo": 2,
       "active": true,
       "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_0",
+      "topicId": null,
+      "text": "Which of the following is used to create tables and manage data in a structured way?",
+      "options": [
+        "Spreadsheet",
+        "Word processor",
+        "Database",
+        "Presentation",
+        "Browser"
+      ],
+      "correctIndex": 2,
+      "explanation": "A database is used to store and manage structured data.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_1",
+      "topicId": null,
+      "text": "The process of converting binary data into human-readable form is called:",
+      "options": [
+        "Encoding",
+        "Decoding",
+        "Encryption",
+        "Compression",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "Decoding converts encoded data into a human-readable or understandable form.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_2",
+      "topicId": null,
+      "text": "Which of the following is a DBMS software?",
+      "options": [
+        "MS Word",
+        "MS Excel",
+        "MS Access",
+        "MS PowerPoint",
+        "MS Outlook"
+      ],
+      "correctIndex": 2,
+      "explanation": "MS Access is database management software.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_3",
+      "topicId": null,
+      "text": "Which of the following is used to connect a computer to a network?",
+      "options": [
+        "NIC",
+        "CPU",
+        "RAM",
+        "ROM",
+        "ALU"
+      ],
+      "correctIndex": 0,
+      "explanation": "A NIC is used to connect a computer to a network.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_4",
+      "topicId": null,
+      "text": "1 Nibble equals how many bits?",
+      "options": [
+        "2",
+        "4",
+        "8",
+        "16",
+        "32"
+      ],
+      "correctIndex": 1,
+      "explanation": "One nibble consists of 4 bits.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_5",
+      "topicId": null,
+      "text": "The full form of CPU is:",
+      "options": [
+        "Central Processing Unit",
+        "Central Program Unit",
+        "Control Processing Unit",
+        "Computer Processing Unit",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "CPU stands for Central Processing Unit.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_6",
+      "topicId": null,
+      "text": "In MS Excel, a cell reference that does not change when copied is called:",
+      "options": [
+        "Relative reference",
+        "Absolute reference",
+        "Mixed reference",
+        "Floating reference",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "An absolute reference remains fixed when copied.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_7",
+      "topicId": null,
+      "text": "Which of the following is NOT a type of computer memory?",
+      "options": [
+        "RAM",
+        "ROM",
+        "Cache",
+        "CPU",
+        "Hard Disk"
+      ],
+      "correctIndex": 3,
+      "explanation": "CPU is a processing unit, not a type of computer memory.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_8",
+      "topicId": null,
+      "text": "Which of the following is an example of application software?",
+      "options": [
+        "Windows OS",
+        "Linux",
+        "MS Excel",
+        "UNIX",
+        "DOS"
+      ],
+      "correctIndex": 2,
+      "explanation": "MS Excel is application software.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_9",
+      "topicId": null,
+      "text": "Symbol used for absolute cell reference in Excel is:",
+      "options": [
+        "#",
+        "$",
+        "&",
+        "%",
+        "@"
+      ],
+      "correctIndex": 1,
+      "explanation": "The $ symbol is used for absolute cell references in Excel.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_10",
+      "topicId": null,
+      "text": "Convert binary number 1010 to decimal:",
+      "options": [
+        "8",
+        "10",
+        "12",
+        "14",
+        "16"
+      ],
+      "correctIndex": 1,
+      "explanation": "1010₂ = 8 + 2 = 10₁₀.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_11",
+      "topicId": null,
+      "text": "Which generation of computers used microprocessors?",
+      "options": [
+        "First",
+        "Second",
+        "Third",
+        "Fourth",
+        "Fifth"
+      ],
+      "correctIndex": 3,
+      "explanation": "The fourth generation of computers used microprocessors.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_12",
+      "topicId": null,
+      "text": "Full form of NIC is:",
+      "options": [
+        "Network Interface Card",
+        "Network Internal Card",
+        "New Interface Card",
+        "Network Input Card",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "NIC stands for Network Interface Card.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_13",
+      "topicId": null,
+      "text": "Which software helps in managing and organizing data in tables?",
+      "options": [
+        "MS Word",
+        "MS Excel",
+        "MS Access",
+        "MS PowerPoint",
+        "MS Outlook"
+      ],
+      "correctIndex": 2,
+      "explanation": "MS Access is used to manage structured data in tables and databases.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_14",
+      "topicId": null,
+      "text": "Which of the following is the fastest memory among the options?",
+      "options": [
+        "Hard Disk",
+        "RAM",
+        "Cache Memory",
+        "CD-ROM",
+        "Pen Drive"
+      ],
+      "correctIndex": 2,
+      "explanation": "Among the listed options, cache memory is the fastest.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_15",
+      "topicId": null,
+      "text": "Which part of the computer performs arithmetic and logical operations?",
+      "options": [
+        "Control Unit",
+        "ALU",
+        "Memory Unit",
+        "Input Unit",
+        "Output Unit"
+      ],
+      "correctIndex": 1,
+      "explanation": "The ALU performs arithmetic and logical operations.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_16",
+      "topicId": null,
+      "text": "Which of the following is an example of system software?",
+      "options": [
+        "MS Word",
+        "MS Excel",
+        "Operating System",
+        "PowerPoint",
+        "Access"
+      ],
+      "correctIndex": 2,
+      "explanation": "An operating system is system software.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_17",
+      "topicId": null,
+      "text": "Which of the following is a valid hexadecimal digit?",
+      "options": [
+        "G",
+        "H",
+        "A",
+        "I",
+        "J"
+      ],
+      "correctIndex": 2,
+      "explanation": "A is a valid hexadecimal digit; hexadecimal uses 0–9 and A–F.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_18",
+      "topicId": null,
+      "text": "ROM is a type of:",
+      "options": [
+        "Volatile memory",
+        "Non-volatile memory",
+        "Temporary memory",
+        "Cache only",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "ROM is non-volatile memory and retains its contents without power.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_19",
+      "topicId": null,
+      "text": "Shortcut key to open a new document in MS Word is:",
+      "options": [
+        "Ctrl + N",
+        "Ctrl + O",
+        "Ctrl + S",
+        "Ctrl + P",
+        "Ctrl + W"
+      ],
+      "correctIndex": 0,
+      "explanation": "Ctrl + N is the shortcut for creating a new document.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_20",
+      "topicId": null,
+      "text": "Shortcut key to save a document in MS Word / Excel is:",
+      "options": [
+        "Ctrl + N",
+        "Ctrl + O",
+        "Ctrl + S",
+        "Ctrl + P",
+        "Ctrl + W"
+      ],
+      "correctIndex": 2,
+      "explanation": "Ctrl + S is the shortcut for saving a document or workbook.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_21",
+      "topicId": null,
+      "text": "Which of the following is a network interface card?",
+      "options": [
+        "NIC",
+        "CPU",
+        "RAM",
+        "ROM",
+        "ALU"
+      ],
+      "correctIndex": 0,
+      "explanation": "NIC is the network interface card used to connect a computer to a network.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_22",
+      "topicId": null,
+      "text": "In MS Excel, which function counts the number of cells that contain numbers?",
+      "options": [
+        "=SUM()",
+        "=COUNT()",
+        "=AVERAGE()",
+        "=MAX()",
+        "=MIN()"
+      ],
+      "correctIndex": 1,
+      "explanation": "COUNT() counts cells containing numbers.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_23",
+      "topicId": null,
+      "text": "Base of the hexadecimal number system is:",
+      "options": [
+        "2",
+        "8",
+        "10",
+        "16",
+        "4"
+      ],
+      "correctIndex": 3,
+      "explanation": "The hexadecimal number system has base 16.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_24",
+      "topicId": null,
+      "text": "Which of the following file formats is commonly used for animated images on the web?",
+      "options": [
+        "JPG",
+        "PNG",
+        "GIF",
+        "BMP",
+        "TIFF"
+      ],
+      "correctIndex": 2,
+      "explanation": "GIF is commonly used for animated images on the web.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_25",
+      "topicId": null,
+      "text": "Full form of GIF is:",
+      "options": [
+        "Graphics Interchange Format",
+        "Graphical Image Format",
+        "General Image File",
+        "Global Interchange Format",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "GIF stands for Graphics Interchange Format.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_26",
+      "topicId": null,
+      "text": "The smallest unit of data in a computer is:",
+      "options": [
+        "Byte",
+        "Bit",
+        "Nibble",
+        "Kilobyte",
+        "Word"
+      ],
+      "correctIndex": 1,
+      "explanation": "A bit is the smallest unit of data.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_27",
+      "topicId": null,
+      "text": "RAM is a type of:",
+      "options": [
+        "Permanent memory",
+        "Volatile memory",
+        "Secondary storage",
+        "Optical memory",
+        "Magnetic memory"
+      ],
+      "correctIndex": 1,
+      "explanation": "RAM is volatile memory and loses stored data when power is removed.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_28",
+      "topicId": null,
+      "text": "Base of the binary number system is:",
+      "options": [
+        "2",
+        "8",
+        "10",
+        "16",
+        "4"
+      ],
+      "correctIndex": 0,
+      "explanation": "The binary number system has base 2.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_29",
+      "topicId": null,
+      "text": "Which number system uses only two digits 0 and 1?",
+      "options": [
+        "Decimal",
+        "Binary",
+        "Octal",
+        "Hexadecimal",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "The binary number system uses only 0 and 1.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_30",
+      "topicId": null,
+      "text": "In MS Word, the option to change page orientation (Portrait/Landscape) is found under:",
+      "options": [
+        "Home tab",
+        "Insert tab",
+        "Layout / Page Layout tab",
+        "Review tab",
+        "View tab"
+      ],
+      "correctIndex": 2,
+      "explanation": "Page orientation settings such as Portrait and Landscape are found under Layout/Page Layout.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_31",
+      "topicId": null,
+      "text": "Which of the following is an example of secondary memory?",
+      "options": [
+        "RAM",
+        "Cache",
+        "Hard Disk",
+        "Registers",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "A hard disk is an example of secondary memory.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_32",
+      "topicId": null,
+      "text": "Shortcut key to print a document is:",
+      "options": [
+        "Ctrl + N",
+        "Ctrl + O",
+        "Ctrl + S",
+        "Ctrl + P",
+        "Ctrl + W"
+      ],
+      "correctIndex": 3,
+      "explanation": "Ctrl + P is the shortcut for printing.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_33",
+      "topicId": null,
+      "text": "Convert decimal number 15 to binary:",
+      "options": [
+        "1110",
+        "1111",
+        "1101",
+        "1011",
+        "1001"
+      ],
+      "correctIndex": 1,
+      "explanation": "15 in decimal is 1111 in binary.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_34",
+      "topicId": null,
+      "text": "Primary key in a database is used to:",
+      "options": [
+        "Store images",
+        "Uniquely identify each record",
+        "Sort data only",
+        "Delete data",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "A primary key uniquely identifies each record in a database.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_35",
+      "topicId": null,
+      "text": "DBMS stands for:",
+      "options": [
+        "Database Management System",
+        "Data Base Memory System",
+        "Digital Base Management System",
+        "Data Backup Management System",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "DBMS stands for Database Management System.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_36",
+      "topicId": null,
+      "text": "In MS Excel, which function returns the largest value in a range?",
+      "options": [
+        "=SUM()",
+        "=COUNT()",
+        "=AVERAGE()",
+        "=MAX()",
+        "=MIN()"
+      ],
+      "correctIndex": 3,
+      "explanation": "MAX() returns the largest value in a selected range.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_37",
+      "topicId": null,
+      "text": "Which of the following is used to store large amounts of data permanently?",
+      "options": [
+        "RAM",
+        "Cache",
+        "Hard Disk Drive",
+        "Registers",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "A hard disk drive is used for permanent storage of large amounts of data.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_38",
+      "topicId": null,
+      "text": "GIF is a type of:",
+      "options": [
+        "Audio file",
+        "Image file format",
+        "Video file",
+        "Document file",
+        "Spreadsheet"
+      ],
+      "correctIndex": 1,
+      "explanation": "GIF is an image file format.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791478808623_39",
+      "topicId": null,
+      "text": "Which of the following is an example of primary memory?",
+      "options": [
+        "Hard Disk",
+        "CD-ROM",
+        "RAM",
+        "Pen Drive",
+        "DVD"
+      ],
+      "correctIndex": 2,
+      "explanation": "RAM is an example of primary memory.",
+      "difficulty": "medium",
+      "setNo": 3,
+      "active": true,
+      "productIds": []
     }
   ],
   "quizSets": [
@@ -6710,6 +7430,17 @@
       "id": "qs_1791478012260",
       "setNo": 2,
       "title": "RRB PO 2022 Memory Based Questions",
+      "timeLimitMin": 15,
+      "negMarkEnabled": true,
+      "negMarkValue": 0.125,
+      "marksPerQuestion": 0.5,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qs_1791478682253",
+      "setNo": 3,
+      "title": "RRB PO 2023 Memory Based Questions",
       "timeLimitMin": 15,
       "negMarkEnabled": true,
       "negMarkValue": 0.125,
