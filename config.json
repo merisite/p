@@ -13138,7 +13138,7 @@
     {
       "id": "qq_1791570333230_37",
       "topicId": null,
-      "text": "Which malware does not replicate and reproduce through infection, according to the lesson?",
+      "text": "Which malware does not replicate and reproduce through infection?",
       "options": [
         "Computer virus",
         "Worm",
@@ -13151,7 +13151,12 @@
       "difficulty": "medium",
       "setNo": 11,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
     },
     {
       "id": "qq_1791570333230_38",
