@@ -9568,6 +9568,726 @@
       "setNo": 6,
       "active": true,
       "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_0",
+      "topicId": null,
+      "text": "What colour is the USB 3.0 port?",
+      "options": [
+        "Black",
+        "White",
+        "Blue",
+        "Red",
+        "Yellow"
+      ],
+      "correctIndex": 2,
+      "explanation": "USB 3.0 ports are typically blue to signify their faster data transfer speeds compared to older USB versions like USB 2.0 (black) or USB 1.0/1.1 (white).",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_1",
+      "topicId": null,
+      "text": "How many characters can a standard 7-bit ASCII code uniquely represent?",
+      "options": [
+        "64",
+        "128",
+        "256",
+        "512",
+        "1024"
+      ],
+      "correctIndex": 1,
+      "explanation": "A 7-bit code can represent 2^7 = 128 unique characters or values.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_2",
+      "topicId": null,
+      "text": "In MS Word, a red wavy line under a word usually indicates which type of error?",
+      "options": [
+        "Grammatical error",
+        "Spelling error",
+        "Formatting error",
+        "Style error",
+        "Contextual error"
+      ],
+      "correctIndex": 1,
+      "explanation": "Microsoft Word uses a red wavy underline to flag potential spelling mistakes, indicating the word is not found in its dictionary.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_3",
+      "topicId": null,
+      "text": "The Indian supercomputer PARAM belongs to which generation of computers?",
+      "options": [
+        "Third",
+        "Fourth",
+        "Fifth",
+        "Sixth",
+        "Second"
+      ],
+      "correctIndex": 2,
+      "explanation": "The fifth generation of computers is characterized by advancements in artificial intelligence and parallel processing, which includes supercomputers like PARAM.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_4",
+      "topicId": null,
+      "text": "Windows Vista is classified as which type of software?",
+      "options": [
+        "Application software",
+        "Utility software",
+        "Operating System",
+        "Firmware",
+        "Middleware"
+      ],
+      "correctIndex": 2,
+      "explanation": "An operating system manages a computer's hardware and software resources, and Windows Vista performs this function.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_5",
+      "topicId": null,
+      "text": "Which of the following is NOT a storage device?",
+      "options": [
+        "Hard Disk Drive",
+        "Compact Disc",
+        "DVD",
+        "Printer",
+        "Solid State Drive"
+      ],
+      "correctIndex": 3,
+      "explanation": "A printer is an output device that produces hard copies of data, rather than storing data itself.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_6",
+      "topicId": null,
+      "text": "In the Normal View of MS PowerPoint, where do the slide thumbnails appear?",
+      "options": [
+        "Top of the screen",
+        "Bottom of the screen",
+        "Right side",
+        "Left side",
+        "Centre"
+      ],
+      "correctIndex": 3,
+      "explanation": "In PowerPoint's Normal View, slide thumbnails are displayed in a pane on the left side of the screen for easy navigation.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_7",
+      "topicId": null,
+      "text": "Which keyboard shortcut hides a selected column in MS Excel?",
+      "options": [
+        "Ctrl + 9",
+        "Ctrl + 0",
+        "Ctrl + H",
+        "Alt + 0",
+        "Shift + 0"
+      ],
+      "correctIndex": 1,
+      "explanation": "The keyboard shortcut Ctrl + 0 is used in Microsoft Excel to hide selected columns.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_8",
+      "topicId": null,
+      "text": "Which malware generates income by forcing users to view advertisements?",
+      "options": [
+        "Spyware",
+        "Ransomware",
+        "Adware",
+        "Trojan Horse",
+        "Worm"
+      ],
+      "correctIndex": 2,
+      "explanation": "Adware is software designed to display advertisements, often without the user's consent, to generate revenue for its creators.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_9",
+      "topicId": null,
+      "text": "Which of the following is primarily a search engine and not a web browser?",
+      "options": [
+        "Google Chrome",
+        "Mozilla Firefox",
+        "Internet Explorer",
+        "Bing",
+        "Safari"
+      ],
+      "correctIndex": 3,
+      "explanation": "Bing is a search engine used to find information on the internet, whereas Google Chrome, Mozilla Firefox, Internet Explorer, and Safari are web browsers used to access websites.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_10",
+      "topicId": null,
+      "text": "An optical disc that can be written only once but read multiple times is known as:",
+      "options": [
+        "CD-ROM",
+        "CD-RW",
+        "CD-R",
+        "DVD-RW",
+        "Blu-ray Disc"
+      ],
+      "correctIndex": 2,
+      "explanation": "A CD-R (Compact Disc-Recordable) allows data to be written once, after which it can only be read.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_11",
+      "topicId": null,
+      "text": "The Sanchar Saathi portal was launched by which ministry?",
+      "options": [
+        "Ministry of Electronics & Information Technology",
+        "Ministry of Home Affairs",
+        "Ministry of Communications",
+        "Ministry of Education",
+        "Ministry of Finance"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Sanchar Saathi portal, aimed at empowering citizens with mobile connection management and fraud prevention, was launched by the Ministry of Communications, Government of India.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_12",
+      "topicId": null,
+      "text": "Which organisation developed the Sanchar Saathi application?",
+      "options": [
+        "MeitY",
+        "Department of Telecommunications (DoT)",
+        "TRAI",
+        "National Informatics Centre",
+        "CERT-In"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Department of Telecommunications (DoT) under the Ministry of Communications developed the Sanchar Saathi platform.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_13",
+      "topicId": null,
+      "text": "What is the primary purpose of the Sanchar Saathi application?",
+      "options": [
+        "Online shopping",
+        "Social networking",
+        "Preventing mobile theft and controlling telecom fraud",
+        "Digital payments",
+        "Health monitoring"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Sanchar Saathi portal helps citizens manage their mobile connections, report stolen phones, and combat telecom fraud.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_14",
+      "topicId": null,
+      "text": "Which feature of Sanchar Saathi is used to block a stolen mobile phone?",
+      "options": [
+        "DigiLocker",
+        "CEIR",
+        "UPI",
+        "Aadhaar linking",
+        "FASTag"
+      ],
+      "correctIndex": 1,
+      "explanation": "CEIR (Central Equipment Identity Register) is the system used within Sanchar Saathi to block stolen mobile phones by their IMEI number.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_15",
+      "topicId": null,
+      "text": "Who launched the Sanchar Saathi application?",
+      "options": [
+        "Prime Minister Narendra Modi",
+        "Ashwini Vaishnaw",
+        "Ravi Shankar Prasad",
+        "Amit Shah",
+        "Nirmala Sitharaman"
+      ],
+      "correctIndex": 1,
+      "explanation": "Shri Ashwini Vaishnaw, the Union Minister for Communications, Electronics and Information Technology, launched the Sanchar Saathi portal.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_16",
+      "topicId": null,
+      "text": "In which year was Sanchar Saathi launched by the Government of India?",
+      "options": [
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2020"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Sanchar Saathi portal was launched in May 2023.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_17",
+      "topicId": null,
+      "text": "Which Indian application is regarded as an alternative to Twitter (X)?",
+      "options": [
+        "ShareChat",
+        "Roposo",
+        "Koo",
+        "Moj",
+        "Chingari"
+      ],
+      "correctIndex": 2,
+      "explanation": "Koo is an Indian micro-blogging platform that has been widely seen as a domestic alternative to Twitter.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_18",
+      "topicId": null,
+      "text": "What does the HTTP status code 404 indicate?",
+      "options": [
+        "Server overloaded",
+        "File permanently moved",
+        "Page Not Found",
+        "Access forbidden",
+        "Internal server error"
+      ],
+      "correctIndex": 2,
+      "explanation": "An HTTP 404 error means the web server could not find the requested resource (page or file) on the server.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_19",
+      "topicId": null,
+      "text": "Which part of the CPU performs arithmetic and logical operations?",
+      "options": [
+        "Control Unit",
+        "ALU",
+        "Register",
+        "Cache Memory",
+        "Memory Unit"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Arithmetic Logic Unit (ALU) is a fundamental component of the CPU responsible for carrying out arithmetic and bitwise logical operations.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_20",
+      "topicId": null,
+      "text": "The time interval between providing input to a program and receiving its output is called:",
+      "options": [
+        "Turnaround time",
+        "Waiting time",
+        "Execution time",
+        "Response time",
+        "Throughput"
+      ],
+      "correctIndex": 2,
+      "explanation": "Execution time is the duration a program runs to process input and produce output.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_21",
+      "topicId": null,
+      "text": "Adding more of which memory component usually improves overall PC performance?",
+      "options": [
+        "ROM",
+        "Cache",
+        "RAM",
+        "Virtual Memory",
+        "Flash Memory"
+      ],
+      "correctIndex": 2,
+      "explanation": "Increasing the amount of RAM (Random Access Memory) allows the computer to hold more data and programs actively in use, reducing the need to access slower storage, thereby improving performance.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_22",
+      "topicId": null,
+      "text": "Which of the following is NOT an antivirus software?",
+      "options": [
+        "Norton",
+        "McAfee",
+        "Bitdefender",
+        "Code Red",
+        "Malwarebytes"
+      ],
+      "correctIndex": 3,
+      "explanation": "Code Red was a destructive computer worm, not a protective antivirus software.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_23",
+      "topicId": null,
+      "text": "Where is the BIOS firmware stored in a computer?",
+      "options": [
+        "RAM",
+        "Hard Disk",
+        "ROM",
+        "Cache",
+        "SSD"
+      ],
+      "correctIndex": 2,
+      "explanation": "BIOS firmware is stored in non-volatile memory, typically ROM (Read-Only Memory) or its modern equivalent like flash memory, on the motherboard.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_24",
+      "topicId": null,
+      "text": "Which OSI layer is responsible for reliable, error-free delivery of data frames?",
+      "options": [
+        "Physical Layer",
+        "Network Layer",
+        "Data Link Layer",
+        "Transport Layer",
+        "Session Layer"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Data Link Layer (Layer 2) of the OSI model handles error detection, correction, and flow control for data frames exchanged between adjacent network nodes.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_25",
+      "topicId": null,
+      "text": "Which web browser was released in 2003 as the default browser for Macintosh computers?",
+      "options": [
+        "Chrome",
+        "Firefox",
+        "Internet Explorer",
+        "Safari",
+        "Opera"
+      ],
+      "correctIndex": 3,
+      "explanation": "Safari was developed by Apple and first released in 2003 as the default browser for Mac OS X.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_26",
+      "topicId": null,
+      "text": "What are the bit lengths of IPv4 and IPv6 addresses respectively?",
+      "options": [
+        "64-bit and 128-bit",
+        "32-bit and 128-bit",
+        "32-bit and 64-bit",
+        "48-bit and 128-bit",
+        "16-bit and 32-bit"
+      ],
+      "correctIndex": 1,
+      "explanation": "IPv4 addresses are 32 bits long, while IPv6 addresses are 128 bits long, providing a significantly larger address space.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_27",
+      "topicId": null,
+      "text": "Which technology enables contactless payments through smartphones?",
+      "options": [
+        "Bluetooth",
+        "Infrared",
+        "NFC",
+        "Wi-Fi Direct",
+        "RFID only"
+      ],
+      "correctIndex": 2,
+      "explanation": "Near Field Communication (NFC) is the short-range wireless technology used by smartphones to facilitate contactless payments.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_28",
+      "topicId": null,
+      "text": "Which digital platform is primarily used for investing in mutual funds in India?",
+      "options": [
+        "Google Pay",
+        "PhonePe",
+        "Grow",
+        "Paytm",
+        "BHIM"
+      ],
+      "correctIndex": 2,
+      "explanation": "Groww is an Indian investment platform widely used for investing in mutual funds, stocks, and other financial instruments.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_29",
+      "topicId": null,
+      "text": "The gap between people who can use digital services and those who cannot is known as:",
+      "options": [
+        "Digital Gap",
+        "Digital Divide",
+        "Information Gap",
+        "Technology Divide",
+        "Knowledge Divide"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Digital Divide refers to the disparity in access to and use of digital technologies among different populations.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_30",
+      "topicId": null,
+      "text": "Who is popularly known as the Mother of the Internet?",
+      "options": [
+        "Ada Lovelace",
+        "Grace Hopper",
+        "Radia Perlman",
+        "Hedy Lamarr",
+        "Tim Berners-Lee"
+      ],
+      "correctIndex": 2,
+      "explanation": "Radia Perlman is credited as the 'Mother of the Internet' for her invention of the Spanning Tree Protocol (STP), crucial for network stability.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_31",
+      "topicId": null,
+      "text": "In MS Excel, the maximum width of a column is limited to how many characters?",
+      "options": [
+        "128",
+        "255",
+        "512",
+        "1024",
+        "64"
+      ],
+      "correctIndex": 1,
+      "explanation": "Microsoft Excel's default maximum column width is set at 255 characters.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_32",
+      "topicId": null,
+      "text": "Which programming language is primarily used in the development of ChatGPT?",
+      "options": [
+        "Java",
+        "C++",
+        "Python",
+        "Ruby",
+        "JavaScript"
+      ],
+      "correctIndex": 2,
+      "explanation": "Python is the primary programming language used by OpenAI for developing and training large language models like ChatGPT due to its extensive libraries for AI and machine learning.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_33",
+      "topicId": null,
+      "text": "Which view in MS PowerPoint displays all slides as small thumbnails simultaneously?",
+      "options": [
+        "Normal View",
+        "Slide Show View",
+        "Slide Sorter View",
+        "Notes Page View",
+        "Outline View"
+      ],
+      "correctIndex": 2,
+      "explanation": "Slide Sorter View in PowerPoint presents all slides as miniature images, allowing users to easily reorder, delete, or add transitions.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_34",
+      "topicId": null,
+      "text": "What is the keyboard shortcut to apply superscript formatting in MS Word?",
+      "options": [
+        "Ctrl + =",
+        "Ctrl + Shift + +",
+        "Ctrl + Shift + =",
+        "Alt + Shift + +",
+        "Ctrl + +"
+      ],
+      "correctIndex": 1,
+      "explanation": "The keyboard shortcut Ctrl + Shift + + is used to apply superscript formatting to selected text in Microsoft Word.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_35",
+      "topicId": null,
+      "text": "What is the largest font size available in the default dropdown list of MS Word 365?",
+      "options": [
+        "48",
+        "60",
+        "72",
+        "96",
+        "36"
+      ],
+      "correctIndex": 2,
+      "explanation": "The default font size dropdown menu in Microsoft Word lists sizes up to 72 points.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_36",
+      "topicId": null,
+      "text": "Which of the following represents an absolute cell reference in MS Excel?",
+      "options": [
+        "A1",
+        "$A1",
+        "A$1",
+        "$A$9",
+        "A9$"
+      ],
+      "correctIndex": 3,
+      "explanation": "In Excel, an absolute cell reference is denoted by dollar signs before both the column letter and the row number, such as $A$9, ensuring it does not change when copied.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_37",
+      "topicId": null,
+      "text": "Which storage device is also commonly called a Flash Drive?",
+      "options": [
+        "Hard Disk",
+        "Optical Disc",
+        "Pen Drive / USB Drive",
+        "Magnetic Tape",
+        "Floppy Disk"
+      ],
+      "correctIndex": 2,
+      "explanation": "Pen Drives and USB Drives are commonly referred to as Flash Drives because they utilize flash memory technology.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_38",
+      "topicId": null,
+      "text": "In most email clients, deleted emails are moved to which folder?",
+      "options": [
+        "Inbox",
+        "Spam",
+        "Drafts",
+        "Trash / Deleted Items",
+        "Sent Items"
+      ],
+      "correctIndex": 3,
+      "explanation": "Deleted emails are typically moved to a 'Trash' or 'Deleted Items' folder, allowing for potential recovery before permanent deletion.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791544826817_39",
+      "topicId": null,
+      "text": "Which of the following groups contains only input devices?",
+      "options": [
+        "Light Pen, Scanner, Plotter",
+        "Monitor, Printer, Speaker",
+        "Light Pen, Scanner, OCR, MICR, Barcode Reader",
+        "Keyboard, Mouse, Projector",
+        "Touchscreen, Printer, Webcam"
+      ],
+      "correctIndex": 2,
+      "explanation": "Light Pen, Scanner, OCR, MICR, and Barcode Reader are all devices used to input data into a computer system.",
+      "difficulty": "medium",
+      "setNo": 7,
+      "active": true,
+      "productIds": []
     }
   ],
   "quizSets": [
@@ -9635,7 +10355,19 @@
       "id": "qs_1791542730045",
       "setNo": 6,
       "title": "Mock 01",
-      "timeLimitMin": 40,
+      "timeLimitMin": 15,
+      "negMarkEnabled": true,
+      "negMarkValue": 0.25,
+      "marksPerQuestion": 1,
+      "section": "mock",
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qs_1791544772012",
+      "setNo": 7,
+      "title": "Mock 02",
+      "timeLimitMin": 15,
       "negMarkEnabled": true,
       "negMarkValue": 0.25,
       "marksPerQuestion": 1,
