@@ -6669,20 +6669,25 @@
     {
       "id": "qq_1791478272425_39",
       "topicId": null,
-      "text": "According to the source, which combination can uniquely identify a computer/device on a network?",
+      "text": "Attempts by individuals to obtain confidential information from you by false pretenses is called?",
       "options": [
-        "MAC Address only",
-        "IP Address only",
-        "Both MAC and IP Address",
-        "Port Number",
+        "Phishing",
+        "Hacking",
+        "Spoofing",
+        "Spamming",
         "None of these"
       ],
-      "correctIndex": 2,
-      "explanation": "The source marks both MAC and IP Address as the answer. A MAC address identifies a network interface, while an IP address identifies a device/interface for network communication.",
+      "correctIndex": 0,
+      "explanation": "Phishing uses deceptive messages or websites to trick people into revealing sensitive information.",
       "difficulty": "medium",
       "setNo": 2,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
     },
     {
       "id": "qq_1791479777163_0",
