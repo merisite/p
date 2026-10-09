@@ -11728,6 +11728,726 @@
       "setNo": 9,
       "active": true,
       "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_0",
+      "topicId": null,
+      "text": "HTTP is a prefix of a what that specifies the location/protocol used to access a resource?",
+      "options": [
+        "Web browser",
+        "IP address",
+        "URL (Uniform Resource Locator)",
+        "Domain registrar",
+        "Search engine"
+      ],
+      "correctIndex": 2,
+      "explanation": "A URL identifies the location of a resource on the web and can include a scheme such as http or https.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_1",
+      "topicId": null,
+      "text": "Which blank CD can be written, read, erased and written again?",
+      "options": [
+        "CD-ROM",
+        "CD-R",
+        "CD-RW (CD-ReWritable)",
+        "DVD-ROM",
+        "Blu-ray ROM"
+      ],
+      "correctIndex": 2,
+      "explanation": "CD-RW media can be erased and rewritten multiple times, unlike CD-R which can generally be written only once, and CD-ROM which is read-only.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_2",
+      "topicId": null,
+      "text": "What refers to the design and placement of different elements on a PowerPoint slide?",
+      "options": [
+        "Slide transition",
+        "Slide layout",
+        "Animation pane",
+        "Slide timing",
+        "Theme colour"
+      ],
+      "correctIndex": 1,
+      "explanation": "A slide layout determines the arrangement of placeholders and content areas such as title, text, and images on a slide.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_3",
+      "topicId": null,
+      "text": "Duplication of data in a database is known as what?",
+      "options": [
+        "Data integrity",
+        "Data redundancy",
+        "Data validation",
+        "Data normalization",
+        "Data encryption"
+      ],
+      "correctIndex": 1,
+      "explanation": "Data redundancy means storing the same data unnecessarily in multiple places, which can waste storage and create inconsistencies.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_4",
+      "topicId": null,
+      "text": "Which of the following is a relative cell reference in Excel?",
+      "options": [
+        "$A$1",
+        "A$1",
+        "$A1",
+        "C2",
+        "$C$2"
+      ],
+      "correctIndex": 3,
+      "explanation": "A relative cell reference in Excel does not contain dollar signs and changes when a formula is copied to another cell.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_5",
+      "topicId": null,
+      "text": "Which common cyberattack targets individuals through emails, text messages, phone calls and other communications?",
+      "options": [
+        "Phishing",
+        "Defragmentation",
+        "Data compression",
+        "Load balancing",
+        "Disk formatting"
+      ],
+      "correctIndex": 0,
+      "explanation": "Phishing attempts to trick individuals into revealing sensitive information or taking harmful actions, often via email, text, or phone calls.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_6",
+      "topicId": null,
+      "text": "What is the keyboard shortcut to insert a SUM formula in MS Excel?",
+      "options": [
+        "Ctrl + S",
+        "Alt + =",
+        "Ctrl + Shift + S",
+        "Alt + Enter",
+        "Ctrl + Alt + ="
+      ],
+      "correctIndex": 1,
+      "explanation": "Alt + = (Alt plus the equals key) invokes the AutoSum feature in Excel, which inserts a SUM formula for a selected range of cells.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_7",
+      "topicId": null,
+      "text": "Which memory is permanent and stores BIOS instructions needed to start a computer?",
+      "options": [
+        "RAM",
+        "ROM",
+        "Cache",
+        "Register",
+        "Virtual memory"
+      ],
+      "correctIndex": 1,
+      "explanation": "ROM (Read-Only Memory) is non-volatile memory that stores firmware, including the BIOS, which is essential for booting a computer.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_8",
+      "topicId": null,
+      "text": "What is the keyboard shortcut to change the font in MS Word?",
+      "options": [
+        "Ctrl + B",
+        "Ctrl + I",
+        "Ctrl + D or Ctrl + Shift + F",
+        "Ctrl + U",
+        "Ctrl + M"
+      ],
+      "correctIndex": 2,
+      "explanation": "Ctrl+D opens the Font dialog box in Microsoft Word, allowing font changes, while Ctrl+Shift+F can also be used in many versions to access font settings.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_9",
+      "topicId": null,
+      "text": "Which memory stores frequently used information from RAM so it can be accessed faster?",
+      "options": [
+        "ROM",
+        "Cache memory",
+        "Optical memory",
+        "Virtual memory",
+        "Magnetic tape"
+      ],
+      "correctIndex": 1,
+      "explanation": "Cache memory stores frequently accessed data from RAM to reduce the time it takes for the CPU to access that data.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_10",
+      "topicId": null,
+      "text": "What is the most common Internet domain suffix mentioned in the lesson?",
+      "options": [
+        ".org",
+        ".edu",
+        ".gov",
+        ".com",
+        ".int"
+      ],
+      "correctIndex": 3,
+      "explanation": "The .com top-level domain, originally for commercial entities, is the most common and widely used internet domain suffix.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_11",
+      "topicId": null,
+      "text": "Which protocol is used for remote access or remote login, according to the lesson?",
+      "options": [
+        "FTP",
+        "HTTP",
+        "Telnet",
+        "SMTP",
+        "SNMP"
+      ],
+      "correctIndex": 2,
+      "explanation": "Telnet is a protocol used for remote login and command-line access, though it transmits data without encryption.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_12",
+      "topicId": null,
+      "text": "Simple Mail Transfer Protocol (SMTP) is used to transfer which type of files, according to the lesson?",
+      "options": [
+        "Image files only",
+        "Audio files only",
+        "Text files (as stated in the video)",
+        "Executable files only",
+        "Database files only"
+      ],
+      "correctIndex": 2,
+      "explanation": "SMTP is primarily used to send and relay email messages, which are typically text-based, though modern email can carry attachments via MIME.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_13",
+      "topicId": null,
+      "text": "What is the default command-line interpreter/interface commonly opened in Windows by typing CMD?",
+      "options": [
+        "Windows PowerShell",
+        "Command Prompt (cmd.exe)",
+        "Task Manager",
+        "File Explorer",
+        "Registry Editor"
+      ],
+      "correctIndex": 1,
+      "explanation": "Typing CMD in Windows typically opens the Command Prompt (cmd.exe), the traditional command-line interface.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_14",
+      "topicId": null,
+      "text": "Which keyboard shortcut opens a file or displays the Open dialog?",
+      "options": [
+        "Ctrl + N",
+        "Ctrl + O",
+        "Ctrl + S",
+        "Ctrl + P",
+        "Ctrl + W"
+      ],
+      "correctIndex": 1,
+      "explanation": "Ctrl+O is the standard keyboard shortcut to open a file or display the Open dialog box in many applications.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_15",
+      "topicId": null,
+      "text": "What is the maximum zoom percentage in Microsoft PowerPoint, according to the lesson?",
+      "options": [
+        "100%",
+        "200%",
+        "300%",
+        "400%",
+        "500%"
+      ],
+      "correctIndex": 3,
+      "explanation": "According to the lesson, Microsoft PowerPoint and Excel have a maximum zoom percentage of 400%.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_16",
+      "topicId": null,
+      "text": "What is the built-in browser provided with Windows 10 or Windows 11?",
+      "options": [
+        "Mozilla Firefox",
+        "Google Chrome",
+        "Microsoft Edge",
+        "Opera",
+        "Safari"
+      ],
+      "correctIndex": 2,
+      "explanation": "Microsoft Edge is the default web browser included with Windows 10 and Windows 11.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_17",
+      "topicId": null,
+      "text": "What is the name of the signal sent to indicate that data has been received successfully?",
+      "options": [
+        "SYN (Synchronize)",
+        "ACK (Acknowledgement)",
+        "FIN (Finish)",
+        "RST (Reset)",
+        "DNS (Domain Name System)"
+      ],
+      "correctIndex": 1,
+      "explanation": "An ACK (Acknowledgement) signal is sent to confirm that data has been received successfully.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_18",
+      "topicId": null,
+      "text": "Computer memory capacity is normally measured in what?",
+      "options": [
+        "Hertz",
+        "Bytes",
+        "Pixels",
+        "Volts",
+        "Decibels"
+      ],
+      "correctIndex": 1,
+      "explanation": "Computer memory capacity is typically measured in Bytes, and larger units derived from it such as Kilobytes (KB), Megabytes (MB), Gigabytes (GB), and Terabytes (TB).",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_19",
+      "topicId": null,
+      "text": "Cold booting and warm booting are the two types of what?",
+      "options": [
+        "Formatting",
+        "Booting",
+        "Debugging",
+        "Compiling",
+        "Defragmentation"
+      ],
+      "correctIndex": 1,
+      "explanation": "Cold booting and warm booting are the two types of booting, which refer to the process of starting or restarting a computer.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_20",
+      "topicId": null,
+      "text": "What is the default subnet mask for a Class C network?",
+      "options": [
+        "255.0.0.0",
+        "255.255.0.0",
+        "255.255.255.0",
+        "255.255.255.128",
+        "255.255.255.255"
+      ],
+      "correctIndex": 2,
+      "explanation": "The default subnet mask for a Class C network in IPv4 addressing is 255.255.255.0.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_21",
+      "topicId": null,
+      "text": "Which of the following is an example of a toggle key?",
+      "options": [
+        "Shift",
+        "Ctrl",
+        "Alt",
+        "Scroll Lock",
+        "Tab"
+      ],
+      "correctIndex": 3,
+      "explanation": "Scroll Lock is a toggle key, meaning it switches a function between two states (on or off) each time it is pressed, similar to Caps Lock and Num Lock.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_22",
+      "topicId": null,
+      "text": "In MS Word 365, which shortcut removes paragraph formatting?",
+      "options": [
+        "Ctrl + P",
+        "Ctrl + Q",
+        "Ctrl + E",
+        "Ctrl + Shift + N",
+        "Ctrl + Space"
+      ],
+      "correctIndex": 1,
+      "explanation": "Ctrl+Q is the shortcut in MS Word 365 to remove paragraph formatting and revert to the default paragraph style.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_23",
+      "topicId": null,
+      "text": "In which computer generation were GUI-oriented input devices such as the mouse introduced, according to the lesson?",
+      "options": [
+        "First generation",
+        "Second generation",
+        "Third generation",
+        "Fourth generation",
+        "Fifth generation"
+      ],
+      "correctIndex": 3,
+      "explanation": "The lesson associates the introduction of GUI-oriented input devices like the mouse with the fourth generation of computers.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_24",
+      "topicId": null,
+      "text": "What is the return of an email message to its sender because of an error called?",
+      "options": [
+        "Email forwarding",
+        "Email spoofing",
+        "Bounced email (bounce mail)",
+        "Email archiving",
+        "Email encryption"
+      ],
+      "correctIndex": 2,
+      "explanation": "An email that cannot be delivered to its recipient and is returned to the sender is known as a bounced email.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_25",
+      "topicId": null,
+      "text": "Name the latest Mac operating-system version released in September 2025, according to the video.",
+      "options": [
+        "macOS 14 Sonoma",
+        "macOS 15 Sequoia",
+        "macOS 26 Tahoe",
+        "macOS 13 Ventura",
+        "macOS 27 Redwood"
+      ],
+      "correctIndex": 2,
+      "explanation": "According to the video, macOS 26 Tahoe was released in September 2025.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_26",
+      "topicId": null,
+      "text": "How many bits are used in an IPv4 address?",
+      "options": [
+        "8 bits",
+        "16 bits",
+        "32 bits",
+        "64 bits",
+        "128 bits"
+      ],
+      "correctIndex": 2,
+      "explanation": "An IPv4 address is 32 bits long, typically represented as four decimal numbers separated by dots.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_27",
+      "topicId": null,
+      "text": "What is the fourth layer of the OSI model?",
+      "options": [
+        "Physical layer",
+        "Data Link layer",
+        "Network layer",
+        "Transport layer",
+        "Session layer"
+      ],
+      "correctIndex": 3,
+      "explanation": "The fourth layer of the OSI model, counting from the bottom, is the Transport layer.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_28",
+      "topicId": null,
+      "text": "Which is NOT a property of RAM and ROM, according to the question?",
+      "options": [
+        "Volatile in nature",
+        "Non-volatile in nature",
+        "Malleable in nature",
+        "Electronic in nature",
+        "Used for data storage"
+      ],
+      "correctIndex": 2,
+      "explanation": "'Malleable in nature' is not a standard technical property describing computer memory like RAM or ROM.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_29",
+      "topicId": null,
+      "text": "How do you specify the cell range from A9 to A99 in Excel?",
+      "options": [
+        "A9-B99",
+        "A9:A99",
+        "A9;A99",
+        "A9/B99",
+        "A9:B9"
+      ],
+      "correctIndex": 1,
+      "explanation": "In Excel, a colon (:) is used to specify a range of cells, so A9:A99 denotes all cells from A9 down to A99 in column A.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_30",
+      "topicId": null,
+      "text": "Which keyboard shortcut opens the File menu in the current program?",
+      "options": [
+        "Ctrl + F",
+        "Alt + F",
+        "Ctrl + S",
+        "Alt + Tab",
+        "Ctrl + P"
+      ],
+      "correctIndex": 1,
+      "explanation": "Alt + F is the common keyboard shortcut to open the File menu in most Windows applications.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_31",
+      "topicId": null,
+      "text": "Which shortcut increases font size in PowerPoint?",
+      "options": [
+        "Ctrl + Shift + >",
+        "Ctrl + Shift + <",
+        "Ctrl + B",
+        "Ctrl + Shift + P",
+        "Alt + Shift + >"
+      ],
+      "correctIndex": 0,
+      "explanation": "The keyboard shortcut Ctrl + Shift + > increases the font size in Microsoft PowerPoint and other Office applications.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_32",
+      "topicId": null,
+      "text": "How many basic types of logic gates are listed in the lesson?",
+      "options": [
+        "Four",
+        "Five",
+        "Six",
+        "Seven",
+        "Eight"
+      ],
+      "correctIndex": 3,
+      "explanation": "The lesson lists seven basic types of logic gates: AND, OR, NOT, NAND, NOR, XOR, and XNOR.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_33",
+      "topicId": null,
+      "text": "Which shortcut key quickly centres text in a document?",
+      "options": [
+        "Ctrl + L",
+        "Ctrl + R",
+        "Ctrl + J",
+        "Ctrl + E",
+        "Ctrl + K"
+      ],
+      "correctIndex": 3,
+      "explanation": "Ctrl + E is the keyboard shortcut used in Microsoft Word to center-align the selected text or the current paragraph.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_34",
+      "topicId": null,
+      "text": "How many bits are used in an IPv6 address?",
+      "options": [
+        "32 bits",
+        "64 bits",
+        "96 bits",
+        "128 bits",
+        "256 bits"
+      ],
+      "correctIndex": 3,
+      "explanation": "An IPv6 address is 128 bits long, providing a vastly larger address space compared to IPv4.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_35",
+      "topicId": null,
+      "text": "What is Apple’s presentation software called?",
+      "options": [
+        "Pages",
+        "Numbers",
+        "Keynote",
+        "GarageBand",
+        "Final Cut Pro"
+      ],
+      "correctIndex": 2,
+      "explanation": "Keynote is the name of Apple's presentation software, similar to Microsoft PowerPoint.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_36",
+      "topicId": null,
+      "text": "What do coloured wavy lines under text in Microsoft Word indicate?",
+      "options": [
+        "A hyperlink is present",
+        "A comment is attached",
+        "Usually spelling, grammar or contextual/formatting issues",
+        "The document is read-only",
+        "The text is selected for copying"
+      ],
+      "correctIndex": 2,
+      "explanation": "Coloured wavy underlines in Microsoft Word typically indicate potential spelling, grammar, or contextual errors, with different colours often representing different types of issues.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_37",
+      "topicId": null,
+      "text": "Which of the following are examples of antivirus software?",
+      "options": [
+        "McAfee only",
+        "Norton only",
+        "Kaspersky only",
+        "Avast only",
+        "All of these are antivirus software"
+      ],
+      "correctIndex": 4,
+      "explanation": "McAfee, Norton, Kaspersky, and Avast are all well-known examples of antivirus software.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_38",
+      "topicId": null,
+      "text": "What is the file extension of Notepad text files?",
+      "options": [
+        ".docx",
+        ".rtf",
+        ".txt",
+        ".html",
+        ".csv"
+      ],
+      "correctIndex": 2,
+      "explanation": "Notepad is a plain-text editor, and files saved from it typically have the .txt file extension.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570182584_39",
+      "topicId": null,
+      "text": "Which statement about twisted-pair cable is correct, according to the lesson?",
+      "options": [
+        "It is used for telephone lines",
+        "It transmits data only through light",
+        "It requires a satellite dish",
+        "It is a wireless-only medium",
+        "It cannot carry network signals"
+      ],
+      "correctIndex": 0,
+      "explanation": "Twisted-pair cable, commonly used in telephone lines and Ethernet networks, consists of copper wires twisted together to reduce interference.",
+      "difficulty": "medium",
+      "setNo": 10,
+      "active": true,
+      "productIds": []
     }
   ],
   "quizSets": [
@@ -11831,6 +12551,18 @@
       "id": "qs_1791547176785",
       "setNo": 9,
       "title": "Mock 04",
+      "timeLimitMin": 15,
+      "negMarkEnabled": true,
+      "negMarkValue": 0.25,
+      "marksPerQuestion": 1,
+      "section": "mock",
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qs_1791570148540",
+      "setNo": 10,
+      "title": "Mock 05",
       "timeLimitMin": 15,
       "negMarkEnabled": true,
       "negMarkValue": 0.25,
