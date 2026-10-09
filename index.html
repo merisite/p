@@ -413,16 +413,9 @@ body #quizrun .exam-bar .btn.bg:hover{background:rgba(255,255,255,.14)!important
   .qzr-backdrop.open{display:block;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:399}
 }
 /* ---- Quiz runner: bank-exam CBT look (light exam paper, sub-bar, shaped palette) ---- */
-#quizrun{--qz-s:var(--bg2);--qz-s2:var(--bg3);--qz-b:var(--b);--qz-t:var(--t);--qz-m:var(--t2);--qz-a:var(--accent);--qz-sb:var(--bg3);--qz-sbb:var(--b);background:var(--bg);color:var(--t);border-radius:10px;padding:10px}
-/* Quiz screens follow the site theme; the accent is light blue instead of yellow */
-#quizlist,#quizinstr,#quizrun{--accent:#3b82f6;--ah:#2563eb;--adim:rgba(59,130,246,.10);--aborder:rgba(59,130,246,.38)}
-[data-mode="dark"] #quizlist,[data-mode="dark"] #quizinstr,[data-mode="dark"] #quizrun{--accent:#60a5fa;--ah:#3b82f6;--adim:rgba(96,165,250,.13);--aborder:rgba(96,165,250,.42)}
-#quizlist .q-item:hover{box-shadow:0 6px 20px rgba(59,130,246,.16)}
-.qzsec-tab{font-family:var(--font);font-size:.78rem;font-weight:700;padding:8px 18px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:all var(--tr)}
-.qzsec-tab:hover{border-color:var(--accent);color:var(--t)}
-.qzsec-tab.on{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-.qzsec-tab small{font-family:var(--mono);font-size:.62rem;font-weight:700;padding:1px 6px;border-radius:999px;background:rgba(127,127,127,.18)}
-.qzsec-tab.on small{background:rgba(255,255,255,.28)}
+#quizrun{--qz-s:var(--bg2);--qz-s2:var(--bg3);--qz-b:var(--b);--qz-t:var(--t);--qz-m:var(--t2);--qz-a:var(--accent);--qz-sb:var(--bg3);--qz-sbb:var(--b);color:var(--t);border-radius:10px;padding:10px}
+#quizlist .stab{display:inline-flex;align-items:center;gap:7px;padding:7px 16px;font-weight:700;font-size:.78rem}
+#quizlist .stab small{font-family:var(--mono);font-size:.62rem;font-weight:700;padding:1px 6px;border-radius:999px;background:rgba(127,127,127,.2)}
 #quizrun .exam-bar{margin-bottom:0;border-radius:8px 8px 0 0}
 #qzr-subbar{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;background:var(--qz-s);border:1px solid var(--b);border-top:none;padding:7px 14px;font-size:.74rem;color:var(--t2);margin-bottom:10px}
 #qzr-subbar b{color:var(--t)}
@@ -711,7 +704,7 @@ img.qzr-av{object-fit:cover}
    Because #exam/#fullmock are separate sibling containers, none of this
    touches them — they keep resolving the original [data-theme] variables
    exactly as before, so the exam module's own look is untouched. */
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,.cov,.panel-pop){
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun,.cov,.panel-pop){
   --r:20px;--rs:12px;--rl:26px;
   color:var(--t);
 }
@@ -719,7 +712,7 @@ img.qzr-av{object-fit:cover}
 /* Light / Dark mode — Navy & Gold, deliberately echoing the exam module's own
    "Clean & Blue" (light) and "Navy & Gold" (dark) themes so the whole platform
    reads as one coherent brand. Doesn't touch #exam/#fullmock (see note above). */
-[data-mode="light"] :is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,.cov,.panel-pop){
+[data-mode="light"] :is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun,.cov,.panel-pop){
   --bg:#F4F6FA;--bg2:#FFFFFF;--bg3:#E7ECF6;--bg4:#D8E2F2;
   --t:#16213A;--t2:#55617A;--t3:#B7C1D6;--b:#1C2A47;
   --accent:#A8791B;--ah:#8A6414;--adim:#F5E9C7;--aborder:#1C2A47;
@@ -732,7 +725,7 @@ img.qzr-av{object-fit:cover}
   --shadow:2px 2px 0 color-mix(in srgb,var(--b) 45%,transparent);
   --dotbg:radial-gradient(rgba(22,33,58,.09) 1px,transparent 1px);
 }
-[data-mode="dark"] :is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,.cov,.panel-pop){
+[data-mode="dark"] :is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun,.cov,.panel-pop){
   --bg:#0F1420;--bg2:#161C27;--bg3:#1C2333;--bg4:#232D40;
   --t:#E7ECF5;--t2:#8A93A8;--t3:#3A4150;--b:#C7D0E0;
   --accent:#E2B714;--ah:#F0C633;--adim:#2E2712;--aborder:#C7D0E0;
@@ -747,7 +740,7 @@ img.qzr-av{object-fit:cover}
 }
 [data-mode="light"]{--brut-fill:#E2B714;--brut-fill-t:#16213A;--brut-tint:#F5E9C7;}
 [data-mode="dark"]{--brut-fill:#E2B714;--brut-fill-t:#12151C;--brut-tint:#2E2712;}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays){
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun){
   background-color:var(--bg);
   color:var(--t);
   background-image:var(--dotbg);
@@ -755,8 +748,8 @@ img.qzr-av{object-fit:cover}
 }
 
 /* headline / label voice */
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) h1,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) h2,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) h1,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) h2,
 .h-title,.r-top h2,.hc-title,.hi-title,.oc-title,.tmode-t,#offers-head,#ml-exam-name,.trc-grade{
   font-family:'Space Grotesk',sans-serif;
 }
@@ -776,96 +769,96 @@ img.qzr-av{object-fit:cover}
 @media(max-width:640px){.nb-marquee{margin:0 -24px 24px}}
 
 /* buttons */
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,.cov,.panel-pop) .btn,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,.cov,.panel-pop) .tgs-cta,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .oc-link,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .oc-coupon-btn,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .clr-btn,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .lt-btn,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .back-btn{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun,.cov,.panel-pop) .btn,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun,.cov,.panel-pop) .tgs-cta,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .oc-link,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .oc-coupon-btn,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .clr-btn,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .lt-btn,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .back-btn{
   font-family:'Space Grotesk',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.02em;
   border:2px solid var(--b)!important;border-radius:999px;
   box-shadow:2px 2px 0 color-mix(in srgb,var(--b) 45%,transparent);transition:transform .12s ease,box-shadow .12s ease,background .12s ease,color .12s ease!important;
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,.cov,.panel-pop) .btn:hover,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .oc-link:hover,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .lt-btn:hover,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .back-btn:hover{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun,.cov,.panel-pop) .btn:hover,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .oc-link:hover,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .lt-btn:hover,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .back-btn:hover{
   transform:translate(-2px,-2px);box-shadow:3px 3px 0 color-mix(in srgb,var(--b) 40%,transparent);
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,.cov,.panel-pop) .btn:active{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun,.cov,.panel-pop) .btn:active{
   transform:translate(0,0);box-shadow:1px 1px 0 var(--b);
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,.cov,.panel-pop) .bp,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .oc-link,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .tgs-cta{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun,.cov,.panel-pop) .bp,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .oc-link,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .tgs-cta{
   background:var(--brut-fill)!important;color:var(--brut-fill-t)!important;box-shadow:2px 2px 0 color-mix(in srgb,var(--b) 45%,transparent);
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,.cov,.panel-pop) .bg,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .back-btn,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .clr-btn{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun,.cov,.panel-pop) .bg,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .back-btn,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .clr-btn{
   background:var(--bg2)!important;
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .clr-btn{color:var(--red)!important;border-color:var(--b)!important;}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .clr-btn:hover{background:var(--red)!important;color:var(--bg)!important;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .clr-btn{color:var(--red)!important;border-color:var(--b)!important;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .clr-btn:hover{background:var(--red)!important;color:var(--bg)!important;}
 
 /* pills — pattern for chips/tabs, thick-ish border, no heavy shadow (keeps dense rows calm) */
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) :is(.stab,.tob,.ptab,.tl-btn,.mtab){
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) :is(.stab,.tob,.ptab,.tl-btn,.mtab){
   border:2px solid var(--b);font-weight:600;
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) :is(.stab.on,.tob.on,.ptab.on,.tl-btn.on){
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) :is(.stab.on,.tob.on,.ptab.on,.tl-btn.on){
   background:var(--brut-fill);color:var(--brut-fill-t);
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) :is(.chip,.hi-badge,.hi-score-chip,.ftag,.lt-badge,.oc-price-save){
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) :is(.chip,.hi-badge,.hi-score-chip,.ftag,.lt-badge,.oc-price-save){
   border:2px solid var(--b);font-weight:600;border-radius:999px;
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .oc-top-badge{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .oc-top-badge{
   position:absolute;top:10px;right:12px;left:auto;
   background:var(--brut-fill);color:var(--brut-fill-t);
   border:1.5px solid var(--b);border-radius:999px;
   padding:2px 8px;font-family:'Space Grotesk',sans-serif;font-size:.5rem;font-weight:700;letter-spacing:.03em;
   box-shadow:1.5px 1.5px 0 color-mix(in srgb,var(--b) 45%,transparent);line-height:1.4;white-space:nowrap;z-index:2;
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .oc-title{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .oc-title{
   padding-right:0;
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .oc-header.has-badge{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .oc-header.has-badge{
   margin-top:30px;
 }
 
 /* card / surface family: thick border + hard offset shadow */
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,.cov) :is(.hcard,.offer-card,.stile,.rcard,.ph-tile,.hist-item,.timer-box,.q-item,.tmode,.trc,.trc-tile,.cbox,.card,.qpick-btn,.paste-area,.typing-input,.para-disp,.tbar,.lt-card,.weak-areas-card){
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun,.cov) :is(.hcard,.offer-card,.stile,.rcard,.ph-tile,.hist-item,.timer-box,.q-item,.tmode,.trc,.trc-tile,.cbox,.card,.qpick-btn,.paste-area,.typing-input,.para-disp,.tbar,.lt-card,.weak-areas-card){
   border:2px solid var(--b);
   box-shadow:3px 3px 0 color-mix(in srgb,var(--b) 40%,transparent);
   border-radius:var(--r);
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .hcard{transition:transform .12s ease,box-shadow .12s ease;}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .hcard::after{display:none;}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .hcard:hover{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .hcard{transition:transform .12s ease,box-shadow .12s ease;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .hcard::after{display:none;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .hcard:hover{
   transform:translate(-3px,-3px);box-shadow:5px 5px 0 color-mix(in srgb,var(--b) 40%,transparent);background:var(--bg2);border-color:var(--b);
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .hcard.exam-card:hover{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .hcard.exam-card:hover{
   box-shadow:8px 8px 0 var(--teal);
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .hc-icon{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .hc-icon{
   border:2px solid var(--b);border-radius:8px;
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .oc-icon-wrap{border:2px solid var(--b);}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .offer-card.featured{border:2px solid var(--b);box-shadow:4px 4px 0 var(--brut-fill);}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .q-item:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 color-mix(in srgb,var(--b) 40%,transparent);}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .model-box{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .oc-icon-wrap{border:2px solid var(--b);}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .offer-card.featured{border:2px solid var(--b);box-shadow:4px 4px 0 var(--brut-fill);}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .q-item:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 color-mix(in srgb,var(--b) 40%,transparent);}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .model-box{
   border-top:2px solid var(--b);border-right:2px solid var(--b);border-bottom:2px solid var(--b);border-left:4px solid var(--green);
   box-shadow:3px 3px 0 color-mix(in srgb,var(--b) 40%,transparent);border-radius:var(--rs);
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .ans-box,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .verdict,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .ai-notice{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .ans-box,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .verdict,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .ai-notice{
   border:2px solid var(--b);border-radius:var(--rs);
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .lt-row{border-bottom:2px solid var(--b);}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .lt-logo,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .lt-logo-fb{border:2px solid var(--b);border-radius:8px;}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .cring .ring-bg{stroke:var(--b);opacity:.25;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .lt-row{border-bottom:2px solid var(--b);}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .lt-logo,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .lt-logo-fb{border:2px solid var(--b);border-radius:8px;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .cring .ring-bg{stroke:var(--b);opacity:.25;}
 
 /* homepage-closing CTA banner, inspired by the reference site's footer */
 .nb-footer{position:relative;overflow:hidden;background:#0F1420;margin:44px -32px 0;padding:52px 32px 0;color:#E7ECF5;border-top:3px solid #0F1420;}
@@ -883,15 +876,15 @@ img.qzr-av{object-fit:cover}
 .panel-pop{border:2px solid var(--b)!important;box-shadow:3px 3px 0 color-mix(in srgb,var(--b) 40%,transparent)!important;}
 
 /* value chips / dividers */
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .sec-divider{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .sec-divider{
   background:repeating-linear-gradient(90deg,var(--b) 0 8px,transparent 8px 16px);height:2.5px;
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .prog-tabs{gap:8px;}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .stile-v,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .ph-v,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .trc-v,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .tst-v,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays) .t-v{font-family:'Space Grotesk',sans-serif;font-weight:800;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .prog-tabs{gap:8px;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .stile-v,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .ph-v,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .trc-v,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .tst-v,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#quizinstr,#quizrun) .t-v{font-family:'Space Grotesk',sans-serif;font-weight:800;}
 
 /* HEADER — default (non-exam) look only.
    Kept at plain, low-specificity selectors so the existing
@@ -939,6 +932,10 @@ header .h-brand:hover{background:var(--brut-tint);}
 @media(prefers-reduced-motion:reduce){
   .festive-layer .fp{animation:none!important;opacity:0!important;}
 }
+
+/* ---- Computer Quiz: same Navy theme as the rest of the site, light blue where the site uses gold ---- */
+[data-mode="light"] :is(#quizlist,#quizinstr,#quizrun,#qz-submit-cov){--accent:#2563eb;--ah:#1d4ed8;--adim:#DCEBFF;--brut-fill:#8EC5FF;--brut-fill-t:#16213A;--brut-tint:#DCEBFF;--ch:rgba(110,170,255,.16)}
+[data-mode="dark"] :is(#quizlist,#quizinstr,#quizrun,#qz-submit-cov){--accent:#6EB1FF;--ah:#8CC2FF;--adim:#14243E;--brut-fill:#6EB1FF;--brut-fill-t:#0F1420;--brut-tint:#14243E;--ch:rgba(110,177,255,.12)}
 </style>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
@@ -6013,7 +6010,7 @@ function renderQuizList(){
   // Sub-parts: Previous Year Questions / Mock Tests
   const secCount={pyq:0,mock:0};allSets.forEach(function(x){secCount[qzSecOf(x)]++;});
   if(!_qzSec||(secCount[_qzSec]===0&&(secCount.pyq||secCount.mock)))_qzSec=secCount.pyq?'pyq':'mock';
-  if(tabsEl)tabsEl.innerHTML=QZ_SECTIONS.map(function(sc){return '<button class="qzsec-tab'+(sc[0]===_qzSec?' on':'')+'" onclick="setQuizSection(\''+sc[0]+'\')">'+sc[1]+' <small>'+secCount[sc[0]]+'</small></button>';}).join("");
+  if(tabsEl)tabsEl.innerHTML=QZ_SECTIONS.map(function(sc){return '<button class="stab'+(sc[0]===_qzSec?' on':'')+'" onclick="setQuizSection(\''+sc[0]+'\')">'+sc[1]+' <small>'+secCount[sc[0]]+'</small></button>';}).join("");
   const sortedSets=allSets.filter(function(x){return qzSecOf(x)===_qzSec;});
   if(!sortedSets.length){cardsEl.innerHTML='<div style="grid-column:1/-1;color:var(--t2);font-size:.82rem;padding:18px 0">No sets in this section yet. Check back soon!</div>';emptyEl.style.display="none";return;}
   emptyEl.style.display="none";
@@ -6028,15 +6025,14 @@ function renderQuizList(){
     const cta=locked
       ? '<button onclick="event.stopPropagation();showUnlockOptions('+jsArrayAttr(unlockIds)+')" style="font-size:.7rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:5px 12px;border-radius:999px;white-space:nowrap;cursor:pointer;font-family:var(--font);display:inline-flex;align-items:center;gap:4px">'+QZ_ICON_LOCK+(expiredV?"Renew":"Unlock")+'</button>'
       : '';
-    // Only status chips stay on the card. Quiz details (questions, time, marks) now live in the instructions table.
-    const chips=(draftInfo?'<span class="chip" style="color:var(--accent)">In progress \u00b7 '+draftInfo.answered+' answered</span>':'')
-      +(expiredV?'<span class="chip" style="color:var(--red)">Validity ended '+fmtValidDate(expiredV.until)+'</span>':'');
+    // Clean card: title + Copy Link on top, buttons at the bottom. No info chips, no progress counts.
+    const note=expiredV?'<div style="font-size:.7rem;color:var(--red);margin:-4px 0 10px">Validity ended '+fmtValidDate(expiredV.until)+'</div>':'';
     return '<div class="q-item" style="cursor:default">'
-      +(locked?'<div style="position:absolute;top:12px;right:12px;color:var(--accent)">'+QZ_ICON_LOCK.replace('width="10" height="10"','width="13" height="13"')+'</div>':'')
-      +'<div style="font-size:.94rem;font-weight:700;color:var(--t);margin-bottom:12px">'+escapeHTML(s.title||('Set '+s.setNo))+'</div>'
-      +'<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px"><div style="display:flex;gap:6px;flex-wrap:wrap">'+chips+'</div>'
+      +'<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:14px">'
+      +'<div style="font-size:.98rem;font-weight:700;color:var(--t);line-height:1.35">'+escapeHTML(s.title||('Set '+s.setNo))+'</div>'
       +'<button onclick="event.stopPropagation();copyShareLink(\'quizset-'+s.id+'\',this)" title="Copy direct link to this quiz" style="flex-shrink:0;display:flex;align-items:center;gap:4px;font-size:.62rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer">'+QZ_ICON_LINK+'Copy Link</button></div>'
-      +'<div style="margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap">'+qzCardActions(s,{draftInfo:draftInfo,locked:locked,last:last,cta:cta})+'</div>'
+      +note
+      +'<div style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap">'+qzCardActions(s,{draftInfo:draftInfo,locked:locked,last:last,cta:cta})+'</div>'
       +'</div>';
   }).join("");
 }
@@ -6145,7 +6141,7 @@ function qzCardActions(s,o){
   const id="'"+s.id+"'";
   const view=o.last?qzViewBtn(s.id):'';
   if(o.locked)return o.cta+view;
-  if(o.draftInfo)return qzCta('Resume','resumeQuizSet('+id+')',QZ_ICON_GO)+qzCta('Start Over','startQuizSet('+id+')',QZ_ICON_REDO)+view;
+  if(o.draftInfo)return '<span style="display:inline-flex;gap:6px;align-items:center">'+qzCta('Resume','resumeQuizSet('+id+')',QZ_ICON_GO)+'<button onclick="event.stopPropagation();startQuizSet('+id+')" title="Start over" aria-label="Start over" style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer">'+QZ_ICON_REDO+'</button></span>'+view;
   if(o.last)return qzCta('Reattempt','startQuizSet('+id+')',QZ_ICON_REDO)+view;
   return qzCta('Click to attempt','startQuizSet('+id+')',QZ_ICON_GO);
 }
