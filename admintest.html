@@ -626,8 +626,9 @@ Q: Which of these is an input device?
           <div style="font-size:.72rem;color:var(--t2);margin-bottom:4px">Fill in the details below, then click Save Set.</div>
 
           <div class="qzf-h">1 · Basics</div>
-          <div style="display:grid;grid-template-columns:110px 1fr;gap:12px">
+          <div style="display:grid;grid-template-columns:110px minmax(170px,230px) 1fr;gap:12px">
             <div><label style="font-size:.72rem;color:var(--t2);display:block;margin-bottom:5px">Set number</label><input id="qzs-setno" type="number" min="1" style="width:100%;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.82rem"/></div>
+            <div><label style="font-size:.72rem;color:var(--t2);display:block;margin-bottom:5px">Section</label><select id="qzs-section" style="width:100%;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.82rem"><option value="pyq">Previous Year Questions</option><option value="mock">Mock Tests</option></select></div>
             <div><label style="font-size:.72rem;color:var(--t2);display:block;margin-bottom:5px">Title</label><input id="qzs-title" placeholder="e.g. Computer Awareness — Set 1" style="width:100%;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.82rem"/></div>
           </div>
 
@@ -3015,6 +3016,7 @@ function qzEnsureNewBox(prefix,selId){
   const f='style="width:100%;padding:7px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem"',l='style="font-size:.7rem;color:var(--t2);display:block;margin:8px 0 4px"';
   sel.insertAdjacentHTML('afterend','<div id="qzn-'+prefix+'" style="display:none;margin-top:10px;padding:12px;border:1px solid var(--aborder);border-radius:var(--rs);background:var(--adim)"><div style="font-size:.76rem;font-weight:700">New quiz set</div>'
     +'<label '+l+'>Title (optional)</label><input id="qzn-'+prefix+'-title" placeholder="e.g. Computer Awareness — Set 3" '+f+'/>'
+    +'<label '+l+'>Section</label><select id="qzn-'+prefix+'-section" '+f+'><option value="pyq">Previous Year Questions</option><option value="mock">Mock Tests</option></select>'
     +'<label '+l+'>Is this quiz paid?</label><select id="qzn-'+prefix+'-access" onchange="qzNewAccess(\''+prefix+'\')" '+f+'><option value="free">No — free for everyone</option><option value="paid">Yes — only buyers of a package</option></select>'
     +'<div id="qzn-'+prefix+'-prods" style="display:none;margin-top:8px"></div></div>');
   sel.onchange=function(){qzNewBox(prefix);};
@@ -3026,15 +3028,16 @@ function qzResolveSet(val,prefix){
   if(val==='__new'){n=Math.max.apply(null,[0].concat(d.quizSets.map(function(x){return x.setNo||0;}),d.quizQuestions.map(function(q){return q.setNo||0;})))+1;}
   else n=parseInt(val);
   if(!d.quizSets.some(function(x){return x.setNo===n;})){
-    let title='Quiz Set '+n,productIds=[];
+    let title='Quiz Set '+n,productIds=[],section='pyq';
     if(val==='__new'&&prefix&&document.getElementById('qzn-'+prefix)){
       title=(document.getElementById('qzn-'+prefix+'-title').value||'').trim()||title;
+      section=document.getElementById('qzn-'+prefix+'-section').value==='mock'?'mock':'pyq';
       if(document.getElementById('qzn-'+prefix+'-access').value==='paid'){
         productIds=Array.from(document.querySelectorAll('.qzn-cb-'+prefix+':checked')).map(function(cb){return cb.value;});
         if(!productIds.length){t('This quiz is paid — tick at least one package, or choose "No — free for everyone"','err');return false;}
       }
     }
-    d.quizSets.push({id:'qs_'+Date.now()+'_'+n,setNo:n,title:title,timeLimitMin:null,negMarkEnabled:false,negMarkValue:0,marksPerQuestion:1,active:true,productIds:productIds});
+    d.quizSets.push({id:'qs_'+Date.now()+'_'+n,setNo:n,title:title,timeLimitMin:null,negMarkEnabled:false,negMarkValue:0,marksPerQuestion:1,section:section,active:true,productIds:productIds});
     SD(d);
     t('Set '+n+' created ('+(productIds.length?'paid':'free')+') and shown to students. Add its timer and marks in Quiz Sets.','ok');
     populateQuizTopicSelects();
@@ -3071,7 +3074,7 @@ function renderQuizSetsList(){
       +orphans.map(function(n){return '<button class="btn bp sm" style="margin:6px 6px 0 0" onclick="qzCreateSet('+n+')">Create Set '+n+'</button>';}).join('')+'</div>';
   }
   if(!d.quizSets.length&&!orphans.length)h+='<div style="font-size:.78rem;color:var(--t2);margin-bottom:10px">No quiz sets yet — fill the form below, or add questions and choose “+ Create a new set”.</div>';
-  h+=d.quizSets.slice().sort(function(a,b){return (a.setNo||0)-(b.setNo||0);}).map(function(st){
+  const cardOf=function(st){
     const n=cnt(st.setNo),on=st.active!==false,mp=Number(st.marksPerQuestion)>0?Number(st.marksPerQuestion):1;
     return '<div class="card" style="margin-bottom:10px;padding:14px 16px">'
       +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap">'
@@ -3082,7 +3085,13 @@ function renderQuizSetsList(){
       +'</div>'
       +'<div style="display:flex;gap:6px;margin-top:11px;flex-wrap:wrap"><button class="btn bp sm" onclick="qzAddToSet('+st.setNo+')">+ Add questions</button><button class="btn bo sm" onclick="editQuizSet(\''+st.id+'\')">Edit</button><button class="btn bd sm" onclick="deleteQuizSet(\''+st.id+'\')">Delete set + questions</button></div>'
       +'</div>';
-  }).join('');
+  };
+  const secs=[['pyq','Previous Year Questions'],['mock','Mock Tests']];
+  secs.forEach(function(sc){
+    const list=d.quizSets.filter(function(x){return (x.section==='pyq'?'pyq':'mock')===sc[0];}).sort(function(a,b){return (a.setNo||0)-(b.setNo||0);});
+    h+='<div style="font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t2);margin:18px 0 10px;display:flex;align-items:center;gap:8px">'+sc[1]+' <span class="bge bg-g">'+list.length+'</span></div>';
+    h+=list.length?list.map(cardOf).join(''):'<div style="font-size:.76rem;color:var(--t2);margin-bottom:6px">No sets here yet.</div>';
+  });
   el.innerHTML=h;
 }
 function saveQuizSet(){
@@ -3095,6 +3104,7 @@ function saveQuizSet(){
   const negMarkValue=negMarkEnabled?parseFloat(document.getElementById('qzs-negval').value||'0'):0;
   const active=document.getElementById('qzs-active').checked;
   const marksPerQuestion=Math.max(0.25,parseFloat(document.getElementById('qzs-marks').value)||1);
+  const section=document.getElementById('qzs-section').value==='mock'?'mock':'pyq';
   const paid=document.getElementById('qzs-access').value==='paid';
   const productIds=paid?Array.from(document.querySelectorAll('.qzs-prod-cb:checked')).map(function(cb){return cb.value;}):[];
   if(paid&&!productIds.length){t('Tick at least one package, or choose Free for everyone','err');return;}
@@ -3102,9 +3112,9 @@ function saveQuizSet(){
   if(!_quizEditingSetId&&d.quizSets.some(function(s){return s.setNo===setNo;})){t('A set with that number already exists','err');return;}
   if(_quizEditingSetId){
     const s=d.quizSets.find(function(x){return x.id===_quizEditingSetId;});
-    if(s)Object.assign(s,{setNo:setNo,title:title,timeLimitMin:timeLimitMin,negMarkEnabled:negMarkEnabled,negMarkValue:negMarkValue,marksPerQuestion:marksPerQuestion,active:active,productIds:productIds});
+    if(s)Object.assign(s,{setNo:setNo,title:title,timeLimitMin:timeLimitMin,negMarkEnabled:negMarkEnabled,negMarkValue:negMarkValue,marksPerQuestion:marksPerQuestion,section:section,active:active,productIds:productIds});
   }else{
-    d.quizSets.push({id:'qs_'+Date.now(),setNo:setNo,title:title,timeLimitMin:timeLimitMin,negMarkEnabled:negMarkEnabled,negMarkValue:negMarkValue,marksPerQuestion:marksPerQuestion,active:active,productIds:productIds});
+    d.quizSets.push({id:'qs_'+Date.now(),setNo:setNo,title:title,timeLimitMin:timeLimitMin,negMarkEnabled:negMarkEnabled,negMarkValue:negMarkValue,marksPerQuestion:marksPerQuestion,section:section,active:active,productIds:productIds});
   }
   SD(d);
   t(_quizEditingSetId?'Quiz Set updated':'Quiz Set added','ok');
@@ -3126,6 +3136,7 @@ function editQuizSet(id){
   document.getElementById('qzs-negval').value=s.negMarkValue||'';
   document.getElementById('qzs-active').checked=s.active!==false;
   document.getElementById('qzs-marks').value=s.marksPerQuestion>0?s.marksPerQuestion:1;
+  document.getElementById('qzs-section').value=(s.section==='pyq')?'pyq':'mock';
   document.querySelectorAll('.qzs-prod-cb').forEach(function(cb){cb.checked=(s.productIds||[]).includes(cb.value);});
   const isPaid=!!(s.productIds&&s.productIds.length);
   document.getElementById('qzs-access').value=isPaid?'paid':'free';
@@ -3144,6 +3155,7 @@ function resetQuizSetForm(){
   document.getElementById('qzs-negval').value='';
   document.getElementById('qzs-active').checked=true;
   document.getElementById('qzs-marks').value='1';
+  document.getElementById('qzs-section').value='pyq';
   document.querySelectorAll('.qzs-prod-cb').forEach(function(cb){cb.checked=false;});
   document.getElementById('qzs-access').value='free';
   document.getElementById('qzs-prod-wrap').style.display='none';
