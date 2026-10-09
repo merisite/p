@@ -414,8 +414,15 @@ body #quizrun .exam-bar .btn.bg:hover{background:rgba(255,255,255,.14)!important
 }
 /* ---- Quiz runner: bank-exam CBT look (light exam paper, sub-bar, shaped palette) ---- */
 #quizrun{--qz-s:var(--bg2);--qz-s2:var(--bg3);--qz-b:var(--b);--qz-t:var(--t);--qz-m:var(--t2);--qz-a:var(--accent);--qz-sb:var(--bg3);--qz-sbb:var(--b);background:var(--bg);color:var(--t);border-radius:10px;padding:10px}
-[data-mode="light"] #quizrun{--bg:#eef2f7;--bg2:#fff;--bg3:#f1f5f9;--b:#cfd8e3;--t:#1f2937;--t2:#5b6676;--accent:#1a4da0;--adim:#e8f0fe;--aborder:#9db8e8;--gdim:#e8f5e9;--gborder:#27ae60;--green:#1e8e3e;--rdim:#fdecea;--rborder:#e74c3c;--red:#c0392b;--qz-sb:#dde6f3;--qz-sbb:#c3d0e6;--qz-b:#b7c2d0;--qz-a:#1a4da0}
-[data-mode="dark"] #quizrun{--qz-b:#33405c;--qz-a:#7aa7ff;--qz-sb:#1c2536;--qz-sbb:#2a3550}
+/* Quiz screens follow the site theme; the accent is light blue instead of yellow */
+#quizlist,#quizinstr,#quizrun{--accent:#3b82f6;--ah:#2563eb;--adim:rgba(59,130,246,.10);--aborder:rgba(59,130,246,.38)}
+[data-mode="dark"] #quizlist,[data-mode="dark"] #quizinstr,[data-mode="dark"] #quizrun{--accent:#60a5fa;--ah:#3b82f6;--adim:rgba(96,165,250,.13);--aborder:rgba(96,165,250,.42)}
+#quizlist .q-item:hover{box-shadow:0 6px 20px rgba(59,130,246,.16)}
+.qzsec-tab{font-family:var(--font);font-size:.78rem;font-weight:700;padding:8px 18px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:all var(--tr)}
+.qzsec-tab:hover{border-color:var(--accent);color:var(--t)}
+.qzsec-tab.on{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.qzsec-tab small{font-family:var(--mono);font-size:.62rem;font-weight:700;padding:1px 6px;border-radius:999px;background:rgba(127,127,127,.18)}
+.qzsec-tab.on small{background:rgba(255,255,255,.28)}
 #quizrun .exam-bar{margin-bottom:0;border-radius:8px 8px 0 0}
 #qzr-subbar{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;background:var(--qz-s);border:1px solid var(--b);border-top:none;padding:7px 14px;font-size:.74rem;color:var(--t2);margin-bottom:10px}
 #qzr-subbar b{color:var(--t)}
@@ -1594,6 +1601,8 @@ function routeFromHash(){
   if(screenId==="quizset"&&sectionArg){
     Promise.all([initPromise,_productsCachePromise||Promise.resolve(),_entitlementsReadyPromise]).then(()=>{
       showS("quizlist",{skipHash:true});
+      const target=qzGetData().sets.find(function(x){return x.id===sectionArg;});
+      if(target)_qzSec=qzSecOf(target);
       renderQuizList();
       startQuizSet(sectionArg);
     });
@@ -5973,6 +5982,10 @@ function isQuizSetUnlocked(set){
 function quizCourseIsUpcoming(){
   return (D().siteSettings||{}).quizCourseStatus==="upcoming";
 }
+var _qzSec=null;
+var QZ_SECTIONS=[['pyq','Previous Year Questions'],['mock','Mock Tests']];
+function qzSecOf(s){return s&&s.section==='pyq'?'pyq':'mock';}
+function setQuizSection(sec){_qzSec=sec;renderQuizList();}
 function renderQuizList(){
   const data=qzGetData();
   const topicPillsEl=document.getElementById("qz-topic-pills");
@@ -5988,14 +6001,21 @@ function renderQuizList(){
     document.getElementById("qz-topic-pills").innerHTML="";
     emptyEl.style.display="none";
     cardsEl.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:50px 20px;background:var(--bg2);border:1px solid var(--b);border-radius:var(--rl)">'
-      +'<div style="font-size:1.6rem;margin-bottom:10px">🚧</div>'
+      +'<div style="margin-bottom:12px;color:var(--accent)"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg></div>'
       +'<div style="font-size:1rem;font-weight:700;color:var(--t);margin-bottom:6px">Coming Soon</div>'
       +'<div style="font-size:.82rem;color:var(--t2);max-width:360px;margin:0 auto">The Computer Quiz Course is being put together and isn\'t open yet. Check back soon!</div>'
       +'</div>';
     return;
   }
-  const sortedSets=data.sets.slice().sort(function(a,b){return (a.setNo||0)-(b.setNo||0);});
-  if(!sortedSets.length){cardsEl.innerHTML="";emptyEl.style.display="block";return;}
+  const allSets=data.sets.slice().sort(function(a,b){return (a.setNo||0)-(b.setNo||0);});
+  const tabsEl=document.getElementById("qz-section-tabs");
+  if(!allSets.length){if(tabsEl)tabsEl.innerHTML="";cardsEl.innerHTML="";emptyEl.style.display="block";return;}
+  // Sub-parts: Previous Year Questions / Mock Tests
+  const secCount={pyq:0,mock:0};allSets.forEach(function(x){secCount[qzSecOf(x)]++;});
+  if(!_qzSec||(secCount[_qzSec]===0&&(secCount.pyq||secCount.mock)))_qzSec=secCount.pyq?'pyq':'mock';
+  if(tabsEl)tabsEl.innerHTML=QZ_SECTIONS.map(function(sc){return '<button class="qzsec-tab'+(sc[0]===_qzSec?' on':'')+'" onclick="setQuizSection(\''+sc[0]+'\')">'+sc[1]+' <small>'+secCount[sc[0]]+'</small></button>';}).join("");
+  const sortedSets=allSets.filter(function(x){return qzSecOf(x)===_qzSec;});
+  if(!sortedSets.length){cardsEl.innerHTML='<div style="grid-column:1/-1;color:var(--t2);font-size:.82rem;padding:18px 0">No sets in this section yet. Check back soon!</div>';emptyEl.style.display="none";return;}
   emptyEl.style.display="none";
   const courseProductId=(D().siteSettings||{}).quizCourseProductId;
   cardsEl.innerHTML=sortedSets.map(function(s){
@@ -6707,6 +6727,7 @@ const initPromise=init();
     <button class="back-btn" onclick="showS('home')"><svg width="13" height="13" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Home</button>
     <div style="font-size:1rem;font-weight:700;margin-bottom:3px">Computer Quiz Course</div>
     <div style="color:var(--t2);font-size:.78rem;margin-bottom:16px">Topic-wise MCQ practice sets — timed, with negative marking where enabled</div>
+    <div id="qz-section-tabs" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px"></div>
     <div id="qz-topic-pills" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px"></div>
     <div id="qz-set-cards" class="card-grid"></div>
     <div id="qz-list-empty" style="display:none;color:var(--t2);font-size:.82rem;padding:18px 0">No quiz sets available yet. Check back soon!</div>
