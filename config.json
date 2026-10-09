@@ -12457,7 +12457,7 @@
     {
       "id": "qq_1791570333230_0",
       "topicId": null,
-      "text": "When was Windows 10 released, and when did its support end, according to the video?",
+      "text": "When was Windows 10 released, and when did its support end?",
       "options": [
         "Released in 2015; support ended in 2025",
         "Released in 2010; support ended in 2020",
@@ -12466,11 +12466,16 @@
         "Released in 2012; support ended in 2022"
       ],
       "correctIndex": 0,
-      "explanation": "The video states that Windows 10 was released in 2015 and that support ended in 2025.",
+      "explanation": "Windows 10 was released in 2015 and that support ended in 2025.",
       "difficulty": "medium",
       "setNo": 11,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
     },
     {
       "id": "qq_1791570333230_1",
