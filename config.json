@@ -8848,6 +8848,726 @@
       "setNo": 5,
       "active": true,
       "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_0",
+      "topicId": null,
+      "text": "The ability to recover and read deleted and damaged files from a criminal’s computer is an example of a low enforcement specialty called?",
+      "options": [
+        "Computer Forensics",
+        "Cyber Crime",
+        "Data Recovery",
+        "Digital Investigation",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "Computer forensics involves recovering, preserving and examining digital evidence from computers for investigations.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_1",
+      "topicId": null,
+      "text": "The barcode which is used on all types of items is read by a scanning device known as?",
+      "options": [
+        "Laser Scanner",
+        "Optical Scanner",
+        "Barcode Reader",
+        "Both (a) and (c)",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "A barcode reader reads barcodes; a laser scanner is one kind of barcode-reading device.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_2",
+      "topicId": null,
+      "text": "Vertically aligned set of tracks on a disk pack is known as?",
+      "options": [
+        "Cylinder",
+        "Sector",
+        "Track",
+        "Cluster",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "A cylinder is the set of tracks at the same radial position across the surfaces of a disk pack.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_3",
+      "topicId": null,
+      "text": "Anti-virus software is an example of which type of software?",
+      "options": [
+        "System Software",
+        "Application Software",
+        "Utility Software",
+        "Both (a) and (c)",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "The session classifies antivirus software as utility software, which helps protect, maintain or optimize a computer.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_4",
+      "topicId": null,
+      "text": "Which of the following is also called the SMS of the Internet?",
+      "options": [
+        "Email",
+        "Twitter",
+        "WhatsApp",
+        "Facebook",
+        "Instagram"
+      ],
+      "correctIndex": 1,
+      "explanation": "The source identifies Twitter, whose short posts were often compared with SMS messages.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_5",
+      "topicId": null,
+      "text": "Port number is of how many bits?",
+      "options": [
+        "8 bit",
+        "16 bit",
+        "32 bit",
+        "64 bit",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "TCP and UDP port numbers are 16 bits long, allowing values from 0 through 65535.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_6",
+      "topicId": null,
+      "text": "Which of the following type of computer is used in Railway (as large server)?",
+      "options": [
+        "Microcomputer",
+        "Minicomputer",
+        "Mainframe",
+        "Supercomputer",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "The source answer is Mainframe, a computer type designed for high-volume processing and many concurrent users or transactions.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_7",
+      "topicId": null,
+      "text": "What is the meaning of Hibernate in Windows 7 / XP?",
+      "options": [
+        "Computer shuts down completely",
+        "Running files are saved in a hibernate file and computer goes to low power state",
+        "Only screen turns off",
+        "All programs close",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "Hibernation saves the current session to storage so it can be restored later, while the computer enters a very low-power or powered-off state.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_8",
+      "topicId": null,
+      "text": "In which type of network all the computers are considered equal?",
+      "options": [
+        "Client-Server",
+        "Peer-to-Peer",
+        "Hybrid",
+        "Centralized",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "In a peer-to-peer network, computers can share resources directly without relying on a dedicated central server for every service.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_9",
+      "topicId": null,
+      "text": "What is Backup?",
+      "options": [
+        "Copy of data stored for safety",
+        "Deletion of data",
+        "Formatting",
+        "Encryption",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "A backup is a separate copy of data that can be restored if the original is lost, damaged or deleted.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_10",
+      "topicId": null,
+      "text": "FORTRAN is a programming language more suitable for?",
+      "options": [
+        "Business applications",
+        "Scientific applications",
+        "Web development",
+        "Database",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "FORTRAN is associated with scientific and numerical computing, mathematical calculations and high-performance computing.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_11",
+      "topicId": null,
+      "text": "Repeater works on which layer of the OSI model?",
+      "options": [
+        "Physical Layer",
+        "Data Link Layer",
+        "Network Layer",
+        "Transport Layer",
+        "Application Layer"
+      ],
+      "correctIndex": 0,
+      "explanation": "A repeater regenerates signals to extend transmission distance, a Physical Layer function.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_12",
+      "topicId": null,
+      "text": "The idea of MFC (Microsoft Foundation Classes) document architecture was given by?",
+      "options": [
+        "Microsoft",
+        "IBM",
+        "Apple",
+        "Oracle",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "Microsoft Foundation Classes is a Microsoft C++ class library used to develop Windows desktop applications.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_13",
+      "topicId": null,
+      "text": "Which of the following is a type of USB connector?",
+      "options": [
+        "Type-A",
+        "Type-B",
+        "Type-C",
+        "Mini/Micro USB",
+        "All of the above"
+      ],
+      "correctIndex": 4,
+      "explanation": "Type-A, Type-B, Type-C and Mini/Micro USB are types of USB connectors.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_14",
+      "topicId": null,
+      "text": "Which key will launch the Start button?",
+      "options": [
+        "Windows key",
+        "Ctrl key",
+        "Alt key",
+        "Esc key",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "Pressing the Windows key opens the Start menu in Windows.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_15",
+      "topicId": null,
+      "text": "Which storage device is used to compensate for the difference in rate of flow of data from one device to another?",
+      "options": [
+        "Buffer",
+        "Cache",
+        "Register",
+        "RAM",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "A buffer temporarily holds data during transfer between devices or processes operating at different speeds.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_16",
+      "topicId": null,
+      "text": "Special high-speed storage area within the CPU in which all data must be represented before it can be processed is called?",
+      "options": [
+        "Register",
+        "Cache",
+        "RAM",
+        "Buffer",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "Registers are small, high-speed storage locations inside the CPU that hold data, instructions and intermediate results.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_17",
+      "topicId": null,
+      "text": "A repair for a known software bug, available at no charge on the Internet, is called a?",
+      "options": [
+        "Patch",
+        "Version",
+        "Update",
+        "Fix",
+        "Security Patch"
+      ],
+      "correctIndex": 0,
+      "explanation": "A patch corrects a known software bug or vulnerability.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_18",
+      "topicId": null,
+      "text": "An organized collection of data about a single entity is called?",
+      "options": [
+        "Field",
+        "Record",
+        "File",
+        "Database",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "A record is a collection of related fields describing one entity, such as a customer's name, address and account number.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_19",
+      "topicId": null,
+      "text": "Which network topology is highly reliable?",
+      "options": [
+        "Star",
+        "Bus",
+        "Ring",
+        "Mesh",
+        "Tree"
+      ],
+      "correctIndex": 3,
+      "explanation": "Mesh topology provides multiple paths between devices, so a single link failure may not disrupt all communication.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_20",
+      "topicId": null,
+      "text": "The process that copies a process from memory to disk to allow space for other processes is called?",
+      "options": [
+        "Swapping",
+        "Paging",
+        "Segmentation",
+        "Thrashing",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "Swapping moves a process between main memory and secondary storage to free memory for other processes.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_21",
+      "topicId": null,
+      "text": "In which generation did multiprogramming start?",
+      "options": [
+        "First",
+        "Second",
+        "Third",
+        "Fourth",
+        "Fifth"
+      ],
+      "correctIndex": 2,
+      "explanation": "The source gives third generation, associated with integrated circuits and advances in operating systems such as multiprogramming.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_22",
+      "topicId": null,
+      "text": "Main difference between Mainframe and Supercomputer is?",
+      "options": [
+        "Speed and purpose",
+        "Size only",
+        "Cost only",
+        "Operating System",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "Supercomputers are optimized for demanding scientific calculations; mainframes handle large volumes of data, transactions and concurrent users.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_23",
+      "topicId": null,
+      "text": "What type of telecommunication hardware allows you to access the web?",
+      "options": [
+        "Modem",
+        "Router",
+        "Switch",
+        "Hub",
+        "Browser"
+      ],
+      "correctIndex": 0,
+      "explanation": "A modem enables connection through a communication link; a browser is software, not hardware.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_24",
+      "topicId": null,
+      "text": "System software that facilitates editing of text and data is known as?",
+      "options": [
+        "Editor",
+        "Compiler",
+        "Interpreter",
+        "Assembler",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "An editor allows users to create or modify text and data.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_25",
+      "topicId": null,
+      "text": "Specialized programs that assist users in locating information on the web are called?",
+      "options": [
+        "Search Engines",
+        "Browsers",
+        "Directories",
+        "Portals",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "Search engines help users locate information by searching indexed web content.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_26",
+      "topicId": null,
+      "text": "Which register holds the information before it goes to the decoder?",
+      "options": [
+        "Accumulator",
+        "Instruction Register",
+        "Program Counter",
+        "Memory Address Register",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "The instruction register holds the current instruction after it is fetched so the control unit can decode it.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_27",
+      "topicId": null,
+      "text": "Personal computers can be connected together to form a?",
+      "options": [
+        "Network",
+        "Supercomputer",
+        "Mainframe",
+        "Server",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "Connected personal computers form a network that can share data, services and devices.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_28",
+      "topicId": null,
+      "text": "WWW is made up of a set of interconnected __________ that are linked together over the Internet.",
+      "options": [
+        "Electronic documents / Hyperlinked documents",
+        "Servers only",
+        "Databases",
+        "Programs",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "The World Wide Web consists of linked web pages and other resources that users access through the internet.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_29",
+      "topicId": null,
+      "text": "Which one is an optical disc storage medium designed to recapture data normally in DVD format with higher capacity?",
+      "options": [
+        "CD",
+        "DVD",
+        "Blu-ray Disc (BRD)",
+        "Floppy",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "Blu-ray is an optical storage format with higher capacity than a standard DVD.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_30",
+      "topicId": null,
+      "text": "Network __________ is the central structure that connects other portions of the network.",
+      "options": [
+        "Backbone",
+        "Hub",
+        "Switch",
+        "Router",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "A network backbone is the central high-capacity structure connecting different network segments.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_31",
+      "topicId": null,
+      "text": "Which command divides the surface of a blank disk into sectors and then assigns a unique address to each of them?",
+      "options": [
+        "Format",
+        "Partition",
+        "Defrag",
+        "Scan",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "Formatting prepares a storage volume for use by creating a file system and organizing data storage.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_32",
+      "topicId": null,
+      "text": "Which is used to open the File menu in the current program (MS Office)?",
+      "options": [
+        "Alt",
+        "Ctrl + F",
+        "Ctrl + O",
+        "Shift + F",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "Alt activates keyboard access to Ribbon commands in many Office apps; Alt + F commonly opens the File menu.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_33",
+      "topicId": null,
+      "text": "A hacker that changes or forges information in an electronic resource is engaging in?",
+      "options": [
+        "Data Diddling",
+        "Phishing",
+        "Spoofing",
+        "Hacking",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "Data diddling means altering data before, during or after entry into a system, often to cause an unauthorized result.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_34",
+      "topicId": null,
+      "text": "Which of the following is NOT an example of Utility Software?",
+      "options": [
+        "Antivirus",
+        "Disk Cleanup",
+        "Notepad",
+        "Disk Defragmenter",
+        "All are utility"
+      ],
+      "correctIndex": 2,
+      "explanation": "The session identifies Notepad as the answer because it is a text editor, while the other listed tools are utilities.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_35",
+      "topicId": null,
+      "text": "Who defined the term Computer Virus?",
+      "options": [
+        "Frederick Cohen",
+        "John von Neumann",
+        "Alan Turing",
+        "Bill Gates",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "The session gives Frederick Cohen as the answer; he is associated with early formal research on computer viruses.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_36",
+      "topicId": null,
+      "text": "Which keyboard shortcut can be used to create a chart in MS Excel?",
+      "options": [
+        "F11",
+        "Alt + F1",
+        "Ctrl + F1",
+        "Shift + F11",
+        "Both (a) and (b)"
+      ],
+      "correctIndex": 4,
+      "explanation": "F11 creates a chart on a separate chart sheet; Alt + F1 creates an embedded chart in the current worksheet.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_37",
+      "topicId": null,
+      "text": "Whose function is to convert computer generated results into human acceptable form?",
+      "options": [
+        "Input Device",
+        "Output Device",
+        "CPU",
+        "Memory",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "Output devices present processed data in a usable form, such as text, images, printed pages or sound.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_38",
+      "topicId": null,
+      "text": "Which key combination is used to make the percent (%) sign?",
+      "options": [
+        "Shift + 5",
+        "Shift + 4",
+        "Ctrl + 5",
+        "Alt + 5",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "On most English-language keyboard layouts, Shift + 5 types %.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791542778544_39",
+      "topicId": null,
+      "text": "Science that revolves around the use of nanostructures to build devices on an extremely small scale is called?",
+      "options": [
+        "Nanotechnology",
+        "Biotechnology",
+        "Microtechnology",
+        "Quantum Computing",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "Nanotechnology uses or manipulates structures at the nanoscale to develop materials, devices and systems.",
+      "difficulty": "medium",
+      "setNo": 6,
+      "active": true,
+      "productIds": []
     }
   ],
   "quizSets": [
@@ -8910,6 +9630,18 @@
       "active": true,
       "productIds": [],
       "section": "pyq"
+    },
+    {
+      "id": "qs_1791542730045",
+      "setNo": 6,
+      "title": "Computer Awareness",
+      "timeLimitMin": 40,
+      "negMarkEnabled": true,
+      "negMarkValue": 0.25,
+      "marksPerQuestion": 1,
+      "section": "mock",
+      "active": true,
+      "productIds": []
     }
   ]
 }
