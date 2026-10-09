@@ -12448,6 +12448,726 @@
       "setNo": 10,
       "active": true,
       "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_0",
+      "topicId": null,
+      "text": "When was Windows 10 released, and when did its support end, according to the video?",
+      "options": [
+        "Released in 2015; support ended in 2025",
+        "Released in 2010; support ended in 2020",
+        "Released in 2016; support ended in 2024",
+        "Released in 2018; support ended in 2026",
+        "Released in 2012; support ended in 2022"
+      ],
+      "correctIndex": 0,
+      "explanation": "The video states that Windows 10 was released in 2015 and that support ended in 2025.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_1",
+      "topicId": null,
+      "text": "What is the address size of IPv6?",
+      "options": [
+        "32 bits",
+        "64 bits",
+        "96 bits",
+        "128 bits",
+        "256 bits"
+      ],
+      "correctIndex": 3,
+      "explanation": "IPv6 addresses are 128 bits long.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_2",
+      "topicId": null,
+      "text": "The number of packets passing through a network in a unit of time is called what?",
+      "options": [
+        "Latency",
+        "Bandwidth",
+        "Throughput",
+        "Jitter",
+        "Packet loss"
+      ],
+      "correctIndex": 2,
+      "explanation": "Throughput measures the amount of data successfully delivered over a period of time, often expressed in packets per second or bits per second.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_3",
+      "topicId": null,
+      "text": "Which technology reads special information printed on cheques to verify banking details?",
+      "options": [
+        "OCR (Optical Character Recognition)",
+        "OMR (Optical Mark Recognition)",
+        "MICR (Magnetic Ink Character Recognition)",
+        "Barcode scanning",
+        "RFID (Radio-Frequency Identification)"
+      ],
+      "correctIndex": 2,
+      "explanation": "MICR reads characters printed with magnetic ink, which is commonly used on cheques for automated processing.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_4",
+      "topicId": null,
+      "text": "When you visit a service for the first time and need to register, what do you do?",
+      "options": [
+        "Sign in",
+        "Log out",
+        "Sign up",
+        "Reset password",
+        "Browse as guest"
+      ],
+      "correctIndex": 2,
+      "explanation": "Signing up is the process of creating a new account or registering for a service.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_5",
+      "topicId": null,
+      "text": "Which device can produce high-quality output on large sheets?",
+      "options": [
+        "Laser printer",
+        "Dot-matrix printer",
+        "Plotter",
+        "Thermal printer",
+        "Inkjet printer"
+      ],
+      "correctIndex": 2,
+      "explanation": "Plotters are specialized printers designed to handle large-format drawings and precise line work.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_6",
+      "topicId": null,
+      "text": "What carries data between the CPU and other system components via the motherboard?",
+      "options": [
+        "Control unit",
+        "System bus",
+        "Power supply",
+        "Heat sink",
+        "Expansion slot"
+      ],
+      "correctIndex": 1,
+      "explanation": "The system bus is the primary communication pathway for data, addresses, and control signals between computer components.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_7",
+      "topicId": null,
+      "text": "What is the use of computer technology to create a simulated environment called?",
+      "options": [
+        "Cloud computing",
+        "Virtual reality (VR)",
+        "Data mining",
+        "Video conferencing",
+        "Augmented printing"
+      ],
+      "correctIndex": 1,
+      "explanation": "Virtual reality (VR) creates immersive, computer-generated simulated environments.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_8",
+      "topicId": null,
+      "text": "Which storage device can store a very large amount of data, as described in the lesson?",
+      "options": [
+        "DVD",
+        "USB flash drive",
+        "Magnetic tape",
+        "Blu-ray disc",
+        "Floppy disk"
+      ],
+      "correctIndex": 2,
+      "explanation": "Magnetic tape is a storage medium known for its high capacity, making it suitable for backing up and archiving large amounts of data.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_9",
+      "topicId": null,
+      "text": "Which networking device forwards data packets between computer networks?",
+      "options": [
+        "Switch",
+        "Hub",
+        "Router",
+        "Repeater",
+        "Bridge"
+      ],
+      "correctIndex": 2,
+      "explanation": "A router directs data packets between different computer networks based on their IP addresses.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_10",
+      "topicId": null,
+      "text": "What is an expression that calculates the value of a cell in Excel called?",
+      "options": [
+        "Function",
+        "Formula",
+        "Macro",
+        "Cell reference",
+        "Pivot table"
+      ],
+      "correctIndex": 1,
+      "explanation": "A formula in Excel is an expression, usually starting with an equals sign, used to perform calculations and return a value.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_11",
+      "topicId": null,
+      "text": "Which keyboard shortcut is used to show or hide the Ribbon in Microsoft Office?",
+      "options": [
+        "Ctrl + F1",
+        "Ctrl + F2",
+        "Alt + F1",
+        "Ctrl + Shift + F1",
+        "F12"
+      ],
+      "correctIndex": 0,
+      "explanation": "Ctrl+F1 is the keyboard shortcut used to toggle the visibility of the Ribbon in Microsoft Office applications.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_12",
+      "topicId": null,
+      "text": "How many cells are present in the Excel range A1:B3?",
+      "options": [
+        "3 cells",
+        "4 cells",
+        "5 cells",
+        "6 cells",
+        "9 cells"
+      ],
+      "correctIndex": 3,
+      "explanation": "The range A1:B3 includes two columns (A and B) and three rows (1, 2, 3), resulting in 2 * 3 = 6 cells.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_13",
+      "topicId": null,
+      "text": "Which device stores information about routing paths between communicating networks, according to the lesson?",
+      "options": [
+        "DNS server",
+        "Gateway",
+        "Proxy server",
+        "Print server",
+        "Mail server"
+      ],
+      "correctIndex": 1,
+      "explanation": "A gateway connects different networks and can store information to help route traffic between them, though a router's routing table is the more common place for this information.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_14",
+      "topicId": null,
+      "text": "Which MS Word feature enlarges the first letter of a text block across two or more lines?",
+      "options": [
+        "WordArt",
+        "Drop Cap",
+        "SmartArt",
+        "Text Box",
+        "Page Border"
+      ],
+      "correctIndex": 1,
+      "explanation": "A Drop Cap is a text formatting feature that enlarges the first letter of a paragraph to span multiple lines.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_15",
+      "topicId": null,
+      "text": "Static RAM (SRAM) is made up of what?",
+      "options": [
+        "Capacitors only",
+        "Flip-flops",
+        "Magnetic domains",
+        "Vacuum tubes",
+        "Optical sensors"
+      ],
+      "correctIndex": 1,
+      "explanation": "SRAM uses flip-flops, which are bistable circuits typically made of transistors, to store each bit of data.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_16",
+      "topicId": null,
+      "text": "IBM 1620, IBM 7094, CDC 1604 and CDC 3600 belong to which computer generation?",
+      "options": [
+        "First generation",
+        "Second generation",
+        "Third generation",
+        "Fourth generation",
+        "Fifth generation"
+      ],
+      "correctIndex": 1,
+      "explanation": "These early mainframe computers, which used transistors, are generally classified as belonging to the second generation of computing.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_17",
+      "topicId": null,
+      "text": "An Internet connection is an example of which type of network?",
+      "options": [
+        "PAN (Personal Area Network)",
+        "LAN (Local Area Network)",
+        "MAN (Metropolitan Area Network)",
+        "WAN (Wide Area Network)",
+        "CAN (Campus Area Network)"
+      ],
+      "correctIndex": 3,
+      "explanation": "The Internet is a global network of interconnected computer networks, making it the largest example of a Wide Area Network (WAN).",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_18",
+      "topicId": null,
+      "text": "Which of the following is a valid IPv4 address?",
+      "options": [
+        "192.168.1.256",
+        "300.10.2.1",
+        "172.16.4.25",
+        "192.168.1.25",
+        "10.20.30.300"
+      ],
+      "correctIndex": 3,
+      "explanation": "A valid IPv4 address consists of four octets (numbers from 0 to 255) separated by dots; 192.168.1.25 fits this format.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_19",
+      "topicId": null,
+      "text": "Computers originally used for applications related to national security, including nuclear-weapon design and cryptography, were which type?",
+      "options": [
+        "Microcomputers",
+        "Minicomputers",
+        "Mainframe computers",
+        "Supercomputers",
+        "Embedded computers"
+      ],
+      "correctIndex": 3,
+      "explanation": "Supercomputers are designed for high-performance computing and are used for complex tasks such as scientific research, simulations, and cryptography.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_20",
+      "topicId": null,
+      "text": "Which software prevents unauthorised external access to a system?",
+      "options": [
+        "Compiler",
+        "Firewall",
+        "Spreadsheet",
+        "Device driver",
+        "Text editor"
+      ],
+      "correctIndex": 1,
+      "explanation": "A firewall is a security system that monitors and controls incoming and outgoing network traffic based on predetermined security rules.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_21",
+      "topicId": null,
+      "text": "What is the small icon that identifies a website in a web browser called?",
+      "options": [
+        "Widget",
+        "Favicon",
+        "Cookie",
+        "Bookmark",
+        "Plug-in"
+      ],
+      "correctIndex": 1,
+      "explanation": "A favicon is a small icon representing a website, typically displayed in browser tabs, bookmarks, or history.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_22",
+      "topicId": null,
+      "text": "Which Microsoft Office feature is used to create decorative text?",
+      "options": [
+        "Mail Merge",
+        "WordArt",
+        "Track Changes",
+        "SmartArt",
+        "Drop Cap"
+      ],
+      "correctIndex": 1,
+      "explanation": "WordArt is a tool in Microsoft Office used to create stylized text with decorative effects like outlines, shadows, and colors.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_23",
+      "topicId": null,
+      "text": "In which tab are macros found in MS Excel, according to the lesson?",
+      "options": [
+        "Home tab",
+        "Insert tab",
+        "Data tab",
+        "View tab",
+        "Review tab"
+      ],
+      "correctIndex": 3,
+      "explanation": "According to the lesson, macros in MS Excel are found within the View tab of the ribbon.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_24",
+      "topicId": null,
+      "text": "A software update comprising code inserted into an executable program is called what?",
+      "options": [
+        "Compiler",
+        "Patch",
+        "Firewall",
+        "Device driver",
+        "Spreadsheet"
+      ],
+      "correctIndex": 1,
+      "explanation": "A patch is a small piece of software code designed to update or fix problems within an existing program.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_25",
+      "topicId": null,
+      "text": "Which of the following is NOT an example of an impact printer?",
+      "options": [
+        "Dot-matrix printer",
+        "Daisy-wheel printer",
+        "Line printer",
+        "Laser printer",
+        "Drum printer"
+      ],
+      "correctIndex": 3,
+      "explanation": "Laser printers are non-impact printers because they use a laser beam and toner to create an image on paper, unlike impact printers which strike the paper.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_26",
+      "topicId": null,
+      "text": "Which network topology uses one main cable as the backbone for the entire network?",
+      "options": [
+        "Star topology",
+        "Ring topology",
+        "Mesh topology",
+        "Bus topology",
+        "Tree topology"
+      ],
+      "correctIndex": 3,
+      "explanation": "A bus topology connects all devices to a single, central cable known as the backbone.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_27",
+      "topicId": null,
+      "text": "What is a media service offered directly to viewers via the Internet called?",
+      "options": [
+        "Video-on-Demand (VOD) only",
+        "OTT (Over-the-top) media service",
+        "File Transfer Protocol (FTP)",
+        "Internet Relay Chat (IRC)",
+        "Electronic Data Interchange (EDI)"
+      ],
+      "correctIndex": 1,
+      "explanation": "Over-the-top (OTT) media services deliver audio and video content directly to users over the internet, bypassing traditional broadcast distribution.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_28",
+      "topicId": null,
+      "text": "What is the process of smoothing out digital noise in graphics called, according to the lesson?",
+      "options": [
+        "Anti-aliasing",
+        "Dithering",
+        "Cropping",
+        "Rendering",
+        "Vectorization"
+      ],
+      "correctIndex": 1,
+      "explanation": "Dithering is a technique used to create the illusion of more colors or shades than are actually available by using patterns of pixels.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_29",
+      "topicId": null,
+      "text": "Which of the following is spreadsheet software?",
+      "options": [
+        "Microsoft Excel",
+        "Google Sheets",
+        "LibreOffice Calc",
+        "Apple Numbers",
+        "All of these"
+      ],
+      "correctIndex": 4,
+      "explanation": "Microsoft Excel, Google Sheets, LibreOffice Calc, and Apple Numbers are all widely used spreadsheet software applications.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_30",
+      "topicId": null,
+      "text": "What is the keyboard shortcut to open Name Manager in Excel?",
+      "options": [
+        "Ctrl + F",
+        "Ctrl + F3",
+        "Ctrl + H",
+        "Alt + F3",
+        "Ctrl + Shift + F"
+      ],
+      "correctIndex": 1,
+      "explanation": "Ctrl+F3 is the keyboard shortcut to open the Name Manager dialog box in Microsoft Excel.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_31",
+      "topicId": null,
+      "text": "What is the keyboard shortcut to select an entire column in Excel?",
+      "options": [
+        "Ctrl + Space",
+        "Shift + Space",
+        "Ctrl + A",
+        "Alt + Space",
+        "Ctrl + Shift + Space"
+      ],
+      "correctIndex": 0,
+      "explanation": "Pressing Ctrl+Space in Excel selects the entire active column.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_32",
+      "topicId": null,
+      "text": "Access time in which type of memory is independent of the address being accessed?",
+      "options": [
+        "ROM",
+        "Hard disk",
+        "Optical disc",
+        "RAM (Random Access Memory)",
+        "Magnetic tape"
+      ],
+      "correctIndex": 3,
+      "explanation": "RAM allows for direct access to any memory location, meaning the time it takes to retrieve data is generally the same regardless of its address.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_33",
+      "topicId": null,
+      "text": "How can you use exactly the same font type, size and colour in the titles of all PowerPoint slides?",
+      "options": [
+        "Use Slide Master (or Master Slide)",
+        "Apply different themes to every slide",
+        "Format each title manually",
+        "Use Slide Sorter only",
+        "Insert a screenshot of each title"
+      ],
+      "correctIndex": 0,
+      "explanation": "The Slide Master feature in PowerPoint allows you to define default formatting, including font styles, for all slides in a presentation.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_34",
+      "topicId": null,
+      "text": "Which type of memory provides permanent storage of data in bulk quantity?",
+      "options": [
+        "Cache memory",
+        "Primary memory",
+        "Registers",
+        "Secondary memory",
+        "Virtual memory"
+      ],
+      "correctIndex": 3,
+      "explanation": "Secondary memory, such as hard drives and SSDs, is used for long-term, non-volatile storage of large amounts of data.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_35",
+      "topicId": null,
+      "text": "What is the default zoom level in MS Word?",
+      "options": [
+        "75%",
+        "90%",
+        "100%",
+        "125%",
+        "150%"
+      ],
+      "correctIndex": 2,
+      "explanation": "The default zoom level in Microsoft Word is 100%, displaying the document at its actual size.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_36",
+      "topicId": null,
+      "text": "Name the latest Android operating-system version released in June 2025, according to the video.",
+      "options": [
+        "Android 14",
+        "Android 15",
+        "Android 16",
+        "Android 17",
+        "Android 13"
+      ],
+      "correctIndex": 2,
+      "explanation": "According to the video, Android 16 was released in June 2025.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_37",
+      "topicId": null,
+      "text": "Which malware does not replicate and reproduce through infection, according to the lesson?",
+      "options": [
+        "Computer virus",
+        "Worm",
+        "Trojan horse",
+        "Ransomware",
+        "Spyware"
+      ],
+      "correctIndex": 2,
+      "explanation": "A Trojan horse is malware that disguises itself as legitimate software but does not self-replicate; it relies on deception for distribution.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_38",
+      "topicId": null,
+      "text": "Which key is used to cancel the current process or close a pop-up window?",
+      "options": [
+        "Enter",
+        "Shift",
+        "Esc (Escape)",
+        "Caps Lock",
+        "Insert"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Escape (Esc) key is commonly used to abort an operation, close dialog boxes, or cancel commands.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1791570333230_39",
+      "topicId": null,
+      "text": "Which optical storage format was developed by four companies in 1995?",
+      "options": [
+        "CD-ROM",
+        "Blu-ray Disc",
+        "DVD (Digital Versatile Disc)",
+        "HD DVD",
+        "Floppy disk"
+      ],
+      "correctIndex": 2,
+      "explanation": "The DVD format was developed in 1995 by a consortium of four major technology companies.",
+      "difficulty": "medium",
+      "setNo": 11,
+      "active": true,
+      "productIds": []
     }
   ],
   "quizSets": [
@@ -12563,6 +13283,18 @@
       "id": "qs_1791570148540",
       "setNo": 10,
       "title": "Mock 05",
+      "timeLimitMin": 15,
+      "negMarkEnabled": true,
+      "negMarkValue": 0.25,
+      "marksPerQuestion": 1,
+      "section": "mock",
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qs_1791570230764",
+      "setNo": 11,
+      "title": "Mock 06",
       "timeLimitMin": 15,
       "negMarkEnabled": true,
       "negMarkValue": 0.25,
