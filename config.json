@@ -13241,7 +13241,9 @@
       "negMarkValue": 0.125,
       "marksPerQuestion": 0.5,
       "active": true,
-      "productIds": [],
+      "productIds": [
+        "computer"
+      ],
       "section": "pyq"
     },
     {
@@ -13253,7 +13255,9 @@
       "negMarkValue": 0.125,
       "marksPerQuestion": 0.5,
       "active": true,
-      "productIds": [],
+      "productIds": [
+        "computer"
+      ],
       "section": "pyq"
     },
     {
@@ -13278,7 +13282,9 @@
       "marksPerQuestion": 1,
       "section": "mock",
       "active": true,
-      "productIds": []
+      "productIds": [
+        "computer"
+      ]
     },
     {
       "id": "qs_1791547006597",
@@ -13290,7 +13296,9 @@
       "marksPerQuestion": 1,
       "section": "mock",
       "active": true,
-      "productIds": []
+      "productIds": [
+        "computer"
+      ]
     },
     {
       "id": "qs_1791547176785",
@@ -13302,7 +13310,9 @@
       "marksPerQuestion": 1,
       "section": "mock",
       "active": true,
-      "productIds": []
+      "productIds": [
+        "computer"
+      ]
     },
     {
       "id": "qs_1791570148540",
@@ -13314,7 +13324,9 @@
       "marksPerQuestion": 1,
       "section": "mock",
       "active": true,
-      "productIds": []
+      "productIds": [
+        "computer"
+      ]
     },
     {
       "id": "qs_1791570230764",
@@ -13326,7 +13338,9 @@
       "marksPerQuestion": 1,
       "section": "mock",
       "active": true,
-      "productIds": []
+      "productIds": [
+        "computer"
+      ]
     }
   ]
 }
