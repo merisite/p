@@ -13100,7 +13100,7 @@
     {
       "id": "qq_1791570333230_36",
       "topicId": null,
-      "text": "Name the latest Android operating-system version released in June 2025, according to the video.",
+      "text": "Name the latest Android operating-system version released in October 2026, according to the video.",
       "options": [
         "Android 14",
         "Android 15",
@@ -13108,12 +13108,17 @@
         "Android 17",
         "Android 13"
       ],
-      "correctIndex": 2,
-      "explanation": "According to the video, Android 16 was released in June 2025.",
+      "correctIndex": 3,
+      "explanation": "Android 17 was released in October 2026.",
       "difficulty": "medium",
       "setNo": 11,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
     },
     {
       "id": "qq_1791570333230_37",
