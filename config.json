@@ -12182,20 +12182,25 @@
     {
       "id": "qq_1791570182584_25",
       "topicId": null,
-      "text": "Name the latest Mac operating-system version released in September 2025, according to the video.",
+      "text": "Name the latest Mac operating-system version released in September 2026, according to the video.",
       "options": [
         "macOS 14 Sonoma",
         "macOS 15 Sequoia",
         "macOS 26 Tahoe",
         "macOS 13 Ventura",
-        "macOS 27 Redwood"
+        "macOS 27 Golden Gate"
       ],
-      "correctIndex": 2,
+      "correctIndex": 4,
       "explanation": "According to the video, macOS 26 Tahoe was released in September 2025.",
       "difficulty": "medium",
       "setNo": 10,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
     },
     {
       "id": "qq_1791570182584_26",
