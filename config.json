@@ -8855,7 +8855,8 @@
       "negMarkValue": 0.125,
       "marksPerQuestion": 0.5,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "section": "pyq"
     },
     {
       "id": "qs_1791478012260",
@@ -8866,7 +8867,8 @@
       "negMarkValue": 0.125,
       "marksPerQuestion": 0.5,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "section": "pyq"
     },
     {
       "id": "qs_1791479599006",
@@ -8877,7 +8879,8 @@
       "negMarkValue": 0.125,
       "marksPerQuestion": 0.5,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "section": "pyq"
     },
     {
       "id": "qs_1791479637369",
@@ -8888,7 +8891,8 @@
       "negMarkValue": 0.125,
       "marksPerQuestion": 0.5,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "section": "pyq"
     },
     {
       "id": "qs_1791481875169",
@@ -8899,7 +8903,8 @@
       "negMarkValue": 0.125,
       "marksPerQuestion": 0.5,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "section": "pyq"
     }
   ]
 }
