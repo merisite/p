@@ -12876,7 +12876,7 @@
     {
       "id": "qq_1791570333230_23",
       "topicId": null,
-      "text": "In which tab are macros found in MS Excel, according to the lesson?",
+      "text": "In which tab are macros found in MS Excel ?",
       "options": [
         "Home tab",
         "Insert tab",
@@ -12885,11 +12885,16 @@
         "Review tab"
       ],
       "correctIndex": 3,
-      "explanation": "According to the lesson, macros in MS Excel are found within the View tab of the ribbon.",
+      "explanation": "Macros in MS Excel are found within the View tab of the ribbon.",
       "difficulty": "medium",
       "setNo": 11,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
     },
     {
       "id": "qq_1791570333230_24",
