@@ -11967,7 +11967,7 @@
     {
       "id": "qq_1791570182584_10",
       "topicId": null,
-      "text": "What is the most common Internet domain suffix mentioned in the lesson?",
+      "text": "What is the most common Internet domain suffix?",
       "options": [
         ".org",
         ".edu",
@@ -11980,7 +11980,12 @@
       "difficulty": "medium",
       "setNo": 10,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
     },
     {
       "id": "qq_1791570182584_11",
