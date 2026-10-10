@@ -4612,7 +4612,7 @@
     {
       "id": "qq_1791450928138_5",
       "topicId": null,
-      "text": "According to the source, what happens to data when a disk is formatted?",
+      "text": "What happens to data when a disk is formatted?",
       "options": [
         "Saved",
         "Copied",
@@ -4625,7 +4625,12 @@
       "difficulty": "medium",
       "setNo": 1,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
     },
     {
       "id": "qq_1791450928138_6",
