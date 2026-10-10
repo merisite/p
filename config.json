@@ -9014,11 +9014,16 @@
         "None of these"
       ],
       "correctIndex": 2,
-      "explanation": "The source answer is Mainframe, a computer type designed for high-volume processing and many concurrent users or transactions.",
+      "explanation": "Mainframe, a computer type designed for high-volume processing and many concurrent users or transactions.",
       "difficulty": "medium",
       "setNo": 6,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
     },
     {
       "id": "qq_1791542778544_7",
