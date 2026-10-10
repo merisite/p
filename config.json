@@ -6429,18 +6429,23 @@
       "topicId": null,
       "text": "Which of the following is NOT a programming language?",
       "options": [
-        "C",
+        "Adobe PS",
         "C++",
         "Java",
         "COBOL",
         "A+"
       ],
-      "correctIndex": 4,
-      "explanation": "The source identifies A+ as the option that is not a programming language. C, C++, Java and COBOL are programming languages.",
+      "correctIndex": 0,
+      "explanation": "Adobe PS is a photo editing software.",
       "difficulty": "medium",
       "setNo": 2,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
     },
     {
       "id": "qq_1791478272425_26",
