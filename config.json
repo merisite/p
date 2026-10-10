@@ -4774,7 +4774,7 @@
     {
       "id": "qq_1791450928138_14",
       "topicId": null,
-      "text": "According to the source, where does the actual execution of instructions take place?",
+      "text": "Which component of a computer performs arithmetic calculations and logical operations?",
       "options": [
         "ALU",
         "Control Unit",
@@ -4783,11 +4783,16 @@
         "None of these"
       ],
       "correctIndex": 0,
-      "explanation": "The Arithmetic Logic Unit (ALU) performs arithmetic and logical operations, which is where instruction execution largely occurs.",
+      "explanation": "The ALU performs arithmetic calculations and logical comparisons. The Control Unit directs and coordinates the execution of instructions within the CPU.",
       "difficulty": "medium",
       "setNo": 1,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
     },
     {
       "id": "qq_1791450928138_15",
