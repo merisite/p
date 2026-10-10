@@ -11990,7 +11990,7 @@
     {
       "id": "qq_1791570182584_11",
       "topicId": null,
-      "text": "Which protocol is used for remote access or remote login, according to the lesson?",
+      "text": "Which protocol is used for remote access or remote login?",
       "options": [
         "FTP",
         "HTTP",
@@ -12003,7 +12003,12 @@
       "difficulty": "medium",
       "setNo": 10,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
     },
     {
       "id": "qq_1791570182584_12",
