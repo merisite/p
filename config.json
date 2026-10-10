@@ -4954,7 +4954,7 @@
     {
       "id": "qq_1791450928138_24",
       "topicId": null,
-      "text": "Which of the following is NOT a programming language according to the source?",
+      "text": "Which of the following is NOT a programming language?",
       "options": [
         "C",
         "C++",
@@ -4967,7 +4967,12 @@
       "difficulty": "medium",
       "setNo": 1,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
     },
     {
       "id": "qq_1791450928138_25",
