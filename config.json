@@ -9289,11 +9289,16 @@
         "Fifth"
       ],
       "correctIndex": 2,
-      "explanation": "The source gives third generation, associated with integrated circuits and advances in operating systems such as multiprogramming.",
+      "explanation": "Third generation, associated with integrated circuits and advances in operating systems such as multiprogramming.",
       "difficulty": "medium",
       "setNo": 6,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
     },
     {
       "id": "qq_1791542778544_22",
