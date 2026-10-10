@@ -12072,7 +12072,7 @@
     {
       "id": "qq_1791570182584_15",
       "topicId": null,
-      "text": "What is the maximum zoom percentage in Microsoft PowerPoint, according to the lesson?",
+      "text": "What is the maximum zoom percentage in Microsoft PowerPoint?",
       "options": [
         "100%",
         "200%",
@@ -12081,11 +12081,16 @@
         "500%"
       ],
       "correctIndex": 3,
-      "explanation": "According to the lesson, Microsoft PowerPoint and Excel have a maximum zoom percentage of 400%.",
+      "explanation": "Microsoft PowerPoint and Excel have a maximum zoom percentage of 400%.",
       "difficulty": "medium",
       "setNo": 10,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
     },
     {
       "id": "qq_1791570182584_16",
