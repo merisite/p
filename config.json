@@ -8875,20 +8875,25 @@
     {
       "id": "qq_1791542778544_1",
       "topicId": null,
-      "text": "The barcode which is used on all types of items is read by a scanning device known as?",
+      "text": "Which of the following protocols is used to automatically assign IP addresses to devices connected to a network?",
       "options": [
-        "Laser Scanner",
-        "Optical Scanner",
-        "Barcode Reader",
-        "Both (a) and (c)",
-        "None of these"
+        "DNS",
+        "DHCP",
+        "FTP",
+        "SMTP",
+        "SNMP"
       ],
-      "correctIndex": 2,
-      "explanation": "A barcode reader reads barcodes; a laser scanner is one kind of barcode-reading device.",
+      "correctIndex": 1,
+      "explanation": "Explanation: DHCP (Dynamic Host Configuration Protocol) automatically assigns IP addresses and provides other network configuration details, such as the subnet mask, default gateway, and DNS server addresses, to devices connected to a network.\n\nDHCP: Automatically assigns IP addresses.\nDNS: Translates domain names into IP addresses.\nFTP: Transfers files between computers.\nSMTP: Sends emails.\nSNMP: Monitors and manages network devices.",
       "difficulty": "medium",
       "setNo": 6,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
     },
     {
       "id": "qq_1791542778544_2",
