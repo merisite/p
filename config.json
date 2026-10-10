@@ -13071,7 +13071,7 @@
     {
       "id": "qq_1791570333230_28",
       "topicId": null,
-      "text": "What is the process of smoothing out digital noise in graphics called, according to the lesson?",
+      "text": "What is the process of smoothing out digital noise in graphics called?",
       "options": [
         "Anti-aliasing",
         "Dithering",
@@ -13084,7 +13084,12 @@
       "difficulty": "medium",
       "setNo": 11,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
     },
     {
       "id": "qq_1791570333230_29",
