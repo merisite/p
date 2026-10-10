@@ -7788,11 +7788,16 @@
         "Printer"
       ],
       "correctIndex": 1,
-      "explanation": "The source gives 'Cache Memory / CPU' as the answer. These components are associated with improving or supporting processing performance.",
+      "explanation": "'Cache Memory / CPU' as the ans\n\n\n\n\nCache memory/CPU. These components are associated with improving or supporting processing performance.",
       "difficulty": "medium",
       "setNo": 4,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
     },
     {
       "id": "qq_1791479865856_20",
@@ -8364,11 +8369,16 @@
         "Registers"
       ],
       "correctIndex": 1,
-      "explanation": "The source gives ROM / CMOS as the answer. BIOS-related settings have traditionally been associated with CMOS memory and non-volatile storage.",
+      "explanation": "ROM / CMOS as the answer. BIOS-related settings have traditionally been associated with CMOS memory and non-volatile storage.",
       "difficulty": "medium",
       "setNo": 5,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
     },
     {
       "id": "qq_1791481954101_12",
