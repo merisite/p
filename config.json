@@ -12524,7 +12524,7 @@
     {
       "id": "qq_1791570182584_39",
       "topicId": null,
-      "text": "Which statement about twisted-pair cable is correct, according to the lesson?",
+      "text": "Which statement about twisted-pair cable is correct?",
       "options": [
         "It is used for telephone lines",
         "It transmits data only through light",
@@ -12537,7 +12537,12 @@
       "difficulty": "medium",
       "setNo": 10,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
     },
     {
       "id": "qq_1791570333230_0",
