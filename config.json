@@ -12013,11 +12013,11 @@
     {
       "id": "qq_1791570182584_12",
       "topicId": null,
-      "text": "Simple Mail Transfer Protocol (SMTP) is used to transfer which type of files, according to the lesson?",
+      "text": "Simple Mail Transfer Protocol (SMTP) is used to transfer which type of files?",
       "options": [
         "Image files only",
         "Audio files only",
-        "Text files (as stated in the video)",
+        "Text files",
         "Executable files only",
         "Database files only"
       ],
@@ -12026,7 +12026,12 @@
       "difficulty": "medium",
       "setNo": 10,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
     },
     {
       "id": "qq_1791570182584_13",
