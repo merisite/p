@@ -12393,7 +12393,7 @@
     {
       "id": "qq_1791570182584_32",
       "topicId": null,
-      "text": "How many basic types of logic gates are listed in the lesson?",
+      "text": "How many basic types of logic gates re there?",
       "options": [
         "Four",
         "Five",
@@ -12402,11 +12402,16 @@
         "Eight"
       ],
       "correctIndex": 3,
-      "explanation": "The lesson lists seven basic types of logic gates: AND, OR, NOT, NAND, NOR, XOR, and XNOR.",
+      "explanation": "Seven basic types of logic gates: AND, OR, NOT, NAND, NOR, XOR, and XNOR.",
       "difficulty": "medium",
       "setNo": 10,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
     },
     {
       "id": "qq_1791570182584_33",
