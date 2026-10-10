@@ -12696,7 +12696,7 @@
     {
       "id": "qq_1791570333230_8",
       "topicId": null,
-      "text": "Which storage device can store a very large amount of data, as described in the lesson?",
+      "text": "Which storage device can store a very large amount of data?",
       "options": [
         "DVD",
         "USB flash drive",
@@ -12709,7 +12709,12 @@
       "difficulty": "medium",
       "setNo": 11,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
     },
     {
       "id": "qq_1791570333230_9",
