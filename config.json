@@ -8973,11 +8973,16 @@
         "Instagram"
       ],
       "correctIndex": 1,
-      "explanation": "The source identifies Twitter, whose short posts were often compared with SMS messages.",
+      "explanation": "Twitter, whose short posts were often compared with SMS messages.",
       "difficulty": "medium",
       "setNo": 6,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
     },
     {
       "id": "qq_1791542778544_5",
