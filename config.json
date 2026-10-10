@@ -12791,7 +12791,7 @@
     {
       "id": "qq_1791570333230_13",
       "topicId": null,
-      "text": "Which device stores information about routing paths between communicating networks, according to the lesson?",
+      "text": "Which device stores information about routing paths between communicating networks?",
       "options": [
         "DNS server",
         "Gateway",
@@ -12804,7 +12804,12 @@
       "difficulty": "medium",
       "setNo": 11,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
     },
     {
       "id": "qq_1791570333230_14",
