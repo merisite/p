@@ -14094,7 +14094,7 @@
     {
       "id": "qq_1791624558519_4",
       "topicId": null,
-      "text": "Which option provides the shortest access time?",
+      "text": "Which option provides the fastest/shortest access time?",
       "options": [
         "Semiconductor memory",
         "Magnetic disk",
@@ -14107,7 +14107,12 @@
       "difficulty": "medium",
       "setNo": 13,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
     },
     {
       "id": "qq_1791624558519_5",
