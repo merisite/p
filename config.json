@@ -9933,7 +9933,7 @@
     {
       "id": "qq_1791544826817_17",
       "topicId": null,
-      "text": "Which Indian application is regarded as an alternative to Twitter (X)?",
+      "text": "Which prominent Indian social media application, launched in 2020 as a multilingual alternative to Twitter (X), officially shut down its services in July 2024 due to financial constraints?",
       "options": [
         "ShareChat",
         "Roposo",
@@ -9942,11 +9942,16 @@
         "Chingari"
       ],
       "correctIndex": 2,
-      "explanation": "Koo is an Indian micro-blogging platform that has been widely seen as a domestic alternative to Twitter.",
+      "explanation": "Koo, the Indian microblogging platform and Twitter/X alternative, officially shut down its operations on July 3, 2024.",
       "difficulty": "medium",
       "setNo": 7,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
     },
     {
       "id": "qq_1791544826817_18",
