@@ -2754,7 +2754,7 @@ function populateQuizTopicSelects(){
   if(setFilterEl){
     const cur=setFilterEl.value;
     const setNos=Array.from(new Set(d.quizQuestions.map(function(q){return q.setNo;}).filter(function(n){return n!=null;}))).sort(function(a,b){return a-b;});
-    setFilterEl.innerHTML='<option value="">All Sets</option>'+setNos.map(function(n){return '<option value="'+n+'">Set '+n+'</option>';}).join('');
+    setFilterEl.innerHTML='<option value="">All Quizzes</option>'+setNos.map(function(n){const st=d.quizSets.find(function(x){return x.setNo===n;});return '<option value="'+n+'">Set '+n+(st&&st.title?' — '+esc(st.title):'')+'</option>';}).join('');
     setFilterEl.value=cur;
   }
 }
@@ -2901,7 +2901,9 @@ function editQuizQuestion(id){
   if(!q)return;
   _quizEditingQId=id;
   const _qn=qzNumbers(d)[q.id];
-  document.getElementById('qz-form-title').textContent=_qn?('Editing Q'+_qn+' — Set '+q.setNo):'Editing Question'+(q.setNo!=null?' (hidden, Set '+q.setNo+')':' (not in a set)');
+  const _st=d.quizSets.find(function(x){return x.setNo===q.setNo;});
+  const _qname='Set '+q.setNo+(_st&&_st.title?' — '+_st.title:'');
+  document.getElementById('qz-form-title').textContent=_qn?('Editing Q'+_qn+' — '+_qname):'Editing Question'+(q.setNo!=null?' (hidden, '+_qname+')':' (not in a quiz)');
   document.getElementById('qz-q-text').value=q.text||'';
   [0,1,2,3,4].forEach(function(i){document.getElementById('qz-opt-'+i).value=(q.options||[])[i]||'';});
   const radio=document.querySelector('input[name="qz-correct"][value="'+(q.correctIndex||0)+'"]');
@@ -2971,6 +2973,13 @@ function renderQuizQuestionsTable(){
   const d=qzD();
   const num=qzNumbers(d);
   const tm={};d.quizTopics.forEach(function(tp){tm[tp.id]=tp.name;});
+  const setBy={};d.quizSets.forEach(function(x){setBy[x.setNo]=x;});
+  const quizCell=function(q){
+    if(q.setNo==null)return '<span style="color:var(--t2)">—</span>';
+    const st=setBy[q.setNo];
+    if(!st)return '<b>Set '+q.setNo+'</b><div style="font-size:.68rem;color:#d97706">set not created yet</div>';
+    return '<b>Set '+q.setNo+'</b> · '+esc(st.title||'Untitled')+'<div style="font-size:.66rem;color:var(--t2)">'+(st.section==='pyq'?'Previous Year Questions':'Mock Tests')+(st.active===false?' · hidden':'')+'</div>';
+  };
   const search=(document.getElementById('qz-filter-search')||{}).value?.toLowerCase()||'';
   const filterTopic=(document.getElementById('qz-filter-topic')||{}).value||'';
   const filterSet=(document.getElementById('qz-filter-set')||{}).value||'';
@@ -2990,7 +2999,7 @@ function renderQuizQuestionsTable(){
   const el=document.getElementById('qz-questions-table');
   if(!qs.length){el.innerHTML='<div style="font-size:.78rem;color:var(--t2);padding:10px 0">No questions match.</div>';return;}
   let html='<table style="width:100%;border-collapse:collapse;font-size:.78rem"><thead><tr style="text-align:left;border-bottom:1px solid var(--b);color:var(--t2)">'
-    +'<th style="padding:6px 8px 6px 0;width:64px">Q #</th><th style="padding:6px 8px 6px 0">Question</th><th style="padding:6px 8px">Topic</th><th style="padding:6px 8px">Set #</th><th style="padding:6px 8px">Difficulty</th><th style="padding:6px 8px">Status</th><th style="padding:6px 0;text-align:right">Action</th>'
+    +'<th style="padding:6px 8px 6px 0;width:64px">Q #</th><th style="padding:6px 8px 6px 0">Question</th><th style="padding:6px 8px">Topic</th><th style="padding:6px 8px">Quiz</th><th style="padding:6px 8px">Difficulty</th><th style="padding:6px 8px">Status</th><th style="padding:6px 0;text-align:right">Action</th>'
     +'</tr></thead><tbody>';
   qs.forEach(function(q){
     const n=num[q.id];
@@ -3000,7 +3009,7 @@ function renderQuizQuestionsTable(){
       +'<td style="padding:8px 8px 8px 0;white-space:nowrap">'+qn+'</td>'
       +'<td style="padding:8px 8px 8px 0;max-width:320px">'+esc((q.text||'').slice(0,90))+((q.text||'').length>90?'…':'')+'</td>'
       +'<td style="padding:8px">'+(q.topicId&&tm[q.topicId]?esc(tm[q.topicId]):'<span style="color:var(--t2)">—</span>')+'</td>'
-      +'<td style="padding:8px">'+(q.setNo!=null?q.setNo:'<span style="color:var(--t2)">—</span>')+'</td>'
+      +'<td style="padding:8px;min-width:150px">'+quizCell(q)+'</td>'
       +'<td style="padding:8px;text-transform:capitalize">'+esc(q.difficulty||'medium')+'</td>'
       +'<td style="padding:8px">'+(q.active!==false?'<span class="bge bg-g">Active</span>':'<span class="bge bg-r">Hidden</span>')+'</td>'
       +'<td style="padding:8px 0;text-align:right"><button class="btn bo sm" onclick="editQuizQuestion(\''+q.id+'\')">Edit</button> <button class="btn bd sm" onclick="deleteQuizQuestion(\''+q.id+'\')">Delete</button></td>'
