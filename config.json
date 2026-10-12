@@ -12159,20 +12159,25 @@
     {
       "id": "qq_1791570182584_19",
       "topicId": null,
-      "text": "Cold booting and warm booting are the two types of what?",
+      "text": "What is the main difference between a Cold Boot and a Warm Boot?",
       "options": [
-        "Formatting",
-        "Booting",
-        "Debugging",
-        "Compiling",
-        "Defragmentation"
+        "A cold boot deletes all files, while a warm boot saves them.",
+        "A cold boot starts a computer from a completely powered-off state, while a warm boot restarts a computer that is already running.",
+        "A cold boot is done by software, while a warm boot requires a technician.",
+        "A cold boot is used for laptops, while a warm boot is only for desktop computers.",
+        "A cold boot bypasses the power button entirely."
       ],
       "correctIndex": 1,
-      "explanation": "Cold booting and warm booting are the two types of booting, which refer to the process of starting or restarting a computer.",
+      "explanation": "• Cold Boot: Turning a computer ON when it is completely off (the system is \"cold\").\n• Warm Boot: Clicking \"Restart\" while the computer is already on (the system is already \"warm\").",
       "difficulty": "medium",
       "setNo": 10,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
     },
     {
       "id": "qq_1791570182584_20",
