@@ -9992,20 +9992,25 @@
     {
       "id": "qq_1791544826817_20",
       "topicId": null,
-      "text": "The time interval between providing input to a program and receiving its output is called:",
+      "text": "Which layer of the OSI model is responsible for end-to-end communication, reliable or unreliable data delivery, flow control, and error recovery using protocols such as TCP and UDP?",
       "options": [
-        "Turnaround time",
-        "Waiting time",
-        "Execution time",
-        "Response time",
-        "Throughput"
+        "Physical Layer",
+        "Network Layer",
+        "Transport Layer",
+        "Data Link Layer",
+        "Session Layer"
       ],
       "correctIndex": 2,
-      "explanation": "Execution time is the duration a program runs to process input and produce output.",
+      "explanation": "The transport layer (Layer 4) ensures complete data transfer, flow control, and error correction for end-to-end communications via TCP and UDP.",
       "difficulty": "medium",
       "setNo": 7,
       "active": true,
-      "productIds": []
+      "productIds": [],
+      "textHi": "",
+      "optionsHi": [],
+      "explanationHi": "",
+      "topperTime": null,
+      "correctAvgTime": null
     },
     {
       "id": "qq_1791544826817_21",
