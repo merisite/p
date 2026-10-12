@@ -608,7 +608,7 @@ Q: Which of these is an input device?
           <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;flex-wrap:wrap">
             <div style="font-size:.85rem;font-weight:700">All Quiz Questions</div><button class="btn bp sm" onclick="qzTab('add','manual')">+ Add Question</button>
             <div style="display:flex;gap:8px;flex-wrap:wrap">
-              <input id="qz-filter-search" placeholder="Search question text…" oninput="renderQuizQuestionsTable()" style="padding:6px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.76rem"/>
+              <input id="qz-filter-search" placeholder="Search question text…" oninput="renderQuizQuestionsTable()" style="padding:6px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.76rem"/><input id="qz-filter-qno" type="number" min="1" placeholder="Q # (e.g. 12)" oninput="renderQuizQuestionsTable()" title="Show only the question with this number (inside the chosen set, or in every set)" style="width:118px;padding:6px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.76rem"/>
               <select id="qz-filter-topic" onchange="renderQuizQuestionsTable()" style="padding:6px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.76rem"><option value="">All Topics</option></select>
               <select id="qz-filter-set" onchange="renderQuizQuestionsTable()" style="padding:6px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.76rem"><option value="">All Sets</option></select>
             </div>
@@ -2900,7 +2900,8 @@ function editQuizQuestion(id){
   const q=d.quizQuestions.find(function(x){return x.id===id;});
   if(!q)return;
   _quizEditingQId=id;
-  document.getElementById('qz-form-title').textContent='Editing Question';
+  const _qn=qzNumbers(d)[q.id];
+  document.getElementById('qz-form-title').textContent=_qn?('Editing Q'+_qn+' — Set '+q.setNo):'Editing Question'+(q.setNo!=null?' (hidden, Set '+q.setNo+')':' (not in a set)');
   document.getElementById('qz-q-text').value=q.text||'';
   [0,1,2,3,4].forEach(function(i){document.getElementById('qz-opt-'+i).value=(q.options||[])[i]||'';});
   const radio=document.querySelector('input[name="qz-correct"][value="'+(q.correctIndex||0)+'"]');
@@ -2956,25 +2957,47 @@ function qzTab(tab,sub){
   document.getElementById('qzt-cq').textContent=d.quizQuestions.length;
   document.getElementById('qzt-cs').textContent=d.quizSets.length;
 }
+// Question numbers exactly as students see them: position inside the set, counting only shown (active) questions.
+function qzNumbers(d){
+  const count={},num={};
+  d.quizQuestions.forEach(function(q){
+    if(q.setNo==null||q.active===false)return;
+    count[q.setNo]=(count[q.setNo]||0)+1;
+    num[q.id]=count[q.setNo];
+  });
+  return num;
+}
 function renderQuizQuestionsTable(){
   const d=qzD();
+  const num=qzNumbers(d);
   const tm={};d.quizTopics.forEach(function(tp){tm[tp.id]=tp.name;});
   const search=(document.getElementById('qz-filter-search')||{}).value?.toLowerCase()||'';
   const filterTopic=(document.getElementById('qz-filter-topic')||{}).value||'';
   const filterSet=(document.getElementById('qz-filter-set')||{}).value||'';
-  const qs=d.quizQuestions.filter(function(q){
+  const filterNo=parseInt((document.getElementById('qz-filter-qno')||{}).value)||0;
+  // grouped by set, then in the order students get them (Q1, Q2, …); questions without a set go last
+  const qs=d.quizQuestions.map(function(q,i){return {q:q,i:i};}).filter(function(x){
+    const q=x.q;
     if(search&&!(q.text||'').toLowerCase().includes(search))return false;
     if(filterTopic&&q.topicId!==filterTopic)return false;
     if(filterSet&&String(q.setNo)!==filterSet)return false;
+    if(filterNo&&num[q.id]!==filterNo)return false;
     return true;
-  });
+  }).sort(function(a,b){
+    const sa=a.q.setNo==null?1e9:a.q.setNo,sb=b.q.setNo==null?1e9:b.q.setNo;
+    return sa-sb||a.i-b.i;
+  }).map(function(x){return x.q;});
   const el=document.getElementById('qz-questions-table');
   if(!qs.length){el.innerHTML='<div style="font-size:.78rem;color:var(--t2);padding:10px 0">No questions match.</div>';return;}
   let html='<table style="width:100%;border-collapse:collapse;font-size:.78rem"><thead><tr style="text-align:left;border-bottom:1px solid var(--b);color:var(--t2)">'
-    +'<th style="padding:6px 8px 6px 0">Question</th><th style="padding:6px 8px">Topic</th><th style="padding:6px 8px">Set #</th><th style="padding:6px 8px">Difficulty</th><th style="padding:6px 8px">Status</th><th style="padding:6px 0;text-align:right">Actions</th>'
+    +'<th style="padding:6px 8px 6px 0;width:64px">Q #</th><th style="padding:6px 8px 6px 0">Question</th><th style="padding:6px 8px">Topic</th><th style="padding:6px 8px">Set #</th><th style="padding:6px 8px">Difficulty</th><th style="padding:6px 8px">Status</th><th style="padding:6px 0;text-align:right">Action</th>'
     +'</tr></thead><tbody>';
   qs.forEach(function(q){
+    const n=num[q.id];
+    const qn=n?'<span class="bge bg-g" style="font-family:\'JetBrains Mono\',monospace;font-weight:700">Q'+n+'</span>'
+      :'<span style="color:var(--t2)" title="'+(q.setNo==null?'Not in a set, so students never see it':'Hidden, so it has no number for students')+'">—</span>';
     html+='<tr style="border-bottom:1px solid var(--b)">'
+      +'<td style="padding:8px 8px 8px 0;white-space:nowrap">'+qn+'</td>'
       +'<td style="padding:8px 8px 8px 0;max-width:320px">'+esc((q.text||'').slice(0,90))+((q.text||'').length>90?'…':'')+'</td>'
       +'<td style="padding:8px">'+(q.topicId&&tm[q.topicId]?esc(tm[q.topicId]):'<span style="color:var(--t2)">—</span>')+'</td>'
       +'<td style="padding:8px">'+(q.setNo!=null?q.setNo:'<span style="color:var(--t2)">—</span>')+'</td>'
