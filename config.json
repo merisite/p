@@ -17618,6 +17618,726 @@
       "setNo": 16,
       "active": true,
       "productIds": []
+    },
+    {
+      "id": "qq_1792582650620_0",
+      "topicId": null,
+      "text": "Which low-level programming language, understood directly by the hardware, did first-generation computers (1940-1956) rely on?",
+      "options": [
+        "Assembly Language",
+        "Machine Language",
+        "C++",
+        "Python",
+        "COBOL"
+      ],
+      "correctIndex": 1,
+      "explanation": "First-generation computers used Machine Language (Binary Code: 0s and 1s), which is the only language a computer understands without translation.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_1",
+      "topicId": null,
+      "text": "Which type of network extends over a large geographical area, such as a country or a continent, often using leased telecommunication lines?",
+      "options": [
+        "LAN",
+        "PAN",
+        "MAN",
+        "WAN",
+        "WLAN"
+      ],
+      "correctIndex": 3,
+      "explanation": "A WAN (Wide Area Network) spans a large distance (e.g., the Internet). A LAN is for a building, and a MAN is for a city.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_2",
+      "topicId": null,
+      "text": "If you send an email to three people by placing their addresses in the 'CC' field, which of the following is true?",
+      "options": [
+        "None of the recipients can see each other's email addresses.",
+        "Only the sender can see the recipients.",
+        "All recipients can see the email addresses of everyone in the To and CC fields.",
+        "The email will delete itself after reading.",
+        "The email is sent as a text message."
+      ],
+      "correctIndex": 2,
+      "explanation": "CC creates a transparent copy; every recipient can see the email addresses of everyone in the To and CC fields.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_3",
+      "topicId": null,
+      "text": "In technical terms, ________ is a step-by-step procedure — a set of rules that a computer follows while performing calculations or other problem-solving operations.",
+      "options": [
+        "Syntax",
+        "Algorithm",
+        "Bug",
+        "Variable",
+        "Loop"
+      ],
+      "correctIndex": 1,
+      "explanation": "An Algorithm is a defined list of steps for solving a problem (e.g., a recipe is an algorithm for cooking).",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_4",
+      "topicId": null,
+      "text": "What is software called when it is available for free, but the author retains the copyright and the source code is NOT available for modification?",
+      "options": [
+        "Open Source",
+        "Firmware",
+        "Freeware",
+        "Adware",
+        "Malware"
+      ],
+      "correctIndex": 2,
+      "explanation": "Freeware is free to use (like Skype or Adobe Reader), but it is closed-source. (Open Source software allows code modification.)",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_5",
+      "topicId": null,
+      "text": "An IPv4 address is made up of a maximum of how many bits?",
+      "options": [
+        "16 bits",
+        "32 bits",
+        "64 bits",
+        "128 bits",
+        "256 bits"
+      ],
+      "correctIndex": 1,
+      "explanation": "IPv4 uses 32-bit addresses (e.g., 192.168.1.1). IPv6 uses 128-bit addresses.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_6",
+      "topicId": null,
+      "text": "Which DOS command makes an exact duplicate of a floppy disk by copying its entire contents track-by-track onto another disk?",
+      "options": [
+        "COPY",
+        "XCOPY",
+        "DISKCOPY",
+        "FORMAT",
+        "CHKDSK"
+      ],
+      "correctIndex": 2,
+      "explanation": "DISKCOPY copies the entire contents of one disk to another, whereas COPY usually copies specific files.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_7",
+      "topicId": null,
+      "text": "The modern Internet evolved from which US Department of Defense network that was established in 1969?",
+      "options": [
+        "ALOHANET",
+        "ARPANET",
+        "NSFNET",
+        "ETHERNET",
+        "MILNET"
+      ],
+      "correctIndex": 1,
+      "explanation": "ARPANET was the first wide-area packet-switched network and the precursor to the modern Internet.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_8",
+      "topicId": null,
+      "text": "Using which network protocol can a user access and control a remote computer over a network, as though sitting right in front of it?",
+      "options": [
+        "HTTP",
+        "Telnet",
+        "SMTP",
+        "HTML",
+        "UDP"
+      ],
+      "correctIndex": 1,
+      "explanation": "Telnet is a protocol used for remote login. (SSH is the modern, secure equivalent).",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_9",
+      "topicId": null,
+      "text": "In network terminology, what is a computer that has full two-way access to other computers on the Internet called?",
+      "options": [
+        "Guest",
+        "Host",
+        "Client",
+        "Terminal",
+        "Node"
+      ],
+      "correctIndex": 1,
+      "explanation": "A computer connected to a network that provides services or resources and has two-way access is called a Host.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_10",
+      "topicId": null,
+      "text": "Microsoft offers a subscription-based service that gives users access to Office applications along with cloud services. By what name is this service known?",
+      "options": [
+        "Microsoft Cloud",
+        "Microsoft 365",
+        "Office Online",
+        "Windows 365",
+        "Azure Office"
+      ],
+      "correctIndex": 1,
+      "explanation": "Microsoft 365 (formerly Office 365) is the subscription service.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_11",
+      "topicId": null,
+      "text": "To join two or more text strings together into a single string in Microsoft Excel, which function is used?",
+      "options": [
+        "COMBINE()",
+        "JOIN()",
+        "CONCATENATE()",
+        "MERGE()",
+        "ADDTEXT()"
+      ],
+      "correctIndex": 2,
+      "explanation": "The CONCATENATE function (or CONCAT in newer versions) joins several text strings into one string.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_12",
+      "topicId": null,
+      "text": "A computer that is working but is not connected to the internet or to any other network at the moment is described as being in which state?",
+      "options": [
+        "Online",
+        "Offline",
+        "Sleep Mode",
+        "Cached",
+        "Uploading"
+      ],
+      "correctIndex": 1,
+      "explanation": "Offline indicates that a device is not maintaining an active connection to a network.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_13",
+      "topicId": null,
+      "text": "\"Wi-Fi\" is a popular wireless networking technology. What full form is commonly associated with this term?",
+      "options": [
+        "Wireless Finance",
+        "Wireless Fidelity",
+        "Wired Field",
+        "Wireless Frequency",
+        "Wide Fidelity"
+      ],
+      "correctIndex": 1,
+      "explanation": "While technically debated, \"Wireless Fidelity\" is the widely accepted full form of Wi-Fi in general computer awareness contexts.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_14",
+      "topicId": null,
+      "text": "Which protocol do email clients mainly use to retrieve or download messages from a mail server?",
+      "options": [
+        "SMTP",
+        "FTP",
+        "POP3",
+        "HTTP",
+        "SNMP"
+      ],
+      "correctIndex": 2,
+      "explanation": "POP3 (Post Office Protocol version 3) is used to retrieve emails, while SMTP is used to send emails.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_15",
+      "topicId": null,
+      "text": "Which of the following is a web-based email service and NOT a desktop email client application?",
+      "options": [
+        "Microsoft Outlook",
+        "Mozilla Thunderbird",
+        "Apple Mail",
+        "Gmail (accessed via Chrome)",
+        "Eudora"
+      ],
+      "correctIndex": 3,
+      "explanation": "Gmail accessed via Chrome is a Webmail service, while the others are standalone email client applications installed on the operating system.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_16",
+      "topicId": null,
+      "text": "Into how many distinct levels of abstraction does the ANSI/SPARC architecture divide a database system?",
+      "options": [
+        "One Level",
+        "Two Levels",
+        "Three Levels",
+        "Four Levels",
+        "Five Levels"
+      ],
+      "correctIndex": 2,
+      "explanation": "The ANSI/SPARC architecture has Three Levels: Internal (Physical), Conceptual (Logical), and External (View).",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_17",
+      "topicId": null,
+      "text": "In technical terms, a set of instructions arranged step by step to tell the computer what it should do is called a:",
+      "options": [
+        "Hardware",
+        "Program",
+        "Peripheral",
+        "Input",
+        "Output"
+      ],
+      "correctIndex": 1,
+      "explanation": "A Computer Program is a collection of instructions that performs a specific task when executed by a computer.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_18",
+      "topicId": null,
+      "text": "The density of ink dots decides the quality or sharpness of a printed image. The unit of resolution used for this is abbreviated as ________.",
+      "options": [
+        "PPM (Pages Per Minute)",
+        "CPS (Characters Per Second)",
+        "DPI (Dots Per Inch)",
+        "LPM (Lines Per Minute)",
+        "GHz (Gigahertz)"
+      ],
+      "correctIndex": 2,
+      "explanation": "DPI (Dots Per Inch) measures the resolution of a printed image; higher DPI results in sharper and clearer images.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_19",
+      "topicId": null,
+      "text": "Who is credited with putting forward the Relational Model of data in 1970, which forms the theoretical basis of modern SQL databases?",
+      "options": [
+        "Charles Babbage",
+        "Tim Berners-Lee",
+        "Dr.E.F. Codd",
+        "Dennis Ritchie",
+        "Bill Gates"
+      ],
+      "correctIndex": 2,
+      "explanation": "Dr. Edgar F. Codd introduced the 12 rules (Codd's 12 Rules) that define what is required for a database management system to be considered a true Relational Database (RDBMS).",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_20",
+      "topicId": null,
+      "text": "When a computer is switched on, the initial instructions that check the hardware and load the OS are found in which memory?",
+      "options": [
+        "RAM",
+        "ROM (BIOS)",
+        "Hard Disk",
+        "Cache",
+        "Virtual Memory"
+      ],
+      "correctIndex": 1,
+      "explanation": "The BIOS (Basic Input/Output System) is stored in Read-Only Memory (ROM) and runs first to check the hardware and boot the system.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_21",
+      "topicId": null,
+      "text": "Built much like a photocopier, with a glass pane and a moving optical array, this is the scanner type most commonly found in offices for scanning documents. Which type is it?",
+      "options": [
+        "Handheld Scanner",
+        "Drum Scanner",
+        "Flatbed Scanner",
+        "Sheet-fed Scanner",
+        "Barcode Scanner"
+      ],
+      "correctIndex": 2,
+      "explanation": "A Flatbed Scanner uses a flat glass surface for scanning documents, books, or photos.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_22",
+      "topicId": null,
+      "text": "Which shortcut key minimizes all open windows and displays the Desktop?",
+      "options": [
+        "Alt + Tab",
+        "Ctrl + D",
+        "Windows Key + D",
+        "Windows Key + M",
+        "Shift + D"
+      ],
+      "correctIndex": 2,
+      "explanation": "Windows Key + D toggles between showing the desktop and restoring the open windows, whereas Windows Key + M only minimizes them.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_23",
+      "topicId": null,
+      "text": "Compatibility with older as well as newer networks is ensured in modern operating systems through support for which version of the Internet Protocol?",
+      "options": [
+        "IPv 4 only",
+        "IPv 6 only",
+        "Dual Stack (Both IPv 4 and IPv 6)",
+        "IPv 5",
+        "IPv 2"
+      ],
+      "correctIndex": 2,
+      "explanation": "Most modern devices use a \"Dual Stack\" implementation to process both IPv4 and IPv6 traffic simultaneously.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_24",
+      "topicId": null,
+      "text": "Which company and researcher are linked with the development of the Compact Disc (CD) technology?",
+      "options": [
+        "Apple & Steve Jobs",
+        "Sony & Philips (James Russell)",
+        "IBM & Alan Turing",
+        "Microsoft & Bill Gates",
+        "Intel & Gordon Moore"
+      ],
+      "correctIndex": 1,
+      "explanation": "James Russell is often credited with the original concept, while Sony and Philips jointly developed the commercial Compact Disc standard.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_25",
+      "topicId": null,
+      "text": "Which GUI control element lets the user select one or more options from a set of alternatives?",
+      "options": [
+        "Radio Button",
+        "Check Box",
+        "Drop-down List",
+        "Text Box",
+        "Scroll Bar"
+      ],
+      "correctIndex": 1,
+      "explanation": "Check Boxes allow multiple selections (square boxes), while Radio Buttons allow only a single selection (round buttons).",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_26",
+      "topicId": null,
+      "text": "Which network topology needs the maximum cabling and is the costliest to implement?",
+      "options": [
+        "Bus",
+        "Star",
+        "Ring",
+        "Mesh",
+        "Tree"
+      ],
+      "correctIndex": 3,
+      "explanation": "In a full Mesh topology, every device is connected to every other device, so it requires the most cabling and is the most expensive to set up.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_27",
+      "topicId": null,
+      "text": "Reading a program one line at a time, a translator converts each line into machine code and runs it then and there, halting the moment an error appears. Identify this translator:",
+      "options": [
+        "Compiler",
+        "Assembler",
+        "Interpreter",
+        "Linker",
+        "Loader"
+      ],
+      "correctIndex": 2,
+      "explanation": "An Interpreter translates and executes code line-by-line. A Compiler translates the whole program at once and lists all errors at the end.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_28",
+      "topicId": null,
+      "text": "In which network topology is every node connected individually to a central connection point, such as a hub or a switch?",
+      "options": [
+        "Ring",
+        "Bus",
+        "Star",
+        "Mesh",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "In a Star topology, every computer is connected to a central node (Hub/Switch); if the central node fails, the whole network fails.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_29",
+      "topicId": null,
+      "text": "Who is widely recognised as the \"Father of Email\"?",
+      "options": [
+        "Tim Berners-Lee",
+        "Bill Gates",
+        "Ray Tomlinson",
+        "VintCerf",
+        "Charles Babbage"
+      ],
+      "correctIndex": 2,
+      "explanation": "Ray Tomlinson implemented the first email system on the ARPANET, which earned him this title.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_30",
+      "topicId": null,
+      "text": "Only Audio file formats are contained in which of the following groups?",
+      "options": [
+        "MP3, WAV, AAC",
+        "JPG, MP3, AVI",
+        "WAV, DOC, PDF",
+        "PNG, GIF, MP3",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "MP3, WAV, and AAC are all standard audio file formats, while JPG/PNG are images, AVI is video, and DOC/PDF are documents.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_31",
+      "topicId": null,
+      "text": "In a relational database, a \"column\" of a table is technically referred to as a/an?",
+      "options": [
+        "Tuple",
+        "Record",
+        "Attribute",
+        "Degree",
+        "Relation"
+      ],
+      "correctIndex": 2,
+      "explanation": "In a table, columns are called Attributes (or Fields), while rows are called Tuples (or Records).",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_32",
+      "topicId": null,
+      "text": "Specialized devices such as PDAs, ATMs and Washing Machines run an Operating System that is typically classified as a(n):",
+      "options": [
+        "Batch OS",
+        "Embedded OS",
+        "Network OS",
+        "Distributed OS",
+        "Multi-user OS"
+      ],
+      "correctIndex": 1,
+      "explanation": "Embedded Operating Systems are designed for specific tasks on specialized hardware, such as the controllers in PDAs, ATMs and washing machines.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_33",
+      "topicId": null,
+      "text": "In a hierarchical file system, the top-most directory that holds all the other directories and files is called the ______.",
+      "options": [
+        "Sub-directory",
+        "Root Directory",
+        "Home Folder",
+        "Cache",
+        "Leaf Directory"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Root Directory (often denoted as C: in Windows or / in Unix) is the starting point of the file system hierarchy.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_34",
+      "topicId": null,
+      "text": "Large-format, high-quality vector graphics such as blueprints are produced using which output device?",
+      "options": [
+        "Laser Printer",
+        "Inkjet Printer",
+        "Plotter",
+        "Monitor",
+        "Projector"
+      ],
+      "correctIndex": 2,
+      "explanation": "Plotters draw continuous lines using pens and are used for engineering designs (CAD) and maps.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_35",
+      "topicId": null,
+      "text": "Volatile memory retains its data only for as long as the computer stays powered on and loses everything the moment it is shut down. Which type of computer memory is this?",
+      "options": [
+        "ROM",
+        "Hard Disk",
+        "RAM",
+        "Flash Drive",
+        "DVD"
+      ],
+      "correctIndex": 2,
+      "explanation": "RAM (Random Access Memory) is temporary (volatile) storage used by the CPU to hold data that is being actively processed.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_36",
+      "topicId": null,
+      "text": "The quantity of data that a network connection can transmit within a given period of time is described by which term?",
+      "options": [
+        "Latency",
+        "Bandwidth",
+        "Frequency",
+        "Protocol",
+        "Topology"
+      ],
+      "correctIndex": 1,
+      "explanation": "Bandwidth refers to the maximum data transfer rate of a network or internet connection.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_37",
+      "topicId": null,
+      "text": "When two or more different types of topologies (e.g., Star and Bus) are combined together, the resulting network topology is known as:",
+      "options": [
+        "Mesh",
+        "Ring",
+        "Hybrid",
+        "Dual",
+        "Complex"
+      ],
+      "correctIndex": 2,
+      "explanation": "A Hybrid topology integrates two or more different topologies to suit specific needs.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_38",
+      "topicId": null,
+      "text": "Which device is required to convert digital computer signals into analog signals so that they can be transmitted over telephone lines?",
+      "options": [
+        "Router",
+        "Switch",
+        "Modem",
+        "NIC card",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "A Modem (Modulator-Demodulator) converts digital data from a computer into analog signals for phone lines and vice-versa.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582650621_39",
+      "topicId": null,
+      "text": "In Unix/Linux, user commands entered at the command line are interpreted and handed over to the OS kernel by a component known as a:",
+      "options": [
+        "Desktop",
+        "Shell",
+        "Core",
+        "Root",
+        "Node"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Shell (e.g., Bash) is the command interpreter in Unix/Linux that takes user commands and passes them to the kernel.",
+      "difficulty": "medium",
+      "setNo": 18,
+      "active": true,
+      "productIds": []
     }
   ],
   "quizSets": [
@@ -17854,7 +18574,7 @@
     {
       "id": "qs_1791575725382",
       "setNo": 18,
-      "title": "Mock 13 (Upcoming)",
+      "title": "Mock 13",
       "timeLimitMin": 15,
       "negMarkEnabled": true,
       "negMarkValue": 0.25,
