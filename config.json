@@ -21218,6 +21218,726 @@
       "setNo": 21,
       "active": true,
       "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_0",
+      "topicId": null,
+      "text": "________ is the name given to data after it has been processed, organized, structured or presented within a given context in such a way that it becomes useful.",
+      "options": [
+        "Raw Input",
+        "Instruction",
+        "Information",
+        "Database",
+        "Algorithm"
+      ],
+      "correctIndex": 2,
+      "explanation": "Raw facts are called Data; once data is processed and presented in a meaningful, useful form, it becomes Information.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_1",
+      "topicId": null,
+      "text": "\"Code Red\", a well-known computer worm seen in 2001, targeted computers that were running which web server software?",
+      "options": [
+        "Apache HTTP Server",
+        "Microsoft IIS (Internet Information Services)",
+        "Nginx",
+        "Tomcat",
+        "NodeJS"
+      ],
+      "correctIndex": 1,
+      "explanation": "Code Red exploited a vulnerability in Microsoft's IIS web server.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_2",
+      "topicId": null,
+      "text": "Data can travel in both directions at the same time in which transmission mode?",
+      "options": [
+        "Simplex",
+        "Half-Duplex",
+        "Full-Duplex",
+        "Multiplex",
+        "Asynchronous"
+      ],
+      "correctIndex": 2,
+      "explanation": "In Full-Duplex mode, transmission can occur in both directions at the same time, like traffic on a two-way street.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_3",
+      "topicId": null,
+      "text": "The invention of the Floppy Disk Drive in the early 1970s is credited to which IBM engineer?",
+      "options": [
+        "Alan Shugart",
+        "Ray Tomlinson",
+        "Marc Andreessen",
+        "Jack Dorsey",
+        "Robert Metcalfe"
+      ],
+      "correctIndex": 0,
+      "explanation": "Alan Shugart, along with his team at IBM, invented the floppy disk drive in the early 1970s.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_4",
+      "topicId": null,
+      "text": "For recovery purposes, an exact duplicate of the whole hard drive — covering the OS as well as every file — is created by which type of utility software?",
+      "options": [
+        "Antivirus",
+        "Disk Defragmenter",
+        "Disk Imaging / Backup Software",
+        "Firewall",
+        "Compression Tool"
+      ],
+      "correctIndex": 2,
+      "explanation": "Disk Imaging creates a sector-by-sector copy of the drive, which can be restored for recovery.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_5",
+      "topicId": null,
+      "text": "Being the world's first commercial ________ is what made the Intel 4004, launched in 1971, famous.",
+      "options": [
+        "Transistor",
+        "Microprocessor",
+        "Vacuum Tube",
+        "Hard Disk",
+        "Monitor"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Intel 4004 was the first Microprocessor (a CPU on a single chip), marking the start of the 4th generation of computers.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_6",
+      "topicId": null,
+      "text": "Which machine, built in 1946, is widely considered the first general-purpose electronic digital computer?",
+      "options": [
+        "UNIVAC",
+        "ENIAC",
+        "EDVAC",
+        "Macintosh",
+        "Cray-1"
+      ],
+      "correctIndex": 1,
+      "explanation": "ENIAC (Electronic Numerical Integrator and Computer), completed in 1946, was the first programmable, electronic, general-purpose digital computer.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_7",
+      "topicId": null,
+      "text": "The process of restructuring data in a database to ensure consistency and accuracy is known as?",
+      "options": [
+        "Data Mining",
+        "Data Warehousing",
+        "Normalization",
+        "Defragmentation",
+        "Phishing"
+      ],
+      "correctIndex": 2,
+      "explanation": "Normalization is the process of organizing data in a database to reduce redundancy and improve data integrity, ensuring consistency and accuracy.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_8",
+      "topicId": null,
+      "text": "What name is given to the bar normally found at the bottom of the Windows desktop, showing the Start button and the programs currently open?",
+      "options": [
+        "Title Bar",
+        "Menu Bar",
+        "Taskbar",
+        "Scroll Bar",
+        "Status Bar"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Taskbar displays open programs and the Start button, and allows switching between tasks/apps.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_9",
+      "topicId": null,
+      "text": "For transferring files over the internet in a secure manner, which protocol is mainly used?",
+      "options": [
+        "HTTP",
+        "SMTP",
+        "SFTP",
+        "Telnet",
+        "SNMP"
+      ],
+      "correctIndex": 2,
+      "explanation": "SFTP (Secure File Transfer Protocol) is a secure version of FTP that uses SSH to encrypt data.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_10",
+      "topicId": null,
+      "text": "A document's layout stays intact no matter which software opens it when the file uses a portable document format. The file extension linked with such a format is:",
+      "options": [
+        ".txt",
+        ".pdf",
+        ".docx",
+        ".gif",
+        ".mp3"
+      ],
+      "correctIndex": 1,
+      "explanation": ".pdf stands for Portable Document Format, developed by Adobe; unlike .docx or .txt, it maintains the visual formatting of the document across different devices.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_11",
+      "topicId": null,
+      "text": "The Central Processing Unit (CPU) is made up of several components. Which of the following is not one of them?",
+      "options": [
+        "Control Unit (CU)",
+        "Arithmetic Logic Unit (ALU)",
+        "Registers",
+        "Hard Disk Drive",
+        "None of these"
+      ],
+      "correctIndex": 3,
+      "explanation": "The Hard Disk is a secondary storage device, not a part of the CPU itself.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_12",
+      "topicId": null,
+      "text": "In a relational database table, rows represent records and columns represent attributes. What is the technical term used for a \"Row\" in such a database?",
+      "options": [
+        "Domain",
+        "Tuple",
+        "Schema",
+        "Instance",
+        "Degree"
+      ],
+      "correctIndex": 1,
+      "explanation": "In relational database terminology, a single row (record) is called a Tuple, while a column (field) is called an Attribute.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_13",
+      "topicId": null,
+      "text": "Which of the following network protocols is specifically designed for retrieving emails from a server to a client?",
+      "options": [
+        "SMTP",
+        "HTTP",
+        "POP 3",
+        "FTP",
+        "SNMP"
+      ],
+      "correctIndex": 2,
+      "explanation": "POP3 (Post Office Protocol version 3) is used to retrieve or download emails from a mail server. SMTP is used for sending emails.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_14",
+      "topicId": null,
+      "text": "The credit of being the \"first computer programmer\", earned by devising the very first algorithm, goes to whom?",
+      "options": [
+        "Charles Babbage",
+        "Alan Turing",
+        "Ada Lovelace",
+        "Grace Hopper",
+        "John von Neumann"
+      ],
+      "correctIndex": 2,
+      "explanation": "Ada Lovelace wrote the first algorithm intended for Babbage's Analytical Engine in the 1840s.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_15",
+      "topicId": null,
+      "text": "The Central Processing Unit (CPU) is often described as the brain of the computer and is made up of two main sub-units responsible for processing and control. What are they?",
+      "options": [
+        "RAM and ROM",
+        "ALU and CU",
+        "Input and Output",
+        "Monitor and Keyboard",
+        "HDD and SSD"
+      ],
+      "correctIndex": 1,
+      "explanation": "The CPU consists of the ALU (Arithmetic Logic Unit), which performs mathematical and logical operations, and the CU (Control Unit), which directs instructions and data flow.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_16",
+      "topicId": null,
+      "text": "Data on which of these storage devices can be read strictly through \"Sequential Access\"?",
+      "options": [
+        "Hard Disk Drive",
+        "Magnetic Tape",
+        "Flash Drive",
+        "Optical Disc",
+        "None of the above"
+      ],
+      "correctIndex": 1,
+      "explanation": "Magnetic Tape requires the drive to wind through the reel to reach a specific piece of data (like a cassette tape), making it sequential access, unlike the random access of disks.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_17",
+      "topicId": null,
+      "text": "An old computing system or software that continues to be used even though newer alternatives exist is described by which term?",
+      "options": [
+        "Beta System",
+        "Firmware",
+        "Legacy System",
+        "Proprietary System",
+        "Open Source"
+      ],
+      "correctIndex": 2,
+      "explanation": "A legacy system is an old method, technology, computer system, or application program that continues to be used.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_18",
+      "topicId": null,
+      "text": "On many computers, pressing which key repeatedly during startup opens the Advanced Boot Options menu (Safe Mode, etc.)?",
+      "options": [
+        "F 1",
+        "F 8",
+        "F 12",
+        "Del",
+        "Esc"
+      ],
+      "correctIndex": 1,
+      "explanation": "F8 was the standard key for Advanced Boot Options (though this changed in Windows 10/11).",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_19",
+      "topicId": null,
+      "text": "Which software acts as an interface between the database and the end-user, making sure the data stays consistently organized and remains easily accessible?",
+      "options": [
+        "Spreadsheet",
+        "Operating System",
+        "DBMS (Database Management System)",
+        "Word Processor",
+        "Compiler"
+      ],
+      "correctIndex": 2,
+      "explanation": "A DBMS (like Oracle or SQL Server) manages the database structure and controls access to the data.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_20",
+      "topicId": null,
+      "text": "Which machine-readable code, seen on product packaging and read during inventory scanning, is made up of a series of parallel black and white lines of different widths?",
+      "options": [
+        "QR Code",
+        "Barcode",
+        "MICR Code",
+        "OMR Code",
+        "ASCII Code"
+      ],
+      "correctIndex": 1,
+      "explanation": "A Barcode represents data with bars of varying widths, which are read by an optical scanner.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_21",
+      "topicId": null,
+      "text": "Under the 'Edit' menu of standard text editors and older versions of Microsoft Word (like 2003), which of the following options would you typically NOT find?",
+      "options": [
+        "Cut",
+        "Copy",
+        "Paste",
+        "Page Setup",
+        "Undo"
+      ],
+      "correctIndex": 3,
+      "explanation": "Page Setup is typically found under the File menu (or the Layout tab in newer versions), while the Edit menu contains clipboard operations like Cut, Copy, and Paste.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_22",
+      "topicId": null,
+      "text": "Often called the Network Interface Layer, the lowest layer of the TCP/IP model matches which two layers of the OSI reference model?",
+      "options": [
+        "Network and Transport",
+        "Physical and Data Link",
+        "Session and Presentation",
+        "Application and Network",
+        "Transport and Session"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Network Interface Layer (also called the Link Layer) in TCP/IP combines the functions of the Physical and Data Link layers of the OSI model.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_23",
+      "topicId": null,
+      "text": "In which year was the Information Technology Act enacted — the Act that provides the legal framework for electronic commerce in India?",
+      "options": [
+        "1995",
+        "1998",
+        "2000",
+        "2005",
+        "2008"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Information Technology Act, 2000 is the primary law in India dealing with cybercrime and electronic commerce.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_24",
+      "topicId": null,
+      "text": "Which storage device is based on flash memory and has no moving mechanical parts?",
+      "options": [
+        "Hard Disk Drive (HDD)",
+        "Floppy Disk",
+        "Solid State Drive (SSD)",
+        "Compact Disc (CD)",
+        "Magnetic Tape"
+      ],
+      "correctIndex": 2,
+      "explanation": "SSDs use flash memory and are faster and more durable than HDDs because they lack moving parts.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_25",
+      "topicId": null,
+      "text": "Two separate networks running on different protocols can be linked together by which network device?",
+      "options": [
+        "Hub",
+        "Switch",
+        "Gateway",
+        "Bridge",
+        "Repeater"
+      ],
+      "correctIndex": 2,
+      "explanation": "A Gateway serves as an entrance to another network and can translate between different network protocols.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_26",
+      "topicId": null,
+      "text": "In the OSI model, which layer is responsible for logical addressing and for routing packets?",
+      "options": [
+        "Physical Layer",
+        "Data Link Layer",
+        "Network Layer",
+        "Transport Layer",
+        "Session Layer"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Network layer (Layer 3) handles IP addressing and determines the best path for data delivery (routing).",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_27",
+      "topicId": null,
+      "text": "In time-sharing operating systems, the CPU switches rapidly from one program to another, creating the illusion that all of them are running simultaneously. This technique is known as:",
+      "options": [
+        "Multitasking",
+        "Multiprocessing",
+        "Batch Processing",
+        "Real-time Processing",
+        "Spooling"
+      ],
+      "correctIndex": 0,
+      "explanation": "Multitasking allows a single CPU to execute multiple tasks by switching context rapidly.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_28",
+      "topicId": null,
+      "text": "In a relational database table, which key is chosen to uniquely identify every record (row) and does not permit NULL values?",
+      "options": [
+        "Foreign Key",
+        "Secondary Key",
+        "Primary Key",
+        "Candidate Key",
+        "Alternate Key"
+      ],
+      "correctIndex": 2,
+      "explanation": "A Primary Key uniquely identifies each record in a database table (for example, a Student ID number) and cannot contain NULL values.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_29",
+      "topicId": null,
+      "text": "In MS PowerPoint, the visual effect applied when moving from one slide to the next is known as:",
+      "options": [
+        "Animation",
+        "Slide Transition",
+        "Custom Motion",
+        "Slide Design",
+        "Layout"
+      ],
+      "correctIndex": 1,
+      "explanation": "Transitions are the effects that occur when you move from one slide to the next during a presentation. (Animations happen within a slide.)",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_30",
+      "topicId": null,
+      "text": "Which type of malware replicates itself and spreads to other computers, often without any user action?",
+      "options": [
+        "Trojan",
+        "Adware",
+        "Worm",
+        "Spyware",
+        "Keylogger"
+      ],
+      "correctIndex": 2,
+      "explanation": "A Worm is a standalone malware that replicates itself to spread to other computers, unlike a virus, which needs a host file.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_31",
+      "topicId": null,
+      "text": "In Microsoft Excel, the address of the currently selected cell (e.g., \"A1\") is shown by which component, located to the left of the Formula Bar?",
+      "options": [
+        "Status Bar",
+        "Name Box",
+        "Title Bar",
+        "Menu Bar",
+        "Scroll Bar"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Name Box shows the cell reference (or name) of the active cell.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_32",
+      "topicId": null,
+      "text": "Microsoft Word, Google Chrome, and Adobe Photoshop are all examples of which of the following?",
+      "options": [
+        "System Software",
+        "Utility Software",
+        "Application Software",
+        "Operating Systems",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "Application Software allows the user to perform specific tasks such as writing, browsing, and editing, while System software (like the OS) runs the computer.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_33",
+      "topicId": null,
+      "text": "Which level of database abstraction describes what data is stored in the database and the relationships among that data, while hiding the details of physical storage?",
+      "options": [
+        "Internal Level",
+        "Physical Level",
+        "Logical (Conceptual) Level",
+        "View Level",
+        "Hardware Level"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Logical Level describes the entire database structure (tables, relationships) without worrying about how the data is physically stored on the disk.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_34",
+      "topicId": null,
+      "text": "In Microsoft Word, apart from \"Ctrl + S\", which function key combination can also be used to save the active document?",
+      "options": [
+        "F12",
+        "Shift + F12",
+        "Alt + F4",
+        "Ctrl + F12",
+        "Shift + F5"
+      ],
+      "correctIndex": 1,
+      "explanation": "In MS Word, Shift + F12 saves the active document, just like Ctrl + S, while F12 opens the Save As dialog.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_35",
+      "topicId": null,
+      "text": "Multiplication and division could be carried out with a set of numbered rods or sticks in an early mechanical calculating device that John Napier invented in 1617. The device was:",
+      "options": [
+        "Pascaline",
+        "Abacus",
+        "Napier's Bones",
+        "Difference Engine",
+        "Slide Rule"
+      ],
+      "correctIndex": 2,
+      "explanation": "Napier's Bones was a manually-operated calculating device created by John Napier.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_36",
+      "topicId": null,
+      "text": "Which technology lets a mobile phone act as a wireless modem for other devices?",
+      "options": [
+        "Bluetooth",
+        "Tethering",
+        "NFC",
+        "GPS",
+        "Roaming"
+      ],
+      "correctIndex": 1,
+      "explanation": "Tethering (or Hotspot) allows sharing a mobile device's internet connection with other devices like laptops.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_37",
+      "topicId": null,
+      "text": "A standard email address is made up of how many distinct parts?",
+      "options": [
+        "One",
+        "Two",
+        "Three",
+        "Four",
+        "Five"
+      ],
+      "correctIndex": 1,
+      "explanation": "An email address has Two parts: the Local Part (Username) and the Domain Part.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_38",
+      "topicId": null,
+      "text": "Sitting between the CPU and the main memory (RAM) as a buffer, which high-speed memory holds frequently used instructions so that the CPU does not have to wait?",
+      "options": [
+        "Virtual Memory",
+        "Secondary Memory",
+        "Cache Memory",
+        "Flash Memory",
+        "Register"
+      ],
+      "correctIndex": 2,
+      "explanation": "Cache Memory is extremely fast memory located inside or near the CPU.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584919862_39",
+      "topicId": null,
+      "text": "In which database architecture is the application logic located on the client machine, while the database is located on a separate server?",
+      "options": [
+        "One-tier architecture",
+        "Two-tier architecture",
+        "Three-tier architecture",
+        "N-tier architecture",
+        "Peer-to-Peer architecture"
+      ],
+      "correctIndex": 1,
+      "explanation": "In a Two-tier architecture, the client containing the User Interface and Application logic communicates directly with the database server.",
+      "difficulty": "medium",
+      "setNo": 23,
+      "active": true,
+      "productIds": []
     }
   ],
   "quizSets": [
@@ -21511,6 +22231,20 @@
       "id": "qs_1792584661817",
       "setNo": 22,
       "title": "Mock 17",
+      "timeLimitMin": 15,
+      "negMarkEnabled": true,
+      "negMarkValue": 0.25,
+      "marksPerQuestion": 1,
+      "section": "mock",
+      "active": true,
+      "productIds": [
+        "computer"
+      ]
+    },
+    {
+      "id": "qs_1792584880305",
+      "setNo": 23,
+      "title": "Mock 18",
       "timeLimitMin": 15,
       "negMarkEnabled": true,
       "negMarkValue": 0.25,
