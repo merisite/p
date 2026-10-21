@@ -16898,6 +16898,726 @@
       "setNo": 17,
       "active": true,
       "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_0",
+      "topicId": null,
+      "text": "In a website URL, the use of the top-level domain extension \".edu\" is strictly limited to which type of organization?",
+      "options": [
+        "Commercial entities",
+        "Government agencies",
+        "Educational institutions",
+        "Network providers",
+        "Non-profit organizations"
+      ],
+      "correctIndex": 2,
+      "explanation": ".edu domains are reserved for accredited educational institutions.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_1",
+      "topicId": null,
+      "text": "What is a computer program that converts an entire program into machine language all at once called?",
+      "options": [
+        "Interpreter",
+        "Simulator",
+        "Compiler",
+        "Commander",
+        "Converter"
+      ],
+      "correctIndex": 2,
+      "explanation": "A compiler translates the entire source code into machine code before execution.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_2",
+      "topicId": null,
+      "text": "Which optical storage format was created to supersede the DVD format, offering high-definition video (1080p and 4K) with a capacity of up to 50GB per layer?",
+      "options": [
+        "CD-ROM",
+        "Blu-ray Disc",
+        "HD-DVD",
+        "HVD",
+        "Floppy Disk"
+      ],
+      "correctIndex": 1,
+      "explanation": "Blu-ray Disc technology was developed to store larger amounts of data, including high-definition video.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_3",
+      "topicId": null,
+      "text": "Which security system works as a barrier between a trusted internal network and an untrusted external network (like the internet), monitoring traffic and blocking unauthorized access?",
+      "options": [
+        "Antivirus",
+        "Firewall",
+        "Firmware",
+        "Spyware",
+        "Cookie"
+      ],
+      "correctIndex": 1,
+      "explanation": "A firewall acts as a security barrier, controlling incoming and outgoing network traffic based on predetermined security rules.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_4",
+      "topicId": null,
+      "text": "In Microsoft Word, the 'Font' dialog box — used for changing font style, size and character spacing — can be opened with which keyboard shortcut?",
+      "options": [
+        "Ctrl + F",
+        "Ctrl + Shift + F",
+        "Ctrl + D",
+        "Alt + F",
+        "Ctrl + H"
+      ],
+      "correctIndex": 2,
+      "explanation": "Ctrl + D is the keyboard shortcut to open the Font dialog box in Microsoft Word.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_5",
+      "topicId": null,
+      "text": "Which Indian organization is responsible for designing and developing the 'PARAM' series of supercomputers (e.g., PARAM 8000, PARAM Siddhi)?",
+      "options": [
+        "ISRO",
+        "DRDO",
+        "C-DAC",
+        "BARC",
+        "IIT Madras"
+      ],
+      "correctIndex": 2,
+      "explanation": "C-DAC (Centre for Development of Advanced Computing) is the primary Indian institution that develops the PARAM series of supercomputers.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_6",
+      "topicId": null,
+      "text": "In phishing, the attacker deceives victims by pretending to be somebody else. For this reason, phishing is classed under which kind of crime?",
+      "options": [
+        "Vandalism",
+        "Impersonation / Identity Theft attempts",
+        "Burglary",
+        "Physical Assault",
+        "Arson"
+      ],
+      "correctIndex": 1,
+      "explanation": "Phishing involves impersonating a legitimate entity to steal sensitive information, making it an impersonation or identity theft attempt.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_7",
+      "topicId": null,
+      "text": "Technically, the point where a column and a row cross each other in an MS Excel worksheet — B5, for instance — is referred to as a ________.",
+      "options": [
+        "Value",
+        "Cell",
+        "Grid",
+        "Label",
+        "Field"
+      ],
+      "correctIndex": 1,
+      "explanation": "In spreadsheet software like Excel, the intersection of a column and a row is called a cell.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_8",
+      "topicId": null,
+      "text": "Placing one function as an argument inside another function (e.g., =IF(AND(A1>0, A1<10), \"Yes\", \"No\")) is known as ________ a function.",
+      "options": [
+        "Sorting",
+        "Nesting",
+        "Filtering",
+        "Merging",
+        "Linking"
+      ],
+      "correctIndex": 1,
+      "explanation": "When one function is placed inside another function as an argument, it is called nesting.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_9",
+      "topicId": null,
+      "text": "Operations like inserting, deleting or updating data in a database are requested by application programs through which language?",
+      "options": [
+        "DDL",
+        "DML",
+        "HTML",
+        "XML",
+        "VDL"
+      ],
+      "correctIndex": 1,
+      "explanation": "Data Manipulation Language (DML) is used to perform operations such as inserting, deleting, and updating data in a database.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_10",
+      "topicId": null,
+      "text": "What name is given to a defect or fault in a computer program that stops it from working correctly?",
+      "options": [
+        "Patch",
+        "Bug",
+        "Cookie",
+        "Spam",
+        "Syntax"
+      ],
+      "correctIndex": 1,
+      "explanation": "A bug is a flaw or error in a computer program that causes it to produce an incorrect or unexpected result.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_11",
+      "topicId": null,
+      "text": "Which of the following statements correctly describes Proprietary Software?",
+      "options": [
+        "Source code is available to the public",
+        "It is always free of cost",
+        "Source code is kept secret and belongs to the developer",
+        "Users can modify the code freely",
+        "It has no license agreement"
+      ],
+      "correctIndex": 2,
+      "explanation": "Proprietary software is characterized by its closed source code, meaning the source code is kept secret and owned by the developer.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_12",
+      "topicId": null,
+      "text": "In which type of connection is the capacity of the link shared among multiple devices, either spatially or temporally?",
+      "options": [
+        "Point-to-Point",
+        "Multipoint",
+        "Simplex",
+        "Dedicated",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "A Multipoint connection allows multiple devices to share a single communication link.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_13",
+      "topicId": null,
+      "text": "In email clients everywhere, the action of \"Adding an Attachment\" is universally represented by the icon of:",
+      "options": [
+        "A Pencil",
+        "A Paperclip",
+        "A Gear",
+        "A Trash Can",
+        "An Envelope"
+      ],
+      "correctIndex": 1,
+      "explanation": "The paperclip icon is a widely recognized symbol for attaching files to an email.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_14",
+      "topicId": null,
+      "text": "On the Windows desktop, where are the System Clock and volume controls usually found?",
+      "options": [
+        "Title Bar",
+        "Menu Bar",
+        "System Tray (Notification Area)",
+        "Desktop Background",
+        "Quick Access Toolbar"
+      ],
+      "correctIndex": 2,
+      "explanation": "The System Tray, also known as the Notification Area, is located on the taskbar and typically displays the clock, volume controls, and other system icons.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_15",
+      "topicId": null,
+      "text": "Which component of the CPU works as the \"traffic cop\" of the computer, directing the flow of data and control signals?",
+      "options": [
+        "ALU",
+        "Control Unit (CU)",
+        "Register",
+        "Cache",
+        "Bus"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Control Unit (CU) manages and directs the operations of the CPU, coordinating the flow of data and instructions.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_16",
+      "topicId": null,
+      "text": "The branch of forensic science dealing with the recovery and investigation of material found in digital devices, often in relation to computer crime, is called:",
+      "options": [
+        "Cyber Analysis",
+        "Computer Forensics / Cyber Forensics",
+        "Ethical Hacking",
+        "Data Mining",
+        "Digital Analytics"
+      ],
+      "correctIndex": 1,
+      "explanation": "Computer Forensics, also known as Cyber Forensics, is the discipline concerned with the examination of digital evidence.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_17",
+      "topicId": null,
+      "text": "Which feature of a word processor automatically shifts a word to the start of the next line when it does not fit at the end of the current line?",
+      "options": [
+        "Word Wrap",
+        "Auto Correct",
+        "Alignment",
+        "Hyphenation",
+        "Indentation"
+      ],
+      "correctIndex": 0,
+      "explanation": "Word Wrap automatically moves text to the next line when the cursor reaches the right margin, preventing text from going off the page.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_18",
+      "topicId": null,
+      "text": "In Microsoft Word, what is the smallest font size that can be typed manually into the Font Size box?",
+      "options": [
+        "1",
+        "4",
+        "8",
+        "10",
+        "0.5"
+      ],
+      "correctIndex": 0,
+      "explanation": "The smallest font size that can be manually entered into the Font Size box in Microsoft Word is 1.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_19",
+      "topicId": null,
+      "text": "In MS Excel, what is a selected rectangular block of two or more cells (e.g., A1 to C10) technically called?",
+      "options": [
+        "Cluster",
+        "Array",
+        "Range",
+        "Formula",
+        "Sheet"
+      ],
+      "correctIndex": 2,
+      "explanation": "A contiguous group of selected cells in a spreadsheet is referred to as a range.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_20",
+      "topicId": null,
+      "text": "Which type of printer works on heat-sensitive paper and is commonly found in ATMs and Point of Sale (POS) receipt machines?",
+      "options": [
+        "Laser Printer",
+        "Thermal Printer",
+        "Dot Matrix Printer",
+        "Drum Printer",
+        "Inkjet Printer"
+      ],
+      "correctIndex": 1,
+      "explanation": "Thermal printers use heat to produce an image on specially coated paper, commonly used for receipts.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_21",
+      "topicId": null,
+      "text": "Scanned images containing handwritten, typewritten or printed text can be converted into editable, machine-encoded text with the help of which technology?",
+      "options": [
+        "MICR",
+        "OMR",
+        "OCR",
+        "Barcode Reader",
+        "Biometrics"
+      ],
+      "correctIndex": 2,
+      "explanation": "OCR (Optical Character Recognition) is the technology used to convert images of text into machine-readable text.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_22",
+      "topicId": null,
+      "text": "Which acronym identifies optical discs that can be recorded, erased and re-recorded again and again?",
+      "options": [
+        "CD-ROM",
+        "DVD-R",
+        "CD-RW",
+        "WORM",
+        "Blu-ray"
+      ],
+      "correctIndex": 2,
+      "explanation": "CD-RW discs (Compact Disc ReWritable) can be written to, erased, and rewritten multiple times.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_23",
+      "topicId": null,
+      "text": "Which of the following units is equivalent to 240 bytes in the binary measurement of storage?",
+      "options": [
+        "1 Kilobyte",
+        "1 Gigabyte",
+        "1 Terabyte",
+        "1 Petabyte",
+        "1 Exabyte"
+      ],
+      "correctIndex": 0,
+      "explanation": "1 Kilobyte (KB) is equal to 1024 bytes, and 240 bytes is less than a kilobyte. This question seems to have a typo as none of the options are correct for 240 bytes. If it meant 2^10 bytes, it would be 1 KB.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_24",
+      "topicId": null,
+      "text": "What is the ability of an Operating System to run multiple programs at the same time called?",
+      "options": [
+        "Multiprocessing",
+        "Multitasking",
+        "Multithreading",
+        "Batch Processing",
+        "Real-time Processing"
+      ],
+      "correctIndex": 1,
+      "explanation": "Multitasking is the capability of an operating system to execute multiple tasks or programs concurrently.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_25",
+      "topicId": null,
+      "text": "Among the following, which one is NOT a web browser, but rather an Operating System?",
+      "options": [
+        "Microsoft Edge",
+        "Mozilla Firefox",
+        "Google Chrome",
+        "Apple Safari",
+        "Linux"
+      ],
+      "correctIndex": 4,
+      "explanation": "Linux is an operating system, whereas Microsoft Edge, Mozilla Firefox, Google Chrome, and Apple Safari are web browsers.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_26",
+      "topicId": null,
+      "text": "In text editors and Office apps, which command (shortcut) would you use to immediately bring back text that was accidentally deleted?",
+      "options": [
+        "Redo (Ctrl + Y)",
+        "Copy (Ctrl + C)",
+        "Undo (Ctrl + Z)",
+        "Paste (Ctrl + V)",
+        "Cut (Ctrl + X)"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Undo command (Ctrl + Z) reverses the last action performed, allowing for the recovery of accidentally deleted text.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_27",
+      "topicId": null,
+      "text": "Which utility process makes a file or a group of files smaller in size to save disk space and make transmission faster?",
+      "options": [
+        "Defragmentation",
+        "Encryption",
+        "Compression",
+        "Formatting",
+        "Backing up"
+      ],
+      "correctIndex": 2,
+      "explanation": "File compression is a process that reduces the size of files, saving storage space and improving transmission speed.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_28",
+      "topicId": null,
+      "text": "________ refers to the systematic process of locating and fixing the defects or problems in a computer program that stop it from operating correctly.",
+      "options": [
+        "Compiling",
+        "Decoding",
+        "Debugging",
+        "Formatting",
+        "Encrypting"
+      ],
+      "correctIndex": 2,
+      "explanation": "Debugging is the process of finding and resolving defects or errors in computer code.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_29",
+      "topicId": null,
+      "text": "Which operating system is proprietary to Apple Inc. and comes pre-installed on their Macintosh line of computers?",
+      "options": [
+        "Windows",
+        "Linux",
+        "macOS",
+        "Android",
+        "Unix"
+      ],
+      "correctIndex": 2,
+      "explanation": "macOS is the proprietary operating system developed by Apple for its Macintosh computers.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_30",
+      "topicId": null,
+      "text": "Which port is primarily used to connect a monitor to a computer for high-definition video?",
+      "options": [
+        "HDMI",
+        "USB",
+        "Ethernet",
+        "PS/2",
+        "Parallel Port"
+      ],
+      "correctIndex": 0,
+      "explanation": "HDMI (High-Definition Multimedia Interface) is the standard port for transmitting high-definition video and audio signals to monitors and displays.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_31",
+      "topicId": null,
+      "text": "Which interface allows both high-definition video and uncompressed audio data to be transmitted through a single cable?",
+      "options": [
+        "VGA",
+        "USB",
+        "HDMI",
+        "DVI",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "HDMI (High-Definition Multimedia Interface) supports the transmission of both high-definition video and uncompressed digital audio over a single cable.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_32",
+      "topicId": null,
+      "text": "The OSI model was developed by the ISO as a standard networking framework. OSI is the abbreviation of which of the following?",
+      "options": [
+        "Open Systems Interconnection",
+        "Open Source Interconnection",
+        "Operating System Interface",
+        "Optical System Interconnection",
+        "Open Service Interface"
+      ],
+      "correctIndex": 0,
+      "explanation": "OSI stands for Open Systems Interconnection, which is a conceptual framework used to standardize the communication functions of a telecommunication or computing system.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_33",
+      "topicId": null,
+      "text": "A signal sent by hardware, such as a keyboard press, or by software to indicate an event that needs immediate attention from the CPU is known as a(n):",
+      "options": [
+        "Buffer",
+        "Interrupt",
+        "Flag",
+        "Semaphore",
+        "Token"
+      ],
+      "correctIndex": 1,
+      "explanation": "An interrupt is a signal that temporarily stops the CPU from executing its current task to attend to a more urgent event.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_34",
+      "topicId": null,
+      "text": "In which network topology are all the other nodes connected to a central controller or \"Hub\", so that the entire network fails if the hub fails?",
+      "options": [
+        "Bus Topology",
+        "Ring Topology",
+        "Star Topology",
+        "Mesh Topology",
+        "Tree Topology"
+      ],
+      "correctIndex": 2,
+      "explanation": "In a Star Topology, all devices are connected to a central hub or switch; if the central device fails, the entire network segment goes down.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_35",
+      "topicId": null,
+      "text": "Which PowerPoint view is used to run a presentation from the beginning for an audience, occupying the full screen?",
+      "options": [
+        "Slide Sorter",
+        "Reading View",
+        "Slide Show",
+        "Normal View",
+        "Outline View"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Slide Show view is used to present a PowerPoint presentation full-screen to an audience.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_36",
+      "topicId": null,
+      "text": "Which of the following storage devices is based on non-volatile \"Flash Memory\" technology and contains no moving mechanical parts, making it both durable and fast?",
+      "options": [
+        "Hard Disk Drive (HDD)",
+        "Floppy Disk",
+        "CD-ROM",
+        "Pen Drive / USB Flash Drive",
+        "Magnetic Tape"
+      ],
+      "correctIndex": 3,
+      "explanation": "Pen Drives and USB Flash Drives use non-volatile flash memory, offering durability and speed due to the absence of moving mechanical parts.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_37",
+      "topicId": null,
+      "text": "The Microsoft Office application that works as a Personal Information Manager for email, calendaring and tasks is:",
+      "options": [
+        "MS Access",
+        "MS Excel",
+        "MS Outlook",
+        "MS PowerPoint",
+        "MS OneNote"
+      ],
+      "correctIndex": 2,
+      "explanation": "Microsoft Outlook is the Personal Information Manager (PIM) application within the Microsoft Office suite, handling email, calendars, contacts, and tasks.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_38",
+      "topicId": null,
+      "text": "A targeted network or website is swamped with so much excessive traffic that it gets overwhelmed and genuine users can no longer reach it. This kind of cyber-attack is specifically termed:",
+      "options": [
+        "Phishing",
+        "SQL Injection",
+        "DoS (Denial of Service)",
+        "Spoofing",
+        "Man-in-the-middle"
+      ],
+      "correctIndex": 2,
+      "explanation": "A Denial of Service (DoS) attack aims to make a machine or network resource unavailable to its intended users by overwhelming it with traffic.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582438505_39",
+      "topicId": null,
+      "text": "By keeping open apps stored in RAM, the computer can be put into a power mode that consumes very little power yet lets it resume within seconds. This mode is:",
+      "options": [
+        "Shut Down",
+        "Hibernate",
+        "Sleep / Standby",
+        "Restart",
+        "Cold Boot"
+      ],
+      "correctIndex": 2,
+      "explanation": "In Sleep or Standby mode, the computer uses minimal power to keep the contents of RAM active, allowing for a quick resumption of the previous session.",
+      "difficulty": "medium",
+      "setNo": 16,
+      "active": true,
+      "productIds": []
     }
   ],
   "quizSets": [
@@ -17106,7 +17826,7 @@
     {
       "id": "qs_1791575655762",
       "setNo": 16,
-      "title": "Mock 11 (Upcoming)",
+      "title": "Mock 11",
       "timeLimitMin": 15,
       "negMarkEnabled": true,
       "negMarkValue": 0.25,
