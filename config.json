@@ -19058,6 +19058,726 @@
       "setNo": 19,
       "active": true,
       "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_0",
+      "topicId": null,
+      "text": "Pictures, Shapes, SmartArt and Charts are inserted in Microsoft Word 2010 and later through the \"Illustrations\" group. This group appears under which Ribbon Tab?",
+      "options": [
+        "Home",
+        "Layout",
+        "Design",
+        "Insert",
+        "View"
+      ],
+      "correctIndex": 3,
+      "explanation": "The Insert Tab contains the tools to add elements like tables, pictures, shapes, headers, and footers to the document, including the Illustrations group.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_1",
+      "topicId": null,
+      "text": "Who proposed the \"Stored Program Concept,\" under which instructions and data are held in the same memory unit, forming the foundation of modern computer architecture?",
+      "options": [
+        "Alan Turing",
+        "Charles Babbage",
+        "John von Neumann",
+        "Herman Hollerith",
+        "Tim Berners-Lee"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Von Neumann Architecture describes a design where the CPU shares the same memory for both data and program instructions.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_2",
+      "topicId": null,
+      "text": "The Second Generation of computers was defined by which electronic component as its core technology?",
+      "options": [
+        "Vacuum Tubes",
+        "Integrated Circuits (ICs)",
+        "Transistors",
+        "Artificial Intelligence",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Second Generation (roughly 1956-1963) replaced vacuum tubes with Transistors, making computers smaller, faster and more efficient.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_3",
+      "topicId": null,
+      "text": "Together, the Arithmetic Logic Unit (ALU) and the Control Unit (CU) make up which component of the computer?",
+      "options": [
+        "RAM",
+        "Central Processing Unit (CPU)",
+        "Motherboard",
+        "PCI Bus",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "The CPU is the brain of the computer, consisting of the ALU (math/logic) and the CU (instruction coordination).",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_4",
+      "topicId": null,
+      "text": "An Attribute of an entity is standardly shown in an Entity-Relationship (E-R) diagram using which geometric shape?",
+      "options": [
+        "Rectangle",
+        "Diamond",
+        "Ellipse / Oval",
+        "Triangle",
+        "Cylinder"
+      ],
+      "correctIndex": 2,
+      "explanation": "In an E-R diagram, a Rectangle represents an Entity, an Ellipse (Oval) represents an Attribute, and a Diamond represents a Relationship.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_5",
+      "topicId": null,
+      "text": "Microsoft PowerPoint has a maximum zoom limit of 400%. What is the maximum zoom percentage available in Microsoft Word?",
+      "options": [
+        "100%",
+        "300%",
+        "400%",
+        "500%",
+        "800%"
+      ],
+      "correctIndex": 3,
+      "explanation": "In MS Word, the zoom ranges from a minimum of 10% to a maximum of 500%. In MS Excel and MS PowerPoint, the range is 10% to 400%.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_6",
+      "topicId": null,
+      "text": "CRAY-1 was a landmark machine at the global level. What was the name of India's first indigenously built supercomputer, developed by C-DAC in 1991?",
+      "options": [
+        "PRATYUSH",
+        "MIHIR",
+        "PARAM 8000",
+        "SAGA-220",
+        "VIKRAM"
+      ],
+      "correctIndex": 2,
+      "explanation": "PARAM 8000 was India's first supercomputer, developed by the Centre for Development of Advanced Computing (C-DAC) under the leadership of Dr. Vijay Bhatkar.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_7",
+      "topicId": null,
+      "text": "While working in an MS Word table, pressing which key moves the cursor to the next cell on the right?",
+      "options": [
+        "Enter",
+        "Tab",
+        "Alt",
+        "Shift",
+        "Ctrl"
+      ],
+      "correctIndex": 1,
+      "explanation": "Pressing the Tab key moves the insertion point to the next cell, while Shift + Tab moves it to the previous cell.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_8",
+      "topicId": null,
+      "text": "What is the term for carrying out financial transactions in order to hide the identity, source, or destination of money obtained illegally?",
+      "options": [
+        "Cyber Laundering",
+        "Phishing",
+        "Skimming",
+        "Embezzlement",
+        "Fraud"
+      ],
+      "correctIndex": 0,
+      "explanation": "Money Laundering, known as Cyber Laundering when done online, is the process of concealing the source of illegally obtained funds.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_9",
+      "topicId": null,
+      "text": "Standing as a barrier between a trusted network and an untrusted one, which network security system keeps watch over incoming and outgoing traffic and controls it according to predetermined security rules?",
+      "options": [
+        "Router",
+        "Switch",
+        "Firewall",
+        "Hub",
+        "Bridge"
+      ],
+      "correctIndex": 2,
+      "explanation": "A Firewall acts as a gatekeeper, blocking unauthorized access while permitting authorized communications.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_10",
+      "topicId": null,
+      "text": "A storage device like Magnetic Tape works on ________ Access, which means the data stored on it has to be accessed in a specific order (from start to finish).",
+      "options": [
+        "Direct",
+        "Random",
+        "Sequential",
+        "Parallel",
+        "Virtual"
+      ],
+      "correctIndex": 2,
+      "explanation": "Sequential Access means the system must read through all the preceding data to reach a specific point, just like a cassette tape.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_11",
+      "topicId": null,
+      "text": "An operating system built to handle data instantly, with no buffering delays, is typically found in critical setups such as air traffic control. Such an operating system belongs to which category?",
+      "options": [
+        "Real-Time Operating System (RTOS)",
+        "Batch Processing System",
+        "Time-Sharing System",
+        "Single User System",
+        "Distributed System"
+      ],
+      "correctIndex": 0,
+      "explanation": "A Real-Time Operating System (RTOS) guarantees immediate processing of data within strict time constraints.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_12",
+      "topicId": null,
+      "text": "The sharpness or clarity of an image shown on a display screen depends on the number of pixels per unit area. This property is called ________.",
+      "options": [
+        "Refresh Rate",
+        "Aspect Ratio",
+        "Resolution",
+        "Color Depth",
+        "Contrast"
+      ],
+      "correctIndex": 2,
+      "explanation": "Resolution (e.g., 1920x1080) defines the number of pixels, and a higher resolution generally results in a clearer image.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_13",
+      "topicId": null,
+      "text": "Keys like 'Ctrl', 'Shift', and 'Alt' are known as ________ keys because they change the function of other keys when pressed simultaneously with them.",
+      "options": [
+        "keys when pressed simultaneously. Function",
+        "Numeric",
+        "Toggle",
+        "Modifier",
+        "Navigation"
+      ],
+      "correctIndex": 3,
+      "explanation": "Modifier keys do nothing on their own but modify the action of another key (e.g., Shift + A types a capital 'A', Ctrl + C copies).",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_14",
+      "topicId": null,
+      "text": "Any external device connected to a computer to provide input, output or storage functions, such as a printer, scanner or mouse, is collectively known as a ________.",
+      "options": [
+        "Core Component",
+        "Integrated Circuit",
+        "Peripheral Device",
+        "Expansion Slot",
+        "Bus"
+      ],
+      "correctIndex": 2,
+      "explanation": "Peripheral devices are auxiliary devices connected to a computer to put information into it and get information out of it.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_15",
+      "topicId": null,
+      "text": "Which power state first saves the contents of RAM to the Hard Disk and then powers off, allowing the computer to resume exactly where it left off without consuming power?",
+      "options": [
+        "Sleep",
+        "Hibernate",
+        "Restart",
+        "Log Off",
+        "Lock"
+      ],
+      "correctIndex": 1,
+      "explanation": "Hibernate saves the current session to the hard disk (non-volatile) before switching off, whereas Sleep keeps the session in RAM (volatile) and continues to use a little power.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_16",
+      "topicId": null,
+      "text": "Loan calculators, animations and other interactive elements on web pages are delivered by tiny programs embedded in those pages. These programs are referred to as:",
+      "options": [
+        "Cookies",
+        "Applets",
+        "Spiders",
+        "Kernels",
+        "Macros"
+      ],
+      "correctIndex": 1,
+      "explanation": "Java Applets were small applications designed to run within a web browser to provide interactive features.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_17",
+      "topicId": null,
+      "text": "Who is credited with inventing the World Wide Web (WWW) in 1989 during his work at CERN?",
+      "options": [
+        "Tim Berners-Lee",
+        "Vint Cerf",
+        "Bill Gates",
+        "Mark Zuckerberg",
+        "Steve Jobs"
+      ],
+      "correctIndex": 0,
+      "explanation": "Sir Tim Berners-Lee invented the World Wide Web, while Vint Cerf is regarded as a father of the Internet/TCP/IP.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_18",
+      "topicId": null,
+      "text": "Which protocol provides the foundation for data communication on the World Wide Web?",
+      "options": [
+        "SMTP",
+        "HTTP",
+        "FTP",
+        "IMAP",
+        "SNMP"
+      ],
+      "correctIndex": 1,
+      "explanation": "HTTP (Hypertext Transfer Protocol) is the standard application-level protocol used for distributed, hypermedia information systems on the Web.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_19",
+      "topicId": null,
+      "text": "Unsolicited and unwanted junk email sent in bulk to a large number of recipients is known as?",
+      "options": [
+        "Virus",
+        "Spam",
+        "Malware",
+        "Phishing",
+        "Spoofing"
+      ],
+      "correctIndex": 1,
+      "explanation": "Spam refers to irrelevant or unsolicited messages sent over the internet to a large number of recipients.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_20",
+      "topicId": null,
+      "text": "Which data processing mode gathers data over a period of time and then processes all the transactions together as a group?",
+      "options": [
+        "Real-Time Processing",
+        "Batch Processing",
+        "Online Processing",
+        "Distributed Processing",
+        "Multi-programming"
+      ],
+      "correctIndex": 1,
+      "explanation": "Batch Processing handles large volumes of data (batches) at once, as in payroll processing.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_21",
+      "topicId": null,
+      "text": "The first felony conviction in the US under the Computer Fraud and Abuse Act resulted from a computer worm spread through the Internet in 1988. Which worm was it?",
+      "options": [
+        "The Morris Worm",
+        "Code Red",
+        "ILOVEYOU",
+        "Melissa",
+        "Creeper"
+      ],
+      "correctIndex": 0,
+      "explanation": "The Morris Worm, created by Robert Morris, was the first major worm to spread via the Internet, in 1988.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_22",
+      "topicId": null,
+      "text": "Which type of computer works with data in the form of continuous physical magnitudes (such as voltage, pressure, or temperature) instead of discrete binary digits?",
+      "options": [
+        "Digital Computer",
+        "Hybrid Computer",
+        "Analog Computer",
+        "Mainframe Computer",
+        "Supercomputer"
+      ],
+      "correctIndex": 2,
+      "explanation": "Analog Computers process continuous data, whereas Digital computers use 0s and 1s and Hybrid computers combine both.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_23",
+      "topicId": null,
+      "text": "Routing — deciding the best path for data to travel across a network — is the responsibility of which layer of the OSI Model?",
+      "options": [
+        "Physical Layer",
+        "Data Link Layer",
+        "Network Layer",
+        "Transport Layer",
+        "Session Layer"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Network Layer (Layer 3) handles logical addressing (IP) and routing, i.e., determining the best path for data across the network.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_24",
+      "topicId": null,
+      "text": "_________ is a graphical representation of an algorithm or process, drawn with standard symbols such as rectangles (for processes) and diamonds (for decisions).",
+      "options": [
+        "Pseudocode",
+        "Flowchart",
+        "Source Code",
+        "Histogram",
+        "Pie Chart"
+      ],
+      "correctIndex": 1,
+      "explanation": "A Flowchart is a diagram that shows the sequential steps of a process or algorithm.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_25",
+      "topicId": null,
+      "text": "Which of the following is a key feature of the UNIX operating system?",
+      "options": [
+        "It is a single-user system.",
+        "It is a multi-user, multi-tasking system.",
+        "It is only compatible with Apple hardware.",
+        "It has no command line interface.",
+        "It is a batch processing system."
+      ],
+      "correctIndex": 1,
+      "explanation": "UNIX was designed as a multi-user, multi-tasking system, allowing several users to run multiple tasks simultaneously.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_26",
+      "topicId": null,
+      "text": "A harmful program that disguises itself as genuine software (for example, a fake antivirus) in order to damage the system is classically known as a:",
+      "options": [
+        "Trojan Horse",
+        "Worm",
+        "Virus",
+        "Spyware",
+        "Rootkit"
+      ],
+      "correctIndex": 0,
+      "explanation": "Named after the Greek myth, a Trojan Horse hides inside something that looks safe and legitimate.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_27",
+      "topicId": null,
+      "text": "Which switching technique does the Internet use for transmitting data efficiently?",
+      "options": [
+        "Circuit Switching",
+        "Packet Switching",
+        "Message Switching",
+        "Line Switching",
+        "Manual Switching"
+      ],
+      "correctIndex": 1,
+      "explanation": "Packet switching breaks data into packets and routes each one via the most efficient path, which is how the Internet transmits data.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_28",
+      "topicId": null,
+      "text": "Internet connection speed, or bandwidth, is typically measured in which unit?",
+      "options": [
+        "Hertz (Hz)",
+        "Bits per second (bps/Gbps)",
+        "Bytes (B)",
+        "DPI (Dots Per Inch)",
+        "RPM (Revolutions Per Minute)"
+      ],
+      "correctIndex": 1,
+      "explanation": "Data transfer rates are measured in Bits per second (bps), such as Mbps or Gbps.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_29",
+      "topicId": null,
+      "text": "In a relational database table, what is a vertical column holding a specific category of information (such as \"Phone Number\") called?",
+      "options": [
+        "Record",
+        "Tuple",
+        "Field",
+        "File",
+        "Schema"
+      ],
+      "correctIndex": 2,
+      "explanation": "A column is called a Field (or Attribute), whereas a horizontal row is called a Record (or Tuple).",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_30",
+      "topicId": null,
+      "text": "In an Operating System, a situation in which two or more processes are unable to proceed because each is waiting for the other to release a resource is called ________.",
+      "options": [
+        "Starvation",
+        "Deadlock",
+        "Pagination",
+        "Fragmentation",
+        "Spooling"
+      ],
+      "correctIndex": 1,
+      "explanation": "Deadlock occurs when Process A holds Resource 1 and waits for Resource 2, while Process B holds Resource 2 and waits for Resource 1. Neither can finish.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_31",
+      "topicId": null,
+      "text": "Small text files created by a website and stored on the user's computer specifically to track and recognize the user are called:",
+      "options": [
+        "Bugs",
+        "Cache",
+        "Cookies",
+        "Applets",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "Cookies are small pieces of data sent from a website and stored on the user's computer to remember information such as login status or preferences.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_32",
+      "topicId": null,
+      "text": "To take a selected item out of the document and store it on the clipboard for pasting somewhere else, which command is applied?",
+      "options": [
+        "Copy",
+        "Cut",
+        "Delete",
+        "Format",
+        "Undo"
+      ],
+      "correctIndex": 1,
+      "explanation": "Cut (Ctrl + X) removes the data from its original position and puts it on the clipboard to move it, while Copy (Ctrl + C) duplicates it.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_33",
+      "topicId": null,
+      "text": "A single peripheral lets a laptop hook up to several external devices at once — a monitor, a keyboard and a printer, among others — so that it effectively works like a desktop workstation. That peripheral device is:",
+      "options": [
+        "Network Switch",
+        "Docking Station",
+        "Expansion Slot",
+        "Router",
+        "Bridge"
+      ],
+      "correctIndex": 1,
+      "explanation": "A Docking Station (or Port Replicator) allows a portable computer to connect with other devices with little or no effort.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_34",
+      "topicId": null,
+      "text": "What term is used for software that is distributed free of charge for a trial period but requires payment for continued use?",
+      "options": [
+        "Firmware",
+        "Shareware",
+        "Freeware",
+        "Adware",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "Shareware is provided to users free of charge on a trial basis; if the user wishes to continue using the software after the trial, a licence fee is required.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_35",
+      "topicId": null,
+      "text": "What is the process of changing an incoming analog signal from a telephone line back into a digital signal that a computer can understand called?",
+      "options": [
+        "Modulation",
+        "Demodulation",
+        "Transmission",
+        "Digitization",
+        "Encryption"
+      ],
+      "correctIndex": 1,
+      "explanation": "Demodulation is the reverse of modulation; it extracts the original digital information from a modulated analog carrier wave.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_36",
+      "topicId": null,
+      "text": "How a Java client may access a database is defined by JDBC, an application programming interface (API) for the programming language Java. JDBC is short for:",
+      "options": [
+        "Java Data Business Connectivity",
+        "Java Database Connectivity",
+        "Java Data Basic Connectivity",
+        "Java Direct Basic Connection",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "JDBC (Java Database Connectivity) is the industry standard API for database-independent connectivity between the Java programming language and a wide range of databases.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_37",
+      "topicId": null,
+      "text": "'LCD', the display technology behind the modern flat-panel monitors that have largely replaced bulky CRT screens, is short for:",
+      "options": [
+        "Liquid Crystal Display",
+        "Light Core Display",
+        "Lithium Crystal Device",
+        "Liquid Chrome Diode",
+        "Light Crystal Display"
+      ],
+      "correctIndex": 0,
+      "explanation": "LCD stands for Liquid Crystal Display; such monitors use liquid crystals sandwiched between two sheets of polarizing material to block or pass light.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_38",
+      "topicId": null,
+      "text": "In which year did ISO publish the OSI (Open Systems Interconnection) reference model, the standard for network communication?",
+      "options": [
+        "1970",
+        "1978",
+        "1984",
+        "1995",
+        "2000"
+      ],
+      "correctIndex": 2,
+      "explanation": "The International Organization for Standardization (ISO) published the OSI model standard in 1984.",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583028474_39",
+      "topicId": null,
+      "text": "Data is transmitted as pulses of light through glass or plastic threads (fibers) in which type of transmission medium?",
+      "options": [
+        "Coaxial Cable",
+        "Twisted Pair Cable",
+        "FiberOptic Cable",
+        "Radio Waves",
+        "Infrared"
+      ],
+      "correctIndex": 2,
+      "explanation": "Fiber Optic cables transmit data via light pulses, offering the highest bandwidth and speed compared to copper wires (Coaxial/Twisted Pair).",
+      "difficulty": "medium",
+      "setNo": 20,
+      "active": true,
+      "productIds": []
     }
   ],
   "quizSets": [
@@ -19322,7 +20042,7 @@
     {
       "id": "qs_1791575857535",
       "setNo": 20,
-      "title": "Mock 15 (Upcoming)",
+      "title": "Mock 15",
       "timeLimitMin": 15,
       "negMarkEnabled": true,
       "negMarkValue": 0.25,
