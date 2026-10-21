@@ -9933,7 +9933,7 @@
     {
       "id": "qq_1791544826817_17",
       "topicId": null,
-      "text": "Which prominent Indian social media application, launched in 2020 as a multilingual alternative to Twitter (X), officially shut down its services in July 2024 due to financial constraints?",
+      "text": "Which Indian application is regarded as an alternative to Twitter (X)?",
       "options": [
         "ShareChat",
         "Roposo",
@@ -9942,16 +9942,11 @@
         "Chingari"
       ],
       "correctIndex": 2,
-      "explanation": "Koo, the Indian microblogging platform and Twitter/X alternative, officially shut down its operations on July 3, 2024.",
+      "explanation": "Koo is an Indian micro-blogging platform that has been widely seen as a domestic alternative to Twitter.",
       "difficulty": "medium",
       "setNo": 7,
       "active": true,
-      "productIds": [],
-      "textHi": "",
-      "optionsHi": [],
-      "explanationHi": "",
-      "topperTime": null,
-      "correctAvgTime": null
+      "productIds": []
     },
     {
       "id": "qq_1791544826817_18",
@@ -9992,25 +9987,20 @@
     {
       "id": "qq_1791544826817_20",
       "topicId": null,
-      "text": "Which layer of the OSI model is responsible for end-to-end communication, reliable or unreliable data delivery, flow control, and error recovery using protocols such as TCP and UDP?",
+      "text": "The time interval between providing input to a program and receiving its output is called:",
       "options": [
-        "Physical Layer",
-        "Network Layer",
-        "Transport Layer",
-        "Data Link Layer",
-        "Session Layer"
+        "Turnaround time",
+        "Waiting time",
+        "Execution time",
+        "Response time",
+        "Throughput"
       ],
       "correctIndex": 2,
-      "explanation": "The transport layer (Layer 4) ensures complete data transfer, flow control, and error correction for end-to-end communications via TCP and UDP.",
+      "explanation": "Execution time is the duration a program runs to process input and produce output.",
       "difficulty": "medium",
       "setNo": 7,
       "active": true,
-      "productIds": [],
-      "textHi": "",
-      "optionsHi": [],
-      "explanationHi": "",
-      "topperTime": null,
-      "correctAvgTime": null
+      "productIds": []
     },
     {
       "id": "qq_1791544826817_21",
@@ -12159,25 +12149,20 @@
     {
       "id": "qq_1791570182584_19",
       "topicId": null,
-      "text": "What is the main difference between a Cold Boot and a Warm Boot?",
+      "text": "Cold booting and warm booting are the two types of what?",
       "options": [
-        "A cold boot deletes all files, while a warm boot saves them.",
-        "A cold boot starts a computer from a completely powered-off state, while a warm boot restarts a computer that is already running.",
-        "A cold boot is done by software, while a warm boot requires a technician.",
-        "A cold boot is used for laptops, while a warm boot is only for desktop computers.",
-        "A cold boot bypasses the power button entirely."
+        "Formatting",
+        "Booting",
+        "Debugging",
+        "Compiling",
+        "Defragmentation"
       ],
       "correctIndex": 1,
-      "explanation": "• Cold Boot: Turning a computer ON when it is completely off (the system is \"cold\").\n• Warm Boot: Clicking \"Restart\" while the computer is already on (the system is already \"warm\").",
+      "explanation": "Cold booting and warm booting are the two types of booting, which refer to the process of starting or restarting a computer.",
       "difficulty": "medium",
       "setNo": 10,
       "active": true,
-      "productIds": [],
-      "textHi": "",
-      "optionsHi": [],
-      "explanationHi": "",
-      "topperTime": null,
-      "correctAvgTime": null
+      "productIds": []
     },
     {
       "id": "qq_1791570182584_20",
@@ -14109,7 +14094,7 @@
     {
       "id": "qq_1791624558519_4",
       "topicId": null,
-      "text": "Which option provides the fastest/shortest access time?",
+      "text": "Which option provides the shortest access time?",
       "options": [
         "Semiconductor memory",
         "Magnetic disk",
@@ -14122,12 +14107,7 @@
       "difficulty": "medium",
       "setNo": 13,
       "active": true,
-      "productIds": [],
-      "textHi": "",
-      "optionsHi": [],
-      "explanationHi": "",
-      "topperTime": null,
-      "correctAvgTime": null
+      "productIds": []
     },
     {
       "id": "qq_1791624558519_5",
@@ -14758,6 +14738,726 @@
       "setNo": 13,
       "active": true,
       "productIds": []
+    },
+    {
+      "id": "qq_1792581738945_0",
+      "topicId": null,
+      "text": "In MS Word, which feature allows you to place text that shows up faintly behind the main text of a document?",
+      "options": [
+        "Header",
+        "Footer",
+        "Watermark",
+        "Drop Cap",
+        "SmartArt"
+      ],
+      "correctIndex": 2,
+      "explanation": "A watermark is a faint image or text (like \"Confidential\") placed in the background of a document.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738945_1",
+      "topicId": null,
+      "text": "HTTPS is the protocol used for secure browsing of websites. By default, HTTPS makes use of which port number?",
+      "options": [
+        "21",
+        "25",
+        "80",
+        "443",
+        "110"
+      ],
+      "correctIndex": 3,
+      "explanation": "Port 443 is the standard port for HTTPS traffic, while port 80 is used for standard HTTP.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738945_2",
+      "topicId": null,
+      "text": "Devices connected within one individual's personal workspace (e.g., a smartphone linked to a laptop via Bluetooth) form a network that is classified as a ________.",
+      "options": [
+        "LAN",
+        "WAN",
+        "PAN",
+        "MAN",
+        "SAN"
+      ],
+      "correctIndex": 2,
+      "explanation": "PAN (Personal Area Network) has the smallest range, typically centred around a single person (e.g., Bluetooth).",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738945_3",
+      "topicId": null,
+      "text": "To produce large-sized, high-quality vector graphics (for example, blueprints), which output device is used?",
+      "options": [
+        "Laser Printer",
+        "Inkjet Printer",
+        "Plotter",
+        "Monitor",
+        "Projector"
+      ],
+      "correctIndex": 2,
+      "explanation": "A plotter draws continuous lines using pens and is used for engineering designs (CAD), blueprints and maps.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738945_4",
+      "topicId": null,
+      "text": "A standard Single-Layer Blu-ray disc stores 25 GB of data. How much can be stored on a Dual-Layer Blu-ray disc?",
+      "options": [
+        "30 GB",
+        "40 GB",
+        "50 GB",
+        "60 GB",
+        "100 GB"
+      ],
+      "correctIndex": 2,
+      "explanation": "A dual-layer Blu-ray disc can hold 50 GB of data.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738945_5",
+      "topicId": null,
+      "text": "In Microsoft Word, which keyboard shortcut takes the cursor straight to the very beginning of the whole document?",
+      "options": [
+        "Home",
+        "Page Up",
+        "Ctrl + Home",
+        "Alt + Home",
+        "Ctrl + Page Up"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Home key moves the cursor to the start of the current line, whereas Ctrl + Home moves it to the very beginning of the document.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738945_6",
+      "topicId": null,
+      "text": "Norton, McAfee, QuickHeal, and Kaspersky are well-known examples of which category of utility software?",
+      "options": [
+        "Operating System",
+        "Antivirus Software",
+        "Word Processor",
+        "Database Management System",
+        "Media Player"
+      ],
+      "correctIndex": 1,
+      "explanation": "These are all popular brands of Antivirus Software used for protection against malware.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738945_7",
+      "topicId": null,
+      "text": "In MS PowerPoint, which key combination starts the slideshow from the current slide?",
+      "options": [
+        "F 5",
+        "Shift + F 5",
+        "Ctrl + F 5",
+        "Alt + F 5",
+        "F 9"
+      ],
+      "correctIndex": 1,
+      "explanation": "Shift + F5 starts the slideshow from the current slide, whereas F5 starts it from the beginning.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738945_8",
+      "topicId": null,
+      "text": "GPS helps in finding a location, but which computer system is designed to capture, store, manipulate, analyze, manage, and present all types of geographical data?",
+      "options": [
+        "GUI (Graphical User Interface)",
+        "GIS (Geographic Information System)",
+        "GPRS (General Packet Radio Service)",
+        "GSM (Global System for Mobile)",
+        "HTML"
+      ],
+      "correctIndex": 1,
+      "explanation": "GIS is a framework for gathering, managing, and analyzing data rooted in the science of geography, used by mapmakers and urban planners.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_9",
+      "topicId": null,
+      "text": "In Microsoft Excel, what is the technical name for the point where a row and a column meet?",
+      "options": [
+        "Grid",
+        "Box",
+        "Cell",
+        "Range",
+        "Data point"
+      ],
+      "correctIndex": 2,
+      "explanation": "A cell is the basic unit of a worksheet where a column and row intersect.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_10",
+      "topicId": null,
+      "text": "In event-driven programming, a user action such as pressing a key or clicking a mouse button is referred to as an:",
+      "options": [
+        "Interrupt",
+        "Event",
+        "Process",
+        "Thread",
+        "Exception"
+      ],
+      "correctIndex": 1,
+      "explanation": "GUI systems are event-driven, meaning they respond to user actions such as clicks and key presses, which are called events.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_11",
+      "topicId": null,
+      "text": "Which attack works by inserting malicious code into a website's input fields in order to manipulate its backend database?",
+      "options": [
+        "XSS (Cross-Site Scripting)",
+        "SQL Injection",
+        "CSRF",
+        "DoS",
+        "Brute Force"
+      ],
+      "correctIndex": 1,
+      "explanation": "SQL Injection manipulates the backend database by entering malicious code through a website's input fields.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_12",
+      "topicId": null,
+      "text": "Which of the following is NOT a communication protocol but rather a standard markup language used for creating web pages?",
+      "options": [
+        "TCP/IP",
+        "SMTP",
+        "HTML",
+        "FTP",
+        "UDP"
+      ],
+      "correctIndex": 2,
+      "explanation": "HTML (HyperText Markup Language) is a markup language used to structure content on the web; the others (TCP/IP, SMTP, FTP, UDP) are protocols, i.e., rules for transferring data.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_13",
+      "topicId": null,
+      "text": "To lock a row or column in Microsoft Excel so that the reference does not change when a formula is copied — that is, to create an Absolute Cell Reference — which symbol is used?",
+      "options": [
+        "&",
+        "$",
+        "%",
+        "@",
+        "#"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Dollar Sign ($) is used to lock a reference (e.g., $A$1).",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_14",
+      "topicId": null,
+      "text": "The Pegasus spyware mainly targets mobile devices running which of the following operating systems?",
+      "options": [
+        "Android Only",
+        "iOS Only",
+        "Windows Mobile",
+        "Symbian",
+        "Both Android and iOS"
+      ],
+      "correctIndex": 4,
+      "explanation": "Pegasus can exploit vulnerabilities in both Android and iOS, so it targets mobile devices running either operating system.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_15",
+      "topicId": null,
+      "text": "By default, in which page orientation does a new document open in Microsoft Word?",
+      "options": [
+        "Landscape",
+        "Portrait",
+        "A4",
+        "Letter",
+        "Horizontal"
+      ],
+      "correctIndex": 1,
+      "explanation": "The default orientation is Portrait (vertical); Landscape is the horizontal orientation.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_16",
+      "topicId": null,
+      "text": "Processor architectures come in two broad types, RISC and CISC. The full form of RISC is:",
+      "options": [
+        "Reduced Instruction Set Computer",
+        "Rapid Instruction Set Computer",
+        "Random Instruction Source Computer",
+        "Read-Only Instruction Set Computer",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "RISC stands for Reduced Instruction Set Computer. (CISC stands for Complex Instruction Set Computer.)",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_17",
+      "topicId": null,
+      "text": "Which feature in MS Word lets users insert stylized, decorative text with special effects such as shadows, outlines, and gradients?",
+      "options": [
+        "SmartArt",
+        "ClipArt",
+        "WordArt",
+        "Drop Cap",
+        "Watermark"
+      ],
+      "correctIndex": 2,
+      "explanation": "WordArt is a text-styling feature in MS Word that allows users to create decorative text with special effects.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_18",
+      "topicId": null,
+      "text": "Which file format, developed by Adobe, presents documents in a way that is independent of application software, hardware, and operating systems?",
+      "options": [
+        "HTML",
+        "PDF",
+        "XML",
+        "DOCX",
+        "TXT"
+      ],
+      "correctIndex": 1,
+      "explanation": "PDF (Portable Document Format) ensures that a document looks the same on any device.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_19",
+      "topicId": null,
+      "text": "Li-Fi is a new wireless technology that uses which of the following to transmit data?",
+      "options": [
+        "Radio Waves",
+        "Visible Light Communication (VLC)",
+        "Sound Waves",
+        "Magnetic Fields",
+        "Thermal Energy"
+      ],
+      "correctIndex": 1,
+      "explanation": "Li-Fi (Light Fidelity) uses Visible Light Communication (VLC) from LEDs to transmit data, offering potentially higher speeds than Wi-Fi.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_20",
+      "topicId": null,
+      "text": "To take the load of complex graphics and image rendering off the main CPU, which specialized processor is used?",
+      "options": [
+        "FPU",
+        "GPU",
+        "ALU",
+        "ROM",
+        "BIOS"
+      ],
+      "correctIndex": 1,
+      "explanation": "The GPU (Graphics Processing Unit) is optimized for rendering images and video.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_21",
+      "topicId": null,
+      "text": "What is a computer that stores websites and delivers them to users whenever they are requested called?",
+      "options": [
+        "Client",
+        "Web Server / Host",
+        "Router",
+        "Gateway",
+        "Firewall"
+      ],
+      "correctIndex": 1,
+      "explanation": "A web server hosts the website's data and serves it to client computers on request.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_22",
+      "topicId": null,
+      "text": "When we talk about digital displays, the term 'Resolution' refers specifically to:",
+      "options": [
+        "The total number ofcolorsa screen can display.",
+        "The number of pixels displayed horizontally and vertically on the screen.",
+        "The distance between thecentersof two adjacent pixels.",
+        "The speed at which the screen refreshes.",
+        "The diagonal measurement of the screen in inches."
+      ],
+      "correctIndex": 1,
+      "explanation": "Resolution is the number of pixels displayed horizontally and vertically on the screen, cited as width x height (e.g., 1920 x 1080), and it determines the sharpness of the image.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_23",
+      "topicId": null,
+      "text": "To shrink one or more files into a smaller package for convenient storage or transfer, they are combined and compressed. The kind of file format used for this purpose is:",
+      "options": [
+        "Archive (e.g., .zip, .rar)",
+        "Executable (e.g., .exe)",
+        "System (e.g., .sys)",
+        "Text (e.g., .txt)",
+        "Media (e.g., .mp 4)"
+      ],
+      "correctIndex": 0,
+      "explanation": "Archive files (like ZIP or RAR) compress data to save space and organize multiple files into a single container.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_24",
+      "topicId": null,
+      "text": "Physical documents (hard copy) are turned into digital images (soft copy) that a computer can store by using which input device?",
+      "options": [
+        "Printer",
+        "Plotter",
+        "Scanner",
+        "Monitor",
+        "Projector"
+      ],
+      "correctIndex": 2,
+      "explanation": "A Scanner optically scans images, printed text or handwriting and converts it into a digital image.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_25",
+      "topicId": null,
+      "text": "A \"Parent-Child\" relationship is formed between two tables at the point where the _______ of the Parent table is referenced by the _______ of the Child table.",
+      "options": [
+        "Foreign Key, Primary Key",
+        "Primary Key, Foreign Key",
+        "Candidate Key, Super Key",
+        "Alternate Key, Primary Key",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Child table contains a Foreign Key that references the Primary Key of the Parent table.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_26",
+      "topicId": null,
+      "text": "Which device converts digital signals from a computer into analog signals for transmission over telephone lines (and vice versa)?",
+      "options": [
+        "Router",
+        "Modem (Modulator-Demodulator)",
+        "Switch",
+        "Hub",
+        "Repeater"
+      ],
+      "correctIndex": 1,
+      "explanation": "A Modem modulates digital data to analog for transmission and demodulates it back to digital.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_27",
+      "topicId": null,
+      "text": "What type of code — one that the CPU can execute directly — makes up the entire \"First Generation\" of programming languages (1GL)?",
+      "options": [
+        "Assembly Code",
+        "Source Code",
+        "Machine Code (Binary)",
+        "Object Oriented Code",
+        "High-Level Code"
+      ],
+      "correctIndex": 2,
+      "explanation": "First-generation languages are Machine Languages, consisting of 0s and 1s.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_28",
+      "topicId": null,
+      "text": "In Microsoft Excel, which function key directly opens the \"Save As\" dialog box?",
+      "options": [
+        "F2",
+        "F12",
+        "F11",
+        "F5",
+        "F1"
+      ],
+      "correctIndex": 1,
+      "explanation": "Pressing F12 opens the \"Save As\" dialog box. (F11 creates a chart and F2 edits a cell.)",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_29",
+      "topicId": null,
+      "text": "Which component on the motherboard keeps the system time and date running even when the computer is turned off?",
+      "options": [
+        "BIOS Chip",
+        "CMOS Battery",
+        "Northbridge",
+        "Expansion Slot",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "The CMOS Battery (Complementary Metal-Oxide-Semiconductor) is a coin-cell battery that powers the BIOS firmware to retain settings like time and date when the PC is unplugged.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_30",
+      "topicId": null,
+      "text": "Compared with Windows for Workgroups, which early Microsoft OS version was mainly a standalone graphical environment and came with very limited built-in networking capabilities?",
+      "options": [
+        "Windows NT",
+        "Windows 3.1",
+        "Windows 95",
+        "Windows 2000",
+        "Windows XP"
+      ],
+      "correctIndex": 1,
+      "explanation": "Standard Windows 3.1 lacked built-in networking (the TCP/IP stack was separate), unlike Windows for Workgroups.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_31",
+      "topicId": null,
+      "text": "The small text files that websites store on a user's computer to track user activity and save session information are called —",
+      "options": [
+        "Cache files",
+        "Cookies",
+        "Plug-ins",
+        "Pop-ups",
+        "Bookmarks"
+      ],
+      "correctIndex": 1,
+      "explanation": "Cookies are small text files used to track user activity and save session information.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_32",
+      "topicId": null,
+      "text": "The initial bootstrap loader resides in ROM, but during the boot process the Master Boot Record (MBR) and the OS kernel are typically loaded into ________.",
+      "options": [
+        "RAM",
+        "EPROM",
+        "Cache",
+        "Registers",
+        "BIOS"
+      ],
+      "correctIndex": 0,
+      "explanation": "The OS is loaded from secondary storage (HDD/SSD) into RAM to run.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_33",
+      "topicId": null,
+      "text": "Apps meant for Apple's iOS devices are distributed in which package format?",
+      "options": [
+        ".apk",
+        ".ipa",
+        ".exe",
+        ".app",
+        ".deb"
+      ],
+      "correctIndex": 1,
+      "explanation": "iOS apps use the .ipa (iOS App Store Package) format for distribution.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_34",
+      "topicId": null,
+      "text": "In MS Word, text typed by the user can be made to appear faintly behind the main text of the document. This is achieved using which feature?",
+      "options": [
+        "Header",
+        "Footer",
+        "Watermark",
+        "Drop Cap",
+        "SmartArt"
+      ],
+      "correctIndex": 2,
+      "explanation": "A watermark is a faint image or text (like \"Confidential\") placed in the background of a document.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_35",
+      "topicId": null,
+      "text": "A file that acts as a blueprint or pattern when a new document is being created is which of the following?",
+      "options": [
+        "Macro",
+        "Wizard",
+        "Template",
+        "Add-in",
+        "Plug-in"
+      ],
+      "correctIndex": 2,
+      "explanation": "A Template is a file that serves as a blueprint or pattern for creating a new document.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_36",
+      "topicId": null,
+      "text": "Every website on the Internet has its own unique address through which users can locate it using a browser. This address is technically known as a(n) ________.",
+      "options": [
+        "HTTP",
+        "HTML",
+        "ISP",
+        "DNS",
+        "URL"
+      ],
+      "correctIndex": 4,
+      "explanation": "URL (Uniform Resource Locator) is the unique address of a resource on the Web (e.g., www.google.com), used to locate it through a browser.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_37",
+      "topicId": null,
+      "text": "For a home Wi-Fi network today, the wireless security protocol regarded as the most secure is:",
+      "options": [
+        "WEP",
+        "WPA",
+        "WPA 2",
+        "WPA 3",
+        "WPS"
+      ],
+      "correctIndex": 3,
+      "explanation": "WPA3 is the latest and most secure standard for Wi-Fi security, succeeding WPA2.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_38",
+      "topicId": null,
+      "text": "What is a piece of software code designed to fix a problem or update a computer program called?",
+      "options": [
+        "Bug",
+        "Patch",
+        "Virus",
+        "Trojan",
+        "Spam"
+      ],
+      "correctIndex": 1,
+      "explanation": "A patch is a software update comprised of code inserted into an executable program.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581738946_39",
+      "topicId": null,
+      "text": "The global allocation of IP addresses and domain names is coordinated by which organization?",
+      "options": [
+        "IEEE",
+        "ICANN / IANA",
+        "ISO",
+        "W3C",
+        "CERN"
+      ],
+      "correctIndex": 1,
+      "explanation": "ICANN (Internet Corporation for Assigned Names and Numbers), through IANA, coordinates the maintenance of namespaces and numerical spaces.",
+      "difficulty": "medium",
+      "setNo": 14,
+      "active": true,
+      "productIds": []
     }
   ],
   "quizSets": [
@@ -14938,7 +15638,7 @@
     {
       "id": "qs_1791575559515",
       "setNo": 14,
-      "title": "Mock 09 (Upcoming)",
+      "title": "Mock 09",
       "timeLimitMin": 15,
       "negMarkEnabled": true,
       "negMarkValue": 0.25,
