@@ -20094,6 +20094,34 @@
       "productIds": [
         "computer"
       ]
+    },
+    {
+      "id": "qs_1792583196099",
+      "setNo": 24,
+      "title": "Mock 19",
+      "timeLimitMin": 15,
+      "negMarkEnabled": true,
+      "negMarkValue": 0.25,
+      "marksPerQuestion": 1,
+      "section": "mock",
+      "active": true,
+      "productIds": [
+        "computer"
+      ]
+    },
+    {
+      "id": "qs_1792583244991",
+      "setNo": 25,
+      "title": "Mock 20",
+      "timeLimitMin": 15,
+      "negMarkEnabled": true,
+      "negMarkValue": 0.25,
+      "marksPerQuestion": 1,
+      "section": "mock",
+      "active": true,
+      "productIds": [
+        "computer"
+      ]
     }
   ]
 }
