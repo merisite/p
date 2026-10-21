@@ -20498,6 +20498,726 @@
       "setNo": 22,
       "active": true,
       "productIds": []
+    },
+    {
+      "id": "qq_1792584777038_0",
+      "topicId": null,
+      "text": "Which SQL command is used to completely remove a table definition, together with all its data, indexes, triggers, and constraints, from the database?",
+      "options": [
+        "DELETE",
+        "REMOVE",
+        "DROP",
+        "TRUNCATE",
+        "ERASE"
+      ],
+      "correctIndex": 2,
+      "explanation": "DROP is used to remove a table and all its associated data and definitions from a database.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777038_1",
+      "topicId": null,
+      "text": "Which keyboard shortcut opens the Windows Task Manager so that unresponsive programs can be closed?",
+      "options": [
+        "Ctrl + Shift + Esc",
+        "Alt + F4",
+        "Shift + Del",
+        "Windows + L",
+        "Ctrl + P"
+      ],
+      "correctIndex": 0,
+      "explanation": "Ctrl + Shift + Esc is the direct shortcut to open the Windows Task Manager.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777038_2",
+      "topicId": null,
+      "text": "A complete high-level language program is translated into machine language in one go, as a single block, and an object code file is produced. The translator program that does this is:",
+      "options": [
+        "Interpreter",
+        "Assembler",
+        "Compiler",
+        "Debugger",
+        "Linker"
+      ],
+      "correctIndex": 2,
+      "explanation": "A compiler translates the entire source code of a high-level language into machine code before execution.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777038_3",
+      "topicId": null,
+      "text": "Marc Andreessen is well known for co-authoring which pioneering web browser?",
+      "options": [
+        "Internet Explorer",
+        "Mosaic",
+        "Opera",
+        "Safari",
+        "Dolphin"
+      ],
+      "correctIndex": 1,
+      "explanation": "Marc Andreessen was a co-creator of the Mosaic web browser, which was highly influential in the early development of the World Wide Web.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777038_4",
+      "topicId": null,
+      "text": "Norton, McAfee, and Quick Heal are examples of which specific category of software designed to analyze, configure, optimize, or maintain a computer?",
+      "options": [
+        "Application Software",
+        "Utility Software",
+        "Firmware",
+        "Operating System",
+        "Database Software"
+      ],
+      "correctIndex": 1,
+      "explanation": "Antivirus software like Norton, McAfee, and Quick Heal falls under the category of Utility Software, which aids in computer maintenance and optimization.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777038_5",
+      "topicId": null,
+      "text": "To make sure that data travelling between the browser and the server cannot be intercepted, SSL/TLS encryption is used by which protocol?",
+      "options": [
+        "HTTP",
+        "HTTPS",
+        "FTP",
+        "SMTP",
+        "Telnet"
+      ],
+      "correctIndex": 1,
+      "explanation": "HTTPS (Hypertext Transfer Protocol Secure) uses SSL/TLS encryption to secure communication between a web browser and a server.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777038_6",
+      "topicId": null,
+      "text": "What is the specialized software that allows you to view and manage all the files and folders on your computer?",
+      "options": [
+        "Task Manager",
+        "File Explorer",
+        "Control Panel",
+        "Device Manager",
+        "Registry Editor"
+      ],
+      "correctIndex": 1,
+      "explanation": "File Explorer is the application in Windows used for managing files and folders.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777038_7",
+      "topicId": null,
+      "text": "In Microsoft Word, options such as Strikethrough, Double Strikethrough, Superscript, and Subscript are grouped under which section of the Font dialog box?",
+      "options": [
+        "Font Style",
+        "Effects",
+        "Underline Style",
+        "Paragraph Spacing",
+        "Text Animation"
+      ],
+      "correctIndex": 1,
+      "explanation": "These text formatting options like Strikethrough, Superscript, and Subscript are found under the 'Effects' section of the Font dialog box in Microsoft Word.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777038_8",
+      "topicId": null,
+      "text": "Which of the following devices is used only for storing data and is neither an Input nor an Output device?",
+      "options": [
+        "Monitor",
+        "Keyboard",
+        "Hard Disk Drive",
+        "Plotter",
+        "Scanner"
+      ],
+      "correctIndex": 2,
+      "explanation": "A Hard Disk Drive is primarily a storage device, whereas a monitor and plotter are output devices, and a keyboard and scanner are input devices.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777038_9",
+      "topicId": null,
+      "text": "Every device in a network is joined to one central shared cable (the backbone) in which topology?",
+      "options": [
+        "Star",
+        "Ring",
+        "Mesh",
+        "Bus",
+        "Tree"
+      ],
+      "correctIndex": 3,
+      "explanation": "In a Bus topology, all network devices are connected to a single, central cable known as the backbone.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777038_10",
+      "topicId": null,
+      "text": "In third-generation computers (1965-1971), transistors were replaced by which component, bringing about a massive reduction in size and heat generation?",
+      "options": [
+        "Vacuum Tubes",
+        "Microprocessors",
+        "Artificial Intelligence",
+        "Integrated Circuits (ICs)",
+        "ULSI"
+      ],
+      "correctIndex": 3,
+      "explanation": "Third-generation computers utilized Integrated Circuits (ICs), which contained many transistors on a single chip, leading to smaller size and reduced heat.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777038_11",
+      "topicId": null,
+      "text": "A connection in which a dedicated link is set up between two devices, and only those two devices, is termed a:",
+      "options": [
+        "Multipoint Connection",
+        "Point-to-Point Connection",
+        "Broadcast Connection",
+        "Shared Connection",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "A Point-to-Point Connection establishes a dedicated communication link exclusively between two devices.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777038_12",
+      "topicId": null,
+      "text": "Computers of the first generation (approx. 1940-1956), such as the ENIAC, were enormous in size and produced huge amounts of heat, since their circuitry was built using ________.",
+      "options": [
+        "Transistors",
+        "Integrated Circuits",
+        "Vacuum Tubes",
+        "Microprocessors",
+        "Capacitors"
+      ],
+      "correctIndex": 2,
+      "explanation": "First-generation computers primarily used Vacuum Tubes for their circuitry, which were large, generated significant heat, and consumed considerable power.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777038_13",
+      "topicId": null,
+      "text": "Software that is permanently programmed into a Read-Only Memory (ROM) is technically known as:",
+      "options": [
+        "Hardware",
+        "Firmware",
+        "Vaporware",
+        "Malware",
+        "Shareware"
+      ],
+      "correctIndex": 1,
+      "explanation": "Firmware is software that is embedded into hardware devices, often stored in ROM, and typically cannot be easily modified or deleted.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777038_14",
+      "topicId": null,
+      "text": "Communication between the operating system and a particular hardware device is made possible by a component that works as an interpreter between the two. This component is known as:",
+      "options": [
+        "BIOS",
+        "Device Driver",
+        "Kernel",
+        "Shell",
+        "Registry"
+      ],
+      "correctIndex": 1,
+      "explanation": "A Device Driver acts as an interpreter, allowing the operating system to communicate with and control a specific hardware device.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777038_15",
+      "topicId": null,
+      "text": "In Microsoft Excel, which keyboard shortcut selects the entire Column containing the active cell?",
+      "options": [
+        "Shift + Space",
+        "Ctrl + Space",
+        "Alt + Space",
+        "Shift + Enter",
+        "Ctrl + Enter"
+      ],
+      "correctIndex": 1,
+      "explanation": "Pressing Ctrl + Space selects the entire column in which the active cell is located.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777038_16",
+      "topicId": null,
+      "text": "Software code that provides low-level control of a device's specific hardware (for example, a washing machine controller) is known as:",
+      "options": [
+        "Firmware",
+        "Middleware",
+        "Groupware",
+        "Shareware",
+        "Freeware"
+      ],
+      "correctIndex": 0,
+      "explanation": "Firmware is software embedded in hardware that provides low-level control of its functions.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777038_17",
+      "topicId": null,
+      "text": "Which component of the CPU is responsible for carrying out all mathematical calculations (addition, subtraction) and logical operations (AND, OR, NOT)?",
+      "options": [
+        "Control Unit (CU)",
+        "Register Unit",
+        "Arithmetic Logic Unit (ALU)",
+        "Cache Memory",
+        "Bus Interface Unit"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Arithmetic Logic Unit (ALU) within the CPU performs all arithmetic and logical operations.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777038_18",
+      "topicId": null,
+      "text": "A paragraph deleted by mistake in MS Word can be restored with the \"Undo\" action. Which keyboard shortcut performs it?",
+      "options": [
+        "Ctrl + Y",
+        "Ctrl + U",
+        "Ctrl + Z",
+        "Ctrl + X",
+        "Ctrl + S"
+      ],
+      "correctIndex": 2,
+      "explanation": "Ctrl + Z is the standard keyboard shortcut for the 'Undo' command in most applications, including Microsoft Word.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777038_19",
+      "topicId": null,
+      "text": "The management of the CPU, memory and peripheral devices is handled by the core software component of the system, called the:",
+      "options": [
+        "Shell",
+        "Kernel",
+        "BIOS",
+        "Registry",
+        "Bootloader"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Kernel is the central component of an operating system responsible for managing system resources and hardware.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777038_20",
+      "topicId": null,
+      "text": "Before modern graphical browsers came into use, what was the name of the very first web browser, created by Tim Berners-Lee?",
+      "options": [
+        "Explorer",
+        "WorldWideWeb (later Nexus)",
+        "Mosaic",
+        "Netscape",
+        "Opera"
+      ],
+      "correctIndex": 1,
+      "explanation": "The first web browser created by Tim Berners-Lee was named WorldWideWeb, which was later renamed Nexus.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777038_21",
+      "topicId": null,
+      "text": "Text shown on a computer screen that contains references (links) to other text, which the reader can access immediately, and which forms the basis of the World Wide Web, is known as ________.",
+      "options": [
+        "Plain Text",
+        "Rich Text",
+        "Hypertext",
+        "Ciphertext",
+        "Context"
+      ],
+      "correctIndex": 2,
+      "explanation": "Hypertext is text that contains links to other text or resources, allowing non-sequential access and forming the foundation of the World Wide Web.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777038_22",
+      "topicId": null,
+      "text": "In 2022, official support came to an end, in most contexts, for which legacy browser from Microsoft?",
+      "options": [
+        "Internet Explorer",
+        "Edge",
+        "Chrome",
+        "Firefox",
+        "Opera"
+      ],
+      "correctIndex": 0,
+      "explanation": "Microsoft officially retired Internet Explorer in June 2022, replacing it with Microsoft Edge.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777038_23",
+      "topicId": null,
+      "text": "From the following, select the one that qualifies as a Real-Time Operating System (RTOS):",
+      "options": [
+        "Windows 10",
+        "VxWorks",
+        "MS-DOS",
+        "macOS",
+        "Android"
+      ],
+      "correctIndex": 1,
+      "explanation": "VxWorks is a prominent example of a Real-Time Operating System (RTOS) designed for time-critical applications.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777038_24",
+      "topicId": null,
+      "text": "Which computer scientist popularized the concept of the \"Deep Web\", as distinct from the \"Surface Web\", in 2001?",
+      "options": [
+        "Tim Berners-Lee",
+        "Vint Cerf",
+        "Michael K. Bergman",
+        "Marc Andreessen",
+        "Alan Turing"
+      ],
+      "correctIndex": 2,
+      "explanation": "Michael K. Bergman is recognized for coining and popularizing the term 'Deep Web' in his 2001 paper.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777038_25",
+      "topicId": null,
+      "text": "What is the specific term for restarting a computer that is already powered on?",
+      "options": [
+        "Cold Boot",
+        "Warm Boot",
+        "Shut Down",
+        "Hibernate",
+        "Log Off"
+      ],
+      "correctIndex": 1,
+      "explanation": "A Warm Boot is the process of restarting a computer that is already running, without fully powering it down.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777039_26",
+      "topicId": null,
+      "text": "What is the technique called in which a physical storage device is made to appear as though it were larger than it is, or as if it were multiple devices?",
+      "options": [
+        "Virtualization",
+        "Simulation",
+        "Emulation",
+        "Cloud Computing",
+        "Multiplexing"
+      ],
+      "correctIndex": 0,
+      "explanation": "Virtualization is a technology that allows for the creation of virtual versions of computing resources, such as storage, which can be abstracted from the physical hardware.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777039_27",
+      "topicId": null,
+      "text": "Architects and engineers use CAD technology to prepare precision drawings. In the abbreviation CAD, the letter 'D' stands for:",
+      "options": [
+        "Diagram",
+        "Design",
+        "Data",
+        "Development",
+        "Decoding"
+      ],
+      "correctIndex": 1,
+      "explanation": "CAD stands for Computer-Aided Design.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777039_28",
+      "topicId": null,
+      "text": "On optical discs such as CDs and DVDs, data is physically recorded on the surface in the form of microscopic bumps and flat areas known as ________.",
+      "options": [
+        "0 s and 1 s",
+        "Pits and Lands",
+        "Tracks and Sectors",
+        "Highs and Lows",
+        "Diodes and Triodes"
+      ],
+      "correctIndex": 1,
+      "explanation": "Data on optical discs is stored as microscopic indentations called 'pits' and the flat areas between them called 'lands'.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777039_29",
+      "topicId": null,
+      "text": "The cloud computing platform and infrastructure called \"Azure\" belongs to which technology giant?",
+      "options": [
+        "Google",
+        "Amazon",
+        "Microsoft",
+        "IBM",
+        "Oracle"
+      ],
+      "correctIndex": 2,
+      "explanation": "Microsoft Azure is Microsoft's cloud computing platform.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777039_30",
+      "topicId": null,
+      "text": "At switch-on, the BIOS runs a diagnostic test that verifies whether all the hardware components (RAM, Disk, Keyboard) are working properly. This test goes by the name:",
+      "options": [
+        "BOOT",
+        "CMOS Check",
+        "POST",
+        "LOAD",
+        "RESET"
+      ],
+      "correctIndex": 2,
+      "explanation": "POST stands for Power-On Self-Test, which is a diagnostic sequence performed by the BIOS when a computer is first turned on.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777039_31",
+      "topicId": null,
+      "text": "A private network whose access is limited only to the staff of an organization is called a/an?",
+      "options": [
+        "Internet",
+        "Ethernet",
+        "Intranet",
+        "Extranet",
+        "Arpanet"
+      ],
+      "correctIndex": 2,
+      "explanation": "An Intranet is a private network used exclusively by the members of a single organization.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777039_32",
+      "topicId": null,
+      "text": "Adobe Dreamweaver is a software application that is primarily used for:",
+      "options": [
+        "Editing Photos",
+        "Creating Spreadsheets",
+        "Designing and developing websites",
+        "Playing Videos",
+        "Managing Databases"
+      ],
+      "correctIndex": 2,
+      "explanation": "Adobe Dreamweaver is a professional software tool used for designing, coding, and managing websites.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777039_33",
+      "topicId": null,
+      "text": "Suppose the size of the data fields is not the same in every record — a \"Remarks\" field, for instance, may be short in one record and long in another. In such file organization, which record format is utilized?",
+      "options": [
+        "Fixed-length record",
+        "Variable-length record",
+        "Static record",
+        "Binary record",
+        "Master record"
+      ],
+      "correctIndex": 1,
+      "explanation": "Variable-length records allow each record in a file to have a different size, which is suitable for data fields like 'Remarks' that can vary in length.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777039_34",
+      "topicId": null,
+      "text": "Google Chrome and Firefox belong to the category of software applications that locate, fetch and display content from the World Wide Web. This category is:",
+      "options": [
+        "Web Server",
+        "Web Browser",
+        "Search Engine",
+        "URL",
+        "HTML"
+      ],
+      "correctIndex": 1,
+      "explanation": "Google Chrome and Firefox are examples of Web Browsers, which are applications used to access and view web pages.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777039_35",
+      "topicId": null,
+      "text": "What are the small programs embedded in web pages to provide interactive features such as loan calculators or animations called?",
+      "options": [
+        "Cookies",
+        "Applets",
+        "Spiders",
+        "Kernels",
+        "Macros"
+      ],
+      "correctIndex": 1,
+      "explanation": "Applets are small programs that can be embedded within web pages to provide interactive functionality.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777039_36",
+      "topicId": null,
+      "text": "In a Relational Database, the column (or combination of columns) that serves to uniquely identify every record in a table is technically known as the ________.",
+      "options": [
+        "Foreign Key",
+        "Primary Key",
+        "Domain",
+        "Tuple",
+        "Null Value"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Primary Key is a column or a set of columns that uniquely identifies each row (record) in a relational database table.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777039_37",
+      "topicId": null,
+      "text": "What is a network called when it connects computers within a limited area, such as a residence, school, or office building?",
+      "options": [
+        "WAN",
+        "MAN",
+        "LAN",
+        "PAN",
+        "SAN"
+      ],
+      "correctIndex": 2,
+      "explanation": "A Local Area Network (LAN) connects computers within a geographically limited area, like a single building or campus.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777039_38",
+      "topicId": null,
+      "text": "Within a relational database table, a single structured data item (a record) appears as a horizontal line of data. These horizontal lines are known as ________.",
+      "options": [
+        "Columns",
+        "Fields",
+        "Rows",
+        "Cells",
+        "Attributes"
+      ],
+      "correctIndex": 2,
+      "explanation": "In a database table, a horizontal line representing a single record is called a Row or a Tuple.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792584777039_39",
+      "topicId": null,
+      "text": "A template file in Microsoft Word 2019 normally carries which standard file extension?",
+      "options": [
+        ".docx",
+        ".dotx",
+        ".docm",
+        ".txt",
+        ".wpd"
+      ],
+      "correctIndex": 1,
+      "explanation": ".dotx is the file extension for Microsoft Word template files (.dotm for macro-enabled templates), while .docx is for standard documents.",
+      "difficulty": "medium",
+      "setNo": 21,
+      "active": true,
+      "productIds": []
     }
   ],
   "quizSets": [
