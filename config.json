@@ -19778,6 +19778,726 @@
       "setNo": 20,
       "active": true,
       "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_0",
+      "topicId": null,
+      "text": "Posing as a genuine, helpful program such as a game or a utility, a piece of malicious software gets the user to install it and thereby breaches security. Such software is known as a:",
+      "options": [
+        "Worm",
+        "Trojan Horse",
+        "Spyware",
+        "Adware",
+        "Ransomware"
+      ],
+      "correctIndex": 1,
+      "explanation": "A Trojan Horse is malware that misleads users of its true intent; unlike viruses, Trojans do not replicate themselves but rely on users to install them.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_1",
+      "topicId": null,
+      "text": "Word, Excel and PowerPoint belong to a group of related programs that are packaged and sold together under a common interface. Such a bundle is termed a:",
+      "options": [
+        "Software Patch",
+        "Software Driver",
+        "Software Suite",
+        "Software Kernel",
+        "Software Shell"
+      ],
+      "correctIndex": 2,
+      "explanation": "A Software Suite (e.g., MS Office) bundles several related applications together with a common interface.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_2",
+      "topicId": null,
+      "text": "For hard drives, modern Windows versions (XP and later) use which file system as the default, which is also the most advanced among them?",
+      "options": [
+        "FAT 16",
+        "FAT 32",
+        "NTFS (New Technology File System)",
+        "HFS+",
+        "EXT 4"
+      ],
+      "correctIndex": 2,
+      "explanation": "NTFS supports large files, security permissions, and encryption, making it the default and most advanced file system for modern Windows versions.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_3",
+      "topicId": null,
+      "text": "Which technology refers to a network of physical objects fitted with sensors and software to exchange data over the Internet?",
+      "options": [
+        "Cloud Computing",
+        "Internet of Things (IoT)",
+        "Block Computing",
+        "Artificial Intelligence",
+        "None of the above"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Internet of Things (IoT) allows everyday physical devices, such as smart bulbs or thermostats, to connect to the Internet and communicate with other devices.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_4",
+      "topicId": null,
+      "text": "In Microsoft PowerPoint, which keyboard shortcut inserts a New Slide into the presentation currently open?",
+      "options": [
+        "Ctrl + N",
+        "Ctrl + S",
+        "Ctrl + M",
+        "Ctrl + O",
+        "Ctrl + P"
+      ],
+      "correctIndex": 2,
+      "explanation": "Ctrl + M inserts a New Slide, while Ctrl + N opens a New Presentation.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_5",
+      "topicId": null,
+      "text": "A secret string of characters that a user enters to verify their identity and gain access to a computer system or network is called a ________.",
+      "options": [
+        "Firewall",
+        "Encryption Key",
+        "Password",
+        "Biometric",
+        "User ID"
+      ],
+      "correctIndex": 2,
+      "explanation": "A Password is the secret code used for authentication to verify a user's identity.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_6",
+      "topicId": null,
+      "text": "An Operating System (OS) like Windows or Linux belongs to which type of software?",
+      "options": [
+        "Application Software",
+        "System Software",
+        "Utility Software",
+        "Malware",
+        "None of these"
+      ],
+      "correctIndex": 1,
+      "explanation": "System Software is designed to run the computer's hardware and application programs; the OS is the core system software.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_7",
+      "topicId": null,
+      "text": "Which version of Windows was the first to bring a specialized \"x64\" edition, designed for 64-bit processors, to general consumers?",
+      "options": [
+        "Windows 95",
+        "Windows 98",
+        "Windows XP Professional x 64 Edition",
+        "Windows 2000",
+        "Windows ME"
+      ],
+      "correctIndex": 2,
+      "explanation": "While 64-bit server versions existed earlier, Windows XP Professional x64 Edition brought 64-bit computing to the desktop mainstream.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_8",
+      "topicId": null,
+      "text": "Which of the following is a well-known example of an Open Source Operating System, meaning its source code is freely available for anyone to use and modify?",
+      "options": [
+        "Microsoft Windows",
+        "Linux",
+        "iOS",
+        "Mac OS",
+        "MS-DOS"
+      ],
+      "correctIndex": 1,
+      "explanation": "Linux is a free, open-source operating system, whereas Windows and macOS are proprietary (closed source).",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_9",
+      "topicId": null,
+      "text": "Which level of database abstraction deals with how the data is actually stored on physical storage media (like hard drives) and involves complex low-level data structures?",
+      "options": [
+        "Physical Level",
+        "Logical Level",
+        "View Level",
+        "External Level",
+        "Conceptual Level"
+      ],
+      "correctIndex": 0,
+      "explanation": "The Physical Level is the lowest level of abstraction, describing complex low-level data structures and storage paths.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_10",
+      "topicId": null,
+      "text": "In the context of website development, the acronym CMS stands for:",
+      "options": [
+        "Computer Management System",
+        "Content Management System",
+        "Creative Media Software",
+        "Cloud Maintenance Service",
+        "Customer Management Solution"
+      ],
+      "correctIndex": 1,
+      "explanation": "A CMS (Content Management System), like WordPress, allows users to create, manage, and modify website content without technical knowledge.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_11",
+      "topicId": null,
+      "text": "Every Network Interface Card (NIC) carries an address that is unique to it and is assigned physically by the manufacturer itself. That address is the:",
+      "options": [
+        "IP Address",
+        "MAC Address",
+        "Link Address",
+        "Domain Name",
+        "Gateway ID"
+      ],
+      "correctIndex": 1,
+      "explanation": "A Media Access Control (MAC) address is a 48-bit hardware identification number that uniquely identifies each device on a network.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_12",
+      "topicId": null,
+      "text": "Emails are sent (pushed) from a client to a mail server using which internet standard protocol?",
+      "options": [
+        "POP 3",
+        "IMAP",
+        "SMTP",
+        "HTTP",
+        "FTP"
+      ],
+      "correctIndex": 2,
+      "explanation": "SMTP (Simple Mail Transfer Protocol) is used for sending mail. POP3 and IMAP are used for receiving mail.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_13",
+      "topicId": null,
+      "text": "Which popular free web-based email service was founded by Sabeer Bhatia and Jack Smith?",
+      "options": [
+        "Gmail",
+        "Hotmail",
+        "Rediffmail",
+        "Yahoo Mail",
+        "AOL"
+      ],
+      "correctIndex": 1,
+      "explanation": "Hotmail was founded by Sabeer Bhatia and Jack Smith in 1996 and was later acquired by Microsoft.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_14",
+      "topicId": null,
+      "text": "Which program, dating back to 1971 and displaying the message \"I'm the creeper, catch me if you can!\", is generally accepted as the first computer virus?",
+      "options": [
+        "Reaper",
+        "Creeper",
+        "Brain",
+        "Elk Cloner",
+        "Michelangelo"
+      ],
+      "correctIndex": 1,
+      "explanation": "Creeper was an experimental self-replicating program on ARPANET and is regarded as the first computer virus.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_15",
+      "topicId": null,
+      "text": "The Minimize, Maximize/Restore, and Close buttons at the top-right corner of a window are collectively located on the:",
+      "options": [
+        "Menu Bar",
+        "Status Bar",
+        "Title Bar",
+        "Scroll Bar",
+        "Taskbar"
+      ],
+      "correctIndex": 2,
+      "explanation": "These window control buttons are found on the Title Bar at the top of the window.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_16",
+      "topicId": null,
+      "text": "Which level of integration technology allows millions of components on a single chip, powering Fifth Generation devices?",
+      "options": [
+        "SSI (Small Scale Integration)",
+        "MSI (Medium Scale Integration)",
+        "ULSI (Ultra Large Scale Integration)",
+        "Vacuum Tubes",
+        "Transistors"
+      ],
+      "correctIndex": 2,
+      "explanation": "Fifth-generation computers utilize ULSI (Ultra Large Scale Integration) technology, which packs millions of electronic components onto a single microprocessor chip.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_17",
+      "topicId": null,
+      "text": "The computer's BIOS (Firmware) is usually stored where, so that it is ready for use the moment the computer is switched on?",
+      "options": [
+        "RAM",
+        "Cache",
+        "Hard Disk",
+        "ROM / EEPROM",
+        "Registers"
+      ],
+      "correctIndex": 3,
+      "explanation": "BIOS is stored on non-volatile memory like ROM or Flash (EEPROM) so it retains data without power and is available at start-up.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_18",
+      "topicId": null,
+      "text": "Transistors took the place of vacuum tubes starting from which generation of computers?",
+      "options": [
+        "First Generation",
+        "Second Generation",
+        "Third Generation",
+        "Fourth Generation",
+        "Fifth Generation"
+      ],
+      "correctIndex": 1,
+      "explanation": "Second-generation computers (roughly 1956-1963) used transistors, which were smaller and more reliable than vacuum tubes.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_19",
+      "topicId": null,
+      "text": "Which image file format is commonly used for web graphics because it allows transparent backgrounds along with lossless compression?",
+      "options": [
+        "JPEG",
+        "BMP",
+        "PNG",
+        "TXT",
+        "RAW"
+      ],
+      "correctIndex": 2,
+      "explanation": "PNG (Portable Network Graphics) is preferred for web graphics when transparency is needed, as JPEG does not support transparency.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_20",
+      "topicId": null,
+      "text": "Memory can be divided, on the basis of logical divisions, into segments whose sizes vary. In memory management, what is this technique termed?",
+      "options": [
+        "Paging",
+        "Segmentation",
+        "Spooling",
+        "Throttling",
+        "None of the above"
+      ],
+      "correctIndex": 1,
+      "explanation": "While Paging divides memory into fixed-size blocks, Segmentation divides it into variable-sized segments based on the logic of the program (e.g., code, stack, data).",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_21",
+      "topicId": null,
+      "text": "In which topology does every node connect to every other node, giving it the highest fault tolerance?",
+      "options": [
+        "Bus",
+        "Star",
+        "Ring",
+        "Mesh",
+        "Linear"
+      ],
+      "correctIndex": 3,
+      "explanation": "In a full Mesh topology, data can take any of several paths to reach its destination, providing high redundancy and reliability.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_22",
+      "topicId": null,
+      "text": "Which program translates high-level language code into machine code one line at a time?",
+      "options": [
+        "Compiler",
+        "Assembler",
+        "Interpreter",
+        "Linker",
+        "Loader"
+      ],
+      "correctIndex": 2,
+      "explanation": "An interpreter translates and executes code line-by-line, whereas a compiler translates the whole program at once.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_23",
+      "topicId": null,
+      "text": "Which component of the Excel interface, located to the left of the Formula Bar, displays the address of the currently selected cell?",
+      "options": [
+        "Title Bar",
+        "Name Box",
+        "Status Bar",
+        "Menu Bar",
+        "Scroll Bar"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Name Box displays the cell reference (e.g., A1) or the name of the selected range.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_24",
+      "topicId": null,
+      "text": "For recovery purposes, an exact copy of an entire hard drive — the OS and every file included — can be created by which type of utility software?",
+      "options": [
+        "Antivirus",
+        "Disk Defragmenter",
+        "Disk Imaging / Backup Software",
+        "Firewall",
+        "Compression Tool"
+      ],
+      "correctIndex": 2,
+      "explanation": "Disk imaging/backup software creates a sector-by-sector copy of the entire drive, which can be used to restore the system after a failure.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_25",
+      "topicId": null,
+      "text": "Who is the famous computer scientist regarded as the \"Father of Artificial Intelligence\"?",
+      "options": [
+        "Alan Turing",
+        "John McCarthy",
+        "Charles Babbage",
+        "Tim Berners-Lee",
+        "Bill Gates"
+      ],
+      "correctIndex": 1,
+      "explanation": "John McCarthy coined the term \"Artificial Intelligence\" in 1955; Alan Turing is regarded as the father of theoretical computer science.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_26",
+      "topicId": null,
+      "text": "A context-sensitive menu (popup menu) with options specific to the selected item is usually brought up by which action of the mouse?",
+      "options": [
+        "Left Click",
+        "Double Click",
+        "Right Click",
+        "Scroll",
+        "Hover"
+      ],
+      "correctIndex": 2,
+      "explanation": "Right-clicking usually opens a context menu that provides options (like Copy, Paste, Properties) relevant to the item clicked.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_27",
+      "topicId": null,
+      "text": "The legal agreement between the software publisher and the end-user that lays down the terms of use is known as:",
+      "options": [
+        "EULA (End User License Agreement)",
+        "NDA (Non-Disclosure Agreement)",
+        "SLA (Service Level Agreement)",
+        "API (Application Programming Interface)",
+        "GUI (Graphical User Interface)"
+      ],
+      "correctIndex": 0,
+      "explanation": "EULA stands for End User License Agreement, the legal contract that defines the terms under which a user may use the software.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_28",
+      "topicId": null,
+      "text": "A sudden, short-lived rise in voltage on a power line, capable of damaging sensitive electronic components, is technically known as a ________.",
+      "options": [
+        "Blackout",
+        "Spike / Surge",
+        "Brownout",
+        "Sag",
+        "Short"
+      ],
+      "correctIndex": 1,
+      "explanation": "A Spike or Surge is a sudden rise in voltage, and surge protectors are used to prevent such damage.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_29",
+      "topicId": null,
+      "text": "The technical standards of the World Wide Web are created and maintained by which international community?",
+      "options": [
+        "IEEE",
+        "ISO",
+        "W 3 C (World Wide Web Consortium)",
+        "CERN",
+        "NASA"
+      ],
+      "correctIndex": 2,
+      "explanation": "The W3C, led by Tim Berners-Lee, develops open standards to ensure the long-term growth of the Web.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_30",
+      "topicId": null,
+      "text": "Tabbed groupings of buttons took the place of traditional menus and toolbars in the \"Ribbon\" interface. In which version of Microsoft Office did this interface first appear?",
+      "options": [
+        "Office 2003",
+        "Office 2007",
+        "Office XP",
+        "Office 2010",
+        "Office 365"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Ribbon interface was a major design change introduced in Office 2007.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_31",
+      "topicId": null,
+      "text": "Windows 95 introduced support for which updated file system that could handle larger hard drives?",
+      "options": [
+        "NTFS",
+        "FAT32",
+        "exFAT",
+        "EXT4",
+        "HPFS"
+      ],
+      "correctIndex": 1,
+      "explanation": "Windows 95 OSR2 introduced FAT32 to support larger hard drives.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_32",
+      "topicId": null,
+      "text": "In Microsoft Excel, which keyboard shortcut inserts the current date into the selected cell?",
+      "options": [
+        "Ctrl + ; (Semicolon)",
+        "Ctrl + : (Colon)",
+        "Ctrl + D",
+        "Ctrl + T",
+        "Shift + D"
+      ],
+      "correctIndex": 0,
+      "explanation": "Ctrl + ; inserts the current date, while Ctrl + Shift + : inserts the current time.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_33",
+      "topicId": null,
+      "text": "Keyboards, mice, printers and external drives can all be plugged in with ease through a universal standard port that supports \"Plug and Play\" functionality. That port is:",
+      "options": [
+        "VGA",
+        "HDMI",
+        "USB",
+        "Ethernet",
+        "PS/2"
+      ],
+      "correctIndex": 2,
+      "explanation": "USB (Universal Serial Bus) is the industry standard for connecting such devices, and it allows hot-swapping (plugging in without restarting).",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_34",
+      "topicId": null,
+      "text": "In Microsoft Word, which keyboard shortcut is used to align the selected paragraph to the Center of the page?",
+      "options": [
+        "Ctrl + C",
+        "Ctrl + J",
+        "Ctrl + E",
+        "Ctrl + R",
+        "Ctrl + M"
+      ],
+      "correctIndex": 2,
+      "explanation": "Ctrl + E is the shortcut for Center alignment (Ctrl + J is for Justify, Ctrl + R for Right, and Ctrl + L for Left).",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_35",
+      "topicId": null,
+      "text": "\"Dial-up\" internet access is correctly described by which of the following statements?",
+      "options": [
+        "It uses fiber optic cables for ultra-high speeds.",
+        "It utilizes existing telephone lines and a modem.",
+        "It is a dedicated broadband connection.",
+        "It is wireless technology.",
+        "None of the above"
+      ],
+      "correctIndex": 1,
+      "explanation": "Dial-up uses standard telephone lines and a modem to connect to the internet; it is slow and ties up the phone line.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_36",
+      "topicId": null,
+      "text": "In MS Word, a table can contain at most how many columns?",
+      "options": [
+        "45",
+        "63",
+        "100",
+        "128",
+        "256"
+      ],
+      "correctIndex": 1,
+      "explanation": "The limit for columns in a Word table is 63.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_37",
+      "topicId": null,
+      "text": "To look up synonyms for a selected word through the \"Thesaurus\" tool in Microsoft Word, which shortcut key combination is used?",
+      "options": [
+        "F 7",
+        "Shift + F 7",
+        "Ctrl + F 7",
+        "Alt + F 7",
+        "Ctrl + T"
+      ],
+      "correctIndex": 1,
+      "explanation": "Shift + F7 opens the Thesaurus, while F7 alone runs the Spelling & Grammar check.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_38",
+      "topicId": null,
+      "text": "To directly open a new tab in Google Chrome, which combination of keys should be pressed?",
+      "options": [
+        "Ctrl + N",
+        "Ctrl + T",
+        "Ctrl + J",
+        "Ctrl + W",
+        "Alt + F 4"
+      ],
+      "correctIndex": 1,
+      "explanation": "Ctrl + T opens a new tab, while Ctrl + N opens a new window.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792583768328_39",
+      "topicId": null,
+      "text": "Using a laser beam and toner, one kind of \"Non-Impact\" printer produces output a whole page at a time. That printer is the:",
+      "options": [
+        "Dot Matrix Printer",
+        "Daisy Wheel Printer",
+        "Laser Printer",
+        "Drum Printer",
+        "Chain Printer"
+      ],
+      "correctIndex": 2,
+      "explanation": "Laser Printers are Page Printers (print a whole page at once) and are Non-Impact (quiet). Daisy Wheel and Drum printers are Impact printers.",
+      "difficulty": "medium",
+      "setNo": 22,
+      "active": true,
+      "productIds": []
     }
   ],
   "quizSets": [
