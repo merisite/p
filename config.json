@@ -18338,6 +18338,726 @@
       "setNo": 18,
       "active": true,
       "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_0",
+      "topicId": null,
+      "text": "In the OSI networking model, the task of logical addressing (IP Addressing) and routing data packets to their destination is performed by which layer?",
+      "options": [
+        "Physical Layer",
+        "Data Link Layer",
+        "Network Layer",
+        "Transport Layer",
+        "Session Layer"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Network Layer (Layer 3) handles IP addressing and routing, while the Data Link Layer handles MAC addressing.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_1",
+      "topicId": null,
+      "text": "A value that can be nothing other than True or False is represented, in computer programming and databases, by which data type?",
+      "options": [
+        "Integer",
+        "Floating Point",
+        "Boolean",
+        "String",
+        "Character"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Boolean data type has only two possible values: True (1) or False (0).",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_2",
+      "topicId": null,
+      "text": "Jio, Airtel and BSNL are examples of the kind of entity that supplies internet access to users and businesses. Such an entity is called:",
+      "options": [
+        "HTTP",
+        "FTP",
+        "ISP",
+        "URL",
+        "TCP"
+      ],
+      "correctIndex": 2,
+      "explanation": "ISP stands for Internet Service Provider, the entity that provides internet access to users and businesses.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_3",
+      "topicId": null,
+      "text": "In Microsoft PowerPoint, what is the visual effect that appears when you move from one slide to the next during a presentation called?",
+      "options": [
+        "Custom Animation",
+        "Slide Transition",
+        "Trigger",
+        "Motion Path",
+        "Entrance Effect"
+      ],
+      "correctIndex": 1,
+      "explanation": "Transitions control how the presentation changes from one slide to the next.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_4",
+      "topicId": null,
+      "text": "Software applications are able to interact directly with network services (e.g., email or file transfer) at which layer of the OSI model?",
+      "options": [
+        "Physical Layer",
+        "Transport Layer",
+        "Network Layer",
+        "Application Layer",
+        "Session Layer"
+      ],
+      "correctIndex": 3,
+      "explanation": "The Application Layer (Layer 7) provides the interface for end-user applications to access network services.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_5",
+      "topicId": null,
+      "text": "Which special software program enables the Operating System to communicate with a particular hardware device, such as a printer or a graphics card?",
+      "options": [
+        "Firmware",
+        "Device Driver",
+        "Kernel",
+        "Utility",
+        "Patch"
+      ],
+      "correctIndex": 1,
+      "explanation": "A Device Driver is a program that operates or controls a particular type of device attached to a computer, allowing the Operating System to communicate with it.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_6",
+      "topicId": null,
+      "text": "What do we call malicious software that encrypts a user's data and demands a payment to restore access to it?",
+      "options": [
+        "Spyware",
+        "Ransomware",
+        "Adware",
+        "Rootkit",
+        "Keylogger"
+      ],
+      "correctIndex": 1,
+      "explanation": "Ransomware encrypts a victim's files, with the attacker demanding a ransom to restore access.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_7",
+      "topicId": null,
+      "text": "Based on their licensing model (Open Source vs. Proprietary), find the odd one out among the following Operating Systems.",
+      "options": [
+        "Windows 10",
+        "macOS",
+        "iOS",
+        "Linux",
+        "MS-DOS"
+      ],
+      "correctIndex": 3,
+      "explanation": "Linux is Open Source (free to modify). Windows, macOS, iOS and MS-DOS are proprietary (closed source).",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_8",
+      "topicId": null,
+      "text": "Managing network resources and handling the requests that come from client computers is the speciality of which type of Operating System?",
+      "options": [
+        "Network Operating System (NOS) / Server OS",
+        "Embedded OS",
+        "Handheld OS",
+        "Single-user OS",
+        "Batch OS"
+      ],
+      "correctIndex": 0,
+      "explanation": "A Network Operating System (NOS) / Server OS manages network resources for client computers, e.g., Windows Server and Linux Server.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_9",
+      "topicId": null,
+      "text": "It was in the late 1960s that the UNIX operating system was created — at which well-known laboratory?",
+      "options": [
+        "CERN",
+        "Bell Labs (AT&T)",
+        "Xerox PARC",
+        "Microsoft Research",
+        "IBM Labs"
+      ],
+      "correctIndex": 1,
+      "explanation": "UNIX was developed in the late 1960s at Bell Labs (AT&T), mainly by Ken Thompson and Dennis Ritchie.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_10",
+      "topicId": null,
+      "text": "One variety of ROM gets its contents written by the manufacturer itself at the time of fabrication, after which the user can never alter it. This type is:",
+      "options": [
+        "EPROM",
+        "PROM",
+        "Mask ROM (MROM)",
+        "EEPROM",
+        "Flash Memory"
+      ],
+      "correctIndex": 2,
+      "explanation": "Mask ROM is \"hard-wired\" during production, so its contents cannot be altered by the user.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_11",
+      "topicId": null,
+      "text": "Who is credited with inventing the single-transistor Dynamic RAM (DRAM) cell in 1968?",
+      "options": [
+        "Alan Turing",
+        "Robert H. Dennard",
+        "Tim Berners-Lee",
+        "Jack Kilby",
+        "Gordon Moore"
+      ],
+      "correctIndex": 1,
+      "explanation": "Robert Dennard (IBM) invented the 1-transistor DRAM cell, which greatly increased memory density.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_12",
+      "topicId": null,
+      "text": "What is the maintenance process of reorganizing the data on a hard disk so that the related pieces of files are stored contiguously called?",
+      "options": [
+        "Defragmentation",
+        "Partitioning",
+        "Formatting",
+        "Booting",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "Defragmentation reduces file fragmentation by physically organizing the contents of the disk to store the pieces of each file close together.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_13",
+      "topicId": null,
+      "text": "Complex scientific calculations, weather forecasting and nuclear simulations are handled at extremely high speeds by which class of computers?",
+      "options": [
+        "Microcomputers",
+        "Minicomputers",
+        "Mainframe Computers",
+        "Supercomputers",
+        "Workstations"
+      ],
+      "correctIndex": 3,
+      "explanation": "Supercomputers are the most powerful computers in terms of performance and data processing. They are used for specialized applications that require immense mathematical calculations (number crunching), such as weather forecasting and fluid dynamics.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_14",
+      "topicId": null,
+      "text": "To describe supply chain optimization using RFID, the term \"Internet of Things\" was coined in the year ________.",
+      "options": [
+        "RFID. 1990",
+        "1999",
+        "2005",
+        "2010",
+        "2015"
+      ],
+      "correctIndex": 1,
+      "explanation": "Kevin Ashton coined the term \"Internet of Things\" in 1999 while working at Procter & Gamble to describe supply chain optimization using RFID.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_15",
+      "topicId": null,
+      "text": "OLE is a technology that lets content created in one application be embedded into another. What is the full form of OLE?",
+      "options": [
+        "Object Linking and Embedding",
+        "Online Linking and Environment",
+        "Object Loading and Enabling",
+        "Operational Link Exchange",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "OLE stands for Object Linking and Embedding, and it is a Microsoft technology.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_16",
+      "topicId": null,
+      "text": "Which layer of software interacts directly with the computer hardware?",
+      "options": [
+        "Application Software",
+        "Operating System (Kernel/Drivers)",
+        "Utility Software",
+        "Database Management System",
+        "Presentation Software"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Operating System, through its Kernel and drivers, sits directly on top of the hardware and interacts with it.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_17",
+      "topicId": null,
+      "text": "Error recovery, flow control and dependable end-to-end delivery of messages in the OSI model are the responsibility of which layer?",
+      "options": [
+        "Physical Layer",
+        "Data Link Layer",
+        "Transport Layer",
+        "Session Layer",
+        "Presentation Layer"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Transport Layer (Layer 4) manages end-to-end communication between the source and the destination (e.g., TCP).",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_18",
+      "topicId": null,
+      "text": "Which technology is the defining feature of the Fourth Generation of computers (1971-Present)?",
+      "options": [
+        "Vacuum Tubes",
+        "Transistors",
+        "Integrated Circuits (SSI/MSI)",
+        "Microprocessors (VLSI)",
+        "Artificial Intelligence"
+      ],
+      "correctIndex": 3,
+      "explanation": "The Fourth Generation used Microprocessors built with VLSI (Very Large Scale Integration) technology.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_19",
+      "topicId": null,
+      "text": "Processing is speeded up by a high-speed memory that serves as a buffer between the CPU and the main memory (RAM). This memory is:",
+      "options": [
+        "Virtual Memory",
+        "Cache Memory",
+        "Secondary Memory",
+        "Flash Memory",
+        "Auxillary Memory"
+      ],
+      "correctIndex": 1,
+      "explanation": "Cache Memory stores frequently used instructions close to the CPU to reduce access time.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_20",
+      "topicId": null,
+      "text": "Two or more people can engage in real-time, text-based communication with each other over a network by using which internet service?",
+      "options": [
+        "Email",
+        "Instant Messaging (IM)",
+        "Newsgroups",
+        "Blogging",
+        "FTP"
+      ],
+      "correctIndex": 1,
+      "explanation": "Instant Messaging (IM) (like WhatsApp, Slack, Messenger) allows for immediate transmission of text messages.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_21",
+      "topicId": null,
+      "text": "At the top of a web browser window there is a text field in which the user types a website's unique address (URL). This field is known as the:",
+      "options": [
+        "Title Bar",
+        "Status Bar",
+        "Address Bar",
+        "Menu Bar",
+        "Tool Bar"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Address Bar (or URL bar) is where the website address is entered.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_22",
+      "topicId": null,
+      "text": "As soon as a computer is powered on, its BIOS automatically carries out a sequence of diagnostic tests. This sequence is known as:",
+      "options": [
+        "POST (Power-On Self-Test)",
+        "BOOT (Basic Operating On Test)",
+        "HOST (Hardware Operating System Test)",
+        "DOS (Disk Operating System)",
+        "TEST (Technical Evaluation System Test)"
+      ],
+      "correctIndex": 0,
+      "explanation": "POST (Power-On Self-Test) is the diagnostic routine the BIOS runs at switch-on to check the CPU, memory and connected hardware before the system boots.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_23",
+      "topicId": null,
+      "text": "Data at the Data Link Layer is filtered and forwarded on the basis of MAC addresses by which device?",
+      "options": [
+        "Hub",
+        "Repeater",
+        "Switch",
+        "Router",
+        "Gateway"
+      ],
+      "correctIndex": 2,
+      "explanation": "A Switch connects devices within a network and uses MAC addresses to forward data only to the specific destination device.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_24",
+      "topicId": null,
+      "text": "A file that can be accessed on the Internet has a unique address (e.g., https://www.google.com). What is this address technically known as?",
+      "options": [
+        "ISP",
+        "SQL",
+        "URL",
+        "HTML",
+        "DNS"
+      ],
+      "correctIndex": 2,
+      "explanation": "URL (Uniform Resource Locator) is the address of a given unique resource on the Web.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_25",
+      "topicId": null,
+      "text": "What is a private network, accessible only to an organization's staff, called?",
+      "options": [
+        "Internet",
+        "Ethernet",
+        "Intranet",
+        "Extranet",
+        "Arpanet"
+      ],
+      "correctIndex": 2,
+      "explanation": "An Intranet is a private network restricted to an organization, while an Extranet allows limited outside access.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_26",
+      "topicId": null,
+      "text": "Which layer of an application becomes the target when a SQL Injection, a code injection technique, is carried out?",
+      "options": [
+        "The Operating System",
+        "The Database Layer",
+        "The Network Layer",
+        "The Hardware Layer",
+        "The Physical Layer"
+      ],
+      "correctIndex": 1,
+      "explanation": "SQL Injection attacks the Database Layer by inserting malicious SQL statements into entry fields of data-driven applications for execution.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_27",
+      "topicId": null,
+      "text": "Errors or \"bugs\" in a computer program are located, isolated and corrected through a systematic process. That process goes by the name:",
+      "options": [
+        "Compiling",
+        "Executing",
+        "Debugging",
+        "Decoding",
+        "Encoding"
+      ],
+      "correctIndex": 2,
+      "explanation": "Debugging is the process of finding and resolving defects or problems within a computer program.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_28",
+      "topicId": null,
+      "text": "The code originally written by a programmer in a High-Level Language is called ________, while the machine-readable code generated after compilation is called _______.",
+      "options": [
+        "machine-readable code, Source Code",
+        "Source Code, Object Code",
+        "System Code, Application Code",
+        "User Code, System Code",
+        "Source Code, Executable Code"
+      ],
+      "correctIndex": 1,
+      "explanation": "Source Code is the human-readable code written by the programmer. Object Code is the machine-readable code created by a compiler.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_29",
+      "topicId": null,
+      "text": "Commonly found on laptops, which input device uses a touch-sensitive surface to convert the movement of a finger into cursor movement on the screen?",
+      "options": [
+        "Trackball",
+        "Joystick",
+        "Touchpad",
+        "Light Pen",
+        "Stylus"
+      ],
+      "correctIndex": 2,
+      "explanation": "A Touchpad (also called a trackpad) is the touch-sensitive pointing device built into laptops.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_30",
+      "topicId": null,
+      "text": "Which type of attack makes a machine or network resource unavailable to its intended users by disrupting services, often by flooding the target with traffic?",
+      "options": [
+        "DoS (Denial of Service)",
+        "SQL Injection",
+        "Brute Force",
+        "Zero-Day Exploit",
+        "Man-in-the-Middle"
+      ],
+      "correctIndex": 0,
+      "explanation": "A DoS (Denial of Service) attack overwhelms the target with traffic so that legitimate users cannot access its services.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_31",
+      "topicId": null,
+      "text": "Which multinational technology company was co-founded by Larry Page and Sergey Brin?",
+      "options": [
+        "Microsoft",
+        "Apple",
+        "Google",
+        "Amazon",
+        "Facebook"
+      ],
+      "correctIndex": 2,
+      "explanation": "Larry Page and Sergey Brin founded Google in 1998.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_32",
+      "topicId": null,
+      "text": "In a database, making sure that no two rows of a table ever hold identical values in a specific column is the job of which of the following concepts?",
+      "options": [
+        "Foreign Key",
+        "Check Constraint",
+        "Unique Key",
+        "Default Key",
+        "Null Constraint"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Unique Key constraint ensures that all values in a column are different, preventing duplicate entries in that column.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_33",
+      "topicId": null,
+      "text": "Applications such as Word Processors and Spreadsheets find use in many different industries; they are therefore grouped under which classification?",
+      "options": [
+        "Vertical Market Software",
+        "Horizontal Market Software",
+        "System Software",
+        "Embedded Software",
+        "Utility Software"
+      ],
+      "correctIndex": 1,
+      "explanation": "Horizontal Market Software (like MS Word) is general-purpose and useful to a wide range of industries. (Vertical market software is specific to one industry, like banking software.)",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_34",
+      "topicId": null,
+      "text": "So that printing does not hold up the user's other work, the queue of documents sent to a printer is managed by which software process?",
+      "options": [
+        "Spooling",
+        "Throttling",
+        "Paging",
+        "Buffering",
+        "Compiling"
+      ],
+      "correctIndex": 0,
+      "explanation": "Spooling (Simultaneous Peripheral Operations On-Line) manages print jobs in a queue, feeding them to the printer in order while the user continues other work.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_35",
+      "topicId": null,
+      "text": "The Octal number system has a base of ________ and uses digits from ________.",
+      "options": [
+        "10, 0-9",
+        "16, 0-9 and A-F",
+        "2, 0-1",
+        "8, 0-7",
+        "8, 1-8"
+      ],
+      "correctIndex": 3,
+      "explanation": "The Octal system is Base-8 and uses the digits 0, 1, 2, 3, 4, 5, 6 and 7.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_36",
+      "topicId": null,
+      "text": "The task of looking after a database's performance, integrity and security falls on:",
+      "options": [
+        "Web Designer",
+        "Database Administrator (DBA)",
+        "System Analyst",
+        "Network Engineer",
+        "Graphic Designer"
+      ],
+      "correctIndex": 1,
+      "explanation": "A Database Administrator (DBA) directs or performs all activities related to maintaining a successful database environment, including its performance, integrity and security.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_37",
+      "topicId": null,
+      "text": "The decimal number 15 is written as what in the hexadecimal number system?",
+      "options": [
+        "A",
+        "C",
+        "E",
+        "F",
+        "10"
+      ],
+      "correctIndex": 3,
+      "explanation": "In Hexadecimal (Base 16), numbers 10-15 are represented by letters A-F, so 15 is represented by F.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_38",
+      "topicId": null,
+      "text": "Rectangles stand for processing steps and diamonds for decisions in a diagram that pictures the steps of an algorithm using such standard symbols. This pictorial representation is called:",
+      "options": [
+        "Pseudocode",
+        "Source Code",
+        "Flowchart",
+        "Mnemonic",
+        "Syntax"
+      ],
+      "correctIndex": 2,
+      "explanation": "A Flowchart is a diagram that uses standard symbols, such as rectangles for processing and diamonds for decisions, to display the sequence of steps in an algorithm.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582881914_39",
+      "topicId": null,
+      "text": "Copying, distributing or using software without authorization is given which legal term?",
+      "options": [
+        "Hacking",
+        "Software Piracy",
+        "Phishing",
+        "Spooling",
+        "Cracking"
+      ],
+      "correctIndex": 1,
+      "explanation": "Software Piracy involves violating the copyright of software by copying, distributing or using it without permission.",
+      "difficulty": "medium",
+      "setNo": 19,
+      "active": true,
+      "productIds": []
     }
   ],
   "quizSets": [
@@ -18588,7 +19308,7 @@
     {
       "id": "qs_1791575796626",
       "setNo": 19,
-      "title": "Mock 14 (Upcoming)",
+      "title": "Mock 14",
       "timeLimitMin": 15,
       "negMarkEnabled": true,
       "negMarkValue": 0.25,
