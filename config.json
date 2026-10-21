@@ -16178,6 +16178,726 @@
       "setNo": 15,
       "active": true,
       "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_0",
+      "topicId": null,
+      "text": "Among the following, which one is NOT a genuine version name of the Android Operating System?",
+      "options": [
+        "KitKat",
+        "Lollipop",
+        "Marshmallow",
+        "Red Velvet Cake",
+        "Oreo"
+      ],
+      "correctIndex": 3,
+      "explanation": "KitKat, Lollipop, Marshmallow and Oreo were all official dessert-based public names of Android versions. Red Velvet Cake was only an internal codename for Android 11 and was never used as a public version name.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_1",
+      "topicId": null,
+      "text": "Which of the following best describes the \"World Wide Web\" (WWW) and how it differs from the Internet?",
+      "options": [
+        "The physical cables connecting computers.",
+        "A system of interlinked hypertext documents accessed via the Internet.",
+        "A centralized government network.",
+        "A synonym for email services.",
+        "The operating system of the server."
+      ],
+      "correctIndex": 1,
+      "explanation": "The Web is the collection of interlinked pages and information accessed over the physical network known as the Internet.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_2",
+      "topicId": null,
+      "text": "Logical addressing and the routing of packets are the responsibility of which layer of the OSI model?",
+      "options": [
+        "Physical Layer",
+        "Data Link Layer",
+        "Network Layer",
+        "Transport Layer",
+        "Session Layer"
+      ],
+      "correctIndex": 2,
+      "explanation": "The Network Layer (Layer 3) handles logical IP addressing and determines the best path for data delivery, i.e., routing.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_3",
+      "topicId": null,
+      "text": "A decentralized, distributed digital ledger that keeps a record of transactions spread across many computers is the basis of which technology?",
+      "options": [
+        "Blockchain",
+        "Big Data",
+        "Virtual Reality",
+        "Dark Web",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "Blockchain is the underlying technology for cryptocurrencies and secure banking ledgers, ensuring data cannot be altered retroactively.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_4",
+      "topicId": null,
+      "text": "Commands like CREATE, ALTER and DROP, which set up and change a database's structure or schema, belong to which subset of SQL?",
+      "options": [
+        "DML (Data Manipulation Language)",
+        "DCL (Data Control Language)",
+        "DDL (Data Definition Language)",
+        "TCL (Transaction Control Language)",
+        "DQL (Data Query Language)"
+      ],
+      "correctIndex": 2,
+      "explanation": "DDL (Data Definition Language) is used to define the database schema (structure).",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_5",
+      "topicId": null,
+      "text": "________ is the term for the collection of rules in a programming language that decides which combinations of symbols form a correctly structured document or fragment.",
+      "options": [
+        "Semantics",
+        "Syntax",
+        "Algorithm",
+        "Flowchart",
+        "Pseudocode"
+      ],
+      "correctIndex": 1,
+      "explanation": "Syntax refers to the spelling and grammar of a programming language; if the syntax is incorrect, the program will not run (a Syntax Error occurs).",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_6",
+      "topicId": null,
+      "text": "Which memory is used to store data that the CPU accesses frequently, in order to improve speed?",
+      "options": [
+        "Flash Memory",
+        "Cache Memory",
+        "Secondary Memory",
+        "Auxiliary Memory",
+        "Virtual Memory"
+      ],
+      "correctIndex": 1,
+      "explanation": "Cache memory is a small, high-speed memory located between the CPU and RAM that stores frequently accessed data to speed up processing.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_7",
+      "topicId": null,
+      "text": "To display how much each part contributes, in percentage terms, to the total in Excel, the most suitable choice of chart is:",
+      "options": [
+        "Bar Chart",
+        "Line Chart",
+        "Pie Chart",
+        "Column Chart",
+        "Scatter Chart"
+      ],
+      "correctIndex": 2,
+      "explanation": "Pie charts display data as slices of a circle, representing percentages of a whole.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_8",
+      "topicId": null,
+      "text": "What is the scrambling of data to make it unreadable to unauthorized users called?",
+      "options": [
+        "Decryption",
+        "Encryption",
+        "Spooling",
+        "Defragmentation",
+        "Phishing"
+      ],
+      "correctIndex": 1,
+      "explanation": "Encryption converts data into a coded form (cipher text) so that unauthorized users cannot read it.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_9",
+      "topicId": null,
+      "text": "The technical term for the event in which the CPU locates the data it needs within the Cache Memory is:",
+      "options": [
+        "Cache Miss",
+        "Cache Hit",
+        "Cache Fault",
+        "Cache Error",
+        "Cache Load"
+      ],
+      "correctIndex": 1,
+      "explanation": "A Cache Hit occurs when the requested data is found in the cache.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_10",
+      "topicId": null,
+      "text": "Google gave dessert names to its Android versions up to Android 9 (Pie). Which version dropped this practice and was branded simply with a number?",
+      "options": [
+        "Android 10",
+        "Android 11",
+        "Android X",
+        "Android One",
+        "Android M"
+      ],
+      "correctIndex": 0,
+      "explanation": "Android 10 (internally known as Queen Cake/Quince Tart) was officially released simply as \"Android 10,\" ending the public dessert naming scheme.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_11",
+      "topicId": null,
+      "text": "Mnemonic codes written in Assembly Language are converted into machine code (0s and 1s) by a program called a(n):",
+      "options": [
+        "Compiler",
+        "Interpreter",
+        "Assembler",
+        "Debugger",
+        "Editor"
+      ],
+      "correctIndex": 2,
+      "explanation": "An Assembler converts Assembly language into Machine language.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_12",
+      "topicId": null,
+      "text": "In Windows applications, which function key is conventionally used to open the \"Help\" menu?",
+      "options": [
+        "F1",
+        "F2",
+        "F5",
+        "F10",
+        "F12"
+      ],
+      "correctIndex": 0,
+      "explanation": "F1 is the universal shortcut key for Help. F2 is used for Rename, F5 for Refresh and F12 for Save As.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_13",
+      "topicId": null,
+      "text": "Data that has been 'Cut' or 'Copied' in Windows is held temporarily by which feature, so that it can be 'Pasted' at another place?",
+      "options": [
+        "Recycle Bin",
+        "Clipboard",
+        "Cache",
+        "RAM",
+        "Dashboard"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Clipboard is a temporary storage area in the memory used to hold data during cut, copy, and paste operations.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_14",
+      "topicId": null,
+      "text": "Which specialized software allows you to view and manage all the files and folders stored on your computer?",
+      "options": [
+        "Task Manager",
+        "File Explorer",
+        "Control Panel",
+        "Device Manager",
+        "Registry Editor"
+      ],
+      "correctIndex": 1,
+      "explanation": "File Explorer (formerly Windows Explorer) is the file management application in Windows, used to browse and organise files and folders.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_15",
+      "topicId": null,
+      "text": "________ is the process in which plain, readable text is turned into scrambled, unreadable characters (cipher text) so that it stays protected during transmission.",
+      "options": [
+        "Decryption",
+        "Encryption",
+        "Phishing",
+        "Spooling",
+        "Mining"
+      ],
+      "correctIndex": 1,
+      "explanation": "Encryption encodes data at the sender's side to protect it during transmission; Decryption is the reverse process carried out at the receiver's side.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_16",
+      "topicId": null,
+      "text": "Existing records stored in a table can be modified using which SQL (Structured Query Language) command?",
+      "options": [
+        "SELECT",
+        "UPDATE",
+        "INSERT",
+        "DROP",
+        "CREATE"
+      ],
+      "correctIndex": 1,
+      "explanation": "The UPDATE statement is used to modify the existing records in a database table (SELECT retrieves data, INSERT adds new records).",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_17",
+      "topicId": null,
+      "text": "In Microsoft Excel, a ________ is a predefined formula that carries out calculations using specific values in a particular order (e.g., SUM, AVERAGE).",
+      "options": [
+        "Cell",
+        "Function",
+        "Macro",
+        "Operator",
+        "Argument"
+      ],
+      "correctIndex": 1,
+      "explanation": "A Function is a built-in formula in Excel, such as =SUM(A1:A10).",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_18",
+      "topicId": null,
+      "text": "Which DOS command displays a list of the files and subdirectories present in the current directory?",
+      "options": [
+        "COPY",
+        "CLS",
+        "DIR",
+        "MD",
+        "DEL"
+      ],
+      "correctIndex": 2,
+      "explanation": "The DIR command lists the contents of a directory.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_19",
+      "topicId": null,
+      "text": "Which memory type is placed between the CPU and Main Memory in order to speed up processing?",
+      "options": [
+        "Virtual Memory",
+        "Cache Memory",
+        "Flash Memory",
+        "Secondary Memory",
+        "Auxiliary Memory"
+      ],
+      "correctIndex": 1,
+      "explanation": "Cache memory is a high-speed memory that stores frequently used data and instructions closer to the CPU to increase processing speed.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_20",
+      "topicId": null,
+      "text": "In which year did Tim Berners-Lee first write the proposal for the World Wide Web (WWW)?",
+      "options": [
+        "1985",
+        "1989",
+        "1995",
+        "1999",
+        "2001"
+      ],
+      "correctIndex": 1,
+      "explanation": "Tim Berners-Lee wrote the proposal for the WWW in March 1989 at CERN.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_21",
+      "topicId": null,
+      "text": "Located directly inside the CPU and used to hold immediate instructions, the fastest type of memory among the following is:",
+      "options": [
+        "Cache Memory",
+        "RAM",
+        "Registers",
+        "SSD",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "Registers are tiny, extremely fast memory locations inside the CPU that hold data currently being processed. They are faster than Cache and RAM.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_22",
+      "topicId": null,
+      "text": "The C programming language was developed at Bell Labs in the early 1970s. Its development is credited to whom?",
+      "options": [
+        "Bjarne Stroustrup",
+        "Dennis Ritchie",
+        "James Gosling",
+        "Guido van RossumC",
+        "Ken Thompson"
+      ],
+      "correctIndex": 1,
+      "explanation": "Dennis Ritchie created the C programming language at Bell Labs.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_23",
+      "topicId": null,
+      "text": "RAM is considered ________ memory because it loses data without power, while a Hard Disk is ________ memory.",
+      "options": [
+        "_______ memory. Permanent, Temporary",
+        "Volatile, Non-Volatile",
+        "Non-Volatile, Volatile",
+        "Static, Dynamic",
+        "Secondary, Primary"
+      ],
+      "correctIndex": 1,
+      "explanation": "RAM is Volatile, as it needs power to retain data. A Hard Disk is Non-Volatile, as it retains data without power.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_24",
+      "topicId": null,
+      "text": "The circuitry of first-generation computers (1940-1956) was built around which bulky electronic component?",
+      "options": [
+        "Transistors",
+        "Vacuum Tubes",
+        "Integrated Circuits",
+        "Microprocessors",
+        "Bio-chips"
+      ],
+      "correctIndex": 1,
+      "explanation": "Vacuum Tubes were used in the first generation. They were large, consumed high power, and generated significant heat.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_25",
+      "topicId": null,
+      "text": "Which application software is essential for locating, retrieving, and displaying content from the World Wide Web?",
+      "options": [
+        "Spreadsheet",
+        "Web Browser",
+        "Media Player",
+        "Compiler",
+        "Antivirus"
+      ],
+      "correctIndex": 1,
+      "explanation": "A Web Browser such as Chrome, Firefox, or Edge is the tool used to locate and display content from the Web.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_26",
+      "topicId": null,
+      "text": "Which protocol translates a domain name (such as www.google.com) into an IP address?",
+      "options": [
+        "DHCP",
+        "DNS",
+        "ARP",
+        "TCP",
+        "HTTP"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Domain Name System (DNS) acts as the phonebook of the internet, converting domain names into IP addresses.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_27",
+      "topicId": null,
+      "text": "Which networking device is primarily used to join multiple networks together and direct data packets between them?",
+      "options": [
+        "Repeater",
+        "Hub",
+        "Router",
+        "Modem",
+        "None of the above"
+      ],
+      "correctIndex": 2,
+      "explanation": "A Router connects different networks (such as a LAN to a WAN) and decides the best path for data packets to travel to their destination.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_28",
+      "topicId": null,
+      "text": "Which system program combines separate object files together to produce a single executable file?",
+      "options": [
+        "Compiler",
+        "Linker",
+        "Loader",
+        "Assembler",
+        "Interpreter"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Linker combines object modules into a single executable file, while the Loader loads that file into memory.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_29",
+      "topicId": null,
+      "text": "Of the standard units of digital information storage listed below, the greatest quantity of data is represented by which one?",
+      "options": [
+        "Petabyte (10^15)",
+        "Exabyte (10^18)",
+        "Terabyte (10^12)",
+        "Zettabyte (10^21)",
+        "None of these"
+      ],
+      "correctIndex": 3,
+      "explanation": "The storage unit hierarchy is: KB < MB < GB < TB < PB < EB < ZB. Zettabyte (ZB) is the largest unit listed.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_30",
+      "topicId": null,
+      "text": "AC power coming from the wall outlet is converted into DC power suitable for the computer's internal components by which hardware component?",
+      "options": [
+        "UPS",
+        "Motherboard",
+        "SMPS",
+        "CPU Fan",
+        "Inverter"
+      ],
+      "correctIndex": 2,
+      "explanation": "SMPS (Switched-Mode Power Supply) converts high-voltage AC to low-voltage DC for the computer.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_31",
+      "topicId": null,
+      "text": "In Windows, which utility is used to change system settings such as date/time and mouse speed, and to uninstall programs?",
+      "options": [
+        "Task Manager",
+        "Control Panel / Settings",
+        "File Explorer",
+        "Command Prompt",
+        "Registry Editor"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Control Panel, or the Settings app in newer versions, is used for system configuration tasks like these.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_32",
+      "topicId": null,
+      "text": "In which version of Windows did the \"My Computer\" icon (now called \"This PC\") make its first appearance?",
+      "options": [
+        "Windows 3.1",
+        "Windows 95",
+        "Windows XP",
+        "Windows 7",
+        "Windows 2000"
+      ],
+      "correctIndex": 1,
+      "explanation": "Windows 95 introduced the Desktop metaphor, bringing in icons such as My Computer and the Recycle Bin.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_33",
+      "topicId": null,
+      "text": "On a standard QWERTY computer keyboard, the keys labelled F1 through F12 are collectively called ________ keys.",
+      "options": [
+        "Toggle Keys",
+        "Modifier Keys",
+        "Numeric Keys",
+        "Function Keys",
+        "Navigation Keys"
+      ],
+      "correctIndex": 3,
+      "explanation": "F1 to F12 are Function Keys, used to perform specific tasks defined by the operating system or the active program.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_34",
+      "topicId": null,
+      "text": "Which memory unit can be accessed directly by the CPU and stores the instructions and data that are currently being processed?",
+      "options": [
+        "Secondary Storage",
+        "Main Memory (RAM)",
+        "Auxiliary Memory",
+        "Cloud Storage",
+        "Optical Drive"
+      ],
+      "correctIndex": 1,
+      "explanation": "RAM (Random Access Memory) is the primary or main memory used by the CPU for active tasks.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_35",
+      "topicId": null,
+      "text": "ENIAC was a pioneering computer in history. The acronym ENIAC stands for:",
+      "options": [
+        "Electronic Number Integration and Computing",
+        "Electronic Numerical Integrator and Computer",
+        "Electrical Numerical Integer and Calculator",
+        "Engine for Numerical Integer Calculation",
+        "Electronic Network Interface and Computer"
+      ],
+      "correctIndex": 1,
+      "explanation": "ENIAC stands for Electronic Numerical Integrator and Computer.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_36",
+      "topicId": null,
+      "text": "The top three layers of the OSI model (Session, Presentation, and Application) are together known as the ________ support layers.",
+      "options": [
+        "Network",
+        "User",
+        "Hardware",
+        "Physical",
+        "None"
+      ],
+      "correctIndex": 1,
+      "explanation": "The top three layers are the User Support Layers because they allow interaction between the software and the user, while the bottom three are Network Support Layers.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_37",
+      "topicId": null,
+      "text": "A clickable link in a digital document or webpage that takes the user to another location or file is technically known as a ________.",
+      "options": [
+        "Protocol",
+        "Hyperlink",
+        "Domain",
+        "Browser",
+        "Plug-in"
+      ],
+      "correctIndex": 1,
+      "explanation": "A Hyperlink connects web pages or documents and redirects the user to another location or file when clicked.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_38",
+      "topicId": null,
+      "text": "In Microsoft Excel, what does a small green triangle appearing in the corner of a cell indicate?",
+      "options": [
+        "The cell contains a comment",
+        "A possible error flagged by background error checking",
+        "The cell is protected or locked",
+        "The cell has a data-validation rule",
+        "The cell is part of a named range"
+      ],
+      "correctIndex": 1,
+      "explanation": "Excel's background error checking flags a cell with a green triangle when it suspects an error, such as an inconsistent formula. (A red triangle indicates a comment.)",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792582213012_39",
+      "topicId": null,
+      "text": "IPv6 was developed to overcome the exhaustion of IPv4 addresses. An IPv6 address is made up of how many bits?",
+      "options": [
+        "32 bits",
+        "64 bits",
+        "128 bits",
+        "256 bits",
+        "512 bits"
+      ],
+      "correctIndex": 2,
+      "explanation": "IPv6 uses 128-bit addresses, providing a vastly larger number of unique IP addresses compared to IPv4.",
+      "difficulty": "medium",
+      "setNo": 17,
+      "active": true,
+      "productIds": []
     }
   ],
   "quizSets": [
@@ -16400,7 +17120,7 @@
     {
       "id": "qs_1791575701498",
       "setNo": 17,
-      "title": "Mock 12 (Upcoming)",
+      "title": "Mock 12",
       "timeLimitMin": 15,
       "negMarkEnabled": true,
       "negMarkValue": 0.25,
