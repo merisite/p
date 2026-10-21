@@ -15458,6 +15458,726 @@
       "setNo": 14,
       "active": true,
       "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_0",
+      "topicId": null,
+      "text": "Before semiconductor memory took over, which storage technology served as the industry standard for main memory (RAM) during the second generation of computers?",
+      "options": [
+        "Magnetic Drum",
+        "Magnetic Core Memory",
+        "Floppy Disk",
+        "Punch Cards",
+        "Optical Disc"
+      ],
+      "correctIndex": 1,
+      "explanation": "Magnetic Core Memory uses tiny magnetic rings (toroids) to store data and was the dominant form of random-access memory from 1955 to 1975.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_1",
+      "topicId": null,
+      "text": "Sending data or files from a local computer system to a remote system or server through the internet is a process called ________.",
+      "options": [
+        "Downloading",
+        "Streaming",
+        "Uploading",
+        "Browsing",
+        "Archiving"
+      ],
+      "correctIndex": 2,
+      "explanation": "Uploading is the process of sending data from a local system to a remote server over a network.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_2",
+      "topicId": null,
+      "text": "The logo of the Firefox browser actually represents which animal?",
+      "options": [
+        "A mythical Phoenix",
+        "A Red Panda",
+        "A Red Fox",
+        "A Tiger",
+        "A Wolf"
+      ],
+      "correctIndex": 1,
+      "explanation": "While the logo visually resembles a fox, 'Firefox' is the common name for the Red Panda.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_3",
+      "topicId": null,
+      "text": "BIOS, the firmware interface that comes into play during the booting process, is the abbreviation for:",
+      "options": [
+        "Basic Input Output System",
+        "Binary Input Output System",
+        "Basic Internal Operating System",
+        "Built-In Operating Software",
+        "Basic Interface Output Standard"
+      ],
+      "correctIndex": 0,
+      "explanation": "BIOS stands for Basic Input Output System, and it's the firmware that initializes hardware during the computer's boot-up process.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_4",
+      "topicId": null,
+      "text": "___________ acts as a unique identifier for a device connected to a TCP/IP network.",
+      "options": [
+        "PIN Code",
+        "IP Address",
+        "Zip Code",
+        "Serial Number",
+        "URL"
+      ],
+      "correctIndex": 1,
+      "explanation": "An Internet Protocol (IP) Address is a unique numerical label assigned to each device connected to a computer network that uses the Internet Protocol for communication.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_5",
+      "topicId": null,
+      "text": "Which semiconductor device took the place of the large, heat-producing Vacuum Tubes in the Second Generation of computers (1959-1965)?",
+      "options": [
+        "Integrated Circuits",
+        "Transistors",
+        "Microprocessors",
+        "Bio-chips",
+        "AI Processors"
+      ],
+      "correctIndex": 1,
+      "explanation": "Transistors replaced vacuum tubes in the second generation of computers, offering significant improvements in size, speed, cost, energy efficiency, and reliability.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_6",
+      "topicId": null,
+      "text": "Modern Windows releases (XP onwards) rely on one particular file system as the default — and the most advanced — for hard drives. It is:",
+      "options": [
+        "FAT 16",
+        "FAT 32",
+        "NTFS (New Technology File System)",
+        "HFS+",
+        "EXT 4"
+      ],
+      "correctIndex": 2,
+      "explanation": "NTFS (New Technology File System) has been the standard file system for Windows operating systems since Windows NT and offers features like better security, larger file size support, and journaling.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_7",
+      "topicId": null,
+      "text": "Which of the following statements about Read-Only Memory (ROM) is TRUE?",
+      "options": [
+        "It is volatile memory.",
+        "It loses data when power is turned off.",
+        "It stores the startup instructions (BIOS).",
+        "It is faster than Cache memory.",
+        "It is used for temporary data storage."
+      ],
+      "correctIndex": 2,
+      "explanation": "ROM is non-volatile memory, meaning it retains its data even when power is off, and it is used to store essential firmware like the BIOS.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_8",
+      "topicId": null,
+      "text": "Databases can be created, stored, modified and managed efficiently with the help of which type of software application?",
+      "options": [
+        "Spreadsheet Software",
+        "DBMS (Database Management System)",
+        "Word Processor",
+        "Operating System",
+        "Presentation Software"
+      ],
+      "correctIndex": 1,
+      "explanation": "A Database Management System (DBMS) is specialized software designed for creating, managing, and interacting with databases.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_9",
+      "topicId": null,
+      "text": "Retrieving emails from a server onto a client machine is the specific job of which network protocol?",
+      "options": [
+        "SMTP",
+        "HTTP",
+        "POP 3",
+        "FTP",
+        "SNMP"
+      ],
+      "correctIndex": 2,
+      "explanation": "POP3 (Post Office Protocol version 3) is used by email clients to retrieve emails from a mail server.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_10",
+      "topicId": null,
+      "text": "Telephone lines carry analog signals, so a device is needed that changes a computer's digital signals into analog form for transmission over them — and back again. This device is:",
+      "options": [
+        "Router",
+        "Modem (Modulator-Demodulator)",
+        "Switch",
+        "Hub",
+        "Repeater"
+      ],
+      "correctIndex": 1,
+      "explanation": "A Modem (Modulator-Demodulator) converts digital signals to analog for transmission and analog signals back to digital for reception.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_11",
+      "topicId": null,
+      "text": "In the main part of an email address, which of the following characters is generally not permitted?",
+      "options": [
+        "Letters (a-z)",
+        "Numbers (0-9)",
+        "Space ( )",
+        "Period (.)",
+        "Underscore (_)"
+      ],
+      "correctIndex": 2,
+      "explanation": "Email addresses typically do not allow spaces; only letters, numbers, periods, hyphens, and underscores are generally permitted in the local part (before the @) and domain.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_12",
+      "topicId": null,
+      "text": "Which keyboard shortcut is used to immediately close the currently active application window, such as a web browser or a Word document?",
+      "options": [
+        "Ctrl + F4",
+        "Alt + F4",
+        "Shift + F4",
+        "Ctrl + W",
+        "Alt + End"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Alt + F4 keyboard shortcut is commonly used in Windows to close the active application window.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_13",
+      "topicId": null,
+      "text": "From the options below, pick the one that is NOT among the standard page margins offered in the Page Setup dialog box:",
+      "options": [
+        "Left",
+        "Right",
+        "Center",
+        "Top",
+        "Bottom"
+      ],
+      "correctIndex": 2,
+      "explanation": "Standard page margins are typically Top, Bottom, Left, and Right; 'Center' refers to text alignment, not a page margin.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_14",
+      "topicId": null,
+      "text": "Which feature automatically adds your name, designation, and contact details at the bottom of every outgoing email?",
+      "options": [
+        "Auto-Complete",
+        "Subject Line",
+        "Signature",
+        "Footer Note",
+        "Watermark"
+      ],
+      "correctIndex": 2,
+      "explanation": "An email signature is a predefined block of text that is automatically appended to the end of outgoing emails, containing contact information or other details.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_15",
+      "topicId": null,
+      "text": "Mnemonic codes such as ADD and MOV are used in Assembly Language in place of binary code. Assembly Language belongs to which category of languages?",
+      "options": [
+        "High-Level Language",
+        "Fourth Generation Language",
+        "Low-Level Language",
+        "Natural Language",
+        "Scripting Language"
+      ],
+      "correctIndex": 2,
+      "explanation": "Assembly Language is a low-level programming language that has a close correspondence with machine code but uses mnemonics for easier readability.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_16",
+      "topicId": null,
+      "text": "When software is sold to users for profit and their rights to alter or redistribute it are restricted, such software is termed:",
+      "options": [
+        "Commercial Software",
+        "Open Source Software",
+        "Public Domain Software",
+        "Freeware",
+        "Donationware"
+      ],
+      "correctIndex": 0,
+      "explanation": "Commercial Software, also known as proprietary software, is sold for profit, and users typically have restricted rights to modify or redistribute it.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_17",
+      "topicId": null,
+      "text": "Which SQL aggregate function is used to calculate the total number of rows (records) in a table that match a specified criteria?",
+      "options": [
+        "SUM()",
+        "TOTAL()",
+        "MAX()",
+        "COUNT()",
+        "ADD()"
+      ],
+      "correctIndex": 3,
+      "explanation": "The COUNT() aggregate function in SQL is used to return the number of rows that satisfy a specified condition.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_18",
+      "topicId": null,
+      "text": "Which category of printers produces images without the printing mechanism physically striking the paper?",
+      "options": [
+        "Impact Printer",
+        "Non-Impact Printer",
+        "Daisy Wheel",
+        "Dot Matrix",
+        "Line Printer"
+      ],
+      "correctIndex": 1,
+      "explanation": "Non-Impact Printers, such as inkjet and laser printers, create images without the print head physically striking the paper.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_19",
+      "topicId": null,
+      "text": "Computers that work with data in discrete form (using the binary digits 0 and 1) instead of continuous electrical pulses are known as ________.",
+      "options": [
+        "Analog Computers",
+        "Hybrid Computers",
+        "Digital Computers",
+        "Supercomputers",
+        "Mainframe Computers"
+      ],
+      "correctIndex": 2,
+      "explanation": "Digital Computers process data in discrete values, typically represented by binary digits (0s and 1s).",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_20",
+      "topicId": null,
+      "text": "Cheques are processed in the banking industry using an input device that reads the characters printed on them in magnetic ink. This device is:",
+      "options": [
+        "OCR",
+        "OMR",
+        "MICR",
+        "Barcode Reader",
+        "None of these"
+      ],
+      "correctIndex": 2,
+      "explanation": "MICR (Magnetic Ink Character Recognition) technology is used to read the special characters printed on the bottom of checks.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_21",
+      "topicId": null,
+      "text": "Which Excel function would you use to calculate the average of the numbers in the range A1 to A10?",
+      "options": [
+        "=MEAN(A1:A10)",
+        "=AVG(A1:A10)",
+        "=AVERAGE(A1:A10)",
+        "=SUM(A1:A10)/10",
+        "Both 3 and 4"
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct Excel function to calculate the average of a range of numbers is =AVERAGE().",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_22",
+      "topicId": null,
+      "text": "Which of the following is classified as System Software rather than Application Software?",
+      "options": [
+        "Microsoft Word",
+        "Adobe Photoshop",
+        "Device Driver",
+        "Google Chrome",
+        "VLC Player"
+      ],
+      "correctIndex": 2,
+      "explanation": "Device Drivers are classified as System Software, as they are essential for the operation of hardware and the computer system itself.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_23",
+      "topicId": null,
+      "text": "While sending an email, what does putting a recipient in the BCC field ensure?",
+      "options": [
+        "The recipient is highlighted.",
+        "The recipient receives a physical copy.",
+        "The recipient's email address is hidden from other recipients.",
+        "The email is marked as urgent.",
+        "The email is encrypted."
+      ],
+      "correctIndex": 2,
+      "explanation": "BCC (Blind Carbon Copy) allows you to send an email to multiple recipients without their email addresses being visible to each other.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_24",
+      "topicId": null,
+      "text": "The invention of which groundbreaking component, credited to Jack Kilby and Robert Noyce, made computers much smaller during the third generation?",
+      "options": [
+        "Vacuum Tube",
+        "Transistor",
+        "Integrated Circuit (IC)",
+        "Microprocessor",
+        "Bio-chip"
+      ],
+      "correctIndex": 2,
+      "explanation": "The invention of the Integrated Circuit (IC) allowed for the miniaturization of electronic components, leading to smaller and more powerful computers.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_25",
+      "topicId": null,
+      "text": "Microsoft produced Windows NT as a family of operating systems. In the name \"NT\", what does the abbreviation stand for?",
+      "options": [
+        "New Technology",
+        "Network Terminal",
+        "New Technique",
+        "Network Technology",
+        "None of these"
+      ],
+      "correctIndex": 0,
+      "explanation": "NT in Windows NT stands for 'New Technology', signifying a major architectural shift from previous Windows versions.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_26",
+      "topicId": null,
+      "text": "Which of the following is a low-level programming language that stays close to the hardware architecture and makes use of mnemonics?",
+      "options": [
+        "Java",
+        "Python",
+        "Assembly Language",
+        "C++",
+        "PHP"
+      ],
+      "correctIndex": 2,
+      "explanation": "Assembly Language is a low-level programming language that uses mnemonic codes to represent machine code instructions, allowing for direct hardware manipulation.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_27",
+      "topicId": null,
+      "text": "Exponentiation (raising a number to a power) inside a Microsoft Excel formula is performed using which symbol?",
+      "options": [
+        "* (Asterisk)",
+        "^ (Caret)",
+        "% (Percentage)",
+        "# (Hash)",
+        "& (Ampersand)"
+      ],
+      "correctIndex": 1,
+      "explanation": "The caret symbol (^) is used in Excel formulas to denote exponentiation, meaning raising a number to a power.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_28",
+      "topicId": null,
+      "text": "A holiday announcement has to go out to 500 clients, but none of them should be able to see the email addresses of the others. Which field would you use for this?",
+      "options": [
+        "CC",
+        "To",
+        "BCC",
+        "Reply All",
+        "Forward"
+      ],
+      "correctIndex": 2,
+      "explanation": "The BCC (Blind Carbon Copy) field is used to send an email to multiple recipients while keeping their email addresses hidden from each other.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_29",
+      "topicId": null,
+      "text": "Which protocol is used for transferring files between a client and a server over a network?",
+      "options": [
+        "SMTP",
+        "HTTP",
+        "FTP",
+        "DNS",
+        "PPP"
+      ],
+      "correctIndex": 2,
+      "explanation": "FTP (File Transfer Protocol) is the standard protocol used for transferring files between computers on a network.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_30",
+      "topicId": null,
+      "text": "The \"Cookie\" file that gets stored on a user's computer is created by whom?",
+      "options": [
+        "The User",
+        "The Web Server (sent to the browser)",
+        "The Operating System",
+        "The Anti-virus software",
+        "The Hardware manufacturer"
+      ],
+      "correctIndex": 1,
+      "explanation": "Web servers send cookies to a user's browser, which then stores them on the user's computer to remember information about the user's session.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_31",
+      "topicId": null,
+      "text": "Which of the following statements correctly distinguishes a Compiler from an Interpreter?",
+      "options": [
+        "A Compiler translates line-by-line; an Interpreter translates the whole code.",
+        "A Compiler translates the whole source code at once; an Interpreter translates line-by-line.",
+        "A Compiler is faster for debugging than an Interpreter.",
+        "Both work exactly the same way.",
+        "Interpreters generate an object code file; Compilers do not."
+      ],
+      "correctIndex": 1,
+      "explanation": "A compiler translates the entire source code into machine code before execution, while an interpreter translates and executes the code line by line.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_32",
+      "topicId": null,
+      "text": "The conversion of digital signals from a computer into analog signals that can travel over telephone lines is called ________.",
+      "options": [
+        "Demodulation",
+        "Modulation",
+        "Compilation",
+        "Digitization",
+        "Transmission"
+      ],
+      "correctIndex": 1,
+      "explanation": "Modulation is the process of converting digital signals into analog signals for transmission over analog media like telephone lines.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_33",
+      "topicId": null,
+      "text": "What is the name of the surveillance technology that records every keystroke typed on a particular computer keyboard?",
+      "options": [
+        "Keylogger",
+        "Rootkit",
+        "Screen Scraper",
+        "Mouse Logger",
+        "Clickjacker"
+      ],
+      "correctIndex": 0,
+      "explanation": "A keylogger is a type of surveillance technology that records all keystrokes made on a keyboard, often for malicious purposes.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_34",
+      "topicId": null,
+      "text": "An optical disc that can be written to, erased and then written to again many times over is referred to by which acronym?",
+      "options": [
+        "CD-ROM",
+        "DVD-R",
+        "CD-RW",
+        "WORM",
+        "Blu-ray ROM"
+      ],
+      "correctIndex": 2,
+      "explanation": "CD-RW discs (Compact Disc ReWritable) can be written to, erased, and rewritten multiple times.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_35",
+      "topicId": null,
+      "text": "A video file you want to send is larger than your email provider's 25MB attachment limit. Which of the following is the best way to share it?",
+      "options": [
+        "Break the video into 50 small parts and email them one by one.",
+        "Upload the file to a cloud drive (e.g., Google Drive) and share the link.",
+        "Send the email without the file and hope the server accepts it.",
+        "Convert the video to a text file.",
+        "Fax the video frames to the recipient."
+      ],
+      "correctIndex": 1,
+      "explanation": "Uploading large files to a cloud storage service and sharing a link is the most efficient and common method for sharing files that exceed email attachment size limits.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_36",
+      "topicId": null,
+      "text": "What is the name of the small battery fitted on the motherboard — the one that keeps the clock ticking while the PC is switched off — known as?",
+      "options": [
+        "Lithium Ion",
+        "CMOS Battery",
+        "BIOS Battery",
+        "Alkaline",
+        "UPS"
+      ],
+      "correctIndex": 1,
+      "explanation": "The small battery on the motherboard is commonly referred to as a CMOS battery (Complementary Metal-Oxide-Semiconductor), which powers the system's real-time clock and BIOS settings.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_37",
+      "topicId": null,
+      "text": "Which network device acts as an entrance to another network that uses different protocols, essentially working as a \"translator\" between dissimilar networks?",
+      "options": [
+        "Switch",
+        "Hub",
+        "Gateway",
+        "Repeater",
+        "Bridge"
+      ],
+      "correctIndex": 2,
+      "explanation": "A Gateway is a network node that connects two different networks that use different protocols, acting as an intermediary and translator between them.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_38",
+      "topicId": null,
+      "text": "In Microsoft Word (2010 and later), the options to add a 'Header', 'Footer' or 'Page Number' are found under which Tab on the Ribbon?",
+      "options": [
+        "Home",
+        "Layout",
+        "Review",
+        "Insert",
+        "View"
+      ],
+      "correctIndex": 3,
+      "explanation": "The 'Insert' tab in Microsoft Word contains commands for adding headers, footers, and page numbers to a document.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
+    },
+    {
+      "id": "qq_1792581899572_39",
+      "topicId": null,
+      "text": "The OSI model is a conceptual framework that describes how a networking system functions. Into how many distinct layers is this model divided?",
+      "options": [
+        "Four",
+        "Five",
+        "Six",
+        "Seven",
+        "Eight"
+      ],
+      "correctIndex": 3,
+      "explanation": "The OSI (Open Systems Interconnection) model is divided into seven distinct layers, each responsible for a specific aspect of network communication.",
+      "difficulty": "medium",
+      "setNo": 15,
+      "active": true,
+      "productIds": []
     }
   ],
   "quizSets": [
@@ -15652,7 +16372,7 @@
     {
       "id": "qs_1791575615994",
       "setNo": 15,
-      "title": "Mock 10 (Upcoming)",
+      "title": "Mock 10",
       "timeLimitMin": 15,
       "negMarkEnabled": true,
       "negMarkValue": 0.25,
