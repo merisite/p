@@ -2644,6 +2644,25 @@
         "IBPSPO",
         "IBPSSO"
       ]
+    },
+    {
+      "id": "q_1792841219864",
+      "examId": "__so",
+      "type": "essay",
+      "soPostId": "sop_1792824199480",
+      "title": "Soil Health and Sustainable Farming Practices",
+      "label": "Soil Health and Sustainable Farming Practices",
+      "text": "",
+      "modelAnswer": "",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO",
+        "IBPSSO"
+      ]
     }
   ],
   "typingParas": [
@@ -4802,6 +4821,19 @@
       "body": "Food security means ensuring that every person has access to sufficient, safe, and nutritious food. In India, agriculture is the main source of food and livelihood for millions of people. However, climate change, rising input costs, water shortages, and crop diseases threaten agricultural production. Therefore, Agricultural Field Officers play an important role in strengthening food security.\n\nAgricultural Field Officers connect farmers with banks, government departments, and modern farming practices. They guide farmers in selecting suitable crops, using quality seeds, managing pests, and adopting better irrigation methods. They also help farmers understand agricultural loans and government schemes. By providing timely guidance, they can improve crop productivity and reduce farming costs.\n\nThese officers also support sustainable agriculture by promoting soil testing, balanced fertiliser use, water conservation, and climate-resilient crops. They can inform farmers about crop insurance and suitable credit facilities to reduce financial risks caused by crop failure. Their support is particularly important for small and marginal farmers who often lack access to technical knowledge and formal credit.\n\nThe government has introduced several initiatives to strengthen food security. The National Food Security Act, 2013, supports access to food grains for eligible households, while the Pradhan Mantri Garib Kalyan Anna Yojana provides free food grains to eligible beneficiaries. Agricultural Field Officers can contribute indirectly by helping farmers improve production and encouraging sustainable farming practices.\n\nIn conclusion, food security requires both adequate food production and fair access to food. Agricultural Field Officers can help achieve this goal through farmer education, better credit access, and the adoption of modern and sustainable methods. Their effective work can strengthen rural livelihoods and contribute to a food-secure India.",
       "structure": [],
       "practiceQuestionId": "q_1792840868799",
+      "active": true
+    },
+    {
+      "id": "essay_1792841330484",
+      "title": "Soil Health and Sustainable Farming Practices",
+      "category": "SO AFO",
+      "tags": [
+        "SO AFO"
+      ],
+      "image": "https://i.postimg.cc/qBGBHq8W/soil-health-management-practices-in-india.jpg",
+      "body": "Soil is one of the most important natural resources because it supports agriculture and provides food for humans and animals. However, excessive use of chemical fertilisers, pesticides, and improper farming methods has reduced soil fertility in many areas. Therefore, maintaining soil health is essential for sustainable agriculture and long-term food security.\n\nHealthy soil contains essential nutrients, organic matter, and useful microorganisms that help crops grow. To protect it, farmers should adopt sustainable farming practices such as crop rotation, organic farming, composting, and balanced use of fertilisers. These methods improve soil fertility, reduce pollution, conserve water, and support better crop production. Practices such as mulching and minimum tillage can also prevent soil erosion and conserve moisture.\n\nThe Government of India has introduced the Soil Health Card Scheme to help farmers understand the nutrient status of their soil and receive recommendations on the appropriate use of fertilisers. The PM-PRANAM initiative also encourages states to promote balanced fertiliser use and alternative nutrients. Such initiatives can reduce unnecessary chemical use and support environmentally friendly agriculture.\n\nHowever, many farmers lack awareness, financial resources, and access to soil testing facilities. To address these challenges, the government should strengthen agricultural extension services, provide training, and improve access to affordable organic inputs. Farmers should also be encouraged to adopt sustainable practices through suitable financial support and awareness campaigns.\n\nIn conclusion, soil health is directly linked to agricultural productivity, farmers' income, and food security. Protecting soil requires cooperation between farmers, scientists, and the government. By adopting sustainable farming practices today, India can preserve its natural resources and ensure productive agriculture for future generations.",
+      "structure": [],
+      "practiceQuestionId": "q_1792841219864",
       "active": true
     }
   ],
