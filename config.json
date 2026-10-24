@@ -2473,6 +2473,22 @@
       "productIds": [
         "IBPSPO"
       ]
+    },
+    {
+      "id": "q_1792824300122",
+      "examId": "__so",
+      "type": "essay",
+      "soPostId": "sop_1792824199480",
+      "title": "Climate-Resilient Agriculture: Preparing Indian Farmers for Extreme Weather",
+      "label": "Climate-Resilient Agriculture: Preparing Indian Farmers for Extreme Weather",
+      "text": "Climate-Resilient Agriculture: Preparing Indian Farmers for Extreme Weather",
+      "modelAnswer": "Indian agriculture depends heavily on weather conditions. However, rising temperatures, irregular rainfall, floods, droughts and heatwaves are making farming increasingly difficult. These extreme weather events damage crops, reduce farmers’ incomes and threaten food security. Therefore, climate-resilient agriculture has become essential for protecting farmers and ensuring sustainable agricultural growth.\n\nClimate-resilient agriculture means adopting farming practices that help farmers manage changing weather conditions. Farmers can grow drought-resistant crop varieties, diversify crops and adopt methods such as crop rotation. Rainwater harvesting, drip irrigation and better soil management can conserve water and maintain soil fertility. Weather forecasts and mobile-based advisories can also help farmers decide when to sow, irrigate and harvest crops.\n\nThe government has introduced several initiatives to support this transition. The National Mission for Sustainable Agriculture promotes sustainable farming, better soil health and efficient water use. The Pradhan Mantri Krishi Sinchayee Yojana encourages improved irrigation practices, while the Pradhan Mantri Fasal Bima Yojana provides insurance protection against specified crop losses caused by natural risks. These measures can reduce farmers’ vulnerability to extreme weather.\n\nHowever, many small and marginal farmers lack awareness, financial resources and access to modern technology. To address these problems, the government should strengthen agricultural training, improve access to affordable credit and provide timely weather information in regional languages. Research institutions should also develop climate-resistant seeds suitable for local conditions. Better storage and irrigation facilities are equally important.\n\nIn conclusion, climate-resilient agriculture is necessary to protect farmers, maintain food production and strengthen rural livelihoods. By combining suitable farming practices, scientific research and effective government support, India can prepare its farmers for extreme weather and build a more sustainable agricultural future.",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": []
     }
   ],
   "typingParas": [
@@ -4514,6 +4530,19 @@
         }
       ],
       "practiceQuestionId": "q_1791016167275",
+      "active": true
+    },
+    {
+      "id": "essay_1792824128229",
+      "title": "Climate-Resilient Agriculture: Preparing Indian Farmers for Extreme Weather",
+      "category": "SO AFO",
+      "tags": [
+        "SO AFO"
+      ],
+      "image": "https://i.postimg.cc/JhtbPBWW/Climate-Change-on-Indian-Agriculture.jpg",
+      "body": "Indian agriculture depends heavily on weather conditions. However, rising temperatures, irregular rainfall, floods, droughts and heatwaves are making farming increasingly difficult. These extreme weather events damage crops, reduce farmers’ incomes and threaten food security. Therefore, climate-resilient agriculture has become essential for protecting farmers and ensuring sustainable agricultural growth.\n\nClimate-resilient agriculture means adopting farming practices that help farmers manage changing weather conditions. Farmers can grow drought-resistant crop varieties, diversify crops and adopt methods such as crop rotation. Rainwater harvesting, drip irrigation and better soil management can conserve water and maintain soil fertility. Weather forecasts and mobile-based advisories can also help farmers decide when to sow, irrigate and harvest crops.\n\nThe government has introduced several initiatives to support this transition. The National Mission for Sustainable Agriculture promotes sustainable farming, better soil health and efficient water use. The Pradhan Mantri Krishi Sinchayee Yojana encourages improved irrigation practices, while the Pradhan Mantri Fasal Bima Yojana provides insurance protection against specified crop losses caused by natural risks. These measures can reduce farmers’ vulnerability to extreme weather.\n\nHowever, many small and marginal farmers lack awareness, financial resources and access to modern technology. To address these problems, the government should strengthen agricultural training, improve access to affordable credit and provide timely weather information in regional languages. Research institutions should also develop climate-resistant seeds suitable for local conditions. Better storage and irrigation facilities are equally important.\n\nIn conclusion, climate-resilient agriculture is necessary to protect farmers, maintain food production and strengthen rural livelihoods. By combining suitable farming practices, scientific research and effective government support, India can prepare its farmers for extreme weather and build a more sustainable agricultural future.",
+      "structure": [],
+      "practiceQuestionId": null,
       "active": true
     }
   ],
@@ -22255,5 +22284,17 @@
         "computer"
       ]
     }
-  ]
+  ],
+  "ibpsSO": {
+    "enabled": false,
+    "title": "Essay Writing (IBPS SO)",
+    "desc": "Post-wise essay tests for IBPS SO",
+    "posts": [
+      {
+        "id": "sop_1792824199480",
+        "name": "SO AFO",
+        "active": true
+      }
+    ]
+  }
 }
