@@ -704,7 +704,7 @@ img.qzr-av{object-fit:cover}
    Because #exam/#fullmock are separate sibling containers, none of this
    touches them — they keep resolving the original [data-theme] variables
    exactly as before, so the exam module's own look is untouched. */
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,.cov,.panel-pop){
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay,.cov,.panel-pop){
   --r:20px;--rs:12px;--rl:26px;
   color:var(--t);
 }
@@ -712,7 +712,7 @@ img.qzr-av{object-fit:cover}
 /* Light / Dark mode — Navy & Gold, deliberately echoing the exam module's own
    "Clean & Blue" (light) and "Navy & Gold" (dark) themes so the whole platform
    reads as one coherent brand. Doesn't touch #exam/#fullmock (see note above). */
-[data-mode="light"] :is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,.cov,.panel-pop){
+[data-mode="light"] :is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay,.cov,.panel-pop){
   --bg:#F4F6FA;--bg2:#FFFFFF;--bg3:#E7ECF6;--bg4:#D8E2F2;
   --t:#16213A;--t2:#55617A;--t3:#B7C1D6;--b:#1C2A47;
   --accent:#A8791B;--ah:#8A6414;--adim:#F5E9C7;--aborder:#1C2A47;
@@ -725,7 +725,7 @@ img.qzr-av{object-fit:cover}
   --shadow:2px 2px 0 color-mix(in srgb,var(--b) 45%,transparent);
   --dotbg:radial-gradient(rgba(22,33,58,.09) 1px,transparent 1px);
 }
-[data-mode="dark"] :is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,.cov,.panel-pop){
+[data-mode="dark"] :is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay,.cov,.panel-pop){
   --bg:#0F1420;--bg2:#161C27;--bg3:#1C2333;--bg4:#232D40;
   --t:#E7ECF5;--t2:#8A93A8;--t3:#3A4150;--b:#C7D0E0;
   --accent:#E2B714;--ah:#F0C633;--adim:#2E2712;--aborder:#C7D0E0;
@@ -740,7 +740,7 @@ img.qzr-av{object-fit:cover}
 }
 [data-mode="light"]{--brut-fill:#E2B714;--brut-fill-t:#16213A;--brut-tint:#F5E9C7;}
 [data-mode="dark"]{--brut-fill:#E2B714;--brut-fill-t:#12151C;--brut-tint:#2E2712;}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist){
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay){
   background-color:var(--bg);
   color:var(--t);
   background-image:var(--dotbg);
@@ -748,8 +748,8 @@ img.qzr-av{object-fit:cover}
 }
 
 /* headline / label voice */
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) h1,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) h2,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) h1,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) h2,
 .h-title,.r-top h2,.hc-title,.hi-title,.oc-title,.tmode-t,#offers-head,#ml-exam-name,.trc-grade{
   font-family:'Space Grotesk',sans-serif;
 }
@@ -769,96 +769,96 @@ img.qzr-av{object-fit:cover}
 @media(max-width:640px){.nb-marquee{margin:0 -24px 24px}}
 
 /* buttons */
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,.cov,.panel-pop) .btn,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,.cov,.panel-pop) .tgs-cta,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .oc-link,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .oc-coupon-btn,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .clr-btn,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .lt-btn,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .back-btn{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay,.cov,.panel-pop) .btn,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay,.cov,.panel-pop) .tgs-cta,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .oc-link,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .oc-coupon-btn,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .clr-btn,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .lt-btn,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .back-btn{
   font-family:'Space Grotesk',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.02em;
   border:2px solid var(--b)!important;border-radius:999px;
   box-shadow:2px 2px 0 color-mix(in srgb,var(--b) 45%,transparent);transition:transform .12s ease,box-shadow .12s ease,background .12s ease,color .12s ease!important;
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,.cov,.panel-pop) .btn:hover,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .oc-link:hover,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .lt-btn:hover,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .back-btn:hover{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay,.cov,.panel-pop) .btn:hover,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .oc-link:hover,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .lt-btn:hover,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .back-btn:hover{
   transform:translate(-2px,-2px);box-shadow:3px 3px 0 color-mix(in srgb,var(--b) 40%,transparent);
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,.cov,.panel-pop) .btn:active{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay,.cov,.panel-pop) .btn:active{
   transform:translate(0,0);box-shadow:1px 1px 0 var(--b);
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,.cov,.panel-pop) .bp,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .oc-link,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .tgs-cta{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay,.cov,.panel-pop) .bp,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .oc-link,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .tgs-cta{
   background:var(--brut-fill)!important;color:var(--brut-fill-t)!important;box-shadow:2px 2px 0 color-mix(in srgb,var(--b) 45%,transparent);
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,.cov,.panel-pop) .bg,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .back-btn,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .clr-btn{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay,.cov,.panel-pop) .bg,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .back-btn,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .clr-btn{
   background:var(--bg2)!important;
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .clr-btn{color:var(--red)!important;border-color:var(--b)!important;}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .clr-btn:hover{background:var(--red)!important;color:var(--bg)!important;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .clr-btn{color:var(--red)!important;border-color:var(--b)!important;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .clr-btn:hover{background:var(--red)!important;color:var(--bg)!important;}
 
 /* pills — pattern for chips/tabs, thick-ish border, no heavy shadow (keeps dense rows calm) */
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) :is(.stab,.tob,.ptab,.tl-btn,.mtab){
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) :is(.stab,.tob,.ptab,.tl-btn,.mtab){
   border:2px solid var(--b);font-weight:600;
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) :is(.stab.on,.tob.on,.ptab.on,.tl-btn.on){
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) :is(.stab.on,.tob.on,.ptab.on,.tl-btn.on){
   background:var(--brut-fill);color:var(--brut-fill-t);
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) :is(.chip,.hi-badge,.hi-score-chip,.ftag,.lt-badge,.oc-price-save){
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) :is(.chip,.hi-badge,.hi-score-chip,.ftag,.lt-badge,.oc-price-save){
   border:2px solid var(--b);font-weight:600;border-radius:999px;
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .oc-top-badge{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .oc-top-badge{
   position:absolute;top:10px;right:12px;left:auto;
   background:var(--brut-fill);color:var(--brut-fill-t);
   border:1.5px solid var(--b);border-radius:999px;
   padding:2px 8px;font-family:'Space Grotesk',sans-serif;font-size:.5rem;font-weight:700;letter-spacing:.03em;
   box-shadow:1.5px 1.5px 0 color-mix(in srgb,var(--b) 45%,transparent);line-height:1.4;white-space:nowrap;z-index:2;
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .oc-title{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .oc-title{
   padding-right:0;
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .oc-header.has-badge{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .oc-header.has-badge{
   margin-top:30px;
 }
 
 /* card / surface family: thick border + hard offset shadow */
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,.cov) :is(.hcard,.offer-card,.stile,.rcard,.ph-tile,.hist-item,.timer-box,.q-item,.tmode,.trc,.trc-tile,.cbox,.card,.qpick-btn,.paste-area,.typing-input,.para-disp,.tbar,.lt-card,.weak-areas-card){
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay,.cov) :is(.hcard,.offer-card,.stile,.rcard,.ph-tile,.hist-item,.timer-box,.q-item,.tmode,.trc,.trc-tile,.cbox,.card,.qpick-btn,.paste-area,.typing-input,.para-disp,.tbar,.lt-card,.weak-areas-card){
   border:2px solid var(--b);
   box-shadow:3px 3px 0 color-mix(in srgb,var(--b) 40%,transparent);
   border-radius:var(--r);
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .hcard{transition:transform .12s ease,box-shadow .12s ease;}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .hcard::after{display:none;}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .hcard:hover{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .hcard{transition:transform .12s ease,box-shadow .12s ease;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .hcard::after{display:none;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .hcard:hover{
   transform:translate(-3px,-3px);box-shadow:5px 5px 0 color-mix(in srgb,var(--b) 40%,transparent);background:var(--bg2);border-color:var(--b);
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .hcard.exam-card:hover{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .hcard.exam-card:hover{
   box-shadow:8px 8px 0 var(--teal);
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .hc-icon{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .hc-icon{
   border:2px solid var(--b);border-radius:8px;
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .oc-icon-wrap{border:2px solid var(--b);}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .offer-card.featured{border:2px solid var(--b);box-shadow:4px 4px 0 var(--brut-fill);}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .q-item:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 color-mix(in srgb,var(--b) 40%,transparent);}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .model-box{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .oc-icon-wrap{border:2px solid var(--b);}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .offer-card.featured{border:2px solid var(--b);box-shadow:4px 4px 0 var(--brut-fill);}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .q-item:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 color-mix(in srgb,var(--b) 40%,transparent);}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .model-box{
   border-top:2px solid var(--b);border-right:2px solid var(--b);border-bottom:2px solid var(--b);border-left:4px solid var(--green);
   box-shadow:3px 3px 0 color-mix(in srgb,var(--b) 40%,transparent);border-radius:var(--rs);
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .ans-box,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .verdict,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .ai-notice{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .ans-box,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .verdict,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .ai-notice{
   border:2px solid var(--b);border-radius:var(--rs);
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .lt-row{border-bottom:2px solid var(--b);}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .lt-logo,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .lt-logo-fb{border:2px solid var(--b);border-radius:8px;}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .cring .ring-bg{stroke:var(--b);opacity:.25;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .lt-row{border-bottom:2px solid var(--b);}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .lt-logo,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .lt-logo-fb{border:2px solid var(--b);border-radius:8px;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .cring .ring-bg{stroke:var(--b);opacity:.25;}
 
 /* homepage-closing CTA banner, inspired by the reference site's footer */
 .nb-footer{position:relative;overflow:hidden;background:#0F1420;margin:44px -32px 0;padding:52px 32px 0;color:#E7ECF5;border-top:3px solid #0F1420;}
@@ -876,15 +876,15 @@ img.qzr-av{object-fit:cover}
 .panel-pop{border:2px solid var(--b)!important;box-shadow:3px 3px 0 color-mix(in srgb,var(--b) 40%,transparent)!important;}
 
 /* value chips / dividers */
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .sec-divider{
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .sec-divider{
   background:repeating-linear-gradient(90deg,var(--b) 0 8px,transparent 8px 16px);height:2.5px;
 }
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .prog-tabs{gap:8px;}
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .stile-v,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .ph-v,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .trc-v,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .tst-v,
-:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist) .t-v{font-family:'Space Grotesk',sans-serif;font-weight:800;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .prog-tabs{gap:8px;}
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .stile-v,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .ph-v,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .trc-v,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .tst-v,
+:is(#home,#qselect,#result,#typing,#offers,#mocklist,#progress,#live-tracker,#essays,#quizlist,#soessay) .t-v{font-family:'Space Grotesk',sans-serif;font-weight:800;}
 
 /* HEADER — default (non-exam) look only.
    Kept at plain, low-specificity selectors so the existing
@@ -1313,7 +1313,7 @@ header .h-brand:hover{background:var(--brut-tint);}
       <div id="r-mock-sections"></div>
     </div>
     <div class="ract">
-      <button class="btn bg" id="r-try-btn" onclick="showS('qselect')">Try Another</button>
+      <button class="btn bg" id="r-try-btn" onclick="if(CQ&&CQ.soPostId){goSO();}else{showS('qselect');}">Try Another</button>
       <button class="btn bp" onclick="showS('home')">Home</button>
     </div>
   </div>
@@ -1596,6 +1596,13 @@ function routeFromHash(){
   }
   if(screenId==="mock"&&sectionArg){
     initPromise.then(()=>openMockLink(sectionArg));
+    return;
+  }
+  if(screenId==="soessay"){
+    Promise.all([initPromise,_productsCachePromise||Promise.resolve(),_entitlementsReadyPromise]).then(()=>{
+      showS("soessay",{skipHash:true});
+      renderSO();
+    });
     return;
   }
   if(screenId==="quizset"&&sectionArg){
@@ -2027,6 +2034,15 @@ function renderHome(){
     </div>`;
   const essayInsertIdx=allSections.findIndex(s=>s.id==="essay"||s.id==="comprehension");
   if(essayInsertIdx>=0)sectionCardsArr.splice(essayInsertIdx,0,essayLibCardHTML);
+  const soC=soCfg();
+  if(soC.enabled){
+    const soCardHTML=`<div class="hcard" onclick="goSO()">
+      <div class="hc-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="14" y2="17"/></svg></div>
+      <div class="hc-title">${escapeHTML(soC.title)}</div>
+      <div class="hc-desc">${escapeHTML(soC.desc)}</div>
+    </div>`;
+    sectionCardsArr.splice(essayInsertIdx>=0?essayInsertIdx+1:sectionCardsArr.length,0,soCardHTML);
+  }
   const quizBadge=quizCourseIsUpcoming()?'<span style="font-size:.6rem;font-weight:700;color:var(--amber);background:rgba(217,119,6,.12);border:1px solid rgba(217,119,6,.35);border-radius:999px;padding:2px 7px;vertical-align:middle">COMING SOON</span>':'';
   const computerQuizCardHTML=`<div class="hcard" onclick="showS('quizlist');renderQuizList()" id="qz-home-card">
     <div class="hc-icon" id="qz-home-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
@@ -2230,7 +2246,7 @@ function renderQS(type){
   document.querySelectorAll(".tob").forEach(b=>b.classList.remove("on"));
   document.querySelector("[data-v='default']").classList.add("on");
   document.getElementById("cust-row").classList.remove("show");tMode="default";
-  const qs=d.questions.filter(q=>q.type===type&&q.active&&hasUsableContent(q));
+  const qs=d.questions.filter(q=>q.type===type&&q.active&&!q.soPostId&&hasUsableContent(q));
   // Short label for card titles: "Email Writing" -> "Email", "Situation Analysis" -> "Situation Analysis"
   const shortLabel=(sec.name||"Practice").replace(/\s*Writing\s*/i,"").trim()||sec.name||"Practice";
   document.getElementById("q-list").innerHTML=qs.length===0?"<div class='empty-q'>No questions yet for this section. Add questions in the Admin panel.</div>":qs.map((q,i)=>{
@@ -5424,6 +5440,8 @@ function refreshLockedContentUI(){
   }
   const qlEl=document.getElementById('quizlist');
   if(qlEl&&qlEl.classList.contains('active'))renderQuizList();
+  const soEl=document.getElementById('soessay');
+  if(soEl&&soEl.classList.contains('active'))renderSO();
   const esEl=document.getElementById('essays');
   if(esEl&&esEl.classList.contains('active')&&_esSelectedId){
     selectEssay(_esSelectedId);
@@ -5977,6 +5995,45 @@ function isQuizSetUnlocked(set){
 }
 function quizCourseIsUpcoming(){
   return (D().siteSettings||{}).quizCourseStatus==="upcoming";
+}
+// ---- Essay Writing (IBPS SO): post-wise essay tests ----
+var _soPost=null;
+function soCfg(){
+  const c=D().ibpsSO||{};
+  return{enabled:!!c.enabled,title:c.title||'Essay Writing (IBPS SO)',desc:c.desc||'Post-wise essay tests for IBPS SO',posts:(c.posts||[]).filter(function(p){return p.active!==false;})};
+}
+function goSO(){showS("soessay");renderSO();}
+function setSOPost(id){_soPost=id;renderSO();}
+function renderSO(){
+  const d=D(),c=soCfg();
+  const tabsEl=document.getElementById("so-post-tabs"),cardsEl=document.getElementById("so-cards"),emptyEl=document.getElementById("so-empty");
+  document.getElementById("so-head").textContent=c.title;
+  document.getElementById("so-sub").textContent=c.desc;
+  const msg=function(t){tabsEl.innerHTML="";cardsEl.innerHTML="";emptyEl.style.display="block";emptyEl.textContent=t;};
+  if(!c.enabled){msg("This section is not available right now.");return;}
+  if(!c.posts.length){msg("Tests for this section will be added soon. Check back!");return;}
+  const live=(d.questions||[]).filter(function(q){return q.soPostId&&q.active&&hasUsableContent(q);});
+  const cnt={};live.forEach(function(q){cnt[q.soPostId]=(cnt[q.soPostId]||0)+1;});
+  if(!_soPost||!c.posts.some(function(p){return p.id===_soPost;}))_soPost=(c.posts.find(function(p){return cnt[p.id];})||c.posts[0]).id;
+  tabsEl.innerHTML=c.posts.map(function(p){return '<button class="stab'+(p.id===_soPost?' on':'')+'" onclick="setSOPost(\''+p.id+'\')">'+escapeHTML(p.name)+' <small>'+(cnt[p.id]||0)+'</small></button>';}).join("");
+  const qs=live.filter(function(q){return q.soPostId===_soPost;});
+  emptyEl.style.display="none";
+  if(!qs.length){cardsEl.innerHTML='<div style="grid-column:1/-1;color:var(--t2);font-size:.82rem;padding:18px 0">No tests for this post yet. Check back soon!</div>';return;}
+  cardsEl.innerHTML=qs.map(function(q,i){
+    const last=getLastPracticeAttempt(q.id),locked=!isPracticeQuestionUnlocked(q);
+    let cta,view='';
+    if(locked){
+      cta='<button onclick="event.stopPropagation();showUnlockOptions('+jsArrayAttr(getUnlockingProductIds(q))+')" style="font-size:.7rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:5px 12px;border-radius:999px;white-space:nowrap;cursor:pointer;font-family:var(--font);display:inline-flex;align-items:center;gap:4px">'+QZ_ICON_LOCK+'Unlock</button>';
+    }else{
+      cta=qzCta(last?'Reattempt':'Click to attempt',"launchExam('"+q.id+"')",last?QZ_ICON_REDO:QZ_ICON_GO);
+      view=last?'<button onclick="event.stopPropagation();viewSavedResult(\'practice\',\''+last.id+'\')" style="font-size:.7rem;font-weight:700;color:var(--bg);background:var(--accent);border:none;padding:5px 12px;border-radius:999px;cursor:pointer;white-space:nowrap;font-family:var(--font)">View Result</button>':'';
+    }
+    return '<div class="q-item" style="cursor:default">'
+      +'<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px"><div style="font-size:.94rem;font-weight:700;color:var(--t);line-height:1.35">'+escapeHTML(q.title||('Test '+(i+1)))+'</div>'
+      +'<button onclick="event.stopPropagation();copyShareLink(\'question-'+q.id+'\',this)" title="Copy direct link to this test" style="flex-shrink:0;display:flex;align-items:center;gap:4px;font-size:.62rem;font-family:var(--font);font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--b);background:var(--bg2);color:var(--t2);cursor:pointer">'+QZ_ICON_LINK+'Copy Link</button></div>'
+      +'<div style="margin-bottom:12px"><span class="chip">'+escapeHTML(q.difficulty||'medium')+'</span></div>'
+      +'<div style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap">'+cta+view+'</div></div>';
+  }).join("");
 }
 var _qzSec=null;
 var QZ_SECTIONS=[['pyq','Previous Year Questions'],['mock','Mock Tests']];
@@ -6726,6 +6783,17 @@ const initPromise=init();
     <div id="qz-topic-pills" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px"></div>
     <div id="qz-set-cards" class="card-grid"></div>
     <div id="qz-list-empty" style="display:none;color:var(--t2);font-size:.82rem;padding:18px 0">No quiz sets available yet. Check back soon!</div>
+  </div>
+</div>
+
+<div id="soessay" class="screen">
+  <div class="page-wrap">
+    <button class="back-btn" onclick="showS('home')"><svg width="13" height="13" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Home</button>
+    <div id="so-head" style="font-size:1rem;font-weight:700;margin-bottom:3px">Essay Writing (IBPS SO)</div>
+    <div id="so-sub" style="color:var(--t2);font-size:.78rem;margin-bottom:16px"></div>
+    <div id="so-post-tabs" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px"></div>
+    <div id="so-cards" class="card-grid"></div>
+    <div id="so-empty" style="display:none;color:var(--t2);font-size:.82rem;padding:18px 0"></div>
   </div>
 </div>
 
