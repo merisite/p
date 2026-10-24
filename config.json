@@ -4641,7 +4641,7 @@
       "image": "https://i.postimg.cc/0y3Cyt0t/i-Stock-959697442.jpg",
       "body": "Sustainable farming is essential for ensuring food security while protecting the environment. It aims to maintain soil fertility, conserve water, and support farmers' incomes without harming the needs of future generations. The responsible use of fertilizers is an important part of this approach.\n\nFertilizers provide essential nutrients that help crops grow and improve agricultural productivity. However, their excessive or unbalanced use can damage soil health, pollute water bodies, and increase farming costs. Chemical fertilizers may also contribute to environmental problems when used improperly. Therefore, farmers must apply fertilizers according to soil conditions and crop requirements.\n\nSoil testing can help farmers identify nutrient deficiencies and use the correct quantity of fertilizers. Organic manure, compost, and biofertilizers can improve soil quality and reduce dependence on chemical inputs. Practices such as crop rotation, green manuring, and integrated nutrient management can maintain soil fertility over time. Drip irrigation and proper fertilizer application methods can also reduce nutrient losses.\n\nThe Government of India promotes balanced fertilizer use through the Soil Health Card Scheme, which provides farmers with information about soil quality and suitable nutrient application. The government also promotes neem-coated urea to improve nitrogen-use efficiency and reduce misuse. These measures can support more informed and responsible farming practices.\n\nIn conclusion, sustainable farming requires a balance between higher crop production and environmental protection. Farmers, agricultural experts, and the government must work together to encourage soil testing, balanced fertilization, and eco-friendly practices. Responsible fertilizer use can protect natural resources, reduce unnecessary expenses, and ensure productive agriculture for future generations.",
       "structure": [],
-      "practiceQuestionId": null,
+      "practiceQuestionId": "q_1792839711789",
       "active": true
     }
   ],
@@ -22385,7 +22385,7 @@
     }
   ],
   "ibpsSO": {
-    "enabled": true,
+    "enabled": false,
     "title": "Essay Writing (IBPS SO)",
     "desc": "Post-wise essay tests for IBPS SO",
     "posts": [
