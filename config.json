@@ -2663,6 +2663,25 @@
         "IBPSPO",
         "IBPSSO"
       ]
+    },
+    {
+      "id": "q_1792841447940",
+      "examId": "__so",
+      "type": "essay",
+      "soPostId": "sop_1792824199480",
+      "title": "Millets, Nutrition Security and Sustainable Agriculture",
+      "label": "Millets, Nutrition Security and Sustainable Agriculture",
+      "text": "",
+      "modelAnswer": "",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO",
+        "IBPSSO"
+      ]
     }
   ],
   "typingParas": [
@@ -4834,6 +4853,19 @@
       "body": "Soil is one of the most important natural resources because it supports agriculture and provides food for humans and animals. However, excessive use of chemical fertilisers, pesticides, and improper farming methods has reduced soil fertility in many areas. Therefore, maintaining soil health is essential for sustainable agriculture and long-term food security.\n\nHealthy soil contains essential nutrients, organic matter, and useful microorganisms that help crops grow. To protect it, farmers should adopt sustainable farming practices such as crop rotation, organic farming, composting, and balanced use of fertilisers. These methods improve soil fertility, reduce pollution, conserve water, and support better crop production. Practices such as mulching and minimum tillage can also prevent soil erosion and conserve moisture.\n\nThe Government of India has introduced the Soil Health Card Scheme to help farmers understand the nutrient status of their soil and receive recommendations on the appropriate use of fertilisers. The PM-PRANAM initiative also encourages states to promote balanced fertiliser use and alternative nutrients. Such initiatives can reduce unnecessary chemical use and support environmentally friendly agriculture.\n\nHowever, many farmers lack awareness, financial resources, and access to soil testing facilities. To address these challenges, the government should strengthen agricultural extension services, provide training, and improve access to affordable organic inputs. Farmers should also be encouraged to adopt sustainable practices through suitable financial support and awareness campaigns.\n\nIn conclusion, soil health is directly linked to agricultural productivity, farmers' income, and food security. Protecting soil requires cooperation between farmers, scientists, and the government. By adopting sustainable farming practices today, India can preserve its natural resources and ensure productive agriculture for future generations.",
       "structure": [],
       "practiceQuestionId": "q_1792841219864",
+      "active": true
+    },
+    {
+      "id": "essay_1792841414642",
+      "title": "Millets, Nutrition Security and Sustainable Agriculture",
+      "category": "SO AFO",
+      "tags": [
+        "SO AFO"
+      ],
+      "image": "https://i.postimg.cc/FKPqxt37/Millets-MSC.webp",
+      "body": "Millets are traditional grains that have been grown in India for centuries. Popular varieties include jowar, bajra and ragi. In recent years, millets have gained attention because of their nutritional value, low water requirements and ability to grow in difficult climatic conditions. They can play an important role in improving nutrition security and promoting sustainable agriculture.\n\nMillets are rich in fibre, minerals and other essential nutrients. They can help address nutritional deficiencies and support a healthy diet. Their inclusion in daily meals can benefit children, women and other vulnerable groups. Promoting millet consumption can also diversify food habits and reduce excessive dependence on rice and wheat.\n\nMillets are equally important for sustainable agriculture. They generally require less water than many major crops and can grow in dry regions with limited rainfall. Their ability to tolerate harsh weather makes them useful in tackling climate change. Growing millets can also help farmers reduce input costs and manage agricultural risks. Moreover, greater demand for these crops can create new income opportunities for farmers and small food-processing businesses.\n\nThe Indian government has taken steps to promote millets, including through the National Millets Mission and initiatives to increase awareness about their benefits. India also led efforts to celebrate 2023 as the International Year of Millets. However, challenges such as limited market access, low consumer awareness and inadequate processing facilities still need attention.\n\nIn conclusion, millets offer a practical way to improve nutrition while protecting natural resources. Greater investment in research, better market facilities and awareness campaigns can encourage both farmers and consumers to adopt them. Promoting millets can strengthen food security, support farmers and make Indian agriculture more sustainable.",
+      "structure": [],
+      "practiceQuestionId": "q_1792841447940",
       "active": true
     }
   ],
