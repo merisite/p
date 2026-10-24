@@ -2530,6 +2530,25 @@
         "IBPSPO",
         "IBPSSO"
       ]
+    },
+    {
+      "id": "q_1792839711789",
+      "examId": "__so",
+      "type": "essay",
+      "soPostId": "sop_1792824199480",
+      "title": "Sustainable Farming and the Responsible Use of Fertilizers",
+      "label": "Sustainable Farming and the Responsible Use of Fertilizers",
+      "text": "",
+      "modelAnswer": "",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO",
+        "IBPSSO"
+      ]
     }
   ],
   "typingParas": [
@@ -4608,6 +4627,19 @@
       ],
       "image": "https://i.postimg.cc/gJMFwFtW/images.jpg",
       "body": "Agriculture is a major source of livelihood in India, but farmers face problems such as unpredictable weather, water shortages, rising input costs, and low incomes. Digital agriculture uses technology to address these challenges and make farming more productive and sustainable.\n\nTechnology can help farmers make better decisions. Mobile applications provide weather forecasts, market prices, and information about suitable crops. Drones can monitor fields, spray pesticides, and identify crop damage. Sensors and smart irrigation systems help farmers use water efficiently. Artificial Intelligence (AI) can analyse soil conditions and weather patterns to suggest suitable farming practices. These tools can reduce costs, save time, and improve crop yields.\n\nThe Indian government has also taken steps to promote digital agriculture. The Digital Agriculture Mission aims to develop digital infrastructure for agriculture, including farmers' digital identities and reliable crop-related data. It can improve access to information, support better planning, and make agricultural services more efficient. Schemes such as Namo Drone Didi also bring modern tools like drones to villages through women Self-Help Groups.\n\nHowever, digital agriculture faces several challenges. Many farmers lack digital literacy, reliable internet connectivity, or money to purchase modern equipment. Small and marginal farmers may find advanced technologies expensive. Inaccurate data and cyber risks can also create difficulties without proper safeguards.\n\nTo overcome these barriers, the government should improve rural internet connectivity, provide affordable technology, and organise practical training programmes in local languages. Farmer cooperatives can help small farmers access shared equipment and digital services.\n\nIn conclusion, digital agriculture has the potential to transform Indian farming, but technology alone cannot solve every problem. Affordable tools, proper training, and equal access are essential to ensure that farmers benefit from this transformation.",
+      "structure": [],
+      "practiceQuestionId": null,
+      "active": true
+    },
+    {
+      "id": "essay_1792839682629",
+      "title": "Sustainable Farming and the Responsible Use of Fertilizers",
+      "category": "SO AFO",
+      "tags": [
+        "SO AFO"
+      ],
+      "image": "https://i.postimg.cc/0y3Cyt0t/i-Stock-959697442.jpg",
+      "body": "Sustainable farming is essential for ensuring food security while protecting the environment. It aims to maintain soil fertility, conserve water, and support farmers' incomes without harming the needs of future generations. The responsible use of fertilizers is an important part of this approach.\n\nFertilizers provide essential nutrients that help crops grow and improve agricultural productivity. However, their excessive or unbalanced use can damage soil health, pollute water bodies, and increase farming costs. Chemical fertilizers may also contribute to environmental problems when used improperly. Therefore, farmers must apply fertilizers according to soil conditions and crop requirements.\n\nSoil testing can help farmers identify nutrient deficiencies and use the correct quantity of fertilizers. Organic manure, compost, and biofertilizers can improve soil quality and reduce dependence on chemical inputs. Practices such as crop rotation, green manuring, and integrated nutrient management can maintain soil fertility over time. Drip irrigation and proper fertilizer application methods can also reduce nutrient losses.\n\nThe Government of India promotes balanced fertilizer use through the Soil Health Card Scheme, which provides farmers with information about soil quality and suitable nutrient application. The government also promotes neem-coated urea to improve nitrogen-use efficiency and reduce misuse. These measures can support more informed and responsible farming practices.\n\nIn conclusion, sustainable farming requires a balance between higher crop production and environmental protection. Farmers, agricultural experts, and the government must work together to encourage soil testing, balanced fertilization, and eco-friendly practices. Responsible fertilizer use can protect natural resources, reduce unnecessary expenses, and ensure productive agriculture for future generations.",
       "structure": [],
       "practiceQuestionId": null,
       "active": true
