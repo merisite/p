@@ -2511,6 +2511,25 @@
         "IBPSPO",
         "IBPSSO"
       ]
+    },
+    {
+      "id": "q_1792839468457",
+      "examId": "__so",
+      "type": "essay",
+      "soPostId": "sop_1792824199480",
+      "title": "Digital Agriculture: Can Technology Transform Indian Farming?",
+      "label": "Digital Agriculture: Can Technology Transform Indian Farming?",
+      "text": "",
+      "modelAnswer": "",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO",
+        "IBPSSO"
+      ]
     }
   ],
   "typingParas": [
@@ -4578,6 +4597,19 @@
       "body": "Agricultural credit is an important tool for improving farmers' incomes in India. Farming requires money for seeds, fertilizers, irrigation, machinery, labour and other activities. However, many farmers have limited savings and cannot meet these expenses from their own income. Timely and affordable credit helps them invest in farming and improve productivity.\n\nWith access to loans, farmers can purchase better-quality seeds, adopt modern technology and use improved irrigation methods. Credit also enables them to diversify into dairy farming, poultry and other allied activities. These steps can increase agricultural production, reduce dependence on a single crop and create additional sources of income. Farmers can also avoid borrowing from moneylenders who often charge high interest rates.\n\nThe Kisan Credit Card (KCC) scheme is an important government initiative that provides farmers with timely credit for agricultural and allied activities. It helps them meet cultivation expenses and reduces their dependence on informal sources of borrowing. However, the benefits of agricultural credit depend on its timely availability and affordable interest rates.\n\nDespite these benefits, many small and tenant farmers still face difficulties in obtaining bank loans due to a lack of documents, limited awareness and lengthy procedures. Banks should simplify loan applications, improve rural banking services and ensure that eligible farmers receive credit on time. Financial literacy programmes can also help farmers understand loan conditions and use borrowed money wisely.\n\nIn conclusion, agricultural credit can improve farmers' incomes by increasing productivity, supporting diversification and reducing dependence on costly loans. However, credit alone cannot solve every problem. Fair prices, crop insurance, better storage facilities and improved market access must also support farmers to ensure stable and sustainable incomes.",
       "structure": [],
       "practiceQuestionId": "q_1792824984791",
+      "active": true
+    },
+    {
+      "id": "essay_1792839412724",
+      "title": "Digital Agriculture: Can Technology Transform Indian Farming?",
+      "category": "SO AFO",
+      "tags": [
+        "SO AFO"
+      ],
+      "image": "https://i.postimg.cc/gJMFwFtW/images.jpg",
+      "body": "Agriculture is a major source of livelihood in India, but farmers face problems such as unpredictable weather, water shortages, rising input costs, and low incomes. Digital agriculture uses technology to address these challenges and make farming more productive and sustainable.\n\nTechnology can help farmers make better decisions. Mobile applications provide weather forecasts, market prices, and information about suitable crops. Drones can monitor fields, spray pesticides, and identify crop damage. Sensors and smart irrigation systems help farmers use water efficiently. Artificial Intelligence (AI) can analyse soil conditions and weather patterns to suggest suitable farming practices. These tools can reduce costs, save time, and improve crop yields.\n\nThe Indian government has also taken steps to promote digital agriculture. The Digital Agriculture Mission aims to develop digital infrastructure for agriculture, including farmers' digital identities and reliable crop-related data. It can improve access to information, support better planning, and make agricultural services more efficient. Schemes such as Namo Drone Didi also bring modern tools like drones to villages through women Self-Help Groups.\n\nHowever, digital agriculture faces several challenges. Many farmers lack digital literacy, reliable internet connectivity, or money to purchase modern equipment. Small and marginal farmers may find advanced technologies expensive. Inaccurate data and cyber risks can also create difficulties without proper safeguards.\n\nTo overcome these barriers, the government should improve rural internet connectivity, provide affordable technology, and organise practical training programmes in local languages. Farmer cooperatives can help small farmers access shared equipment and digital services.\n\nIn conclusion, digital agriculture has the potential to transform Indian farming, but technology alone cannot solve every problem. Affordable tools, proper training, and equal access are essential to ensure that farmers benefit from this transformation.",
+      "structure": [],
+      "practiceQuestionId": null,
       "active": true
     }
   ],
