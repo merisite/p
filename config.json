@@ -22321,7 +22321,7 @@
     }
   ],
   "ibpsSO": {
-    "enabled": false,
+    "enabled": true,
     "title": "Essay Writing (IBPS SO)",
     "desc": "Post-wise essay tests for IBPS SO",
     "posts": [
