@@ -2720,6 +2720,25 @@
         "IBPSPO",
         "IBPSSO"
       ]
+    },
+    {
+      "id": "q_1792842346316",
+      "examId": "__so",
+      "type": "essay",
+      "soPostId": "sop_1792824199480",
+      "title": "Agricultural Mechanisation: Benefits and Challenges for Small Farmers",
+      "label": "Agricultural Mechanisation: Benefits and Challenges for Small Farmers",
+      "text": "",
+      "modelAnswer": "",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO",
+        "IBPSSO"
+      ]
     }
   ],
   "typingParas": [
@@ -4930,6 +4949,19 @@
       "body": "Banks play an important role in the development of rural India by providing financial services, creating employment opportunities, and supporting economic growth. Since a large part of India's population lives in rural areas, strong banking services are necessary to improve the living standards of farmers, small business owners, and rural households.\n\nOne of the major contributions of banks is providing loans to farmers for purchasing seeds, fertilizers, equipment, and other agricultural needs. Timely and affordable credit helps farmers improve productivity and reduce their dependence on moneylenders. Banks also support small businesses, self-help groups, and rural entrepreneurs by providing funds to start or expand their activities. The Pradhan Mantri Mudra Yojana (PMMY) supports this by providing loans to micro and small enterprises.\n\nFinancial inclusion is another important role of banks. The Pradhan Mantri Jan Dhan Yojana has helped millions of people open bank accounts and access formal banking services. These accounts also help people receive government benefits directly, reducing delays and the risk of leakages. Digital banking and mobile payment services have further made transactions easier for people living far from bank branches.\n\nHowever, rural banking still faces several challenges. Limited financial literacy, poor internet connectivity, and a shortage of banking facilities prevent some people from using these services effectively. Farmers and small entrepreneurs may also struggle to obtain loans because of complex procedures or a lack of proper documents.\n\nTo address these issues, banks should expand their rural services, simplify loan procedures, and organise financial awareness programmes. Business Correspondents and digital banking facilities can help reach remote villages.\n\nIn conclusion, banks are essential for building a prosperous and self-reliant rural India. By improving access to affordable credit, savings, and digital services, they can strengthen rural livelihoods and promote inclusive economic development.",
       "structure": [],
       "practiceQuestionId": "q_1792841875119",
+      "active": true
+    },
+    {
+      "id": "essay_1792842324050",
+      "title": "Agricultural Mechanisation: Benefits and Challenges for Small Farmers",
+      "category": "SO AFO",
+      "tags": [
+        "SO AFO"
+      ],
+      "image": "https://i.postimg.cc/d38DCjXW/images.jpg",
+      "body": "Agricultural mechanisation refers to the use of machines and modern equipment for farming activities such as ploughing, sowing, irrigation, harvesting, and threshing. In India, it can improve farm productivity, reduce physical labour, and help farmers complete agricultural activities on time. However, small farmers face several difficulties in adopting modern machinery.\n\nMechanisation offers many benefits. Tractors, seed drills, harvesters, and irrigation pumps help farmers save time and reduce dependence on manual labour. Machines can also improve the quality of farming operations, reduce crop losses, and increase productivity. Timely sowing and harvesting are particularly important because delays caused by labour shortages or bad weather can affect crop yields. Mechanisation can also make farming less physically demanding.\n\nDespite these advantages, small and marginal farmers often struggle to afford expensive machinery. Many own small and scattered plots of land, making large machines difficult to use. Maintenance, fuel, repairs, and the need for trained operators further increase costs. As a result, the benefits of mechanisation may remain limited to farmers with greater financial resources.\n\nTo address these challenges, the government promotes agricultural mechanisation through the Sub-Mission on Agricultural Mechanization (SMAM). The scheme supports access to machinery through financial assistance and Custom Hiring Centres, where farmers can rent equipment instead of purchasing it. Farmer Producer Organisations and cooperatives can also help small farmers share machinery and reduce costs.\n\nIn conclusion, agricultural mechanisation can make Indian farming more productive and efficient, but its benefits must reach small farmers as well. Affordable rental services, suitable equipment, training, and government support are essential to ensure that mechanisation reduces the burden on farmers rather than increasing their financial difficulties.",
+      "structure": [],
+      "practiceQuestionId": "q_1792842346316",
       "active": true
     }
   ],
