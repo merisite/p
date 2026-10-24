@@ -2606,6 +2606,25 @@
         "IBPSPO",
         "IBPSSO"
       ]
+    },
+    {
+      "id": "q_1792840711542",
+      "examId": "__so",
+      "type": "essay",
+      "soPostId": "sop_1792824199480",
+      "title": "Food Processing and Cold-Chain Infrastructure: Reducing Post-Harvest Losses",
+      "label": "Food Processing and Cold-Chain Infrastructure: Reducing Post-Harvest Losses",
+      "text": "",
+      "modelAnswer": "",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO",
+        "IBPSSO"
+      ]
     }
   ],
   "typingParas": [
@@ -4738,6 +4757,19 @@
       "body": "Agriculture is the backbone of India's rural economy, but many small farmers struggle to get fair prices for their produce. They often depend on middlemen and lack access to storage, transport, and large markets. Farmer Producer Organisations (FPOs) offer a practical solution by bringing farmers together to improve their bargaining power and income.\n\nFPOs are groups of farmers who work collectively to purchase agricultural inputs, sell produce, and access financial services. By selling crops in larger quantities, farmers can negotiate better prices and reduce marketing costs. FPOs also help members access modern technology, quality seeds, fertilizers, and market information. They can connect farmers directly with retailers, food processing companies, and online markets, reducing dependence on middlemen.\n\nRecognising their importance, the Government of India launched the Central Sector Scheme for the Formation and Promotion of 10,000 FPOs. The scheme provides financial assistance, training, and institutional support to strengthen farmer organisations. Digital platforms such as the Electronic National Agriculture Market (e-NAM) can also help FPOs reach more buyers and improve price transparency.\n\nHowever, FPOs face challenges such as limited financial resources, poor management skills, inadequate storage facilities, and lack of market awareness. Many organisations also struggle to build trust among members. These problems can be addressed through better training, easier credit access, improved infrastructure, and professional management.\n\nIn conclusion, FPOs can transform agricultural marketing by giving small farmers greater market access and stronger bargaining power. With proper government support and active farmer participation, they can make agriculture more profitable, organised, and sustainable.",
       "structure": [],
       "practiceQuestionId": null,
+      "active": true
+    },
+    {
+      "id": "essay_1792840773416",
+      "title": "Food Processing and Cold-Chain Infrastructure: Reducing Post-Harvest Losses",
+      "category": "SO AFO",
+      "tags": [
+        "SO AFO"
+      ],
+      "image": "https://i.postimg.cc/x1wb7qQf/industry-cold-storage-Dqgxl-LTh.jpg",
+      "body": "Food processing and cold-chain infrastructure play an important role in reducing food waste and improving farmers’ incomes in India. A large quantity of fruits, vegetables, dairy products, and other perishable goods can be lost after harvesting due to poor storage, transportation delays, and a lack of proper processing facilities. Addressing these problems is essential for strengthening India’s agricultural economy.\n\nFood processing involves converting raw agricultural products into products that can be stored, transported, and consumed more easily. Cold-chain infrastructure includes refrigerated storage, temperature-controlled transportation, and suitable warehouses. These facilities help maintain the freshness and quality of food from farms to markets. They also allow farmers to store their produce for longer periods and sell it when prices are more favourable.\n\nThe Government of India has introduced the Pradhan Mantri Kisan SAMPADA Yojana to support food processing and related infrastructure. It aims to improve storage facilities, develop processing units, and strengthen supply chains. The PM Formalisation of Micro Food Processing Enterprises (PMFME) scheme supports small food-processing units with credit-linked assistance, training and branding. However, small farmers still face challenges such as high transportation costs, limited access to modern facilities, and a lack of awareness about available support.\n\nTo reduce these losses, the government should encourage investment in cold storage, refrigerated vehicles, and affordable processing units near farms. Farmer Producer Organisations (FPOs) and cooperatives can help small farmers share infrastructure costs. Training farmers in proper handling, packaging, and storage is equally important. These steps can also create rural employment and improve the availability of food throughout the year.\n\nIn conclusion, food processing and cold-chain infrastructure are essential for reducing post-harvest losses. Better facilities, government support, and farmer participation can reduce waste, increase incomes, and build a stronger agricultural economy.",
+      "structure": [],
+      "practiceQuestionId": "q_1792840711542",
       "active": true
     }
   ],
