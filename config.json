@@ -2701,6 +2701,25 @@
         "IBPSPO",
         "IBPSSO"
       ]
+    },
+    {
+      "id": "q_1792841875119",
+      "examId": "__so",
+      "type": "essay",
+      "soPostId": "sop_1792824199480",
+      "title": "The Role of Banks in Strengthening Rural India",
+      "label": "The Role of Banks in Strengthening Rural India",
+      "text": "",
+      "modelAnswer": "",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO",
+        "IBPSSO"
+      ]
     }
   ],
   "typingParas": [
@@ -4911,6 +4930,19 @@
       "body": "Women's role in agriculture and rural entrepreneurship is important for India's economic growth and rural development. Women contribute significantly to farming, livestock management, food processing, and other agricultural activities. However, their contribution often remains unrecognised, and they face challenges such as limited access to land, credit, technology, and markets.\n\nWomen perform several agricultural tasks, including sowing seeds, harvesting crops, storing grains, and caring for animals. Beyond farming, many women are becoming rural entrepreneurs by starting dairy businesses, food processing units, handicraft businesses, and small shops. These activities create employment, increase family income, and improve living standards in rural areas. Women-led enterprises also help preserve traditional skills and provide locally made products to wider markets.\n\nHowever, women entrepreneurs often struggle to obtain loans, receive proper training, and access modern technology. Social restrictions, unequal property rights, and limited market connections further affect their progress. Many women also manage household responsibilities alongside their economic activities, leaving them with less time to expand their businesses.\n\nThe government can help women overcome these barriers through suitable training, financial support, and better market access. The Deendayal Antyodaya Yojana–National Rural Livelihoods Mission (DAY-NRLM) supports rural women through Self-Help Groups (SHGs), which improve access to credit and encourage small businesses. Under the Namo Drone Didi scheme, women SHGs are provided with drones to offer spraying and other farm services to farmers, creating a new source of income for rural women. The Mahila Kisan Sashaktikaran Pariyojana also aims to strengthen women's participation in sustainable agriculture.\n\nIn conclusion, women are not merely contributors to agriculture; they are also potential leaders of rural businesses. Providing them with equal opportunities, skills, finance, and market access can increase rural incomes, create employment, and strengthen India's rural economy. Their empowerment is essential for inclusive and sustainable development.",
       "structure": [],
       "practiceQuestionId": "q_1792841692731",
+      "active": true
+    },
+    {
+      "id": "essay_1792841855675",
+      "title": "The Role of Banks in Strengthening Rural India",
+      "category": "SO AFO",
+      "tags": [
+        "SO AFO"
+      ],
+      "image": "https://i.postimg.cc/0y51G0Fd/66e527b14a47120240914113537.jpg",
+      "body": "Banks play an important role in the development of rural India by providing financial services, creating employment opportunities, and supporting economic growth. Since a large part of India's population lives in rural areas, strong banking services are necessary to improve the living standards of farmers, small business owners, and rural households.\n\nOne of the major contributions of banks is providing loans to farmers for purchasing seeds, fertilizers, equipment, and other agricultural needs. Timely and affordable credit helps farmers improve productivity and reduce their dependence on moneylenders. Banks also support small businesses, self-help groups, and rural entrepreneurs by providing funds to start or expand their activities. The Pradhan Mantri Mudra Yojana (PMMY) supports this by providing loans to micro and small enterprises.\n\nFinancial inclusion is another important role of banks. The Pradhan Mantri Jan Dhan Yojana has helped millions of people open bank accounts and access formal banking services. These accounts also help people receive government benefits directly, reducing delays and the risk of leakages. Digital banking and mobile payment services have further made transactions easier for people living far from bank branches.\n\nHowever, rural banking still faces several challenges. Limited financial literacy, poor internet connectivity, and a shortage of banking facilities prevent some people from using these services effectively. Farmers and small entrepreneurs may also struggle to obtain loans because of complex procedures or a lack of proper documents.\n\nTo address these issues, banks should expand their rural services, simplify loan procedures, and organise financial awareness programmes. Business Correspondents and digital banking facilities can help reach remote villages.\n\nIn conclusion, banks are essential for building a prosperous and self-reliant rural India. By improving access to affordable credit, savings, and digital services, they can strengthen rural livelihoods and promote inclusive economic development.",
+      "structure": [],
+      "practiceQuestionId": "q_1792841875119",
       "active": true
     }
   ],
