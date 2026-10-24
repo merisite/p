@@ -2481,14 +2481,36 @@
       "soPostId": "sop_1792824199480",
       "title": "Climate-Resilient Agriculture: Preparing Indian Farmers for Extreme Weather",
       "label": "Climate-Resilient Agriculture: Preparing Indian Farmers for Extreme Weather",
-      "text": "Climate-Resilient Agriculture: Preparing Indian Farmers for Extreme Weather",
-      "modelAnswer": "Indian agriculture depends heavily on weather conditions. However, rising temperatures, irregular rainfall, floods, droughts and heatwaves are making farming increasingly difficult. These extreme weather events damage crops, reduce farmers’ incomes and threaten food security. Therefore, climate-resilient agriculture has become essential for protecting farmers and ensuring sustainable agricultural growth.\n\nClimate-resilient agriculture means adopting farming practices that help farmers manage changing weather conditions. Farmers can grow drought-resistant crop varieties, diversify crops and adopt methods such as crop rotation. Rainwater harvesting, drip irrigation and better soil management can conserve water and maintain soil fertility. Weather forecasts and mobile-based advisories can also help farmers decide when to sow, irrigate and harvest crops.\n\nThe government has introduced several initiatives to support this transition. The National Mission for Sustainable Agriculture promotes sustainable farming, better soil health and efficient water use. The Pradhan Mantri Krishi Sinchayee Yojana encourages improved irrigation practices, while the Pradhan Mantri Fasal Bima Yojana provides insurance protection against specified crop losses caused by natural risks. These measures can reduce farmers’ vulnerability to extreme weather.\n\nHowever, many small and marginal farmers lack awareness, financial resources and access to modern technology. To address these problems, the government should strengthen agricultural training, improve access to affordable credit and provide timely weather information in regional languages. Research institutions should also develop climate-resistant seeds suitable for local conditions. Better storage and irrigation facilities are equally important.\n\nIn conclusion, climate-resilient agriculture is necessary to protect farmers, maintain food production and strengthen rural livelihoods. By combining suitable farming practices, scientific research and effective government support, India can prepare its farmers for extreme weather and build a more sustainable agricultural future.",
+      "text": "",
+      "modelAnswer": "",
       "wordLimit": "250-300 words",
       "marks": 15,
       "difficulty": "medium",
       "active": true,
       "mockNo": null,
-      "productIds": []
+      "productIds": [
+        "IBPSPO",
+        "IBPSSO"
+      ]
+    },
+    {
+      "id": "q_1792824984791",
+      "examId": "__so",
+      "type": "essay",
+      "soPostId": "sop_1792824199480",
+      "title": "The Role of Agricultural Credit in Improving Farmers' Incomes",
+      "label": "The Role of Agricultural Credit in Improving Farmers' Incomes",
+      "text": "",
+      "modelAnswer": "",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO",
+        "IBPSSO"
+      ]
     }
   ],
   "typingParas": [
@@ -4543,6 +4565,19 @@
       "body": "Indian agriculture depends heavily on weather conditions. However, rising temperatures, irregular rainfall, floods, droughts and heatwaves are making farming increasingly difficult. These extreme weather events damage crops, reduce farmers’ incomes and threaten food security. Therefore, climate-resilient agriculture has become essential for protecting farmers and ensuring sustainable agricultural growth.\n\nClimate-resilient agriculture means adopting farming practices that help farmers manage changing weather conditions. Farmers can grow drought-resistant crop varieties, diversify crops and adopt methods such as crop rotation. Rainwater harvesting, drip irrigation and better soil management can conserve water and maintain soil fertility. Weather forecasts and mobile-based advisories can also help farmers decide when to sow, irrigate and harvest crops.\n\nThe government has introduced several initiatives to support this transition. The National Mission for Sustainable Agriculture promotes sustainable farming, better soil health and efficient water use. The Pradhan Mantri Krishi Sinchayee Yojana encourages improved irrigation practices, while the Pradhan Mantri Fasal Bima Yojana provides insurance protection against specified crop losses caused by natural risks. These measures can reduce farmers’ vulnerability to extreme weather.\n\nHowever, many small and marginal farmers lack awareness, financial resources and access to modern technology. To address these problems, the government should strengthen agricultural training, improve access to affordable credit and provide timely weather information in regional languages. Research institutions should also develop climate-resistant seeds suitable for local conditions. Better storage and irrigation facilities are equally important.\n\nIn conclusion, climate-resilient agriculture is necessary to protect farmers, maintain food production and strengthen rural livelihoods. By combining suitable farming practices, scientific research and effective government support, India can prepare its farmers for extreme weather and build a more sustainable agricultural future.",
       "structure": [],
       "practiceQuestionId": "q_1792824300122",
+      "active": true
+    },
+    {
+      "id": "essay_1792824915909",
+      "title": "The Role of Agricultural Credit in Improving Farmers' Incomes",
+      "category": "SO AFO",
+      "tags": [
+        "SO AFO"
+      ],
+      "image": "https://i.postimg.cc/bY6SFwLF/farmers-income-doubled-for-certain-crops-shows-sbi-study.avif",
+      "body": "Agricultural credit is an important tool for improving farmers' incomes in India. Farming requires money for seeds, fertilizers, irrigation, machinery, labour and other activities. However, many farmers have limited savings and cannot meet these expenses from their own income. Timely and affordable credit helps them invest in farming and improve productivity.\n\nWith access to loans, farmers can purchase better-quality seeds, adopt modern technology and use improved irrigation methods. Credit also enables them to diversify into dairy farming, poultry and other allied activities. These steps can increase agricultural production, reduce dependence on a single crop and create additional sources of income. Farmers can also avoid borrowing from moneylenders who often charge high interest rates.\n\nThe Kisan Credit Card (KCC) scheme is an important government initiative that provides farmers with timely credit for agricultural and allied activities. It helps them meet cultivation expenses and reduces their dependence on informal sources of borrowing. However, the benefits of agricultural credit depend on its timely availability and affordable interest rates.\n\nDespite these benefits, many small and tenant farmers still face difficulties in obtaining bank loans due to a lack of documents, limited awareness and lengthy procedures. Banks should simplify loan applications, improve rural banking services and ensure that eligible farmers receive credit on time. Financial literacy programmes can also help farmers understand loan conditions and use borrowed money wisely.\n\nIn conclusion, agricultural credit can improve farmers' incomes by increasing productivity, supporting diversification and reducing dependence on costly loans. However, credit alone cannot solve every problem. Fair prices, crop insurance, better storage facilities and improved market access must also support farmers to ensure stable and sustainable incomes.",
+      "structure": [],
+      "practiceQuestionId": "q_1792824984791",
       "active": true
     }
   ],
