@@ -2625,6 +2625,25 @@
         "IBPSPO",
         "IBPSSO"
       ]
+    },
+    {
+      "id": "q_1792840868799",
+      "examId": "__so",
+      "type": "essay",
+      "soPostId": "sop_1792824199480",
+      "title": "Food Security and the Role of Agricultural Field Officers",
+      "label": "Food Security and the Role of Agricultural Field Officers",
+      "text": "",
+      "modelAnswer": "",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO",
+        "IBPSSO"
+      ]
     }
   ],
   "typingParas": [
@@ -4770,6 +4789,19 @@
       "body": "Food processing and cold-chain infrastructure play an important role in reducing food waste and improving farmers’ incomes in India. A large quantity of fruits, vegetables, dairy products, and other perishable goods can be lost after harvesting due to poor storage, transportation delays, and a lack of proper processing facilities. Addressing these problems is essential for strengthening India’s agricultural economy.\n\nFood processing involves converting raw agricultural products into products that can be stored, transported, and consumed more easily. Cold-chain infrastructure includes refrigerated storage, temperature-controlled transportation, and suitable warehouses. These facilities help maintain the freshness and quality of food from farms to markets. They also allow farmers to store their produce for longer periods and sell it when prices are more favourable.\n\nThe Government of India has introduced the Pradhan Mantri Kisan SAMPADA Yojana to support food processing and related infrastructure. It aims to improve storage facilities, develop processing units, and strengthen supply chains. The PM Formalisation of Micro Food Processing Enterprises (PMFME) scheme supports small food-processing units with credit-linked assistance, training and branding. However, small farmers still face challenges such as high transportation costs, limited access to modern facilities, and a lack of awareness about available support.\n\nTo reduce these losses, the government should encourage investment in cold storage, refrigerated vehicles, and affordable processing units near farms. Farmer Producer Organisations (FPOs) and cooperatives can help small farmers share infrastructure costs. Training farmers in proper handling, packaging, and storage is equally important. These steps can also create rural employment and improve the availability of food throughout the year.\n\nIn conclusion, food processing and cold-chain infrastructure are essential for reducing post-harvest losses. Better facilities, government support, and farmer participation can reduce waste, increase incomes, and build a stronger agricultural economy.",
       "structure": [],
       "practiceQuestionId": "q_1792840711542",
+      "active": true
+    },
+    {
+      "id": "essay_1792841096559",
+      "title": "Food Security and the Role of Agricultural Field Officers",
+      "category": "SO AFO",
+      "tags": [
+        "SO AFO"
+      ],
+      "image": "https://i.postimg.cc/7YVkdRy7/Rural-Development-Officer.avif",
+      "body": "Food security means ensuring that every person has access to sufficient, safe, and nutritious food. In India, agriculture is the main source of food and livelihood for millions of people. However, climate change, rising input costs, water shortages, and crop diseases threaten agricultural production. Therefore, Agricultural Field Officers play an important role in strengthening food security.\n\nAgricultural Field Officers connect farmers with banks, government departments, and modern farming practices. They guide farmers in selecting suitable crops, using quality seeds, managing pests, and adopting better irrigation methods. They also help farmers understand agricultural loans and government schemes. By providing timely guidance, they can improve crop productivity and reduce farming costs.\n\nThese officers also support sustainable agriculture by promoting soil testing, balanced fertiliser use, water conservation, and climate-resilient crops. They can inform farmers about crop insurance and suitable credit facilities to reduce financial risks caused by crop failure. Their support is particularly important for small and marginal farmers who often lack access to technical knowledge and formal credit.\n\nThe government has introduced several initiatives to strengthen food security. The National Food Security Act, 2013, supports access to food grains for eligible households, while the Pradhan Mantri Garib Kalyan Anna Yojana provides free food grains to eligible beneficiaries. Agricultural Field Officers can contribute indirectly by helping farmers improve production and encouraging sustainable farming practices.\n\nIn conclusion, food security requires both adequate food production and fair access to food. Agricultural Field Officers can help achieve this goal through farmer education, better credit access, and the adoption of modern and sustainable methods. Their effective work can strengthen rural livelihoods and contribute to a food-secure India.",
+      "structure": [],
+      "practiceQuestionId": "q_1792840868799",
       "active": true
     }
   ],
