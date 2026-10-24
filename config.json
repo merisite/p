@@ -2549,6 +2549,25 @@
         "IBPSPO",
         "IBPSSO"
       ]
+    },
+    {
+      "id": "q_1792840019749",
+      "examId": "__so",
+      "type": "essay",
+      "soPostId": "sop_1792824199480",
+      "title": "Crop Insurance and Its Importance in Protecting Farmers from Financial Losses",
+      "label": "Crop Insurance and Its Importance in Protecting Farmers from Financial Losses",
+      "text": "",
+      "modelAnswer": "",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO",
+        "IBPSSO"
+      ]
     }
   ],
   "typingParas": [
