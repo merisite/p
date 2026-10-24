@@ -2568,6 +2568,25 @@
         "IBPSPO",
         "IBPSSO"
       ]
+    },
+    {
+      "id": "q_1792840156869",
+      "examId": "__so",
+      "type": "essay",
+      "soPostId": "sop_1792824199480",
+      "title": "Sustainable Irrigation and Water Conservation in Indian Agriculture",
+      "label": "Sustainable Irrigation and Water Conservation in Indian Agriculture",
+      "text": "",
+      "modelAnswer": "",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO",
+        "IBPSSO"
+      ]
     }
   ],
   "typingParas": [
@@ -4683,10 +4702,10 @@
       "tags": [
         "SO AFO"
       ],
-      "image": "",
+      "image": "https://i.postimg.cc/Gmkf88qW/images.jpg",
       "body": "Agriculture is the backbone of the Indian economy, but it depends heavily on the availability of water. Growing water shortages, irregular rainfall, and falling groundwater levels have made irrigation a major concern. Therefore, sustainable irrigation and water conservation are essential for protecting farmers’ livelihoods and ensuring food security.\n\nTraditional irrigation methods, such as flood irrigation, often waste large amounts of water. In contrast, drip irrigation delivers water directly to plant roots, while sprinkler irrigation distributes water evenly across fields. These methods reduce water wastage and can improve crop productivity. Rainwater harvesting, farm ponds, and the restoration of traditional water bodies can also help farmers store water for dry periods.\n\nHowever, several challenges remain. Many farmers cannot afford modern irrigation equipment, while excessive groundwater extraction continues to lower water levels. Growing water-intensive crops in water-scarce regions further increases pressure on available resources. Climate change and unpredictable rainfall make the situation more difficult.\n\nThe government has introduced the Pradhan Mantri Krishi Sinchayee Yojana (PMKSY) to improve irrigation facilities and promote efficient water use. Its Per Drop More Crop initiative supports micro-irrigation systems such as drip and sprinkler irrigation. The Atal Bhujal Yojana encourages communities to manage and conserve groundwater in water-stressed areas. Farmers should also adopt suitable cropping patterns, use water-saving techniques, and participate in community-based water management. Affordable technology and awareness programmes can encourage wider adoption of sustainable practices.\n\nIn conclusion, water conservation is not merely an environmental responsibility but also an economic necessity for Indian agriculture. By combining efficient irrigation, rainwater harvesting, suitable crop choices, and government support, India can reduce water wastage, improve farm productivity, and secure a sustainable future for its farmers.",
       "structure": [],
-      "practiceQuestionId": null,
+      "practiceQuestionId": "q_1792840156869",
       "active": true
     }
   ],
