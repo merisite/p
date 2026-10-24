@@ -183,6 +183,10 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
 .qz-tgl input:checked+.qz-tg{background:#22c55e}.qz-tgl input:checked+.qz-tg::after{transform:translateX(17px)}
 .qz-warn{background:rgba(250,204,21,.12);border:1px solid rgba(250,204,21,.5);border-radius:var(--rs);padding:11px 14px;font-size:.76rem;line-height:1.6;margin-bottom:12px;color:var(--t)}
 .qzf-h{font-size:.66rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--t2);margin:18px 0 9px}
+.so-in{width:100%;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.82rem;font-family:inherit}
+.so-l{font-size:.72rem;color:var(--t2);display:block;margin:14px 0 5px}
+.so-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 0;border-bottom:1px solid var(--b)}
+.so-row:last-child{border-bottom:none}
 </style>
 </head>
 <body>
@@ -274,6 +278,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
       <div class="ni" data-p="mocks" onclick="nav('mocks')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></span>Mocks</div>
       <div class="ni" data-p="paidmocks" onclick="nav('paidmocks')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></span>Paid Mocks</div>
       <div class="ni" data-p="essays" onclick="nav('essays')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></span>Essays</div>
+      <div class="ni" data-p="so" onclick="nav('so')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="14" y2="17"/></svg></span>Essay (IBPS SO)</div>
       <div class="ni" data-p="quizcourse" onclick="nav('quizcourse')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>Quiz Course</div>
       <div class="ni" data-p="livetracker" onclick="nav('livetracker')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></span>Live Tracker</div>
       <div class="ni" data-p="secs" onclick="nav('secs')"><span class="ic" style="width:14px;height:14px"><svg width="14" height="14" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="21"/></svg></span>Sections</div>
@@ -469,6 +474,90 @@ In conclusion, while digital banking has significantly advanced financial inclus
       </div>
 
       <!-- QUIZ COURSE -->
+      <!-- ESSAY WRITING (IBPS SO) -->
+      <div id="pg-so" class="pg">
+        <div class="ph"><div class="ph-ey">Content</div><div class="ph-ti">Essay Writing (IBPS SO)</div><div class="ph-su">Post-wise essay tests for IBPS SO. Create posts, add essay tests under each post, and lock a test behind a paid course if you want.</div></div>
+        <div class="qzt-bar" id="so-bar">
+          <button class="qzt on" data-t="tests" onclick="soTab('tests')">Tests <span class="bge bg-g" id="so-cnt-t">0</span></button>
+          <button class="qzt" data-t="add" onclick="soTab('add')" id="so-addtab">Add Test</button>
+          <button class="qzt" data-t="posts" onclick="soTab('posts')">Posts <span class="bge bg-g" id="so-cnt-p">0</span></button>
+          <button class="qzt" data-t="card" onclick="soTab('card')">Home Card</button>
+        </div>
+
+        <!-- TESTS -->
+        <div data-sotab="tests">
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px">
+            <select id="so-f-post" class="so-in" style="width:auto;min-width:210px" onchange="rSOTests()"></select>
+            <button class="btn bp sm" onclick="soResetForm();soTab('add')">+ Add Test</button>
+          </div>
+          <div class="card"><div class="cb" id="so-tests-list"></div></div>
+        </div>
+
+        <!-- ADD / EDIT TEST -->
+        <div data-sotab="add" style="display:none">
+          <div class="card"><div class="cb">
+            <input type="hidden" id="so-id"/>
+            <div id="so-form-title" style="font-size:.9rem;font-weight:700">Add Test</div>
+            <div class="qzf-h">1 · Which post is this for?</div>
+            <select id="so-post" class="so-in" style="max-width:360px"></select>
+            <label class="so-l">Test name (shown to students — optional, otherwise “Test 1, Test 2…”)</label>
+            <input id="so-title" class="so-in" placeholder="e.g. Digital Banking in Rural India"/>
+            <div class="qzf-h">2 · The essay</div>
+            <label class="so-l" style="margin-top:0">Essay topic / question</label>
+            <textarea id="so-text" class="so-in" rows="4" placeholder="Write the essay topic exactly as students should see it"></textarea>
+            <label class="so-l">Model answer / key points (optional, helps the AI evaluate)</label>
+            <textarea id="so-ans" class="so-in" rows="4"></textarea>
+            <div class="qzf-h">3 · Marks &amp; length</div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px">
+              <div><label class="so-l" style="margin-top:0">Word limit</label><input id="so-wl" class="so-in" value="250 words"/></div>
+              <div><label class="so-l" style="margin-top:0">Marks</label><input id="so-marks" type="number" min="1" class="so-in" value="15"/></div>
+              <div><label class="so-l" style="margin-top:0">Difficulty</label><select id="so-diff" class="so-in"><option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Hard</option></select></div>
+            </div>
+            <div class="qzf-h">4 · Who can attempt it</div>
+            <select id="so-access" class="so-in" style="max-width:360px" onchange="document.getElementById('so-prod-wrap').style.display=this.value==='paid'?'block':'none'"><option value="free">Free for everyone</option><option value="paid">Only buyers of a paid course</option></select>
+            <div id="so-prod-wrap" style="display:none;margin-top:10px">
+              <label class="so-l" style="margin-top:0">Which course(s) unlock it? (tick one or more)</label>
+              <div id="so-prod-list" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+              <div style="font-size:.68rem;color:var(--t2);margin-top:8px;line-height:1.6">Paid tests are protected: the real question text is stored securely and only reaches students who bought the course. Saving a paid test needs you signed in under Paid Content.</div>
+            </div>
+            <div class="qzf-h">5 · Visibility</div>
+            <label style="display:flex;align-items:center;gap:8px;font-size:.8rem;cursor:pointer"><input type="checkbox" id="so-active" checked/> Show this test to students</label>
+            <div style="display:flex;gap:8px;margin-top:18px">
+              <button class="btn bp" style="padding:9px 20px" onclick="soSaveTest()">Save Test</button>
+              <button class="btn" style="padding:8px 16px;font-size:.78rem" onclick="soResetForm();soTab('tests')">Cancel</button>
+            </div>
+          </div></div>
+        </div>
+
+        <!-- POSTS -->
+        <div data-sotab="posts" style="display:none">
+          <div class="card" style="margin-bottom:14px"><div class="cb">
+            <div style="font-size:.85rem;font-weight:700;margin-bottom:4px">Posts (sections inside IBPS SO)</div>
+            <div style="font-size:.74rem;color:var(--t2);line-height:1.6;margin-bottom:12px">Each post becomes a tab on the student page. Add the posts you want, remove the ones you don't.</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <input id="so-newpost" class="so-in" style="flex:1;min-width:200px" placeholder="Post name, e.g. IT Officer"/>
+              <button class="btn bp" onclick="soAddPost()">Add Post</button>
+            </div>
+            <div style="margin-top:12px"><button class="btn bo sm" onclick="soQuickPosts()">+ Add the standard IBPS SO posts</button> <span style="font-size:.68rem;color:var(--t2)">IT, Agricultural, Rajbhasha, Law, HR, Marketing (skips any you already have)</span></div>
+          </div></div>
+          <div class="card"><div class="cb" id="so-posts-list"></div></div>
+        </div>
+
+        <!-- HOME CARD -->
+        <div data-sotab="card" style="display:none">
+          <div class="card"><div class="cb">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+              <div><div style="font-size:.85rem;font-weight:700">Show the card on the home page</div><div style="font-size:.74rem;color:var(--t2);margin-top:3px" id="so-card-hint"></div></div>
+              <label class="qz-tgl"><span id="so-card-lbl">Hidden</span><input type="checkbox" id="so-card-on" onchange="soToggleCard(this.checked)"><span class="qz-tg"></span></label>
+            </div>
+            <label class="so-l">Card title</label><input id="so-card-title" class="so-in" style="max-width:420px"/>
+            <label class="so-l">Card description</label><input id="so-card-desc" class="so-in" style="max-width:560px"/>
+            <div style="margin-top:16px"><button class="btn bp" onclick="soSaveCard()">Save card text</button></div>
+            <div style="font-size:.7rem;color:var(--t2);margin-top:12px;line-height:1.6">The card appears in the Practice Section, right before “Essay Writing”. Switching it off hides the card and the page from students. Remember to click Publish after any change.</div>
+          </div></div>
+        </div>
+      </div>
+
       <div id="pg-quizcourse" class="pg">
         <div class="ph"><div class="ph-ey">Content</div><div class="ph-ti">Quiz Course</div><div class="ph-su">MCQ question bank for Computer Awareness (or any quiz-style course) — bulk-paste and parse with AI, or add/edit questions one at a time. Organize into topics and timed Quiz Sets.</div></div>
       <div class="qzt-bar" id="qzt-bar">
@@ -1363,7 +1452,7 @@ function toggleTheme(){
 
 // ── NAV ──
 function nav(p){document.querySelectorAll('.pg').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.ni').forEach(x=>x.classList.remove('on'));document.getElementById('pg-'+p).classList.add('on');document.querySelector(`[data-p="${p}"]`).classList.add('on');rp(p);}
-function rp(p){if(p==='dash')rDash();if(p==='qs')rQP();if(p==='exams')rExams();if(p==='mocks')renderMocks();if(p==='secs')rSecs();if(p==='typing')rTypingParas();if(p==='timing')rTiming();if(p==='appear')rAppear();if(p==='content')rContent();if(p==='cfg')rCfg();if(p==='notice')rNotice();if(p==='livetracker')rLiveTracker();if(p==='offers')rOffers();if(p==='platforms')rPlatforms();if(p==='essays')renderEssayList();if(p==='quizcourse'){renderQuizAdmin();qzTab(_qzTab,_qzAdd);}}
+function rp(p){if(p==='dash')rDash();if(p==='qs')rQP();if(p==='exams')rExams();if(p==='mocks')renderMocks();if(p==='secs')rSecs();if(p==='typing')rTypingParas();if(p==='timing')rTiming();if(p==='appear')rAppear();if(p==='content')rContent();if(p==='cfg')rCfg();if(p==='notice')rNotice();if(p==='so')rSO();if(p==='livetracker')rLiveTracker();if(p==='offers')rOffers();if(p==='platforms')rPlatforms();if(p==='essays')renderEssayList();if(p==='quizcourse'){renderQuizAdmin();qzTab(_qzTab,_qzAdd);}}
 
 // ── LIVE TRACKER ──
 function rLiveTracker(){
@@ -1699,7 +1788,7 @@ function rDash(){const d=D(),tot=d.questions.length,act=d.questions.filter(q=>q.
 
 // ── QUESTIONS ──
 function rQP(){const d=D();document.getElementById('qs-ft').innerHTML='<option value="">All Types</option>'+d.sectionTypes.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');document.getElementById('qs-fe').innerHTML='<option value="">All Exams</option>'+d.exams.map(e=>`<option value="${e.id}">${e.name}</option>`).join('');renderQT();}
-function renderQT(){const d=D(),s=(document.getElementById('qs-s')||{}).value||'',ft=(document.getElementById('qs-ft')||{}).value||'',fe=(document.getElementById('qs-fe')||{}).value||'';const tm={};d.sectionTypes.forEach(s=>tm[s.id]=s.name);const em={};d.exams.forEach(e=>em[e.id]=e.name);const qs=d.questions.filter(q=>(ft?q.type===ft:true)&&(fe?q.examId===fe:true)&&(s?q.text.toLowerCase().includes(s.toLowerCase()):true));
+function renderQT(){const d=D(),s=(document.getElementById('qs-s')||{}).value||'',ft=(document.getElementById('qs-ft')||{}).value||'',fe=(document.getElementById('qs-fe')||{}).value||'';const tm={};d.sectionTypes.forEach(s=>tm[s.id]=s.name);const em={};d.exams.forEach(e=>em[e.id]=e.name);const qs=d.questions.filter(q=>!q.soPostId&&(ft?q.type===ft:true)&&(fe?q.examId===fe:true)&&(s?q.text.toLowerCase().includes(s.toLowerCase()):true));
   document.getElementById('q-tb').innerHTML=qs.length===0?'<tr><td colspan="8" style="text-align:center;padding:24px;color:var(--t2)">No questions found.</td></tr>':qs.map(q=>{const isPaid=q.productIds&&q.productIds.length;const preview=isPaid?('🔒 '+(q.label||'Paid question — click Edit to view/edit')):(q.text?(q.text.substring(0,70)+(q.text.length>70?'…':'')):'<span style="color:var(--red)">(No question text yet)</span>');return `<tr><td class="td-p">${preview}</td><td style="font-size:.72rem;color:var(--t2)">${em[q.examId]||'<span style=\'color:var(--red)\'>Unassigned</span>'}</td><td style="font-size:.72rem;color:var(--t2)">${tm[q.type]||q.type}</td><td style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--t2)">${q.mockNo||'—'}</td><td style="font-family:'JetBrains Mono',monospace;font-size:.72rem">${q.marks}</td><td style="font-size:.72rem;color:var(--t2)">${q.wordLimit}</td><td><span class="bge ${q.active?'bg-g':'bg-r'}">${q.active?'Active':'Hidden'}</span></td><td><div class="tda"><button class="btn bo sm" onclick="openQM('${q.id}')">Edit</button><button class="btn bd sm" onclick="delQ('${q.id}')">Del</button></div></td></tr>`;}).join('');}
 async function openQM(id){const d=D();document.getElementById('qm-type').innerHTML='<option value="">Select…</option>'+d.sectionTypes.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');document.getElementById('qm-exam').innerHTML=d.exams.map(e=>`<option value="${e.id}">${e.name}</option>`).join('')||'<option value="">No exams yet</option>';let existingProductIds=[];if(id){const q=d.questions.find(x=>x.id===id);if(!q)return;document.getElementById('qm-t').textContent='Edit Question';document.getElementById('qm-type').value=q.type;document.getElementById('qm-exam').value=q.examId||d.exams[0]?.id||'';document.getElementById('qm-marks').value=q.marks;document.getElementById('qm-wl').value=q.wordLimit;document.getElementById('qm-mockno').value=q.mockNo||'';document.getElementById('qm-diff').value=q.difficulty||'medium';document.getElementById('qm-active').checked=q.active;document.getElementById('qm-id').value=q.id;document.getElementById('qm-label').value=q.label||'';existingProductIds=q.productIds||[];
   if(existingProductIds.length){
@@ -1994,6 +2083,212 @@ function resetNoticeText(){
   document.getElementById('nt-title').value=NOTICE_DEFAULT_TITLE;
   document.getElementById('nt-text').value=NOTICE_DEFAULT_TEXT;
   ntPreview();
+}
+
+
+// ── ESSAY WRITING (IBPS SO) ──
+var _soTab='tests';
+var SO_STD_POSTS=['IT Officer','Agricultural Field Officer','Rajbhasha Adhikari','Law Officer','HR / Personnel Officer','Marketing Officer'];
+function soData(){
+  const d=D();
+  if(!d.ibpsSO)d.ibpsSO={enabled:false,title:'Essay Writing (IBPS SO)',desc:'Post-wise essay tests for IBPS SO',posts:[]};
+  if(!d.ibpsSO.posts)d.ibpsSO.posts=[];
+  if(!d.questions)d.questions=[];
+  return d;
+}
+function soGv(id){return (document.getElementById(id).value||'').trim();}
+function soTab(tab){
+  _soTab=tab;
+  document.querySelectorAll('#pg-so [data-sotab]').forEach(function(el){el.style.display=el.dataset.sotab===tab?'':'none';});
+  document.querySelectorAll('#so-bar .qzt').forEach(function(b){b.classList.toggle('on',b.dataset.t===tab);});
+}
+function soTests(d){return d.questions.filter(function(q){return !!q.soPostId;});}
+// "Test N" exactly as students see it: position inside the post, shown tests only
+function soNumbers(d){
+  const c={},n={};
+  soTests(d).forEach(function(q){if(q.active===false)return;c[q.soPostId]=(c[q.soPostId]||0)+1;n[q.id]=c[q.soPostId];});
+  return n;
+}
+function rSO(){
+  const d=soData();
+  document.getElementById('so-cnt-t').textContent=soTests(d).length;
+  document.getElementById('so-cnt-p').textContent=d.ibpsSO.posts.length;
+  const f=document.getElementById('so-f-post'),cur=f.value;
+  f.innerHTML='<option value="">All posts</option>'+d.ibpsSO.posts.map(function(p){return '<option value="'+p.id+'">'+esc(p.name)+'</option>';}).join('');
+  f.value=cur;
+  const ps=document.getElementById('so-post'),pc=ps.value;
+  ps.innerHTML=d.ibpsSO.posts.length?d.ibpsSO.posts.map(function(p){return '<option value="'+p.id+'">'+esc(p.name)+'</option>';}).join(''):'<option value="">Add a post first (Posts tab)</option>';
+  ps.value=pc;
+  rSOTests();rSOPosts();rSOCard();
+  soRenderProducts();soLoadProducts();
+  soTab(_soTab);
+}
+function rSOTests(){
+  const d=soData(),num=soNumbers(d),fp=document.getElementById('so-f-post').value;
+  const pm={};d.ibpsSO.posts.forEach(function(p){pm[p.id]=p.name;});
+  const prods={};(_pcProducts||[]).forEach(function(p){prods[p.id]=p.name||p.id;});
+  const list=soTests(d).filter(function(q){return !fp||q.soPostId===fp;}).sort(function(a,b){
+    const ia=d.ibpsSO.posts.findIndex(function(p){return p.id===a.soPostId;}),ib=d.ibpsSO.posts.findIndex(function(p){return p.id===b.soPostId;});
+    return (ia<0?999:ia)-(ib<0?999:ib);
+  });
+  const el=document.getElementById('so-tests-list');
+  if(!list.length){el.innerHTML='<div style="font-size:.8rem;color:var(--t2);padding:6px 0">'+(d.ibpsSO.posts.length?'No tests yet. Click “+ Add Test”.':'Start by adding posts in the Posts tab, then add tests.')+'</div>';return;}
+  el.innerHTML=list.map(function(q){
+    const paid=q.productIds&&q.productIds.length;
+    const names=paid?q.productIds.map(function(id){return prods[id]||'course';}).join(', '):'';
+    const on=q.active!==false;
+    return '<div class="so-row"><div style="min-width:0;flex:1"><div style="font-weight:700;font-size:.84rem">'+(num[q.id]?'<span class="bge bg-g" style="font-family:monospace;margin-right:6px">Test '+num[q.id]+'</span>':'<span class="bge bg-r" style="margin-right:6px">Hidden</span>')+esc(q.title||q.label||'Untitled test')+'</div>'
+      +'<div style="font-size:.7rem;color:var(--t2);margin-top:4px">'+esc(pm[q.soPostId]||'(post removed)')+' · '+esc(q.wordLimit||'')+' · '+(q.marks||0)+' marks · '+esc(q.difficulty||'medium')+' · '+(paid?'<b style="color:var(--accent)">Paid</b> — '+esc(names):'Free')+'</div></div>'
+      +'<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><label class="qz-tgl"><span>'+(on?'Shown':'Hidden')+'</span><input type="checkbox" '+(on?'checked':'')+' onchange="soToggleTest(\''+q.id+'\',this.checked)"><span class="qz-tg"></span></label>'
+      +'<button class="btn bo sm" onclick="soEditTest(\''+q.id+'\')">Edit</button><button class="btn bd sm" onclick="soDelTest(\''+q.id+'\')">Delete</button></div></div>';
+  }).join('');
+}
+function rSOPosts(){
+  const d=soData(),el=document.getElementById('so-posts-list');
+  if(!d.ibpsSO.posts.length){el.innerHTML='<div style="font-size:.8rem;color:var(--t2)">No posts yet.</div>';return;}
+  el.innerHTML=d.ibpsSO.posts.map(function(p){
+    const n=soTests(d).filter(function(q){return q.soPostId===p.id;}).length,on=p.active!==false;
+    return '<div class="so-row"><div><div style="font-weight:700;font-size:.84rem">'+esc(p.name)+'</div><div style="font-size:.7rem;color:var(--t2);margin-top:3px">'+n+' test'+(n===1?'':'s')+'</div></div>'
+      +'<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><label class="qz-tgl"><span>'+(on?'Shown':'Hidden')+'</span><input type="checkbox" '+(on?'checked':'')+' onchange="soTogglePost(\''+p.id+'\',this.checked)"><span class="qz-tg"></span></label>'
+      +'<button class="btn bo sm" onclick="soRenamePost(\''+p.id+'\')">Rename</button><button class="btn bd sm" onclick="soDelPost(\''+p.id+'\')">Remove</button></div></div>';
+  }).join('');
+}
+function rSOCard(){
+  const c=soData().ibpsSO;
+  document.getElementById('so-card-on').checked=!!c.enabled;
+  document.getElementById('so-card-lbl').textContent=c.enabled?'Shown':'Hidden';
+  document.getElementById('so-card-hint').textContent=c.enabled?'Students see the card on the home page (after you Publish).':'The card is hidden from students.';
+  document.getElementById('so-card-title').value=c.title||'Essay Writing (IBPS SO)';
+  document.getElementById('so-card-desc').value=c.desc||'';
+}
+function soToggleCard(on){
+  const d=soData();d.ibpsSO.enabled=!!on;SD(d);rSOCard();
+  t(on?'Card is ON — click Publish to show it to students':'Card is OFF — click Publish to hide it from students','ok');
+}
+function soSaveCard(){
+  const d=soData();d.ibpsSO.title=soGv('so-card-title')||'Essay Writing (IBPS SO)';d.ibpsSO.desc=soGv('so-card-desc');SD(d);t('Card text saved','ok');
+}
+function soAddPost(){
+  const name=soGv('so-newpost');if(!name){t('Type a post name','er');return;}
+  const d=soData();
+  if(d.ibpsSO.posts.some(function(p){return p.name.toLowerCase()===name.toLowerCase();})){t('That post already exists','er');return;}
+  d.ibpsSO.posts.push({id:'sop_'+Date.now(),name:name,active:true});SD(d);
+  document.getElementById('so-newpost').value='';rSO();t('Post added','ok');
+}
+function soQuickPosts(){
+  const d=soData();let n=0;
+  SO_STD_POSTS.forEach(function(name,i){
+    if(d.ibpsSO.posts.some(function(p){return p.name.toLowerCase()===name.toLowerCase();}))return;
+    d.ibpsSO.posts.push({id:'sop_'+Date.now()+'_'+i,name:name,active:true});n++;
+  });
+  SD(d);rSO();t(n?n+' post'+(n===1?'':'s')+' added':'All standard posts are already there','ok');
+}
+function soRenamePost(id){
+  const d=soData(),p=d.ibpsSO.posts.find(function(x){return x.id===id;});if(!p)return;
+  const name=prompt('Rename post',p.name);if(!name||!name.trim())return;
+  p.name=name.trim();SD(d);rSO();
+}
+function soTogglePost(id,on){
+  const d=soData(),p=d.ibpsSO.posts.find(function(x){return x.id===id;});if(!p)return;
+  p.active=!!on;SD(d);rSO();t(on?'Post shown — click Publish':'Post hidden — click Publish','ok');
+}
+function soDelPost(id){
+  const d=soData(),p=d.ibpsSO.posts.find(function(x){return x.id===id;});if(!p)return;
+  const n=soTests(d).filter(function(q){return q.soPostId===id;}).length;
+  if(!confirm('Remove the post "'+p.name+'"'+(n?' and its '+n+' test'+(n===1?'':'s'):'')+'?\n\nThis cannot be undone.'))return;
+  d.questions=d.questions.filter(function(q){return q.soPostId!==id;});
+  d.ibpsSO.posts=d.ibpsSO.posts.filter(function(x){return x.id!==id;});
+  SD(d);rSO();t('Post removed — click Publish to update the site','ok');
+}
+// paid-course checklist (courses live in Firestore, so they load once you are signed in)
+var _soSelProds=[];
+function soRenderProducts(){
+  const el=document.getElementById('so-prod-list');if(!el)return;
+  const sel=Array.from(document.querySelectorAll('.so-pc:checked')).map(function(c){return c.value;});
+  const keep=sel.length?sel:_soSelProds;
+  if(!_pcProducts||!_pcProducts.length){el.innerHTML='<span style="font-size:.74rem;color:var(--t2)">No courses loaded yet. Sign in under Paid Content and add a course (product) first.</span>';return;}
+  el.innerHTML=_pcProducts.map(function(p){return '<label style="display:inline-flex;align-items:center;gap:6px;font-size:.78rem;background:var(--bg3);border:1px solid var(--b);border-radius:var(--rs);padding:6px 11px;cursor:pointer"><input type="checkbox" class="so-pc" value="'+esc(p.id)+'" '+(keep.indexOf(p.id)>=0?'checked':'')+'/> '+esc(p.name||p.id)+'</label>';}).join('');
+}
+async function soLoadProducts(){
+  if(_pcProducts&&_pcProducts.length)return;
+  if(!window.FB||!window.FB.auth||!window.FB.auth.currentUser)return;
+  try{
+    const snap=await window.FB.getDocs(window.FB.collection(window.FB.db,'products'));
+    _pcProducts=[];snap.forEach(function(x){_pcProducts.push(Object.assign({id:x.id},x.data()));});
+    soRenderProducts();rSOTests();
+  }catch(e){console.warn('Could not load courses',e);}
+}
+function soResetForm(){
+  ['so-id','so-title','so-text','so-ans'].forEach(function(id){document.getElementById(id).value='';});
+  const es=(D().sectionTypes||[]).find(function(s){return s.id==='essay';})||{};
+  document.getElementById('so-wl').value=es.wordLimit||'250 words';
+  document.getElementById('so-marks').value=es.marks||15;
+  document.getElementById('so-diff').value='medium';
+  document.getElementById('so-access').value='free';
+  document.getElementById('so-prod-wrap').style.display='none';
+  document.getElementById('so-active').checked=true;
+  document.getElementById('so-form-title').textContent='Add Test';
+  _soSelProds=[];soRenderProducts();
+}
+async function soSaveTest(){
+  const d=soData();
+  const postId=document.getElementById('so-post').value,text=soGv('so-text'),ans=soGv('so-ans'),title=soGv('so-title');
+  if(!postId){t('Add a post first (Posts tab)','er');return;}
+  if(!text){t('Write the essay topic','er');return;}
+  const paid=document.getElementById('so-access').value==='paid';
+  const productIds=paid?Array.from(document.querySelectorAll('.so-pc:checked')).map(function(c){return c.value;}):[];
+  if(paid&&!productIds.length){t('Tick at least one course, or choose Free for everyone','er');return;}
+  const marks=parseInt(soGv('so-marks'))||15,wordLimit=soGv('so-wl')||'250 words';
+  const id=soGv('so-id')||'q_'+Date.now();
+  if(paid){
+    if(!window.FB||!window.FB.auth.currentUser){t('Sign in as admin (Paid Content tab) before saving a paid test','er');return;}
+    try{
+      await window.FB.setDoc(window.FB.doc(window.FB.db,'paidContent',id),{allowedProducts:productIds,marks:marks,wordLimit:wordLimit,question:text,modelAnswer:ans,updatedAt:Date.now()});
+    }catch(e){t('Could not publish protected content: '+(e&&e.message?e.message:'please try again'),'er');return;}
+  }
+  const label=title||(text.slice(0,70)+(text.length>70?'…':''));
+  const q={id:id,examId:'__so',type:'essay',soPostId:postId,title:title,label:label,text:paid?'':text,modelAnswer:paid?'':ans,wordLimit:wordLimit,marks:marks,difficulty:document.getElementById('so-diff').value,active:document.getElementById('so-active').checked,mockNo:null,productIds:productIds};
+  const i=d.questions.findIndex(function(x){return x.id===id;});
+  if(i>=0)d.questions[i]=q;else d.questions.push(q);
+  SD(d);soResetForm();rSO();_soTab='tests';soTab('tests');
+  t(paid?'Test saved — protected content published too. Click Publish to update the site':'Test saved — click Publish to update the site','ok');
+}
+async function soEditTest(id){
+  const d=soData(),q=d.questions.find(function(x){return x.id===id;});if(!q)return;
+  soTab('add');
+  document.getElementById('so-form-title').textContent='Edit Test';
+  document.getElementById('so-id').value=q.id;
+  document.getElementById('so-post').value=q.soPostId;
+  document.getElementById('so-title').value=q.title||'';
+  document.getElementById('so-wl').value=q.wordLimit||'';
+  document.getElementById('so-marks').value=q.marks||15;
+  document.getElementById('so-diff').value=q.difficulty||'medium';
+  document.getElementById('so-active').checked=q.active!==false;
+  const paid=!!(q.productIds&&q.productIds.length);
+  document.getElementById('so-access').value=paid?'paid':'free';
+  document.getElementById('so-prod-wrap').style.display=paid?'block':'none';
+  _soSelProds=(q.productIds||[]).slice();soRenderProducts();
+  document.getElementById('so-text').value=q.text||'';document.getElementById('so-ans').value=q.modelAnswer||'';
+  if(paid){
+    document.getElementById('so-text').value='Loading…';document.getElementById('so-ans').value='Loading…';
+    try{
+      const snap=await window.FB.getDoc(window.FB.doc(window.FB.db,'paidContent',q.id));
+      const data=snap.exists()?snap.data():null;
+      document.getElementById('so-text').value=data?data.question||'':'';
+      document.getElementById('so-ans').value=data?data.modelAnswer||'':'';
+    }catch(e){
+      document.getElementById('so-text').value='';document.getElementById('so-ans').value='';
+      t('Could not load the protected text — sign in under Paid Content first','er');
+    }
+  }
+}
+function soToggleTest(id,on){
+  const d=soData(),q=d.questions.find(function(x){return x.id===id;});if(!q)return;
+  q.active=!!on;SD(d);rSO();t(on?'Test shown — click Publish':'Test hidden — click Publish','ok');
+}
+function soDelTest(id){
+  if(!confirm('Delete this test?'))return;
+  const d=soData();d.questions=d.questions.filter(function(q){return q.id!==id;});SD(d);rSO();t('Test deleted — click Publish to update the site','ok');
 }
 
 // ── GITHUB PUBLISH ──
