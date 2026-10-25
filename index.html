@@ -956,6 +956,12 @@ header .h-brand:hover{background:var(--brut-tint);}
   .exam-grid.split .answer-ta{flex:1;min-height:0;height:auto!important;overflow-y:auto}
   #exam .exam-main:has(.exam-grid.split),#fullmock .exam-main:has(.exam-grid.split){overflow-y:hidden}
 }
+
+/* Comprehension: use the full screen width (the normal 1300px cap left blank bands on both sides) and justify the passage */
+#exam.wide-split,#fullmock.wide-split{max-width:none;padding:12px 18px}
+.exam-grid.split #exam-qtext,.exam-grid.split #mock-qtext{text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto}
+.exam-grid.split .q-text{font-size:.9rem;line-height:1.85}
+.exam-grid.split .answer-ta{font-size:.9rem}
 </style>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
@@ -2512,6 +2518,7 @@ function launchExamReal(qidOrQ,resume){
   let mins=sec.timer||10;if(tMode==="none")mins=0;else if(tMode==="custom")mins=parseInt(document.getElementById("cust-mins").value)||10;
   document.getElementById("exam-type-lbl").textContent=(tm[CQ.type]?.name||"").toUpperCase();
   const _eg=document.querySelector("#exam .exam-grid");if(_eg)_eg.classList.toggle("split",CQ.type==="comprehension");
+  document.getElementById("exam").classList.toggle("wide-split",CQ.type==="comprehension");
   document.getElementById("exam-wl").textContent=CQ.wordLimit;
   document.getElementById("exam-qtext").textContent=(CQ.text&&CQ.text.trim())?CQ.text:"⚠️ This question's content is missing. Please go back and contact support.";
   document.getElementById("exam-qmeta").innerHTML=`<span class="chip">${CQ.wordLimit}</span><span class="chip">${CQ.marks} marks</span>`;
@@ -3216,6 +3223,7 @@ function loadMSContent(idx){
   const typeMeta=tm[s.question.type]||s.meta;
   document.getElementById("mock-type-lbl").textContent=(typeMeta.name||s.meta.name||"").toUpperCase();
   const _mg=document.querySelector("#fullmock .exam-grid");if(_mg)_mg.classList.toggle("split",s.question.type==="comprehension");
+  document.getElementById("fullmock").classList.toggle("wide-split",s.question.type==="comprehension");
   document.getElementById("mock-wl").textContent=s.question.wordLimit;
   document.getElementById("mock-qtext").textContent=(s.question.text&&s.question.text.trim())?s.question.text:"⚠️ This question's content is missing. Please go back and contact support.";
   document.getElementById("mock-qmeta").innerHTML=`<span class="chip">${s.question.wordLimit}</span><span class="chip">${s.question.marks} marks</span>`;
