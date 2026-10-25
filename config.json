@@ -2824,6 +2824,25 @@
         "IBPSPO",
         "IBPSSO"
       ]
+    },
+    {
+      "id": "q_1792926395211",
+      "examId": "__so",
+      "type": "essay",
+      "soPostId": "sop_1792925950348_0",
+      "title": "Cybersecurity in Banking: Protecting Customers in the Digital Age",
+      "label": "Cybersecurity in Banking: Protecting Customers in the Digital Age",
+      "text": "",
+      "modelAnswer": "",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO",
+        "IBPSSO"
+      ]
     }
   ],
   "typingParas": [
@@ -5060,6 +5079,19 @@
       "body": "Cloud computing is changing the way banks store data, manage services, and serve customers. It allows banks to use computing resources, such as storage and software, through the internet instead of depending only on their own computer systems. As digital banking grows, cloud computing has become an important tool for improving banking services and maintaining business continuity.\n\nOne major benefit of cloud computing is flexibility. Banks can increase their computing capacity when demand rises, such as during festivals or heavy online transactions. It can also reduce the cost of maintaining physical servers and help banks introduce new services faster. Cloud-based systems support mobile banking, online payments, and data analysis, making banking more convenient for customers.\n\nHowever, cloud computing also creates certain risks. Technical failures, cyberattacks, data theft, and internet disruptions can affect banking operations. If a cloud service provider faces an outage, several banking services may become unavailable. Heavy dependence on a single provider can also create problems if the provider changes its prices or services. Therefore, banks must protect customer information and ensure that critical services remain available during disruptions.\n\nTo improve operational resilience, banks should adopt strong cybersecurity measures, regularly back up important data, and prepare effective disaster recovery plans. They should test their systems regularly and maintain alternative arrangements to continue essential services during emergencies. Banks must also carefully assess cloud service providers and follow the guidelines issued by the Reserve Bank of India. Human supervision and clear accountability remain necessary.\n\nIn conclusion, cloud computing can make banking more flexible, efficient, and reliable. However, its benefits depend on proper planning, strong security, and effective risk management. Banks must use cloud technology responsibly to ensure uninterrupted services, protect customer data, and maintain public trust.",
       "structure": [],
       "practiceQuestionId": "q_1792926090278",
+      "active": true
+    },
+    {
+      "id": "essay_1792926368793",
+      "title": "Cybersecurity in Banking: Protecting Customers in the Digital Age",
+      "category": "IT Officer",
+      "tags": [
+        "IT Officer"
+      ],
+      "image": "https://i.postimg.cc/nLCNXZhF/images.jpg",
+      "body": "The banking sector has undergone a major transformation with the growth of digital banking. Services such as mobile banking, internet banking, and UPI have made financial transactions faster and more convenient. However, the increasing use of digital services has also raised the risk of cybercrime. Therefore, cybersecurity has become essential for protecting customers and maintaining trust in the banking system.\n\nCybersecurity refers to the methods used to protect digital systems, financial information, and online transactions from cyberattacks. Banks use technologies such as encryption, two-factor authentication, and fraud detection systems to protect customer accounts. Artificial intelligence can also help identify unusual transactions and prevent fraud. These measures make digital banking safer and more reliable.\n\nDespite these efforts, several challenges remain. Cybercriminals use phishing messages, fake websites, and fraudulent phone calls to steal sensitive information. Many customers, especially those with limited digital knowledge, may unknowingly share their passwords, PINs, or OTPs. Data breaches and identity theft can also cause financial losses and reduce public confidence in banking services.\n\nTo address these challenges, banks must regularly update their security systems, monitor suspicious transactions, and inform customers about emerging threats. They should provide simple reporting systems so that victims can report fraud quickly. Customers must also avoid clicking unknown links, sharing confidential banking details, and using unsecured networks for financial transactions. The government and regulatory authorities should strengthen cybersecurity rules and ensure their proper implementation.\n\nIn conclusion, cybersecurity is not only the responsibility of banks but also of customers and regulators. Strong security systems, digital awareness, and timely action can reduce cybercrime. Protecting customers in the digital age requires continuous improvement in technology and responsible online behaviour. A secure banking system is essential for building trust and supporting India's digital economy.",
+      "structure": [],
+      "practiceQuestionId": "q_1792926395211",
       "active": true
     }
   ],
