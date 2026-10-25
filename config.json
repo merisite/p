@@ -1575,7 +1575,8 @@
       "active": true,
       "mockNo": null,
       "productIds": [
-        "IBPSPO"
+        "IBPSPO",
+        "IBPSSO"
       ]
     },
     {
@@ -1703,7 +1704,8 @@
       "active": true,
       "mockNo": null,
       "productIds": [
-        "IBPSPO"
+        "IBPSPO",
+        "IBPSSO"
       ]
     },
     {
@@ -1719,7 +1721,8 @@
       "active": true,
       "mockNo": null,
       "productIds": [
-        "IBPSPO"
+        "IBPSPO",
+        "IBPSSO"
       ]
     },
     {
@@ -1735,7 +1738,8 @@
       "active": true,
       "mockNo": 6,
       "productIds": [
-        "IBPSPO"
+        "IBPSPO",
+        "IBPSSO"
       ]
     },
     {
@@ -1751,7 +1755,8 @@
       "active": true,
       "mockNo": null,
       "productIds": [
-        "IBPSPO"
+        "IBPSPO",
+        "IBPSSO"
       ]
     },
     {
@@ -1767,7 +1772,8 @@
       "active": true,
       "mockNo": null,
       "productIds": [
-        "IBPSPO"
+        "IBPSPO",
+        "IBPSSO"
       ]
     },
     {
@@ -1783,7 +1789,8 @@
       "active": true,
       "mockNo": null,
       "productIds": [
-        "IBPSPO"
+        "IBPSPO",
+        "IBPSSO"
       ]
     },
     {
@@ -1799,7 +1806,8 @@
       "active": true,
       "mockNo": null,
       "productIds": [
-        "IBPSPO"
+        "IBPSPO",
+        "IBPSSO"
       ]
     },
     {
@@ -1815,7 +1823,8 @@
       "active": true,
       "mockNo": 1,
       "productIds": [
-        "IBPSPO"
+        "IBPSPO",
+        "IBPSSO"
       ]
     },
     {
@@ -1831,7 +1840,8 @@
       "active": true,
       "mockNo": 2,
       "productIds": [
-        "IBPSPO"
+        "IBPSPO",
+        "IBPSSO"
       ]
     },
     {
@@ -1911,7 +1921,8 @@
       "active": true,
       "mockNo": 3,
       "productIds": [
-        "IBPSPO"
+        "IBPSPO",
+        "IBPSSO"
       ]
     },
     {
@@ -2327,7 +2338,8 @@
       "active": true,
       "mockNo": 4,
       "productIds": [
-        "IBPSPO"
+        "IBPSPO",
+        "IBPSSO"
       ]
     },
     {
@@ -2343,7 +2355,8 @@
       "active": true,
       "mockNo": 5,
       "productIds": [
-        "IBPSPO"
+        "IBPSPO",
+        "IBPSSO"
       ]
     },
     {
@@ -2359,7 +2372,8 @@
       "active": true,
       "mockNo": 7,
       "productIds": [
-        "IBPSPO"
+        "IBPSPO",
+        "IBPSSO"
       ]
     },
     {
@@ -2375,7 +2389,8 @@
       "active": true,
       "mockNo": 8,
       "productIds": [
-        "IBPSPO"
+        "IBPSPO",
+        "IBPSSO"
       ]
     },
     {
@@ -2391,7 +2406,8 @@
       "active": true,
       "mockNo": 9,
       "productIds": [
-        "IBPSPO"
+        "IBPSPO",
+        "IBPSSO"
       ]
     },
     {
@@ -2407,7 +2423,8 @@
       "active": true,
       "mockNo": 10,
       "productIds": [
-        "IBPSPO"
+        "IBPSPO",
+        "IBPSSO"
       ]
     },
     {
