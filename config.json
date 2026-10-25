@@ -3052,6 +3052,25 @@
         "IBPSPO",
         "IBPSSO"
       ]
+    },
+    {
+      "id": "q_1792930207537",
+      "examId": "__so",
+      "type": "essay",
+      "soPostId": "sop_1792925950348_0",
+      "title": "Ransomware Attacks and Business Continuity in Banks",
+      "label": "Ransomware Attacks and Business Continuity in Banks",
+      "text": "",
+      "modelAnswer": "",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO",
+        "IBPSSO"
+      ]
     }
   ],
   "typingParas": [
@@ -5444,6 +5463,19 @@
       "body": "Financial inclusion means providing affordable banking and financial services to every section of society, especially people living in rural areas and those with low incomes. Technology has played an important role in expanding financial inclusion in India by making banking services more accessible, affordable, and convenient.\n\nOne major step towards financial inclusion is digital banking. Mobile banking, internet banking, and the Unified Payments Interface (UPI) allow people to transfer money, pay bills, and receive payments without visiting bank branches. The Pradhan Mantri Jan Dhan Yojana has also helped millions of people open bank accounts. With Aadhaar-based services and Direct Benefit Transfer, government benefits can reach beneficiaries directly, reducing delays and the risk of corruption.\n\nTechnology has also improved access to credit and other financial services. Digital lending platforms help small businesses and individuals apply for loans more easily. Mobile-based insurance and investment services allow people to manage their finances conveniently. Farmers, small shopkeepers, and self-employed workers can benefit from these services and become part of the formal financial system.\n\nHowever, some challenges remain. Many people lack digital literacy and struggle to use banking applications. Cyber fraud, poor internet connectivity, and language barriers also prevent some people from using digital services safely. Banks and the government must address these problems through financial awareness programmes, stronger cybersecurity, and simple applications available in regional languages.\n\nIn conclusion, technology has made financial services more accessible and has supported economic empowerment. However, true financial inclusion requires more than opening bank accounts or providing digital access. It also requires safe, affordable, and reliable services that people can use confidently. By combining technology with education and consumer protection, India can build a more inclusive financial system.",
       "structure": [],
       "practiceQuestionId": "q_1792929876858",
+      "active": true
+    },
+    {
+      "id": "essay_1792930188005",
+      "title": "Ransomware Attacks and Business Continuity in Banks",
+      "category": "IT Officer",
+      "tags": [
+        "IT Officer"
+      ],
+      "image": "https://i.postimg.cc/cHNrkSTJ/Ransomware-trends2-1200X630.png",
+      "body": "Ransomware attacks have become a serious threat to the banking sector. Ransomware is a type of malicious software that locks computer systems or encrypts data and demands money to restore access. As banks increasingly depend on digital technology, protecting their systems and ensuring uninterrupted services have become essential.\n\nBanks store sensitive information, including customer details, account records, and financial transactions. A ransomware attack can block access to this information, interrupt online banking, delay payments, and damage customer trust. In some cases, criminals may also steal confidential data and threaten to publish it. Such incidents can cause financial losses and harm the reputation of banks.\n\nBusiness continuity is the ability of a bank to continue essential operations during and after a disruption. To achieve this, banks must regularly back up important data and keep secure copies that attackers cannot easily access. Strong passwords, multi-factor authentication, updated software, and regular security checks can reduce the risk of attacks. Employees should also receive cybersecurity training to identify suspicious emails and avoid unsafe links or attachments.\n\nHowever, preventing every cyberattack is difficult. Therefore, banks must prepare a clear recovery plan. This plan should define the responsibilities of different teams, establish emergency communication channels, and explain how critical services will be restored. Regular drills and testing of backup systems can help banks respond quickly during an actual attack. Banks should also coordinate with cybersecurity experts and relevant authorities to manage incidents effectively.\n\nIn conclusion, ransomware attacks threaten both the security and continuity of banking services. Banks must combine strong cybersecurity measures with effective recovery planning. Protecting customer data, restoring services quickly, and maintaining public trust should remain their top priorities. A prepared bank is better equipped to face cyber threats and provide reliable services even during a crisis.",
+      "structure": [],
+      "practiceQuestionId": null,
       "active": true
     }
   ],
