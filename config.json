@@ -2900,6 +2900,25 @@
         "IBPSPO",
         "IBPSSO"
       ]
+    },
+    {
+      "id": "q_1792927448070",
+      "examId": "__so",
+      "type": "essay",
+      "soPostId": "sop_1792925950348_0",
+      "title": "Digital Payments and the Growing Challenge of Financial Fraud",
+      "label": "Digital Payments and the Growing Challenge of Financial Fraud",
+      "text": "",
+      "modelAnswer": "",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO",
+        "IBPSSO"
+      ]
     }
   ],
   "typingParas": [
@@ -5188,6 +5207,19 @@
       "body": "Banks play an important role in the economy by managing deposits, providing loans, and enabling financial transactions. However, natural disasters, cyberattacks, technical failures, and power outages can interrupt banking services. Therefore, disaster recovery and business continuity are essential to ensure that banks continue to operate during unexpected situations.\n\nDisaster recovery refers to the steps taken to restore banking systems, data, and services after a disruption. Business continuity focuses on keeping essential banking operations running during and after such events. For example, banks maintain backup servers, store copies of important data, and use alternative data centres to recover information if their main systems fail. These measures help reduce financial losses and protect customer information.\n\nBusiness continuity is equally important because customers depend on banks for daily transactions, cash withdrawals, loan payments, and other financial services. If banking services remain unavailable for a long time, individuals and businesses may face serious difficulties. Banks must therefore prepare emergency plans, train employees, and establish alternative communication channels. Regular testing of these plans helps identify weaknesses before a real crisis occurs.\n\nHowever, implementing these measures can be costly and requires continuous investment in technology and employee training. Banks must also protect backup systems from cyberattacks and ensure that recovery plans comply with regulatory requirements. Coordination with technology providers and other financial institutions can further improve preparedness.\n\nIn conclusion, disaster recovery and business continuity are necessary for a safe and reliable banking system. Banks cannot prevent every disruption, but they can reduce its impact through proper planning, secure technology, regular testing, and trained staff. The most important goal is to restore services quickly, protect customer trust, and maintain financial stability during difficult situations.",
       "structure": [],
       "practiceQuestionId": "q_1792927279657",
+      "active": true
+    },
+    {
+      "id": "essay_1792927356255",
+      "title": "Digital Payments and the Growing Challenge of Financial Fraud",
+      "category": "IT Officer",
+      "tags": [
+        "IT Officer"
+      ],
+      "image": "https://i.postimg.cc/2Sb438B9/gb43d876470ff2a01fb5286a7594d1ca4cfb1d8aa4f4a0667e4c22988d8b468c2d4added77ba7044bd605d57c408b192a039.avif",
+      "body": "Digital payments have become an important part of everyday life in India. Platforms such as the Unified Payments Interface (UPI), mobile banking, and internet banking allow people to transfer money quickly and conveniently. They have reduced the need to carry cash and supported the growth of a digital economy. However, the increasing use of digital payments has also created new opportunities for financial fraud.\n\nOne major benefit of digital payments is that transactions can be completed within seconds. Small shopkeepers, farmers, and businesses can receive payments without visiting a bank. Digital payments also improve transparency and make it easier to maintain financial records. Government initiatives and affordable internet services have further encouraged people to adopt cashless transactions.\n\nDespite these benefits, financial fraud is becoming a serious concern. Fraudsters use fake calls, messages, links, and websites to steal personal and banking information. Some criminals pretend to be bank officials and trick customers into sharing their One-Time Passwords (OTPs) or PINs. In other cases, people are cheated through fake payment requests and fraudulent investment schemes. Lack of digital awareness makes elderly people and first-time users especially vulnerable.\n\nTo address this problem, banks must strengthen security systems and improve fraud detection. They should send timely alerts and provide quick complaint resolution. Customers must never share their OTPs, PINs, or passwords with anyone. They should verify payment requests, avoid suspicious links, and use only trusted applications. Schools, banks, and government agencies should also conduct financial awareness campaigns to educate people about safe digital practices.\n\nIn conclusion, digital payments are essential for India's economic growth, but their success depends on security and public trust. By combining strong technology, effective regulation, and responsible user behaviour, India can reduce financial fraud and build a safer digital payment system.",
+      "structure": [],
+      "practiceQuestionId": "q_1792927448070",
       "active": true
     }
   ],
