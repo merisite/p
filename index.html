@@ -944,6 +944,18 @@ header .h-brand:hover{background:var(--brut-tint);}
 [data-mode="dark"] #qz-home-card{--qzb:#6EB1FF;--qzb-dim:#14243E;--qzb-fill:#6EB1FF;--qzb-ink:#0F1420}
 #home #qz-home-card{background:var(--qzb-dim)}
 #home #qz-home-card .hc-icon{background:var(--qzb-fill);color:var(--qzb-ink);border-color:var(--b)}
+
+/* Comprehension: passage on the left, writing area on the right (desktop). Phones stay stacked. */
+@media(min-width:901px){
+  .exam-grid.split{flex-direction:row;align-items:stretch;gap:12px}
+  .exam-grid.split>.panel{flex:1 1 0;min-width:0;display:flex;flex-direction:column}
+  #exam .exam-grid.split>.panel{height:calc(100vh - 112px)}
+  #fullmock .exam-grid.split>.panel{height:calc(100vh - 166px)}
+  .exam-grid.split>.panel>.pb{flex:1;min-height:0;overflow-y:auto}
+  .exam-grid.split>.panel:last-child>.pb{display:flex;flex-direction:column;overflow:hidden}
+  .exam-grid.split .answer-ta{flex:1;min-height:0;height:auto!important;overflow-y:auto}
+  #exam .exam-main:has(.exam-grid.split),#fullmock .exam-main:has(.exam-grid.split){overflow-y:hidden}
+}
 </style>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
@@ -2499,6 +2511,7 @@ function launchExamReal(qidOrQ,resume){
   const tm={};d.sectionTypes.forEach(s=>tm[s.id]=s);const sec=tm[CQ.type]||{timer:10};
   let mins=sec.timer||10;if(tMode==="none")mins=0;else if(tMode==="custom")mins=parseInt(document.getElementById("cust-mins").value)||10;
   document.getElementById("exam-type-lbl").textContent=(tm[CQ.type]?.name||"").toUpperCase();
+  const _eg=document.querySelector("#exam .exam-grid");if(_eg)_eg.classList.toggle("split",CQ.type==="comprehension");
   document.getElementById("exam-wl").textContent=CQ.wordLimit;
   document.getElementById("exam-qtext").textContent=(CQ.text&&CQ.text.trim())?CQ.text:"⚠️ This question's content is missing. Please go back and contact support.";
   document.getElementById("exam-qmeta").innerHTML=`<span class="chip">${CQ.wordLimit}</span><span class="chip">${CQ.marks} marks</span>`;
@@ -3202,6 +3215,7 @@ function loadMSContent(idx){
   const d=D();const tm={};d.sectionTypes.forEach(st=>tm[st.id]=st);
   const typeMeta=tm[s.question.type]||s.meta;
   document.getElementById("mock-type-lbl").textContent=(typeMeta.name||s.meta.name||"").toUpperCase();
+  const _mg=document.querySelector("#fullmock .exam-grid");if(_mg)_mg.classList.toggle("split",s.question.type==="comprehension");
   document.getElementById("mock-wl").textContent=s.question.wordLimit;
   document.getElementById("mock-qtext").textContent=(s.question.text&&s.question.text.trim())?s.question.text:"⚠️ This question's content is missing. Please go back and contact support.";
   document.getElementById("mock-qmeta").innerHTML=`<span class="chip">${s.question.wordLimit}</span><span class="chip">${s.question.marks} marks</span>`;
