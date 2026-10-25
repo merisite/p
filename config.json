@@ -2995,6 +2995,44 @@
         "IBPSPO",
         "IBPSSO"
       ]
+    },
+    {
+      "id": "q_1792929437429",
+      "examId": "__so",
+      "type": "essay",
+      "soPostId": "sop_1792925950348_0",
+      "title": "Data Privacy and Customer Confidentiality in Digital Banking",
+      "label": "Data Privacy and Customer Confidentiality in Digital Banking",
+      "text": "",
+      "modelAnswer": "",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO",
+        "IBPSSO"
+      ]
+    },
+    {
+      "id": "q_1792929803249",
+      "examId": "__so",
+      "type": "essay",
+      "soPostId": "sop_1792925950348_0",
+      "title": "Blockchain Technology in Banking",
+      "label": "Blockchain Technology in Banking",
+      "text": "",
+      "modelAnswer": "",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO",
+        "IBPSSO"
+      ]
     }
   ],
   "typingParas": [
@@ -5348,6 +5386,32 @@
       "body": "The rapid growth of digital banking, online shopping, and internet-based services has made life easier. However, it has also increased the risk of online fraud. Cybercriminals use different methods to steal money, personal information, and banking details. In this situation, cyber awareness has become essential for protecting individuals and ensuring safe digital transactions.\n\nCyber awareness means understanding online threats and knowing how to avoid them. One common form of online fraud is phishing, in which criminals send fake messages, emails, or links to collect sensitive information. Fraudsters may also pretend to be bank officials and ask for an OTP, PIN, or password. Some criminals use fake payment requests or remote access applications to gain control of a person's device. Awareness of these methods can help people identify suspicious activities before suffering financial losses.\n\nIndividuals can take several simple steps to protect themselves. They should never share their OTP, PIN, or password with anyone. Strong passwords and two-factor authentication should be used to secure accounts. People must avoid clicking unknown links and should verify payment requests before transferring money. Regularly updating mobile applications and avoiding public Wi-Fi for sensitive transactions can also reduce risks.\n\nBanks, government agencies, and educational institutions have an important role in spreading cyber awareness. They should organise awareness campaigns, provide clear safety guidelines, and teach people how to report online fraud. In India, victims of financial cyber fraud can report incidents through the national cybercrime helpline, 1930, as soon as possible.\n\nIn conclusion, technology alone cannot prevent every cybercrime. Responsible digital behaviour and timely action are equally important. Cyber awareness empowers people to recognise threats, protect their money, and use digital services confidently. Therefore, awareness remains the first line of defence against online fraud.",
       "structure": [],
       "practiceQuestionId": "q_1792929188666",
+      "active": true
+    },
+    {
+      "id": "essay_1792929416977",
+      "title": "Data Privacy and Customer Confidentiality in Digital Banking",
+      "category": "IT Officer",
+      "tags": [
+        "IT Officer"
+      ],
+      "image": "https://i.postimg.cc/Fzdzr1Y0/digital-onboarding-header-inline-blog-image-1502x800.jpg",
+      "body": "Digital banking has made financial services faster, easier, and more convenient. Customers can transfer money, pay bills, apply for loans, and check account balances using mobile applications and internet banking. However, this growing use of technology has increased concerns about data privacy and customer confidentiality.\n\nBanks collect sensitive information such as account details, phone numbers, transaction records, and personal identification documents. This information helps banks provide better services and detect suspicious activities. However, if it is not protected properly, customers may face financial losses, identity theft, and misuse of their personal information.\n\nCyberattacks, phishing, data breaches, and online fraud are major threats to digital banking. Criminals may steal login details through fake messages or websites. Sometimes, weak security systems or careless handling of customer information can also expose sensitive data. Such incidents can damage customer trust and harm the reputation of banks. Therefore, protecting customer information is not only a technical responsibility but also an ethical and legal duty.\n\nBanks must take strong measures to protect customer data. They should use encryption, multi-factor authentication, regular security checks, and advanced fraud detection systems. Employees must receive proper training to handle confidential information responsibly. Banks should also collect only the information they need and clearly explain how customer data will be used. Customers, too, must use strong passwords, avoid suspicious links, and never share their PINs or OTPs with anyone.\n\nIn conclusion, digital banking can succeed only when customers feel that their money and personal information are safe. Banks must balance technological growth with strong privacy protection. By improving security, following data protection rules, and building customer awareness, banks can strengthen public trust and create a safer digital banking environment.",
+      "structure": [],
+      "practiceQuestionId": "q_1792929437429",
+      "active": true
+    },
+    {
+      "id": "essay_1792929776224",
+      "title": "Blockchain Technology in Banking",
+      "category": "IT Officer",
+      "tags": [
+        "IT Officer"
+      ],
+      "image": "https://i.postimg.cc/HsbbT6cK/images.jpg",
+      "body": "Blockchain technology is an emerging innovation that can change the way banks store information, transfer money, and manage financial transactions. It is a digital system that records transactions in a secure and transparent manner. As banks increasingly adopt digital services, blockchain offers new opportunities to improve efficiency, security, and trust.\n\nOne of the major benefits of blockchain is its ability to maintain records that are difficult to change without detection. Information is stored across a network of computers, reducing dependence on a single central database. This can help banks improve record-keeping and reduce the risk of data manipulation. Blockchain can also make international money transfers faster and less costly by reducing the need for multiple intermediaries. In addition, it can support faster settlement of transactions and improve the tracking of financial activities.\n\nHowever, blockchain technology also faces several challenges. Its implementation can be expensive, as banks need new systems, skilled professionals, and proper infrastructure. Some blockchain networks consume large amounts of energy, while others may face problems related to speed and scalability. Regulatory uncertainty is another concern because clear rules are necessary to ensure safe and responsible use. Moreover, blockchain cannot completely prevent fraud if incorrect information is entered into the system.\n\nTo overcome these challenges, banks should adopt blockchain gradually and test its practical benefits before large-scale implementation. Regulators must establish clear guidelines, while banks should invest in cybersecurity, employee training, and suitable infrastructure. Cooperation between banks and technology providers can also support wider adoption.\n\nIn conclusion, blockchain has the potential to make banking more secure, transparent, and efficient. However, its success depends on responsible implementation, strong regulation, and continuous technological improvement. A balanced approach can help banks use this technology effectively while protecting customers and maintaining public trust.",
+      "structure": [],
+      "practiceQuestionId": "q_1792929803249",
       "active": true
     }
   ],
