@@ -3071,6 +3071,25 @@
         "IBPSPO",
         "IBPSSO"
       ]
+    },
+    {
+      "id": "q_1792930366814",
+      "examId": "__so",
+      "type": "essay",
+      "soPostId": "sop_1792925950348_0",
+      "title": "Automation and Its Impact on Jobs in the Banking Sector",
+      "label": "Automation and Its Impact on Jobs in the Banking Sector",
+      "text": "",
+      "modelAnswer": "",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO",
+        "IBPSSO"
+      ]
     }
   ],
   "typingParas": [
@@ -5476,6 +5495,19 @@
       "body": "Ransomware attacks have become a serious threat to the banking sector. Ransomware is a type of malicious software that locks computer systems or encrypts data and demands money to restore access. As banks increasingly depend on digital technology, protecting their systems and ensuring uninterrupted services have become essential.\n\nBanks store sensitive information, including customer details, account records, and financial transactions. A ransomware attack can block access to this information, interrupt online banking, delay payments, and damage customer trust. In some cases, criminals may also steal confidential data and threaten to publish it. Such incidents can cause financial losses and harm the reputation of banks.\n\nBusiness continuity is the ability of a bank to continue essential operations during and after a disruption. To achieve this, banks must regularly back up important data and keep secure copies that attackers cannot easily access. Strong passwords, multi-factor authentication, updated software, and regular security checks can reduce the risk of attacks. Employees should also receive cybersecurity training to identify suspicious emails and avoid unsafe links or attachments.\n\nHowever, preventing every cyberattack is difficult. Therefore, banks must prepare a clear recovery plan. This plan should define the responsibilities of different teams, establish emergency communication channels, and explain how critical services will be restored. Regular drills and testing of backup systems can help banks respond quickly during an actual attack. Banks should also coordinate with cybersecurity experts and relevant authorities to manage incidents effectively.\n\nIn conclusion, ransomware attacks threaten both the security and continuity of banking services. Banks must combine strong cybersecurity measures with effective recovery planning. Protecting customer data, restoring services quickly, and maintaining public trust should remain their top priorities. A prepared bank is better equipped to face cyber threats and provide reliable services even during a crisis.",
       "structure": [],
       "practiceQuestionId": "q_1792930207537",
+      "active": true
+    },
+    {
+      "id": "essay_1792930338384",
+      "title": "Automation and Its Impact on Jobs in the Banking Sector",
+      "category": "IT Officer",
+      "tags": [
+        "IT Officer"
+      ],
+      "image": "https://i.postimg.cc/668pVTBX/images.jpg",
+      "body": "Automation has become an important part of the banking sector. With the growth of technology, banks are using machines, software, and artificial intelligence to perform various tasks. Services such as ATMs, internet banking, mobile banking, and automated customer support have made banking faster and more convenient. However, this change has also raised concerns about its impact on employment.\n\nAutomation offers several benefits to banks and customers. Tasks such as cash withdrawals, fund transfers, bill payments, and account management can now be completed without visiting a bank branch. It reduces paperwork, saves time, and lowers operational costs. Employees can also focus more on complex tasks, customer relationships, and financial planning instead of performing repetitive work.\n\nHowever, automation may reduce the demand for certain traditional banking jobs. Tasks related to data entry, routine transactions, and basic customer support can increasingly be handled by machines and software. As a result, some employees may face job insecurity, especially those who lack technical skills. At the same time, automation creates new opportunities in areas such as cybersecurity, data analysis, software development, and digital banking services.\n\nTo manage this change, banks must invest in employee training and skill development. Workers should learn digital tools, data management, and customer service skills. Banks should also ensure that technology is introduced gradually, keeping employees' interests in mind. Human supervision remains essential for handling complex complaints, sensitive financial decisions, and customers who are not comfortable with digital services.\n\nIn conclusion, automation is transforming banking, but it does not necessarily mean the end of banking jobs. Instead, it is changing the nature of work. The key challenge is to balance technological progress with employment security. With proper training and planning, banks can improve efficiency while helping employees adapt to the changing workplace.",
+      "structure": [],
+      "practiceQuestionId": "q_1792930366814",
       "active": true
     }
   ],
