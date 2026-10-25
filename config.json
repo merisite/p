@@ -2843,6 +2843,25 @@
         "IBPSPO",
         "IBPSSO"
       ]
+    },
+    {
+      "id": "q_1792926549955",
+      "examId": "__so",
+      "type": "essay",
+      "soPostId": "sop_1792925950348_0",
+      "title": "Role of Big Data Analytics in Banking",
+      "label": "Role of Big Data Analytics in Banking",
+      "text": "",
+      "modelAnswer": "",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO",
+        "IBPSSO"
+      ]
     }
   ],
   "typingParas": [
@@ -5092,6 +5111,19 @@
       "body": "The banking sector has undergone a major transformation with the growth of digital banking. Services such as mobile banking, internet banking, and UPI have made financial transactions faster and more convenient. However, the increasing use of digital services has also raised the risk of cybercrime. Therefore, cybersecurity has become essential for protecting customers and maintaining trust in the banking system.\n\nCybersecurity refers to the methods used to protect digital systems, financial information, and online transactions from cyberattacks. Banks use technologies such as encryption, two-factor authentication, and fraud detection systems to protect customer accounts. Artificial intelligence can also help identify unusual transactions and prevent fraud. These measures make digital banking safer and more reliable.\n\nDespite these efforts, several challenges remain. Cybercriminals use phishing messages, fake websites, and fraudulent phone calls to steal sensitive information. Many customers, especially those with limited digital knowledge, may unknowingly share their passwords, PINs, or OTPs. Data breaches and identity theft can also cause financial losses and reduce public confidence in banking services.\n\nTo address these challenges, banks must regularly update their security systems, monitor suspicious transactions, and inform customers about emerging threats. They should provide simple reporting systems so that victims can report fraud quickly. Customers must also avoid clicking unknown links, sharing confidential banking details, and using unsecured networks for financial transactions. The government and regulatory authorities should strengthen cybersecurity rules and ensure their proper implementation.\n\nIn conclusion, cybersecurity is not only the responsibility of banks but also of customers and regulators. Strong security systems, digital awareness, and timely action can reduce cybercrime. Protecting customers in the digital age requires continuous improvement in technology and responsible online behaviour. A secure banking system is essential for building trust and supporting India's digital economy.",
       "structure": [],
       "practiceQuestionId": "q_1792926395211",
+      "active": true
+    },
+    {
+      "id": "essay_1792926527799",
+      "title": "Role of Big Data Analytics in Banking",
+      "category": "IT Officer",
+      "tags": [
+        "IT Officer"
+      ],
+      "image": "https://i.postimg.cc/s24GZF68/blog-hotel-data-analytics-banner.png",
+      "body": "The banking sector is undergoing rapid changes due to digital technology. Every day, banks generate large amounts of data through transactions, loan applications, online payments, and customer interactions. Big Data Analytics helps banks study this information, identify patterns, and make better decisions. It has become an important tool for improving banking services and managing risks.\n\nOne of the major benefits of Big Data Analytics is better customer service. By studying customers’ spending habits and preferences, banks can offer suitable financial products and personalised services. It also helps banks understand customer needs and improve their overall experience. In addition, banks can use data to identify suspicious transactions and detect possible fraud at an early stage.\n\nBig Data Analytics also plays an important role in lending and risk management. Banks can analyse income, repayment history, and other financial information to assess the creditworthiness of borrowers. This helps them make informed lending decisions and reduce the risk of loan defaults. Furthermore, data analysis can help banks identify market trends, improve operational efficiency, and plan their business strategies more effectively.\n\nHowever, the use of Big Data Analytics also presents certain challenges. Protecting customer information is a major concern, as data breaches can cause financial losses and damage public trust. Poor-quality data may also lead to incorrect decisions. Therefore, banks must ensure data security, maintain accuracy, and follow relevant privacy rules. Skilled employees are also needed to analyse data properly.\n\nIn conclusion, Big Data Analytics can make banking more efficient, secure, and customer-friendly. However, its success depends on responsible data management, strong security systems, and accurate analysis. By addressing these challenges, banks can use data effectively to improve services and build lasting customer trust.",
+      "structure": [],
+      "practiceQuestionId": "q_1792926549955",
       "active": true
     }
   ],
