@@ -5029,6 +5029,19 @@
       "structure": [],
       "practiceQuestionId": "q_1792842346316",
       "active": true
+    },
+    {
+      "id": "essay_1792925889305",
+      "title": "Cloud Computing and Operational Resilience in Banks",
+      "category": "SO IT Officer",
+      "tags": [
+        "SO IT Officer"
+      ],
+      "image": "https://i.postimg.cc/YqKDtYF2/cloud-computing-in-banking.webp",
+      "body": "Cloud computing is changing the way banks store data, manage services, and serve customers. It allows banks to use computing resources, such as storage and software, through the internet instead of depending only on their own computer systems. As digital banking grows, cloud computing has become an important tool for improving banking services and maintaining business continuity.\n\nOne major benefit of cloud computing is flexibility. Banks can increase their computing capacity when demand rises, such as during festivals or heavy online transactions. It can also reduce the cost of maintaining physical servers and help banks introduce new services faster. Cloud-based systems support mobile banking, online payments, and data analysis, making banking more convenient for customers.\n\nHowever, cloud computing also creates certain risks. Technical failures, cyberattacks, data theft, and internet disruptions can affect banking operations. If a cloud service provider faces an outage, several banking services may become unavailable. Heavy dependence on a single provider can also create problems if the provider changes its prices or services. Therefore, banks must protect customer information and ensure that critical services remain available during disruptions.\n\nTo improve operational resilience, banks should adopt strong cybersecurity measures, regularly back up important data, and prepare effective disaster recovery plans. They should test their systems regularly and maintain alternative arrangements to continue essential services during emergencies. Banks must also carefully assess cloud service providers and follow the guidelines issued by the Reserve Bank of India. Human supervision and clear accountability remain necessary.\n\nIn conclusion, cloud computing can make banking more flexible, efficient, and reliable. However, its benefits depend on proper planning, strong security, and effective risk management. Banks must use cloud technology responsibly to ensure uninterrupted services, protect customer data, and maintain public trust.",
+      "structure": [],
+      "practiceQuestionId": null,
+      "active": true
     }
   ],
   "quizTopics": [],
