@@ -2938,6 +2938,44 @@
         "IBPSPO",
         "IBPSSO"
       ]
+    },
+    {
+      "id": "q_1792928667884",
+      "examId": "__so",
+      "type": "essay",
+      "soPostId": "sop_1792925950348_0",
+      "title": "Artificial Intelligence in Banking: Opportunities and Risks",
+      "label": "Artificial Intelligence in Banking: Opportunities and Risks",
+      "text": "",
+      "modelAnswer": "",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO",
+        "IBPSSO"
+      ]
+    },
+    {
+      "id": "q_1792928899431",
+      "examId": "__so",
+      "type": "essay",
+      "soPostId": "sop_1792925950348_0",
+      "title": "Internet of Things and Its Applications in Banking",
+      "label": "Internet of Things and Its Applications in Banking",
+      "text": "",
+      "modelAnswer": "",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO",
+        "IBPSSO"
+      ]
     }
   ],
   "typingParas": [
@@ -5252,6 +5290,32 @@
       "body": "Digital finance has changed the way people manage their money. Services such as UPI, mobile banking, digital wallets, and online lending have made financial transactions faster and easier. However, as digital finance grows, it is important to balance innovation and convenience with security to protect customers and maintain trust.\n\nInnovation has helped banks and financial institutions improve their services. People can transfer money, pay bills, and access banking services from their homes without visiting a branch. Digital payments have also helped small businesses and street vendors accept payments easily. New technologies, including artificial intelligence, can detect suspicious transactions and help banks provide better services. These developments save time, reduce costs, and support financial inclusion.\n\nDespite these benefits, digital finance faces several security challenges. Online fraud, phishing attacks, identity theft, and unauthorised transactions are major concerns. Many users, especially those with limited digital knowledge, may fall victim to fraud. Collecting large amounts of personal and financial data also raises concerns about privacy. If security systems are weak, even advanced digital services can put customers at risk.\n\nTo address these challenges, banks must use strong security measures, including encryption, multi-factor authentication, and real-time fraud detection. They should regularly update their systems and inform customers about safe digital practices. Customers must never share their passwords, PINs, or OTPs with anyone. Regulators should also ensure that financial institutions follow proper data protection rules and provide quick grievance redressal.\n\nIn conclusion, digital finance can achieve its true potential only when innovation, convenience, and security work together. Technology should make financial services easier without exposing customers to unnecessary risks. A secure and trustworthy digital financial system will strengthen public confidence and support India's journey towards a more inclusive economy.",
       "structure": [],
       "practiceQuestionId": "q_1792927770185",
+      "active": true
+    },
+    {
+      "id": "essay_1792928621505",
+      "title": "Artificial Intelligence in Banking: Opportunities and Risks",
+      "category": "IT Officer",
+      "tags": [
+        "IT Officer"
+      ],
+      "image": "https://i.postimg.cc/rstz9zCN/20240625112415-1f246ac3861e4d7ba05fa7d00d930bd6.webp",
+      "body": "Artificial Intelligence (AI) is changing the banking sector by making banking services faster, easier, and more efficient. Banks are using AI to improve customer service, detect fraud, process loan applications, and manage daily operations. As digital banking grows in India, AI offers several opportunities, but it also creates risks that need careful attention.\n\nOne major benefit of AI is improved customer service. Chatbots and virtual assistants can answer customer queries at any time without requiring human support. AI can also detect unusual transactions and help banks prevent fraud. In addition, it can analyse financial data to assess loan applications more quickly. This can save time, reduce costs, and improve the overall banking experience. AI can also help banks offer personalised services according to customers’ needs.\n\nHowever, the use of AI comes with certain risks. Cybercriminals may misuse AI to create convincing fake messages, commit fraud, and steal personal information. Another concern is data privacy, as AI systems require large amounts of customer data. If this information is not protected properly, customers may face financial losses. Moreover, biased AI systems may make unfair lending decisions. Excessive dependence on technology can also create problems when systems fail or produce incorrect results.\n\nTo gain the benefits of AI while reducing its risks, banks must follow strong data protection rules and regularly test their AI systems. Human supervision should remain important in sensitive financial decisions. Banks must also train employees, improve cybersecurity, and maintain clear systems for handling customer complaints.\n\nIn conclusion, AI has the potential to make banking more secure, efficient, and customer-friendly. However, its success depends on responsible use, proper regulation, and effective human oversight. Banks must balance technological progress with customer safety and trust.",
+      "structure": [],
+      "practiceQuestionId": "q_1792928667884",
+      "active": true
+    },
+    {
+      "id": "essay_1792928869199",
+      "title": "Internet of Things and Its Applications in Banking",
+      "category": "IT Officer",
+      "tags": [
+        "IT Officer"
+      ],
+      "image": "https://i.postimg.cc/fLqB9qBv/cover.png",
+      "body": "The Internet of Things (IoT) refers to a network of physical devices connected to the internet that collect and share data. These devices include sensors, cameras, smart machines, and mobile devices. In the banking sector, IoT is creating new ways to improve security, customer service, and operational efficiency.\n\nOne important application of IoT in banking is enhanced security. Smart cameras and connected sensors can monitor bank branches and ATMs in real time. They can help detect suspicious activities and alert security teams quickly. IoT devices can also support fraud prevention by identifying unusual patterns in transactions and customer behaviour.\n\nAnother major application is the improvement of customer services. Smart devices can help banks understand customer needs and offer more personalised services. For example, location-based technology may help customers find nearby ATMs or receive information about banking services. Connected devices can also help banks monitor ATMs and identify cash shortages or technical problems before they cause major inconvenience.\n\nIoT can also improve banking operations by enabling remote monitoring of equipment and reducing maintenance costs. Banks can use connected systems to manage energy consumption, monitor branch facilities, and improve resource utilisation. In addition, IoT-based data can help financial institutions understand business activities and support better lending decisions, especially for businesses using connected machinery.\n\nHowever, IoT also creates challenges. Connected devices may become targets for cyberattacks, and the collection of personal data raises privacy concerns. Banks must therefore use strong encryption, secure networks, regular software updates, and clear data protection policies.\n\nIn conclusion, IoT has the potential to make banking safer, faster, and more efficient. However, its success depends on responsible implementation, strong cybersecurity, and customer trust. Banks must balance technological progress with the protection of sensitive information to achieve long-term benefits.",
+      "structure": [],
+      "practiceQuestionId": "q_1792928899431",
       "active": true
     }
   ],
