@@ -3033,6 +3033,25 @@
         "IBPSPO",
         "IBPSSO"
       ]
+    },
+    {
+      "id": "q_1792929876858",
+      "examId": "__so",
+      "type": "essay",
+      "soPostId": "sop_1792925950348_0",
+      "title": "The Role of Technology in Expanding Financial Inclusion",
+      "label": "The Role of Technology in Expanding Financial Inclusion",
+      "text": "",
+      "modelAnswer": "",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO",
+        "IBPSSO"
+      ]
     }
   ],
   "typingParas": [
@@ -5412,6 +5431,19 @@
       "body": "Blockchain technology is an emerging innovation that can change the way banks store information, transfer money, and manage financial transactions. It is a digital system that records transactions in a secure and transparent manner. As banks increasingly adopt digital services, blockchain offers new opportunities to improve efficiency, security, and trust.\n\nOne of the major benefits of blockchain is its ability to maintain records that are difficult to change without detection. Information is stored across a network of computers, reducing dependence on a single central database. This can help banks improve record-keeping and reduce the risk of data manipulation. Blockchain can also make international money transfers faster and less costly by reducing the need for multiple intermediaries. In addition, it can support faster settlement of transactions and improve the tracking of financial activities.\n\nHowever, blockchain technology also faces several challenges. Its implementation can be expensive, as banks need new systems, skilled professionals, and proper infrastructure. Some blockchain networks consume large amounts of energy, while others may face problems related to speed and scalability. Regulatory uncertainty is another concern because clear rules are necessary to ensure safe and responsible use. Moreover, blockchain cannot completely prevent fraud if incorrect information is entered into the system.\n\nTo overcome these challenges, banks should adopt blockchain gradually and test its practical benefits before large-scale implementation. Regulators must establish clear guidelines, while banks should invest in cybersecurity, employee training, and suitable infrastructure. Cooperation between banks and technology providers can also support wider adoption.\n\nIn conclusion, blockchain has the potential to make banking more secure, transparent, and efficient. However, its success depends on responsible implementation, strong regulation, and continuous technological improvement. A balanced approach can help banks use this technology effectively while protecting customers and maintaining public trust.",
       "structure": [],
       "practiceQuestionId": "q_1792929803249",
+      "active": true
+    },
+    {
+      "id": "essay_1792929856247",
+      "title": "The Role of Technology in Expanding Financial Inclusion",
+      "category": "IT Officer",
+      "tags": [
+        "IT Officer"
+      ],
+      "image": "https://i.postimg.cc/RF3XdwPY/financial-inclusion.webp",
+      "body": "Financial inclusion means providing affordable banking and financial services to every section of society, especially people living in rural areas and those with low incomes. Technology has played an important role in expanding financial inclusion in India by making banking services more accessible, affordable, and convenient.\n\nOne major step towards financial inclusion is digital banking. Mobile banking, internet banking, and the Unified Payments Interface (UPI) allow people to transfer money, pay bills, and receive payments without visiting bank branches. The Pradhan Mantri Jan Dhan Yojana has also helped millions of people open bank accounts. With Aadhaar-based services and Direct Benefit Transfer, government benefits can reach beneficiaries directly, reducing delays and the risk of corruption.\n\nTechnology has also improved access to credit and other financial services. Digital lending platforms help small businesses and individuals apply for loans more easily. Mobile-based insurance and investment services allow people to manage their finances conveniently. Farmers, small shopkeepers, and self-employed workers can benefit from these services and become part of the formal financial system.\n\nHowever, some challenges remain. Many people lack digital literacy and struggle to use banking applications. Cyber fraud, poor internet connectivity, and language barriers also prevent some people from using digital services safely. Banks and the government must address these problems through financial awareness programmes, stronger cybersecurity, and simple applications available in regional languages.\n\nIn conclusion, technology has made financial services more accessible and has supported economic empowerment. However, true financial inclusion requires more than opening bank accounts or providing digital access. It also requires safe, affordable, and reliable services that people can use confidently. By combining technology with education and consumer protection, India can build a more inclusive financial system.",
+      "structure": [],
+      "practiceQuestionId": "q_1792929876858",
       "active": true
     }
   ],
