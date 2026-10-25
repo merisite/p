@@ -2919,6 +2919,25 @@
         "IBPSPO",
         "IBPSSO"
       ]
+    },
+    {
+      "id": "q_1792927770185",
+      "examId": "__so",
+      "type": "essay",
+      "soPostId": "sop_1792925950348_0",
+      "title": "Balancing Innovation, Convenience and Security in Digital Finance",
+      "label": "Balancing Innovation, Convenience and Security in Digital Finance",
+      "text": "",
+      "modelAnswer": "",
+      "wordLimit": "250-300 words",
+      "marks": 15,
+      "difficulty": "medium",
+      "active": true,
+      "mockNo": null,
+      "productIds": [
+        "IBPSPO",
+        "IBPSSO"
+      ]
     }
   ],
   "typingParas": [
@@ -5220,6 +5239,19 @@
       "body": "Digital payments have become an important part of everyday life in India. Platforms such as the Unified Payments Interface (UPI), mobile banking, and internet banking allow people to transfer money quickly and conveniently. They have reduced the need to carry cash and supported the growth of a digital economy. However, the increasing use of digital payments has also created new opportunities for financial fraud.\n\nOne major benefit of digital payments is that transactions can be completed within seconds. Small shopkeepers, farmers, and businesses can receive payments without visiting a bank. Digital payments also improve transparency and make it easier to maintain financial records. Government initiatives and affordable internet services have further encouraged people to adopt cashless transactions.\n\nDespite these benefits, financial fraud is becoming a serious concern. Fraudsters use fake calls, messages, links, and websites to steal personal and banking information. Some criminals pretend to be bank officials and trick customers into sharing their One-Time Passwords (OTPs) or PINs. In other cases, people are cheated through fake payment requests and fraudulent investment schemes. Lack of digital awareness makes elderly people and first-time users especially vulnerable.\n\nTo address this problem, banks must strengthen security systems and improve fraud detection. They should send timely alerts and provide quick complaint resolution. Customers must never share their OTPs, PINs, or passwords with anyone. They should verify payment requests, avoid suspicious links, and use only trusted applications. Schools, banks, and government agencies should also conduct financial awareness campaigns to educate people about safe digital practices.\n\nIn conclusion, digital payments are essential for India's economic growth, but their success depends on security and public trust. By combining strong technology, effective regulation, and responsible user behaviour, India can reduce financial fraud and build a safer digital payment system.",
       "structure": [],
       "practiceQuestionId": "q_1792927448070",
+      "active": true
+    },
+    {
+      "id": "essay_1792927740510",
+      "title": "Balancing Innovation, Convenience and Security in Digital Finance",
+      "category": "IT Officer",
+      "tags": [
+        "IT Officer"
+      ],
+      "image": "https://i.postimg.cc/tgdDCCKg/security-and-ai-png.webp",
+      "body": "Digital finance has changed the way people manage their money. Services such as UPI, mobile banking, digital wallets, and online lending have made financial transactions faster and easier. However, as digital finance grows, it is important to balance innovation and convenience with security to protect customers and maintain trust.\n\nInnovation has helped banks and financial institutions improve their services. People can transfer money, pay bills, and access banking services from their homes without visiting a branch. Digital payments have also helped small businesses and street vendors accept payments easily. New technologies, including artificial intelligence, can detect suspicious transactions and help banks provide better services. These developments save time, reduce costs, and support financial inclusion.\n\nDespite these benefits, digital finance faces several security challenges. Online fraud, phishing attacks, identity theft, and unauthorised transactions are major concerns. Many users, especially those with limited digital knowledge, may fall victim to fraud. Collecting large amounts of personal and financial data also raises concerns about privacy. If security systems are weak, even advanced digital services can put customers at risk.\n\nTo address these challenges, banks must use strong security measures, including encryption, multi-factor authentication, and real-time fraud detection. They should regularly update their systems and inform customers about safe digital practices. Customers must never share their passwords, PINs, or OTPs with anyone. Regulators should also ensure that financial institutions follow proper data protection rules and provide quick grievance redressal.\n\nIn conclusion, digital finance can achieve its true potential only when innovation, convenience, and security work together. Technology should make financial services easier without exposing customers to unnecessary risks. A secure and trustworthy digital financial system will strengthen public confidence and support India's journey towards a more inclusive economy.",
+      "structure": [],
+      "practiceQuestionId": "q_1792927770185",
       "active": true
     }
   ],
