@@ -966,6 +966,7 @@ header .h-brand:hover{background:var(--brut-tint);}
 /* "Choose a package" popup: scrolls if tall (no more cropped top) and lays packages out side by side */
 #unlock-cov{align-items:flex-start;overflow-y:auto}
 #unlock-cov .cbox{margin:auto;transition:max-width .15s}
+@keyframes incbar{from{transform:scaleX(1)}to{transform:scaleX(0)}}
 </style>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
@@ -1107,6 +1108,17 @@ header .h-brand:hover{background:var(--brut-tint);}
     </button>
     <div id="auth-err" style="color:var(--red);font-size:.72rem;min-height:18px;margin:10px 0 0;text-align:center"></div>
     <button class="btn" style="width:100%;background:none;color:var(--t2);font-size:.76rem;box-shadow:none;margin-top:6px" onclick="closeAuthModal()">Cancel</button>
+  </div>
+</div>
+<div class="cov" id="included-cov" onclick="if(event.target===this)closeIncluded()">
+  <div class="cbox" style="max-width:450px;text-align:left;position:relative;overflow:hidden;padding-bottom:26px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+      <div style="width:34px;height:34px;border-radius:50%;background:var(--gdim);border:1px solid var(--gborder);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="cbox-t" style="margin:0">You already have access!</div>
+    </div>
+    <div class="cbox-s" id="inc-msg" style="line-height:1.75;color:var(--t);font-size:.84rem"></div>
+    <button class="btn bp" style="width:100%;margin-top:14px" onclick="closeIncluded()">Got it</button>
+    <div id="inc-bar" style="position:absolute;left:0;right:0;bottom:0;height:5px;background:var(--accent);transform-origin:left"></div>
   </div>
 </div>
 <div class="cov" id="unlock-cov">
@@ -5577,6 +5589,28 @@ let _pendingUnlockAfterLogin = null;
 // The entry point every lock icon / "Unlock" button should call — takes the list of product
 // IDs that would unlock this content (could be one, could be several for combo packs).
 // Requires login first; then shows a popup to actually choose which package to buy.
+// ---- "You already have access" (e.g. IBPS PO buyers already get IBPS SO) ----
+var _incTimer=null;
+function ownedVia(productId){
+  const p=getProduct(productId);
+  if(!p||!p.includedWith||!p.includedWith.length)return null;
+  for(let i=0;i<p.includedWith.length;i++){
+    const oid=p.includedWith[i];
+    if(isProductUnlocked(oid))return getProduct(oid)||{id:oid,name:oid};
+  }
+  return null;
+}
+function showAlreadyIncluded(productId,via){
+  const p=getProduct(productId)||{};
+  const owned=via.name||via.id,course=p.name||'this course';
+  const tpl=(p.alreadyMsg&&p.alreadyMsg.trim())||'Since you already have the {owned} course, you also have access to {course}. Just open the Essay Writing and Comprehension practice sessions and practice the {course} tests there.';
+  document.getElementById('inc-msg').textContent=tpl.replace(/\{owned\}/g,owned).replace(/\{course\}/g,course);
+  const bar=document.getElementById('inc-bar');
+  bar.style.animation='none';void bar.offsetWidth;bar.style.animation='incbar 5s linear forwards';
+  document.getElementById('included-cov').classList.add('open');
+  clearTimeout(_incTimer);_incTimer=setTimeout(closeIncluded,5000);   // vanishes by itself after 5 seconds
+}
+function closeIncluded(){clearTimeout(_incTimer);document.getElementById('included-cov').classList.remove('open');}
 function showUnlockOptions(productIds){
   if(typeof productIds === 'string') productIds = [productIds];
   if(!window.FB || !window.FB.auth.currentUser || window.FB.auth.currentUser.isAnonymous){
@@ -5585,11 +5619,15 @@ function showUnlockOptions(productIds){
     return;
   }
   // Already-logged-in user: don't show the buy screen for anything they already own.
-  const stillLocked = (productIds||[]).filter(function(id){ return !isProductUnlocked(id); });
+  let stillLocked = (productIds||[]).filter(function(id){ return !isProductUnlocked(id); });
   if(!stillLocked.length){
     showToast("You already have access to this — no need to buy it again!");
     return;
   }
+  // Courses the student already gets through another course they own: explain instead of selling
+  const covered = stillLocked.filter(function(id){ return !!ownedVia(id); });
+  if(covered.length && covered.length===stillLocked.length){ showAlreadyIncluded(covered[0], ownedVia(covered[0])); return; }
+  if(covered.length) stillLocked = stillLocked.filter(function(id){ return covered.indexOf(id)<0; });
   const options = stillLocked.map(getProduct).filter(Boolean).sort(function(a,b){ return (a.amount||0)-(b.amount||0); });
   if(!options.length){ alert('This content is not available for purchase right now.'); return; }
   document.getElementById('unlock-sub').textContent = options.length>1
@@ -5622,6 +5660,8 @@ async function unlockProduct(productId){
     openAuthModal();
     return;
   }
+  const _via=ownedVia(productId);
+  if(_via){ showAlreadyIncluded(productId,_via); return; }
   if(typeof Razorpay==='undefined'){
     alert('Payment system is still loading — please try again in a moment.');
     return;
