@@ -380,7 +380,14 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
               </div>
               <button class="btn bp" style="padding:8px 14px;font-size:.78rem" onclick="saveProduct()">Save Product</button>
             </div>
-            <div style="margin-top:16px;padding:14px;border:1px solid var(--aborder);border-radius:var(--rs);background:var(--adim)">
+                        <div style="margin-top:16px;padding:14px;border:1px solid var(--b);border-radius:var(--rs)">
+              <div style="font-size:.78rem;font-weight:700;margin-bottom:4px">Already included with other courses</div>
+              <div style="font-size:.68rem;color:var(--t2);line-height:1.6;margin-bottom:10px">Tick the courses whose buyers already get THIS course too (for example, IBPS PO buyers also get IBPS SO). If one of them taps to buy this course, they see a friendly "you already have access" message for 5 seconds instead of the payment window.</div>
+              <div id="pp-included-list" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+              <label style="font-size:.7rem;color:var(--t2);display:block;margin:12px 0 5px">Message to show them (optional). <b>{owned}</b> becomes the course they already have, <b>{course}</b> becomes this course.</label>
+              <textarea id="pp-already-msg" rows="3" placeholder="Since you already have the {owned} course, you also have access to {course}. Just open the Essay Writing and Comprehension practice sessions and practice the {course} tests there." style="width:100%;padding:8px 10px;border-radius:var(--rs);border:1px solid var(--b);background:var(--bg3);color:var(--t);font-size:.8rem;font-family:inherit"></textarea>
+            </div>
+<div style="margin-top:16px;padding:14px;border:1px solid var(--aborder);border-radius:var(--rs);background:var(--adim)">
               <div style="font-size:.78rem;font-weight:700;margin-bottom:4px">Existing buyers: apply a validity start date</div>
               <div style="font-size:.68rem;color:var(--t2);line-height:1.6;margin-bottom:10px">For buyers who have no purchase date saved, the product's validity (days) is counted from this date. Buyers with a saved purchase date keep their own. It takes effect right away for everyone.</div>
               <div style="display:grid;grid-template-columns:1.4fr 1fr auto auto;gap:10px;align-items:end">
@@ -2701,6 +2708,7 @@ async function loadProducts(){
     renderExamChecklist();
     loadQuizSetProductChecklist();
     renderLegacyBox();
+    renderIncludedChecklist(Array.from(document.querySelectorAll('.pp-incl:checked')).map(function(el){return el.value;}), _pp_editingId||'');
   }catch(e){
     listEl.innerHTML = '<span style="color:#e5484d">Could not load products: '+esc(e.message||'')+'</span>';
   }
@@ -2728,10 +2736,18 @@ function editProduct(id){
   document.getElementById('pp-price').value = ((p.amount||0)/100);
   document.getElementById('pp-features').value = (p.features||[]).join('\n');
   document.getElementById('pp-validity').value = (p.validityDays>0 ? p.validityDays : '');
+  document.getElementById('pp-already-msg').value = p.alreadyMsg || '';
+  renderIncludedChecklist(p.includedWith || [], p.id);
   document.getElementById('pp-form-title').style.display = '';
   document.getElementById('pp-cancel-edit').style.display = '';
   renderExamChecklist(p.unlocksExamPractice || []);
   document.getElementById('pp-id').scrollIntoView({behavior:'smooth', block:'center'});
+}
+function renderIncludedChecklist(selected, exceptId){
+  const el=document.getElementById('pp-included-list');if(!el)return;
+  const list=(_pcProducts||[]).filter(function(p){return p.id!==exceptId;});
+  if(!list.length){el.innerHTML='<span style="font-size:.72rem;color:var(--t2)">Add another course first.</span>';return;}
+  el.innerHTML=list.map(function(p){return '<label style="display:inline-flex;align-items:center;gap:6px;font-size:.76rem;background:var(--bg3);border:1px solid var(--b);border-radius:var(--rs);padding:6px 11px;cursor:pointer"><input type="checkbox" class="pp-incl" value="'+esc(p.id)+'" '+((selected||[]).indexOf(p.id)>=0?'checked':'')+'/> '+esc(p.name||p.id)+'</label>';}).join('');
 }
 function resetProductForm(){
   _pp_editingId = null;
@@ -2741,6 +2757,8 @@ function resetProductForm(){
   document.getElementById('pp-price').value = '';
   document.getElementById('pp-features').value = '';
   document.getElementById('pp-validity').value = '180';
+  document.getElementById('pp-already-msg').value = '';
+  renderIncludedChecklist([], '');
   document.getElementById('pp-form-title').style.display = 'none';
   document.getElementById('pp-cancel-edit').style.display = 'none';
   renderExamChecklist([]);
@@ -2821,6 +2839,8 @@ async function saveProduct(){
   const priceRupees = Number(document.getElementById('pp-price').value);
   const features = document.getElementById('pp-features').value.split('\n').map(function(s){ return s.trim(); }).filter(Boolean);
   const validityDays = Math.max(0, Math.round(Number(document.getElementById('pp-validity').value) || 0)); // days from purchase; 0 = lifetime
+  const includedWith = Array.from(document.querySelectorAll('.pp-incl:checked')).map(function(el){ return el.value; });
+  const alreadyMsg = document.getElementById('pp-already-msg').value.trim();
   const unlocksExamPractice = Array.from(document.querySelectorAll('.pp-exam-check:checked')).map(function(el){ return el.value; });
   statusEl.textContent = '';
   if(!id || !name || !priceRupees){ statusEl.style.color='#e5484d'; statusEl.textContent='Fill in Product ID, Name, and Price.'; return; }
@@ -2828,7 +2848,7 @@ async function saveProduct(){
   statusEl.textContent = 'Saving…';
   try{
     const ref = window.FB.doc(window.FB.db, 'products', id);
-    await window.FB.setDoc(ref, { name: name, amount: Math.round(priceRupees * 100), features: features, unlocksExamPractice: unlocksExamPractice, validityDays: validityDays }, { merge: true }); // amount stored in paise; merge keeps the existing-buyers start date
+    await window.FB.setDoc(ref, { name: name, amount: Math.round(priceRupees * 100), features: features, unlocksExamPractice: unlocksExamPractice, validityDays: validityDays, includedWith: includedWith, alreadyMsg: alreadyMsg }, { merge: true }); // amount stored in paise; merge keeps the existing-buyers start date
     statusEl.style.color = '#22c55e';
     statusEl.textContent = 'Saved "'+name+'" at ₹'+priceRupees+(validityDays?' — valid '+validityDays+' days from purchase':' — lifetime access')+(unlocksExamPractice.length?' — also unlocks all practice for '+unlocksExamPractice.length+' exam(s).':'.');
     resetProductForm();
